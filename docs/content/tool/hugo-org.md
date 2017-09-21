@@ -63,6 +63,15 @@ This creates a git submodule. Now when you run the hugo command to build your si
 public, the created public directory will have a different remote origin (i.e. hosted 
 GitHub repository). You can automate some of these steps with the following script.
 
+### Build site
+
+```
+cd light-doc/docs
+hugo
+```
+
+This will build the site and put rendered site into public folder.
+
 ### Deployment script
 
 You’re almost done. You can also add a deploy.sh script to automate the preceding steps for you. You can also make it executable with chmod +x deploy.sh.
