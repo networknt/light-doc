@@ -13,4 +13,3 @@ monolithic applications or microservices and here is a small list.
 * [WRK](https://networknt.github.io/light-4j/tools/wrk-perf/) is used as client for performance test.
 
 * [Minikube](https://networknt.github.io/light-4j/tools/minikube/) is a single node Kubernetes cluster for developers to work on laptop.
-
