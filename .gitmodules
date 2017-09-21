@@ -1,0 +1,4 @@
+[submodule "docs/public"]
+	path = docs/public
+	url = git@github.com:networknt/networknt.github.io.git
+	branch = master
