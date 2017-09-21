@@ -200,3 +200,8 @@ git push origin master
 
 Please note that the above steps have to be done on every new computer and every time
 you create the light-doc repo, you need to follow the same steps to setup everything.
+
+Basically, there are two sub modules:
+
+* the public folder of docs folder
+* the themes folder of docs folder
