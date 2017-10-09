@@ -12,8 +12,7 @@ The short term goal is to make sure the API framework production ready.
 # 1.5.0 Support API or Service Hosting
 
 # 1.6.0 Create light-webserver
-Requester: Eric Broda
-Date:      October 9, 2017
+Requester: Eric Broda, October 9, 2017
 
 Current web server components are relatively heavyweight (Apache) and
 some are offer modest performance (NGINX).  All require complex configurations
@@ -23,8 +22,7 @@ platform.  Our "light" framework addresses this market need:  it is ultra-high
 performance, light-weight, and offers secure operations out-of-the-box.
 
 # 1.7.0 Create light-gateway
-Requester: Eric Broda
-Date:      October 9, 2017
+Requester: Eric Broda, October 9, 2017
 
 Current API gateway components are relatively heavyweight (CA/Layer7) and
 some are offer modest performance (KONG).  All require complex configurations
@@ -44,8 +42,7 @@ our framework on a Raspberry Pi but could easily be tailored for any
 ARM processor running Linux.
 
 # 1.8.0 Create light-router
-Requester: Eric Broda
-Date:      October 9, 2017
+Requester: Eric Broda, October 9, 2017
 
 Current router components are relatively heavyweight and typically require
 a hardware footprint.  All require complex configurations
@@ -55,8 +52,7 @@ router.  Our "light" framework addresses this market need:  it is ultra-high
 performance, light-weight, and offers secure operations out-of-the-box.
 
 # 1.9.0 Dynamic Loading of JARS
-Requester: Eric Broda
-Date:      October 9, 2017
+Requester: Eric Broda, October 9, 2017
 
 Today, our framework requires a developer to generate / build all the full
 stack of components (light-... plus their own business logic).  While not
@@ -73,8 +69,8 @@ would map the JAR's functions to Swagger file end points which are resolved
 at run-time.
 
 # 1.10.0 Create PSD2 / Open Banking Demo Microservices
-Requester: Eric Broda
-Date:      October 9, 2017
+
+Requester: Eric Broda, October 9, 2017
 
 PSD2 as well as the similar UK offering requires banks to provide open APIs
 for customer, product, account, and transaction information.  These APIs are
@@ -93,8 +89,7 @@ publicly available Open Banking Swagger specifications that connect to a
 demonstration database (Cassandra, Postgres etc).
 
 # 1.11.0 Compare our Framework to KONG Benchmark
-Requester: Eric Broda
-Date:      October 9, 2017
+Requester: Eric Broda, October 9, 2017
 
 Today, KONG is a popular open source API gateway and management framework
 built upon an NGINX foundation.  KONG offers a publicly available
