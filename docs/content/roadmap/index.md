@@ -100,3 +100,13 @@ This initiative will create a LIGHT benchmark that is identical to the KONG
 benchmark and compare results.  We are confident we can dramatically exceed
 KONG benchmarks and intent to publish the results, which will provide some
 useful media attention and bragging rights.
+
+# 1.12.0 Create light-balancer
+Requester: Eric Broda, October 10, 2017
+
+Current load balancer components are relatively heavyweight and typically require
+a hardware footprint.  All require complex configurations
+to support secure operations, especially at-scale.  There is a market opportunity
+to offer a light-weight, ultra high-performance, and secure software-based
+load balancer.  Our "light" framework addresses this market need:  it is ultra-high
+performance, light-weight, and offers secure operations out-of-the-box.
