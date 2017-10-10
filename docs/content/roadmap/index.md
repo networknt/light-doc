@@ -101,7 +101,7 @@ benchmark and compare results.  We are confident we can dramatically exceed
 KONG benchmarks and intent to publish the results, which will provide some
 useful media attention and bragging rights.
 
-# 1.12.0 Create light-balancer
+# 1.12.0 Create light-loadbalancer
 Requester: Eric Broda, October 10, 2017
 
 Current load balancer components are relatively heavyweight and typically require
