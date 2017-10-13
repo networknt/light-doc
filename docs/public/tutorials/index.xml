@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tutorials on Light Ecosystem for Microservices</title>
+    <link>https://networknt.github.io/tutorials/</link>
+    <description>Recent content in Tutorials on Light Ecosystem for Microservices</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license</copyright>
+    <lastBuildDate>Wed, 15 Feb 2017 09:26:58 -0500</lastBuildDate>
+    
+	<atom:link href="https://networknt.github.io/tutorials/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cross-Origin Resource Sharing</title>
+      <link>https://networknt.github.io/tutorials/cors/</link>
+      <pubDate>Wed, 15 Feb 2017 09:26:58 -0500</pubDate>
+      
+      <guid>https://networknt.github.io/tutorials/cors/</guid>
+      <description>For some of the APIs/services, the endpoints will be accessed from a Single Page Application(React/Vue/Angular) served from another domain. In this case, the API server needs to handle the pre-flight OPTIONS request to enable CORS.
+As CORS only used in above scenario, the handler is not wired in by default in swagger-codegen.
+If you want to limit only several domains for CORS, you also need to create cors.yml in config folder.</description>
+    </item>
+    
+    <item>
+      <title>Tutorials</title>
+      <link>https://networknt.github.io/tutorials/</link>
+      <pubDate>Wed, 25 Jan 2017 20:59:08 -0500</pubDate>
+      
+      <guid>https://networknt.github.io/tutorials/</guid>
+      <description>In the beginning, we only have one framework that supports restful API for building microservices and now we have several frameworks to build microservices based on the type of services customers want to build. Majority of our customers are using all types of the frameworks to build their services
+If you are unsure which framework to use for your service, please refer to this article
+The following tutorials will help users to get started and more will be added later.</description>
+    </item>
+    
+    <item>
+      <title>End to End Test</title>
+      <link>https://networknt.github.io/tutorials/end-to-end-test/</link>
+      <pubDate>Wed, 12 Oct 2016 17:21:40 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorials/end-to-end-test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Integration Test</title>
+      <link>https://networknt.github.io/tutorials/integration-test/</link>
+      <pubDate>Wed, 12 Oct 2016 17:06:30 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorials/integration-test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unit Test</title>
+      <link>https://networknt.github.io/tutorials/unit-test/</link>
+      <pubDate>Wed, 12 Oct 2016 17:05:47 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorials/unit-test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Debug</title>
+      <link>https://networknt.github.io/tutorials/debug/</link>
+      <pubDate>Wed, 12 Oct 2016 17:03:28 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorials/debug/</guid>
+      <description>As there is no container in Undertow Server and everything is built on top of POJO, it is very easy to debug your API application within your IDE.
+I am using Intellij Idea but Eclipse should be very similar as the generated project is standard Maven project. To debug your code, you need to start the server.
+Here is the steps to create a standalone application in Idea.
+ Click Run and select Edit Configurations&amp;hellip; Click + on the top left corner to add a new Configuration.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Designs on Light Ecosystem for Microservices</title>
+    <link>https://networknt.github.io/design/</link>
+    <description>Recent content in Designs on Light Ecosystem for Microservices</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license</copyright>
+    <lastBuildDate>Thu, 09 Feb 2017 10:57:47 -0500</lastBuildDate>
+    
+	<atom:link href="https://networknt.github.io/design/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Design</title>
+      <link>https://networknt.github.io/design/</link>
+      <pubDate>Thu, 09 Feb 2017 10:57:47 -0500</pubDate>
+      
+      <guid>https://networknt.github.io/design/</guid>
+      <description>light-4j is aiming microservices and design of microservices is more art other than technique. When you break a business application to smaller pieces, there is a threshold. If it too fine-grained, then the performance will suffer, but if it is too coarse-grained, then the benefit of microservices will be diminishing.
+The big portion of design work for microservices is to functionally divide an application to multiple services and define the communication contract between these services with OpenAPI specifications.</description>
+    </item>
+    
+  </channel>
+</rss>

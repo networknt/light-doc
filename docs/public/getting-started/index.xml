@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Getting-starteds on Light Ecosystem for Microservices</title>
+    <link>https://networknt.github.io/getting-started/</link>
+    <description>Recent content in Getting-starteds on Light Ecosystem for Microservices</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license</copyright>
+    <lastBuildDate>Tue, 18 Oct 2016 07:00:45 -0400</lastBuildDate>
+    
+	<atom:link href="https://networknt.github.io/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Getting Started</title>
+      <link>https://networknt.github.io/getting-started/</link>
+      <pubDate>Tue, 18 Oct 2016 07:00:45 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/getting-started/</guid>
+      <description>Code Generation The easiest way to start your RESTful API project is from OpenAPI specification and here is a video to show you how to generate a project from swagger spec.
+light-4j-getting-started
+And here is the step to step tutorial for example-petstore
+Start from one of the example project This is not recommended but if you don&amp;rsquo;t have OpenAPI specification or your service has very special requirement that cannot be generated, you can find many example projects at a separate repo light-example-4j and start by copying one of them.</description>
+    </item>
+    
+  </channel>
+</rss>
