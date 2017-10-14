@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Design - Light Ecosystem for Microservices</title>
+    <title> - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.20.6" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/design/">
+    <link rel="canonical" href="https://networknt.github.io/design/multi-tenancy/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/design/">
+    <meta property="og:url" content="https://networknt.github.io/design/multi-tenancy/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Design
+        
       </div>
     </div>
 
@@ -216,14 +216,11 @@
 
 
 
-<a class="current" title="Design" href="https://networknt.github.io/design/">
+<a  title="Design" href="https://networknt.github.io/design/">
 	
 	Design
 </a>
 
-
-<ul id="scrollspy">
-</ul>
 
 
   
@@ -500,45 +497,32 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Design </h1>
+			<h1> </h1>
 
-			<p>light-4j is aiming microservices and design of microservices is more art other
-than technique. When you break a business application to smaller pieces, there
-is a threshold. If it too fine-grained, then the performance will suffer, but
-if it is too coarse-grained, then the benefit of microservices will be diminishing.</p>
+			
 
-<p>The big portion of design work for microservices is to functionally divide an
-application to multiple services and define the communication contract between
-these services with OpenAPI specifications.</p>
+<h1 id="multi-tenancy">Multi-Tenancy</h1>
 
-<p>Here is a list of design decisions for microservices:</p>
+<p>Multi-tenancy is an architecture in which a single instance of a software application serves multiple
+customers. Each customer is called a tenant. Tenants may be given the ability to customize some parts
+of the application, such as color of the user interface (UI) or business rules, but they cannot customize
+the application&rsquo;s code.</p>
 
-<ul>
-<li><p><a href="http://blog.arungupta.me/microservice-design-patterns/">Microservice Design Patterns</a></p></li>
+<p>Multi-tenancy can be economical because software development and maintenance costs are shared. It can be
+contrasted with single-tenancy, an architecture in which each customer has their own software instance
+and may be given access to code. With a multi-tenancy architecture, the provider only has to make updates
+once. With a single-tenancy architecture, the provider has to touch multiple instances of the software
+in order to make updates.</p>
 
-<li><p><a href="https://networknt.github.io/light-4j/design/convtws/">How to convert existing web services to microservices</a></p></li>
+<p>In cloud computing, the meaning of multi-tenancy architecture has broadened because of new service models
+that take advantage of virtualization and remote access. A software-as-a-service (SaaS) provider, for example,
+can run one instance of its application on one instance of a database and provide web access to multiple
+customers. In such a scenario, each tenant&rsquo;s data is isolated and remains invisible to other tenants.</p>
 
-<li><p><a href="https://networknt.github.io/light-4j/design/evolution/">Service Evolution</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/partial-failure/">How to handle Partial Faiure</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/idempotency/">Idempotency</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/consumer-contract/">Consumer Contract and Consumer Driven Contract</a></p></li>
-</ul>
-
-<p>Work-in-progress:
-* <a href="https://networknt.github.io/light-4j/design/newprod/">How to design microservices for brand new project/product</a></p>
-
-<ul>
-<li><p><a href="https://networknt.github.io/light-4j/design/monojee/">How to replace monolithic Java EE application to microservices</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/check-token/">Why check token expiration in client</a></p></li>
-
-<li><p><a href="multi-tenancy.md">Multi-tenancy</a></p></li>
-
-<li><p><a href="env-segregation.md">Environment Segregation</a></p></li>
-</ul>
+<p>In a private cloud, the customers, who are also called tenants, can be different business divisions inside
+the same company. In a public cloud, the customers are often entirely different organizations. Most public
+cloud providers use the multi-tenancy model. It allows them to run one server instance, which is less expensive
+and makes it easier to deploy updates to a large number of customers.</p>
 
 
 			<aside class="copyright" role="note">
@@ -557,7 +541,7 @@ these services with OpenAPI specifications.</p>
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/tutorials/cors/" title="Cross-Origin Resource Sharing">
+      <a href="https://networknt.github.io/design/env-segregation/" title="">
         <span class="direction">
           Previous
         </span>
@@ -567,7 +551,7 @@ these services with OpenAPI specifications.</p>
           </div>
           <div class="stretch">
             <div class="title">
-              Cross-Origin Resource Sharing
+              
             </div>
           </div>
         </div>
@@ -576,22 +560,6 @@ these services with OpenAPI specifications.</p>
   </div>
 
   <div class="next">
-  
-      <a href="https://networknt.github.io/middleware/dump/" title="Request and Response Dump">
-        <span class="direction">
-          Next
-        </span>
-        <div class="page">
-          <div class="stretch">
-            <div class="title">
-              Request and Response Dump
-            </div>
-          </div>
-          <div class="button button-next" role="button" aria-label="Next">
-            <i class="icon icon-forward"></i>
-          </div>
-        </div>
-      </a>
   
   </div>
 </nav>

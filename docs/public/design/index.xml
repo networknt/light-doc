@@ -22,5 +22,27 @@
 The big portion of design work for microservices is to functionally divide an application to multiple services and define the communication contract between these services with OpenAPI specifications.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://networknt.github.io/design/env-segregation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://networknt.github.io/design/env-segregation/</guid>
+      <description>Environment Segregation There are two goals for environment segregation:
+ Prevent cross fire  For example, UAT test accesses production services or production application accidentally accesses test database etc.
+ Support multiple instances for testing  For example, one service in testing has multiple backend database and different departments will hit their own instance which connects to their particular database.
+The above use cases are pretty complicated even in traditional monolithic application.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://networknt.github.io/design/multi-tenancy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://networknt.github.io/design/multi-tenancy/</guid>
+      <description>Multi-Tenancy Multi-tenancy is an architecture in which a single instance of a software application serves multiple customers. Each customer is called a tenant. Tenants may be given the ability to customize some parts of the application, such as color of the user interface (UI) or business rules, but they cannot customize the application&amp;rsquo;s code.
+Multi-tenancy can be economical because software development and maintenance costs are shared. It can be contrasted with single-tenancy, an architecture in which each customer has their own software instance and may be given access to code.</description>
+    </item>
+    
   </channel>
 </rss>

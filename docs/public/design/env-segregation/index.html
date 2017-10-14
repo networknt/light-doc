@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Design - Light Ecosystem for Microservices</title>
+    <title> - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.20.6" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/design/">
+    <link rel="canonical" href="https://networknt.github.io/design/env-segregation/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/design/">
+    <meta property="og:url" content="https://networknt.github.io/design/env-segregation/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Design
+        
       </div>
     </div>
 
@@ -216,14 +216,11 @@
 
 
 
-<a class="current" title="Design" href="https://networknt.github.io/design/">
+<a  title="Design" href="https://networknt.github.io/design/">
 	
 	Design
 </a>
 
-
-<ul id="scrollspy">
-</ul>
 
 
   
@@ -500,45 +497,78 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Design </h1>
+			<h1> </h1>
 
-			<p>light-4j is aiming microservices and design of microservices is more art other
-than technique. When you break a business application to smaller pieces, there
-is a threshold. If it too fine-grained, then the performance will suffer, but
-if it is too coarse-grained, then the benefit of microservices will be diminishing.</p>
+			
 
-<p>The big portion of design work for microservices is to functionally divide an
-application to multiple services and define the communication contract between
-these services with OpenAPI specifications.</p>
+<h1 id="environment-segregation">Environment Segregation</h1>
 
-<p>Here is a list of design decisions for microservices:</p>
+<p>There are two goals for environment segregation:</p>
 
 <ul>
-<li><p><a href="http://blog.arungupta.me/microservice-design-patterns/">Microservice Design Patterns</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/convtws/">How to convert existing web services to microservices</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/evolution/">Service Evolution</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/partial-failure/">How to handle Partial Faiure</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/idempotency/">Idempotency</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/consumer-contract/">Consumer Contract and Consumer Driven Contract</a></p></li>
+<li>Prevent cross fire</li>
 </ul>
 
-<p>Work-in-progress:
-* <a href="https://networknt.github.io/light-4j/design/newprod/">How to design microservices for brand new project/product</a></p>
+<p>For example, UAT test accesses production services or production application accidentally accesses test
+database etc.</p>
 
 <ul>
-<li><p><a href="https://networknt.github.io/light-4j/design/monojee/">How to replace monolithic Java EE application to microservices</a></p></li>
-
-<li><p><a href="https://networknt.github.io/light-4j/design/check-token/">Why check token expiration in client</a></p></li>
-
-<li><p><a href="multi-tenancy.md">Multi-tenancy</a></p></li>
-
-<li><p><a href="env-segregation.md">Environment Segregation</a></p></li>
+<li>Support multiple instances for testing</li>
 </ul>
+
+<p>For example, one service in testing has multiple backend database and different departments will hit their
+own instance which connects to their particular database.</p>
+
+<p>The above use cases are pretty complicated even in traditional monolithic application. In microservices
+architecture, it is even more complicated as there are two many services involves and each service has
+many instances.</p>
+
+<h2 id="to-prevent-cross-fire">To prevent cross fire</h2>
+
+<p>In <a href="https://github.com/networknt/light-4j">light-4j</a> framework, we are using <a href="https://github.com/networknt/light-oauth2">light-oauth2</a>
+to separate different environments. For each environment, there is a oauth2 provider to sign JWT token
+with its private key. All the services that is deployed to that environment will have the public key from
+the provider. So even if there is an UAT service trying to access a production service, the token provided
+by the caller cannot be verified due to invalid signature. Given above explanation, there is no way that
+we can have cross fire if configuration for each application and service is correct.</p>
+
+<p>So how can we prevent mistakes when deploy services to the cloud environment? How can we make sure that
+the configuration files won&rsquo;t be wrong during deployment? In our ecosystem, we encourage automatically
+deployment without human involves so that we can eliminate human errors during deployment. Also, we have
+light-config-server to serve configuration for each environment and these configuration are in separate
+github repos and managed by different teams or people.</p>
+
+<h2 id="to-support-multiple-instances-per-environment">To support multiple instances per environment</h2>
+
+<p>One of my customers has an API developed by one line of business but it is shared by others. Each line of
+business has its own test database with different set of reference tables to be populated for their own
+testing. So for each API release, they have to start several instances which connect to different databases
+and give the proper instance to certain QA team to test.</p>
+
+<p>Ideally, the test environment should be consolidated to have the same reference data and similar data set
+as production; however, is has been this way for over a decade and it is too costly to update the test data.</p>
+
+<p>The solution we provided is to have an environment variable in server.yml to indicate which backend database
+the instance is connecting to. This additional attribute will be registered to consul for service discovery
+and the service discovery logic will check the variable to add additional filter if it exists.</p>
+
+<p>The above logic resolves service to service calls to be bound to the same environment. For the original
+client, for example Java EE based web server or test tool like load runner, it must either use our client
+module to do the discovery with an additional environment or they have to manually do the lookup on consul
+to find the right instance with the right environment tag.</p>
+
+<p>This solution normally will only be used in testing environment not production. In production, there should
+not be an environment variable in server.yml at all so all available instances for a given serviceId will
+be returned and load balanced.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>The above solution replaces the ad hoc solution built today in the existing monolithic service. The
+existing solution pass an environment header in the request to indicate the testing and there is a
+piece code to determine which database to connect based on the header. There is no environment header
+on production and there should be only one database connection as default on production. We cannot
+follow this approach when we move to microservices architecture so we found a way to resolve it at
+the framework level instead.</p>
 
 
 			<aside class="copyright" role="note">
@@ -557,7 +587,7 @@ these services with OpenAPI specifications.</p>
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/tutorials/cors/" title="Cross-Origin Resource Sharing">
+      <a href="https://networknt.github.io/" title="Introduction">
         <span class="direction">
           Previous
         </span>
@@ -567,7 +597,7 @@ these services with OpenAPI specifications.</p>
           </div>
           <div class="stretch">
             <div class="title">
-              Cross-Origin Resource Sharing
+              Introduction
             </div>
           </div>
         </div>
@@ -577,14 +607,14 @@ these services with OpenAPI specifications.</p>
 
   <div class="next">
   
-      <a href="https://networknt.github.io/middleware/dump/" title="Request and Response Dump">
+      <a href="https://networknt.github.io/design/multi-tenancy/" title="">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Request and Response Dump
+              
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

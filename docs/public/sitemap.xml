@@ -422,6 +422,14 @@
   </url>
   
   <url>
+    <loc>https://networknt.github.io/design/env-segregation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/design/multi-tenancy/</loc>
+  </url>
+  
+  <url>
     <loc>https://networknt.github.io/architecture/</loc>
     <lastmod>2017-08-10T15:04:40-04:00</lastmod>
     <priority>0</priority>
