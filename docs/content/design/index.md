@@ -33,3 +33,8 @@ Work-in-progress:
 * [How to replace monolithic Java EE application to microservices](https://networknt.github.io/light-4j/design/monojee/)
 
 * [Why check token expiration in client](https://networknt.github.io/light-4j/design/check-token/)
+
+* [Multi-tenancy](multi-tenancy.md)
+
+* [Environment Segregation](env-segregation.md)
+
