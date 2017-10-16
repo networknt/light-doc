@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Audit - Light Ecosystem for Microservices</title>
+    <meta name="generator" content="Hugo 0.21-DEV" />
+
+    
+    <meta name="description" content="Light Document">
+    
+    <link rel="canonical" href="https://networknt.github.io/middleware/audit/">
+    
+    <meta name="author" content="Steve Hu">
+    
+
+    <meta property="og:url" content="https://networknt.github.io/middleware/audit/">
+    <meta property="og:title" content="Light Ecosystem for Microservices">
+    <meta property="og:image" content="https://networknt.github.io/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://networknt.github.io/fonts/icon.eot');
+        src: url('https://networknt.github.io/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://networknt.github.io/fonts/icon.woff')
+               format('woff'),
+             url('https://networknt.github.io/fonts/icon.ttf')
+               format('truetype'),
+             url('https://networknt.github.io/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://networknt.github.io/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-teal">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Audit
+      </div>
+    </div>
+
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/stevehu" title="@stevehu on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/networknt/light-doc" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://networknt.github.io/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Light Ecosystem for Microservices <span class="version">1.4.4</span></strong>
+        
+          <br>
+          networknt/light-doc
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/networknt/light-doc/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/networknt/light-doc/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Getting started" href="https://networknt.github.io/getting-started/">
+	
+	Getting started
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Architecture" href="https://networknt.github.io/architecture/">
+	
+	Architecture
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Design" href="https://networknt.github.io/design/">
+	
+	Design
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Middleware" href="https://networknt.github.io/middleware/">
+	
+	Middleware
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Server Components" href="https://networknt.github.io/server/">
+	
+	Server Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Client Components" href="https://networknt.github.io/client/">
+	
+	Client Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="DevOps" href="https://networknt.github.io/devops/">
+	
+	DevOps
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Benchmark" href="https://networknt.github.io/benchmark/">
+	
+	Benchmark
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tutorial" href="https://networknt.github.io/tutorial/">
+	
+	Tutorial
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Example" href="https://networknt.github.io/example/">
+	
+	Example
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tool" href="https://networknt.github.io/tool/">
+	
+	Tool
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Issues &amp; Help" href="https://github.com/networknt/light-doc/issues">
+	
+	Issues &amp; Help
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Roadmap" href="https://networknt.github.io/roadmap/">
+	
+	Roadmap
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="FAQ" href="https://networknt.github.io/faq/">
+	
+	FAQ
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="License" href="https://www.apache.org/licenses/LICENSE-2.0">
+	
+	License
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Introduction" href="https://networknt.github.io/index.html">
+	
+	Introduction
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+          <li>
+            <a href="https://github.com/stevehu" target="_blank" title="@stevehu on GitHub">
+              @stevehu on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:stevehu@gmail.com" title="Email of stevehu@gmail.com">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Audit </h1>
+
+			
+
+<p>There are two built-in audit handlers that write logs into audit.log that setup
+in the logback appender. End user can add more customized audit handlers if need.</p>
+
+<p>In the audit module, there is AuditHandler which is a generic and configurable
+with audit.yml config file.</p>
+
+<p>There is another audit provided by the light-4j framework called DumpHandler in
+<a href="https://networknt.github.io/middleware/dump/">dump</a> module.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Only logs several fields from request header and the fields are configurable.
+Optional, it can log response status and response time.</p>
+
+<p>This is a generic audit handler that dump most important info per request basis.
+The following elements will be logged if it&rsquo;s available in auditInfo object
+attached to exchange. This object wil be populated by other upstream handlers
+like swagger-meta and swagger-security for light-rest-4j framework.</p>
+
+<p>This handler can be used on production but be aware that it will impact the
+overall performance. Turning off statusCode and responseTime can make it faster
+as these have to be captured on the response chain instead of request chain.</p>
+
+<p>For most business and majority of microservices, you don&rsquo;t need to enable this
+handler due to performance reason. The default audit log will be audit.log config
+in the default logback.xml; however, it can be changed to syslog or Kafka with
+customized appender.</p>
+
+<p>Majority of the fields in audit log are collected in request and response;
+however, to allow user to customize it, we have put an attachment into the
+exchange to allow other handlers to write important info into it. The audit.yml
+can control which fields should be included in the final log.</p>
+
+<p>By default, the following fields are included:</p>
+
+<ul>
+<li>timestamp</li>
+<li>serviceId (from server.yml)</li>
+<li>correlationId</li>
+<li>traceabilityId (if available)</li>
+<li>clientId</li>
+<li>userId (if available)</li>
+<li>scopeClientId (available if called by another API)</li>
+<li>endpoint (uriPattern@method)</li>
+<li>statusCode</li>
+<li>responseTime</li>
+</ul>
+
+<p>The audit.log is in JSON format and it is easy to be parsed and monitored.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>The output fields are populated based on the config file audit.yml and here is
+and example.</p>
+
+<pre><code># AuditHandler will pick some important fields from headers and tokens and logs into a audit appender.
+---
+# Enable Audit
+enabled: true
+
+# Output response status code
+statusCode: true
+
+# Output response time
+responseTime: true
+
+# Output header elements. You can add more if you want.
+headers:
+
+# Correlation Id
+- X-Correlation-Id
+
+# Traceability Id
+- X-Traceability-Id
+
+# Output from id token and access token
+audit:
+
+# Service Id
+- service_id
+
+# Client Id
+- client_id
+
+# User Id
+- user_id
+
+# Client Id in scope/access token
+- scope_client_id
+
+# Request endpoint uri@method.
+- endpoint
+
+</code></pre>
+
+<h2 id="logback-config">Logback config</h2>
+
+<p>The following is the appender defined in the logback.xml or logback-test.xml</p>
+
+<pre><code>    &lt;!--audit log--&gt;
+    &lt;appender name=&quot;audit&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;file&gt;target/audit.log&lt;/file&gt; &lt;!-- logfile location --&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%-5level [%thread] %date{ISO8601} %F:%L - %msg%n
+            &lt;/pattern&gt; &lt;!-- the layout pattern used to format log entries --&gt;
+            &lt;immediateFlush&gt;true&lt;/immediateFlush&gt;
+        &lt;/encoder&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;&gt;
+            &lt;fileNamePattern&gt;target/audit.log.%i.zip&lt;/fileNamePattern&gt;
+            &lt;minIndex&gt;1&lt;/minIndex&gt;
+            &lt;maxIndex&gt;5&lt;/maxIndex&gt; &lt;!-- max number of archived logs that are kept --&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;triggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;&gt;
+            &lt;maxFileSize&gt;200MB
+            &lt;/maxFileSize&gt; &lt;!-- The size of the logfile that triggers a switch to a new logfile, and the current one archived --&gt;
+        &lt;/triggeringPolicy&gt;
+    &lt;/appender&gt;
+
+</code></pre>
+
+<h2 id="logging-example">Logging example</h2>
+
+<pre><code>INFO  [XNIO-1 I/O-1] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353929,&quot;X-Correlation-Id&quot;:&quot;abS_cAyTT5SIrHayM-11pQ&quot;,&quot;X-Traceability-Id&quot;:null,&quot;statusCode&quot;:200,&quot;responseTime&quot;:16}
+INFO  [XNIO-1 I/O-3] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353960,&quot;X-Correlation-Id&quot;:&quot;FUD_bbFpRpSs2CmVjJYt-A&quot;,&quot;X-Traceability-Id&quot;:&quot;tid&quot;,&quot;statusCode&quot;:200,&quot;responseTime&quot;:1}
+</code></pre>
+
+<h2 id="customized-handler">Customized Handler</h2>
+
+<p>For some users that need special audit logic or other channel to redirect the audit
+to, they can create their own audit handler and replace the default audit handler in
+/src/main/resources/META-INF/services/com.networknt.handler.MiddlewareHandler</p>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2017 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://networknt.github.io/middleware/body/" title="Body Parser">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Body Parser
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://networknt.github.io/tutorials/end-to-end-test/" title="End to End Test">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              End to End Test
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/networknt.github.io\/';
+      var repo_id  = 'networknt\/light-doc';
+    
+    </script>
+
+    <script src="https://networknt.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

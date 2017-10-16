@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Security - Light Ecosystem for Microservices</title>
+    <meta name="generator" content="Hugo 0.21-DEV" />
+
+    
+    <meta name="description" content="Light Document">
+    
+    <link rel="canonical" href="https://networknt.github.io/architecture/security/">
+    
+    <meta name="author" content="Steve Hu">
+    
+
+    <meta property="og:url" content="https://networknt.github.io/architecture/security/">
+    <meta property="og:title" content="Light Ecosystem for Microservices">
+    <meta property="og:image" content="https://networknt.github.io/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://networknt.github.io/fonts/icon.eot');
+        src: url('https://networknt.github.io/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://networknt.github.io/fonts/icon.woff')
+               format('woff'),
+             url('https://networknt.github.io/fonts/icon.ttf')
+               format('truetype'),
+             url('https://networknt.github.io/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://networknt.github.io/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-teal">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Security
+      </div>
+    </div>
+
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/stevehu" title="@stevehu on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/networknt/light-doc" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://networknt.github.io/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Light Ecosystem for Microservices <span class="version">1.4.4</span></strong>
+        
+          <br>
+          networknt/light-doc
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/networknt/light-doc/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/networknt/light-doc/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Getting started" href="https://networknt.github.io/getting-started/">
+	
+	Getting started
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Architecture" href="https://networknt.github.io/architecture/">
+	
+	Architecture
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Design" href="https://networknt.github.io/design/">
+	
+	Design
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Middleware" href="https://networknt.github.io/middleware/">
+	
+	Middleware
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Server Components" href="https://networknt.github.io/server/">
+	
+	Server Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Client Components" href="https://networknt.github.io/client/">
+	
+	Client Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="DevOps" href="https://networknt.github.io/devops/">
+	
+	DevOps
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Benchmark" href="https://networknt.github.io/benchmark/">
+	
+	Benchmark
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tutorial" href="https://networknt.github.io/tutorial/">
+	
+	Tutorial
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Example" href="https://networknt.github.io/example/">
+	
+	Example
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tool" href="https://networknt.github.io/tool/">
+	
+	Tool
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Issues &amp; Help" href="https://github.com/networknt/light-doc/issues">
+	
+	Issues &amp; Help
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Roadmap" href="https://networknt.github.io/roadmap/">
+	
+	Roadmap
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="FAQ" href="https://networknt.github.io/faq/">
+	
+	FAQ
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="License" href="https://www.apache.org/licenses/LICENSE-2.0">
+	
+	License
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Introduction" href="https://networknt.github.io/index.html">
+	
+	Introduction
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+          <li>
+            <a href="https://github.com/stevehu" target="_blank" title="@stevehu on GitHub">
+              @stevehu on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:stevehu@gmail.com" title="Email of stevehu@gmail.com">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Security </h1>
+
+			
+
+<p>Note: If this is the first time you hear about OAuth2 or you want to get familiar with
+the grant types we are using, please read this
+<a href="https://github.com/networknt/light-oauth2/wiki/OAuth2-Introduction">article</a> first.</p>
+
+<p>Everyone’s excited about microservices, but actual implementation is sparse. Perhaps the
+reason is that people are unclear on how these services talk to one another; especially
+tricky thing is access management throughout a sea of independent services.</p>
+
+<p>While designing microserivces, big monolithic application is breaking down to smaller
+services that can be independently deployed or replaced. The final application will have
+more http calls than a single application, how can we protect these calls between services?</p>
+
+<p>To protect APIs/services, the answer is OAuth2 and most simple and popular solution will be
+simple web token as access token. The client authenticates itself on OAuth2 server and OAuth2
+server issues
+a simple web token (a UUID in most of the cases), then the client sends the request to API
+server with access token in the Authorization header. Once API server receives the request,
+it has to send the access token to OAuth2 server to verify if this is valid token and if
+this token is allowed to access this API. As you can see there must be a database lookup on
+OAuth2 server to do that. Distributed cache helps a lot but there is still a network call and
+lookup for every single request. OAuth2 server eventually becomes a bottleneck and a single
+point of failure.</p>
+
+<p>Years ago, when JWT draft specification was out, I came up with the idea to do the
+distributed security verification with JWT to replace Simple Web Token for one of the big
+banks in Canada. At that time, there was nobody using JWT this way and the bank sent the design to
+Paul Madson and John Bradley who are the Authors of OAuth2 and JWT specifications and got
+their endorsements to use JWT this way.</p>
+
+<h1 id="distributed-jwt-verification">Distributed JWT Verification</h1>
+
+<p>Here is the diagram of distributed JWT verification for microservices.</p>
+
+<p><img src="https://networknt.github.io/images/ms_distributed_jwt.png" alt="ms_distributed_jwt" /></p>
+
+<p>Let&rsquo;s assume the following:</p>
+
+<ul>
+<li>Client1 is a web server and it has client1 as client_id.</li>
+<li>API A is a microservice and it has apia as client_id and it requires a.r scope to access.</li>
+<li>API B is a microserivce and it has apib as client_id and it requires b.r scope to access.</li>
+<li>API C is a microservice and it has apic as client_id and it requires c.r scope to access.</li>
+<li>API D is a microservice and it has apid as client_id and it requires d.r scope to access.</li>
+</ul>
+
+<h3 id="user-trigger-the-authentication">User trigger the authentication</h3>
+
+<p>When user clicks the login button or accesses resource that is protected, he will be
+redirect to OAuth2 server to authenticate himself. After input username and password, an
+authorization code is redirected back to the browser. The client1 will handle the redirect
+url and get the authorization code. By sending client1 client_id, client_secret and
+authorization code from user to OAuth2 server, Client1 gets a JWT token with</p>
+
+<p>user_id = user1</p>
+
+<p>client_id = client1</p>
+
+<p>scope = [a.r]</p>
+
+<p>This token will be put into the Authorization header of the request to API A. When API A
+receives the request, it verifies the JWT token with public key issued by OAuth2 server with
+the security middleware in the framework. If the signature verification is successful, it
+will verify the scope in the token against the swagger specification defined for the
+endpoint Client1 is accessing. As a.r is required and it is in the JWT scope, it allows
+the access.</p>
+
+<h3 id="api-a-calls-api-b-and-api-c">API A calls API B and API C</h3>
+
+<p>Now API A needs to call API B and API C to fulfill the request. As this is API to API call or
+service to service call, there is no user id involved and Client Credentials flow will be
+used here to get another JWT token to B and C. The original JWT token doesn&rsquo;t have the scopes
+to access B and C as Client1 does not even care A is calling B and C. So here API A needs to
+get a token associate with client_id apia which has proper scope to access API B and API C.</p>
+
+<p>This token will have the following claims.</p>
+
+<p>client_id = apia</p>
+
+<p>scope = [b.r c.r]</p>
+
+<p>As the original token has the original user_id, it is carried in the entire service to service
+calls so that each service has a chance to do role based or user based authorization if it is
+necessary. The new client_credentials token will be passed in the request header &ldquo;X-Scope-Token&rdquo;.</p>
+
+<h3 id="api-b-and-api-c-tokens-verification">API B and API C tokens verification</h3>
+
+<p>The tokens verification on API B and API C are the same. So le&rsquo;t use API B as an example to
+explain the verification process.</p>
+
+<p>When API B receives the request, it first check the Authorization token to make sure it is valid. Then
+if scope verification is enabled, it will check if &lsquo;X-Scope-Token&rsquo; header exists. If yes, it will verify
+it and match the scope with endpoint defined scope. If scope matching is failed, it will fall back
+to Authorization token to see if it has the scope required. If none of the tokens has the scope required,
+an error will be sent back to the caller.</p>
+
+<h3 id="api-b-calls-api-d">API B calls API D</h3>
+
+<p>The process is very similar like API A calls API B and API C. A client credentials token will be
+retrieved by API B from OAuth2 server and it has the following claims.</p>
+
+<p>client_id = apib</p>
+
+<p>scope = [d.r]</p>
+
+<h3 id="api-d-token-verification">API D token verification</h3>
+
+<p>Similar like API B and API C tokens verification.</p>
+
+<h1 id="client-credentials-scope-token-cache">Client Credentials / Scope Token Cache</h1>
+
+<p>As described above, for every API to API call, the caller must pass in a scope token in addition to
+the original token. Unlike the original token which is associated with a user, the scope token is only
+associated with a client (API / service) and it won&rsquo;t be expired after a period configured on OAuth2
+server. So it is not necessary to get the new scope token for every API to API call. The token is
+retrieved and cached in memory until it is about to be expired then a new token will be retrieved.</p>
+
+<p>The entire token renew process is managed
+by <a href="https://networknt.github.io/light-4j/other/client/">Client</a> module provided in the light-4j
+framework. This client module encapsulate a lot of features to help API to API calls.</p>
+
+<h1 id="authorization-token-cache">Authorization Token Cache</h1>
+
+<p>The original token normally will be cached in the web server session so that the subsequent calls
+from the same user can use the cached token.</p>
+
+<h1 id="single-sign-on">Single Sign On</h1>
+
+<p>As the end user login is managed by OAuth2 server, there is a session established between user&rsquo;s
+browser and OAuth2 server. The the user switch to another tab on his browser to access another
+application, the login on OAuth2 is not necessary and a new authorization code will immediately
+redirected back.</p>
+
+<h1 id="fine-grained-authorization">Fine-Grained Authorization</h1>
+
+<p>Above authorization is based on the client_id and scope in the JWT token and it can be verified by
+JwtVerifierHandler without any context information regarding to a specific API endpoint. And it can
+be applied blindly as a technical middleware handler at the framework level. For other fine-grained
+authorizations, they must be applied based on the context of the service.</p>
+
+<h3 id="role-based">Role-Based</h3>
+
+<p>Role-Based Authorization must be specific to one or a group of services with a set of pre-defined
+roles. Normally the role can be embedded into the Id token and the mapping should be cached in the
+handler.</p>
+
+<h3 id="attribute-based">Attribute-Based</h3>
+
+<p>For example, only Account manager can access an account. Or employee based on one geo location can
+access customer based on the same Geo location.</p>
+
+<h3 id="rule-based">Rule-Based</h3>
+
+<p>Teller can only transfer money less than $10,000.00 etc.</p>
+
+<h1 id="request-and-response-filter">Request and Response Filter</h1>
+
+<p>Sometimes, certain request fields need to be removed based on the clientId or other attributes so that
+the rule business handler can be done in a consistent way. Also, for certain client or user, the
+response might need to filter out some information before returning to the consume.</p>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2017 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://networknt.github.io/example/database/" title="Database">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Database
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://networknt.github.io/architecture/gateway/" title="API Gateway">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              API Gateway
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/networknt.github.io\/';
+      var repo_id  = 'networknt\/light-doc';
+    
+    </script>
+
+    <script src="https://networknt.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

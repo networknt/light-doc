@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Nodejs Pitfalls - Light Ecosystem for Microservices</title>
+    <meta name="generator" content="Hugo 0.21-DEV" />
+
+    
+    <meta name="description" content="Light Document">
+    
+    <link rel="canonical" href="https://networknt.github.io/benchmarks/nodejs/">
+    
+    <meta name="author" content="Steve Hu">
+    
+
+    <meta property="og:url" content="https://networknt.github.io/benchmarks/nodejs/">
+    <meta property="og:title" content="Light Ecosystem for Microservices">
+    <meta property="og:image" content="https://networknt.github.io/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://networknt.github.io/fonts/icon.eot');
+        src: url('https://networknt.github.io/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://networknt.github.io/fonts/icon.woff')
+               format('woff'),
+             url('https://networknt.github.io/fonts/icon.ttf')
+               format('truetype'),
+             url('https://networknt.github.io/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://networknt.github.io/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-teal">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Nodejs Pitfalls
+      </div>
+    </div>
+
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/stevehu" title="@stevehu on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/networknt/light-doc" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://networknt.github.io/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Light Ecosystem for Microservices <span class="version">1.4.4</span></strong>
+        
+          <br>
+          networknt/light-doc
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/networknt/light-doc/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/networknt/light-doc/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Getting started" href="https://networknt.github.io/getting-started/">
+	
+	Getting started
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Architecture" href="https://networknt.github.io/architecture/">
+	
+	Architecture
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Design" href="https://networknt.github.io/design/">
+	
+	Design
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Middleware" href="https://networknt.github.io/middleware/">
+	
+	Middleware
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Server Components" href="https://networknt.github.io/server/">
+	
+	Server Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Client Components" href="https://networknt.github.io/client/">
+	
+	Client Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="DevOps" href="https://networknt.github.io/devops/">
+	
+	DevOps
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Benchmark" href="https://networknt.github.io/benchmark/">
+	
+	Benchmark
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tutorial" href="https://networknt.github.io/tutorial/">
+	
+	Tutorial
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Example" href="https://networknt.github.io/example/">
+	
+	Example
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tool" href="https://networknt.github.io/tool/">
+	
+	Tool
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Issues &amp; Help" href="https://github.com/networknt/light-doc/issues">
+	
+	Issues &amp; Help
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Roadmap" href="https://networknt.github.io/roadmap/">
+	
+	Roadmap
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="FAQ" href="https://networknt.github.io/faq/">
+	
+	FAQ
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="License" href="https://www.apache.org/licenses/LICENSE-2.0">
+	
+	License
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Introduction" href="https://networknt.github.io/index.html">
+	
+	Introduction
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+          <li>
+            <a href="https://github.com/stevehu" target="_blank" title="@stevehu on GitHub">
+              @stevehu on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:stevehu@gmail.com" title="Email of stevehu@gmail.com">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Nodejs Pitfalls </h1>
+
+			
+
+<p>When talking about microservices, a lot of Nodejs developers will say that
+Node is a better platform than Java and other languages to build microservices.
+The arguments are:</p>
+
+<ul>
+<li>Nodejs is faster than Java at runtime.</li>
+<li>Nodejs development is more productive than Java.</li>
+</ul>
+
+<p>These claims are proved to be false already as I&rsquo;ve been working on both
+platforms in banking industry for the last couple of years. I have been
+building REST API frameworks on both Java and Nodejs and the following are
+my observations on Nodejs in enterprise computing.</p>
+
+<h2 id="production-hell">Production hell</h2>
+
+<p>As workers are single-threaded, any uncaught exception will crash the worker
+and all the in-flight transactions will be lost and you don&rsquo;t know what is
+the state of each in-flight request. This is the biggest problem faced and
+I have worked with several core Nodejs developers trying to mitigate the risk.</p>
+
+<p>The end result is to capture it in the server.js and then wait for in-flight
+to complete as many as possible in a unknown state of the server and then
+shutdown the server. Not ideal but it reduce the risk to certain level. Due to
+this reason, Nodejs API platform is only recommended for readonly API in the
+bank.</p>
+
+<p>Node server crashes under load (cpu 90% or up). We found this during out loaded
+test with Winston logger enabled and the server always dead without any response
+after a while. The reason is these callbacks don&rsquo;t have enough cpu time to
+complete and there are piling up in memory until you run out of memory, the server
+won&rsquo;t shutdown in this situation but simply won&rsquo;t respond. The solution for
+us is to monitor the cpu usage and starting more containers when it is in
+heavy load.</p>
+
+<h2 id="callback-hell">Callback Hell</h2>
+
+<p>This is know issue for Javascript. Although promise helps a lot, it is still a
+big issue with Node platform.</p>
+
+<h2 id="code-maintenance">Code Maintenance</h2>
+
+<p>Nodejs is easy to get into and very fast to build small Hello World application;
+however, building complex enterprise level application with thousands of line of
+code is very hard. When I look at my own code wrote one year ago, I couldn&rsquo;t
+reason about what that piece code does. I have to put some debug info and run it
+to figure out how the code works. Callback Hell is one of the causes. For
+enterprise applications, easy to understand and maintain is very important and I
+feel sorry for the bank employees who have taken over my work.</p>
+
+<h2 id="debugging">Debugging</h2>
+
+<p>Javascript as a platform doesn&rsquo;t have a good runtime debugging tool that you can inspect
+variables during runtime easily. There are some tools but none of them works as
+good as other languages. I use a customized logger built by myself and put a lot
+of logging statement in order to debug my code and I&rsquo;ve seen so many js developers
+just use console.log:)</p>
+
+<h2 id="no-transaction-support">No Transaction Support</h2>
+
+<p>No transaction support on the platform makes it not enterprise ready. Let&rsquo;s say
+you are building a stock order API, once the server receives the request, it needs
+to save the order in backend database and route the order to an exchange for execution.
+what if the communication to Exchange is down? There is no way that the local
+database update can be rolled back.</p>
+
+<h2 id="lack-of-connectivity-to-backend-system">Lack of Connectivity to Backend System</h2>
+
+<p>In the above order API, the order has to be routed to an exchange through MQ Queue
+but node didn&rsquo;t support it 2 years ago. Also, a lot of existing backend
+systems and databases are not supported even today. I have worked with Strongloop
+and IBM teams for three months to make IBM DB2
+drive(<a href="https://github.com/ibmdb/node-ibm_db">https://github.com/ibmdb/node-ibm_db</a>) worked on production without
+memory leak.</p>
+
+<h2 id="insufficient-of-module-and-version-management">Insufficient of Module and Version Management</h2>
+
+<p>A lot of people praises npm and I agree that it is very good tool to manage modules.
+However, only manage modules is no enough, it has to manage modules with versions.</p>
+
+<p>Most Node developers will have this experience. You have an application running today
+and tomorrow, you run npm install again and it stops working:) As one of the dependencies
+got a new version and it is not backward compatible. Shrinkwrap helps a little bit but
+it is very hard to update one or two immediate dependent modules as there is no way to
+update sub dependencies. Another way is to check in node_modules into git and packaged it
+into docker container. Now we always package node_modules into docker image.</p>
+
+<h2 id="windows-un-friendly">Windows Un-Friendly</h2>
+
+<p>while trying to check in node_modules folder into git on Windows platform, most cases
+you will get an error as some files are buried too deep in the directory and Windows
+has limitation on path length. This issue has been partially fixed in later version
+of Node as npm tries to flatten all the dependencies.</p>
+
+<p>Some of the modules depending on C/C++ that cannot be compiled on Windows. It causes
+issues for teams that use different platforms for development.</p>
+
+<p>Given Windows is not case sensitive on file names, application developed on Windows
+usually cannot be executed on Linux the first time.</p>
+
+<h2 id="long-running-process-hogs-cpu">Long Running process hogs CPU</h2>
+
+<p>This is not a problem of Nodejs but mistake of developers. I have seen too many this
+kind of mistakes and I want to highlight it here. As node is using event loop
+to dispatch tasks/callbacks, if any callback designed wrongly and doesn&rsquo;t give up CPU
+for a period of time, the entire system will suffer. If you have to process thousands
+of records loaded from database, process them in 100 blocks. There are so many articles
+talking about this topic.</p>
+
+<h2 id="public-module-quality">Public Module Quality</h2>
+
+<p>No doubt there is a very active community for Nodejs and there are a lot of modules published
+on public npm repository. I myself got several modules published.</p>
+
+<p>On the other hand, there are so many modules are in bad shape as developers of these modules
+often migrated from frontend without any enterprise level experience. Some of modules got
+10 line of the code but will depending on 8 other modules. Write a small express application
+in nodejs and take a look at how many modules in node_modules folder. Is you application
+using them all? I guess less than 5 percent of the code in node_modules are in the
+execution path and the rest of them are just wasting your hard drive space.</p>
+
+<p>A legendary Node developer TJ mentioned the same reason in his farewell article
+regarding to modules. Javascript sets the bar very low and it attracts a lot of low level
+developers. Remember Visual Basic was the most popular language on Microsoft platform?</p>
+
+<h2 id="stability-of-the-platform">Stability of the Platform</h2>
+
+<p>For one bank I worked last year, they are still using Nodejs 0.10.39 as that was the only
+production ready version. Both Strongloop and Joyent told us to stay on that version and as
+I understand, other customers are on the same version. We were told to upgrade to 0.12.x
+once it was prouduction ready and then Nodejs and IO.js were merged and Nodejs 4 was out.
+Before Nodejs 4 was production ready, they&rsquo;ve moved to Nodejs 5 and now on Nodejs 6.</p>
+
+<p>We are having big issue with Nodejs 0.10.39 as https module is not performing with API to
+API calls and the issue was resolved in 0.12.x. So our recommendation for Nodejs API
+framework added another condition upon only readonly API - The API must not call another
+API in https. All APIs that calling another API with https must be implemented in Java
+framework.</p>
+
+<h2 id="talents-abandoned-the-ship">Talents abandoned the ship</h2>
+
+<p>As you might know, TJ who is the developer of express - most popular nodejs framework left
+Nodejs to GO. Here is his <a href="https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.5brqa9has">farewell</a>
+There are other heavy weight Nodejs developers left and that might make you think what
+is going on.</p>
+
+<h2 id="existing-customers-are-stuck-or-leaving">Existing Customers are stuck or leaving</h2>
+
+<p>There are some early adopters of Nodejs and all of them are trapped with old version of Nodejs
+and they are so afraid to upgrade to the new version as memory leak will be hard to
+resolve - refer to my production hell.</p>
+
+<p>Other companies, just rewrite the application with other language. One example is
+<a href="https://medium.com/@theflapjack103/the-way-of-the-gopher-6693db15ae1f#.jfcsl8hlg">here</a></p>
+
+<p>For the bank I&rsquo;ve worked, they wrote some APIs in Nodejs in 2014 but most of them were rewritten
+in Java in 2016.</p>
+
+<h2 id="memory-footprint-is-high-on-multiple-core-platform">Memory Footprint is high on multiple core platform</h2>
+
+<p>For one worker, it uses less memory than Java, but on a multi-core system, you have to start
+workers per cpu core in order to utilize the resource to its full potential. These workers
+are independent and there is no shared memory, they allocate heap independently. If you start
+four or eight workers, it uses more memory than Java which has only one instance multi-threaded
+with shared heap memory.</p>
+
+<h2 id="much-slower-than-new-java-platforms">Much slower than New Java platforms</h2>
+
+<p>As for speed, it is faster than WebSphere/WebLogic/JBoss but not in the same level as other
+new containerless Java frameworks and platforms.</p>
+
+<p>Here is a <a href="https://github.com/networknt/microservices-framework-benchmark">benchmarks</a>
+that have both popular Java microservices frameworks and Nodejs/Express. The above performance
+result only focus on raw throughput and latency. While more code is added, Nodejs will be
+getting slower and slower.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>I work on both Nodejs and Java so my opinion is not biased but to point out the facts on
+Nodejs platform. No doubt you can build rock solid Nodejs application with a group of senior
+developers but it is very hard to find that level of developers. I am not saying Java is
+better as I know there are a lot of issues with Java. I just hope these points will help
+you in choosing your next application platform.</p>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2017 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://networknt.github.io/devops/windows_service/" title="Running Light-4J Application as Windows Service">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Running Light-4J Application as Windows Service
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://networknt.github.io/example/webserver/" title="Web Server">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Web Server
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/networknt.github.io\/';
+      var repo_id  = 'networknt\/light-doc';
+    
+    </script>
+
+    <script src="https://networknt.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

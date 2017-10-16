@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Architecture - Light Ecosystem for Microservices</title>
+    <meta name="generator" content="Hugo 0.21-DEV" />
+
+    
+    <meta name="description" content="Light Document">
+    
+    <link rel="canonical" href="https://networknt.github.io/architecture/">
+    
+    <meta name="author" content="Steve Hu">
+    
+
+    <meta property="og:url" content="https://networknt.github.io/architecture/">
+    <meta property="og:title" content="Light Ecosystem for Microservices">
+    <meta property="og:image" content="https://networknt.github.io/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://networknt.github.io/fonts/icon.eot');
+        src: url('https://networknt.github.io/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://networknt.github.io/fonts/icon.woff')
+               format('woff'),
+             url('https://networknt.github.io/fonts/icon.ttf')
+               format('truetype'),
+             url('https://networknt.github.io/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://networknt.github.io/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-teal">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Architecture
+      </div>
+    </div>
+
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/stevehu" title="@stevehu on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/networknt/light-doc" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://networknt.github.io/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Light Ecosystem for Microservices <span class="version">1.4.4</span></strong>
+        
+          <br>
+          networknt/light-doc
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/networknt/light-doc/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/networknt/light-doc/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Getting started" href="https://networknt.github.io/getting-started/">
+	
+	Getting started
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a class="current" title="Architecture" href="https://networknt.github.io/architecture/">
+	
+	Architecture
+</a>
+
+
+<ul id="scrollspy">
+</ul>
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Design" href="https://networknt.github.io/design/">
+	
+	Design
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Middleware" href="https://networknt.github.io/middleware/">
+	
+	Middleware
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Server Components" href="https://networknt.github.io/server/">
+	
+	Server Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Client Components" href="https://networknt.github.io/client/">
+	
+	Client Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="DevOps" href="https://networknt.github.io/devops/">
+	
+	DevOps
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Benchmark" href="https://networknt.github.io/benchmark/">
+	
+	Benchmark
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tutorial" href="https://networknt.github.io/tutorial/">
+	
+	Tutorial
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Example" href="https://networknt.github.io/example/">
+	
+	Example
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tool" href="https://networknt.github.io/tool/">
+	
+	Tool
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Issues &amp; Help" href="https://github.com/networknt/light-doc/issues">
+	
+	Issues &amp; Help
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Roadmap" href="https://networknt.github.io/roadmap/">
+	
+	Roadmap
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="FAQ" href="https://networknt.github.io/faq/">
+	
+	FAQ
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="License" href="https://www.apache.org/licenses/LICENSE-2.0">
+	
+	License
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Introduction" href="https://networknt.github.io/index.html">
+	
+	Introduction
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+          <li>
+            <a href="https://github.com/stevehu" target="_blank" title="@stevehu on GitHub">
+              @stevehu on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:stevehu@gmail.com" title="Email of stevehu@gmail.com">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Architecture </h1>
+
+			<p>light-4j is aiming microservices and it has to be high throughput, low latency, light-weight and
+address a lot of cross-cutting concerns at the same time. It is based on Undertow Core Http server
+and depending on minimum third party libraries.</p>
+
+<p>The topics here are architectural considerations. In a nutshell, architecture is a type of design
+where the focus is quality attributes and wide(er) scope whereas design focuses on functional
+requirements and more localized concerns. There is another <a href="https://networknt.github.io/light-4j/design/">section</a>
+for design decisions.</p>
+
+<p>Here is a list of architecture decisions for the framework:</p>
+
+<ul>
+<li><p>Designed for <a href="https://networknt.github.io/light-4j/architecture/microservices/">microservices</a> that can be dockerized and deployed within containers.</p></li>
+
+<li><p>Base on pure HTTP without JavaEE as it has too many problems and is <a href="https://networknt.github.io/light-4j/architecture/jee-is-dead/">declining</a></p></li>
+
+<li><p><a href="https://networknt.github.io/light-4j/architecture/security/">Security</a> first design with OAuth2 integration and distributed verification with embedded distributed gateway.</p></li>
+
+<li><p>How to handler distributed <a href="https://networknt.github.io/light-4j/architecture/transaction/">transaction</a> in microserivces.</p></li>
+
+<li><p>All components are designed as <a href="https://networknt.github.io/light-4j/architecture/plugin/">plugins</a> and the framework is easy to be extended and customized.</p></li>
+
+<li><p>Can be <a href="https://networknt.github.io/light-4j/architecture/integration/">integrated</a> with existing application to protect investment over the year for your organization.</p></li>
+
+<li><p>Support direct calls from microservice to microservice without any <a href="https://networknt.github.io/light-4j/architecture/gateway/">gateway</a>, proxy as they add too much overhead.</p></li>
+
+<li><p>Service logs will be aggregated with ElasticSearch, LogStash and Kibana with <a href="https://networknt.github.io/light-4j/architecture/monitoring/">monitoring and alerting</a>.</p></li>
+
+<li><p>Built-in <a href="https://networknt.github.io/light-4j/architecture/traceability/">CorrelationId and TraceabilityId</a> to trace service to service calls in aggregated logs.</p></li>
+
+<li><p>Designed for <a href="https://networknt.github.io/light-4j/architecture/scalability/">scalability</a> so that you can have thousands instances running at the same time.</p></li>
+
+<li><p>Has its own dependency injection framework so that developers can avoid heavy Spring or Guice as they are <a href="https://networknt.github.io/light-4j/architecture/spring-is-bloated/">bloated</a></p></li>
+
+<li><p><a href="https://networknt.github.io/light-4j/architecture/platform/">Elements</a> of API platform.</p></li>
+
+<li><p>API <a href="https://networknt.github.io/light-4j/architecture/category/">category</a> and how to choose a framework to build your APIs.</p></li>
+</ul>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2017 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://networknt.github.io/benchmarks/" title="Performance">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Performance
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://networknt.github.io/devops/linux_service/" title="Running Light-4J Application as Linux Service">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Running Light-4J Application as Linux Service
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/networknt.github.io\/';
+      var repo_id  = 'networknt\/light-doc';
+    
+    </script>
+
+    <script src="https://networknt.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Faqs on Light Ecosystem for Microservices</title>
+    <link>https://networknt.github.io/faq/</link>
+    <description>Recent content in Faqs on Light Ecosystem for Microservices</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license</copyright>
+    <lastBuildDate>Sat, 12 Aug 2017 10:14:30 -0400</lastBuildDate>
+    
+	<atom:link href="https://networknt.github.io/faq/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>FAQ</title>
+      <link>https://networknt.github.io/faq/</link>
+      <pubDate>Sat, 12 Aug 2017 10:14:30 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/faq/</guid>
+      <description>How to compress the response with gzip For some of the API endpoints, the response body are big and it might be necessary to compress it before return it to the client. Undertow has a built-in EncodingHandler that can be utilize for this.
+Here is an example with customized path provider.
+public` HttpHandler getHandler() { return new EncodingHandler(new ContentEncodingRepository() .addEncodingHandler(&amp;quot;gzip&amp;quot;, new GzipEncodingProvider(), 50, Predicates.parse(&amp;quot;max-content-size[150]&amp;quot;))) .setNext( Handlers.routing() .add(Methods.GET, &amp;quot;/v2/fronts/{front_id}&amp;quot;, new FrontGetHandler(Config.</description>
+    </item>
+    
+  </channel>
+</rss>

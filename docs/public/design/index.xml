@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Designs on Light Ecosystem for Microservices</title>
+    <link>https://networknt.github.io/design/</link>
+    <description>Recent content in Designs on Light Ecosystem for Microservices</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license</copyright>
+    <lastBuildDate>Thu, 09 Feb 2017 10:57:47 -0500</lastBuildDate>
+    
+	<atom:link href="https://networknt.github.io/design/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Design</title>
+      <link>https://networknt.github.io/design/</link>
+      <pubDate>Thu, 09 Feb 2017 10:57:47 -0500</pubDate>
+      
+      <guid>https://networknt.github.io/design/</guid>
+      <description>light-4j is aiming microservices and design of microservices is more art other than technique. When you break a business application to smaller pieces, there is a threshold. If it too fine-grained, then the performance will suffer, but if it is too coarse-grained, then the benefit of microservices will be diminishing.
+The big portion of design work for microservices is to functionally divide an application to multiple services and define the communication contract between these services with OpenAPI specifications.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://networknt.github.io/design/env-segregation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://networknt.github.io/design/env-segregation/</guid>
+      <description>Environment Segregation Environment segregation in APIs has primarily two goals:
+ Prevent cross fire  Applications maintain, in a vast majority, a segregation between test and production environments, to ensure privacy, data integrity, separation of concerns, etc. To this end, an API framework needs to offer the ability to prevent access across this divide.
+For example, test environments should not be able to access production services or resources, nor should production applications accidentally access test services resources such as persisted stores.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://networknt.github.io/design/multi-tenancy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://networknt.github.io/design/multi-tenancy/</guid>
+      <description>Multi-Tenancy Multi-tenancy is an architecture in which a single instance of a software application serves multiple customers. Each customer is called a tenant. Tenants may be given the ability to customize some parts of the application, such as color of the user interface (UI) or business rules, but they cannot customize the application&amp;rsquo;s code.
+Multi-tenancy can be economical because software development and maintenance costs are shared. It can be contrasted with single-tenancy, an architecture in which each customer has their own software instance and may be given access to code.</description>
+    </item>
+    
+  </channel>
+</rss>

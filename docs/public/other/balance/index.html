@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Load Balance - Light Ecosystem for Microservices</title>
+    <meta name="generator" content="Hugo 0.21-DEV" />
+
+    
+    <meta name="description" content="Light Document">
+    
+    <link rel="canonical" href="https://networknt.github.io/other/balance/">
+    
+    <meta name="author" content="Steve Hu">
+    
+
+    <meta property="og:url" content="https://networknt.github.io/other/balance/">
+    <meta property="og:title" content="Light Ecosystem for Microservices">
+    <meta property="og:image" content="https://networknt.github.io/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://networknt.github.io/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://networknt.github.io/fonts/icon.eot');
+        src: url('https://networknt.github.io/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://networknt.github.io/fonts/icon.woff')
+               format('woff'),
+             url('https://networknt.github.io/fonts/icon.ttf')
+               format('truetype'),
+             url('https://networknt.github.io/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/application.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://networknt.github.io/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://networknt.github.io/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-teal">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Load Balance
+      </div>
+    </div>
+
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/stevehu" title="@stevehu on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/networknt/light-doc" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://networknt.github.io/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Light Ecosystem for Microservices <span class="version">1.4.4</span></strong>
+        
+          <br>
+          networknt/light-doc
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/networknt/light-doc/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/networknt/light-doc/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Getting started" href="https://networknt.github.io/getting-started/">
+	
+	Getting started
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Architecture" href="https://networknt.github.io/architecture/">
+	
+	Architecture
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Design" href="https://networknt.github.io/design/">
+	
+	Design
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Middleware" href="https://networknt.github.io/middleware/">
+	
+	Middleware
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Server Components" href="https://networknt.github.io/server/">
+	
+	Server Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Client Components" href="https://networknt.github.io/client/">
+	
+	Client Components
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="DevOps" href="https://networknt.github.io/devops/">
+	
+	DevOps
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Benchmark" href="https://networknt.github.io/benchmark/">
+	
+	Benchmark
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tutorial" href="https://networknt.github.io/tutorial/">
+	
+	Tutorial
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Example" href="https://networknt.github.io/example/">
+	
+	Example
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tool" href="https://networknt.github.io/tool/">
+	
+	Tool
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Issues &amp; Help" href="https://github.com/networknt/light-doc/issues">
+	
+	Issues &amp; Help
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Roadmap" href="https://networknt.github.io/roadmap/">
+	
+	Roadmap
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="FAQ" href="https://networknt.github.io/faq/">
+	
+	FAQ
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="License" href="https://www.apache.org/licenses/LICENSE-2.0">
+	
+	License
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Introduction" href="https://networknt.github.io/index.html">
+	
+	Introduction
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+          <li>
+            <a href="https://github.com/stevehu" target="_blank" title="@stevehu on GitHub">
+              @stevehu on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:stevehu@gmail.com" title="Email of stevehu@gmail.com">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Load Balance </h1>
+
+			
+
+<p>Light-4j framework encourages client side discovery in order to avoid any proxy in
+front of multiple instances of services. This can reduce the network hop and
+subsequently reduce the latency of service call.</p>
+
+<p>Client side discovery needs client side load balancer in order to pick up one and
+only one available service instance from a list of available services for a
+particular downstream request during runtime.</p>
+
+<p>Currently, Round-Robin and LocalFirst are implemented and ConsistentHashing is in
+progress. By default, round-robin will be used and it gives all service instances
+equally opportunity to be invoked.</p>
+
+<h2 id="loadbalance-interface">LoadBalance interface</h2>
+
+<p>All load balance will be implementing LoadBalance interface.</p>
+
+<pre><code>public interface LoadBalance {
+    // select one from a list of URLs
+
+    /**
+     * Select one url from a list of url with requestKey as optional.
+     *
+     * @param urls List
+     * @param requestKey String
+     * @return URL
+     */
+    URL select(List&lt;URL&gt; urls, String requestKey);
+
+    /**
+     * return positive int value of originValue
+     * @param originValue original value
+     * @return positive int
+     */
+    default int getPositive(int originValue){
+        return 0x7fffffff &amp; originValue;
+    }
+
+}
+
+</code></pre>
+
+<h2 id="roundrobinloadbalance">RoundRobinLoadBalance</h2>
+
+<p>Round Robin Loadbalance will pick up a url from a list of urls one by one
+for each service call. It will distributed the load equally to all urls in the list.</p>
+
+<p>This class has an instance variable called idx which is AtomicInteger and it
+increases for every select call to make sure all urls in the list will have
+an opportunity to be selected.</p>
+
+<p>The assumption for round robin is based on all service will have the same
+hardware/cloud resource configuration so that they can be treated as the
+same priority without any weight.</p>
+
+<p>Round robin requestKey is not used as it should be null, the url will
+be selected from the list base on an instance idx.</p>
+
+<h2 id="localfirstloadbalance">LocalFirstLoadBalance</h2>
+
+<p>Local first load balance give local service high priority than remote services.
+If there is no local service available, then it will adapt round robin strategy.</p>
+
+<p>With all the services in the list of urls, find local services with IP, Chances are
+we have multiple local service, then round robin will be used in this case. If
+there is no local service, find the first remote service according to round robin.</p>
+
+<p>Local first requestKey is not used as it is ip on the localhost. It first needs to
+find a list of urls on the localhost for the service, and then round robin in the
+list to pick up one.</p>
+
+<p>Currently, this load balance is only used if you deploy the service as standalone
+java process on data center hosts. We need to find a way to identify two VMs or two
+docker containers sitting on the same physical machine in the future to improve this
+load balance.</p>
+
+<p>It is also suitable if your services are built on top of <a href="https://github.com/networknt/light-hybrid-4j">light-hybrid-4j</a>
+and want to use the remote interface for service to service communication.</p>
+
+<h2 id="consistenthashloadbalance">ConsistentHashLoadBalance</h2>
+
+<p>To obtain maximum scalability, microservices allow Y-Axis scale to break up big
+monolithic application to small functional units. However, for some of the heavy
+load services, we can use data sharding for Z-Axis scale. This load balance is
+designed for that.</p>
+
+<p>In normal case, the requestKey should be client_id or user_id from JWT token, this
+can guarantee that the same client will always to be routed to one service instance
+or one user always to be routed to one service instance. However, this key can be a
+combination of multiple fields from the request.</p>
+
+<p>This load balance is not completed yet. There are some articles talking about this
+on the Internet but majority of the implementations suffers imbalance because of
+random nature of hashing.</p>
+
+<p>Here is a paper that resolve the issue.</p>
+
+<pre><code>https://medium.com/vimeo-engineering-blog/improving-load-balancing-with-a-new-consistent-hashing-algorithm-9f1bd75709ed
+https://arxiv.org/abs/1608.01350
+</code></pre>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>We have several load balance implementations available, there is only one should
+be used for one client during runtime and it is controlled by service.yml config
+file.</p>
+
+<p>Here is an example that use RoundRobinLoadBalance.</p>
+
+<pre><code># Default load balance is round robin and it can be replace with another implementation.
+---
+description: singleton service factory configuration
+singletons:
+- com.networknt.balance.LoadBalance:
+  - com.networknt.balance.RoundRobinLoadBalance
+</code></pre>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2017 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://networknt.github.io/other/cluster/" title="Cluster">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Cluster
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://networknt.github.io/middleware/correlation/" title="Correlation Id">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Correlation Id
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/networknt.github.io\/';
+      var repo_id  = 'networknt\/light-doc';
+    
+    </script>
+
+    <script src="https://networknt.github.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+
