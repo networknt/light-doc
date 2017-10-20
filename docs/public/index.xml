@@ -901,10 +901,9 @@ Provide an embedded gateway to address cross cutting concerns.  Plugin architect
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://networknt.github.io/design/env-segregation/</guid>
-      <description>Environment Segregation There are two goals for environment segregation:
- Prevent cross fire  For example, UAT test accesses production services or production application accidentally accesses test database etc.
- Support multiple instances for testing  For example, one service in testing has multiple backend database and different departments will hit their own instance which connects to their particular database.
-The above use cases are pretty complicated even in traditional monolithic application.</description>
+      <description>Environment Segregation Environment segregation in APIs has primarily two goals:
+ Prevent cross fire  Applications maintain, in a vast majority, a segregation between test and production environments, to ensure privacy, data integrity, separation of concerns, etc. To this end, an API framework needs to offer the ability to prevent access across this divide.
+For example, test environments should not be able to access production services or resources, nor should production applications accidentally access test services resources such as persisted stores.</description>
     </item>
     
     <item>
