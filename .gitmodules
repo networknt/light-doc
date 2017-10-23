@@ -2,3 +2,7 @@
 	path = docs/public
 	url = git@github.com:networknt/networknt.github.io.git
 	branch = master
+[submodule "doc/public"]
+	path = doc/public
+	url = git@github.com:networknt/networknt.github.io.git
+	branch = master
