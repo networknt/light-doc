@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Audit - Light Ecosystem for Microservices</title>
+    <title>Multiple API D Instances - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.21-DEV" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/middleware/audit/">
+    <link rel="canonical" href="https://networknt.github.io/tutorial/common/discovery/multiple/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/middleware/audit/">
+    <meta property="og:url" content="https://networknt.github.io/tutorial/common/discovery/multiple/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Audit
+        Multiple API D Instances
       </div>
     </div>
 
@@ -497,141 +497,188 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Audit </h1>
+			<h1>Multiple API D Instances </h1>
 
 			
 
-<p>There are two built-in audit handlers that write logs into audit.log that setup
-in the logback appender. End user can add more customized audit handlers if need.</p>
+<p>In this step, we are going to start two API D instances that listening to 7444 and 7445.</p>
 
-<p>In the audit module, there is AuditHandler which is a generic and configurable
-with audit.yml config file.</p>
+<p>Now let&rsquo;s copy from dynamic to multiple for each API.</p>
 
-<p>There is another audit provided by the light-4j framework called DumpHandler in
-<a href="https://networknt.github.io/middleware/dump/">dump</a> module.</p>
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_a
+cp -r dynamic multiple
+cd ~/networknt/light-example-4j/discovery/api_b
+cp -r dynamic multiple
+cd ~/networknt/light-example-4j/discovery/api_c
+cp -r dynamic multiple
+cd ~/networknt/light-example-4j/discovery/api_d
+cp -r dynamic multiple
+</code></pre>
 
-<h2 id="introduction">Introduction</h2>
+<h3 id="api-b">API B</h3>
 
-<p>Only logs several fields from request header and the fields are configurable.
-Optional, it can log response status and response time.</p>
+<p>Let&rsquo;s modify API B service.yml to have two API D instances that listen to 7444
+and 7445.</p>
 
-<p>This is a generic audit handler that dump most important info per request basis.
-The following elements will be logged if it&rsquo;s available in auditInfo object
-attached to exchange. This object wil be populated by other upstream handlers
-like swagger-meta and swagger-security for light-rest-4j framework.</p>
+<p>service.yml</p>
 
-<p>This handler can be used on production but be aware that it will impact the
-overall performance. Turning off statusCode and responseTime can make it faster
-as these have to be captured on the response chain instead of request chain.</p>
+<pre><code>singletons:
+- com.networknt.registry.URL:
+  - com.networknt.registry.URLImpl:
+      protocol: https
+      host: localhost
+      port: 8080
+      path: direct
+      parameters:
+        com.networknt.apid-1.0.0: https://localhost:7444,https://localhost:7445
+- com.networknt.registry.Registry:
+  - com.networknt.registry.support.DirectRegistry
+- com.networknt.balance.LoadBalance:
+  - com.networknt.balance.RoundRobinLoadBalance
+- com.networknt.cluster.Cluster:
+  - com.networknt.cluster.LightCluster
 
-<p>For most business and majority of microservices, you don&rsquo;t need to enable this
-handler due to performance reason. The default audit log will be audit.log config
-in the default logback.xml; however, it can be changed to syslog or Kafka with
-customized appender.</p>
+</code></pre>
 
-<p>Majority of the fields in audit log are collected in request and response;
-however, to allow user to customize it, we have put an attachment into the
-exchange to allow other handlers to write important info into it. The audit.yml
-can control which fields should be included in the final log.</p>
+<h3 id="api-d">API D</h3>
 
-<p>By default, the following fields are included:</p>
+<p>In order to start two instances with the same code base, we need to modify the
+server.yml before starting the second server.</p>
 
-<ul>
-<li>timestamp</li>
-<li>serviceId (from server.yml)</li>
-<li>correlationId</li>
-<li>traceabilityId (if available)</li>
-<li>clientId</li>
-<li>userId (if available)</li>
-<li>scopeClientId (available if called by another API)</li>
-<li>endpoint (uriPattern@method)</li>
-<li>statusCode</li>
-<li>responseTime</li>
-</ul>
+<p>Also, let&rsquo;s update the handler so that we know which port serves the request.</p>
 
-<p>The audit.log is in JSON format and it is easy to be parsed and monitored.</p>
+<p>DataGetHandler.java</p>
 
-<h2 id="configuration">Configuration</h2>
+<pre><code>package com.networknt.apid.handler;
 
-<p>The output fields are populated based on the config file audit.yml and here is
-and example.</p>
+import com.networknt.config.Config;
+import com.networknt.server.Server;
+import io.undertow.server.HttpHandler;
+import io.undertow.server.HttpServerExchange;
 
-<pre><code># AuditHandler will pick some important fields from headers and tokens and logs into a audit appender.
+import java.util.ArrayList;
+import java.util.List;
+
+public class DataGetHandler implements HttpHandler {
+    @Override
+    public void handleRequest(HttpServerExchange exchange) throws Exception {
+        int port = Server.config.getHttpsPort();
+        List&lt;String&gt; messages = new ArrayList&lt;&gt;();
+        messages.add(&quot;API D: Message 1 from port &quot; + port);
+        messages.add(&quot;API D: Message 2 from port &quot; + port);
+        exchange.getResponseSender().send(Config.getInstance().getMapper().writeValueAsString(messages));
+    }
+}
+
+</code></pre>
+
+<h3 id="start-servers">Start Servers</h3>
+
+<p>Now let&rsquo;s start all five servers from five terminals. API D has two instances.</p>
+
+<p>API A</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_a/multiple
+mvn clean install exec:exec
+</code></pre>
+
+<p>API B</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_b/multiple
+mvn clean install exec:exec
+
+</code></pre>
+
+<p>API C</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_c/multiple
+mvn clean install exec:exec
+
+</code></pre>
+
+<p>API D</p>
+
+<p>And start the first instance that listen to 7444.</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_d/multiple
+mvn clean install exec:exec
+
+</code></pre>
+
+<p>Now let&rsquo;s start the second instance of API D. Before starting the serer, let&rsquo;s update
+server.yml with https port 7445 and disable HTTP.</p>
+
+<pre><code>
+# Server configuration
 ---
-# Enable Audit
-enabled: true
+# This is the default binding address if the service is dockerized.
+ip: 0.0.0.0
 
-# Output response status code
-statusCode: true
+# Http port if enableHttp is true.
+httpPort:  7004
 
-# Output response time
-responseTime: true
+# Enable HTTP should be false on official environment.
+enableHttp: false
 
-# Output header elements. You can add more if you want.
-headers:
+# Https port if enableHttps is true.
+httpsPort:  7445
 
-# Correlation Id
-- X-Correlation-Id
+# Enable HTTPS should be true on official environment.
+enableHttps: true
 
-# Traceability Id
-- X-Traceability-Id
+# Http/2 is enabled by default.
+enableHttp2: true
 
-# Output from id token and access token
-audit:
+# Keystore file name in config folder. KeystorePass is in secret.yml to access it.
+keystoreName: tls/server.keystore
 
-# Service Id
-- service_id
+# Flag that indicate if two way TLS is enabled. Not recommended in docker container.
+enableTwoWayTls: false
 
-# Client Id
-- client_id
+# Truststore file name in config folder. TruststorePass is in secret.yml to access it.
+truststoreName: tls/server.truststore
 
-# User Id
-- user_id
+# Unique service identifier. Used in service registration and discovery etc.
+serviceId: com.networknt.apid-1.0.0
 
-# Client Id in scope/access token
-- scope_client_id
-
-# Request endpoint uri@method.
-- endpoint
+# Flag to enable service registration. Only be true if running as standalone Java jar.
+enableRegistry: false
 
 </code></pre>
 
-<h2 id="logback-config">Logback config</h2>
+<p>And start the second instance</p>
 
-<p>The following is the appender defined in the logback.xml or logback-test.xml</p>
-
-<pre><code>    &lt;!--audit log--&gt;
-    &lt;appender name=&quot;audit&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
-        &lt;file&gt;target/audit.log&lt;/file&gt; &lt;!-- logfile location --&gt;
-        &lt;encoder&gt;
-            &lt;pattern&gt;%-5level [%thread] %date{ISO8601} %F:%L - %msg%n
-            &lt;/pattern&gt; &lt;!-- the layout pattern used to format log entries --&gt;
-            &lt;immediateFlush&gt;true&lt;/immediateFlush&gt;
-        &lt;/encoder&gt;
-        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;&gt;
-            &lt;fileNamePattern&gt;target/audit.log.%i.zip&lt;/fileNamePattern&gt;
-            &lt;minIndex&gt;1&lt;/minIndex&gt;
-            &lt;maxIndex&gt;5&lt;/maxIndex&gt; &lt;!-- max number of archived logs that are kept --&gt;
-        &lt;/rollingPolicy&gt;
-        &lt;triggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;&gt;
-            &lt;maxFileSize&gt;200MB
-            &lt;/maxFileSize&gt; &lt;!-- The size of the logfile that triggers a switch to a new logfile, and the current one archived --&gt;
-        &lt;/triggeringPolicy&gt;
-    &lt;/appender&gt;
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_d/multiple
+mvn clean install exec:exec
 
 </code></pre>
 
-<h2 id="logging-example">Logging example</h2>
+<h3 id="test-servers">Test Servers</h3>
 
-<pre><code>INFO  [XNIO-1 I/O-1] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353929,&quot;X-Correlation-Id&quot;:&quot;abS_cAyTT5SIrHayM-11pQ&quot;,&quot;X-Traceability-Id&quot;:null,&quot;statusCode&quot;:200,&quot;responseTime&quot;:16}
-INFO  [XNIO-1 I/O-3] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353960,&quot;X-Correlation-Id&quot;:&quot;FUD_bbFpRpSs2CmVjJYt-A&quot;,&quot;X-Traceability-Id&quot;:&quot;tid&quot;,&quot;statusCode&quot;:200,&quot;responseTime&quot;:1}
+<pre><code>curl http://localhost:7001/v1/data
 </code></pre>
 
-<h2 id="customized-handler">Customized Handler</h2>
+<p>And the result can be from port 7444 or 7445 as load balancer will pick up on of them.</p>
 
-<p>For some users that need special audit logic or other channel to redirect the audit
-to, they can create their own audit handler and replace the default audit handler in
-/src/main/resources/META-INF/services/com.networknt.handler.MiddlewareHandler</p>
+<pre><code>[&quot;API C: Message 1&quot;,&quot;API C: Message 2&quot;,&quot;API D: Message 1 from port 7445&quot;,&quot;API D: Message 2 from port 7445&quot;,&quot;API B: Message 1&quot;,&quot;API B: Message 2&quot;,&quot;API A: Message 1&quot;,&quot;API A: Message 2&quot;]
+</code></pre>
+
+<p>If you send multiple requests, the result should be same as it is using the same cached connection.
+Now let&rsquo;s kill the API D instance that serves the request (in our case 7445 instance) by CTRL+C and
+run the curl command again. You will see the following result as it failed over to the other server.</p>
+
+<pre><code>[&quot;API C: Message 1&quot;,&quot;API C: Message 2&quot;,&quot;API D: Message 1 from port 7444&quot;,&quot;API D: Message 2 from port 7444&quot;,&quot;API B: Message 1&quot;,&quot;API B: Message 2&quot;,&quot;API A: Message 1&quot;,&quot;API A: Message 2&quot;]
+</code></pre>
+
+<p>Now, you can see API B can be failed over to either 7444 instance or 7445 instance of API D.
+As we are caching the connection in API B, we have to shutdown one instance in order to fail
+over to another. You can change the API B to get a new connection for each request. This will
+impact the performance however, it won&rsquo;t pin API B to once instance for ever. The server will
+disconnect the connection if it is idle for a period time so eventually the load balancer will
+put load equally to all instances. Developers can try to disconnect after a period of time or
+a number of request to take advantage of cache and at the same time enable load balancing.</p>
+
+<p>The next step, we are going to use consul to do the service registry and discovery.</p>
 
 
 			<aside class="copyright" role="note">
@@ -650,7 +697,7 @@ to, they can create their own audit handler and replace the default audit handle
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/middleware/body/" title="Body Parser">
+      <a href="https://networknt.github.io/tutorial/common/discovery/consul/" title="Consul service registry and discovery">
         <span class="direction">
           Previous
         </span>
@@ -660,7 +707,7 @@ to, they can create their own audit handler and replace the default audit handle
           </div>
           <div class="stretch">
             <div class="title">
-              Body Parser
+              Consul service registry and discovery
             </div>
           </div>
         </div>
@@ -670,14 +717,14 @@ to, they can create their own audit handler and replace the default audit handle
 
   <div class="next">
   
-      <a href="https://networknt.github.io/tutorial/end-to-end-test/" title="End to End Test">
+      <a href="https://networknt.github.io/tutorial/common/discovery/dynamic/" title="Dynamic service discovery with direct registry">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              End to End Test
+              Dynamic service discovery with direct registry
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

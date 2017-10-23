@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Debug - Light Ecosystem for Microservices</title>
+    <title>Integration Test - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.21-DEV" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/tutorials/debug/">
+    <link rel="canonical" href="https://networknt.github.io/tutorial/integration-test/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/tutorials/debug/">
+    <meta property="og:url" content="https://networknt.github.io/tutorial/integration-test/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Debug
+        Integration Test
       </div>
     </div>
 
@@ -497,33 +497,9 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Debug </h1>
+			<h1>Integration Test </h1>
 
-			<p>As there is no container in Undertow Server and everything is built on top of POJO, it
-is very easy to debug your API application within your IDE.</p>
-
-<p>I am using Intellij Idea but Eclipse should be very similar as the generated project is
-standard Maven project. To debug your code, you need to start the server.</p>
-
-<p>Here is the steps to create a standalone application in Idea.</p>
-
-<ul>
-<li>Click Run and select Edit Configurations&hellip;</li>
-<li>Click + on the top left corner to add a new Configuration.</li>
-<li>In the dropdown select application</li>
-<li>Name your application to Server</li>
-<li>In Main Class input, type com.networknt.server.Server</li>
-<li>Click apply to close the popup window.</li>
-<li>Click Run again and select debug</li>
-<li>Pick the application configuration you just created.</li>
-</ul>
-
-<p>Now the server is up and running in the debug mode. You can debug into the framework
-code or set a break point in framework code. To pick up the framework class to debug,
-click External Libraries on the Project tree and click the class name. Idea will
-automatically decompile the class. You can import the source code of that particular
-version of framework source code from <a href="https://github.com/networknt/light-4j/releases">Release</a></p>
-
+			
 
 			<aside class="copyright" role="note">
 				
@@ -541,7 +517,7 @@ version of framework source code from <a href="https://github.com/networknt/ligh
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/tutorials/unit-test/" title="Unit Test">
+      <a href="https://networknt.github.io/tutorial/end-to-end-test/" title="End to End Test">
         <span class="direction">
           Previous
         </span>
@@ -551,7 +527,7 @@ version of framework source code from <a href="https://github.com/networknt/ligh
           </div>
           <div class="stretch">
             <div class="title">
-              Unit Test
+              End to End Test
             </div>
           </div>
         </div>
@@ -561,14 +537,14 @@ version of framework source code from <a href="https://github.com/networknt/ligh
 
   <div class="next">
   
-      <a href="https://networknt.github.io/architecture/scalability/" title="Scalability">
+      <a href="https://networknt.github.io/tutorial/unit-test/" title="Unit Test">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Scalability
+              Unit Test
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

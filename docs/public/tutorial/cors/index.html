@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Audit - Light Ecosystem for Microservices</title>
+    <title>Cross-Origin Resource Sharing - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.21-DEV" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/middleware/audit/">
+    <link rel="canonical" href="https://networknt.github.io/tutorial/cors/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/middleware/audit/">
+    <meta property="og:url" content="https://networknt.github.io/tutorial/cors/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Audit
+        Cross-Origin Resource Sharing
       </div>
     </div>
 
@@ -497,141 +497,112 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Audit </h1>
+			<h1>Cross-Origin Resource Sharing </h1>
 
-			
+			<p>For some of the APIs/services, the endpoints will be accessed from a Single Page
+Application(React/Vue/Angular) served from another domain. In this case, the API
+server needs to handle the pre-flight OPTIONS request to enable CORS.</p>
 
-<p>There are two built-in audit handlers that write logs into audit.log that setup
-in the logback appender. End user can add more customized audit handlers if need.</p>
+<p>As CORS only used in above scenario, the handler is not wired in by default in
+swagger-codegen.</p>
 
-<p>In the audit module, there is AuditHandler which is a generic and configurable
-with audit.yml config file.</p>
+<p>If you want to limit only several domains for CORS, you also need to create cors.yml
+in config folder.</p>
 
-<p>There is another audit provided by the light-4j framework called DumpHandler in
-<a href="https://networknt.github.io/middleware/dump/">dump</a> module.</p>
+<p>And here is an example of cors.yml</p>
 
-<h2 id="introduction">Introduction</h2>
-
-<p>Only logs several fields from request header and the fields are configurable.
-Optional, it can log response status and response time.</p>
-
-<p>This is a generic audit handler that dump most important info per request basis.
-The following elements will be logged if it&rsquo;s available in auditInfo object
-attached to exchange. This object wil be populated by other upstream handlers
-like swagger-meta and swagger-security for light-rest-4j framework.</p>
-
-<p>This handler can be used on production but be aware that it will impact the
-overall performance. Turning off statusCode and responseTime can make it faster
-as these have to be captured on the response chain instead of request chain.</p>
-
-<p>For most business and majority of microservices, you don&rsquo;t need to enable this
-handler due to performance reason. The default audit log will be audit.log config
-in the default logback.xml; however, it can be changed to syslog or Kafka with
-customized appender.</p>
-
-<p>Majority of the fields in audit log are collected in request and response;
-however, to allow user to customize it, we have put an attachment into the
-exchange to allow other handlers to write important info into it. The audit.yml
-can control which fields should be included in the final log.</p>
-
-<p>By default, the following fields are included:</p>
-
-<ul>
-<li>timestamp</li>
-<li>serviceId (from server.yml)</li>
-<li>correlationId</li>
-<li>traceabilityId (if available)</li>
-<li>clientId</li>
-<li>userId (if available)</li>
-<li>scopeClientId (available if called by another API)</li>
-<li>endpoint (uriPattern@method)</li>
-<li>statusCode</li>
-<li>responseTime</li>
-</ul>
-
-<p>The audit.log is in JSON format and it is easy to be parsed and monitored.</p>
-
-<h2 id="configuration">Configuration</h2>
-
-<p>The output fields are populated based on the config file audit.yml and here is
-and example.</p>
-
-<pre><code># AuditHandler will pick some important fields from headers and tokens and logs into a audit appender.
----
-# Enable Audit
+<pre><code>description: Cors Http Handler
 enabled: true
+allowedOrigins:
+- http://localhost
+allowedMethods:
+- GET
+- POST
+</code></pre>
 
-# Output response status code
-statusCode: true
+<p>To enable CORS support, you need to add cors module in pom.xml, you need to update
+pom.xml to add a dependency.</p>
 
-# Output response time
-responseTime: true
-
-# Output header elements. You can add more if you want.
-headers:
-
-# Correlation Id
-- X-Correlation-Id
-
-# Traceability Id
-- X-Traceability-Id
-
-# Output from id token and access token
-audit:
-
-# Service Id
-- service_id
-
-# Client Id
-- client_id
-
-# User Id
-- user_id
-
-# Client Id in scope/access token
-- scope_client_id
-
-# Request endpoint uri@method.
-- endpoint
+<pre><code>        &lt;dependency&gt;
+            &lt;groupId&gt;com.networknt&lt;/groupId&gt;
+            &lt;artifactId&gt;cors&lt;/artifactId&gt;
+            &lt;version&gt;${version.light-4j}&lt;/version&gt;
+        &lt;/dependency&gt;
 
 </code></pre>
 
-<h2 id="logback-config">Logback config</h2>
+<p>Update com.networknt.handler.MiddlewareHandler in src/main/resources/META-INF/services
+folder to plug cors handler into the middleware chain. Note that cors handler is in front
+of swagger so that pre-flight OPTIONS request will be returned before swagger validation
+is done as OPTIONS methods are not defined in swagger specifitions.</p>
 
-<p>The following is the appender defined in the logback.xml or logback-test.xml</p>
+<pre><code># This file is generated and should not be changed unless you want to plug in more handlers into the handler chain
+# for cross cutting concerns. In most cases, you should replace some of the default handlers with your own implementation
+# Please note: the sequence of these handlers are very important.
 
-<pre><code>    &lt;!--audit log--&gt;
-    &lt;appender name=&quot;audit&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
-        &lt;file&gt;target/audit.log&lt;/file&gt; &lt;!-- logfile location --&gt;
-        &lt;encoder&gt;
-            &lt;pattern&gt;%-5level [%thread] %date{ISO8601} %F:%L - %msg%n
-            &lt;/pattern&gt; &lt;!-- the layout pattern used to format log entries --&gt;
-            &lt;immediateFlush&gt;true&lt;/immediateFlush&gt;
-        &lt;/encoder&gt;
-        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;&gt;
-            &lt;fileNamePattern&gt;target/audit.log.%i.zip&lt;/fileNamePattern&gt;
-            &lt;minIndex&gt;1&lt;/minIndex&gt;
-            &lt;maxIndex&gt;5&lt;/maxIndex&gt; &lt;!-- max number of archived logs that are kept --&gt;
-        &lt;/rollingPolicy&gt;
-        &lt;triggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;&gt;
-            &lt;maxFileSize&gt;200MB
-            &lt;/maxFileSize&gt; &lt;!-- The size of the logfile that triggers a switch to a new logfile, and the current one archived --&gt;
-        &lt;/triggeringPolicy&gt;
-    &lt;/appender&gt;
+#Validator Validate request based on swagger specification (depending on Swagger and Body)
+com.networknt.validator.ValidatorHandler
+#Sanitizer Encode cross site scripting
+com.networknt.sanitizer.SanitizerHandler
+#SimpleAudit Log important info about the request into audit log
+com.networknt.audit.AuditHandler
+#Body Parse body based on content type in the header.
+com.networknt.body.BodyHandler
+#Security JWT token verification and scope verification (depending on SwaggerHandler)
+com.networknt.security.JwtVerifyHandler
+#Swagger Parsing swagger specification based on request uri and method.
+com.networknt.swagger.SwaggerHandler
+#Cors handler to handler post/put pre-flight
+com.networknt.cors.CorsHttpHandler
+#Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+com.networknt.correlation.CorrelationHandler
+#Traceability Put traceabilityId into response header from request header if it exists
+com.networknt.traceability.TraceabilityHandler
+#Metrics In order to calculate response time accurately, this needs to be the second.
+com.networknt.metrics.MetricsHandler
+#Exception Global exception handler that needs to be called first.
+com.networknt.exception.ExceptionHandler
+</code></pre>
+
+<p>Now let&rsquo;s start the server</p>
+
+<pre><code>cd ~/networknt/light-example-4j/cors
+mvn clean install exec:exec
+</code></pre>
+
+<p>Test the pre-flight OPTIONS.</p>
+
+<pre><code>curl -H &quot;Origin: http://example.com&quot; -H &quot;Access-Control-Request-Method: POST&quot;  -H &quot;Access-Control-Request-Headers: X-Requested-With&quot;  -X OPTIONS --verbose http://localhost:8080/v1/postData
+</code></pre>
+
+<p>And the result</p>
+
+<pre><code>*   Trying 127.0.0.1...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+&gt; OPTIONS /v1/postData HTTP/1.1
+&gt; Host: localhost:8080
+&gt; User-Agent: curl/7.43.0
+&gt; Accept: */*
+&gt; Origin: http://example.com
+&gt; Access-Control-Request-Method: POST
+&gt; Access-Control-Request-Headers: X-Requested-With
+&gt; 
+&lt; HTTP/1.1 200 OK
+&lt; Access-Control-Allow-Headers: X-Requested-With
+&lt; Server: Light
+&lt; Access-Control-Allow-Credentials: true
+&lt; Content-Length: 0
+&lt; Access-Control-Allow-Methods: POST
+&lt; Access-Control-Max-Age: 3600
+&lt; Date: Wed, 15 Feb 2017 13:37:29 GMT
+&lt; 
+* Connection #0 to host localhost left intact
 
 </code></pre>
 
-<h2 id="logging-example">Logging example</h2>
+<p>The source code for the cors example can be found at</p>
 
-<pre><code>INFO  [XNIO-1 I/O-1] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353929,&quot;X-Correlation-Id&quot;:&quot;abS_cAyTT5SIrHayM-11pQ&quot;,&quot;X-Traceability-Id&quot;:null,&quot;statusCode&quot;:200,&quot;responseTime&quot;:16}
-INFO  [XNIO-1 I/O-3] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353960,&quot;X-Correlation-Id&quot;:&quot;FUD_bbFpRpSs2CmVjJYt-A&quot;,&quot;X-Traceability-Id&quot;:&quot;tid&quot;,&quot;statusCode&quot;:200,&quot;responseTime&quot;:1}
-</code></pre>
-
-<h2 id="customized-handler">Customized Handler</h2>
-
-<p>For some users that need special audit logic or other channel to redirect the audit
-to, they can create their own audit handler and replace the default audit handler in
-/src/main/resources/META-INF/services/com.networknt.handler.MiddlewareHandler</p>
+<p><a href="https://github.com/networknt/light-example-4j/tree/master/cors">https://github.com/networknt/light-example-4j/tree/master/cors</a></p>
 
 
 			<aside class="copyright" role="note">
@@ -650,7 +621,7 @@ to, they can create their own audit handler and replace the default audit handle
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/middleware/body/" title="Body Parser">
+      <a href="https://networknt.github.io/middleware/limit/" title="Rate Limiting">
         <span class="direction">
           Previous
         </span>
@@ -660,7 +631,7 @@ to, they can create their own audit handler and replace the default audit handle
           </div>
           <div class="stretch">
             <div class="title">
-              Body Parser
+              Rate Limiting
             </div>
           </div>
         </div>
@@ -670,14 +641,14 @@ to, they can create their own audit handler and replace the default audit handle
 
   <div class="next">
   
-      <a href="https://networknt.github.io/tutorial/end-to-end-test/" title="End to End Test">
+      <a href="https://networknt.github.io/design/" title="Design">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              End to End Test
+              Design
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

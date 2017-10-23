@@ -7,10 +7,123 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license</copyright>
-    <lastBuildDate>Sun, 08 Oct 2017 07:16:31 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 19 Oct 2017 19:57:17 -0400</lastBuildDate>
     
 	<atom:link href="https://networknt.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/kubernetes/</link>
+      <pubDate>Thu, 19 Oct 2017 19:57:17 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/kubernetes/</guid>
+      <description>Kubernetes should be used for production service scheduling with registrator like Docker compose.</description>
+    </item>
+    
+    <item>
+      <title>Service discovery for Docker container</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/docker/</link>
+      <pubDate>Tue, 17 Oct 2017 21:05:20 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/docker/</guid>
+      <description>In this step, we are going to dockerize all the APIs and then use registrator for service registry. To make it easier, we are going to use docker-compose to put everything together.
+Now let&amp;rsquo;s copy from consul to docker for each API.
+cd ~/networknt/light-example-4j/discovery/api_a cp -r consul consuldocker cd ~/networknt/light-example-4j/discovery/api_b cp -r consul consuldocker cd ~/networknt/light-example-4j/discovery/api_c cp -r consul consuldocker cd ~/networknt/light-example-4j/discovery/api_d cp -r consul consuldocker  API A As we will be using docker-compose to start consul, registrator and APIs altogether and there is no easy way to control the start sequence.</description>
+    </item>
+    
+    <item>
+      <title>Access consul with acl_token for security</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/token/</link>
+      <pubDate>Tue, 17 Oct 2017 21:03:55 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/token/</guid>
+      <description>In previous steps, we have set up the Consul with acl_default_policy=allow so that all operations to the Consul server is allow. This should be only used internal forr testing. For official environment, the acl_default_policy=deny and all operation to the Consul server must provide an acl_token in the header.
+Now let&amp;rsquo;s copy from tag to token for each API.
+cd ~/networknt/light-example-4j/discovery/api_a cp -r tag token cd ~/networknt/light-example-4j/discovery/api_b cp -r tag token cd ~/networknt/light-example-4j/discovery/api_c cp -r tag token cd ~/networknt/light-example-4j/discovery/api_d cp -r tag token  If you consul server is still running, please stop it and restart it with the following</description>
+    </item>
+    
+    <item>
+      <title>Multiple instances with tags per environment</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/tag/</link>
+      <pubDate>Tue, 17 Oct 2017 21:03:06 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/tag/</guid>
+      <description>In the previous step, we&amp;rsquo;ve setup the services to register on Consul and discover downstream services through Consul. If there are multiple instances for the same serviceId, then the client will try to load balance these instances.
+In real service delivery, there are a lot complicated testing scenarios that need to be addressed and one of the use cases is environment segregation
+In this step, we are going to use environment tag to separate multiple instances during testing so that we can have two segregated testing environment on the same Consul server.</description>
+    </item>
+    
+    <item>
+      <title>Consul service registry and discovery</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/consul/</link>
+      <pubDate>Tue, 17 Oct 2017 19:41:50 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/consul/</guid>
+      <description>Previous step multiple demonstrates how to use direct registry to enable load balance and it works the same way as Consul and Zookeeper registry. In this step, we are going to use Consul for registry to enable cluster.
+Now let&amp;rsquo;s copy from multiple to consul for each API.
+cd ~/networknt/light-example-4j/discovery/api_a cp -r multiple consul cd ~/networknt/light-example-4j/discovery/api_b cp -r multiple consul cd ~/networknt/light-example-4j/discovery/api_c cp -r multiple consul cd ~/networknt/light-example-4j/discovery/api_d cp -r multiple consul  API A In order to switch from direct registry to consul registry, we just need to update service.</description>
+    </item>
+    
+    <item>
+      <title>Multiple API D Instances</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/multiple/</link>
+      <pubDate>Tue, 17 Oct 2017 19:08:51 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/multiple/</guid>
+      <description>In this step, we are going to start two API D instances that listening to 7444 and 7445.
+Now let&amp;rsquo;s copy from dynamic to multiple for each API.
+cd ~/networknt/light-example-4j/discovery/api_a cp -r dynamic multiple cd ~/networknt/light-example-4j/discovery/api_b cp -r dynamic multiple cd ~/networknt/light-example-4j/discovery/api_c cp -r dynamic multiple cd ~/networknt/light-example-4j/discovery/api_d cp -r dynamic multiple  API B Let&amp;rsquo;s modify API B service.yml to have two API D instances that listen to 7444 and 7445.</description>
+    </item>
+    
+    <item>
+      <title>Dynamic service discovery with direct registry</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/dynamic/</link>
+      <pubDate>Tue, 17 Oct 2017 18:46:16 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/dynamic/</guid>
+      <description>The above step uses static urls defined in configuration files. It won&amp;rsquo;t work in a dynamic clustered environment as there are more instances of each service. In this step, we are going to use cluster component with direct registry so that we don&amp;rsquo;t need to start external consul or zookeeper instances. We still go through registry for service discovery but the registry is defined in service.yml. Next step we will use consul server for the discovery to mimic real production environment.</description>
+    </item>
+    
+    <item>
+      <title>Service Registry and Discovery Tutorial</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/</link>
+      <pubDate>Tue, 17 Oct 2017 18:12:57 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/</guid>
+      <description>This tutorial shows how to use the service registry and discovery feature of light-*-4j frameworks.
+ Introduction and code generation
+ Static Configuration
+ Dynamic service discovery with direct registry
+ Multiple API D Instances
+ Consul service registry and discovery
+ Multiple instances with tags per environment
+ Access consul with acl_token for security
+ Service discovery for Docker container
+ Service discovery for Kubernetes
+  </description>
+    </item>
+    
+    <item>
+      <title>Static Configuration</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/static/</link>
+      <pubDate>Tue, 17 Oct 2017 18:12:46 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/static/</guid>
+      <description>Now we have four standalone services and the next step is to connect them together.
+Here is the call tree for these services.
+API A will call API B and API C to fulfill its request. API B will call API D to fulfill its request.
+API A -&amp;gt; API B -&amp;gt; API D -&amp;gt; API C  Before we change the code, let&amp;rsquo;s copy the generated projects to new folders so that we can compare the changes later on.</description>
+    </item>
+    
+    <item>
+      <title>Introduction and code generation</title>
+      <link>https://networknt.github.io/tutorial/common/discovery/generated/</link>
+      <pubDate>Tue, 17 Oct 2017 17:58:29 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/tutorial/common/discovery/generated/</guid>
+      <description>Introduction This is a tutorial to show you how to use service registry and discovery for microservices. The example services are implemented in RESTful style but they can be implemented in graphql or hybrid as well. We are going to use api_a, api_b, api_c and api_d as our examples. To simply the tutorial, I am going to disable the security all the time. There are some details that might not be shown in this tutorial, for example, walking through light-codegen config files etc.</description>
+    </item>
     
     <item>
       <title>Install Java JDK</title>
@@ -261,10 +374,10 @@ As this handler will impact the overall performance a little bit, it is not conf
     
     <item>
       <title>Cross-Origin Resource Sharing</title>
-      <link>https://networknt.github.io/tutorials/cors/</link>
+      <link>https://networknt.github.io/tutorial/cors/</link>
       <pubDate>Wed, 15 Feb 2017 09:26:58 -0500</pubDate>
       
-      <guid>https://networknt.github.io/tutorials/cors/</guid>
+      <guid>https://networknt.github.io/tutorial/cors/</guid>
       <description>For some of the APIs/services, the endpoints will be accessed from a Single Page Application(React/Vue/Angular) served from another domain. In this case, the API server needs to handle the pre-flight OPTIONS request to enable CORS.
 As CORS only used in above scenario, the handler is not wired in by default in swagger-codegen.
 If you want to limit only several domains for CORS, you also need to create cors.yml in config folder.</description>
@@ -409,10 +522,10 @@ Generating The correlationId is very useful in microservices architecture as the
     
     <item>
       <title>Tutorials</title>
-      <link>https://networknt.github.io/tutorials/</link>
+      <link>https://networknt.github.io/tutorial/</link>
       <pubDate>Wed, 25 Jan 2017 20:59:08 -0500</pubDate>
       
-      <guid>https://networknt.github.io/tutorials/</guid>
+      <guid>https://networknt.github.io/tutorial/</guid>
       <description>In the beginning, we only have one framework that supports restful API for building microservices and now we have several frameworks to build microservices based on the type of services customers want to build. Majority of our customers are using all types of the frameworks to build their services
 If you are unsure which framework to use for your service, please refer to this article
 The following tutorials will help users to get started and more will be added later.</description>
@@ -795,37 +908,37 @@ Introduction Only logs several fields from request header and the fields are con
     
     <item>
       <title>End to End Test</title>
-      <link>https://networknt.github.io/tutorials/end-to-end-test/</link>
+      <link>https://networknt.github.io/tutorial/end-to-end-test/</link>
       <pubDate>Wed, 12 Oct 2016 17:21:40 -0400</pubDate>
       
-      <guid>https://networknt.github.io/tutorials/end-to-end-test/</guid>
+      <guid>https://networknt.github.io/tutorial/end-to-end-test/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Integration Test</title>
-      <link>https://networknt.github.io/tutorials/integration-test/</link>
+      <link>https://networknt.github.io/tutorial/integration-test/</link>
       <pubDate>Wed, 12 Oct 2016 17:06:30 -0400</pubDate>
       
-      <guid>https://networknt.github.io/tutorials/integration-test/</guid>
+      <guid>https://networknt.github.io/tutorial/integration-test/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Unit Test</title>
-      <link>https://networknt.github.io/tutorials/unit-test/</link>
+      <link>https://networknt.github.io/tutorial/unit-test/</link>
       <pubDate>Wed, 12 Oct 2016 17:05:47 -0400</pubDate>
       
-      <guid>https://networknt.github.io/tutorials/unit-test/</guid>
+      <guid>https://networknt.github.io/tutorial/unit-test/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Debug</title>
-      <link>https://networknt.github.io/tutorials/debug/</link>
+      <link>https://networknt.github.io/tutorial/debug/</link>
       <pubDate>Wed, 12 Oct 2016 17:03:28 -0400</pubDate>
       
-      <guid>https://networknt.github.io/tutorials/debug/</guid>
+      <guid>https://networknt.github.io/tutorial/debug/</guid>
       <description>As there is no container in Undertow Server and everything is built on top of POJO, it is very easy to debug your API application within your IDE.
 I am using Intellij Idea but Eclipse should be very similar as the generated project is standard Maven project. To debug your code, you need to start the server.
 Here is the steps to create a standalone application in Idea.

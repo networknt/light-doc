@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Audit - Light Ecosystem for Microservices</title>
+    <title>Access consul with acl_token for security - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.21-DEV" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/middleware/audit/">
+    <link rel="canonical" href="https://networknt.github.io/tutorial/common/discovery/token/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/middleware/audit/">
+    <meta property="og:url" content="https://networknt.github.io/tutorial/common/discovery/token/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Audit
+        Access consul with acl_token for security
       </div>
     </div>
 
@@ -497,141 +497,310 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Audit </h1>
+			<h1>Access consul with acl_token for security </h1>
 
 			
 
-<p>There are two built-in audit handlers that write logs into audit.log that setup
-in the logback appender. End user can add more customized audit handlers if need.</p>
+<p>In previous steps, we have set up the Consul with acl_default_policy=allow so that
+all operations to the Consul server is allow. This should be only used internal forr
+testing. For official environment, the acl_default_policy=deny and all operation to
+the Consul server must provide an acl_token in the header.</p>
 
-<p>In the audit module, there is AuditHandler which is a generic and configurable
-with audit.yml config file.</p>
+<p>Now let&rsquo;s copy from tag to token for each API.</p>
 
-<p>There is another audit provided by the light-4j framework called DumpHandler in
-<a href="https://networknt.github.io/middleware/dump/">dump</a> module.</p>
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_a
+cp -r tag token
+cd ~/networknt/light-example-4j/discovery/api_b
+cp -r tag token
+cd ~/networknt/light-example-4j/discovery/api_c
+cp -r tag token
+cd ~/networknt/light-example-4j/discovery/api_d
+cp -r tag token
+</code></pre>
 
-<h2 id="introduction">Introduction</h2>
+<p>If you consul server is still running, please stop it and restart it with the following</p>
 
-<p>Only logs several fields from request header and the fields are configurable.
-Optional, it can log response status and response time.</p>
+<pre><code class="language-text">docker run -d -p 8400:8400 -p 8500:8500/tcp -p 8600:53/udp -e 'CONSUL_LOCAL_CONFIG={&quot;acl_datacenter&quot;:&quot;dc1&quot;,&quot;acl_default_policy&quot;:&quot;deny&quot;,&quot;acl_down_policy&quot;:&quot;extend-cache&quot;,&quot;acl_master_token&quot;:&quot;the_one_ring&quot;,&quot;bootstrap_expect&quot;:1,&quot;datacenter&quot;:&quot;dc1&quot;,&quot;data_dir&quot;:&quot;/usr/local/bin/consul.d/data&quot;,&quot;server&quot;:true}' consul agent -server -ui -bind=127.0.0.1 -client=0.0.0.0
+</code></pre>
 
-<p>This is a generic audit handler that dump most important info per request basis.
-The following elements will be logged if it&rsquo;s available in auditInfo object
-attached to exchange. This object wil be populated by other upstream handlers
-like swagger-meta and swagger-security for light-rest-4j framework.</p>
+<p>Now let&rsquo;s create agent token</p>
 
-<p>This handler can be used on production but be aware that it will impact the
-overall performance. Turning off statusCode and responseTime can make it faster
-as these have to be captured on the response chain instead of request chain.</p>
+<pre><code class="language-text">curl \
+    --request PUT \
+    --header &quot;X-Consul-Token: the_one_ring&quot; \
+    --data \
+'{
+  &quot;Name&quot;: &quot;Agent Token&quot;,
+  &quot;Type&quot;: &quot;client&quot;,
+  &quot;Rules&quot;: &quot;node \&quot;\&quot; { policy = \&quot;write\&quot; } service \&quot;\&quot; { policy = \&quot;read\&quot; }&quot;
+}' http://127.0.0.1:8500/v1/acl/create
+</code></pre>
 
-<p>For most business and majority of microservices, you don&rsquo;t need to enable this
-handler due to performance reason. The default audit log will be audit.log config
-in the default logback.xml; however, it can be changed to syslog or Kafka with
-customized appender.</p>
+<p>And we get the token like this.</p>
 
-<p>Majority of the fields in audit log are collected in request and response;
-however, to allow user to customize it, we have put an attachment into the
-exchange to allow other handlers to write important info into it. The audit.yml
-can control which fields should be included in the final log.</p>
+<pre><code class="language-text">{&quot;ID&quot;:&quot;48693be9-51e7-8d1e-927f-346a82516920&quot;}
+</code></pre>
 
-<p>By default, the following fields are included:</p>
+<p>Introduce the token through an API.</p>
 
-<ul>
-<li>timestamp</li>
-<li>serviceId (from server.yml)</li>
-<li>correlationId</li>
-<li>traceabilityId (if available)</li>
-<li>clientId</li>
-<li>userId (if available)</li>
-<li>scopeClientId (available if called by another API)</li>
-<li>endpoint (uriPattern@method)</li>
-<li>statusCode</li>
-<li>responseTime</li>
-</ul>
+<pre><code class="language-text">curl \
+    --request PUT \
+    --header &quot;X-Consul-Token: the_one_ring&quot; \
+    --data \
+'{
+  &quot;Token&quot;: &quot;48693be9-51e7-8d1e-927f-346a82516920&quot;
+}' http://127.0.0.1:8500/v1/agent/token/acl_agent_token
+</code></pre>
 
-<p>The audit.log is in JSON format and it is easy to be parsed and monitored.</p>
+<p>Give anonymous read permission</p>
 
-<h2 id="configuration">Configuration</h2>
+<pre><code class="language-text">curl \
+    --request PUT \
+    --header &quot;X-Consul-Token: the_one_ring&quot; \
+    --data \
+'{
+  &quot;ID&quot;: &quot;anonymous&quot;,
+  &quot;Type&quot;: &quot;client&quot;,
+  &quot;Rules&quot;: &quot;node \&quot;\&quot; { policy = \&quot;read\&quot; }&quot;
+}' http://127.0.0.1:8500/v1/acl/update
 
-<p>The output fields are populated based on the config file audit.yml and here is
-and example.</p>
+</code></pre>
 
-<pre><code># AuditHandler will pick some important fields from headers and tokens and logs into a audit appender.
+<p>The next step we are going to update secret.yml to add consul-token in order to access
+the Consul for service registry and discovery.</p>
+
+<h3 id="api-a">API A</h3>
+
+<p>Update secret.yml to add consulToken: the_one_ring</p>
+
+<pre><code class="language-text"># This file contains all the secrets for the server and client in order to manage and
+# secure all of them in the same place. In Kubernetes, this file will be mapped to
+# Secrets and all other config files will be mapped to mapConfig
+
 ---
-# Enable Audit
-enabled: true
 
-# Output response status code
-statusCode: true
+# Sever section
 
-# Output response time
-responseTime: true
+# Key store password, the path of keystore is defined in server.yml
+serverKeystorePass: password
 
-# Output header elements. You can add more if you want.
-headers:
+# Key password, the key is in keystore
+serverKeyPass: password
 
-# Correlation Id
-- X-Correlation-Id
+# Trust store password, the path of truststore is defined in server.yml
+serverTruststorePass: password
 
-# Traceability Id
-- X-Traceability-Id
 
-# Output from id token and access token
-audit:
+# Client section
 
-# Service Id
-- service_id
+# Key store password, the path of keystore is defined in server.yml
+clientKeystorePass: password
 
-# Client Id
-- client_id
+# Key password, the key is in keystore
+clientKeyPass: password
 
-# User Id
-- user_id
+# Trust store password, the path of truststore is defined in server.yml
+clientTruststorePass: password
 
-# Client Id in scope/access token
-- scope_client_id
+# Authorization code client secret for OAuth2 server
+authorizationCodeClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 
-# Request endpoint uri@method.
-- endpoint
+# Client credentials client secret for OAuth2 server
+clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 
-</code></pre>
+# Consul service registry and discovery
 
-<h2 id="logback-config">Logback config</h2>
-
-<p>The following is the appender defined in the logback.xml or logback-test.xml</p>
-
-<pre><code>    &lt;!--audit log--&gt;
-    &lt;appender name=&quot;audit&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
-        &lt;file&gt;target/audit.log&lt;/file&gt; &lt;!-- logfile location --&gt;
-        &lt;encoder&gt;
-            &lt;pattern&gt;%-5level [%thread] %date{ISO8601} %F:%L - %msg%n
-            &lt;/pattern&gt; &lt;!-- the layout pattern used to format log entries --&gt;
-            &lt;immediateFlush&gt;true&lt;/immediateFlush&gt;
-        &lt;/encoder&gt;
-        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;&gt;
-            &lt;fileNamePattern&gt;target/audit.log.%i.zip&lt;/fileNamePattern&gt;
-            &lt;minIndex&gt;1&lt;/minIndex&gt;
-            &lt;maxIndex&gt;5&lt;/maxIndex&gt; &lt;!-- max number of archived logs that are kept --&gt;
-        &lt;/rollingPolicy&gt;
-        &lt;triggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;&gt;
-            &lt;maxFileSize&gt;200MB
-            &lt;/maxFileSize&gt; &lt;!-- The size of the logfile that triggers a switch to a new logfile, and the current one archived --&gt;
-        &lt;/triggeringPolicy&gt;
-    &lt;/appender&gt;
+# Consul Token for service registry and discovery
+consulToken: the_one_ring
 
 </code></pre>
 
-<h2 id="logging-example">Logging example</h2>
+<h3 id="api-b">API B</h3>
 
-<pre><code>INFO  [XNIO-1 I/O-1] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353929,&quot;X-Correlation-Id&quot;:&quot;abS_cAyTT5SIrHayM-11pQ&quot;,&quot;X-Traceability-Id&quot;:null,&quot;statusCode&quot;:200,&quot;responseTime&quot;:16}
-INFO  [XNIO-1 I/O-3] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353960,&quot;X-Correlation-Id&quot;:&quot;FUD_bbFpRpSs2CmVjJYt-A&quot;,&quot;X-Traceability-Id&quot;:&quot;tid&quot;,&quot;statusCode&quot;:200,&quot;responseTime&quot;:1}
+<p>Update secret.yml to add consulToken: the_one_ring</p>
+
+<pre><code class="language-text"># This file contains all the secrets for the server and client in order to manage and
+# secure all of them in the same place. In Kubernetes, this file will be mapped to
+# Secrets and all other config files will be mapped to mapConfig
+
+---
+
+# Sever section
+
+# Key store password, the path of keystore is defined in server.yml
+serverKeystorePass: password
+
+# Key password, the key is in keystore
+serverKeyPass: password
+
+# Trust store password, the path of truststore is defined in server.yml
+serverTruststorePass: password
+
+
+# Client section
+
+# Key store password, the path of keystore is defined in server.yml
+clientKeystorePass: password
+
+# Key password, the key is in keystore
+clientKeyPass: password
+
+# Trust store password, the path of truststore is defined in server.yml
+clientTruststorePass: password
+
+# Authorization code client secret for OAuth2 server
+authorizationCodeClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
+# Client credentials client secret for OAuth2 server
+clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
+# Consul service registry and discovery
+
+# Consul Token for service registry and discovery
+consulToken: the_one_ring
+
 </code></pre>
 
-<h2 id="customized-handler">Customized Handler</h2>
+<h3 id="api-c">API C</h3>
 
-<p>For some users that need special audit logic or other channel to redirect the audit
-to, they can create their own audit handler and replace the default audit handler in
-/src/main/resources/META-INF/services/com.networknt.handler.MiddlewareHandler</p>
+<p>Update secret.yml to add consulToken: the_one_ring</p>
+
+<pre><code class="language-text"># This file contains all the secrets for the server and client in order to manage and
+# secure all of them in the same place. In Kubernetes, this file will be mapped to
+# Secrets and all other config files will be mapped to mapConfig
+
+---
+
+# Sever section
+
+# Key store password, the path of keystore is defined in server.yml
+serverKeystorePass: password
+
+# Key password, the key is in keystore
+serverKeyPass: password
+
+# Trust store password, the path of truststore is defined in server.yml
+serverTruststorePass: password
+
+
+# Client section
+
+# Key store password, the path of keystore is defined in server.yml
+clientKeystorePass: password
+
+# Key password, the key is in keystore
+clientKeyPass: password
+
+# Trust store password, the path of truststore is defined in server.yml
+clientTruststorePass: password
+
+# Authorization code client secret for OAuth2 server
+authorizationCodeClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
+# Client credentials client secret for OAuth2 server
+clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
+# Consul service registry and discovery
+
+# Consul Token for service registry and discovery
+consulToken: the_one_ring
+
+</code></pre>
+
+<h3 id="api-d">API D</h3>
+
+<p>Update secret.yml to add consulToken: the_one_ring</p>
+
+<pre><code class="language-text"># This file contains all the secrets for the server and client in order to manage and
+# secure all of them in the same place. In Kubernetes, this file will be mapped to
+# Secrets and all other config files will be mapped to mapConfig
+
+---
+
+# Sever section
+
+# Key store password, the path of keystore is defined in server.yml
+serverKeystorePass: password
+
+# Key password, the key is in keystore
+serverKeyPass: password
+
+# Trust store password, the path of truststore is defined in server.yml
+serverTruststorePass: password
+
+
+# Client section
+
+# Key store password, the path of keystore is defined in server.yml
+clientKeystorePass: password
+
+# Key password, the key is in keystore
+clientKeyPass: password
+
+# Trust store password, the path of truststore is defined in server.yml
+clientTruststorePass: password
+
+# Authorization code client secret for OAuth2 server
+authorizationCodeClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
+# Client credentials client secret for OAuth2 server
+clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
+# Consul service registry and discovery
+
+# Consul Token for service registry and discovery
+consulToken: the_one_ring
+
+</code></pre>
+
+<h3 id="start-four-servers">Start four servers</h3>
+
+<p>Now let&rsquo;s start four terminals to start servers.</p>
+
+<p>API A</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_a/token
+mvn clean install -DskipTests
+mvn exec:exec
+</code></pre>
+
+<p>API B</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_b/token
+mvn clean install -DskipTests
+mvn exec:exec
+
+</code></pre>
+
+<p>API C</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_c/token
+mvn clean install -DskipTests 
+mvn exec:exec
+
+</code></pre>
+
+<p>API D</p>
+
+<p>And start the first instance that listen to 7444 as default</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_d/token
+mvn clean install -DskipTests 
+mvn exec:exec
+
+</code></pre>
+
+<p>If you follow the above sequence to start servers, then you will find that API A and
+API B show some error messages as they cannot establish connections to target servers.</p>
+
+<p>You can ignore these errors and as the connections will be recreated on the first request.</p>
+
+<p>Now you can see the registered service from Consul UI.</p>
+
+<pre><code>http://localhost:8500/ui
+</code></pre>
+
+<p>This is not working so far and need to work it out.</p>
 
 
 			<aside class="copyright" role="note">
@@ -650,7 +819,7 @@ to, they can create their own audit handler and replace the default audit handle
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/middleware/body/" title="Body Parser">
+      <a href="https://networknt.github.io/tutorial/common/discovery/docker/" title="Service discovery for Docker container">
         <span class="direction">
           Previous
         </span>
@@ -660,7 +829,7 @@ to, they can create their own audit handler and replace the default audit handle
           </div>
           <div class="stretch">
             <div class="title">
-              Body Parser
+              Service discovery for Docker container
             </div>
           </div>
         </div>
@@ -670,14 +839,14 @@ to, they can create their own audit handler and replace the default audit handle
 
   <div class="next">
   
-      <a href="https://networknt.github.io/tutorial/end-to-end-test/" title="End to End Test">
+      <a href="https://networknt.github.io/tutorial/common/discovery/tag/" title="Multiple instances with tags per environment">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              End to End Test
+              Multiple instances with tags per environment
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

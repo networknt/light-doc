@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Unit Test - Light Ecosystem for Microservices</title>
+    <title>Introduction and code generation - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.21-DEV" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/tutorials/unit-test/">
+    <link rel="canonical" href="https://networknt.github.io/tutorial/common/discovery/generated/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/tutorials/unit-test/">
+    <meta property="og:url" content="https://networknt.github.io/tutorial/common/discovery/generated/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Unit Test
+        Introduction and code generation
       </div>
     </div>
 
@@ -497,9 +497,128 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Unit Test </h1>
+			<h1>Introduction and code generation </h1>
 
 			
+
+<h1 id="introduction">Introduction</h1>
+
+<p>This is a tutorial to show you how to use service registry and discovery
+for microservices. The example services are implemented in RESTful style but
+they can be implemented in graphql or hybrid as well. We are going to use
+api_a, api_b, api_c and api_d as our examples. To simply the tutorial, I am
+going to disable the security all the time. There are some details that might
+not be shown in this tutorial, for example, walking through light-codegen config
+files etc. It is recommended to go through <a href="ms-chain/">ms-chain</a> before this
+tutorial.</p>
+
+<p>There are two situations that you need service discovery:</p>
+
+<ul>
+<li><p>A client application to consume services and it needs to locate the service
+instance by serviceId</p></li>
+
+<li><p>A service that has to call another service to fulfill its request in request/
+response style.</p></li>
+</ul>
+
+<p>The specifications for above APIs can be found at
+<a href="https://github.com/networknt/model-config">https://github.com/networknt/model-config</a> rest folder.</p>
+
+<h1 id="preparation">Preparation</h1>
+
+<p>In order to follow the steps below, please make sure you have the same
+working environment.</p>
+
+<ul>
+<li>A computer with MacOS or Linux (Windows should work but I never tried)</li>
+<li>Install git</li>
+<li>Install Docker</li>
+<li>Install JDK 8 and Maven</li>
+<li>Install Java IDE (Intellij IDEA Community Edition is recommended)</li>
+<li>Create a working directory under your user directory called networknt.</li>
+</ul>
+
+<pre><code>cd ~
+mkdir networknt
+</code></pre>
+
+<h1 id="clone-the-specifications">Clone the specifications</h1>
+
+<p>In order to generate the initial projects, we need to call light-codegen
+and we need the specifications for these services.</p>
+
+<pre><code>cd ~/networknt
+git clone git@github.com:networknt/model-config.git
+</code></pre>
+
+<p>In this repo, you have a generate.sh in the root folder to use docker
+container of light-codegen to generate the code and there are api_a,
+api_b, api_c and api_d in rest folder for swagger.json files and config.json
+files for each API.</p>
+
+<h1 id="code-generation">Code generation</h1>
+
+<p>We are going to generate the code into light-example-4j repo, so let&rsquo;s
+clone this repo into our working directory.</p>
+
+<pre><code>cd ~/networknt
+git clone git@github.com:networknt/light-example-4j.git
+</code></pre>
+
+<p>In the above repo, there is a folder discovery contains all the projects
+for this tutorial. In order to start from scratch, let&rsquo;s change the existing
+folder to discovery.bak as a backup so that you can compare if your code is
+not working in each step.</p>
+
+<pre><code>cd ~/networknt/light-example-4j
+mv discovery discovery.bak
+</code></pre>
+
+<p>In order to generate the four projects, let&rsquo;s clone and build the light-codegen
+into the workspace.</p>
+
+<pre><code>cd ~/networknt
+git clone git@github.com:networknt/light-codegen.git
+mvn clean install
+</code></pre>
+
+<p>Now let&rsquo;s generate the four APIs.</p>
+
+<pre><code>cd ~/networknt/light-codegen
+java -jar codegen-cli/target/codegen-cli.jar -f light-rest-4j -o ../light-example-4j/discovery/api_a/generated -m ../model-config/rest/api_a/1.0.0/swagger.json -c ../model-config/rest/api_a/1.0.0/config.json
+java -jar codegen-cli/target/codegen-cli.jar -f light-rest-4j -o ../light-example-4j/discovery/api_b/generated -m ../model-config/rest/api_b/1.0.0/swagger.json -c ../model-config/rest/api_b/1.0.0/config.json
+java -jar codegen-cli/target/codegen-cli.jar -f light-rest-4j -o ../light-example-4j/discovery/api_c/generated -m ../model-config/rest/api_c/1.0.0/swagger.json -c ../model-config/rest/api_c/1.0.0/config.json
+java -jar codegen-cli/target/codegen-cli.jar -f light-rest-4j -o ../light-example-4j/discovery/api_d/generated -m ../model-config/rest/api_d/1.0.0/swagger.json -c ../model-config/rest/api_d/1.0.0/config.json
+
+</code></pre>
+
+<p>We have four projects generated and compiled under generated folder under each
+project folder.</p>
+
+<h1 id="test-generated-code">Test generated code</h1>
+
+<p>Now you can test the generated projects to make sure they are working with mock
+data. We will pick up one project to test it but you can test them all.</p>
+
+<pre><code>cd ~/networknt/light-example-4j/discovery/api_a/generated
+mvn clean install exec:exec
+</code></pre>
+
+<p>From another terminal, access the server with curl command and check the result.</p>
+
+<pre><code>curl http://localhost:7001/v1/data
+[&quot;Message 1&quot;,&quot;Message 2&quot;]
+</code></pre>
+
+<p>Based on the config files for each project, the generated service will listen to
+7001, 7002, 7003 and 7004 for http connections. You can start other services to test
+them on their corresponding port.</p>
+
+<p>This conclude the first step and we now have four generated APIs in working condition.
+The next step, we are going to change it to use static configuration to enable API to
+API communication.</p>
+
 
 			<aside class="copyright" role="note">
 				
@@ -517,7 +636,7 @@
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/tutorials/integration-test/" title="Integration Test">
+      <a href="https://networknt.github.io/tutorial/common/discovery/static/" title="Static Configuration">
         <span class="direction">
           Previous
         </span>
@@ -527,7 +646,7 @@
           </div>
           <div class="stretch">
             <div class="title">
-              Integration Test
+              Static Configuration
             </div>
           </div>
         </div>
@@ -537,14 +656,14 @@
 
   <div class="next">
   
-      <a href="https://networknt.github.io/tutorials/debug/" title="Debug">
+      <a href="https://networknt.github.io/devops/java/" title="Install Java JDK">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Debug
+              Install Java JDK
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

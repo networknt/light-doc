@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Audit - Light Ecosystem for Microservices</title>
+    <title>Tutorials - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.21-DEV" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/middleware/audit/">
+    <link rel="canonical" href="https://networknt.github.io/tutorial/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/middleware/audit/">
+    <meta property="og:url" content="https://networknt.github.io/tutorial/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Audit
+        Tutorials
       </div>
     </div>
 
@@ -324,11 +324,14 @@
 
 
 
-<a  title="Tutorial" href="https://networknt.github.io/tutorial/">
+<a class="current" title="Tutorial" href="https://networknt.github.io/tutorial/">
 	
 	Tutorial
 </a>
 
+
+<ul id="scrollspy">
+</ul>
 
 
   
@@ -497,141 +500,37 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Audit </h1>
+			<h1>Tutorials </h1>
 
-			
+			<p>In the beginning, we only have one framework that supports restful API for building microservices
+and now we have several frameworks to build microservices based on the type of services customers
+want to build. Majority of our customers are using all types of the frameworks to build their services</p>
 
-<p>There are two built-in audit handlers that write logs into audit.log that setup
-in the logback appender. End user can add more customized audit handlers if need.</p>
+<p>If you are unsure which framework to use for your service, please refer to this <a href="https://networknt.github.io/light-4j/architecture/category/">article</a></p>
 
-<p>In the audit module, there is AuditHandler which is a generic and configurable
-with audit.yml config file.</p>
-
-<p>There is another audit provided by the light-4j framework called DumpHandler in
-<a href="https://networknt.github.io/middleware/dump/">dump</a> module.</p>
-
-<h2 id="introduction">Introduction</h2>
-
-<p>Only logs several fields from request header and the fields are configurable.
-Optional, it can log response status and response time.</p>
-
-<p>This is a generic audit handler that dump most important info per request basis.
-The following elements will be logged if it&rsquo;s available in auditInfo object
-attached to exchange. This object wil be populated by other upstream handlers
-like swagger-meta and swagger-security for light-rest-4j framework.</p>
-
-<p>This handler can be used on production but be aware that it will impact the
-overall performance. Turning off statusCode and responseTime can make it faster
-as these have to be captured on the response chain instead of request chain.</p>
-
-<p>For most business and majority of microservices, you don&rsquo;t need to enable this
-handler due to performance reason. The default audit log will be audit.log config
-in the default logback.xml; however, it can be changed to syslog or Kafka with
-customized appender.</p>
-
-<p>Majority of the fields in audit log are collected in request and response;
-however, to allow user to customize it, we have put an attachment into the
-exchange to allow other handlers to write important info into it. The audit.yml
-can control which fields should be included in the final log.</p>
-
-<p>By default, the following fields are included:</p>
+<p>The following tutorials will help users to get started and more will be added later. They are not
+specific to individual framework but explains concept in general.</p>
 
 <ul>
-<li>timestamp</li>
-<li>serviceId (from server.yml)</li>
-<li>correlationId</li>
-<li>traceabilityId (if available)</li>
-<li>clientId</li>
-<li>userId (if available)</li>
-<li>scopeClientId (available if called by another API)</li>
-<li>endpoint (uriPattern@method)</li>
-<li>statusCode</li>
-<li>responseTime</li>
+<li><p><a href="https://networknt.github.io/light-4j/tutorials/unit-test/">How to do unit test</a></p></li>
+
+<li><p><a href="https://networknt.github.io/light-4j/tutorials/end-to-end-test/">How to do end-to-end test</a></p></li>
+
+<li><p><a href="https://networknt.github.io/light-4j/tutorials/integration-test/">How to do integration test</a></p></li>
+
+<li><p><a href="https://networknt.github.io/light-4j/tutorials/debug/">How to debug the service</a></p></li>
 </ul>
 
-<p>The audit.log is in JSON format and it is easy to be parsed and monitored.</p>
+<p>As different frameworks work slightly differently, the tutorials are reside in each individual
+framework document site. Here is a list of links:</p>
 
-<h2 id="configuration">Configuration</h2>
+<p><a href="https://networknt.github.io/light-rest-4j/tutorial/">light-rest-4j tutorials</a></p>
 
-<p>The output fields are populated based on the config file audit.yml and here is
-and example.</p>
+<p><a href="https://networknt.github.io/light-graphql-4j/tutorial/">light-graphql-4j tutorials</a></p>
 
-<pre><code># AuditHandler will pick some important fields from headers and tokens and logs into a audit appender.
----
-# Enable Audit
-enabled: true
+<p><a href="https://networknt.github.io/light-hybrid-4j/tutorial/">light-hybrid-4j tutorials</a></p>
 
-# Output response status code
-statusCode: true
-
-# Output response time
-responseTime: true
-
-# Output header elements. You can add more if you want.
-headers:
-
-# Correlation Id
-- X-Correlation-Id
-
-# Traceability Id
-- X-Traceability-Id
-
-# Output from id token and access token
-audit:
-
-# Service Id
-- service_id
-
-# Client Id
-- client_id
-
-# User Id
-- user_id
-
-# Client Id in scope/access token
-- scope_client_id
-
-# Request endpoint uri@method.
-- endpoint
-
-</code></pre>
-
-<h2 id="logback-config">Logback config</h2>
-
-<p>The following is the appender defined in the logback.xml or logback-test.xml</p>
-
-<pre><code>    &lt;!--audit log--&gt;
-    &lt;appender name=&quot;audit&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
-        &lt;file&gt;target/audit.log&lt;/file&gt; &lt;!-- logfile location --&gt;
-        &lt;encoder&gt;
-            &lt;pattern&gt;%-5level [%thread] %date{ISO8601} %F:%L - %msg%n
-            &lt;/pattern&gt; &lt;!-- the layout pattern used to format log entries --&gt;
-            &lt;immediateFlush&gt;true&lt;/immediateFlush&gt;
-        &lt;/encoder&gt;
-        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;&gt;
-            &lt;fileNamePattern&gt;target/audit.log.%i.zip&lt;/fileNamePattern&gt;
-            &lt;minIndex&gt;1&lt;/minIndex&gt;
-            &lt;maxIndex&gt;5&lt;/maxIndex&gt; &lt;!-- max number of archived logs that are kept --&gt;
-        &lt;/rollingPolicy&gt;
-        &lt;triggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;&gt;
-            &lt;maxFileSize&gt;200MB
-            &lt;/maxFileSize&gt; &lt;!-- The size of the logfile that triggers a switch to a new logfile, and the current one archived --&gt;
-        &lt;/triggeringPolicy&gt;
-    &lt;/appender&gt;
-
-</code></pre>
-
-<h2 id="logging-example">Logging example</h2>
-
-<pre><code>INFO  [XNIO-1 I/O-1] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353929,&quot;X-Correlation-Id&quot;:&quot;abS_cAyTT5SIrHayM-11pQ&quot;,&quot;X-Traceability-Id&quot;:null,&quot;statusCode&quot;:200,&quot;responseTime&quot;:16}
-INFO  [XNIO-1 I/O-3] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {&quot;timestamp&quot;:1494286353960,&quot;X-Correlation-Id&quot;:&quot;FUD_bbFpRpSs2CmVjJYt-A&quot;,&quot;X-Traceability-Id&quot;:&quot;tid&quot;,&quot;statusCode&quot;:200,&quot;responseTime&quot;:1}
-</code></pre>
-
-<h2 id="customized-handler">Customized Handler</h2>
-
-<p>For some users that need special audit logic or other channel to redirect the audit
-to, they can create their own audit handler and replace the default audit handler in
-/src/main/resources/META-INF/services/com.networknt.handler.MiddlewareHandler</p>
+<p><a href="https://networknt.github.io/light-eventuate-4j/tutorial/">light-eventuate-4j tutorials</a></p>
 
 
 			<aside class="copyright" role="note">
@@ -650,7 +549,7 @@ to, they can create their own audit handler and replace the default audit handle
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/middleware/body/" title="Body Parser">
+      <a href="https://networknt.github.io/example/" title="Examples">
         <span class="direction">
           Previous
         </span>
@@ -660,7 +559,7 @@ to, they can create their own audit handler and replace the default audit handle
           </div>
           <div class="stretch">
             <div class="title">
-              Body Parser
+              Examples
             </div>
           </div>
         </div>
@@ -670,14 +569,14 @@ to, they can create their own audit handler and replace the default audit handle
 
   <div class="next">
   
-      <a href="https://networknt.github.io/tutorial/end-to-end-test/" title="End to End Test">
+      <a href="https://networknt.github.io/devops/" title="DevOps">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              End to End Test
+              DevOps
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

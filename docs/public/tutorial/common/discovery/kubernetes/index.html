@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Cross-Origin Resource Sharing - Light Ecosystem for Microservices</title>
+    <title>kubernetes - Light Ecosystem for Microservices</title>
     <meta name="generator" content="Hugo 0.21-DEV" />
 
     
     <meta name="description" content="Light Document">
     
-    <link rel="canonical" href="https://networknt.github.io/tutorials/cors/">
+    <link rel="canonical" href="https://networknt.github.io/tutorial/common/discovery/kubernetes/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/tutorials/cors/">
+    <meta property="og:url" content="https://networknt.github.io/tutorial/common/discovery/kubernetes/">
     <meta property="og:title" content="Light Ecosystem for Microservices">
     <meta property="og:image" content="https://networknt.github.io/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light Ecosystem for Microservices">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Cross-Origin Resource Sharing
+        kubernetes
       </div>
     </div>
 
@@ -497,112 +497,10 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Cross-Origin Resource Sharing </h1>
+			<h1>kubernetes </h1>
 
-			<p>For some of the APIs/services, the endpoints will be accessed from a Single Page
-Application(React/Vue/Angular) served from another domain. In this case, the API
-server needs to handle the pre-flight OPTIONS request to enable CORS.</p>
-
-<p>As CORS only used in above scenario, the handler is not wired in by default in
-swagger-codegen.</p>
-
-<p>If you want to limit only several domains for CORS, you also need to create cors.yml
-in config folder.</p>
-
-<p>And here is an example of cors.yml</p>
-
-<pre><code>description: Cors Http Handler
-enabled: true
-allowedOrigins:
-- http://localhost
-allowedMethods:
-- GET
-- POST
-</code></pre>
-
-<p>To enable CORS support, you need to add cors module in pom.xml, you need to update
-pom.xml to add a dependency.</p>
-
-<pre><code>        &lt;dependency&gt;
-            &lt;groupId&gt;com.networknt&lt;/groupId&gt;
-            &lt;artifactId&gt;cors&lt;/artifactId&gt;
-            &lt;version&gt;${version.light-4j}&lt;/version&gt;
-        &lt;/dependency&gt;
-
-</code></pre>
-
-<p>Update com.networknt.handler.MiddlewareHandler in src/main/resources/META-INF/services
-folder to plug cors handler into the middleware chain. Note that cors handler is in front
-of swagger so that pre-flight OPTIONS request will be returned before swagger validation
-is done as OPTIONS methods are not defined in swagger specifitions.</p>
-
-<pre><code># This file is generated and should not be changed unless you want to plug in more handlers into the handler chain
-# for cross cutting concerns. In most cases, you should replace some of the default handlers with your own implementation
-# Please note: the sequence of these handlers are very important.
-
-#Validator Validate request based on swagger specification (depending on Swagger and Body)
-com.networknt.validator.ValidatorHandler
-#Sanitizer Encode cross site scripting
-com.networknt.sanitizer.SanitizerHandler
-#SimpleAudit Log important info about the request into audit log
-com.networknt.audit.AuditHandler
-#Body Parse body based on content type in the header.
-com.networknt.body.BodyHandler
-#Security JWT token verification and scope verification (depending on SwaggerHandler)
-com.networknt.security.JwtVerifyHandler
-#Swagger Parsing swagger specification based on request uri and method.
-com.networknt.swagger.SwaggerHandler
-#Cors handler to handler post/put pre-flight
-com.networknt.cors.CorsHttpHandler
-#Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
-com.networknt.correlation.CorrelationHandler
-#Traceability Put traceabilityId into response header from request header if it exists
-com.networknt.traceability.TraceabilityHandler
-#Metrics In order to calculate response time accurately, this needs to be the second.
-com.networknt.metrics.MetricsHandler
-#Exception Global exception handler that needs to be called first.
-com.networknt.exception.ExceptionHandler
-</code></pre>
-
-<p>Now let&rsquo;s start the server</p>
-
-<pre><code>cd ~/networknt/light-example-4j/cors
-mvn clean install exec:exec
-</code></pre>
-
-<p>Test the pre-flight OPTIONS.</p>
-
-<pre><code>curl -H &quot;Origin: http://example.com&quot; -H &quot;Access-Control-Request-Method: POST&quot;  -H &quot;Access-Control-Request-Headers: X-Requested-With&quot;  -X OPTIONS --verbose http://localhost:8080/v1/postData
-</code></pre>
-
-<p>And the result</p>
-
-<pre><code>*   Trying 127.0.0.1...
-* Connected to localhost (127.0.0.1) port 8080 (#0)
-&gt; OPTIONS /v1/postData HTTP/1.1
-&gt; Host: localhost:8080
-&gt; User-Agent: curl/7.43.0
-&gt; Accept: */*
-&gt; Origin: http://example.com
-&gt; Access-Control-Request-Method: POST
-&gt; Access-Control-Request-Headers: X-Requested-With
-&gt; 
-&lt; HTTP/1.1 200 OK
-&lt; Access-Control-Allow-Headers: X-Requested-With
-&lt; Server: Light
-&lt; Access-Control-Allow-Credentials: true
-&lt; Content-Length: 0
-&lt; Access-Control-Allow-Methods: POST
-&lt; Access-Control-Max-Age: 3600
-&lt; Date: Wed, 15 Feb 2017 13:37:29 GMT
-&lt; 
-* Connection #0 to host localhost left intact
-
-</code></pre>
-
-<p>The source code for the cors example can be found at</p>
-
-<p><a href="https://github.com/networknt/light-example-4j/tree/master/cors">https://github.com/networknt/light-example-4j/tree/master/cors</a></p>
+			<p>Kubernetes should be used for production service scheduling with registrator like Docker
+compose.</p>
 
 
 			<aside class="copyright" role="note">
@@ -621,34 +519,18 @@ mvn clean install exec:exec
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/middleware/limit/" title="Rate Limiting">
-        <span class="direction">
-          Previous
-        </span>
-        <div class="page">
-          <div class="button button-previous" role="button" aria-label="Previous">
-            <i class="icon icon-back"></i>
-          </div>
-          <div class="stretch">
-            <div class="title">
-              Rate Limiting
-            </div>
-          </div>
-        </div>
-      </a>
-  
   </div>
 
   <div class="next">
   
-      <a href="https://networknt.github.io/design/" title="Design">
+      <a href="https://networknt.github.io/tutorial/common/discovery/docker/" title="Service discovery for Docker container">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Design
+              Service discovery for Docker container
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

@@ -3,6 +3,56 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/kubernetes/</loc>
+    <lastmod>2017-10-19T19:57:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/docker/</loc>
+    <lastmod>2017-10-17T21:05:20-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/token/</loc>
+    <lastmod>2017-10-17T21:03:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/tag/</loc>
+    <lastmod>2017-10-17T21:03:06-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/consul/</loc>
+    <lastmod>2017-10-17T19:41:50-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/multiple/</loc>
+    <lastmod>2017-10-17T19:08:51-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/dynamic/</loc>
+    <lastmod>2017-10-17T18:46:16-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/</loc>
+    <lastmod>2017-10-17T18:12:57-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/static/</loc>
+    <lastmod>2017-10-17T18:12:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://networknt.github.io/tutorial/common/discovery/generated/</loc>
+    <lastmod>2017-10-17T17:58:29-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://networknt.github.io/devops/java/</loc>
     <lastmod>2017-10-08T07:16:31-04:00</lastmod>
   </url>
@@ -123,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://networknt.github.io/tutorials/cors/</loc>
+    <loc>https://networknt.github.io/tutorial/cors/</loc>
     <lastmod>2017-02-15T09:26:58-05:00</lastmod>
   </url>
   
@@ -193,7 +243,7 @@
   </url>
   
   <url>
-    <loc>https://networknt.github.io/tutorials/</loc>
+    <loc>https://networknt.github.io/tutorial/</loc>
     <lastmod>2017-01-25T20:59:08-05:00</lastmod>
   </url>
   
@@ -373,22 +423,22 @@
   </url>
   
   <url>
-    <loc>https://networknt.github.io/tutorials/end-to-end-test/</loc>
+    <loc>https://networknt.github.io/tutorial/end-to-end-test/</loc>
     <lastmod>2016-10-12T17:21:40-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://networknt.github.io/tutorials/integration-test/</loc>
+    <loc>https://networknt.github.io/tutorial/integration-test/</loc>
     <lastmod>2016-10-12T17:06:30-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://networknt.github.io/tutorials/unit-test/</loc>
+    <loc>https://networknt.github.io/tutorial/unit-test/</loc>
     <lastmod>2016-10-12T17:05:47-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://networknt.github.io/tutorials/debug/</loc>
+    <loc>https://networknt.github.io/tutorial/debug/</loc>
     <lastmod>2016-10-12T17:03:28-04:00</lastmod>
   </url>
   
@@ -479,7 +529,7 @@
   
   <url>
     <loc>https://networknt.github.io/</loc>
-    <lastmod>2017-10-08T07:16:31-04:00</lastmod>
+    <lastmod>2017-10-19T19:57:17-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -519,8 +569,8 @@
   </url>
   
   <url>
-    <loc>https://networknt.github.io/tutorials/</loc>
-    <lastmod>2017-02-15T09:26:58-05:00</lastmod>
+    <loc>https://networknt.github.io/tutorial/</loc>
+    <lastmod>2017-10-19T19:57:17-04:00</lastmod>
     <priority>0</priority>
   </url>
   
