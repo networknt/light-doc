@@ -526,9 +526,9 @@ Generating The correlationId is very useful in microservices architecture as the
       <pubDate>Wed, 25 Jan 2017 20:59:08 -0500</pubDate>
       
       <guid>https://networknt.github.io/tutorial/</guid>
-      <description>In the beginning, we only have one framework that supports restful API for building microservices and now we have several frameworks to build microservices based on the type of services customers want to build. Majority of our customers are using all types of the frameworks to build their services
-If you are unsure which framework to use for your service, please refer to this article
-The following tutorials will help users to get started and more will be added later.</description>
+      <description>In the beginning, we only have one framework that supports restful API for building microservices and now we have several frameworks to build microservices based on the type of services customers want to build. Majority of our customers are using all types of the frameworks to build their services.
+Also, we have other components to support microservics built on top of light-*-4j frameworks like light-portal, light-session-4j, light-proxy, light-codegen etc.
+If you are unsure which framework to use for your service, please refer to this article</description>
     </item>
     
     <item>
