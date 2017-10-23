@@ -5,13 +5,16 @@ title: Tutorials
 
 In the beginning, we only have one framework that supports restful API for building microservices
 and now we have several frameworks to build microservices based on the type of services customers
-want to build. Majority of our customers are using all types of the frameworks to build their services
+want to build. Majority of our customers are using all types of the frameworks to build their services.
+
+Also, we have other components to support microservics built on top of light-*-4j frameworks like
+light-portal, light-session-4j, light-proxy, light-codegen etc.
 
 If you are unsure which framework to use for your service, please refer to this [article](https://networknt.github.io/light-4j/architecture/category/)
 
 
 The following tutorials will help users to get started and more will be added later. They are not
-specific to individual framework but explains concept in general. 
+specific to individual framework but explains concepts in general.
 
 
 * [How to do unit test](https://networknt.github.io/light-4j/tutorials/unit-test/)
@@ -21,6 +24,8 @@ specific to individual framework but explains concept in general.
 * [How to do integration test](https://networknt.github.io/light-4j/tutorials/integration-test/)
 
 * [How to debug the service](https://networknt.github.io/light-4j/tutorials/debug/)
+
+* [How to do service registry and discovery](https://networknt.github.io/tutorial/common/discovery/)
 
 
 As different frameworks work slightly differently, the tutorials are reside in each individual
