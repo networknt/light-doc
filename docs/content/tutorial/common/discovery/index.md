@@ -6,21 +6,21 @@ title: Service Registry and Discovery Tutorial
 This tutorial shows how to use the service registry and discovery feature of light-*-4j
 frameworks. 
 
-* [Introduction and code generation](generated.md)
+* [Introduction and code generation](generated)
 
-* [Static Configuration](static.md)
+* [Static Configuration](static)
 
-* [Dynamic service discovery with direct registry](dynamic.md)
+* [Dynamic service discovery with direct registry](dynamic)
 
-* [Multiple API D Instances](multiple.md)
+* [Multiple API D Instances](multiple)
 
-* [Consul service registry and discovery](consul.md)
+* [Consul service registry and discovery](consul)
 
-* [Multiple instances with tags per environment](tag.md)
+* [Multiple instances with tags per environment](tag)
 
-* [Access consul with acl_token for security](token.md)
+* [Access consul with acl_token for security](token)
 
-* [Service discovery for Docker container](docker.md)
+* [Service discovery for Docker container](docker)
 
-* [Service discovery for Kubernetes](kubernetes.md)
+* [Service discovery for Kubernetes](kubernetes)
 
