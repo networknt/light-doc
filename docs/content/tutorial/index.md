@@ -17,11 +17,11 @@ The following tutorials will help users to get started and more will be added la
 specific to individual framework but explains concepts in general.
 
 
-* [How to do unit test](https://networknt.github.io/light-4j/tutorials/unit-test/)
+* [How to do unit test](https://networknt.github.io/tutorial/unit-test/)
 
 * [How to do end-to-end test](https://networknt.github.io/light-4j/tutorials/end-to-end-test/)
 
-* [How to do integration test](https://networknt.github.io/light-4j/tutorials/integration-test/)
+* [How to do integration test](https://networknt.github.io/tutorial/integration-test/)
 
 * [How to debug the service](https://networknt.github.io/light-4j/tutorials/debug/)
 
