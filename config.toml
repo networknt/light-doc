@@ -69,7 +69,7 @@ twitter = "networkntcom"
 
 #CUSTOM PARAMS
 [params]
-  description = "Some of the world’s fastest api frameworks"
+  description = "One of the world’s fastest API platform"
   ## Used for views in rendered HTML (i.e., rather than using the .Hugo variable)
   release = "1.5.0"
   ## Setting this to true will add a "noindex" to *EVERY* page on the site
@@ -232,10 +232,10 @@ twitter = "networkntcom"
     url = "/documentation/"
 
   [[menu.global]]
-    name = "Themes"
+    name = "Blog"
     weight = 10
-    identifier = "themes"
-    url = "https://themes.gohugo.io/"
+    identifier = "blog"
+    url = "/blog/"
 
   # Anything with a weight > 100 gets an external icon
   [[menu.global]]
