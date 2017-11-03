@@ -2,48 +2,61 @@
 title: "A Fast and Flexible Website Generator"
 date: 2017-03-02T12:00:00-05:00
 features:
-  - heading: Blistering Speed
+  - heading: Blistering Speed and Small Memory Footprint
     image_path: /images/icon-fast.svg
-    tagline: What's modern about waiting for your site to build?
-    copy: Hugo is the fastest tool of its kind. At <1 ms per page, the average site builds in less than a second.
+    tagline: Save 10s to 100s times on production provision cost
+    copy: You need hundreds of instances of Sprint Boot with Tomcat embedded to match one instance of light-4j in "Hello World" for the same throughput and latency.
 
-  - heading: Robust Content Management
+  - heading: Embedded Gateway to Address all Cross-cutting Concerns
     image_path: /images/icon-content-management.svg
-    tagline: Flexibility rules. Hugo is a content strategist's dream.
-    copy: Hugo supports unlimited content types, taxonomies, menus, dynamic API-driven content, and more, all without plugins.
+    tagline: Maximize developers productivity by focusing on business logic only
+    copy: Plugin architecture that allows middleware handlers to be injected into the request/response chain to handler security, metrics, audit etc.
 
-  - heading: Shortcodes
+  - heading: Design and Test Driven Development
     image_path: /images/icon-shortcodes.svg
-    tagline: Hugo's shortcodes are Markdown's hidden superpower.
-    copy: We love the beautiful simplicity of markdown’s syntax, but there are times when we want more flexibility. Hugo shortcodes allow for both beauty and flexibility.
+    tagline: OpenAPI specification, Unit, Integration, End-to-End and Client Tests
+    copy: Generate code from specification and encourage unit tests, integration tests, end-to-end test as well as client tests to ensure quality and interoperability.
 
-  - heading: Built-in Templates
+  - heading: Built-in DevOps Tool Chain for CI/CD
     image_path: /images/icon-built-in-templates.svg
-    tagline: Hugo has common patterns to get your work done quickly.
-    copy: Hugo ships with pre-made templates to make quick work of SEO, commenting, analytics and other functions. One line of code, and you're done.
+    tagline: Jenkins pipeline, Ansible playbook, Docker and Kubernetes
+    copy: The entire tool chain (pipeline) and infrastructure (logging, metrics, messaging, security etc.) are integrated together and services are dockerized and orchestrated by Kubernetes.
 
-  - heading: Multilingual and i18n
+  - heading: Multi-Style Support for Different Products
     image_path: /images/icon-multilingual2.svg
-    tagline: Polyglot baked in.
-    copy: Hugo provides full i18n support for multi-language sites with the same straightforward development experience Hugo users love in single-language sites.
+    tagline: Both synchronous request/response and asynchronous event driven frameworks
+    copy: Support Restful(light-rest-4j), Graphql(light-graphql-4j), Hybrid(light-hybrid-4j) and Eventuate Consistency(light-eventuate-4j). Also Saga(light-saga-4j) for transaction orchestration between services.
 
-  - heading: Custom Outputs
+  - heading: OAuth2, Portal and Services to Form an Ecosystem
     image_path: /images/icon-custom-outputs.svg
-    tagline: HTML not enough?
-    copy: Hugo allows you to output your content in multiple formats, including JSON or AMP, and makes it easy to create your own.
+    tagline: Provide a platform for on-premise solution and hosted solution
+    copy: light-oauth2 for security and light-portal is for service runtime monitoring and management and API marketplace. Kafka for messaging, ELK for logging, InfluxDB and Grafana for metrics and ArangoDB for DB.
 sections:
-  - heading: "100s of Themes"
-    cta: Check out the Hugo's themes.
-    link: http://themes.gohugo.io/
-    color_classes: bg-accent-color white
-    image: /images/homepage-screenshot-hugo-themes.jpg
-    copy: "Hugo provides a robust theming system that is easy to implement but capable of producing even the most complicated websites."
-  - heading: "Capable Templating"
-    cta: Get Started.
+  - heading: "Cross-Cutting Concerns"
+    cta: Check out light-4j middleware handlers.
+    link: http://docs.networknt.com/
+    color_classes: bg-primary-color-light black
+    image: /images/home-page-templating-example.png
+    copy: "Light-4j and related frameworks provide dozens of middleware handlers that can be injected into the request/response chain to give your service an embedded gateway." 
+  - heading: "Styles"
+    cta: Use the right framework for the right product.
     link: templates/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
-    copy: "Hugo's Go-based templating provides just the right amount of logic to build anything from the simple to complex. If you prefer Jade/Pug-like syntax, you can also use Amber, Ace, or any combination of the three."
+    copy: "Restful for public API, Graphql for mobile and Sing Page Application, Hybrid for serverless and take advantage of both Monolithic and Microservices architecture. Eventuate for event driven."
+  - heading: "Services"
+    cta: OAuth2, Portal and other infrastructure services.
+    link: templates/
+    color_classes: bg-primary-color-light black
+    image: /images/home-page-templating-example.png
+    copy: "OAuth2 provider is responsible for centralize policy management and services are responsible for policy enforcement. Portal is API management and marketplace. Others are third party services."
+  - heading: "Tools"
+    cta: Tool chain for code generation, devops and CI/CD.
+    link: templates/
+    color_classes: bg-primary-color-light black
+    image: /images/home-page-templating-example.png
+    copy: "Light-codegen is used for scaffolding project from OpenAPI spec, GraphQL IDL or Hybrid Schema. Jenkins Pipeline for building, packaging and dockerizing. Kebernetes is for service orchestration."
+
 ---
 
 Light means light-weight, lighting fast and shed light on how to program with modern Java SE.
