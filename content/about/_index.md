@@ -1,10 +1,10 @@
 ---
-title: About Hugo
+title: About Light Platform
 linktitle: Overview
-description: Hugo's features, roadmap, license, and motivation.
-date: 2017-02-01
-publishdate: 2017-02-01
-lastmod: 2017-02-01
+description: Light's features, component, roadmap, license, and motivation.
+date: 2017-11-01
+publishdate: 2017-11-01
+lastmod: 2017-11-01
 categories: []
 keywords: []
 menu:
@@ -13,8 +13,8 @@ menu:
     weight: 1
 weight: 1
 draft: false
-aliases: [/about-hugo/,/docs/]
+aliases: [/about-light/,/docs/]
 toc: false
 ---
 
-Hugo is not your average static site generator.
+Light is a fast, lightweight and cloud native microservices platform.

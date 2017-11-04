@@ -109,7 +109,7 @@ twitter = "networkntcom"
 # High level items
 
 [[menu.docs]]
-  name = "About Light Framework"
+  name = "About Light Platform"
   weight = 1
   identifier = "about"
   url = "/about/"

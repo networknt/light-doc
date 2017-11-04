@@ -1,7 +1,7 @@
 ---
-title: What is Hugo
-linktitle: What is Hugo
-description: Hugo is a fast and modern static site generator written in Go, and designed to make website creation fun again.
+title: What is Light
+linktitle: What is Light
+description: Light is a platform written in Java SE, and designed to build cloud native API with different options.
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
@@ -13,7 +13,7 @@ menu:
 weight: 10
 sections_weight: 10
 draft: false
-aliases: [/overview/introduction/,/about/why-i-built-hugo/]
+aliases: [/overview/introduction/,/about/why-i-built-light/]
 toc: true
 ---
 
@@ -41,29 +41,8 @@ Hugo is for people building a blog, a company site, a portfolio site, documentat
 
 
 
-[@spf13]: https://twitter.com/@spf13
-[Aerobatic]: https://www.aerobatic.com/
 [Amazon S3]: http://aws.amazon.com/s3/
 [Azure]: https://blogs.msdn.microsoft.com/acoat/2016/01/28/publish-a-static-web-site-using-azure-web-apps/
-[CloudFront]: http://aws.amazon.com/cloudfront/ "Amazon CloudFront"
-[contributing to it]: https://github.com/gohugoio/hugo
-[DreamHost]: http://www.dreamhost.com/
-[Firebase]: https://firebase.google.com/docs/hosting/ "Firebase static hosting"
+[contributing to it]: https://github.com/networknt/light-4j
 [GitHub Pages]: https://pages.github.com/
-[GitLab]: https://about.gitlab.com
-[Go language]: https://golang.org/
-[GoDaddy]: https://www.godaddy.com/ "Godaddy.com Hosting"
-[Google Cloud Storage]: http://cloud.google.com/storage/
-[Heroku]: https://www.heroku.com/
-[Jekyll]: http://jekyllrb.com/
-[Jekyll]: https://jekyllrb.com/
-[Middleman]: https://middlemanapp.com/
-[Middleman]: https://middlemanapp.com/
-[Nanoc]: http://nanoc.ws/
-[Nanoc]: https://nanoc.ws/
 [Netlify]: https://netlify.com
-[rackspace]: https://www.rackspace.com/cloud/files
-[static site generator]: /about/benefits/
-[Rackspace]: https://www.rackspace.com/cloud/files
-[static site generator]: /about/benefits/
-[Surge]: https://surge.sh
