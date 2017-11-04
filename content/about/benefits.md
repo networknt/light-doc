@@ -1,11 +1,11 @@
 ---
-title: The Benefits of Static Site Generators
-linktitle: The Benefits of Static
-description: Improved performance, security and ease of use are just a few of the reasons static site generators are so appealing.
+title: Benefits of Light Platform
+linktitle: Benefits
+description: Improved performance, Lowered production cost, security and ease of use are just a few of the reasons Light Platform is so appealing.
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
-keywords: [ssg,static,performance,security]
+keywords: [productivity,cost,performance,security]
 menu:
   docs:
     parent: "about"
@@ -16,28 +16,59 @@ draft: false
 aliases: []
 toc: false
 ---
+## Lower the business requirement cost
 
-The purpose of website generators is to render content into HTML files. Most are "dynamic site generators." That means the HTTP server---i.e., the program that sends files to the browser to be viewed---runs the generator to create a new HTML file every time an end user requests a page.
+Compare with the traditional software development process, the business analysis and designer
+can sit together to create an OpenAPI specification. It eliminate the need for Word or Excel
+document which can never be traced and update-to-date. Also the spec can be understood by both
+computers and humans without any confusion or clarification. For client application requirement
+it is much simpler as we just need to pickup services available in the organization or public
+to form an application just like building with Lego.
 
-Over time, dynamic site generators were programmed to cache their HTML files to prevent unnecessary delays in delivering pages to end users. A cached page is a static version of a web page.
+## Lower the solution design cost
 
-Hugo takes caching a step further and all HTML files are rendered on your computer. You can review the files locally before copying them to the computer hosting the HTTP server. Since the HTML files aren't generated dynamically, we say that Hugo is a *static site generator*.
-
-This has many benefits. The most noticeable is performance. HTTP servers are *very* good at sending files---so good, in fact, that you can effectively serve the same number of pages with a fraction of the memory and CPU needed for a dynamic site.
-
-## More on Static Site Generators
-
-* ["An Introduction to Static Site Generators", David Walsh][]
-* ["Hugo vs. Wordpress page load speed comparison: Hugo leaves WordPress in its dust", GettingThingsTech][hugovwordpress]
-* ["Static Site Generators", O-Reilly][]
-* [StaticGen: Top Open-Source Static Site Generators (GitHub Stars)][]
-* ["Top 10 Static Website Generators", Netlify blog][]
-* ["The Resurgence of Static", dotCMS][dotcms]
+With opinionated frameworks and infrastructure, the solution design is much simpler. The output
+would be an IDL document for services or services interactions for client applications. 
 
 
-["An Introduction to Static Site Generators", David Walsh]: https://davidwalsh.name/introduction-static-site-generators
-["Static Site Generators", O-Reilly]: /documents/oreilly-static-site-generators.pdf
-["Top 10 Static Website Generators", Netlify blog]: https://www.netlify.com/blog/2016/05/02/top-ten-static-website-generators/
-[hugovwordpress]: https://gettingthingstech.com/hugo-vs.-wordpress-page-load-speed-comparison-hugo-leaves-wordpress-in-its-dust/
-[StaticGen: Top Open-Source Static Site Generators (GitHub Stars)]: https://www.staticgen.com/
-[dotcms]: https://dotcms.com/blog/post/the-resurgence-of-static
+## Lower the development cost
+
+With [light-codegen][] to generate a working project within a second, developers can only focus on
+the business logic implementation and unit test for the business logic. There is no need to handle
+any cross-cutting concerns as they are taken care of by the platform with configurations. 
+
+## Lower the devops cost
+
+With devops as code, everything is automatic and there is no need for engineer to build and
+deploy services to static shared environment anymore. 
+
+## Lower the test cost
+
+All tests will be done automatically to support CI/CD flow. Testers will write integration and
+end-to-end test cases and these tests will be part of the CI/CD flow to ensure the quality of
+the product. Also, all clients will submit their test cases to the service team to ensure that
+changes won't beak the client side contract. 
+
+## Lower the production provision cost
+
+With high throughput, low latency and small memory footprint, the production provision cost
+will be significant lower than traditional Java EE based solution. Based on different type
+of services, sometime, the difference is over 100 times. 
+
+## Lower the operation cost
+
+With centralized logging, metrics, auditing, tracing and monitoring, you will have the peace
+of mind on your production. 
+
+## Lower application delivery cost
+
+When building a new application, you don't need to build every component but just pick the
+right building blocks from within the organization or public. Building a new application is
+just like playing Lego games. 
+ 
+In summary, the goal of the platform is to lower the total cost of software product in
+all sizes of organizations.  
+
+
+
+[light-codegen]: https://github.com/networknt/light-codegen

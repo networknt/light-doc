@@ -1,11 +1,11 @@
 ---
 title: Roadmap
 linktitle: Roadmap
-description: Take a look at what's in the pipeline for future versions of the Hugo project.
+description: Take a look at what's in the pipeline for future versions of the Light platform.
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
-categories: [about hugo]
+categories: [about light]
 keywords: [about,contribute,roadmap]
 menu:
   docs:
@@ -18,34 +18,31 @@ aliases: [/meta/roadmap]
 toc: false
 ---
 
-To track Hugo's progress, see our [GitHub Milestones][milestones].
+To track each individual product's progress, see our [GitHub Milestones][milestone].
 
 In no particular order, here are some other features currently being worked on:
 
-* Even easier deployment to S3, SSH, GitHub, rsync. Give the [hosting and deployment][] section a shot.
-* Import from other website systems. There are already [existing migration tools][migrate], but they don’t cover all major platforms.
-* An interactive web-based editor (See the [related forum thread][])
-* Additional [themes][], which are always ongoing and [contributions are welcome][themescontrib]!
-* Dynamic image resizing via shortcodes ({{< gh 1014 >}})
-* Native support for additional content formats (AsciiDoc {{< gh 1435>}}, reST {{< gh 1436 >}})
+* A distributed transaction orchestration tool [light-saga-4j][].
+* An API runtime management and marketplace [light-portal][].
 * And, last but not least, [***your*** best ideas!][]
 
 ## Contributions Welcome
 
-Feel free to [contribute to Hugo's development][devcontribute], [improve Hugo's documentation][doccontribute], or [open a new issue][newissue] if you have an idea for a new feature.
+Feel free to [contribute to Light's development][devcontribute], [improve Light's documentation][doccontribute], 
+, [add a new example][exacontribute] or [write a tutorial][tutcontribute]. If you have an idea 
+or found a defect, please [open an issue][issue] at corresponding repository in [networknt github organization][github].
+If you have a question, please ask in the [gitter chat rooms][gitter]. All your activities will
+help the community to grow. 
 
-[#98]: https://github.com/gohugoio/hugo/issues/98
-[#1014]: https://github.com/gohugoio/hugo/issues/1014
-[#1435]: https://github.com/gohugoio/hugo/issues/1435
-[#1436]: https://github.com/gohugoio/hugo/issues/1436
+
+[light-saga-4j]: https://github.com/networknt/light-saga-4j
+[light-portal]: https://github.com/networknt/light-portal
 [devcontribute]: /contribute/development/
 [doccontribute]: /contribute/documentation/
-[hosting and deployment]: /hosting-and-deployment/
-[migrate]: /tools/migrations/
-[milestones]: https://github.com/gohugoio/hugo/milestones/
-[newissue]: https://github.com/gohugoio/hugo/issues/
-[related forum thread]: https://discourse.gohugo.io/t/web-based-editor/155
-[themes]: /themes/
-[themescontrib]: /contribute/themes/
-[tutorials]: /tutorials
+[tutcontribute]: /contribute/tutorial/
+[exacontribute]: /contribute/example/
+[gitter]: /contribute/gitter/
+[issue]: /contribute/issue/
+[milestone]: /milestone/
+[github]: https://github.com/networknt
 [***your*** best ideas!]: /contribute/

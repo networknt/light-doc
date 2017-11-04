@@ -1,7 +1,7 @@
 ---
-title: Contribute to the Hugo Project
-linktitle: Contribute to Hugo
-description: Contribute to Hugo development and documentation.
+title: Contribute to the Light Projects
+linktitle: Contribute to Light
+description: Contribute to Light development, documentation, example and tutorial.
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
@@ -14,10 +14,14 @@ menu:
 weight: 01	#rem
 draft: false
 slug:
-aliases: [/tutorials/how-to-contribute-to-hugo/,/community/contributing/]
+aliases: [/tutorials/how-to-contribute-to-light/,/community/contributing/]
 toc: false
 ---
 
-Hugo relies heavily on the enthusiasm and participation of the open-source community. We need your support in both its development and documentation.
+Light Platform relies heavily on the enthusiasm and participation of the open-source 
+community. We need your support in its development, documentation, examples and
+tutorials. In addition to above activities, opening issues on github.com and ask questions
+on gitter rooms will help the team to improve the product and help other members to learn
+how to use the platform. 
 
-Hugo's contribution guidelines are [detailed in a `CONTRIBUTING.md`](https://github.com/gohugoio/hugo/blob/master/CONTRIBUTING.md) in the Hugo source repository on GitHub.
+Light's contribution guidelines are [detailed in a `CONTRIBUTING.md`](https://github.com/networknt/light-4j/blob/master/CONTRIBUTING.md) in the light-4j source repository on GitHub.

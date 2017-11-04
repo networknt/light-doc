@@ -1,7 +1,7 @@
 ---
-title: Hugo Documentation
-linktitle: Hugo
-description: Hugo is the world's fastest static website engine. It's written in Go (aka Golang) and developed by bep, spf13 and friends.
+title: Light Documentation
+linktitle: Light
+description: Light is one of the world's fastest microservices platform. 
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
@@ -16,4 +16,4 @@ aliases: []
 toc: false
 layout: documentation-home
 ---
-Hugo is the **world's fastest static website engine.** It's written in Go (aka Golang) and developed by [bep](https://github.com/bep), [spf13](https://github.com/spf13) and [friends](https://github.com/gohugoio/hugo/graphs/contributors). Below you will find some of the most common and helpful pages from our documentation.
+Light is one of the **world's fastest microservices platform.** It's written in Java 8 SE and developed by [stevehu](https://github.com/stevehu), [chenyan71](https://github.com/chenyan71), [ddobrin](https://github.com/ddobrin), [gonzalovazquez](https://github.com/gonzalovazquez), [NicholasAzar](https://github.com/NicholasAzar) and friends. Below you will find some of the most common and helpful pages from our documentation.

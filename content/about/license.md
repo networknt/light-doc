@@ -1,11 +1,11 @@
 ---
 title: Apache License
 linktitle: License
-description: Hugo v0.15 and later are released under the Apache 2.0 license.
+description: Light-4j and related frameworks are released under the Apache 2.0 license.
 date: 2016-02-01
 publishdate: 2016-02-01
 lastmod: 2016-03-02
-categories: ["about hugo"]
+categories: ["about light"]
 keywords: ["License","apache"]
 menu:
   docs:
@@ -17,10 +17,6 @@ aliases: [/meta/license]
 toc: true
 ---
 
-{{% note %}}
-Hugo v0.15 and later are released under the Apache 2.0 license.
-Earlier versions of Hugo were released under the [Simple Public License](https://opensource.org/licenses/Simple-2.0).
-{{% /note %}}
 
 _Version 2.0, January 2004_ <br>
 <http://www.apache.org/licenses/LICENSE-2.0>

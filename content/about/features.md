@@ -1,7 +1,7 @@
 ---
-title: Hugo Features
-linktitle: Hugo Features
-description: Hugo boasts blistering speed, robust content management, and a powerful templating language making it a great fit for all kinds of static websites.
+title: Light Platform Features
+linktitle: Features
+description: Light Platform boasts blistering speed, robust runtime management, and a powerful CI/CD delivery flow making it a great fit for all kinds of API services.
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
@@ -18,73 +18,18 @@ toc: true
 
 ## General
 
-* [Extremely fast][] build times (&lt; 1 ms per page)
-* Completely cross platform, with [easy installation][install] on macOS, Linux, Windows, and more
-* Renders changes on the fly with [LiveReload][] as you develop
-* [Powerful theming][]
-* [Host your site anywhere][hostanywhere]
+* [Extremely fast][] Up to 3 million requests per second
+* Support or encourage [design driven][] and [test driven][] development
+* [Easy to install][] Support all platforms with JDK 8 and up installed or Docker
+* [Powerful plugins][] Allow users to choose built-in plugins or customer plugins
+* [Host your App][hostanywhere] in your data center, public cloud or lightapi.net
 
-## Organization
+See what's coming next in the [roadmap][].
 
-* Straightforward [organization for your projects][], including website sections
-* Customizable [URLs][]
-* Support for configurable [taxonomies][], including categories and tags
-* [Sort content][] as you desire through powerful template [functions][]
-* Automatic [table of contents][] generation
-* [Dynamic menu][] creation
-* [Pretty URLs][] support
-* [Permalink][] pattern support
-* Redirects via [aliases][]
-
-## Content
-
-* Native Markdown and Emacs Org-Mode support, as well as other languages via *external helpers* (see [supported formats][])
-* TOML, YAML, and JSON metadata support in [front matter][]
-* Customizable [homepage][]
-* Multiple [content types][]
-* Automatic and user defined [content summaries][]
-* [Shortcodes][] to enable rich content inside of Markdown
-* ["Minutes to Read"][pagevars] functionality
-* ["Wordcount"][pagevars] functionality
-
-## Additional Features
-
-* Integrated [Disqus][] comment support
-* Integrated [Google Analytics][] support
-* Automatic [RSS][] creation
-* Support for [Go][], [Amber], and [Ace][] HTML templates
-* [Syntax highlighting][] powered by [Pygments][]
-
-See what's coming next in the [Hugo roadmap][].
-
-[Ace]: /templates/alternatives/
-[aliases]: /content-management/urls/#aliases
-[Amber]: https://github.com/eknkc/amber
-[content summaries]: /content-management/summaries/
-[content types]: /content-management/types/
-[Disqus]: https://disqus.com/
-[Dynamic menu]: /templates/menus/
-[Extremely fast]: https://github.com/bep/hugo-benchmark
-[front matter]: /content-management/front-matter/
-[functions]: /functions/
-[Go]: http://golang.org/pkg/html/template/
-[Google Analytics]: https://google-analytics.com/
-[homepage]: /templates/homepage/
-[hostanywhere]: /hosting-and-deployment/
-[Hugo roadmap]: /about/roadmap
-[install]: /getting-started/installing/
-[LiveReload]: /getting-started/usage/
-[organization for your projects]: /getting-started/directory-structure/
-[pagevars]: /variables/page/
-[Permalink]: /content-management/urls/#permalinks
-[Powerful theming]: /themes/
-[Pretty URLs]: /content-management/urls/
-[Pygments]: http://pygments.org/
-[RSS]: /templates/rss/
-[Shortcodes]: /content-management/shortcodes/
-[sort content]: /templates/
-[supported formats]: /content-management/formats/
-[Syntax highlighting]: /tools/syntax-highlighting/
-[table of contents]: /content-management/toc/
-[taxonomies]: /content-management/taxonomies/
-[URLs]: /content-management/urls/
+[design driven]: /design/design-driven/
+[Extremely fast]: https://www.techempower.com/benchmarks/previews/round15/
+[Easy to Install]: /deployment/installation/
+[hostanywhere]: /deployment/
+[roadmap]: /about/roadmap
+[Powerful plugins]: /plugins/
+[test driven]: /test/test-driven/

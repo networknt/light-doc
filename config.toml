@@ -187,6 +187,12 @@ twitter = "networkntcom"
   url = "/hosting-and-deployment/"
 
 [[menu.docs]]
+  name = "Milestones"
+  weight = 90
+  identifier = "milestone"
+  url = "/milestone/"
+
+[[menu.docs]]
   name = "Contribute"
   weight = 100
   post = "break"
