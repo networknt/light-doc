@@ -14,4 +14,4 @@ toc: false
 draft: false
 ---
 
-You can build APIs or services with different framework provided.  
+You can build APIs or services with different frameworks provided by the light platform. 

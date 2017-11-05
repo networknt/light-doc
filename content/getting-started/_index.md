@@ -17,7 +17,13 @@ aliases: [/overview/introduction/]
 toc: false
 ---
 
-If this is your first time using Hugo and you've [already installed Hugo on your machine][installed], we recommend the [quick start][].
+If you don't have JDK 8, Maven and Git installed, please prepare your [environment][]. 
 
-[installed]: /getting-started/installing/
-[quick start]: /getting-started/quick-start/
+There are several frameworks available to support different style of API building. If this
+is the very first time you try to create an API, please try [restful][]. If you are unsure
+which style you should choose for your project, please read [API category][].
+
+
+[API category]: /style/category/
+[environment]: /getting-started/environment/
+[restful]: /getting-started/light-rest-4j/
