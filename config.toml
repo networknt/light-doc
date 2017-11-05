@@ -120,50 +120,32 @@ twitter = "networkntcom"
   identifier = "getting-started"
   url = "/getting-started/"
 
-
-[[menu.docs]]
-  name = "Themes"
-  weight = 15
-  identifier = "themes"
-  post = "break"
-  url = "/themes/"
-
 # Core Menus
 
 [[menu.docs]]
-  name = "Content Management"
+  name = "Cross-Cutting Concerns"
   weight = 20
-  identifier = "content-management"
+  identifier = "concern"
   post = "expanded"
-  url = "/content-management/"
+  url = "/concern/"
 
 [[menu.docs]]
-  name = "Templates"
+  name = "API Styles"
   weight = 25
-  identifier = "templates"
-
-  url = "/templates/"
+  identifier = "style"
+  url = "/style/"
 
 [[menu.docs]]
-  name = "Functions"
+  name = "Infrastructure Services"
   weight = 30
-  identifier = "functions"
-  url = "/functions/"
+  identifier = "service"
+  url = "/service/"
 
 [[menu.docs]]
-  name = "Variables"
+  name = "Tool Chain"
   weight = 35
-  identifier = "variables"
-  url = "/variables/"
-
-[[menu.docs]]
-  name = "CLI"
-  weight = 40
-  post = "break"
-  identifier = "commands"
-  url = "/commands/"
-
-
+  identifier = "tool"
+  url = "/tool/"
 
 # LOW LEVEL ITEMS
 
@@ -175,16 +157,10 @@ twitter = "networkntcom"
   url = "/troubleshooting/"
 
 [[menu.docs]]
-  name = "Tools"
-  weight = 70
-  identifier = "tools"
-  url = "/tools/"
-
-[[menu.docs]]
-  name = "Hosting & Deployment"
+  name = "Deployment"
   weight = 80
-  identifier = "hosting-and-deployment"
-  url = "/hosting-and-deployment/"
+  identifier = "deployment"
+  url = "/deployment/"
 
 [[menu.docs]]
   name = "Milestones"

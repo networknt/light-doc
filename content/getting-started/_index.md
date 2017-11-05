@@ -1,7 +1,7 @@
 ---
 title: Get Started
 linktitle: Get Started Overview
-description: Quick start and guides for installing Hugo on your preferred operating system.
+description: Quick start and guides for staring your first microserivce on your preferred operating system.
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
