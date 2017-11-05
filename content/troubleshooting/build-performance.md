@@ -88,7 +88,7 @@ values is usually greater than the actual time it takes to build a site.
 Some `partial` templates such as sidebars or menus are executed many times
 during a site build.  Depending on the content within the `partial` template and
 the desired output, the template may benefit from caching to reduce the number
-of executions.  The [`partialCached`][partialCached] template function provides
+of executions.  The template function provides
 caching capabilities for `partial` templates.
 
 {{% tip %}}
@@ -106,6 +106,3 @@ total time per step, the cumulative time after each step (in parentheses),
 the memory usage per step, and the total memory allocations per step.
 
 To enable *step analysis*, use the `--stepAnalysis` option when running Hugo.
-
-
-[partialCached]:{{< ref "functions/partialCached.md" >}}
