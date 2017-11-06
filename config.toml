@@ -164,6 +164,18 @@ twitter = "networkntcom"
 # LOW LEVEL ITEMS
 
 [[menu.docs]]
+  name = "Example"
+  weight = 40
+  identifier = "example"
+  url = "/example/"
+
+[[menu.docs]]
+  name = "Tutorial"
+  weight = 45
+  identifier = "tutorial"
+  url = "/tutorial/"
+
+[[menu.docs]]
   name = "Benchmark"
   weight = 50
   identifier = "benchmark"
