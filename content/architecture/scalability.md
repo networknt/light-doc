@@ -1,9 +1,19 @@
 ---
-date: 2016-10-11T12:32:21-04:00
-title: Scalability
+title: "Scalability"
+date: 2017-11-06T11:14:26-05:00
+description: "Microservices Scalability"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
-##
 
 One of the benefits utilizing microservices architecture is to make sure
 your application is easily scaling. When we talk about scalability, one 

@@ -1,6 +1,17 @@
 ---
-date: 2017-08-10T15:04:40-04:00
-title: Transaction management in microservices architecture
+title: "Transaction Management"
+date: 2017-11-06T11:14:26-05:00
+description: "Transaction management in microservices architecture"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
 In traditional monolithic applications, we normally use distributed transactions([XA](https://en.wikipedia.org/wiki/X/Open_XA))

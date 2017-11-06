@@ -1,6 +1,17 @@
 ---
-date: 2017-06-07T12:58:56-04:00
-title: API category and framework
+title: "API Category"
+date: 2017-11-06T11:14:26-05:00
+description: "API Category and Frameworks"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
 When an organization pursue microservices, the services/APIs can be grouped

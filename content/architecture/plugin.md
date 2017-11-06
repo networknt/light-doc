@@ -1,6 +1,17 @@
 ---
-date: 2016-10-29T17:22:16-04:00
-title: Plugin Architecture
+title: "Plugins"
+date: 2017-11-06T11:14:26-05:00
+description: "Plugin Architecture"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
 

@@ -1,9 +1,18 @@
 ---
-date: 2016-11-06T11:04:20-05:00
-title: traceability
+title: "Traceability"
+date: 2017-11-06T11:14:26-05:00
+description: "Microservices Traceability"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
-
-# 
 
 For microservices architecture, it is very important to trace request from one service to 
 another in the entire call tree in order to have big picture if something happens or have

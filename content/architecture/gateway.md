@@ -1,6 +1,17 @@
 ---
-date: 2016-10-20T14:33:53-04:00
-title: API Gateway
+title: "API Gateway"
+date: 2017-11-06T11:14:26-05:00
+description: "API Gateway is embedded in light-4j framework"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
 When your organization is thinking about breaking up the big monolithic

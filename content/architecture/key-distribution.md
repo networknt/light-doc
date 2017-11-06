@@ -1,7 +1,19 @@
 ---
-date: 2017-09-19T21:22:47-04:00
-title: JWT Public Key Certification Distribution
+title: "Key Distribution"
+date: 2017-11-06T11:14:26-05:00
+description: "JWT Public Key Certification Distribution"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
+
 
 light-4j and related frameworks integrate with light-oauth2 very closely so that tokens
 issued by light-oauth2 can be verified on services built on top of light-*-4j frameworks

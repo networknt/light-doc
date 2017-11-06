@@ -1,6 +1,17 @@
 ---
-date: 2016-10-20T14:34:09-04:00
-title: Security
+title: "Security"
+date: 2017-11-06T11:14:26-05:00
+description: "Microservices Security"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
 

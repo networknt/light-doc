@@ -1,6 +1,17 @@
 ---
-date: 2016-11-12T20:55:44-05:00
-title: Integration Patterns
+title: "Integration Patterns"
+date: 2017-11-06T11:14:26-05:00
+description: "API Integration Pattern"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
 While working with my clients to transform monolithic Java EE applications to 

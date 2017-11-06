@@ -1,9 +1,19 @@
 ---
-date: 2016-10-09T08:13:52-04:00
-title: Microservices
+title: "Microservices"
+date: 2017-11-06T11:14:26-05:00
+description: "Microservices Architecture"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
-#
 
 Speed and Safety at Scale and in Harmony.
 

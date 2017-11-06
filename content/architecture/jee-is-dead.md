@@ -1,6 +1,17 @@
 ---
-date: 2016-10-09T08:14:57-04:00
-title: Microservices - The final nail in the coffin for Java EE
+title: "Java EE declining"
+date: 2017-11-06T11:14:26-05:00
+description: "Microservices - The final nail in the coffin for Java EE"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
 When Java was out, big players like IBM, BEA, Oracle etc. saw a great opportunity

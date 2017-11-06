@@ -1,16 +1,31 @@
 ---
-date: 2017-06-08T09:37:00-04:00
-title: Platform
+title: "Platform"
+date: 2017-11-06T11:14:26-05:00
+description: "Microservices Platform"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
-Thre are five major elements of API platform
+There are five major elements of API platform
 
-## Runtime service management
+## Runtime infrastructure services
+
 
 ## API testing
 
+
 ## API creation and delivery
 
+
 ## API management solution
+
 
 ## API life-cycle management

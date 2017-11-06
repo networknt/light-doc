@@ -1,7 +1,19 @@
 ---
-date: 2016-11-09T21:13:27-05:00
-title: Monitoring
+title: "Monitoring"
+date: 2017-11-06T11:14:26-05:00
+description: "Microservices Monitoring"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
+
 
 Monitoring used to be a somewhat passive thing. You used tools to monitor the 
 application process/logs and perhaps send an alert if something seemed wrong,  

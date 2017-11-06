@@ -1,6 +1,17 @@
 ---
-date: 2016-10-09T08:15:27-04:00
-title: Spring is bloated
+title: "Spring is bloated"
+date: 2017-11-06T11:14:26-05:00
+description: "Spring is bloated"
+categories: []
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
 Over the years, Spring seemed to be the replacement of JEE servers with IoC
