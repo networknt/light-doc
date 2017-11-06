@@ -1,16 +1,14 @@
 ---
 title: "SPA API"
 date: 2017-11-06T16:10:53-05:00
-description: ""
+description: "How to serve Single Page Application(React/Angular etc.) from your API server instance"
 categories: []
 keywords: []
 slug: ""
 aliases: []
 toc: false
-draft: true
+draft: false
 ---
-
-## How to serve Single Page Application(React/Angular etc.) from your API server instance
 
 During development, we normally use Nodejs to serve the single page application as it is easy
 to package and test/debug. However, on production, it makes sense that the API server serves
