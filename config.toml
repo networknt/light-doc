@@ -176,6 +176,12 @@ twitter = "networkntcom"
   url = "/troubleshooting/"
 
 [[menu.docs]]
+  name = "FAQ"
+  weight = 70
+  identifier = "faq"
+  url = "/faq/"
+
+[[menu.docs]]
   name = "Deployment"
   weight = 80
   identifier = "deployment"
