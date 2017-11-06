@@ -12,5 +12,5 @@ weight: 120
 sections_weight: 120
 aliases: []
 toc: false
-draft: true
+draft: false
 ---

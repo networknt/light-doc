@@ -12,7 +12,7 @@ weight: 8
 sections_weight: 8
 aliases: []
 toc: false
-draft: true
+draft: false
 ---
 
 A code generator based on rocker that can be used as an utility or web service. It is

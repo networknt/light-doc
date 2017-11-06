@@ -12,7 +12,7 @@ weight: 5
 sections_weight: 5
 aliases: []
 toc: false
-draft: true
+draft: false
 ---
 
 Currently, majority of the components in light platform is based on Java 8. Before

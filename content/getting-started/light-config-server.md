@@ -12,7 +12,7 @@ weight: 80
 sections_weight: 80
 aliases: []
 toc: false
-draft: true
+draft: false
 ---
 
 Each plugin in light platform has a configuration file to control is the component is
