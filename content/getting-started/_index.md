@@ -5,13 +5,14 @@ description: Quick start and guides for staring your first microserivce on your 
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
-categories: [getting started]
+categories: [getting started,fundamentals]
 keywords: [usage,docs]
 menu:
   docs:
     parent: "getting-started"
     weight: 1
-weight: 0001	#rem
+weight: 40	#rem
+sections_weight: 40
 draft: false
 aliases: [/overview/introduction/]
 toc: false

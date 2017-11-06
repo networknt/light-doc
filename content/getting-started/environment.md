@@ -2,14 +2,13 @@
 title: "Environment"
 date: 2017-11-05T12:01:18-05:00
 description: ""
-categories: [getting started,fundamentals]
+categories: [getting started]
 keywords: []
 menu:
   docs:
     parent: "getting-started"
     weight: 5
 weight: 5
-sections_weight: 5
 aliases: []
 toc: false
 draft: false

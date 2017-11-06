@@ -2,13 +2,14 @@
 title: "Concerns Overview"
 date: 2017-11-04T22:04:22-04:00
 description: "Plugins or Middleware Handlers that address all the cross-cutting concerns"
-categories: [concerns]
+categories: [concerns,fundamentals]
 keywords: []
 menu:
   docs:
     parent: "concern"
     weight: 01
-weight: 01	#rem
+weight: 50	#rem
+sections_weight: 50
 aliases: []
 toc: false
 draft: false

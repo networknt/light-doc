@@ -2,7 +2,7 @@
 title: "Light Codegen"
 date: 2017-11-05T12:34:57-05:00
 description: ""
-categories: [getting started,fundamentals]
+categories: [getting started]
 keywords: []
 menu:
   docs:

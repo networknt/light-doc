@@ -5,6 +5,7 @@ description: Light Platform boasts blistering speed, robust runtime management, 
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
+categories: [about,fundamentals]
 menu:
   docs:
     parent: "about"

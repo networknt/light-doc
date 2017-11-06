@@ -6,6 +6,7 @@ date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
 keywords: [productivity,cost,performance,security]
+categories: [about,fundamentals]
 menu:
   docs:
     parent: "about"
