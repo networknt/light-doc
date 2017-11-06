@@ -2,7 +2,7 @@
 title: "Concerns Overview"
 date: 2017-11-04T22:04:22-04:00
 description: "Plugins or Middleware Handlers that address all the cross-cutting concerns"
-categories: [concern]
+categories: [concerns]
 keywords: []
 menu:
   docs:

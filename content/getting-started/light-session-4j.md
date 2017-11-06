@@ -2,7 +2,7 @@
 title: "Light Session 4j"
 date: 2017-11-05T12:31:44-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

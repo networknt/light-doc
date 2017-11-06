@@ -2,7 +2,7 @@
 title: "Webserver"
 date: 2017-11-05T12:32:15-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

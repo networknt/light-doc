@@ -2,7 +2,7 @@
 title: "Light Hybrid 4j"
 date: 2017-11-05T11:46:42-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

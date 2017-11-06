@@ -2,7 +2,7 @@
 title: "Light Proxy"
 date: 2017-11-05T12:31:31-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

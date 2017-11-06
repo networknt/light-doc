@@ -2,7 +2,7 @@
 title: "Light Oauth2"
 date: 2017-11-05T12:34:02-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

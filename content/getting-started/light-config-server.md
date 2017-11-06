@@ -2,7 +2,7 @@
 title: "Light Config Server"
 date: 2017-11-05T12:33:29-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

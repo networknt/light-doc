@@ -2,7 +2,7 @@
 title: "Websocket"
 date: 2017-11-05T12:31:57-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

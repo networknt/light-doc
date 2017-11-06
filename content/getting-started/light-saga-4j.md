@@ -2,7 +2,7 @@
 title: "Light Saga 4j"
 date: 2017-11-05T12:31:18-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

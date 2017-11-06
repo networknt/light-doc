@@ -2,7 +2,7 @@
 title: "Light Portal"
 date: 2017-11-05T12:34:09-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:

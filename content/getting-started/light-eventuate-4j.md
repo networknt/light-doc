@@ -2,7 +2,7 @@
 title: "Light Eventuate 4j"
 date: 2017-11-05T11:46:59-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
 menu:
   docs:
