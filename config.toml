@@ -123,6 +123,20 @@ twitter = "networkntcom"
 # Core Menus
 
 [[menu.docs]]
+  name = "Architecture"
+  weight = 10
+  identifier = "architecture"
+  post = "expanded"
+  url = "/architecture/"
+
+[[menu.docs]]
+  name = "Design"
+  weight = 15
+  identifier = "design"
+  post = "expanded"
+  url = "/design/"
+
+[[menu.docs]]
   name = "Cross-Cutting Concerns"
   weight = 20
   identifier = "concern"
@@ -149,6 +163,11 @@ twitter = "networkntcom"
 
 # LOW LEVEL ITEMS
 
+[[menu.docs]]
+  name = "Benchmark"
+  weight = 50
+  identifier = "benchmark"
+  url = "/benchmark/"
 
 [[menu.docs]]
   name = "Troubleshooting"
