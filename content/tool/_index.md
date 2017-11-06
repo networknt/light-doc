@@ -1,7 +1,7 @@
 ---
 title: Tool Chain Overview
 date: 2017-11-04T22:12:19-04:00
-description: "There are some services as part of the infrastructure to support microservices"
+description: "There are certain tools that can help to manage the complexity of microservices"
 categories: [tool]
 keywords: []
 menu:
@@ -14,5 +14,4 @@ toc: false
 draft: false
 ---
 
-For organizations that is planning to migrate existing monolithic application to
-microservices, the front-end infrastructure investment is very significant. 
+There are so many tools that help us to deliver microservices and here is a small list.
