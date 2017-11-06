@@ -1,11 +1,17 @@
 ---
-title: "Light Graphql 4j"
+title: "GraphQL"
 date: 2017-11-05T14:15:07-05:00
-description: ""
-categories: []
-keywords: []
-slug: ""
+description: "GraphQL API"
+categories: [style]
+keywords: [graphql]
+menu:
+  docs:
+    parent: "style"
+    weight: 10
+weight: 10	#rem
 aliases: []
 toc: false
-draft: true
+draft: false
 ---
+
+GraphQL is great for developers.
