@@ -2,7 +2,7 @@
 title: "Environment"
 date: 2017-11-05T12:01:18-05:00
 description: ""
-categories: [getting started]
+categories: [getting started,fundamentals]
 keywords: []
 menu:
   docs:
