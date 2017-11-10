@@ -100,7 +100,7 @@ be found [here](https://github.com/networknt/light-example-4j)
 Our framework is built on top of Undertow http core server which is very 
 light and serves 1.4 million "Hello World!" requests on my desktop with 
 average response time 2ms. Is it 44 times faster then the most popular 
-RESTful container Sprint Boot with embedded Tomcat.
+RESTful container Spring Boot with embedded Tomcat.
 
 The performance test code can be found in 
 [here](https://github.com/networknt/microservices-framework-benchmark)

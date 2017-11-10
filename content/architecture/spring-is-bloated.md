@@ -45,7 +45,7 @@ later on I have switched to Undertow servlet container for Spring Boot. The
 Undertow Servlet container is faster but still over 20-30 times slower then
 Light Java Framework which is built on top of Undertow core http server. 
 
-The 20-30 times difference between the two is due to Servlet overhead and Sprint
+The 20-30 times difference between the two is due to Servlet overhead and Spring
 Boot overhead and it is very significant.
 
 After I published the peformance test results, one of the Spring developers pointed

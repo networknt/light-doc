@@ -5,7 +5,7 @@ features:
   - heading: Blistering Speed and Small Memory Footprint
     image_path: /images/icon-fast.svg
     tagline: Save 10s to 100s times on production provision cost
-    copy: You need hundreds of instances of Sprint Boot with Tomcat embedded to match one instance of light-4j in "Hello World" for the same throughput and latency.
+    copy: You need hundreds of instances of Spring Boot with Tomcat embedded to match one instance of light-4j in "Hello World" for the same throughput and latency.
 
   - heading: Embedded Gateway to Address all Cross-cutting Concerns
     image_path: /images/icon-content-management.svg
