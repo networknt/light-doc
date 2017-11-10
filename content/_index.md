@@ -1,5 +1,5 @@
 ---
-title: "A Fast and Flexible Website Generator"
+title: "A High Throughput, Low Latency and Small Memory Footprint API Platform"
 date: 2017-03-02T12:00:00-05:00
 features:
   - heading: Blistering Speed and Small Memory Footprint
