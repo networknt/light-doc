@@ -1,0 +1,58 @@
+---
+title: "Service"
+date: 2017-11-10T14:50:30-05:00
+description: ""
+categories: []
+keywords: []
+slug: ""
+aliases: []
+toc: false
+draft: false
+---
+
+
+OAuth2 is used to protect services and each service must register itself with scope in
+order to have fine-grained access control. This microservice provides endpoint to add,
+update, remove and query services. 
+
+To add a new service.
+
+```
+curl -H "Content-Type: application/json" -X POST -d '{"serviceId":"AACT0003","serviceType":"ms","serviceName":"Retail Account","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","ownerId":"admin"}' http://localhost:6883/oauth2/service
+```
+
+To query all services.
+
+```
+curl http://localhost:6883/oauth2/service?page=1
+
+```
+And here is the result.
+
+```
+[{"serviceType":"ms","serviceDesc":"A microservice that serves account information","scope":"a.r b.r","serviceId":"AACT0001","serviceName":"Account Service","ownerId":"admin","updateDt":null,"createDt":"2016-12-31"},{"serviceType":"ms","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin","updateDt":null,"createDt":"2016-12-31"}]
+```
+
+To query a service with service id.
+
+```
+curl http://localhost:6883/oauth2/service/AACT0003
+
+```
+And here is the result.
+```
+{"serviceType":"ms","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin"}
+```
+
+To update above service type to "api".
+
+```
+curl -H "Content-Type: application/json" -X PUT -d '{"serviceType":"api","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin"}' http://localhost:6883/oauth2/service
+```
+
+To delete above service with service id.
+
+```
+curl -X DELETE http://localhost:6883/oauth2/service/AACT0003
+
+```
