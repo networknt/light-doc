@@ -50,12 +50,14 @@ Since Facebook open sourced Graphql, it is get popular in the open source commun
 very fast and some companies start to adopt it to replace RESTful APIs for public
 APIs. Github.com is one of the example as they are moving to Graphql from Restful.
 
-[light-graphql-4j](https://github.com/networknt/light-graphql-4j) is designed to
-build Graphql API with Graphql IDL(Interface Definition Language). Developers just
-need to wire in the domain logic into the generated graphql schema to make the
-API works. Sometime, Graphql APIs will be used an aggregate API in front of several
-RESTful or Hybrid APIs to serve different consumers like Web Server, Native Mobile
-and Single Page Application on Browser. 
+[light-graphql-4j][] is designed to build Graphql API with Graphql IDL(Interface 
+Definition Language). Developers just need to wire in the domain logic into the 
+generated graphql schema to make the API works. Sometimes, Graphql APIs will be 
+used as an aggregate API in front of several RESTful or Hybrid APIs to serve 
+different consumers like Web Server, Native Mobile and Single Page Application 
+on Browser.
+
+ 
 
 ## B2B APIs
 
@@ -77,16 +79,19 @@ Graphql is gaining traction in certain business scenarios.
 Another option for partner API is RPC style of API which is much more efficient than
 RESTful. 
 
-[light-hybrid-4j](https://github.com/networknt/light-hybrid-4j) is designed to build
-RPC based microservices. Also, it allows you to build modularized monolithic services
-as well. You can build a monolithic services in the beginning and then split one or
-more hot services to another instance easily. 
+[light-hybrid-4j][] is designed to build RPC based microservices. Also, it allows you 
+to build modularized monolithic services as well. You can build a monolithic services 
+in the beginning and then split one or more hot services to another instance easily. In
+addition, it is a serverless framework and will be the corner stone of lightapi.net
+hosting platform.
 
 
 ## Internal APIs
 
 Internal APIs will only be used within the same organization and service might be shared
-between LOBs. 
+between LOBs. These APIs can only be accessed from servers within our data center. We still 
+follow best practices like load balancing etc, but we don't provide any public routes to 
+these APIs.
 
 #### Rest
 
@@ -100,19 +105,29 @@ Graphql is gaining traction in certain business scenarios.
 #### Hybrid
 
 Hybrid is one of the frameworks that is very suitable in product APIs. It is highly
-recommended.
+recommended. In fact, all services built in light-portal are based on hybrid.
 
 #### Eventuate
 
 Above three microservices frameworks are all designed for request/response type of
-interaction between consumers and services. In a data rich environment it has its
-drawbacks in dealing with transactions. Distributed transaction is not the answer
-in microservices world. Ultimately, each service should have its own database. So
-no shared database is allowed. In this case, the eventual consistency microservices
-framework is needed to glue all services together to allow data synch between them.
+interaction between consumers and services. In another word, the interaction style
+is synchronous and it would scale to a certain point once volume increases. In a data 
+rich environment it has its drawbacks in dealing with transactions. Distributed 
+transaction is not the answer in microservices world. Ultimately, each service should 
+have its own database. So no shared database is allowed. In this case, the eventual 
+consistency microservices framework is needed to glue all services together to allow 
+data synch between them.
 
-[light-eventuate-4j](https://github.com/networknt/light-eventuate-4j) is designed to 
-build microservices based on messaging, event sourcing and CQRS on top of Kafka. 
+[light-eventuate-4j][] is designed to build microservices based on messaging, event 
+sourcing and CQRS on top of Kafka. The interaction style is asynchronous which is based
+on domain events and will ensure data consistency eventually. Combining with [light-saga-4j][],
+it can handle distributed transactions between multiple services. 
+
+Basically, light-eventuate-4j is a [service mesh][] that is deployed in an organization
+as infrastructure service to support microserivces. All services still need to be built
+with light-rest-4j, light-graphql-4j or light-hybrid-4j to serve consumers but underline
+communication between services is done through light-eventuate-4j and transaction orchestration
+is done by light-saga-4j. 
 
 
 ## Product APIs
@@ -126,7 +141,8 @@ Rest is very popular with this type of APIs but it is not very efficient.
 
 #### Graphql
 
-Graphql is gaining traction in certain business scenarios.
+Graphql is gaining traction in certain business scenarios. For example, the services
+close to the UI. 
 
 #### Hybrid
 
@@ -136,6 +152,12 @@ recommended.
 #### Eventuate
 
 Like Internal APIs, Eventual consistency with messaging, event sourcing and CQRS can
-be used to glue all services/APIs together.
+be used to glue all services/APIs together. And light-saga-4j can be used to orchestrate
+distributed transactions between services. 
 
 [light-rest-4j]: /style/light-rest-4j/
+[light-graphql-4j]: /style/light-graphql-4j/
+[light-hybrid-4j]: /style/light-hybrid-4j/
+[light-eventuate-4j]: /style/light-eventuate-4j/
+[light-saga-4j]: /style/light-saga-4j/
+[service mesh]: /architecture/service-mesh/

@@ -51,6 +51,7 @@ Here is a list of architecture decisions for the framework:
 
 * API [category][] and how to choose a framework to build your APIs.
 
+* What is [service mesh][] and why we need it? 
 
 [design]: /design/
 [microservices]: /architecture/microservices/
@@ -66,3 +67,4 @@ Here is a list of architecture decisions for the framework:
 [bloated]: /architecture/spring-is-bloated/
 [Elements]: /architecture/platform/
 [category]: /architecture/category/
+[service mesh]: /architecture/service-mesh/
