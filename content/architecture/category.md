@@ -1,7 +1,7 @@
 ---
 title: "API Category"
 date: 2017-11-06T11:14:26-05:00
-description: "API Category and Frameworks"
+description: "API Category - Choose the right framework for the right API type"
 categories: []
 keywords: [architecture]
 menu:
@@ -14,28 +14,37 @@ toc: false
 draft: false
 ---
 
-When an organization pursue microservices, the services/APIs can be grouped
+When an organization pursues microservices, the services/APIs can be grouped
 into the following categories. For each category, certain microservice style
-is more suitable than others. 
+is more suitable than others. There are several ways to categorize APIs and
+here we are differentiate APIs by visibility. 
 
 ## Open Web APIs
 
-This is also called public API. Companies want to bring their business online
+This is also called public API. APIs in this category have public routes and 
+can be accessed from anywhere. Companies want to bring their business online
 to attract developers to build applications against their public APIs. In this
 way, they can extend their business and reach more customers than before. 
 
-### Rest
+#### Rest
 
-When doing so, it seems RESTful API is a natural choose as it is well known by
-almost every developer and support almost every language. It is the most mature
+When building pubic APIs, it seems RESTful is a natural choose as it is well known 
+by almost every developer and support almost every language. It is the most mature
 technology and has support from a lot of commercial infrastructure and tools.
 
-[light-rest-4j](https://github.com/networknt/light-rest-4j) is designed to build 
-microservices in RESTful style on top of OpenAPI specification with most 
-cross-cutting concerns addressed and allow developer to focus on the domain business 
-logic only. 
+[light-rest-4j][] is designed to build microservices in RESTful style on top of 
+OpenAPI specification with most cross-cutting concerns addressed and allow developers 
+to focus on the domain business logic only. 
 
-### Graphql
+The drawback for RESTful interaction style is its complexity in specification and
+less efficient in communication. With today's smart browser with Single Page 
+Application and mobile device, REST forces the client to convert the data model
+into URI and send through the HTTP connection to server with all type information
+lost. The server has to transform the URI into data model with the help of Swagger
+specification. The response reverses the same process. That is the reason Swagger
+specification is so complicated and very hard to write compare with other IDLs.  
+
+#### Graphql
 
 Since Facebook open sourced Graphql, it is get popular in the open source community
 very fast and some companies start to adopt it to replace RESTful APIs for public
@@ -55,15 +64,15 @@ Due to the close relationship with partners, there are more flexibility in term 
 choosing more efficient approach to build APIs. It is easier to train developers due
 to the close relationship. 
 
-### Rest
+#### Rest
 
 Rest is very popular with this type of APIs.
 
-### Graphql
+#### Graphql
 
 Graphql is gaining traction in certain business scenarios.
 
-### Hybrid
+#### Hybrid
 
 Another option for partner API is RPC style of API which is much more efficient than
 RESTful. 
@@ -79,21 +88,21 @@ more hot services to another instance easily.
 Internal APIs will only be used within the same organization and service might be shared
 between LOBs. 
 
-### Rest
+#### Rest
 
 Rest is very popular with this type of APIs.
 
-### Graphql
+#### Graphql
 
 Graphql is gaining traction in certain business scenarios.
 
 
-### Hybrid
+#### Hybrid
 
 Hybrid is one of the frameworks that is very suitable in product APIs. It is highly
 recommended.
 
-### Eventuate
+#### Eventuate
 
 Above three microservices frameworks are all designed for request/response type of
 interaction between consumers and services. In a data rich environment it has its
@@ -111,20 +120,22 @@ build microservices based on messaging, event sourcing and CQRS on top of Kafka.
 Product APIs are used only around one specific product and they are not supposed to be
 shared. 
 
-### Rest
+#### Rest
 
 Rest is very popular with this type of APIs but it is not very efficient.
 
-### Graphql
+#### Graphql
 
 Graphql is gaining traction in certain business scenarios.
 
-### Hybrid
+#### Hybrid
 
 Hybrid is one of the frameworks that is very suitable in product APIs. It is highly
 recommended.
 
-### Eventuate
+#### Eventuate
 
 Like Internal APIs, Eventual consistency with messaging, event sourcing and CQRS can
 be used to glue all services/APIs together.
+
+[light-rest-4j]: /style/light-rest-4j/

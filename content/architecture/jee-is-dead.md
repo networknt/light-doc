@@ -1,5 +1,5 @@
 ---
-title: "Java EE declining"
+title: "JavaEE declining"
 date: 2017-11-06T11:14:26-05:00
 description: "Microservices - The final nail in the coffin for Java EE"
 categories: []
