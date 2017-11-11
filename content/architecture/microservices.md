@@ -14,6 +14,13 @@ toc: false
 draft: false
 ---
 
+Microservice architecture, or simply microservices, is a distinctive method of developing software 
+systems that has grown in popularity in recent years. In fact, even though there isn’t a whole lot 
+out there on what it is and how to do it, for many developers it has become a preferred way of 
+creating enterprise applications.  Thanks to its scalability, this architectural method is considered 
+particularly ideal when you have to enable support for a range of platforms and devices—spanning web, 
+mobile, Internet of Things, and wearables—or simply when you’re not sure what kind of devices you’ll 
+need to support in an increasingly cloudy future.
 
 Speed and Safety at Scale and in Harmony.
 

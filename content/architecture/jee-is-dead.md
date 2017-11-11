@@ -38,8 +38,7 @@ In 2003, Rod Johnson released Spring Framework and it allows IoC and POJO for
 development without EJBs. The productivity increment is huge and a lot of 
 developers jumped onto it and thrown J2EE EJBs out of the window. The application
 server vendors saw this and in Java EE 5, they provided some features to make 
-developer's life easier and less painful, today’s [Spring Framework is so 
-bloated](https://networknt.github.io/light-4j/architecture/spring-is-bloated/) 
+developer's life easier and less painful, today’s [Spring Framework is so bloated][] 
 like Java EE containers and it still based on Java EE servlet container which was
 designed in early 2000 without considering multiple cores and NIO.
 
@@ -53,18 +52,18 @@ In 2009, Ryan Dahl introduced Node.js that supports asynchronous, non-blocking
 and event-driven I/O. This increase the response rate dramatically as the server 
 threads are well utilized and the throughput of a single server can be comparable 
 to a cluster of Java EE servers. Node.js is a very good design but it has its 
-[limitations](https://networknt.github.io/light-4j/benchmarks/nodejs/). 
-It is hard to scale and hard to integrate with existing legacy systems.
+[limitations][]. It is hard to scale and hard to integrate with existing legacy 
+systems.
 
 
 In 2014, a new player Undertow came in town and it is Java based non-blocking web 
-server. From techempower.com [test](https://www.techempower.com/benchmarks/#section=data-r12&hw=peak&test=plaintext), 
+server. From techempower.com [benchmark test][], 
 it serves millions requests per second on a single $8000 dell server using the same 
 test case Google claimed to serve 1 million requests with a cluster. It is lightweight 
 with the core coming under 1Mb and a simple embedded server uses less than 4Mb of 
 heap space. 
 
-With the new Undertow Core, we've built [Light 4J Framework](https://github.com/networknt/light-4j) 
+With the new Undertow Core, we've built [Light 4J Framework][] 
 which is aiming containerized microserivces. It supports design driven approach 
 from OpenAPI specification for RESTful API, GraphQL IDL for GraphQL service and our
 home grown schema for Hybrid service with code generation and runtime model based
@@ -76,7 +75,8 @@ validation and security.
 Years ago, Java EE vendors like Oracle and IBM spent billions dollars to develop their 
 application servers and these servers (WebLogic and WebSphere) will be sold for millions
 dollars to big organizations. Now it is hard to sell these servers as JBoss is grabbing
-market share quickly and Oracle is [dropping Java EE support](https://developers.slashdot.org/story/16/07/02/1639241/oracle-may-have-stopped-funding-and-developing-java-ee)
+market share quickly and Oracle is [dropping Java EE support][]. Recently, Oracle has
+donate Java EE to Eclipse Foundation. 
 
 With microservices gainning traction, the application servers are hard to sell as these
 servers are used to host monolithic applications. It doesn't make sense to host a service
@@ -84,9 +84,8 @@ with only 200 lines of code on WebSphere which has several millions lines of cod
 99 percent of CPU and memory will be wasted on the Java EE server and your service will be
 slow as a snail. This forces them to rebrand and make changes on their platform to allow 
 user to build microservices but the result is not promising. I have tested JBoss WildFly
-Swarm in my [benchmarks](https://github.com/networknt/microservices-framework-benchmark)
-and it is at the bottom. WebLogic Multitenant and WebSphere Liberty will be much worse as
-they are significant bigger than WildFly Swarm.
+Swarm in my [benchmarks][] and it is at the bottom. WebLogic Multitenant and WebSphere 
+Liberty will be much worse as they are significant bigger than WildFly Swarm.
   
   
 ## Java EE customers
@@ -159,13 +158,13 @@ application microservices becomes easier.
   
 While microservices are getting popular, a lot vendors are trying to re-brand their 
 Java EE based web services to microservices in order to sell their obsolete product. 
-[API Gateway](https://networknt.github.io/light-4j/architecture/gateway/) is one of 
-them. These gateways are designed for Web Services but not Microservices. 
+[API Gateway][] is one of them. These gateways are designed for Web Services but not 
+Microservices. 
 
 
 Jason Bloomberg, president of Intellyx, talks about the distinction between a typical 
 web service and a microservice, arguing against the tendency to try to simply rebrand 
-web services as microservices in this [article](http://techbeacon.com/dangers-microservices-washing-get-value-strip-away-hype)
+web services as microservices in this [article][]
 
 Microservices are not Web Services on enterprise service buses (ESBs). And it is not
 the traditional service-oriented architecture (SOA), while it inherits some of the 
@@ -201,7 +200,7 @@ are getting more and more popular. Big corporations are breaking their big appli
 up to smaller pieces that can be individually deployed and replaced. These smaller
 services are deployed within docker containers on the cloud. I myself have been working
 on this area for my clients for the last couple of years and devoted my time to build
-an open source microservices framework [Light 4J](https://github.com/networknt/light-4j)
+an open source microservices framework light-4j.
 which provides all cross cutting concerns for microservices running in containers. It
 supports design driven approach and developers will only focus on the domain business
 logic in generated handlers. All the rest will be handled by the Framework and DevOps flow.
@@ -209,4 +208,11 @@ So far, it is one of the fastest microservices framework available.
 
 
 
-
+[Spring Framework is so bloated]: /architecture/spring-is-bloated/
+[limitations]: /benchmark/nodejs/
+[benchmark test]: https://www.techempower.com/benchmarks/previews/round15/
+[Light 4J Framework]: https://github.com/networknt/light-4j
+[dropping Java EE support]: https://developers.slashdot.org/story/16/07/02/1639241/oracle-may-have-stopped-funding-and-developing-java-ee
+[benchmarks]: https://github.com/networknt/microservices-framework-benchmark
+[API Gateway]: /architecture/gateway/
+[article]: http://techbeacon.com/dangers-microservices-washing-get-value-strip-away-hype

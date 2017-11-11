@@ -30,10 +30,10 @@ The purpose of the gateway is to address cross-cutting concerns in Web
 services as these are built on top of JavaEE platform with no capability
 to address these concerns inside the application server. The foundation
 of JavaEE is Servlet API which treats request and response immutable and
-it doesn't provide a way to intercept request and response easyly in 
+it doesn't provide a way to intercept request and response easily in 
 servlet filter. The servlet API was designed around 2000 and it cannot be
 changed due to backward compatibility. This leaves only one option to
-address cross-cutting concerns on the network level. Normally JavaEE app
+address cross-cutting concerns on the network level. Normally JavaEE apps
 are designed as multiple layers and putting an extra layer as gateway is
 very natural. 
 
@@ -62,8 +62,8 @@ When you look inside the APIs protected by the gateway, you can see
 these APIs are implemented in JavaEE containers like 
 WebLogic/WebSphere/JBoss/SpringBoot etc. and they don't call each 
 other. They are simply monolithic JavaEE application packaged in ear 
-or war and exposed RESTful APIs. These APIs are normally deployed in Data
-Centers and lately moved to cloud. They are not real microservices at 
+, war or jar and exposed RESTful APIs. These APIs are normally deployed in 
+Data Centers and lately moved to cloud. They are not real microservices at 
 all. 
 
 Some smart developers attempted to break these big application into 
@@ -93,21 +93,19 @@ orchestration tools like Kubernetes or Docker Swarm, the traditional
 gateway is replaced. As there is no remote calls between API to gateway, 
 all the cross cutting concerns are addressed in the same request/response 
 chain. This gives you the best performance for your APIs. Here
-is an [tutorial](https://networknt.github.io/light-4j/tutorials/microservices/) 
-which implements the above diagram and source code for the four APIs can
-be found [here](https://github.com/networknt/light-example-4j)
+is an [tutorial][] which implements the above diagram and source code for 
+the four APIs can be found in github [light-example-4j repo][].
 
 Our framework is built on top of Undertow http core server which is very 
 light and serves 1.4 million "Hello World!" requests on my desktop with 
 average response time 2ms. Is it 44 times faster then the most popular 
 RESTful container Spring Boot with embedded Tomcat.
 
-The performance test code can be found in 
-[here](https://github.com/networknt/microservices-framework-benchmark)
+The performance test code can be found in [microservices framework benchmark][].
 
 
 In the above diagram, OAuth2 server is an independent entity and you 
-might ask if it is a bottleneck. I have written another [document](/architecture/security) 
+might ask if it is a bottleneck. I have written another [security document][] 
 to address it with distributed JWT token verification and client credentials 
 token caching and renewal. Basically, the Client module in the framework
 caches the client credentials token until it is about to expire then renew
@@ -116,5 +114,10 @@ in the background.
 Also, our own OAuth2 server built on top of light-rest-4j and light-hybrid-4j 
 frameworks is very fast that it can handle 60K user login to get authorization 
 code per second. For access token, it can serve about 700 access tokens in a 
-second. It is also open sourced and can be found at [https://github.com/networknt/light-oauth2](https://github.com/networknt/light-oauth2)
+second. It is also open sourced and can be found at [light-oauth2 repo][].
 
+[tutorial]: https://networknt.github.io/light-4j/tutorials/microservices/
+[light-example-4j repo]: https://github.com/networknt/light-example-4j
+[microservices framework benchmark]: https://github.com/networknt/microservices-framework-benchmark
+[security document]: /architecture/security/
+[light-oauth2 repo]: https://github.com/networknt/light-oauth2
