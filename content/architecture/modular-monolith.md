@@ -48,6 +48,43 @@ complexity).
 When you introduce significant additional complexity (with all its attendant risk) with little 
 chance of the technique actually achieving its goal, you’ve caused harm.
 
+### Why are microservices useful?
+
+Microservices are useful because of two things:
+
+* scale up the team very quickly by taking advantage of Conway’s Law 
+
+* modular development
+
+In addition, microservices can scale very easily and minimize spending on the cloud. The reason is 
+that when load increases, more specific instances can be started at a minimal cost.
+
+As we can see from the industry examples, these criteria apply very well for large projects that 
+need to scale quickly. So if you need to start such a project, by all means, use microservices. 
+But if you don’t need to scale that quickly, there are easier ways. The reason is that 
+microservices, like any architectural approach, are a trade-off.
+
+### A downside and a huge mistake
+
+Microservices have one important downside and can lead to one huge architecture mistake.
+
+The downside is that microservices architecture leads to huge complexity increases for deployment 
+and operations. Deploying one monolith is very different from deploying 100 or 1000 separate services. 
+Monitoring and de-bugging then become a very difficult job. There are solutions, but each adds to 
+costs and complexity. This investment might not pay off for smaller products.
+
+The architecture mistake is to create microservices that directly depend on other microservices. 
+This is just a re-creation of the dependency hell problem in deployment. If dependencies are 
+hierarchical, changing a service propagates and require a lot of redeployments. Instead, aim for 
+services that completely encapsulate one atomic change. This is the hardest thing to do about 
+microservices; no wonder it took Fred George’s team weeks to figure it out (and probably a lot 
+more time after starting the development).
+
+### Modular monolith
+
+There is an alternative to microservices, one that we used successfully for light-hybrid-4j: the 
+modular monolith.
+
 Can we realize the benefit of microservices and still enjoy the simplicity of monolith? The answer
 is modular monolith. It is an architecture sitting in between monolith and microservices. Instead of
 big black box of monolith, we apply [microservices principles][] to vertically slice the application

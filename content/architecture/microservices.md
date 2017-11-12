@@ -41,7 +41,28 @@ and deploying an entirely new version. If you need to scale specific functions o
 you may have to scale the entire application instead of just the desired components. This is where 
 creating microservices can come to the rescue.  
 
+## Using Conway’s Law for fast development
 
+organizations which design systems are constrained to produce designs which are copies of the 
+communication structures of these organizations — Melvin E. Conway
+
+Conway’s Law has been first stated in 1967, and it has been proven empirically again and again. 
+To understand it, let’s discuss a few examples of its application:
+
+* Teams who can communicate easily (typically small and collocated) tend to create monoliths
+
+* Teams who communicate through intermediaries (managers, architects etc.) tend to work on 
+separate modules
+
+* Teams who communicate through hierarchies tend to work on complex structures. For example 
+one core / framework team, front-end teams, back-end teams etc.
+
+Fred George started one of the first microservices projects with a big challenge: the work had 
+to be organized in a way that allowed adding developers fast. He decided to use Conway’s Law to 
+their advantage, and create an architectural structure that allowed adding pairs of programmers 
+to the development. The only option was to create many small services that communicated asynchronously 
+and that were completely independent of each other, each developed by a pair of programmers. 
+ 
 
 ## Principles of microservices
 
