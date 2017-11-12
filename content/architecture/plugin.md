@@ -32,7 +32,7 @@ following is the loading sequence.
 
 ![startup_sequence](/images/startup_sequence.png)
 
-# Plugin implementation
+### Plugin implementation
 
 There are so many way to implement plugins and wire in different implementations of the same 
 interface. Spring is one of the popular ways. However, it will make our framework depending on 
@@ -45,7 +45,7 @@ server startup and shutdown.
 
 
 
-# Shutdown Hook Providers
+### Shutdown Hook Providers
 
 Shutdown hook providers are plugins that would be called during server shutdown in order to release
 resources. For example, close database connections.
@@ -75,7 +75,7 @@ public interface StartupHookProvider {
 
 The onStartup() in your implementation will be called before server startup.
  
-# Handler Provider
+### Handler Provider
 
 There is only one handler provider that is needed to wire in API implementations. In most of the
 cases, it would be an instance of io.undertow.server.RoutingHandler just like the generated [petstore
@@ -105,7 +105,7 @@ The getHandler() will return an HttpHandler or a chain of HttpHandlers wrapped t
 will be called in the request/response chain right after all middleware handlers are called.
 
 
-# Middleware Handlers
+### Middleware Handlers
 
 There are some [builtin middleware components](https://networknt.github.io/light-4j/middleware/) 
 in the framework to address common cross cutting concerns. There are implemented in a way we think
@@ -156,7 +156,7 @@ There are dependencies between middleware handlers so the sequence to plug them 
 For default plugins generated from [light-codegen](https://github.com/networknt/light-codegen),
 please refer to [Server](https://networknt.github.io/light-4j/other/server/)
 
-# Diagram
+### Diagram
 
 ![handler_chain](/images/handler_chain.png)
 
