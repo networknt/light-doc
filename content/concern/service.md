@@ -14,22 +14,47 @@ toc: false
 draft: false
 ---
 
+### Why do we re-invent the wheel 
 
-A light-weight and fast dependency injection framework without any third
-party dependencies. It only support constructor inject and the injection is done
-during server startup. All the object is saved into a map and the key is the
-interface class. That can guarantee that only one instance of implementation
-is available during runtime. 
+While building a light-weight microservices platform, we need an IoC service
+to bind implementations to interfaces. Given light-4j has server startup and
+shutdown hooks, normally we only need to inject during the server startup with
+constructor injection only. 
+
+We have evaluate several IoC containers and found them to be too heavy for my
+use cases. Also most of them are still using XML as configuration or annotations
+which eliminate the benefit of configurable IoC.
+
+### Features of Singleton Service Factory
+
+Given above reasons, We have built our own IoC service module which is a light-weight 
+and fast dependency injection framework without any third party dependencies. It 
+only support constructor inject and the injection is done during server startup. All 
+the object is saved into a map and the key is the interface class name. This can 
+guarantee that only one instance of implementation is available during runtime. 
 
 Light 4J framework encourage developers to build microservices with Functional
 Programming Style. One of the key principle is immutability so that the code can
-be optimized to take advantage of multi-core CPUs. 
+be optimized to take advantage of multi-core CPUs. All singleton classes should
+be designed as immutable and the initialized object will be cached in the service
+map ready to be looked up. 
 
 Unlike other IoC container, our service module only deals with singleton during
 server startup with constructor injection. It give developer an opportunity to
-choose from several implementations of an interface in service.yml
+choose from several implementations of an interface in service.yml config file.
+
+For example, if you have an interface with two different implementations, you can
+change externalized service.yml file on production to switch between two 
+implementations.
+
+### YAML configuration
 
 The following is an example of service.yml in the test folder for this module.
+
+Please note that the sequence of of binding in the config file are very important. 
+If one implementation uses another injected object, that object must be defined
+in the configuration first. 
+
 
 ```
 # singleton service factory configuration
@@ -73,12 +98,48 @@ singletons:
     - java.lang.String: Steve
     - int: 2
     - int: 3
+- com.networknt.service.Contact:
+  - com.networknt.service.ContactImpl
+- com.networknt.service.License:
+  - com.networknt.service.LicenseImpl
+- com.networknt.service.Info:
+  - com.networknt.service.InfoImpl
+- com.networknt.service.Validator<com.networknt.service.Contact>:
+  - com.networknt.service.ContactValidator
+- com.networknt.service.Validator<com.networknt.service.License>:
+  - com.networknt.service.LicenseValidator
+- com.networknt.service.Validator<com.networknt.service.Info>:
+  - com.networknt.service.InfoValidator
 
 ```
 
-Here is the code that gets the singleton object from service map. 
+### How to use the Singleton Service Factory
 
+Here is the code that gets the singleton object from service map by passing
+in a interface class. 
+
+```java
+A a = SingletonServiceFactory.getBean(A.class);
 ```
-A a = (A)SingletonServiceFactory.getBean(A.class);
+
+Here is another API that you can get a list of implementations for a single
+interface. 
+
+```java
+J[] j = SingletonServiceFactory.getBeans(J.class);
 ```
+
+Here is another API that you can get an object that implement an interface with
+generic types. 
+
+```java
+Validator<Info> infoValidator = SingletonServiceFactory.getBean(Validator.class, Info.class);
+```
+
+### Tutorial
+
+The service module is one of the most important modules in light-platform and a
+lot of other components are relying on it. To help developers to learn it quickly,
+we have provided a [service tutorial][] in the tutorial section. 
+  
 
