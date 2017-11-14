@@ -36,4 +36,4 @@ This tutorial shows how to use service IoC injection in light*4j frameworks.
 
 
 [Introduction]: /tutorial/common/service/introduction/
-[Single-Single]: /tutorial/common/service/singlesingle/
+[Single Interface Single Implementation]: /tutorial/common/service/singlesingle/
