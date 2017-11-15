@@ -60,10 +60,11 @@ types of the components as part of the platform.
 * light-saga-4j
 * Web server
 * Web socket
+* Nodejs framework
 
 ### Infrastructure services
 
-* light-portal
+* light-portal(Marketplace)
 * light-oauth2
 * light-config-server
 * light-proxy
