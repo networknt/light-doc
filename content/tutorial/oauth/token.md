@@ -11,7 +11,9 @@ draft: false
 ---
 
 This service has only one endpoint to get access token. It supports authorization
-code grant type and client credentials grant type. 
+code grant type and client credentials grant type. Also, it supports some customized
+authorization types required by our customer. These customized flows will only work
+on certain clients which have to be setup as trusted clients. 
 
 Authorization Grant with authorization code redirected in the previous step. Please
 replace code with the newly retrieved one as it is only valid for 10 minutes.

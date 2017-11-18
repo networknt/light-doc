@@ -80,6 +80,6 @@ Given the drawbacks of the fail-slow and the suitable use cases are replaced by 
 is no need to design your server to be fail-slow. For microservices architecture, one of the
 principles is fail-fast. 
 
-
+33
 
 

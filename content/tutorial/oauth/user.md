@@ -13,7 +13,11 @@ draft: false
 
 The OAuth2 services can be integrated with existing Active Directory, LDAP or customer
 database for authentication. If there is no existing authentication service, you can
-register users into database.
+register users into database as default implementation. For the light-portal we are using
+our own database for all users. 
+
+In this tutorial, we are using curl commmand to access the API and endpoints. In reality
+these endpoints will only be consumed by light-portal UI.
 
 To add a new user.
 

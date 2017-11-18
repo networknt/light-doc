@@ -12,8 +12,12 @@ draft: false
 
 
 OAuth2 is used to protect services and each service must register itself with scope in
-order to have fine-grained access control. This microservice provides endpoint to add,
-update, remove and query services. 
+order to have fine-grained access control. This microservice provides endpoint to add a
+new service, update an existing service, remove an existing service and query service(s). 
+
+In this tutorial, we are using curl command to demo how these services are working. In
+reality, these endpoints are accessed from light-portal UI.
+
 
 To add a new service.
 

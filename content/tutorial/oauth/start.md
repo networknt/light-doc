@@ -14,8 +14,6 @@ Note: the following steps use Oracle database as an example. MySQL and Postgres 
 by choosing docker-compose-mysql.yml or docker-compose-postgres.yml when starting docker-compose.
 
 
-# Start Services
-
 In production mode, all services will have docker images downloaded from hub.docker.com or private
 docker hub within your organization. And Kubernetes or other docker orchestration tools will be
 used to manage containers. 

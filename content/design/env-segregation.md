@@ -1,4 +1,4 @@
-# Environment Segregation
+### Environment Segregation
 
 Environment segregation in APIs has primarily two goals:
 
@@ -22,7 +22,7 @@ The above use cases are pretty complicated even in traditional monolithic applic
 it is even more complicated as there are too many services involved and each service can have many instances.
 
 
-## To prevent cross fire
+#### To prevent cross fire
 
 In the [light-4j](https://github.com/networknt/light-4j) framework, we are using [light-oauth2](https://github.com/networknt/light-oauth2)
 to distinguish between test and production environments, or even different test phases within a larger test environment.
@@ -41,7 +41,7 @@ deployments without human intervention, in order to eliminate human errors durin
 environment. These configurations are persisted in separate GitHub repos and managed by different teams or people.
 
 
-## To support multiple different instances per environment for testing
+#### To support multiple different instances per environment for testing
 
 One of our customers has an API developed by one line of business and shared by other lines of business. Each line of
 business has its own test database, log files, configurations, with a different set of reference tables to be populated
@@ -73,7 +73,7 @@ balanced. The server.yml provisioned in production will be certified by a certif
 environment tag, it won't pass. This further guarantees the production environment integrity.
 
 
-## Summary
+#### Summary
 
 The above mentioned solution replaces the solution built today in the existing service.
 

@@ -11,8 +11,14 @@ draft: false
 ---
 
 Every client that accesses service(s) must register itself in order to get
-access token during runtime. An entity might be a client and service at the
-same time and in this case, it must register twice as client and service.
+access token during runtime from OAuth 2.0 provider. If it happens that the client is
+an service and some other client is calling it. This particular API need to register
+itself twice. One as a client and one as a service. 
+
+The client service provide endpoint to create a new client, update an existing client and
+delete a client. Here we have the services accessed by curl command for demo purpose. In
+reality, these APIs will be accessed from light-portal UI. 
+
 
 To add a new client.
 

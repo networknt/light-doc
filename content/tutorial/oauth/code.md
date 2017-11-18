@@ -12,7 +12,12 @@ draft: false
 
 
 This is part of authorization flow that takes user's credentials and redirect back authorization
-code to the webserver. 
+code to the webserver through user agent (browser). The web server will use the authorization code
+along with client_id and client_secret. 
+
+In this tutorial we are using curl command to access the service for demo purpose. In reality,
+this should be done in the light-portal login page. 
+
 
 There are two endpoints: /oauth2/code@get and /oauth2/code@post
 
