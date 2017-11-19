@@ -3,7 +3,7 @@ date: 2017-06-09T16:05:06-04:00
 title: Handling Partial Failure
 ---
 
-# Introduction
+### Introduction
 
 In a distributed system there is the ever-present risk of partial failure. Since clients and services 
 are separate processes or even reside on different physical servers, a service might not be able to respond 
@@ -12,7 +12,7 @@ the service might be overloaded and responding extremely slowly to requests. Als
 distributed across networks or even data centers, it increases the risk of partial failures especially you 
 have too many small services interact each other to form a big application. 
 
-# Cascade Failure
+### Cascade Failure
 
 Consider you have a aggregate service that call five other services to serve a SPA running on the 
 browser. If one of the five services is unresponsive, the aggregate service might block indefinitely
@@ -26,7 +26,7 @@ The situation is particularly serious in services built on top of Java EE stack 
 If all services are built on top of asynchronous http server with non-blocking IO. The risk is significantly
 reduced. However, the proper setup is still important to safe-guard your application.  
 
-# Solution
+### Solution
 
 To prevent the problem described above, it is essential that you design your services to handle partial 
 failures.
@@ -65,6 +65,7 @@ When partial failures happen to update services in a chain, the data consistency
 unknown and it will require client to retry the request in order to ensure that consistency between 
 multiple services are maintained. If we are doing it, all services in the chain must be idempotent so
 that the same request only updates the database exact once. The request can only be started from the
-original client not in the middle of the service chain. For details, please refer to [idempotency](https://networknt.github.io/light-4j/design/idempotency/)  
+original client not in the middle of the service chain. For details, please refer to [idempotency][]  
 
 
+[idempotency]: /design/idempotency/

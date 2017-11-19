@@ -14,7 +14,7 @@ toc: false
 draft: false
 ---
 
-API security is very important and today APIs doesn't have security built-in at all but
+API security is very important and today most APIs don't have security built-in at all but
 relying on third party API gateway to handle the security at network level. This assumes
 that within the organization, it is safe or some sort of firewall setup to ensure that
 only Gateway host can access the service host. 
@@ -25,20 +25,18 @@ can be down on one VM but started in another VM immediately with container orche
 The traditional gateway also add another layer of network calls and if there are so many 
 service to service calls, the added up latency is unacceptable. 
 
-Here is an [article](https://networknt.github.io/light-4j/architecture/gateway/) 
-in the architecture section that talks about the drawbacks of API gateway and why it is not 
-suitable for microservices architecture. 
+Here is an [gateway article][] in the architecture section that talks about the drawbacks of the API 
+gateway and why it is not suitable for microservices architecture. 
 
 In order to make sure that security works for microservies, we have extended the OAuth 2.0
-specification and come up with a branch new approach for authorization with JWT. Here is an
-[article](https://networknt.github.io/light-4j/architecture/security/) talks about the API
-security in light-*-4j frameworks. 
+specification and come up with a brand new approach for authorization with JWT. Here is an
+[security article][] talks about the API security in light*4j frameworks. 
 
-Basically, we have [light-oauth2](https://github.com/networknt/light-oauth2) OAuth 2.0 provider 
-and built-in JWT security verification in the frameworks. The security policy is managed by the 
-OAuth2 provider with service registration and client registration; however, the policy enforcement 
-is done distributedly at each service level. With PIK signed JWT token issued from the light-oauth, 
-all services can verify the token with the JWT signature public key certificate. 
+Basically, we have [light-oauth2][] OAuth 2.0 provider and built-in JWT security verification 
+in the frameworks. The security policy is managed by the OAuth2 provider with service registration 
+and client registration; however, the policy enforcement is done distributed at each service level. 
+With PIK signed JWT token issued from the light-oauth2, all services can verify the token with the 
+JWT signature public key certificate. 
 
 The following is a list of key components in light-4j security.
 
@@ -78,7 +76,7 @@ server and it can be found at https://github.com/networknt/light-oauth2 README.m
 Here is the default security.yml
 
 ```yaml
-# Security configuration in light-rest-4j framework.
+# Security configuration in light framework.
 ---
 # Enable JWT verification flag.
 enableVerifyJwt: true
@@ -96,11 +94,20 @@ jwt:
     '101': oauth/secondary.crt
   clockSkewInSeconds: 60
 
-# Enable or disable JWT token logging
+# Enable or disable JWT token logging for audit. This is to log the entire token
+# or choose the next option that only logs client_id, user_id and scope.
 logJwtToken: true
 
-# Enable or disable client_id, user_id and scope logging.
+# Enable or disable client_id, user_id and scope logging if you don't want to log
+# the entire token. Choose this option or the option above.
 logClientUserScope: false
+
+# If OAuth2 provider support http2 protocol. If using light-oauth2, set this to true.
+oauthHttp2Support: true
+
+# Enable JWT token cache to speed up verification. This will only verify expired time
+# and skip the signature verification as it takes more CPU power and long time.
+enableJwtCache: true
 ``` 
 
 ### Enable security
@@ -136,4 +143,19 @@ logged. The logJwtToken will just log the raw token itself and logClientUserScop
 important piece of info only. Normally, you choose one of them or disable both. It doesn't make sense to
 log both as information is duplicated. 
 
+### oauthHttp2Support
 
+To indicate if the OAuth 2.0 provide support HTTP 2.0 protocol. The default is true as we are assuming
+light-oauth2 is used. 
+
+### enableJwtCache
+
+Cache the JWT token within the period of expiry so that we can only check if the token is not expired
+without verify the signature as it is very time consuming and CPU intensive. Default is true and you
+should only turn it off if you have a very good reason. For example, token chaining is used and every
+request has a unique token so cache doesn't make sense in the case. 
+
+
+[gateway article]: /architecture/gateway/
+[security article]: /architecture/security/
+[light-oauth2]: /service/oauth/

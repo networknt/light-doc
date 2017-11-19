@@ -15,4 +15,6 @@ draft: false
 ---
 
 For organizations that is planning to migrate existing monolithic application to
-microservices, the front-end infrastructure investment is very significant. 
+microservices, the front-end infrastructure investment is very significant. There
+are some key services must be implemented before deploying huge number of services.
+

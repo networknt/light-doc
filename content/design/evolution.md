@@ -15,7 +15,7 @@ is not easy to make service changes once it is on production and the root cause 
 due to designers/developers still follow the pattern of Java EE RMI approach to
 build microservices and their consumers with POJO.
 
-# Example of Evolving a Service
+### Example of Evolving a Service
 
 Let's say we have a restful service called party which can output all the profile
 information about customers. Here is the output in JSON.
@@ -58,7 +58,7 @@ is now constrained to the provider, but at the expense of making the service mor
 and more costly to maintain.
 
 
-# Extension Points
+### Extension Points
 
 Making schemas both backwards- and forwards-compatible is a well-understood design task, 
 best expressed by the Must Ignore pattern of extensibility. The Must Ignore pattern 
@@ -110,7 +110,7 @@ without breaking service providers and consumers. Schema extensions do not help 
 manage the evolution of a system when we need to make what is a breaking change to a 
 contract.
 
-# Breaking Change
+### Breaking Change
 
 The party service depends on a security subsystem to populate operatorId for
 consumers to access other system which uses this field to verify if access is allowed.
@@ -138,13 +138,13 @@ data that contributes to the business functions they implement, and should only 
 explicitly bounded or targeted validation of the data they receive - as opposed to the 
 implicitly unbounded, "all-or-nothing" validation inherent in schema processing.
 
-# Jsoniter Any
+### Jsoniter Any
 
 One way we can target or bound consumer-side validation and processing is to extract 
 pattern expressions along the received message's document tree structure, perhaps using 
-a zero copy JSON parser like [Jsoniter](https://github.com/json-iterator/java) instead of 
-Jackson POJO binding. Using Jsoniter, each consumer of the party service can 
-programmatically assert/process what it expects to find in the response.
+a zero copy JSON parser like [Jsoniter][] instead of Jackson POJO binding. Using Jsoniter, 
+each consumer of the party service can programmatically assert/process what it expects 
+to find in the response.
 
 
 Notice that this approach makes no assertions about attributes in the underlying document 
@@ -166,20 +166,23 @@ consumers, the service can revise the service results schema - again without dis
 the rate of evolution of each of the consumers.
 
 
-# Conclusion
+### Conclusion
 
 Unlike monolithic applications, communications between client and service should be loosely
 coupled with individual attributes in JSON instead of POJO which is popular in RMI. By
 doing so, we can ensure that the service can be evolved easily without multiple versions
-running in parallel. Given this, when we write [light-codegen](https://github.com/networknt/light-codegen), 
-we deliberately removed POJO generator to encourage developer to not bind service response
-to a POJO which is time consuming and tightly coupled your consumer to the service. 
+running in parallel. Given this, when we write [light-codegen][], we deliberately removed 
+POJO generator to encourage developer to not bind service response to a POJO which is time 
+consuming and tightly coupled your consumer to the service. 
 
 Also, to give confidence for service provider to evolve, it is wise to ask all consumers
 to provide test cases which described consumers expectations in their processing as part
 of the regression test for the service. Once service changes happen, it only need to run
 the entire regression test cases to ensure nothing is broken on the consumer side. This
-consumer expectation is called [consume contract](https://networknt.github.io/light-4j/design/consumer-contract/) 
-which is another topic that is out of scope of this article. 
+consumer expectation is called [consume contract][] which is another topic that is out of 
+scope of this article. 
 
 
+[consume contract]: /design/consumer-contract/
+[light-codegen]: https://github.com/networknt/light-codegen
+[Jsoniter]: https://github.com/json-iterator/java

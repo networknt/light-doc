@@ -35,9 +35,9 @@ Here is a list of architecture decisions for the framework:
 
 * All components are designed as [plugins][] and the framework is easy to be extended and customized.
 
-* Can be [integrated][] with existing application to protect investment over the year for your organization.
+* Can be [integrated][] with existing application to protect investment over the years for your organization.
 
-* Support direct calls from microservice to microservice without any [gateway][], proxy as they add too much overhead. 
+* Support client side discovery without any [gateway][], proxy between service to service calls as they add too much overhead. 
 
 * Service logs will be aggregated with ElasticSearch, LogStash and Kibana with [monitoring and alerting][].
 
@@ -47,10 +47,11 @@ Here is a list of architecture decisions for the framework:
  
 * Has its own dependency injection framework so that developers can avoid heavy Spring or Guice as they are [bloated][]. 
 
-* [Elements][] of API platform. 
+* [Elements][] of API platform form an eco-system. 
 
 * API [category][] and how to choose a framework to build your APIs.
 
+* What is [service mesh][] and why we need it? 
 
 [design]: /design/
 [microservices]: /architecture/microservices/
@@ -66,3 +67,4 @@ Here is a list of architecture decisions for the framework:
 [bloated]: /architecture/spring-is-bloated/
 [Elements]: /architecture/platform/
 [category]: /architecture/category/
+[service mesh]: /architecture/service-mesh/

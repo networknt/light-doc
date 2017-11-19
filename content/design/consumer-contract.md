@@ -10,20 +10,20 @@ introduced in SOA architecture to address service evolution in XML schema. The s
 concept is still suitable for the microserivces architecture which normally based on
 JSON and some sort of RPC schema. 
 
-# Provider Contract
+### Provider Contract
 
 A provider contract expresses a service provider's business function capabilities in 
 terms of the set of exportable elements necessary to support that functionality. From 
 a service evolution point of view, a contract is a container for a set of exportable 
 business function elements. A non-normative list of these elements includes:
 
-## Schemas 
+#### Schemas 
 
 Schemas are the parts of a provider contract most likely to change as the service 
 evolves. In restful OpenAPI specification, they map to the definitions for the request 
 and response.
 
-## Interfaces
+#### Interfaces
 
 In their simplest form, service provider interfaces comprise the set of exportable 
 operation signatures a consumer can exploit to drive the behaviour of a provider. 
@@ -37,7 +37,7 @@ we must account for interface consumption when evolving our service. In OpenAPI 
 interfaces map to operations/endpoints.
 
 
-## Conversations 
+#### Conversations 
 
 Service providers and consumers exchange messages in conversations that compose one or 
 more message exchange patterns such as request-response and fire-and-forget. Over the 
@@ -46,7 +46,7 @@ particular to the interaction in the messages that it sends and receives. Most r
 APIs are stateless; however, there are relationships between different endpoints which
 form conversational conventions. 
 
-## Policy 
+#### Policy 
 
 Besides exporting schemas, interfaces and conversations, service providers may declare 
 and enforce specific usage requirements that govern how the other elements of the 
@@ -54,7 +54,7 @@ contract can be realised. Most commonly, these requirements relate to the securi
 which a consumer can exploit a provider's functionality. This maps to OpenAPI security
 definitions.
 
-## Quality of service 
+#### Quality of service 
 
 The business value potential that service providers and consumers exploit is often 
 evaluated in the context of specific quality of service characteristics such as 
@@ -71,7 +71,7 @@ have their provider contracts defined only as sub-set of the elements. For examp
 internal API contract might not have explicit QoS definition.
 
 
-# Consumer Contracts
+### Consumer Contracts
 
 If we decide to account for consumer expectations regarding the schemas we expose 
 when evolving our service - and consider it worth our provider knowing about them - 
@@ -99,7 +99,7 @@ of provider-consumer relationships, which we will now call consumer contracts. W
 a provider accepts and adopts the reasonable expectations expressed by a consumer, 
 it enters into a consumer contract.
 
-# Consumer-Driven Contracts
+### Consumer-Driven Contracts
 
 Consumer contracts allow us to reflect on the business value being exploited at any 
 point in a provider's lifetime. By expressing and asserting expectations of a provider 
@@ -117,7 +117,7 @@ subject to an obligation that originates from outside their boundaries. This in 
 way impacts on the fundamentally autonomous nature of their implementations; it simply 
 makes explicit the fact that services depend for success on their being consumed.
 
-# Implementation
+### Implementation
 
 This is paradigm shift in term of service contract design and the team must be careful
 not drift to consume request too much and miss the opportunity to explore the system
@@ -141,7 +141,7 @@ implementation into the connected systems' infrastructure. Whatever the mechanis
 it is likely communications will be conducted out-of-band and prior to any 
 conversations that exercise the business functionality of the system.
 
-# Benefits
+### Benefits
 
 Consumer-driven contracts offer two significant benefits when it comes to evolving 
 services. First, they focus the specification and delivery of service functionality 
@@ -166,7 +166,7 @@ service providers from consumer contracts, we can have a repository of knowledge
 a feedback mechanism that we can draw on during the operations part of the system 
 lifecycle.
 
-# Conclusion
+### Conclusion
 
 In this article we've identified the motivation for introducing consumer-driven 
 contracts into the service landscape, and thereafter described how the Consumer-Driven 

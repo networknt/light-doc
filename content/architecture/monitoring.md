@@ -1,5 +1,5 @@
 ---
-title: "Monitoring"
+title: "Microservices Monitoring"
 date: 2017-11-06T11:14:26-05:00
 description: "Microservices Monitoring"
 categories: []
@@ -20,7 +20,7 @@ application process/logs and perhaps send an alert if something seemed wrong,
 but mostly it was hands off. When we move to microservices architecture, things
 are changing.  
 
-## User Experience and Microservices Monitoring
+### User Experience and Microservices Monitoring
 
 With Microservices which are released more often, you can try new features and
 see how they impact user usage patterns. With this feedback, you can improve 
@@ -30,7 +30,7 @@ watching for failure. With big data, data science, and microservices,
 monitoring microservices runtime stats is required to know your application 
 users. You want to know what your users like and dislike and react. 
 
-## Debugging and Microservices Monitoring 
+### Debugging and Microservices Monitoring 
 
 Runtime statistics and metrics are critical for distributed systems. Since 
 microservices architecture use a lot of remote calls. Monitoring microservices 
@@ -41,7 +41,7 @@ Working with distributed systems without reactive monitoring is crazy. Reactive
 monitoring allows you to react to failure conditions and ramp of services for 
 higher loads.
 
-## Circuit Breaker and Microservices Monitoring
+### Circuit Breaker and Microservices Monitoring
  
 You can employ the Circuit Breaker pattern to prevent a catastrophic cascade, 
 and reactive microservices monitoring can be the trigger. Downstream services 
@@ -50,13 +50,13 @@ as well react by reroute in the case of outages. The reaction can be serving up
 a deprecated version of the data or service, but the key is to avoid cascading 
 failure. You don't want your services falling over like dominoes.
 
-## Cloud Orchestration and Microservices Monitoring 
+### Cloud Orchestration and Microservices Monitoring 
 
 Reactive microservices monitoring would enable you to detect heavy load, and 
 spin up new instances with the cloud orchestration platform of your choice 
 (Kubernetes, EC2, CloudStack, OpenStack, Rackspace etc.). 
 
-## Public Microservices and Microservices Monitoring
+### Public Microservices and Microservices Monitoring
 
 Microservices monitoring of runtime statistics can be used to rate limiting 
 a partners Application Id/client Id. You don't want partners to consume all of your 
@@ -78,7 +78,7 @@ hit your endpoints 10x more than you did the capacity planning for. Avoid long
 nights and tears. Monitor microservices that you publish, and limit access to them.
 
 
-## Microservices Framework and Microservices Monitoring
+### Microservices Framework and Microservices Monitoring
 
 Light-4J a mircoservices framework that comes with a runtime metrics which can 
 be used for Microservices Monitoring. 
@@ -90,7 +90,7 @@ be used for Microservices Monitoring.
 * TraceabilityId and CorrelationId in logs that can be traced with tools like Logstash, GrayLog and Splunk.
 * Specifically designed error code can be monitored and send alert if some of them shown up in logs.
 
-## Reactive Microservices Monitoring
+### Reactive Microservices Monitoring
 
 Reactive Microservices Monitoring is an essential ingredient of microservices architecture. 
 You need it for debugging, knowing your users, working with partners, building reactive 
@@ -107,7 +107,7 @@ like Kubernetes can also spin up new nodes/pods. With big data, data science,
 and microservices, monitoring microservices runtime stats is required to know your application 
 users, know your partners, know what your system will do under load, etc. 
 
-## Microservice Logging
+### Microservice Logging
 
 Every instance of the service will have a unique identifier which most commonly will be
 the docker container name or the hostname if not deployed in docker container. The code
@@ -122,7 +122,7 @@ be UTC time so that logs can be easily ordered in the ELK.
 
 
 
-## Microservice Alerting
+### Microservice Alerting
 
 Logstash has features to send out alert when certain error code is spotted in the log files.
 

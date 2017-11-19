@@ -20,6 +20,10 @@ error code ERRXXXXX (prefixed with ERR with another 5 digits) and error message.
 Additionally, an description of the error will be available for more info about
 the error.
 
+Note that the error code is prefixed with ERR is trying to ensure that there is
+no false alarm when monitoring tool process a stream of logs in searching for a
+list of important error code. 
+
 # Data Elements
 
 Here are the four fields in the Status object.
@@ -68,7 +72,7 @@ To construct the object with arguments to have a description with context inform
 
 ```
 
-# Convert to JSON response.
+# Convert to JSON response
 
 There are several way to serialize the object to JSON in response. And string
 concat is almost 10 times faster than Jackson ObjectMapper. For one million
@@ -79,6 +83,13 @@ Jackson Perf 503
 ToString Perf 65
 
 ```
+
+# Customize Status JSON format
+
+The default format is a flattened JSON that contains these properties in the status
+object. If you want to change the format or adding more fields into it, please refer
+to [customize status format][]
+
 # Error code range allocation
 The error code prefixed with ERR with another 5 digits so that it can be easily
 scanned in log files. Also, certain error code can be used to trigger an alert
@@ -103,5 +114,28 @@ teams, here is the rule
     Status status = new Status(STATUS_METHOD_NOT_ALLOWED);
     exchange.setStatusCode(status.getStatusCode());
     exchange.getResponseSender().send(status.toString());
-
+    # return; # return if there are other code below.
 ```
+
+The above code will terminate the exchange if this is the last line of code in the
+handler. Otherwise, you need to add a return statement. 
+
+# Merging status.yml
+
+The framework has a status.yml defines all the errors within the framework. Once a
+company is using this framework, it might have a list of standard error within the
+organization. Also, each line of business might have its own error code definitions.
+In addition, each individual API/service might have its API specific errors. As you
+can see, the errors are in a hierarchical structure and the final one for a particular
+API needs to be merged from all levels. 
+
+This can be done manually and put the final status.yml into your service src/main/resources/config
+folder or externalized config folder. 
+
+Another option is to use [light-config-server][] which can automatically merge status
+error codes from multiple levels.
+
+ 
+
+[customize status format]: /faq/customize-status/
+[light-config-server]: https://github.com/networknt/light-config-server

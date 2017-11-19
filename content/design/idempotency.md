@@ -3,7 +3,7 @@ date: 2017-06-19T21:49:05-04:00
 title: Idempotency
 ---
 
-# Networks are unreliable. 
+### Networks are unreliable. 
 
 The networks connecting our clients and servers are, on average, more reliable than 
 consumer-level last miles like cellular or home ISPs, but given enough information 
@@ -20,7 +20,7 @@ APIs and clients that will be robust in the event of failure, and will predictab
 bring a complex integration to a consistent state despite failures. Remember that a
 service might be a client when calling another service.
 
-# Planning for failure
+### Planning for failure
   
 Consider a call between any two nodes. There are a variety of failures that can occur:
 
@@ -49,7 +49,7 @@ has to be initialized from the original client. This requires all the services i
 must be idempotent.
 
 
-# Use of idempotency
+### Use of idempotency
 
 The easiest way to address inconsistencies in distributed state caused by failures is to 
 implement server endpoints so that they’re idempotent, which means that they can be called 
@@ -78,7 +78,7 @@ We have used request/response communication style as an example; however, messag
 microservices should follow the same approach in case duplicate messages are delivery in the
 pipeline.
 
-# Guarantee exactly once
+### Guarantee exactly once
 
 While the inherently idempotent HTTP semantics around PUT and DELETE are a good fit for many 
 API calls, what if we have an operation that needs to be invoked exactly once and no more? 
@@ -113,7 +113,7 @@ If the above one request fails due to a network connection error, you can safely
 with the same idempotency key, and the services must be designed to work with the idempotency key
 /traceabilityId to decide what the business logic with the key.
 
-# Being a good distributed citizen
+### Being a good distributed citizen
 
 Safely handling failure is hugely important, but beyond that, it’s also recommended that it be 
 handled in a considerate way. When a client sees that a network operation has failed, there’s 
@@ -145,7 +145,7 @@ not all client need to retry on failure, we need to make sure it is configurable
 that retry can only be initiated from the original client.
 
 
-# Design robust APIs
+### Design robust APIs
 
 Considering the possibility of failure in a distributed system and how to handle it is of 
 paramount importance in building APIs that are both robust and predictable. Retry logic on 

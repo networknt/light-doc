@@ -3,7 +3,7 @@ date: 2017-09-21T21:20:27-04:00
 title: Why check token expiration in client
 ---
 
-In web service architecture, normally people handle JWT token expiration reactively. Here
+In web service architecture, normally people handle JWT token expiration re-actively. Here
 is the flow. 
 
 * Client sent request with a JWT token in header.
