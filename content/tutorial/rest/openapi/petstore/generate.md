@@ -26,13 +26,13 @@ and want to regenerate the project, it is better to generate into another folder
 and then do a full text comparison to merge the old project and new project. 
 
 ```
-cd ~/networknt/light-codegen
-java -jar codegen-cli/target/codegen-cli.jar -f light-rest-4j -o ~/networknt/light-example-4j/rest/petstore -m ~/networknt/model-config/rest/petstore/2.0.0/swagger.json -c ~/networknt/model-config/rest/petstore/2.0.0/config.json
+cd ~/networknt
+java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o light-example-4j/rest/openapi/petstore -m model-config/rest/openapi/petstore/1.0.0/openapi.json -c model-config/rest/openapi/petstore/1.0.0/config.json
 ```
 
 The cli tool needs to specify:
  
-* -f light-rest-4j - choose rest framework for the generator
+* -f openapi       - choose rest framework that support OpenAPI 3.0 specification for the generator
 * -o output        - choose the output folder for the generated project
 * -m model         - choose the model definition file or IDL spec as it is design driven generator
 * -c config        - choose config file to control how the project is generated

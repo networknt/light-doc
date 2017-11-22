@@ -11,14 +11,14 @@ toc: false
 draft: false
 ---
 
-In the previous step, we've generated a project into light-example-4j/rest/petstore folder
+In the previous step, we've generated a project into light-example-4j/rest/openapi/petstore folder
 and it is ready to be built and started. 
 
 
 To build and start the generated server, use the following command line.
 
 ```
-cd ~/networknt/light-example-4j/rest/petstore
+cd ~/networknt/light-example-4j/rest/openapi/petstore
 mvn install exec:exec
 ```
 

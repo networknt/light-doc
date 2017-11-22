@@ -20,7 +20,7 @@ projects we need for the tutorial. The following will assume to your workspace i
 networknt under your home directory. 
 
 ```
-cd ~C
+cd ~
 mkdir networknt
 cd networknt
 git clone git@github.com:networknt/light-codegen.git
@@ -34,7 +34,7 @@ We are going to re-generate petstore project in light-example-4j. So let's renam
 the existing directory in light-example-4j to petstore.bak
 
 ```
-cd ~/networknt/light-example-4j/rest
+cd ~/networknt/light-example-4j/rest/swagger
 mv petstore petstore.bak
 cd ~/networknt
 ```
@@ -48,4 +48,4 @@ mvn install -DskipTests
 ```
 
 Now, we have the environment and light-codegen ready. The next step, we will generate the
-project with the OpenAPI specification. 
+project with the Swagger 2.0 specification. 

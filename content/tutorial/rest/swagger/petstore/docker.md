@@ -15,18 +15,18 @@ When petstore is generated, a default Dockerfile is there ready for any further
 customization. 
  
 Let's just use it to create a docker image and start a docker container. Make sure you
-are in light-example-4j/rest/petstore folder.
+are in light-example-4j/rest/swagger/petstore folder.
 
 
 ```
-cd ~/networknt/light-example-4j/rest/petstore
-docker build -t networknt/example-petstore .
+cd ~/networknt/light-example-4j/rest/swagger/petstore
+docker build -t networknt/swagger-petstore .
 ```
 
 Let's start the docker container.
 
 ```
-docker run -d -p 8443:8443 networknt/example-petstore
+docker run -d -p 8443:8443 networknt/swagger-petstore
 ```
 
 In another terminal, run the curl to access the server.
@@ -66,21 +66,21 @@ docker stop ad86cc533270
 ```
 
 The next step, let's push the docker image to docker hub. This assumes that you have
-an account on docker hub. For me, I am going to push it to networknt/example-petstore.
+an account on docker hub. For me, I am going to push it to networknt/swagger-petstore.
 
 Please skip this step if you don't have a docker hub account yet.
 
 ```
 docker images
-docker tag 9f0b9fe29c44 networknt/example-petstore:latest
-docker push networknt/example-petstore
+docker tag 9f0b9fe29c44 networknt/swagger-petstore:latest
+docker push networknt/swagger-petstore
 ```
 
-The example-petstore can be found at https://hub.docker.com/u/networknt/dashboard/
+The swagger-petstore can be found at https://hub.docker.com/u/networknt/dashboard/
 
 And the following command can pull and run the docker image on your local if you have
 docker installed.
 
 ```
-docker run -d -p 8443:8443 networknt/example-petstore
+docker run -d -p 8443:8443 networknt/swagger-petstore
 ```

@@ -14,26 +14,34 @@ toc: false
 draft: false
 ---
 
-This tutorial shows how to use service IoC injection in light*4j frameworks. 
+This tutorial shows how to use service IoC injection in light*4j frameworks. All material
+are in github [service module test folder][] and here the test cases are broken down to
+smaller piece so that they are easy to understand. The best way to learn it is to debug
+the test cases one by one and stop into the service model. 
 
 * [Introduction][]
 
 * [Single Interface Single Implementation][]
 
-* [Dynamic service discovery with direct registry](dynamic)
+* [Single Interface Multiple Implementations][]
 
-* [Multiple API D Instances](multiple)
+* [Single Interface with Generic Type][]
 
-* [Consul service registry and discovery](consul)
+* [Multiple Interfaces Single Implementation][]
 
-* [Multiple instances with tags per environment](tag)
+* [Multiple Interfaces Multiple Implementations][]
 
-* [Access consul with acl_token for security](token)
+* [Implementation with constructor parameters][]
 
-* [Service discovery for Docker container](docker)
-
-* [Service discovery for Kubernetes](kubernetes)
+* [Summary][]
 
 
 [Introduction]: /tutorial/common/service/introduction/
 [Single Interface Single Implementation]: /tutorial/common/service/singlesingle/
+[Single Interface Multiple Implementations]: /tutorial/common/service/singlemultiple/
+[Single Interface with Generic Type]: /tutorial/common/service/generic-type/
+[service module test folder]: https://github.com/networknt/light-4j/tree/master/service/src/test/java/com/networknt/service
+[Multiple Interfaces Single Implementation]: /tutorial/common/service/multiple-single/
+[Multiple Interfaces Multiple Implementations]: /tutorial/common/service/multiple-multiple/
+[Implementation with constructor parameters]: /tutorial/common/service/constructor-parameters/
+[Summary]: /tutorial/common/service/summary/
