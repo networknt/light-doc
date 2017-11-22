@@ -66,6 +66,27 @@ class path of light-codegen to get it work. In order for the light-codegen to fi
 your new generator, you need to externalize service.yml to add your generator impl
 into it. The one used internally can be found at https://github.com/networknt/light-codegen/blob/master/codegen-fwk/src/main/resources/config/service.yml
 
+### Multiple Frameworks
+
+Whether or not you are using command line or the web site to generate code, you can choose more
+than one frameworks at a time to combine the framework code together. Normally, you choose one to
+generate backend service and another one to generate front end single page application based on
+Angular or React. 
+
+For command line tool, you can choose to generate the backend service first to a target directory
+and then run another command line to generate the front end application into the same target folder.
+The final target folder should have a running application with both front end and back end tightly
+integrated together.
+
+For web interface, it is a little bit complicated as both backend and frontend frameworks must
+be selected before triggering generation and the final result will be zipped and moved to download
+folder. You first choose the first framework from a dropdown and give model and config (can be a
+url link or upload/copy from local file system in JSON format). And then you can choose the second
+framework and provide detailed model and config. After all frameworks are selected and configured,
+you click the submit button to send the request to the server. The server response will have a
+url to the downloadable zip file that contains all the generated files. You just need to click the
+link to download the project file to your local drive. Then unzip, build, execute and test your
+project. 
 
 
 [swagger-codegen]: https://github.com/swagger-api/swagger-codegen

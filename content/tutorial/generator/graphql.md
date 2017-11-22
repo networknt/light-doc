@@ -16,7 +16,7 @@ their favorite language and then wire in the business logic into the resolvers. 
 there is a IDL defined by the community; although it is not a standard yet, there are a
 lot of big players support it. Our generator can utilize the GraphQL IDL or just scaffold
 a project with simple Hello World for developer to extend. Either way, you need to wire in
-your business logic after the code is generated. 
+your business logic after the project is generated. 
  
 
 ## Input
@@ -145,6 +145,10 @@ The following command is using docker to generate light-graphql-4j into
 ```
 docker run -it -v ~/networknt/light-codegen/light-graphql-4j/src/test/resources:/light-api/input -v /tmp/light-codegen:/light-api/out networknt/light-codegen -f light-graphql-4j -c /light-api/input/config.json -o /light-api/out/graphql
 ```
+
+On Linux environment, the generated code might belong to root:root and you need to change the
+owner to yourself before building it. 
+
 Let's change the owner and build the service
 
 ```

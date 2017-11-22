@@ -263,6 +263,9 @@ The following command is using docker to generate light-hybrid-4j service into
 docker run -it -v ~/networknt/light-codegen/light-hybrid-4j/src/test/resources:/light-api/input -v /tmp/light-codegen:/light-api/out networknt/light-codegen -f light-hybrid-4j-service -m /light-api/input/schema.json -c /light-api/input/serviceConfig.json -o /light-api/out/hybridservice
 ```
 
+On Linux environment, the generated code might belong to root:root and you need to change the
+owner to yourself before building it. 
+
 Let's change the owner and build the service
 
 ```
