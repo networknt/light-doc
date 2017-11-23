@@ -7,7 +7,7 @@ keywords: [milestone]
 slug: ""
 aliases: [/milestone/,/docs/]
 toc: false
-draft: true
+draft: false
 ---
 
 There are so many products in the light platform and each product has its
