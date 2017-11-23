@@ -7,7 +7,6 @@ publishdate: 2017-02-01
 lastmod: 2017-02-01
 categories: [contribute]
 keywords: [dev,open source]
-authors: [digitalcraftsman]
 menu:
   docs:
     parent: "contribute"
