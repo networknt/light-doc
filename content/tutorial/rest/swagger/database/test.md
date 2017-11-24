@@ -10,12 +10,13 @@ toc: false
 draft: false
 ---
 
-Now the service is up and running. Let's access it from curl
+In the previous steps, we have generated the project and built it. Now the service 
+is up and running. Let's access it from curl
 
 Single query
 
 ```
-curl http://localhost:8080/v1/query
+curl -k https://localhost:8443/v1/query
 ```
 
 Result:
@@ -30,7 +31,7 @@ Result:
 Multiple queries with default number of object returned
 
 ```
-curl http://localhost:8080/v1/queries
+curl -k https://localhost:8443/v1/queries
 ```
 
 Result:
@@ -51,7 +52,7 @@ Result:
 Multiple queries with 10 numbers returned
 
 ```
-curl http://localhost:8080/v1/queries?queries=10
+curl -k https://localhost:8443/v1/queries?queries=10
 ```
 
 Result: 
@@ -72,7 +73,7 @@ Result:
 Multiple updates with default number of object updated
 
 ```
-curl http://localhost:8080/v1/updates
+curl -k https://localhost:8443/v1/updates
 ```
 
 Result:
@@ -94,7 +95,7 @@ Result:
 Multiple updates with 10 numbers updated
 
 ```
-curl http://localhost:8080/v1/updates?queries=10
+curl -k https://localhost:8443/v1/updates?queries=10
 ```
 
 Result:
@@ -111,3 +112,10 @@ Result:
                                 }
                             ]
 ```
+
+As you can see, the we have a newly generated project that can output mock data
+from each endpoint defined in the Swagger 2.0 specification. There is no db access
+code behind the scene. In the next step, we are going to wire in the code for
+Mysql database. 
+
+ 
