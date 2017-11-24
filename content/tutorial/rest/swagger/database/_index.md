@@ -1,7 +1,7 @@
 ---
 title: "Restful Database Access Tutorial"
 date: 2017-11-23T14:23:52-05:00
-description: ""
+description: "How to access database from Restful API"
 categories: []
 keywords: [tutorial]
 menu:
@@ -33,7 +33,7 @@ frameworks.
 
 * [Create specification][]
 
-* [Build and start][]
+* [Generate and Build][]
 
 * [Test service][]
 
@@ -49,3 +49,5 @@ frameworks.
 
 [Environment preparation]: /tutorial/rest/swagger/database/preparation/
 [Create specification]: /tutorial/rest/swagger/database/specification/
+[Generate and Build]: /tutorial/rest/swagger/database/generation/
+[Test service]: /tutorial/rest/swagger/database/test/

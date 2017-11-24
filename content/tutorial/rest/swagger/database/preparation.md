@@ -11,7 +11,11 @@ draft: false
 ---
 
 In order to follow the steps below, please make sure you have the same working 
-environment.
+environment. As this tutorial is targeted to Java developers and I assume you have
+the knowledge to work on a Java project on your personal computer. For people who
+are not Java developer, you can have Docker installed and pull the running image
+from Docker Hub to try the service created in this tutorial. 
+
 
 * A computer with MacOS or Linux (Windows should work but I never tried)
 * Install git
@@ -25,3 +29,6 @@ cd ~
 mkdir networknt
 ```
 
+Once your environment is ready, go to the next step to [create a Swagger specification file][]. 
+
+[create a Swagger specification file]: /tutorial/rest/swagger/database/specification/
