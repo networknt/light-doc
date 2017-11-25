@@ -35,19 +35,34 @@ frameworks.
 
 * [Generate and Build][]
 
-* [Test service][]
+* [Test mock service][]
 
-* [Enable security][]
+* [Database scripts][]
 
-* [Docker][]
+* [Start databases][]
 
-* [Metrics][]
+* [Connection pool][]
 
-* [Logging][]
+* [Single query][]
 
-* [Summary][]
+* [Multiple queries][]
+
+* [Multiple updates][]
+
+* [Unit tests][]
+
+* [Performance][]
 
 [Environment preparation]: /tutorial/rest/swagger/database/preparation/
 [Create specification]: /tutorial/rest/swagger/database/specification/
 [Generate and Build]: /tutorial/rest/swagger/database/generation/
-[Test service]: /tutorial/rest/swagger/database/test/
+[Test mock service]: /tutorial/rest/swagger/database/test/
+[Database scripts]: /tutorial/rest/swagger/database/dbscripts/
+[Start databases]: /tutorial/rest/swagger/database/startdb/
+[Connection pool]: /tutorial/rest/swagger/database/connection-pool/
+[Single query]: /tutorial/rest/swagger/database/single-query/
+[Multiple queries]: /tutorial/rest/swagger/database/multiple-queries/
+[Multiple updates]: /tutorial/rest/swagger/database/multiple-updates/
+[Unit tests]: /tutorial/rest/swagger/database/unit-test/
+[Performance]: /tutorial/rest/swagger/database/performance/
+
