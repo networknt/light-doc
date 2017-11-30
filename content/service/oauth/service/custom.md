@@ -48,7 +48,7 @@ REQUIRED. The resource owner username.
 
 * userType
 
-REQUIRED. The resource owner password.
+REQUIRED. The authenticated user type, i.e. employee or customer.
 
 * scope
          
