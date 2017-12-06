@@ -18,29 +18,27 @@ In production mode, all services will have docker images downloaded from hub.doc
 docker hub within your organization. And Kubernetes or other docker orchestration tools will be
 used to manage containers. 
 
-To help use to understand how each service work and enable user to modify services, the first section
+To help user to understand how each service work and enable user to modify services, the first section
 of this tutorial will focus on development mode which will build these services and dockerize them. 
-And start them as a docker compose. 
 
-The following will check out the repo, build and start services with Oracle XE database.   
+The following will check out the repo, build and start services with Oracle XE database. Please don't
+use this in your production as Oracle XE is not supposed to be used in production. If you want to use
+the light-oauth2 in production, you can use Mysql or Postgres.    
 
 ```
-git clone git@github.com:networknt/light-oauth2.git
-cd light-oauth2
-git checkout enterprise
-mvn clean install -DskipTests
-docker-compose -f docker-compose-oracle.yml up
+git clone git@github.com:networknt/light-docker.git
+cd light-docker
+docker-compose -f docker-compose-oauth2-oracle.yml up
 ```
 
 It will take about 30 seconds to have all services and database up and running. If Oracle XE image
 doesn't exist on your host, it will take longer to download it.
 
-If you have modified source code, please follow the steps to restart services. 
+If you have modified source code, please follow the steps to restart services.
+ 
 ```
-docker-compose -f docker-compose-oracle.yml down
-mvn clean install
-./cleanup.sh
-docker-compose -f docker-compose-oracle.yml up
+docker-compose -f docker-compose-oauth2-oracle.yml down
+docker-compose -f docker-compose-oauth2-oracle.yml up
 ```
 
 

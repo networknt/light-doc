@@ -43,7 +43,7 @@ production.
 To get authorization code put the following url into your browser.
 
 ```
-http://localhost:6881/oauth2/code?response_type=code&client_id=f7d42348-c647-4efb-a52d-4c5787421e72&redirect_uri=http://localhost:8080/authorization
+https://localhost:6881/oauth2/code?response_type=code&client_id=f7d42348-c647-4efb-a52d-4c5787421e72&redirect_uri=http://localhost:8080/authorization
 ```
 
 If this is the first time you hit this url on the browser, you will have a popup window for user
@@ -64,7 +64,7 @@ a server listening to the redirect uri you have specified.
 Here is a sample curl command.
 
 ```
-curl -H "Authorization: Basic admin:123456" http://localhost:6881/oauth2/code?response_type=code&client_id=f7d42348-c647-4efb-a52d-4c5787421e72&redirect_uri=http://localhost:8080/authorization
+curl -k -H "Authorization: Basic admin:123456" https://localhost:6881/oauth2/code?response_type=code&client_id=f7d42348-c647-4efb-a52d-4c5787421e72&redirect_uri=http://localhost:8080/authorization
 ``` 
 If you want to try the above command line, you have to make sure that redirect_uri is alive. Otherwise,
 you will have an error that doesn't make any sense.

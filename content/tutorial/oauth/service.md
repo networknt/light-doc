@@ -22,13 +22,13 @@ reality, these endpoints are accessed from light-portal UI.
 To add a new service.
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"serviceId":"AACT0003","serviceType":"ms","serviceName":"Retail Account","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","ownerId":"admin"}' http://localhost:6883/oauth2/service
+curl -k -H "Content-Type: application/json" -X POST -d '{"serviceId":"AACT0003","serviceType":"ms","serviceName":"Retail Account","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","ownerId":"admin"}' https://localhost:6883/oauth2/service
 ```
 
 To query all services.
 
 ```
-curl http://localhost:6883/oauth2/service?page=1
+curl -k https://localhost:6883/oauth2/service?page=1
 
 ```
 And here is the result.
@@ -40,7 +40,7 @@ And here is the result.
 To query a service with service id.
 
 ```
-curl http://localhost:6883/oauth2/service/AACT0003
+curl -k https://localhost:6883/oauth2/service/AACT0003
 
 ```
 And here is the result.
@@ -51,12 +51,12 @@ And here is the result.
 To update above service type to "api".
 
 ```
-curl -H "Content-Type: application/json" -X PUT -d '{"serviceType":"api","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin"}' http://localhost:6883/oauth2/service
+curl -k -H "Content-Type: application/json" -X PUT -d '{"serviceType":"api","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin"}' https://localhost:6883/oauth2/service
 ```
 
 To delete above service with service id.
 
 ```
-curl -X DELETE http://localhost:6883/oauth2/service/AACT0003
+curl -k -X DELETE https://localhost:6883/oauth2/service/AACT0003
 
 ```

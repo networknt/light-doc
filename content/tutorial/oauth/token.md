@@ -19,7 +19,7 @@ Authorization Grant with authorization code redirected in the previous step. Ple
 replace code with the newly retrieved one as it is only valid for 10 minutes.
  
 ```
-curl -H "Authorization: Basic f7d42348-c647-4efb-a52d-4c5787421e72:f6h1FTI8Q3-7UScPZDzfXA" -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "grant_type=authorization_code&code=c0iAfPAeTk2BpiPWj-CYPQ" http://localhost:6882/oauth2/token
+curl -k -H "Authorization: Basic f7d42348-c647-4efb-a52d-4c5787421e72:f6h1FTI8Q3-7UScPZDzfXA" -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "grant_type=authorization_code&code=c0iAfPAeTk2BpiPWj-CYPQ" https://localhost:6882/oauth2/token
 ```
 
 The above command will have the following output.
@@ -32,7 +32,7 @@ Client Credentials grant doesn't need authorization code but only client_id and
 client_secret. Here is the curl command line to get access token.
 
 ```
-curl -H "Authorization: Basic f7d42348-c647-4efb-a52d-4c5787421e72:f6h1FTI8Q3-7UScPZDzfXA" -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "grant_type=client_credentials" http://localhost:6882/oauth2/token
+curl -k -H "Authorization: Basic f7d42348-c647-4efb-a52d-4c5787421e72:f6h1FTI8Q3-7UScPZDzfXA" -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "grant_type=client_credentials" https://localhost:6882/oauth2/token
 ```
 
 The above command will have the following output.

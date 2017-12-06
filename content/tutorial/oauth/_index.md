@@ -31,7 +31,7 @@ there are steps to enable all security with config files.
 
 * [Key Distribution][]
 
-
+* [Client Authenticated User][]
 
 [How to generate long lived access token]: /tutorial/oauth/longlive/
 [How to start services]: /tutorial/oauth/start/
@@ -41,4 +41,5 @@ there are steps to enable all security with config files.
 [Client Registration]: /tutorial/oauth/client/
 [User Management]: /tutorial/oauth/user/
 [Key Distribution]: /tutorial/oauth/key/
+[Client Authenticated User]: /tutorial/oauth/custom/
  

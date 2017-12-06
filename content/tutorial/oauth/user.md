@@ -22,13 +22,13 @@ these endpoints will only be consumed by light-portal UI.
 To add a new user.
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"userId":"stevehu","userType":"employee","firstName":"Steve","lastName":"Hu","email":"stevehu@gmail.com","password":"123456","passwordConfirm":"123456"}' http://localhost:6885/oauth2/user
+curl -k -H "Content-Type: application/json" -X POST -d '{"userId":"stevehu","userType":"employee","firstName":"Steve","lastName":"Hu","email":"stevehu@gmail.com","password":"123456","passwordConfirm":"123456"}' https://localhost:6885/oauth2/user
 ```
 
 To query a user.
 
 ```
-curl http://localhost:6885/oauth2/user/stevehu
+curl -k https://localhost:6885/oauth2/user/stevehu
 
 ```
 
@@ -41,18 +41,18 @@ And here is the result.
 To update the user type to partner.
 
 ```
-curl -H "Content-Type: application/json" -X PUT -d '{"firstName":"Steve","lastName":"Hu","userType":"partner","userId":"stevehu","email":"stevehu@gmail.com"}' http://localhost:6885/oauth2/user
+curl -k -H "Content-Type: application/json" -X PUT -d '{"firstName":"Steve","lastName":"Hu","userType":"partner","userId":"stevehu","email":"stevehu@gmail.com"}' https://localhost:6885/oauth2/user
 ```
 
 To reset the password.
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"password":"123456","newPassword":"stevehu","newPasswordConfirm":"stevehu"}' http://localhost:6885/oauth2/password/stevehu
+curl -k -H "Content-Type: application/json" -X POST -d '{"password":"123456","newPassword":"stevehu","newPasswordConfirm":"stevehu"}' https://localhost:6885/oauth2/password/stevehu
 ```
 
 To remove a user.
 
 ```
-curl -X DELETE http://localhost:6885/oauth2/user/stevehu
+curl -k -X DELETE https://localhost:6885/oauth2/user/stevehu
 
 ```
