@@ -11,7 +11,7 @@ draft: false
 ---
 
 Note: the following steps use Oracle database as an example. MySQL and Postgres should be the same
-by choosing docker-compose-mysql.yml or docker-compose-postgres.yml when starting docker-compose.
+by choosing docker-compose-oauth2-mysql.yml or docker-compose-oauth2-postgres.yml when starting docker-compose.
 
 
 In production mode, all services will have docker images downloaded from hub.docker.com or private
