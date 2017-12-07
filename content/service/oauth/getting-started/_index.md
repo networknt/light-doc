@@ -27,10 +27,15 @@ Three databases are supported: Oracle, Mysql and Postgres
 
 ### Start light-oauth2 with docker-compose
 
-
+If you are an API developer that want to use light-oauth2 to security your API on your laptop
+or desktop, you can start the light-oauth2 services with docker-compose. The steps are documented
+in the [light-oauth2 tutorial][]
 
 
 ### Build the server from source code
+
+If you are a developer that want to contribute light-oauth2 or debug into it, then you can work
+on the source code directly. 
 
 Note: as Oracle client is not available in public maven repo, you have to install it manually by
 following this [link][] to install it before building the source code.
@@ -41,6 +46,32 @@ cd light-oauth2
 mvn clean install
 ```
 
+There are docker-compose files available under the root directory of light-oauth2 to build and 
+start all services together. 
+
+Given that the above steps have been completed and each service has a fat jar in side target folder.
+we can run the following commands to start all services with different database as repository
+
+Mysql
+
+```
+docker-compose -f docker-compose-mysql.yml up
+```
+
+Postgres
+
+```
+docker-compose -f docker-compose-postgres.yml up
+```
+
+Oracle
+
+```
+docker-compose -f docker-compose-oracle.yml up
+```
+
+
 [introduction]: /service/oauth/introduction/
 [link]: https://dimitrisli.wordpress.com/2012/08/09/maven-install-ojdbc6/
+[light-oauth2 tutorial]: /tutorial/oauth/start/
 
