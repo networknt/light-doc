@@ -1,6 +1,6 @@
 ---
 title: "Architecture"
-date: 2017-11-10T13:44:11-05:00
+date: 2017-12-07T11:40:18-05:00
 description: "Architecture of light-oauth2"
 categories: []
 keywords: []
@@ -9,6 +9,7 @@ aliases: []
 toc: false
 draft: false
 ---
+
 
 Unlike web services that all services are built into a monolithic application and we
 can put a gateway in front of the application for security, the service to service

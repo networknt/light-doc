@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-date: 2017-11-10T13:49:54-05:00
+date: 2017-12-07T11:42:23-05:00
 description: "OAuth 2.0 Introduction"
 categories: []
 keywords: []

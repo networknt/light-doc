@@ -1,5 +1,5 @@
 ---
-title: "Security Service"
+title: "Light-OAuth2 Security"
 date: 2017-11-10T12:57:03-05:00
 description: "Service security with light-oauth2"
 categories: [service]

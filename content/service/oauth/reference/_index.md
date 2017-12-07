@@ -1,6 +1,6 @@
 ---
 title: "Reference"
-date: 2017-11-10T13:51:30-05:00
+date: 2017-12-07T11:42:35-05:00
 description: "OAuth 2.0 References"
 categories: []
 keywords: []
@@ -24,7 +24,5 @@ draft: false
 
 * [OAuth 2 and Fragment encoding](http://www.thread-safe.com/2014/05/oauth-2-and-fragment-encoding.html) - Some browsers changed behavior for fragment encoding and the impact on OAuth 2.0
 * [Open Redirect Vulnerability](https://weblog.bulknews.net/covert-redirect-vulnerability-with-oauth-2-2c1f3083b1b4#.t1ldg8xf8) - A vulnerability that requires OAuth2 provider to validate redirect_uri.
-
-
 
 

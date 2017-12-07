@@ -1,7 +1,7 @@
 ---
 title: "Getting Started"
-date: 2017-11-10T13:53:24-05:00
-description: "Getting Started"
+date: 2017-12-07T11:42:48-05:00
+description: "Getting Started with light-oauth2"
 categories: []
 keywords: []
 slug: ""
@@ -38,3 +38,4 @@ mvn clean install
 
 [introduction]: /service/oauth/introduction/
 [link]: https://dimitrisli.wordpress.com/2012/08/09/maven-install-ojdbc6/
+
