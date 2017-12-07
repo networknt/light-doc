@@ -14,18 +14,23 @@ draft: false
 If you are new to OAuth2, please read this [introduction][] document to get familiar 
 with the concept. 
 
-light-oauth2 are designed as microservices based OAuth2 server that have 7 services and 
+light-oauth2 is designed as microservices based OAuth2 server that has 7 services and 
 numeric endpoints to support user login, access token, user registration, service registration, 
 client registration and public key certificate distribution. It can support millions users 
-and thousands of clients and services with scopes. It should be easily handle 
+and thousands of clients and services with scopes. It should be easily handling 
 thousands of concurrent users per instance and each microservice can be scaled individually.
 
-Specifications can be found at https://github.com/networknt/model-config/tree/master/rest
+Specifications can be found at https://github.com/networknt/model-config/tree/master/rest/swagger
 
 Three databases are supported: Oracle, Mysql and Postgres
 
 
-## Build the server from source code
+### Start light-oauth2 with docker-compose
+
+
+
+
+### Build the server from source code
 
 Note: as Oracle client is not available in public maven repo, you have to install it manually by
 following this [link][] to install it before building the source code.
