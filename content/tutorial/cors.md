@@ -33,7 +33,11 @@ For this CORS API, I have created both Swagger 2.0 and OpenAPI 3.0 specification
 and light-codegen config file. 
 
 As we are moving to OpenAPI 3.0 specification, the Swagger 2.0 specification is just
-kept as a reference. In this tutorial, we are going to use OpenAPI 3.0 spec only. 
+kept as a reference. In this tutorial, we are going to use OpenAPI 3.0 spec only.
+
+If you are forced to stay with Swagger 2.0 specification, you can follow this tutorial
+to generate the code using Swagger spec and all additional updates are valid for both.
+ 
 
 * [CORS API Swagger 2.0 Spec][] 
 * [CORS API OpenAPI 3.0 Spec][]
