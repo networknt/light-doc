@@ -108,6 +108,13 @@ oauthHttp2Support: true
 # Enable JWT token cache to speed up verification. This will only verify expired time
 # and skip the signature verification as it takes more CPU power and long time.
 enableJwtCache: true
+
+# If you are using light-oauth2, then you don't need to have oauth subfolder for public
+# key certificate to verify JWT token, the key will be retrieved from key endpoint once
+# the first token is arrived. Default to false for dev environment without oauth2 server
+# or official environment that use other OAuth 2.0 providers.
+bootstrapFromKeyService: false
+
 ``` 
 
 ### Enable security
@@ -155,7 +162,30 @@ without verify the signature as it is very time consuming and CPU intensive. Def
 should only turn it off if you have a very good reason. For example, token chaining is used and every
 request has a unique token so cache doesn't make sense in the case. 
 
+### bootstrapFromKeyService
+
+The default is false as we assume that you are in dev without OAuth 2.0 server access or you are using
+other OAuth 2.0 server instead of [light-oauth2][]. If the value is false, the server will load public
+key certificates for JWT signature verification from the location specified by jwt:certificate in this
+config file which are 100 -> oauth/primary.crt and 101 -> oauth/secondary.crt.
+
+If this value is set true, then the public key certificate will be loaded from [light-oauth2 key service][]
+dynamically. The key will be loaded once the first JWT token is received, the security middleware handler
+will check the kid in the token header and then check if there is cached copy of the public key certificate
+map to this kid. If no cache, then send a request to light-oauth2 key service to get the public key cert
+with kid as query parameter. To ensure that you are connecting to the right Key service, TLS connection
+is a must. In addition, the service itself must be registered on light-oauth2 client service as a client
+as well and client_id and client_secret need to be passed in the Authorization header for authentication.
+This is to further ensure that the OAuth 2.0 provider is the right one to issue the public key certficates.
+
+This feature will impact the Server Info endpoint provided by all services built on top of light-4j as
+fingerprints of OAuth 2.0 public key certificates might not be available locally. The Server Info might
+return nothing about this list of fingerprints if this config parameter is set to true. Also the certify
+process on light-portal will let it go if no fingerprints returned from Server Info endpoint. That means
+the certificates are from light-oauth2 server dynamically and there is no risk the testing certificates
+will be packaged into production configuration.    
 
 [gateway article]: /architecture/gateway/
 [security article]: /architecture/security/
 [light-oauth2]: /service/oauth/
+[light-oauth2 key service]: /service/oauth/service/key/

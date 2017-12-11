@@ -62,8 +62,8 @@ frameworks.
 [Build and start]: /tutorial/rest/openapi/petstore/build/
 [Test service]: /tutorial/rest/openapi/petstore/test/
 [Enable security]: /tutorial/rest/openapi/petstore/security/
-[Docker]: /tutorial/rest/petstore/openapi/docker/
-[Metrics]: /tutorial/rest/petstore/openapi/metrics/
-[Logging]: /tutorial/rest/petstore/openapi/logging/
-[Summary]: /tutorial/rest/petstore/openapi/summary/
+[Docker]: /tutorial/rest/openapi/petstore/docker/
+[Metrics]: /tutorial/rest/openapi/petstore/metrics/
+[Logging]: /tutorial/rest/openapi/petstore/logging/
+[Summary]: /tutorial/rest/openapi/petstore/summary/
 [Swagger 2.0 Petstore Tutorial]: /tutorial/rest/swagger/petstore/
