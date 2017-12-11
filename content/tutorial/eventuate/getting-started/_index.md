@@ -22,7 +22,7 @@ as localhost within docker container means the docker container itself. It must 
 is accessible within docker container. It should be the hostname of your computer or the real network
 IP address of your computer that runs docker. 
 
-There is a scirpt in light-docker that can try to find the hostname and export it as DOCKER_HOST_IP
+There is a script in light-docker that can try to find the hostname and export it as DOCKER_HOST_IP
 but it is not reliable as hostname might just mapped to 127.0.0.1 on some computers. The best way to
 do that would be manually find out the IP address on your computer and export it.
 
