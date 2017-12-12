@@ -33,6 +33,10 @@ the test cases one by one and stop into the service model.
 
 * [Implementation with constructor parameters][]
 
+* [POJO Java Bean][]
+
+* [Inject Manually for debugging][]
+
 * [Summary][]
 
 
@@ -45,3 +49,6 @@ the test cases one by one and stop into the service model.
 [Multiple Interfaces Multiple Implementations]: /tutorial/common/service/multiple-multiple/
 [Implementation with constructor parameters]: /tutorial/common/service/constructor-parameters/
 [Summary]: /tutorial/common/service/summary/
+[POJO Java Bean]: /tutorial/common/service/java-bean/
+[Inject Manually for debugging]: /tutorial/common/service/manual-injection/
+
