@@ -1,7 +1,6 @@
 ---
 title: "IoC Singleton Service Factory"
 date: 2017-11-13T22:23:39-05:00
-description: "Singleton Service Factory - A light-weight IoC service with YAML configuration"
 categories: []
 keywords: [tutorial]
 menu:

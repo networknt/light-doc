@@ -1,13 +1,8 @@
 ---
-title: "Cors"
+title: "CORS - Cross-Origin Resource Sharing"
 date: 2017-11-06T17:45:44-05:00
-description: "Cross-Origin Resource Sharing"
 categories: []
 keywords: [tutorial]
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 10
 weight: 10
 aliases: []
 toc: false
