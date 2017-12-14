@@ -50,7 +50,46 @@ https://github.com/networknt/light-oauth2
 Light-4j also provides a client module that can communicate with light-oauth2 in the background to
 get access token and renew the access token before it is expired. 
 
-## Kid
+## alg
+
+In OAuth 2.0 specification, alg is a header that specifies the algorithm to be used to sign
+and verify the signature. We basically don't use this field and we only use RS256 for signature
+signing and verifying. There are so many design flaws related to this header and our implementation
+is opinionated so that we can eliminate all the flaws in the generic implementation which allows
+customers to make mistake.
+
+There are at least two attacks related to the alg header. 
+
+* In early days, some of the libraries support none for the algorithm in alg header and by pass
+the signature verification if none is specified as alg. Attacker can create a token with alg=none
+and this token will be treated as valid token by some servers. In light-4j framework, we verify
+the signature always without exception.
+
+* Most generic JWT libraries support multiple algorithms at the same time. For example, it support
+HS256(HMAC) and RS256(RSA) at the same time. With RSA like algorithms, tokens are created and signed 
+using a private key, but verified using a corresponding public key. This is pretty neat: if you 
+publish the public key but keep the private key to yourself, only you can sign tokens, but anyone 
+can check if a given token is correctly signed. In systems using HMAC signatures, verificationKey 
+will be the server's secret signing key (since HMAC uses the same key for signing and verifying).
+
+In systems using an asymmetric algorithm, verificationKey will be the public key against which the 
+token should be verified. Unfortunately, an attacker can abuse this. If a server is expecting a 
+token signed with RSA, but actually receives a token signed with HMAC, it will think the public 
+key is actually an HMAC secret key.
+                          
+How is this a disaster? HMAC secret keys are supposed to be kept private, while public keys are, 
+well, public. This means that your typical ski mask-wearing attacker has access to the public key, 
+and can use this to forge a token that the server will accept.
+
+Doing so is pretty straightforward. First, grab your favourite JWT library, and choose a payload 
+for your token. Then, get the public key used on the server as a verification key (most likely in 
+the text-based PEM format). Finally, sign your token using the PEM-formatted public key as an HMAC 
+key. The trickiest part is making sure that serverRSAPublicKey is identical to the verification key 
+used on the server. The strings must match exactly for the attack to work -- exact same format, and 
+no extra or missing line breaks. End result? Anyone with knowledge of the public key can forge tokens 
+that will pass verification.
+                                                
+## kid
 
 Since services are deployed in the cloud without static IP, the traditional push certificates to each 
 service is not working anymore. In this framework each service will pull certificate from OAuth2 server 
@@ -184,6 +223,9 @@ return nothing about this list of fingerprints if this config parameter is set t
 process on light-portal will let it go if no fingerprints returned from Server Info endpoint. That means
 the certificates are from light-oauth2 server dynamically and there is no risk the testing certificates
 will be packaged into production configuration.    
+
+
+
 
 [gateway article]: /architecture/gateway/
 [security article]: /architecture/security/
