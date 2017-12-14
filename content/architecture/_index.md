@@ -53,6 +53,8 @@ Here is a list of architecture decisions for the framework:
 
 * What is [service mesh][] and why we need it? 
 
+* We cannot rely on network security for microservices given the dynamic environment and encrypted data. [Firewall is killed by Cloud][] 
+
 [design]: /design/
 [microservices]: /architecture/microservices/
 [declining]: /architecture/jee-is-dead/
@@ -68,3 +70,4 @@ Here is a list of architecture decisions for the framework:
 [Elements]: /architecture/platform/
 [category]: /architecture/category/
 [service mesh]: /architecture/service-mesh/
+[Firewall is killed by Cloud]: /architecture/firewall/
