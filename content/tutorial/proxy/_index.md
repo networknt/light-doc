@@ -30,8 +30,13 @@ specification.
 
 * [OpenAPI proxy][] to set up light-proxy in front of OpenAPI 3.0 service
 
+### Docker
+
+* [Proxy docker][] will show you how to use dockerized proxy with externalized config files
+
 [Swagger backend service]: /tutorial/proxy/swagger-backend/
 [Swagger proxy]: /tutorial/proxy/swagger-proxy/
 [OpenAPI backend service]: /tutorial/proxy/openapi-backend/
 [OpenAPI proxy]: /tutorial/proxy/openapi-proxy/
+[Proxy docker]: /tutorial/proxy/docker/
 
