@@ -152,7 +152,12 @@ keytool -export -alias mycert-20161109 -keystore server.keystore -rfc -file myce
 
 4. Import Certificate into client Truststore:
 
-keytool -importcert -alias mycert-20161218 -file C:\certs\mycert-20161218.cer -keystore .truststore
+keytool -v -import -file ssg05.com.pem -alias somecrt -keystore client.truststore
+
+5. List keys in keystore:
+
+keytool -list -v -keystore client.truststore
+
 
 Here is an article that shows how to use keytool to generate self-signed certificates.
 
