@@ -4,7 +4,12 @@ date: 2017-12-18T13:45:57-05:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "getting-started"
+    weight: 10
+weight: 10
+sections_weight: 10
 aliases: []
 toc: false
 draft: false
