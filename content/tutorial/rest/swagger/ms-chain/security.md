@@ -27,13 +27,13 @@ Since we are going to change the code, let's copy each service into a new folder
 called security from httpschain. 
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_a
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a
 cp -r httpschain security
-cd ~/networknt/light-example-4j/rest/ms_chain/api_b
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b
 cp -r httpschain security
-cd ~/networknt/light-example-4j/rest/ms_chain/api_c
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c
 cp -r httpschain security
-cd ~/networknt/light-example-4j/rest/ms_chain/api_d
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d
 cp -r httpschain security
 
 ```
@@ -72,6 +72,19 @@ logJwtToken: true
 
 # Enable or disable client_id, user_id and scope logging.
 logClientUserScope: false
+
+# If OAuth2 provider support http2 protocol. If using light-oauth2, set this to true.
+oauthHttp2Support: true
+
+# Enable JWT token cache to speed up verification. This will only verify expired time
+# and skip the signature verification as it takes more CPU power and long time.
+enableJwtCache: true
+
+# If you are using light-oauth2, then you don't need to have oauth subfolder for public
+# key certificate to verify JWT token, the key will be retrieved from key endpoint once
+# the first token is arrived. Default to false for dev environment without oauth2 server
+# or official environment that use other OAuth 2.0 providers.
+bootstrapFromKeyService: false
 ```
 
 Update to 
@@ -100,6 +113,19 @@ logJwtToken: true
 
 # Enable or disable client_id, user_id and scope logging.
 logClientUserScope: false
+
+# If OAuth2 provider support http2 protocol. If using light-oauth2, set this to true.
+oauthHttp2Support: true
+
+# Enable JWT token cache to speed up verification. This will only verify expired time
+# and skip the signature verification as it takes more CPU power and long time.
+enableJwtCache: true
+
+# If you are using light-oauth2, then you don't need to have oauth subfolder for public
+# key certificate to verify JWT token, the key will be retrieved from key endpoint once
+# the first token is arrived. Default to false for dev environment without oauth2 server
+# or official environment that use other OAuth 2.0 providers.
+bootstrapFromKeyService: false
 ```
 
 Update the security.yml for api_b, api_c and api_d in config folder to ensure
@@ -128,21 +154,24 @@ order to update client.yml for each service. Please note, API A, B and C are ser
 at the same time.
 
 For more details on how to use the command line tool or script to access oauth2 services,
-please see this [tutorial](https://networknt.github.io/light-oauth2/tutorials/enterprise/)
+please see this [light-oauth2 tutorial][]
 
 Register a client that calls api_a.
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"mobile","clientName":"Consumer","clientDesc":"A client that calls API A","scope":"api_a.r api_a.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' http://localhost:6884/oauth2/client
+curl -k -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"mobile","clientName":"Consumer","clientDesc":"A client that calls API A","scope":"api_a.r api_a.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' https://localhost:6884/oauth2/client
 
 ```
 
-The return value is something like this. You returned object should be different and you need to write down the clientId and clientSecret. 
+The return value is something like this. Your returned object should be different and you need 
+to write down the clientId and clientSecret.
+ 
 ```
 {"clientId":"e45cb3f4-d029-4284-a42f-a408de5fbe8a","clientSecret":"mCTYQQ2bTySQ-r1TZqY4Hg","clientType":"public","clientProfile":"mobile","clientName":"Consumer","clientDesc":"A client that calls API A","ownerId":"admin","scope":"api_a.r api_a.w","redirectUri":"http://localhost:8080/authorization","createDt":"2017-08-30","updateDt":null}
 ```
 
-To make it convenient, I have created a long lived token that can access api_a with api_a scopes. Here is token and you can verify that in jwt.io
+To make it convenient, I have created a long lived token that can access api_a with api_a scopes. 
+Here is token and you can verify that in jwt.io
  
 ```
 eyJraWQiOiIxMDAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ1cm46Y29tOm5ldHdvcmtudDpvYXV0aDI6djEiLCJhdWQiOiJ1cm46Y29tLm5ldHdvcmtudCIsImV4cCI6MTgxMzAwNTAzNiwianRpIjoiN2daaHY2TS14UXpvVDhuNVMxODNodyIsImlhdCI6MTQ5NzY0NTAzNiwibmJmIjoxNDk3NjQ0OTE2LCJ2ZXJzaW9uIjoiMS4wIiwidXNlcl9pZCI6IlN0ZXZlIiwidXNlcl90eXBlIjoiRU1QTE9ZRUUiLCJjbGllbnRfaWQiOiJmN2Q0MjM0OC1jNjQ3LTRlZmItYTUyZC00YzU3ODc0MjFlNzIiLCJzY29wZSI6WyJhcGlfYS53IiwiYXBpX2IudyIsImFwaV9jLnciLCJhcGlfZC53Iiwic2VydmVyLmluZm8uciJdfQ.FkFbPTRXZf045_7fBlEPQTn7rNoib54TYQeFzSjLmMkUjrfDsJZD6EnrsAquDpHt8GKQNqGbyPzgiNWAIYHgwPZvM-lHw_dv0KUKii3D0woaFBkqu4vYxqyImROBii0B38evxPAZVONWqUncL21592bFPHsxGCz5oHL2unLv-oIQklWxcILpMrSL_tf7nhXHSu1RkRhshxAiAHSSpBZnluu4-jqZdEFtc5U_YApToUrKkmI_An1op5-6rS_I-fMbSnSctUoDgg3RT4Zvw1HC-ZLJlXWRF5-FD4uQOAOgy_T7PI75pNiuh4wgOGgdIf48X-7-fDkEbla-cVLiuj3z4g
@@ -152,7 +181,7 @@ eyJraWQiOiIxMDAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ1cm46Y29tOm5ldHdvcmtudDpvYXV0aDI
 Register a client for api_a to call api_b
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"service","clientName":"api_a","clientDesc":"API A service","scope":"api_b.r api_b.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' http://localhost:6884/oauth2/client
+curl -k -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"service","clientName":"api_a","clientDesc":"API A service","scope":"api_b.r api_b.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' https://localhost:6884/oauth2/client
 
 ```
 
@@ -171,6 +200,9 @@ on the result of the client registration.
 
 
 ```
+# This is the configuration file for Http2Client.
+---
+# Settings for TLS
 tls:
   # if the server is using self-signed certificate, this need to be false. If true, you have to use CA signed certificate
   # or load truststore that contains the self-signed cretificate.
@@ -183,29 +215,52 @@ tls:
   loadKeyStore: false
   # key store location
   keyStore: tls/client.keystore
+# settings for OAuth2 server communication
 oauth:
-  tokenRenewBeforeExpired: 600000
-  expiredRefreshRetryDelay: 5000
-  earlyRefreshRetryDelay: 30000
-  # token server url. The default port number for token service is 6882.
-  server_url: http://localhost:6882
-  authorization_code:
-    # token endpoint for authorization code grant
-    uri: "/oauth2/token"
-    # client_id for authorization code grant flow. client_secret is in secret.yml
+  # OAuth 2.0 token endpoint configuration
+  token:
+    # The scope token will be renewed automatically 1 minutes before expiry
+    tokenRenewBeforeExpired: 60000
+    # if scope token is expired, we need short delay so that we can retry faster.
+    expiredRefreshRetryDelay: 2000
+    # if scope token is not expired but in renew windown, we need slow retry delay.
+    earlyRefreshRetryDelay: 4000
+    # token server url. The default port number for token service is 6882.
+    server_url: https://localhost:6882
+    # token service unique id for OAuth 2.0 provider
+    serviceId: com.networknt.oauth2-token-1.0.0
+    # the following section defines uri and parameters for authorization code grant type
+    authorization_code:
+      # token endpoint for authorization code grant
+      uri: "/oauth2/token"
+      # client_id for authorization code grant flow. client_secret is in secret.yml
+      client_id: 732bba11-9989-49ae-b26e-a29ed5b3f27e
+      # the web server uri that will receive the redirected authorization code
+      redirect_uri: https://localhost:8080/authorization_code
+      # optional scope, default scope in the client registration will be used if not defined.
+      scope:
+      - api_b.r
+      - api_b.w
+    # the following section defines uri and parameters for client credentials grant type
+    client_credentials:
+      # token endpoint for client credentials grant
+      uri: "/oauth2/token"
+      # client_id for client credentials grant flow. client_secret is in secret.yml
+      client_id: 732bba11-9989-49ae-b26e-a29ed5b3f27e
+      # optional scope, default scope in the client registration will be used if not defined.
+      scope:
+      - api_b.r
+      - api_b.w
+  # light-oauth2 key distribution endpoint configuration
+  key:
+    # key distribution server url
+    server_url: https://localhost:6886
+    # the unique service id for key distribution service
+    serviceId: com.networknt.oauth2-key-1.0.0
+    # the path for the key distribution endpoint
+    uri: "/oauth2/key"
+    # client_id used to access key distribution service. It can be the same client_id with token service or not.
     client_id: 732bba11-9989-49ae-b26e-a29ed5b3f27e
-    redirect_uri: https://localhost:8080/authorization_code
-    scope:
-    - api_b.r
-    - api_b.w
-  client_credentials:
-    # token endpoint for client credentials grant
-    uri: "/oauth2/token"
-    # client_id for client credentials grant flow. client_secret is in secret.yml
-    client_id: 732bba11-9989-49ae-b26e-a29ed5b3f27e
-    scope:
-    - api_b.r
-    - api_b.w
 ```
 
 And here is the secret.yml for api_a and you can see that authorizationCodeClientSecret
@@ -247,6 +302,13 @@ authorizationCodeClientSecret: hp0x-__HQZasm2f0gPih_Q
 # Client credentials client secret for OAuth2 server
 clientCredentialsClientSecret: hp0x-__HQZasm2f0gPih_Q
 
+# Key distribution client secret for OAuth2 server
+keyClientSecret: hp0x-__HQZasm2f0gPih_Q
+
+# Consul service registry and discovery
+
+# Consul Token for service registry and discovery
+# consulToken: the_one_ring
 
 ```
 
@@ -254,7 +316,7 @@ clientCredentialsClientSecret: hp0x-__HQZasm2f0gPih_Q
 Register a client for api_b to call api_c
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"service","clientName":"api_b","clientDesc":"API B service","scope":"api_c.r api_c.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' http://localhost:6884/oauth2/client
+curl -k -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"service","clientName":"api_b","clientDesc":"API B service","scope":"api_c.r api_c.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' https://localhost:6884/oauth2/client
 
 ```
 
@@ -270,6 +332,9 @@ secret.yml
 client.yml
 
 ```
+# This is the configuration file for Http2Client.
+---
+# Settings for TLS
 tls:
   # if the server is using self-signed certificate, this need to be false. If true, you have to use CA signed certificate
   # or load truststore that contains the self-signed cretificate.
@@ -282,29 +347,52 @@ tls:
   loadKeyStore: false
   # key store location
   keyStore: tls/client.keystore
+# settings for OAuth2 server communication
 oauth:
-  tokenRenewBeforeExpired: 600000
-  expiredRefreshRetryDelay: 5000
-  earlyRefreshRetryDelay: 30000
-  # token server url. The default port number for token service is 6882.
-  server_url: http://localhost:6882
-  authorization_code:
-    # token endpoint for authorization code grant
-    uri: "/oauth2/token"
-    # client_id for authorization code grant flow. client_secret is in secret.yml
+  # OAuth 2.0 token endpoint configuration
+  token:
+    # The scope token will be renewed automatically 1 minutes before expiry
+    tokenRenewBeforeExpired: 60000
+    # if scope token is expired, we need short delay so that we can retry faster.
+    expiredRefreshRetryDelay: 2000
+    # if scope token is not expired but in renew windown, we need slow retry delay.
+    earlyRefreshRetryDelay: 4000
+    # token server url. The default port number for token service is 6882.
+    server_url: https://localhost:6882
+    # token service unique id for OAuth 2.0 provider
+    serviceId: com.networknt.oauth2-token-1.0.0
+    # the following section defines uri and parameters for authorization code grant type
+    authorization_code:
+      # token endpoint for authorization code grant
+      uri: "/oauth2/token"
+      # client_id for authorization code grant flow. client_secret is in secret.yml
+      client_id: 9ace3ee5-7c01-453d-a80b-3c1e0bed8c40
+      # the web server uri that will receive the redirected authorization code
+      redirect_uri: https://localhost:8080/authorization_code
+      # optional scope, default scope in the client registration will be used if not defined.
+      scope:
+      - api_c.r
+      - api_c.w
+    # the following section defines uri and parameters for client credentials grant type
+    client_credentials:
+      # token endpoint for client credentials grant
+      uri: "/oauth2/token"
+      # client_id for client credentials grant flow. client_secret is in secret.yml
+      client_id: 9ace3ee5-7c01-453d-a80b-3c1e0bed8c40
+      # optional scope, default scope in the client registration will be used if not defined.
+      scope:
+      - api_c.r
+      - api_c.w
+  # light-oauth2 key distribution endpoint configuration
+  key:
+    # key distribution server url
+    server_url: https://localhost:6886
+    # the unique service id for key distribution service
+    serviceId: com.networknt.oauth2-key-1.0.0
+    # the path for the key distribution endpoint
+    uri: "/oauth2/key"
+    # client_id used to access key distribution service. It can be the same client_id with token service or not.
     client_id: 9ace3ee5-7c01-453d-a80b-3c1e0bed8c40
-    redirect_uri: https://localhost:8080/authorization_code
-    scope:
-    - api_c.r
-    - api_c.w
-  client_credentials:
-    # token endpoint for client credentials grant
-    uri: "/oauth2/token"
-    # client_id for client credentials grant flow. client_secret is in secret.yml
-    client_id: 9ace3ee5-7c01-453d-a80b-3c1e0bed8c40
-    scope:
-    - api_c.r
-    - api_c.w
 ```
 
 secret.yml
@@ -345,12 +433,19 @@ authorizationCodeClientSecret: tjJGnU6ySjecmTDIbxXuXg
 # Client credentials client secret for OAuth2 server
 clientCredentialsClientSecret: tjJGnU6ySjecmTDIbxXuXg
 
+# Key distribution client secret for OAuth2 server
+keyClientSecret: tjJGnU6ySjecmTDIbxXuXg
+
+# Consul service registry and discovery
+
+# Consul Token for service registry and discovery
+# consulToken: the_one_ring
 ```
 
 Register a client for api_c to call api_d
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"service","clientName":"api_c","clientDesc":"API C service","scope":"api_d.r api_d.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' http://localhost:6884/oauth2/client
+curl -k -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"service","clientName":"api_c","clientDesc":"API C service","scope":"api_d.r api_d.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' https://localhost:6884/oauth2/client
 
 ```
 
@@ -365,6 +460,9 @@ We need to update client.yml and secret.yml according to the result of the regis
 client.yml
 
 ```
+# This is the configuration file for Http2Client.
+---
+# Settings for TLS
 tls:
   # if the server is using self-signed certificate, this need to be false. If true, you have to use CA signed certificate
   # or load truststore that contains the self-signed cretificate.
@@ -377,29 +475,52 @@ tls:
   loadKeyStore: false
   # key store location
   keyStore: tls/client.keystore
+# settings for OAuth2 server communication
 oauth:
-  tokenRenewBeforeExpired: 600000
-  expiredRefreshRetryDelay: 5000
-  earlyRefreshRetryDelay: 30000
-  # token server url. The default port number for token service is 6882.
-  server_url: http://localhost:6882
-  authorization_code:
-    # token endpoint for authorization code grant
-    uri: "/oauth2/token"
-    # client_id for authorization code grant flow. client_secret is in secret.yml
+  # OAuth 2.0 token endpoint configuration
+  token:
+    # The scope token will be renewed automatically 1 minutes before expiry
+    tokenRenewBeforeExpired: 60000
+    # if scope token is expired, we need short delay so that we can retry faster.
+    expiredRefreshRetryDelay: 2000
+    # if scope token is not expired but in renew windown, we need slow retry delay.
+    earlyRefreshRetryDelay: 4000
+    # token server url. The default port number for token service is 6882.
+    server_url: https://localhost:6882
+    # token service unique id for OAuth 2.0 provider
+    serviceId: com.networknt.oauth2-token-1.0.0
+    # the following section defines uri and parameters for authorization code grant type
+    authorization_code:
+      # token endpoint for authorization code grant
+      uri: "/oauth2/token"
+      # client_id for authorization code grant flow. client_secret is in secret.yml
+      client_id: 294e2fa6-fb2e-4fec-9fed-e9fe1d7fc83f
+      # the web server uri that will receive the redirected authorization code
+      redirect_uri: https://localhost:8080/authorization_code
+      # optional scope, default scope in the client registration will be used if not defined.
+      scope:
+      - api_d.r
+      - api_d.w
+    # the following section defines uri and parameters for client credentials grant type
+    client_credentials:
+      # token endpoint for client credentials grant
+      uri: "/oauth2/token"
+      # client_id for client credentials grant flow. client_secret is in secret.yml
+      client_id: 294e2fa6-fb2e-4fec-9fed-e9fe1d7fc83f
+      # optional scope, default scope in the client registration will be used if not defined.
+      scope:
+      - api_d.r
+      - api_d.w
+  # light-oauth2 key distribution endpoint configuration
+  key:
+    # key distribution server url
+    server_url: https://localhost:6886
+    # the unique service id for key distribution service
+    serviceId: com.networknt.oauth2-key-1.0.0
+    # the path for the key distribution endpoint
+    uri: "/oauth2/key"
+    # client_id used to access key distribution service. It can be the same client_id with token service or not.
     client_id: 294e2fa6-fb2e-4fec-9fed-e9fe1d7fc83f
-    redirect_uri: https://localhost:8080/authorization_code
-    scope:
-    - api_d.r
-    - api_d.w
-  client_credentials:
-    # token endpoint for client credentials grant
-    uri: "/oauth2/token"
-    # client_id for client credentials grant flow. client_secret is in secret.yml
-    client_id: 294e2fa6-fb2e-4fec-9fed-e9fe1d7fc83f
-    scope:
-    - api_d.r
-    - api_d.w
 ```
 
 secret.yml
@@ -439,6 +560,14 @@ authorizationCodeClientSecret: TuC8EC49RZWAkDIY7bSmmw
 
 # Client credentials client secret for OAuth2 server
 clientCredentialsClientSecret: TuC8EC49RZWAkDIY7bSmmw
+
+# Key distribution client secret for OAuth2 server
+keyClientSecret: TuC8EC49RZWAkDIY7bSmmw
+
+# Consul service registry and discovery
+
+# Consul Token for service registry and discovery
+# consulToken: the_one_ring
 
 ```
 
@@ -522,25 +651,25 @@ public class DataGetHandlerTest {
 Now we need to rebuild and restart API A, B, C and D in four terminals. 
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_d/security
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d/security
 mvn clean install exec:exec
 
 ```
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_c/security
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c/security
 mvn clean install exec:exec
 ```
 
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_b/security
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b/security
 mvn clean install exec:exec
 ```
 
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_a/security
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a/security
 mvn clean install exec:exec
 ```
 
@@ -554,3 +683,5 @@ curl -k -H "Authorization: Bearer eyJraWQiOiIxMDAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiO
 
 And you should have the normal result. 
 
+
+[light-oauth2 tutorial]: /tutorial/oauth/

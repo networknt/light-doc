@@ -21,13 +21,13 @@ ms_chain and copy everything from httpchain folder to the httpschain. We are goi
 httpschain folder to have connections switched to Https by changing the urls in config files.
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_a
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a
 cp -r httpchain httpschain
-cd ~/networknt/light-example-4j/rest/ms_chain/api_b
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b
 cp -r httpchain httpschain
-cd ~/networknt/light-example-4j/rest/ms_chain/api_c
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c
 cp -r httpchain httpschain
-cd ~/networknt/light-example-4j/rest/ms_chain/api_d
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d
 cp -r httpchain httpschain
 
 ```
@@ -38,9 +38,10 @@ in httpschain folder.
 #### API D
 
 As we have the server.yml to enable both http and https so the server config for
-API D is ready. However, we only tried to access the API D https port through curl with
-security disabled. Java client access to API through https is not an easy task so we are
-going to complete the test cases to test API D TLS connection with client module first.
+API D is ready. However, in previous steps we only focused on https port through curl with
+security disabled. Java client access to API through https is not an easy task in other
+frameworks but it is built in and run as default in light-4j and related frameworks. Here we 
+are going to complete the test cases to test API D TLS connection with client module first.
 
 This step also shows how to build end-to-end test case to test your API endpoints.
 
@@ -128,8 +129,11 @@ it refers to client.truststore and client.keystore
 
 These files are part of the client module and they are added automatically by light-codegen  
 
+Now you can run your updated test case from IDE like Intellj Idea or just run the following
+command to invoke the unit test. 
+
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_d/httpschain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d/httpschain
 mvn clean install exec:exec
 ```
 
@@ -151,7 +155,7 @@ api_d_path: /v1/data
 Start API C server and test the endpoint /v1/data
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_c/httpschain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c/httpschain
 mvn clean install exec:exec
 ```
 From another terminal window run:
@@ -181,7 +185,7 @@ api_c_path: /v1/data
 Start API B server and test the endpoint /v1/data
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_b/httpschain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b/httpschain
 mvn clean install exec:exec
 ```
 From another terminal window run:
@@ -209,7 +213,7 @@ api_b_path: /v1/data
 Start API A server and test the endpoint /v1/data
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_a/httpschain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a/httpschain
 mvn clean install exec:exec
 ```
 From another terminal window run:
