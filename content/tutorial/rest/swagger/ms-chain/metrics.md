@@ -22,13 +22,13 @@ src/main/resources/config folder to overwrite the default configuration.
 Let's create a new folder metrics by copying the security folder.
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_a
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a
 cp -r security metrics
-cd ~/networknt/light-example-4j/rest/ms_chain/api_b
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b
 cp -r security metrics
-cd ~/networknt/light-example-4j/rest/ms_chain/api_c
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c
 cp -r security metrics
-cd ~/networknt/light-example-4j/rest/ms_chain/api_d
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d
 cp -r security metrics
 
 ```
@@ -69,23 +69,23 @@ docker-compose -f docker-compose-metrics.yml up
 Now let's start four APIs from four terminals. 
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_d/metrics
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d/metrics
 mvn clean install exec:exec
 
 ```
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_c/metrics
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c/metrics
 mvn clean install exec:exec
 ```
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_b/metrics
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b/metrics
 mvn clean install exec:exec
 ```
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_a/metrics
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a/metrics
 mvn clean install exec:exec
 ```
 
