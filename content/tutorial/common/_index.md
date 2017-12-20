@@ -7,8 +7,8 @@ keywords: []
 menu:
   docs:
     parent: "tutorial"
-    weight: 1
-weight: 1
+    weight: 10
+weight: 10
 aliases: []
 toc: false
 draft: false
@@ -20,3 +20,38 @@ bound implementations to an interface, How to inject java beans into service map
 other modules can use the singleton instance. It also covers how to test and debug services
 built on top of the light platform. 
 
+### Test
+
+* [Unit test][]
+
+* [Integration test][]
+
+* [Consumer driven contract test][]
+
+* [End-to-end test][]
+
+### Debug
+
+* [Debug service with IntelliJ Idea][]
+
+* [Debug service with Eclipse][]
+
+
+### Service Registry and Discovery
+
+* [Serivce Regristry and Discovery][]
+
+### IoC Service Injection
+
+* [Singleton Service Injection][]
+
+
+
+[Unit test]: /tutorial/common/test/unit-test/
+[Integration test]: /tutorial/common/test/integration-test/
+[Consumer driven contract test]: /tutorial/common/test/consumer-driven-contract/
+[End-to-end test]: /tutorial/common/test/end-to-end-test/
+[Debug service with IntelliJ Idea]: /tutorial/common/debug/idea/
+[Debug service with Eclipse]: /tutorial/common/debug/eclipse/
+[Serivce Regristry and Discovery]: /tutorial/common/discovery/
+[Singleton Service Injection]: /tutorial/common/service/

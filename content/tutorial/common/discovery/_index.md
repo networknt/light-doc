@@ -3,11 +3,6 @@ title: "Registry and Discovery"
 date: 2017-11-06T17:45:44-05:00
 categories: []
 keywords: [tutorial]
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 10
-weight: 10
 aliases: []
 toc: false
 draft: false

@@ -7,8 +7,8 @@ keywords: []
 menu:
   docs:
     parent: "tutorial"
-    weight: 1
-weight: 1
+    weight: 60
+weight: 60
 aliases: []
 toc: false
 draft: false

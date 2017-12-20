@@ -4,7 +4,11 @@ date: 2017-12-13T20:41:21-05:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "tutorial"
+    weight: 20
+weight: 20
 aliases: []
 toc: false
 draft: false

@@ -4,11 +4,6 @@ date: 2017-11-29T10:05:35-05:00
 description: "How to build an application with a chain of restful microservices"
 categories: []
 keywords: [tutorial]
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 20
-weight: 20
 toc: false
 draft: false
 ---

@@ -4,11 +4,6 @@ date: 2017-11-06T17:45:44-05:00
 description: "Integration Test"
 categories: []
 keywords: [tutorial]
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 30
-weight: 30
 aliases: []
 toc: false
 draft: false

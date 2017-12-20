@@ -3,11 +3,6 @@ title: "IoC Singleton Service Factory"
 date: 2017-11-13T22:23:39-05:00
 categories: []
 keywords: [tutorial]
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 10
-weight: 10
 aliases: []
 toc: false
 draft: false
