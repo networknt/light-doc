@@ -24,13 +24,13 @@ to listen to different port. You can compare between generated and httpchain to 
 been changed later on.
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_a
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a
 cp -r generated httpchain
-cd ~/networknt/light-example-4j/rest/ms_chain/api_b
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b
 cp -r generated httpchain
-cd ~/networknt/light-example-4j/rest/ms_chain/api_c
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c
 cp -r generated httpchain
-cd ~/networknt/light-example-4j/rest/ms_chain/api_d
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d
 cp -r generated httpchain
 
 ```
@@ -130,7 +130,7 @@ public class DataGetHandler implements HttpHandler {
 
 Now, let's build it and start the server. 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_d/httpchain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d/httpchain
 mvn clean install exec:exec
 ```
 Test it with curl.
@@ -156,7 +156,7 @@ certificate and we don't want to verify the domain.
 
 #### API C
 Let's leave API D running and update API C DataGetHandler in 
-~/networknt/light-example-4j/rest/ms_chain/api_c/httpchain
+~/networknt/light-example-4j/rest/swagger/ms_chain/api_c/httpchain
 
 
 ```
@@ -257,7 +257,7 @@ host protocol is h2c-prior instead of http to all Http2Client to use HTTP 2.0 to
 Start API C server and test the endpoint /v1/data
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_c/httpchain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c/httpchain
 mvn clean install exec:exec
 ```
 From another terminal window run:
@@ -283,7 +283,7 @@ curl -k https://localhost:7443/v1/data
 Let's keep API C and API D running. The next step is to complete API B. API B 
 will call API C to fulfill its request. 
 
-Now let's update the generated DataGetHandler.java to this.
+Now let's update the generated DataGetHandler.java to the following in httpchain folder
 
 ```
 package com.networknt.apib.handler;
@@ -381,7 +381,7 @@ api_c_path: /v1/data
 Start API B server and test the endpoint /v1/data
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_b/httpchain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b/httpchain
 mvn clean install exec:exec
 ```
 From another terminal window run:
@@ -506,7 +506,7 @@ api_b_path: /v1/data
 Start API A server and test the endpoint /v1/data
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/api_a/httpchain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a/httpchain
 mvn clean install exec:exec
 ```
 From another terminal window run:
