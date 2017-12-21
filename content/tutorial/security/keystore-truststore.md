@@ -153,7 +153,7 @@ keytool -export -alias mycert-20161109 -keystore server.keystore -rfc -file myce
 4. Import Certificate into client Truststore:
 
 keytool -v -import -file ssg05.com.pem -alias somecrt -keystore client.truststore
-
+keytool -v -import -file ssg05.cibc.com.pem -alias somecrt -keystore client.truststore
 5. List keys in keystore:
 
 keytool -list -v -keystore client.truststore
