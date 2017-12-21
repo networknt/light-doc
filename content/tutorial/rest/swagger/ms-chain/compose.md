@@ -19,7 +19,7 @@ Before doing that, let's create two folders under ms_chain for different version
 compose files and externalized config files.
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain
 mkdir compose
 mkdir etc
 ```
@@ -28,7 +28,7 @@ Now in the etc folder, we need to create sub folders for each api and config sub
 
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/etc
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/etc
 mkdir api_a
 mkdir api_b
 mkdir api_c
@@ -45,7 +45,7 @@ mkdir config
 ```
 
 
-Let's create a rest/ms_chain/compose/docker-compose-app.yml.
+Let's create a rest/swagger/ms_chain/compose/docker-compose-app.yml.
 
 ```
 #
@@ -64,49 +64,49 @@ services:
     # Microservice: API A
     #
     apia:
-        build: ~/networknt/light-example-4j/rest/ms_chain/api_a/metrics/
+        build: ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a/metrics/
         ports:
             - "7441:7441"
         networks:
             - localnet
         volumes:
-            - ~/networknt/light-example-4j/rest/ms_chain/etc/api_a/config:/config
+            - ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_a/config:/config
 
     #
     # Microservice: API B
     #
     apib:
-        build: ~/networknt/light-example-4j/rest/ms_chain/api_b/metrics/
+        build: ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b/metrics/
         ports:
             - "7002:7002"
         networks:
             - localnet
         volumes:
-            - ~/networknt/light-example-4j/rest/ms_chain/etc/api_b/config:/config
+            - ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_b/config:/config
 
     #
     # Microservice: API C
     #
     apic:
-        build: ~/networknt/light-example-4j/rest/ms_chain/api_c/metrics/
+        build: ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c/metrics/
         ports:
             - "7003:7003"
         networks:
             - localnet
         volumes:
-            - ~/networknt/light-example-4j/rest/ms_chain/etc/api_c/config:/config
+            - ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_c/config:/config
 
     #
     # Microservice: API D
     #
     apid:
-        build: ~/networknt/light-example-4j/rest/ms_chain/api_d/metrics/
+        build: ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d/metrics/
         ports:
             - "7004:7004"
         networks:
             - localnet
         volumes:
-            - ~/networknt/light-example-4j/rest/ms_chain/etc/api_d/config:/config
+            - ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_d/config:/config
 
 #
 # Networks
@@ -156,9 +156,9 @@ Now, let's copy the client.yml from metrics folder for each API into ms_chain/et
 folder and update the url for OAuth2 server. 
 
 ```
-cp ~/networknt/light-example-4j/rest/ms_chain/api_a/metrics/src/main/resources/config/client.yml ~/networknt/light-example-4j/rest/ms_chain/etc/api_a/config
-cp ~/networknt/light-example-4j/rest/ms_chain/api_b/metrics/src/main/resources/config/client.yml ~/networknt/light-example-4j/rest/ms_chain/etc/api_b/config
-cp ~/networknt/light-example-4j/rest/ms_chain/api_c/metrics/src/main/resources/config/client.yml ~/networknt/light-example-4j/rest/ms_chain/etc/api_c/config
+cp ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a/metrics/src/main/resources/config/client.yml ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_a/config
+cp ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b/metrics/src/main/resources/config/client.yml ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_b/config
+cp ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c/metrics/src/main/resources/config/client.yml ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_c/config
 ```
 
 The api_a client.yml in ms_chain/etc/api_a/config folder looks like this after modification. 
@@ -182,6 +182,7 @@ tls:
   keyStore: tls/client.keystore
 # settings for OAuth2 server communication
 oauth:
+  # OAuth 2.0 token endpoint configuration
   token:
     # The scope token will be renewed automatically 1 minutes before expiry
     tokenRenewBeforeExpired: 60000
@@ -190,29 +191,40 @@ oauth:
     # if scope token is not expired but in renew windown, we need slow retry delay.
     earlyRefreshRetryDelay: 4000
     # token server url. The default port number for token service is 6882.
-    server_url: http://oauth2-token:6882
+    server_url: https://oauth2-token:6882
+    # token service unique id for OAuth 2.0 provider
     serviceId: com.networknt.oauth2-token-1.0.0
+    # the following section defines uri and parameters for authorization code grant type
     authorization_code:
       # token endpoint for authorization code grant
       uri: "/oauth2/token"
       # client_id for authorization code grant flow. client_secret is in secret.yml
       client_id: 732bba11-9989-49ae-b26e-a29ed5b3f27e
+      # the web server uri that will receive the redirected authorization code
       redirect_uri: https://localhost:8080/authorization_code
+      # optional scope, default scope in the client registration will be used if not defined.
       scope:
       - api_b.r
       - api_b.w
+    # the following section defines uri and parameters for client credentials grant type
     client_credentials:
       # token endpoint for client credentials grant
       uri: "/oauth2/token"
       # client_id for client credentials grant flow. client_secret is in secret.yml
       client_id: 732bba11-9989-49ae-b26e-a29ed5b3f27e
+      # optional scope, default scope in the client registration will be used if not defined.
       scope:
       - api_b.r
       - api_b.w
+  # light-oauth2 key distribution endpoint configuration
   key:
-    server_url: http://oauth2-key:6886
+    # key distribution server url
+    server_url: https://oauth2-key:6886
+    # the unique service id for key distribution service
     serviceId: com.networknt.oauth2-key-1.0.0
+    # the path for the key distribution endpoint
     uri: "/oauth2/key"
+    # client_id used to access key distribution service. It can be the same client_id with token service or not.
     client_id: 732bba11-9989-49ae-b26e-a29ed5b3f27e
 ```
 
@@ -220,10 +232,10 @@ Now in order to make the metrics works, we need to copy the metrics.yml to the c
 and modify it for the influxdb hostname.
 
 ```
-cp ~/networknt/light-example-4j/rest/ms_chain/api_a/metrics/src/main/resources/config/metrics.yml ~/networknt/light-example-4j/rest/ms_chain/etc/api_a/config
-cp ~/networknt/light-example-4j/rest/ms_chain/api_b/metrics/src/main/resources/config/metrics.yml ~/networknt/light-example-4j/rest/ms_chain/etc/api_b/config
-cp ~/networknt/light-example-4j/rest/ms_chain/api_c/metrics/src/main/resources/config/metrics.yml ~/networknt/light-example-4j/rest/ms_chain/etc/api_c/config
-cp ~/networknt/light-example-4j/rest/ms_chain/api_d/metrics/src/main/resources/config/metrics.yml ~/networknt/light-example-4j/rest/ms_chain/etc/api_d/config
+cp ~/networknt/light-example-4j/rest/swagger/ms_chain/api_a/metrics/src/main/resources/config/metrics.yml ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_a/config
+cp ~/networknt/light-example-4j/rest/swagger/ms_chain/api_b/metrics/src/main/resources/config/metrics.yml ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_b/config
+cp ~/networknt/light-example-4j/rest/swagger/ms_chain/api_c/metrics/src/main/resources/config/metrics.yml ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_c/config
+cp ~/networknt/light-example-4j/rest/swagger/ms_chain/api_d/metrics/src/main/resources/config/metrics.yml ~/networknt/light-example-4j/rest/swagger/ms_chain/etc/api_d/config
 ```
 
 The api_a metrics.yml in ms_chain/etc/api_a/config folder looks like this after modification. 
@@ -255,7 +267,7 @@ reportInMinutes: 1
 Now let's start the docker compose. 
 
 ```
-cd ~/networknt/light-example-4j/rest/ms_chain/compose
+cd ~/networknt/light-example-4j/rest/swagger/ms_chain/compose
 docker-compose -f docker-compose-app.yml up
 ```
 

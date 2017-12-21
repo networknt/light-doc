@@ -54,6 +54,14 @@ separated the it into the following steps.
 
 * [Metrics][]
 
+* [Docker compose][]
+
+* [Docker compose performance][]
+
+* [Kubernetes][]
+
+* [Conclusion][]
+
 [Environment preparation]: /tutorial/rest/swagger/ms-chain/preparation/
 [Create specification]: /tutorial/rest/swagger/ms-chain/specification/
 [Generate and Build]: /tutorial/rest/swagger/ms-chain/generation/
@@ -63,4 +71,7 @@ separated the it into the following steps.
 [Metrics]: /tutorial/rest/swagger/ms-chain/metrics/
 [Performance with Http]:  /tutorial/rest/swagger/ms-chain/httpperf/
 [Performance with Https]: /tutorial/rest/swagger/ms-chain/httpsperf/
-
+[Docker compose]: /tutorial/rest/swagger/ms-chain/compose/
+[Docker compose performance]: /tutorial/rest/swagger/ms-chain/composeperf/
+[Kubernetes]: /tutorial/rest/swagger/ms-chain/kubernetes/
+[Conclusion]: /tutorial/rest/swagger/ms-chain/conclusion/
