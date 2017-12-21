@@ -1,6 +1,6 @@
 ---
-title: "Saga - Distributed Transactions"
-date: 2017-12-07T12:44:55-05:00
+title: "Websocket with light platform"
+date: 2017-12-20T21:21:31-05:00
 description: ""
 categories: []
 keywords: []

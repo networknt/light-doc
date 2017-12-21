@@ -1,10 +1,14 @@
 ---
-title: "Eventuate - Event Sourcing and CQRS on Kafka"
+title: "Eventuate - Event Sourcing and CQRS"
 date: 2017-12-07T12:44:15-05:00
-description: "Building APIs that communicates with Events"
+description: ""
 categories: [style]
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "style"
+    weight: 05
+weight: 05	#rem
 aliases: []
 toc: false
 draft: false

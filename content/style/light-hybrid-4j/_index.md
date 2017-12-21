@@ -1,6 +1,6 @@
 ---
-title: "Saga - Distributed Transactions"
-date: 2017-12-07T12:44:55-05:00
+title: "Hybrid - Modularized Monolithic"
+date: 2017-12-20T21:21:09-05:00
 description: ""
 categories: []
 keywords: []

@@ -1,6 +1,6 @@
 ---
-title: "Saga - Distributed Transactions"
-date: 2017-12-07T12:44:55-05:00
+title: "Web Server with Light Platform"
+date: 2017-12-20T21:21:20-05:00
 description: ""
 categories: []
 keywords: []
