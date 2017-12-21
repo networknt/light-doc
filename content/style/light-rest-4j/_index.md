@@ -1,5 +1,5 @@
 ---
-title: "RESTful style of microservices"
+title: "REST - Representational state transfer"
 date: 2017-11-22T21:46:27-05:00
 description: "Microservices framework that support both Swagger 2.0 and OpenAPI 3.0 specifications"
 categories: [style]

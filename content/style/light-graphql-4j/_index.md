@@ -1,5 +1,5 @@
 ---
-title: "GraphQL"
+title: "GraphQL - A query language for your API"
 date: 2017-11-29T21:00:16-05:00
 description: "GraphQL API"
 categories: [style]
