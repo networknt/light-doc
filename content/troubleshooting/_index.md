@@ -18,9 +18,6 @@ toc: false
 notesforauthors:
 ---
 
-The Troubleshooting section includes known issues, recent workarounds, and FAQs pulled from the [Hugo Discussion Forum][forum].
+The Troubleshooting section includes known issues, recent workarounds, and FAQs pulled from the Gitter Rooms.
 
 
-
-
-[forum]: https://discourse.gohugo.io
