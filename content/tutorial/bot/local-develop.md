@@ -82,7 +82,14 @@ The first time build will take a while as Gradle 4.4.1 and Kotlin DSL need to be
 
 ### Run the develop branch build with default config
 
+```
+cd ~/networknt/light-bot/bot-cli/build/libs
+java -jar bot-cli-fat-1.0.jar -t develop
 
+```
+
+if the build is failed, you can check bot.log in the same directory as default email server is not
+set up with a correct password, there would be no email will be sent out if build or test is failed.
 
 
 
