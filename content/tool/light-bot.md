@@ -467,7 +467,52 @@ release:
 
 ```
 
+### external dependencies
+
+If you look at the code, you will realized that the light-bot is an command line executor which
+leverage the Linux/Mac bash to its extreme. We are just using Java code to glue all most useful
+command lines together to automate them in a way we think the most efficient. In order to do that
+we are depending on certain setups on the local environment or your devops servers.
+
+##### JDK, Maven
+
+As most projects in networknt are built in Java and compiled by Maven, we need to ensure that
+JDK 1.8 and Maven 3.5.x are installed. Use the following commands to check if they are installed
+correctly.
+
+
+```
+java -version
+mvn --version
+```
+
+##### Git
+
+Unlike other devops tools that support multiple VCS systems, we only support git and for some of
+the features like create release note, only github.com or compatible gogs are supported. As we
+are calling git command line most of the time, we need to ensure that ssh key pair are created
+on your host and upload the public key to github.com or gogs server. 
+
+##### Docker
+
+Docker needs to be available to start some of the depending services for building and testing. As
+you can see in the above steps, we are using docker-compose to start Kafka, Zookeeper, Mysql, Redis
+and Cdc server for light-tram-4j
+
+Also, we are using [networknt/github-changelog-generator][] to generate changelog from github pull
+request and issues. 
+
+##### Email
+
+For develop branch build and test, there is an email notification can be sent out if anything is
+wrong. In order to use it, you have to setup the email.yml to connect to your email server with
+correct credentials. The default config is using noreply@lightapi.net and you have to change to 
+an account available on your email server.
+
+
+
 [style of interaction]: /style/
 [light-bot]: https://github.com/networknt/light-bot
 [Kotlin DSL]: https://github.com/gradle/kotlin-dsl
 [light-bot tutorial]: /tutorial/bot/
+[networknt/github-changelog-generator]: https://github.com/skywinder/github-changelog-generator
