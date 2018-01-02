@@ -198,6 +198,57 @@ which is generated from swagger editor. If you want to overwrite the default
 config for one of the modules, you must use the {module name}.yml in your app
 config folder or externalized to config directory specified by system properties.
 
+## Environment Variable
+
+Some of the customers and vendors asked for environment variable support in config
+module and this feature was added in 1.5.7 release. As environment variables are
+highly dependable on the environment, we don't want to put it into our config module
+directly but provide a utility for users to substitute values from environment props.
+
+Here is an utility method added to StringUtil in utility module. 
+
+```java
+    public static String expandEnvVars(String text) {
+        Map<String, String> envMap = System.getenv();
+        String pattern = "\\$\\{([A-Za-z0-9-_]+)\\}";
+        Pattern expr = Pattern.compile(pattern);
+        Matcher matcher = expr.matcher(text);
+        while (matcher.find()) {
+            String envValue = envMap.get(matcher.group(1).toUpperCase());
+            if (envValue == null) {
+                envValue = "";
+            } else {
+                envValue = envValue.replace("\\", "\\\\");
+            }
+            Pattern subexpr = Pattern.compile(Pattern.quote(matcher.group(0)));
+            text = subexpr.matcher(text).replaceAll(envValue);
+        }
+        return text;
+    }
+
+```
+
+The format of the config string should be something like this. "IP=${DOCKER_HOST_IP}"
+and ${DOCKER_HOST_IP} will be replaced with the environment variable DOCKER_HOST_IP.
+
+This is a the test case that show you have it can be used.
+
+```java
+    public void testExpandEnvVars() {
+        String s = "IP=${DOCKER_HOST_IP}";
+        Assert.assertEquals("IP=192.168.1.120", StringUtil.expandEnvVars(s));
+    }
+
+```
+
+Before you run the test case above, please export the environment variable. 
+
+```
+export DOCKER_HOST_IP=192.168.1.120
+```
+
+On my desktop, I have it defined in the .bashrc in my home directory so I don't need
+to run the export every time. 
 
 ## Example
 
