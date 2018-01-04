@@ -20,7 +20,7 @@ common issues with RESTful API and has a lot of wonderful features; however, for
 it is very hard to learn in the first place. In this section, we are going to walk through several
 light-graphql-4j examples and show you how to build your own GraphQL server. 
 
-There are three tutorials and source code can be found at light-example-4j [graphql folder][].
+There are several tutorials and source code can be found at light-example-4j [graphql folder][].
  
 ### [Hello World][]
 
@@ -36,6 +36,10 @@ star wars GraphQL IDL downloaded from the Internet.
 
 This example shows you how to create a full blown GraphQL service with both query and mutation.
 
+### [Mutation IDL][]
+
+This is the same example like the mutation but is generated from a schema. 
+
 ### [Relay Todo][]
 
 This is to show you how to build a GraphQL service that is working with Relayjs. 
@@ -45,4 +49,5 @@ This is to show you how to build a GraphQL service that is working with Relayjs.
 [Hello World]: /tutorial/graphql/helloworld/
 [Star Wars]: /tutorial/graphql/starwars/
 [Mutation]: /tutorial/graphql/mutation/
+[Mutation IDL]: /tutorial/graphql/mutation-idl/
 [Relay Todo]: /tutorial/graphql/relay-todo/
