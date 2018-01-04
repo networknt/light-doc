@@ -24,3 +24,18 @@ Light-graph-4j is a framework that is designed to work with GraphQL. Similar to 
 Light frameworks it provides components and middleware handlers to handle specific use 
 cases.
 
+### GraphQL Specific Components
+
+* [graphql-common][] contains common utilities and static variables that are shared by other components.
+* [graphql-router][] is responsible for handling GraphQL and GraphiQL requests and hooks schema provider.
+
+### GraphQL Specific Middleware Handlers
+
+* [graphql-security][] verifies JWT token in request header and verifies scopes if it is enabled.
+* [graphql-validator][] validates the path and methods of the request. Other schema validation will be handled by the GraphQL component.
+
+
+[graphql-common]: /style/graphql-common/
+[graphql-router]: /style/graphql-router/
+[graphql-security]: /style/graphql-security/
+[graphql-validator]: /style/graphql-validator/
