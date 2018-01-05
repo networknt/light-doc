@@ -1,5 +1,5 @@
 ---
-title: "Encrypt Decrypt"
+title: "Encrypt and Decrypt"
 date: 2017-12-13T15:31:55-05:00
 description: ""
 categories: []
@@ -11,7 +11,7 @@ draft: false
 ---
 
 In this tutorial, we are going to show you how to create a customized encryptor command line
-utility and a customized decryptor class in side your API. Also, it shows you how to wire in
+utility and a customized decryptor class inside your API. Also, it shows you how to wire in
 your decryptor in service.yml file. 
 
 ### Decryptor Interface
@@ -49,10 +49,10 @@ process to get the clear text.
 ### Encryptor Utility
 
 Before we do anything in the API or service, we need to get the clear text from secret.yml and
-encrypt it and put it back to secret.yml file.
+encrypt it and put it back into secret.yml file.
 
 First we create a Java utility command line. Remember that you shouldn't package your utility into
-your API or service. Here for demo purpose, I put the class into the test folder in decryptor module.
+your API or service. Here is for demo purpose, I put the class into the test folder in decryptor module.
 
 ```java
 package com.networknt.decrypt;
@@ -315,196 +315,92 @@ singletons:
 As you can see we have bound AESDecryptor the Decryptor interface. If you have customized implementation,
 you can replace the AESDecryptor implementation with your package and class. 
 
-### SecretConfig 
+### DecryptUtil 
 
-Now let's take a look at SecretConfig class to understand how the decryption logic is called. This class
-is in common module which is shared bewteen client and server. 
+Now let's take a look at DecryptUtil class to understand how the decryption logic is called. This class
+is in common module which is shared between client and server. 
 
 ```java
 package com.networknt.common;
 
 import com.networknt.service.SingletonServiceFactory;
 import com.networknt.utility.Decryptor;
+import org.owasp.encoder.Encode;
 
-/**
- * Secret configuration class that maps to secret.yml
- *
- * @author Steve Hu
- */
-public class SecretConfig {
-    String serverKeystorePass;
-    String serverKeyPass;
-    String serverTruststorePass;
-    String clientKeystorePass;
-    String clientKeyPass;
-    String clientTruststorePass;
-    String authorizationCodeClientSecret;
-    String clientCredentialsClientSecret;
-    String keyClientSecret;
-    String consulToken;
+import java.util.List;
+import java.util.Map;
 
-    public SecretConfig() {
+public class DecryptUtil {
+    public static Map<String, Object> decryptMap(Map<String, Object> map) {
+        decryptNode(map);
+        return map;
     }
 
-    public String getServerKeystorePass() {
-        return serverKeystorePass;
-    }
-
-    public void setServerKeystorePass(String serverKeystorePass) {
-        if(serverKeystorePass.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            serverKeystorePass = decryptor.decrypt(serverKeystorePass);
+    private static void decryptNode(Map<String, Object> map) {
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (value instanceof String)
+                map.put(key, decryptObject(value));
+            else if (value instanceof Map)
+                decryptNode((Map) value);
+            else if (value instanceof List) {
+                decryptList((List)value);
+            }
         }
-        this.serverKeystorePass = serverKeystorePass;
     }
 
-    public String getServerKeyPass() {
-        return serverKeyPass;
-    }
-
-    public void setServerKeyPass(String serverKeyPass) {
-        if(serverKeyPass.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            serverKeyPass = decryptor.decrypt(serverKeyPass);
+    private static void decryptList(List list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) instanceof String) {
+                list.set(i, decryptObject((list.get(i))));
+            } else if(list.get(i) instanceof Map) {
+                decryptNode((Map<String, Object>)list.get(i));
+            } else if(list.get(i) instanceof List) {
+                decryptList((List)list.get(i));
+            }
         }
-        this.serverKeyPass = serverKeyPass;
     }
 
-    public String getServerTruststorePass() {
-        return serverTruststorePass;
-    }
+    private static Object decryptObject(Object object) {
+        if(object instanceof String) {
+            if(((String)object).startsWith(Decryptor.CRYPT_PREFIX)) {
+                Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
+                if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
+                object = decryptor.decrypt((String)object);
+            }
 
-    public void setServerTruststorePass(String serverTruststorePass) {
-        if(serverTruststorePass.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            serverTruststorePass = decryptor.decrypt(serverTruststorePass);
         }
-        this.serverTruststorePass = serverTruststorePass;
-    }
-
-    public String getClientKeystorePass() {
-        return clientKeystorePass;
-    }
-
-    public void setClientKeystorePass(String clientKeystorePass) {
-        if(clientKeystorePass.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            clientKeystorePass = decryptor.decrypt(clientKeystorePass);
-        }
-        this.clientKeystorePass = clientKeystorePass;
-    }
-
-    public String getClientKeyPass() {
-        return clientKeyPass;
-    }
-
-    public void setClientKeyPass(String clientKeyPass) {
-        if(clientKeyPass.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            clientKeyPass = decryptor.decrypt(clientKeyPass);
-        }
-        this.clientKeyPass = clientKeyPass;
-    }
-
-    public String getClientTruststorePass() {
-        return clientTruststorePass;
-    }
-
-    public void setClientTruststorePass(String clientTruststorePass) {
-        if(clientTruststorePass.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            clientTruststorePass = decryptor.decrypt(clientTruststorePass);
-        }
-        this.clientTruststorePass = clientTruststorePass;
-    }
-
-    public String getAuthorizationCodeClientSecret() {
-        return authorizationCodeClientSecret;
-    }
-
-    public void setAuthorizationCodeClientSecret(String authorizationCodeClientSecret) {
-        if(authorizationCodeClientSecret.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            authorizationCodeClientSecret = decryptor.decrypt(authorizationCodeClientSecret);
-        }
-        this.authorizationCodeClientSecret = authorizationCodeClientSecret;
-    }
-
-    public String getClientCredentialsClientSecret() {
-        return clientCredentialsClientSecret;
-    }
-
-    public void setClientCredentialsClientSecret(String clientCredentialsClientSecret) {
-        if(clientCredentialsClientSecret.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            clientCredentialsClientSecret = decryptor.decrypt(clientCredentialsClientSecret);
-        }
-        this.clientCredentialsClientSecret = clientCredentialsClientSecret;
-    }
-
-    public String getKeyClientSecret() {
-        return keyClientSecret;
-    }
-
-    public void setKeyClientSecret(String keyClientSecret) {
-        if(keyClientSecret.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            keyClientSecret = decryptor.decrypt(keyClientSecret);
-        }
-        this.keyClientSecret = keyClientSecret;
-    }
-
-    public String getConsulToken() {
-        return consulToken;
-    }
-
-    public void setConsulToken(String consulToken) {
-        if(consulToken.startsWith(Decryptor.CRYPT_PREFIX)) {
-            Decryptor decryptor = SingletonServiceFactory.getBean(Decryptor.class);
-            if(decryptor == null) throw new RuntimeException("No implementation of Decryptor is defined in service.yml");
-            consulToken = decryptor.decrypt(consulToken);
-        }
-        this.consulToken = consulToken;
+        return object;
     }
 }
 
-
 ```
 
-As you can see all set methods check if the value is encrypted with the prefix and decrypt it once if
-necessary. 
+As you can see it iterates all values in a map and check if the value is encrypted with the prefix and decrypt 
+it if necessary. 
 
 ### Test
 
 Now let's create a test case to see if in the application we can get clear text "password" from
-SecretConfig object.
+secret.yml config file. The following test case can be found in common module test folder. 
 
 ```java
-package com.networknt.decrypt;
+package com.networknt.common;
 
-import com.networknt.common.SecretConfig;
 import com.networknt.config.Config;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AESDescyptorTest {
-    public static final String CONFIG_NAME = "secret";
+import java.util.Map;
+
+public class DecryptUtilTest {
     @Test
-    public void descryptorTest() {
-        SecretConfig secretConfig = (SecretConfig)Config.getInstance().getJsonObjectConfig(CONFIG_NAME, SecretConfig.class);
-        Assert.assertEquals("password", secretConfig.getServerKeyPass());
+    public void testDecryptMap() {
+        Map<String, Object> secretMap = Config.getInstance().getJsonMapConfig("secret");
+        DecryptUtil.decryptMap(secretMap);
+        Assert.assertEquals("password", secretMap.get("serverKeystorePass"));
     }
-
-
 }
 
 ```

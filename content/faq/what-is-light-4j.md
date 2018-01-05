@@ -1,5 +1,5 @@
 ---
-title: "What Is Light 4j"
+title: "What is light-4j"
 date: 2017-12-21T06:34:12-05:00
 description: ""
 categories: []
@@ -11,11 +11,11 @@ draft: false
 ---
 
 light-4j is a platform or ecosystem for building and running cloud native microservices. The
-design goal is higher throughput, lower latency and smaller footprint to lower production cost.
+design goal is higher throughput, lower latency and smaller memory footprint to lower production cost.
 
 It contains the following: 
 
-* Cross-cutting concerns
+### Cross-cutting concerns
 
 All light-4j frameworks are built on top of an embedded gateway to address cross-cutting concerns
 for cloud native services within the request/response chain. These plugins or middleware handlers 
@@ -25,41 +25,53 @@ behaviors via configurations. One of the design goal is to allow developers only
 For more info please refer to [cross-cutting concerns][]
 
 
-* Interaction Style
+### Interaction Style
 
-In microservices architecture, services need to interact with each other and their are several
-frameworks to help build service with certain interaction style. 
+In microservices architecture, services need to interact with each other and there are several
+frameworks to help build services with certain interaction style. 
 
-Synchronous(Request/Response over HTTP): 
+Synchronous (Request/Response over HTTP): 
 
 [light-rest-4j][] - Building restful API and supporting Swagger 2.0 and OpenAPI 3.0 specification
+
 [light-graphql-4j][] - Generating GraphQL service with IDL
-[light-hybrid-4j][] - RPC framework that takes advantages of both monolithic and micorservices.
 
-Asynchronous(Event Driven): 
+[light-hybrid-4j][] - RPC and Serverless framework that takes advantages of both monolithic and micorservices.
 
-[light-tram-4j][] - Transactional messaging to enable delivery of message, event or command.
-[light-eventuate-4j][] - Event sourcing and CQRS framework 
+Asynchronous (Event Driven): 
+
+[light-tram-4j][] - Transactional messaging to ensure delivery of message, event or command.
+
+[light-eventuate-4j][] - Event sourcing and CQRS framework
+ 
 [light-saga-4j][] - Distributed transaction orchestration across microservices.
 
-* Infrastructure service
+### Infrastructure service
 
 To support microservices, the initial infrastructure services must be implemented first. It
 includes:
 
-[light-oauth2][] - An OAuth 2.0 provider implmented as microservices. 
-[light-portal][] - An API management portal and marketplace(Work in progress)
+[light-oauth2][] - An OAuth 2.0 provider implemented as microservices. 
+
+[light-portal][] - An API management portal and marketplace (Work in progress)
+
 ELK - Centralized logging
+
 InfluxDB and Grafana - Centralized metrics
+
 Consul - Service registry and discovery
+
 Kafka and Zookeeper - Message Broker
 
 
-* Tool Chain
+### Tool Chain
 
 [light-codegen][] - Code generator for all frameworks. 
-[openapi-parser][] - OpenAPI 3.0 parser and validator
+
+[openapi-parser][] - A light weight and fast OpenAPI 3.0 parser and validator
+
 [swagger-bundler][] - Bundle multiple swagger files together and validate the final result.
+
 [light-bot][] - Devops pipeline for microservices.
 
 
@@ -76,6 +88,3 @@ Kafka and Zookeeper - Message Broker
 [openapi-parser]: /tool/openapi-parser/
 [swagger-bundler]: /tool/swagger-bundler/
 [light-bot]: https://github.com/networknt/light-bot
-
-
-

@@ -352,6 +352,8 @@ You can also use the following curl command to test.
 
 ```
 curl -H 'Content-Type:application/json' -XPOST http://localhost:8080/graphql -d '{"query":"{ numberHolder { theNumber }}"}'
+curl -H 'Content-Type:application/json' -XPOST http://localhost:8080/graphql -d '{"query":"mutation { changeTheNumber(newNumber: 4) { theNumber }}"}'
+curl -H 'Content-Type:application/json' -XPOST http://localhost:8080/graphql -d '{"query":"{ numberHolder { theNumber }}"}'
 
 ```
 
