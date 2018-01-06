@@ -26,7 +26,7 @@ use this in your production as Oracle XE is not supposed to be used in productio
 the light-oauth2 in production, you can use Mysql or Postgres.    
 
 ```
-git clone git@github.com:networknt/light-docker.git
+git clone https://github.com/networknt/light-docker.git
 cd light-docker
 docker-compose -f docker-compose-oauth2-oracle.yml up
 ```

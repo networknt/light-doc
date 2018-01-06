@@ -18,11 +18,11 @@ Checkout related projects into your local workspace.
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/light-codegen.git
-git clone git@github.com:networknt/light-example-4j.git
-git clone git@github.com:networknt/model-config.git
-git clone git@github.com:networknt/light-oauth2.git
-git clone git@github.com:networknt/light-docker.git
+git clone https://github.com/networknt/light-codegen.git
+git clone https://github.com/networknt/light-example-4j.git
+git clone https://github.com/networknt/model-config.git
+git clone https://github.com/networknt/light-oauth2.git
+git clone https://github.com/networknt/light-docker.git
 
 ```
 

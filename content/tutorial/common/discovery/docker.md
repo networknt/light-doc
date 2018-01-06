@@ -574,7 +574,7 @@ Before we start the new docker-compose, make sure we stop the current consul doc
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/light-docker.git
+git clone https://github.com/networknt/light-docker.git
 cd light-docker
 docker-compose -f docker-compose-consul-registrator.yml up
 

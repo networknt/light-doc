@@ -26,7 +26,7 @@ Clone and build light-codegen
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/light-codegen.git
+git clone https://github.com/networknt/light-codegen.git
 cd light-codegen
 mvn clean install -DskipTests
 ```
@@ -39,7 +39,7 @@ compare your working folder with the .bak folder to see any difference.
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/light-example-4j.git
+git clone https://github.com/networknt/light-example-4j.git
 cd light-example-4j/rest/swagger
 mv database database.bak
 ```
