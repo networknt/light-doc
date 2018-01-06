@@ -10,7 +10,7 @@ toc: false
 draft: false
 ---
 
-This is tutorial will show you how to start light-eventuate-4j services with docker-compose. It is
+This tutorial will show you how to start light-eventuate-4j services with docker-compose. It is
 very convenient with developers who want to do integration test on his/her laptop or desktop. For
 official test environment and production, it is not recommended to use docker-compose or docker. 
 These services should be installed in data center or virtual machines to form clusters. 
@@ -81,6 +81,37 @@ echo $DOCKER_HOST_IP
 In order to confirm that the IP address or hostname is valid, you can ping it and see if you have
 responses. 
 
+##### Put the export into .bashrc
+
+If you are using a desktop which has ba static IP address, then you can put the export statement
+into .bashrc under your home directory. This can eliminate the manual step and ensure that you can
+run the docker-compose from any terminal. 
+
+Here is a section of my .bashrc file on my desktop.
+
+```
+export PATH=$PATH:/home/steve/tool/apache-maven-3.5.0/bin
+export M2_HOME=/home/steve/tool/apache-maven-3.5.0
+export M2=%M2_HOME%\bin
+export DOCKER_HOST_IP=192.168.1.120
+```
+
+Note that above manual export and script will only work on the terminal window with the export and
+you have to start the docker-compose with the exact terminal in order to work as the environment
+variable only associates to that particular terminal instance. 
+
+Right after you updated .bashrc, you can run the following command and then run the docker-compose
+from the same terminal. The next time you restart your computer, you can run the docker-compose in
+any terminal.
+
+```
+cd ~
+source .bashrc
+```
+
+This approach only works with desktop as it has a static IP. If you are using a laptop, most likely
+you will have to use the first option to export the IP manually. 
+
 
 ### Start eventuate services
 
@@ -94,7 +125,7 @@ cd light-docker
 ```
 
 Now let's start the docker-compose-eventuate.yml from light-docker folder. Before we run the compose,
-we need to export the DOCKER_HOST_IP on this terminal. 
+we need to export the DOCKER_HOST_IP on this terminal unless you have updated .bashrc file.
 
 After double check the DOCKER_HOST_IP environment variable, you can issue the following command to
 start Kafka, Zookeeper and Mysql all together.
@@ -107,9 +138,9 @@ docker-compose -f docker-compose-eventuate.yml up
 It will take several minutes to get all three services to start. Once all started, you can start the
 CDC server. 
 
-### Start CDC service
+### Start CDC server for eventuate
 
-CDC is a server that monitor the events table in the database and send the events to Kafka for other
+Eventuate CDC is a server that monitors the events table in the database and send the events to Kafka for other
 services to subscribe. To start eventuate-cdc-server, you can use a docker-compose file in light-docker.
 
 ```
@@ -118,7 +149,8 @@ docker-compose -f docker-compose-cdcserver-for-eventuate.yml up
 ```
 
 Another way to start CDC server is to start from the source code build. In this case, we need to compile
-light-eventuate-4j repo.
+light-eventuate-4j repo. Unless you are doing update for the CDC server, you should use the above 
+docker-compose to start CDC server for eventuate. 
 
 ```
 cd ~/networknt

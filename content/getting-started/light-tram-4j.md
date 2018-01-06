@@ -15,7 +15,7 @@ toc: false
 draft: false
 ---
 
-light-tram-4j is based on [eventuate-tram-core][] built by Chris Richardson. The client
+light-tram-4j is a port from [eventuate-tram-core][] built by Chris Richardson. The client
 API is the same but implemented not in Spring framework but light-4j instead. 
 
 There are three frameworks in light-platform focus on event driven microservices and
@@ -26,13 +26,13 @@ within a microservices architecture.
 
 light-tram-4j provides several messaging abstractions:
 
-* messaging - send and receive messages over named channels
+* messages - send and receive messages over named channels
 * events - publish domain events and subscribe to domain events
 * commands - asynchronoously send a command to a service and receive a reply
 
 ### How it works.
 
-Tram messaging implements the Application events pattern. An message producer inserts 
+Tram messaging implements the Application events pattern. A message producer inserts 
 events into an OUTBOX table as part of the ACID transaction that updates data, such as 
 JPA entities. A separate message relay (a.k.a. CDC service) publishes messages to the 
 message broker.
@@ -46,7 +46,7 @@ The message relay works in one of two ways:
 
 ### Example Application
 
-* [Todo list][] = A Todo list application, which publishes domain event using light-tram-4j
+* [Todo list][] A Todo list application, which publishes domain event using light-tram-4j
 
 
 ### Transactional messaging
@@ -154,9 +154,10 @@ public class OrderCommandHandlers {
 
 light-tram-4j has the same dependencies as light-eventuate-4j on Kafka, Zookeeper and
 Mysql. This must be started first before starting the CDC server below. The easiest way
-to start all of the is a docker-compose which is included in [light-docker][] repo.
+to start all of the services is a docker-compose which is included in [light-docker][] 
+repo.
 
-For step to step guide, please refer to [getting-started][] of light-eventuate-4j
+For step by step guide, please refer to [getting-started][] tutorial of light-eventuate-4j
 
 ### Running CDC Server
 
