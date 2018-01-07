@@ -47,6 +47,14 @@ export DOCKER_HOST_IP=198.168.1.120
 The above approach is the most reliable way to get the right IP address and on my Mac Book Pro it is the
 only working way as the computer name is not mapped to a real IP address somehow.
 
+If you want to setup a static IP for your Mac, then you can follow the steps below to set it up. Docker 
+for Mac has [networking limitations](https://docs.docker.com/docker-for-mac/networking/) and you need to 
+follow the steps below to set it up.
+
+```
+sudo ifconfig lo0 alias 10.200.10.1/24  # (where 10.200.10.1 is some unused IP address)
+export DOCKER_HOST_IP=10.200.10.1
+```
 
 ##### Export DOCKER_HOST_IP with script
 
