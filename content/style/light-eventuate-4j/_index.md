@@ -107,6 +107,41 @@ Here is a list of architecture decisions for light-eventuate-4j:
 
 * [Concepts][]
 * [Duplicate Events][]
+* [CDC server vs service][]
+
+### Component
+
+##### Data Change Capture
+
+* eventuate-cdc-connector-common - common utilities shared by all CDC modules
+* eventuate-cdc-connector-mysql-binlog - a trailing transaction log implementation of CDC with mysql binlog
+* eventuate-cdc-connector-polling - a generate CDC implemented by polling database table periodically
+* eventuate-cdc-connector-test-util - test utility for cdc connectors
+* eventuate-cdc-polling-server - a restful service that uses polling connector
+* eventuate-cdc-server - a restful service that uses mysql-binlog connector
+* eventuate-cdc-service - a hybrid service that uses mysql-binlog connector
+
+##### Common
+
+* eventuate-common - common interfaces or classes shared by both client and server
+* eventuate-event - event and event related interfaces and implementations
+
+##### Client
+
+* eventuate-client - common client utilities and classes
+* eventuate-client-jdbc - client JDBC classes for db repository
+* eventuate-client-jdbc-common - client JDBC API common
+* eventuate-client-test - client test cases
+* eventuate-client-test-domain - client test case account management domain model (account, money)
+* eventuate-client-test-example - client test case services that use test-domain
+* eventuate-client-test-util - utility classes for client test cases
+
+##### Server
+
+* eventuate-server-common - common components for server
+* eventuate-server-jdbc - JDBC event store API
+* eventuate-server-kafka - Kafka Publisher API
+
 
 
 
@@ -118,5 +153,6 @@ Here is a list of architecture decisions for light-eventuate-4j:
 [Why not use Kafka as source of truth]: /style/light-eventuate-4j/kafka-eventstore/
 [Concepts]: /style/light-eventuate-4j/concepts/
 [Duplicate Events]: /style/light-eventuate-4j/dup-events/
+[CDC server vs service]: /style/light-eventuate-4j/cdc/
 
 
