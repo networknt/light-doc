@@ -17,6 +17,21 @@ new todo item, update existing todo item and remove todo item(s). It also
 has query side service to retrieve all the todo items for display in the web
 single page application. 
 
+This example can be found at [light-example-4j][]. 
+
+There are five parts in this projects:
+
+* common module define domain object and event object across module both command side and query side
+
+* Command side API implemented on top of light-eventuate-4j to build and publish events.
+
+* Command side microservice (Restful based or hybrid based) to trigger command API
+
+* Query side API implemented on top of light-eventuate-4j to define the event handles and subscribe events and process by defined event handles.
+
+* Query side microservice (Restful based or hybrid based) to trigger query API.
+
+
 The following steps will assume you know the basic about light-eventuate-4j
 as well as light-rest-4j and light-hybrid-4j as we are going to build services
 in RESTful style and Hybrid RPC style. 
@@ -64,5 +79,6 @@ Here are all steps in this tutorial and it is the best to follow them in sequenc
 [Hybrid Test]: /tutorial/eventuate/todo-list/hybrid-test/
 [Rest Docker]: /tutorial/eventuate/todo-list/rest-docker/
 [Hybrid Docker]: /tutorial/eventuate-4j/todol-list/hybrid-docker/
+[light-example-4j]: https://github.com/networknt/light-example-4j/tree/master/eventuate/todo-list
 
 
