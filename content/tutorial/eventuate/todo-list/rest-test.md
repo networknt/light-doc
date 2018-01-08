@@ -92,6 +92,24 @@ And the response will be
 }
 ```
 
+This request will send request which will call backe-end service to generate a "create todo" event and 
+publish to event store.
+
+Event sourcing system will save the event into event store.
+
+CDC service will be triggered and will publish event to Kafka:
+
+The request will publish a "CreateTodo" event and will save the entity/event to the event store mysql database.
+
+we can use sql to verify:
+
+```
+select * from entity;
+
+select * from events;
+```
+
+
 Now let's access the rest-query service
 
 ```
@@ -125,3 +143,7 @@ And the response will be something like this.
     }
 ]
 ```
+
+Event sourcing system will subscribe the events from event store and process user defined event handlers.
+For todo-list example, the event handle simply gets the event and save the latest todo info into local TODO table.
+

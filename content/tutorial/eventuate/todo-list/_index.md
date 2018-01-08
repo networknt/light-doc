@@ -19,7 +19,7 @@ single page application.
 
 This example can be found at [light-example-4j][]. 
 
-There are five parts in this projects:
+### There are five parts in this projects:
 
 * common module define domain object and event object across module both command side and query side
 
@@ -31,6 +31,31 @@ There are five parts in this projects:
 
 * Query side microservice (Restful based or hybrid based) to trigger query API.
 
+### Process Flow
+
+![drawing5](/images/Drawing5.png)
+
+Step 1:  Application or browser sends restful http post request to command service to create a todo :
+
+Step 2: Command service processes the request and generates a "create todo" event; And then publishes 
+the event to event store
+
+Step 3: CDC service will capture the data change based on mysql replication log and publish the event 
+data to Kafka distributed stream system
+
+Step 4: Query side service's event handler will know the new event data published to Kafka, and event 
+handler will subscribe the event
+
+Step 5: Query side service will process the event and Save the result to local table. (In this example: 
+mysql/todo_db/TODO)
+
+Step 6: Application or browser sends restful http get request to query service to get ALL todo list
+
+Step 7: Query side service processes the request and gets the todo list from local table
+
+Step 8: Query side service returns the http response back.
+
+### Steps
 
 The following steps will assume you know the basic about light-eventuate-4j
 as well as light-rest-4j and light-hybrid-4j as we are going to build services

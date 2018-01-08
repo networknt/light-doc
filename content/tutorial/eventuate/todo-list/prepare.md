@@ -29,4 +29,4 @@ Once all done, the todo-list project in light-example-4j/eventuate will contain 
 
 When you are ready, let's go to the next to [create multi-module maven project][].
 
-[create multi-module maven project]: /tutorial/eventuate/todo-list/project.md
+[create multi-module maven project]: /tutorial/eventuate/todo-list/project/
