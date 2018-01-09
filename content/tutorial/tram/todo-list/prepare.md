@@ -25,7 +25,27 @@ repository. And CDC server for light-tram-4j can be found at [docker-compose-cdc
 
 The detail steps are documented in the [getting started] in light-tram-4j
 
+To review the source code, it would be better to checkout the repository from github and review
+the code in an IDE like IntelliJ Idea.
+
+```
+cd ~/networknt
+git clone https://github.com/networknt/light-example-4j.git
+```
+
+The source code can be found at light-example-4j/tram/light-tram-todolist folder.
+
+There are two different implementations: 
+
+A monolithic single module implementation can be found in single-module folder
+
+A microservices multiple module implementation can be found in multi-module folder.
+
+In the next step, let's walk through the [common][] module which contains domain event definitions.
+
+
 [docker-compose-eventuate.yml]: https://github.com/networknt/light-docker/blob/master/docker-compose-eventuate.yml
 [docker-compose-cdcserver-for-tram.yml]: https://github.com/networknt/light-docker/blob/master/docker-compose-cdcserver-for-tram.yml
 [getting started]: /getting-started/light-tram-4j/
+[common]: /tutorial/tram/todo-list/common/
 
