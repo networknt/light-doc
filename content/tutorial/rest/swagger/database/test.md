@@ -5,6 +5,7 @@ description: ""
 categories: []
 keywords: []
 slug: ""
+weight: 40	#rem
 aliases: []
 toc: false
 draft: false
