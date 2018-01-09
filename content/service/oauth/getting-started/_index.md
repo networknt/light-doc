@@ -41,7 +41,7 @@ Note: as Oracle client is not available in public maven repo, you have to instal
 following this [link][] to install it before building the source code.
 
 ```
-git clone git@github.com:networknt/light-oauth2.git
+git clone https://github.com/networknt/light-oauth2.git
 cd light-oauth2
 mvn clean install
 ```

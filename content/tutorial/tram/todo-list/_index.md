@@ -77,16 +77,33 @@ Elasticsearch to maintain a materialize view.
 
 ### Tutorial
 
-The following steps are included in the tutorial and there are simple steps in [README.md][]
+The following steps are included in the tutorial and there are simple steps in [README.md][]. As
+we have two implementations, single-module and multi-module to represent monolithic and microservices,
+we are going to focus on the multi-module project for this tutorial. 
 
 
 * [Prepare environment][]
 
-* 
+* [common][]
 
+* [command][]
+
+* [view][]
+
+* [tram-todo-command][]
+
+* [tram-todo-view][] 
+
+* [Build and Test][]
 
 
 [README.md]: https://github.com/networknt/light-example-4j/tree/master/tram/light-tram-todolist/multi-module
 [Prepare environment]: /tutorial/tram/todo-list/prepare/
+[common]: /tutorial/tram/todo-list/common/
+[command]: /tutorial/tram/todo-list/command/
+[view]: /tutorial/tram/todo-list/view/
+[tram-todo-command]: /tutorial/tram/todo-list/command-service/
+[tram-todo-view]: /tutorial/tram/todo-list/view-service/
+[Build and Test]: /tutorial/tram/todo-list/test/
 
 

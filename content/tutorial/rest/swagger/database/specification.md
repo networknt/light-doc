@@ -127,7 +127,7 @@ specification as well as the config.json to generate a service project.
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/model-config.git
+git clone https://github.com/networknt/model-config.git
 ```
 
 

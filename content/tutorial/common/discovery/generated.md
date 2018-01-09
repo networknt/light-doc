@@ -49,7 +49,7 @@ and we need the specifications for these services.
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/model-config.git
+git clone https://github.com/networknt/model-config.git
 ```
 
 In this repo, you have a generate.sh in the root folder to use docker
@@ -64,7 +64,7 @@ clone this repo into our working directory.
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/light-example-4j.git
+git clone https://github.com/networknt/light-example-4j.git
 ```
 
 In the above repo, there is a folder discovery contains all the projects
@@ -82,7 +82,7 @@ into the workspace.
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/light-codegen.git
+git clone https://github.com/networknt/light-codegen.git
 mvn clean install
 ```
 

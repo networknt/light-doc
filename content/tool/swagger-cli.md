@@ -61,7 +61,7 @@ If you prefer to run the commands individually, please see the sequence listed b
 
 ```shell
 # clone the model-config GIT repository
-git clone git@github.com:networknt/model-config.git
+git clone https://github.com/networknt/model-config.git
 
 # switch to the rest folder
 cd model-config/rest
@@ -99,7 +99,7 @@ specification are defined in a folder name as the API name.
 
 ```shell
 # clone the model-config repository
-git clone git@github.com:networknt/model-config.git
+git clone https://github.com/networknt/model-config.git
 
 # switch to the model-config/rest folder
 cd model-config/rest
