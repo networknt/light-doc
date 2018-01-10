@@ -3,12 +3,12 @@ date: 2017-10-17T18:46:16-04:00
 title: Dynamic service discovery with direct registry
 ---
 
-The above step uses static urls defined in configuration files. It won't work in a
+The above step uses [static][] urls defined in configuration files. It won't work in a
 dynamic clustered environment as there are more instances of each service. In this
 step, we are going to use cluster component with direct registry so that we don't
 need to start external consul or zookeeper instances. We still go through registry
 for service discovery but the registry is defined in service.yml. Next step we
-will use consul server for the discovery to mimic real production environment.
+will use [consul][] server for the discovery to mimic real production environment.
 
 With direct registry in service.yml, we can easily move to consul for service
 discovery without changing the code. Each service can be package with docker
@@ -37,7 +37,7 @@ files.
 
 DataGetHandler.java
 
-```
+```java
 package com.networknt.apia.handler;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -155,12 +155,54 @@ public class DataGetHandler implements HttpHandler {
 
 ```
 
-Also, we need service.yml to inject several singleton implementations of
+Also, we need update service.yml to inject several singleton implementations of
 Cluster, LoadBanlance, URL and Registry. Please note that the key in parameters
 is serviceId of your calling APIs
 
+The generated service.yml should be something like this. 
 
-```
+```yaml
+# Singleton service factory configuration/IoC injection
+singletons:
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apia.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
+
+``` 
+
+And here is the updated one with registry setup.
+
+```yaml
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -177,6 +219,38 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apia.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
 
 ```
 
@@ -187,7 +261,7 @@ As we don't need api_a.yml anymore, it can be removed.
 
 DataGetHandler.java
 
-```
+```java
 package com.networknt.apib.handler;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -276,9 +350,12 @@ public class DataGetHandler implements HttpHandler {
 }
 ```
 
-Inject interface implementations and define the API D url.
+Inject interface implementations and define the API D url. After the update, service.yml should be
+something like this.
 
-```
+
+```yaml
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -294,6 +371,38 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apib.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
 
 ```
 
@@ -360,5 +469,10 @@ The result is
 
 In this step, we are using direct registry service registry and discovery so that it
 can be easily replaced with consul discovery later on without changing the code. In
-the next step, we are going to start multiple instances of API D and see how direct
+the next step, we are going to start [multiple][] instances of API D and see how direct
 registry to handle the situation. 
+
+
+[static]: /tutorial/common/discovery/static/
+[consul]: /tutorial/common/discovery/consul/
+[multiple]: /tutorial/common/discovery/multiple/

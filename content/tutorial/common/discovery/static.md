@@ -380,3 +380,7 @@ The result is
 
 For now we have four APIs updated and with configured host and path, API A can call API B, C 
 and API B can call API D. As you can see we are using https connection between API calls. 
+
+In the next step, we are going to switch our implementation to [dynamic][] discovery with service.yml
+
+[dynamic]: /tutorial/common/discovery/dynamic/
