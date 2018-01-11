@@ -3,8 +3,8 @@ date: 2017-10-17T21:05:20-04:00
 title: Service discovery for Docker container
 ---
 
-In this step, we are going to dockerize all the APIs and then use [registrator](https://github.com/gliderlabs/registrator) 
-for service registry. To make it easier, we are going to use docker-compose to put everything together.
+In this step, we are going to dockerize all the APIs and then use [registrator][] for service 
+registry. To make it easier, we are going to use docker-compose to put everything together.
 
 Now let's copy from consul to docker for each API.
  
@@ -26,7 +26,7 @@ As we will be using docker-compose to start consul, registrator and APIs altoget
 and there is no easy way to control the start sequence. We are going to update the 
 handler to remove the connection creation in constructor. 
 
-```
+```java
 package com.networknt.apia.handler;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -74,7 +74,7 @@ public class DataGetHandler implements HttpHandler {
         List<String> list = new ArrayList<>();
         if(connectionB == null || !connectionB.isOpen()) {
             try {
-                apibHost = cluster.serviceToUrl("https", "com.networknt.apib-1.0.0", null);
+                apibHost = cluster.serviceToUrl("https", "com.networknt.apib-1.0.0", null, null);
                 connectionB = client.connect(new URI(apibHost), Http2Client.WORKER, Http2Client.SSL, Http2Client.POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true)).get();
             } catch (Exception e) {
                 logger.error("Exeption:", e);
@@ -83,7 +83,7 @@ public class DataGetHandler implements HttpHandler {
         }
         if(connectionC == null || !connectionC.isOpen()) {
             try {
-                apicHost = cluster.serviceToUrl("https", "com.networknt.apic-1.0.0", null);
+                apicHost = cluster.serviceToUrl("https", "com.networknt.apic-1.0.0", null, null);
                 connectionC = client.connect(new URI(apicHost), Http2Client.WORKER, Http2Client.SSL, Http2Client.POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true)).get();
             } catch (Exception e) {
                 logger.error("Exeption:", e);
@@ -135,7 +135,7 @@ Since we are using registrator to register the service, we need to disable the a
 
 server.yml
 
-```
+```yaml
 
 # Server configuration
 ---
@@ -171,17 +171,23 @@ serviceId: com.networknt.apia-1.0.0
 
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: false
+
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
 ```
 
 Please note that enableRegistry is set to false as we don't need the server to register itself
 as it is running inside the Docker container and doesn't know the Container IP address and port.
 
 In order to discover services from client module, we need to update service.yml to setup properties
-of URLImpl and properties of ConsulEcwidClient with hostname Consul and port 8500.
+of URLImpl and properties of ConsulClientImpl with hostname Consul and port 8500.
 
 service.yml
 
-```
+```yaml
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -192,7 +198,8 @@ singletons:
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
-  - com.networknt.consul.client.ConsulEcwidClient:
+  - com.networknt.consul.client.ConsulClientImpl:
+    - java.lang.String: http
     - java.lang.String: consul
     - int: 8500
 - com.networknt.registry.Registry:
@@ -201,6 +208,41 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apia.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
+
+
+
 
 ```
 
@@ -232,7 +274,7 @@ docker push networknt/com.networknt.apia-1.0.0
 Similar with API A, we are going to remove the connection creation in constructor for
 the handler. 
 
-```
+```java
 package com.networknt.apib.handler;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -276,7 +318,7 @@ public class DataGetHandler implements HttpHandler {
         final CountDownLatch latch = new CountDownLatch(1);
         if(connection == null || !connection.isOpen()) {
             try {
-                apidHost = cluster.serviceToUrl("https", "com.networknt.apid-1.0.0", null);
+                apidHost = cluster.serviceToUrl("https", "com.networknt.apid-1.0.0", null, null);
                 connection = client.connect(new URI(apidHost), Http2Client.WORKER, Http2Client.SSL, Http2Client.POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true)).get();
             } catch (Exception e) {
                 logger.error("Exeption:", e);
@@ -312,7 +354,8 @@ public class DataGetHandler implements HttpHandler {
 
 server.yml
 
-```
+```yaml
+
 # Server configuration
 ---
 # This is the default binding address if the service is dockerized.
@@ -348,11 +391,17 @@ serviceId: com.networknt.apib-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: false
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
+
 ```
 
 service.yml
 
-```
+```yaml
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -363,7 +412,8 @@ singletons:
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
-  - com.networknt.consul.client.ConsulEcwidClient:
+  - com.networknt.consul.client.ConsulClientImpl:
+    - java.lang.String: http
     - java.lang.String: consul
     - int: 8500
 - com.networknt.registry.Registry:
@@ -372,6 +422,40 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apib.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
+
+
 
 ```
 
@@ -399,7 +483,8 @@ docker push networknt/com.networknt.apib-1.0.0
 
 server.yml
 
-```
+```yaml
+
 # Server configuration
 ---
 # This is the default binding address if the service is dockerized.
@@ -434,11 +519,18 @@ serviceId: com.networknt.apic-1.0.0
 
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: false
+
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
 ```
 
 service.yml
 
-```
+```yaml
+
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -449,7 +541,8 @@ singletons:
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
-  - com.networknt.consul.client.ConsulEcwidClient:
+  - com.networknt.consul.client.ConsulClientImpl:
+    - java.lang.String: http
     - java.lang.String: consul
     - int: 8500
 - com.networknt.registry.Registry:
@@ -458,6 +551,41 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apic.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
+
+
+
 ```
 
 Dockerfile should be
@@ -483,7 +611,8 @@ docker push networknt/com.networknt.apic-1.0.0
 
 server.yml
 
-```
+```yaml
+
 # Server configuration
 ---
 # This is the default binding address if the service is dockerized.
@@ -496,7 +625,7 @@ httpPort:  7004
 enableHttp: false
 
 # Https port if enableHttps is true.
-httpsPort:  7445
+httpsPort:  7444
 
 # Enable HTTPS should be true on official environment.
 enableHttps: true
@@ -519,11 +648,18 @@ serviceId: com.networknt.apid-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: false
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
+
 ```
 
 service.yml
 
-```
+```yaml
+
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -534,7 +670,8 @@ singletons:
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
-  - com.networknt.consul.client.ConsulEcwidClient:
+  - com.networknt.consul.client.ConsulClientImpl:
+    - java.lang.String: http
     - java.lang.String: consul
     - int: 8500
 - com.networknt.registry.Registry:
@@ -543,6 +680,41 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apid.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
+
+
+
 
 ```
 
@@ -568,20 +740,37 @@ docker push networknt/com.networknt.apid-1.0.0
 
 ### Start docker-compose
 
-Now we have all four API built, dockerized and pushed to docker hub. Let's start the docker-compose.
+Now we have all four API built, dockerized and published to docker hub. Let's start the docker-compose.
 Before we start the new docker-compose, make sure we stop the current consul docker container. 
 
+Start Consul.
 
 ```
 cd ~/networknt
 git clone https://github.com/networknt/light-docker.git
 cd light-docker
-docker-compose -f docker-compose-consul-registrator.yml up
+docker-compose -f docker-compose-consul.yml up
 
 ```
 
-This compose will start Consul, Registrator and four services together.
+Start Registrator once Consul is ready.
 
+```
+docker-compose -f docker-compose-registrator.yml up
+```
+
+Start APIs once Registrator is ready.
+
+```
+docker-compose -f docker-compose-discovery.yml up
+```
+
+
+Now you can go to the Consul Web UI to check if all APIs are registered. 
+
+```
+http://localhost:8500/
+```
 
 ### Test Servers
 
@@ -595,7 +784,11 @@ And here is the result.
 ["API C: Message 1","API C: Message 2","API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
 ```
 
+In this step, we have dockerized all APIs and start them together. We also, start Consul and Registrator
+with separate compose and allow registrator to register all docker container on the host to Consul.
 
-Note: with the latest registrator, it registers apia, b, c and d into address 172.25.0.4 - 7
-and these IPs are not reachable. It is broken and need further investigation. 
+In the next step, we are going to deploy all services to [Kubernetes][] cluster instead of docker-compose. 
+
+[registrator]: https://github.com/gliderlabs/registrator
+[Kubernetes]: /tutorial/common/discovery/kubernetes/
 

@@ -352,3 +352,10 @@ http://localhost:8500/ui
 ```
 
 This is not working so far and need to work it out.
+
+
+In this step, we tried to secure consul access from services so that we can be sure that
+the services registered on the consul are the valid ones. In the next step, we are going
+to start services with [Docker][] containers.
+
+[Docker]: /tutorial/common/discovery/docker/
