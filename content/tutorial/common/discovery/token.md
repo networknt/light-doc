@@ -46,7 +46,7 @@ curl \
 And we get the token like this.
 
 ```text
-{"ID":"48693be9-51e7-8d1e-927f-346a82516920"}
+{"ID":"67ccac85-36a3-e912-d0b3-bce1194119a0"}
 ```
 
 Introduce the token through an API.
@@ -57,7 +57,7 @@ curl \
     --header "X-Consul-Token: the_one_ring" \
     --data \
 '{
-  "Token": "48693be9-51e7-8d1e-927f-346a82516920"
+  "Token": "67ccac85-36a3-e912-d0b3-bce1194119a0"
 }' http://127.0.0.1:8500/v1/agent/token/acl_agent_token
 ```
 
@@ -77,6 +77,12 @@ curl \
 
 ```
 
+It should return something like this.
+
+```json
+{"ID":"anonymous"}
+```
+
 The next step we are going to update secret.yml to add consul-token in order to access
 the Consul for service registry and discovery.
 
@@ -84,7 +90,7 @@ the Consul for service registry and discovery.
 
 Update secret.yml to add consulToken: the_one_ring
 
-```text
+```yaml
 # This file contains all the secrets for the server and client in order to manage and
 # secure all of them in the same place. In Kubernetes, this file will be mapped to
 # Secrets and all other config files will be mapped to mapConfig
@@ -120,10 +126,16 @@ authorizationCodeClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 # Client credentials client secret for OAuth2 server
 clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 
+# Key distribution client secret for OAuth2 server
+keyClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
 # Consul service registry and discovery
 
 # Consul Token for service registry and discovery
 consulToken: the_one_ring
+
+# EmailSender password
+emailPassword: change-to-real-password
 
 ```
 
@@ -131,7 +143,7 @@ consulToken: the_one_ring
 
 Update secret.yml to add consulToken: the_one_ring
 
-```text
+```yaml
 # This file contains all the secrets for the server and client in order to manage and
 # secure all of them in the same place. In Kubernetes, this file will be mapped to
 # Secrets and all other config files will be mapped to mapConfig
@@ -167,10 +179,16 @@ authorizationCodeClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 # Client credentials client secret for OAuth2 server
 clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 
+# Key distribution client secret for OAuth2 server
+keyClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
 # Consul service registry and discovery
 
 # Consul Token for service registry and discovery
 consulToken: the_one_ring
+
+# EmailSender password
+emailPassword: change-to-real-password
 
 ```
 
@@ -178,7 +196,7 @@ consulToken: the_one_ring
 
 Update secret.yml to add consulToken: the_one_ring
 
-```text
+```yaml
 # This file contains all the secrets for the server and client in order to manage and
 # secure all of them in the same place. In Kubernetes, this file will be mapped to
 # Secrets and all other config files will be mapped to mapConfig
@@ -214,10 +232,16 @@ authorizationCodeClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 # Client credentials client secret for OAuth2 server
 clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 
+# Key distribution client secret for OAuth2 server
+keyClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
 # Consul service registry and discovery
 
 # Consul Token for service registry and discovery
 consulToken: the_one_ring
+
+# EmailSender password
+emailPassword: change-to-real-password
 
 ```
 
@@ -225,7 +249,7 @@ consulToken: the_one_ring
 
 Update secret.yml to add consulToken: the_one_ring
 
-```text
+```yaml
 # This file contains all the secrets for the server and client in order to manage and
 # secure all of them in the same place. In Kubernetes, this file will be mapped to
 # Secrets and all other config files will be mapped to mapConfig
@@ -261,10 +285,16 @@ authorizationCodeClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 # Client credentials client secret for OAuth2 server
 clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 
+# Key distribution client secret for OAuth2 server
+keyClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+
 # Consul service registry and discovery
 
 # Consul Token for service registry and discovery
 consulToken: the_one_ring
+
+# EmailSender password
+emailPassword: change-to-real-password
 
 ```
 

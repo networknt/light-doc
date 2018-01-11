@@ -3,7 +3,7 @@ date: 2017-10-17T19:41:50-04:00
 title: Consul service registry and discovery
 ---
 
-Previous step multiple demonstrates how to use direct registry to enable load balance and
+Previous step [multiple][] demonstrates how to use direct registry to enable load balance and
 it works the same way as Consul and Zookeeper registry. In this step, we are going to
 use Consul for registry to enable cluster.
 
@@ -29,7 +29,8 @@ service.yml configuration to inject the consul implementation to the registry in
 
 service.yml
 
-```
+```yaml
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -50,6 +51,38 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apia.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
 ```
 
 Although in our case, there is no caller service for API A, we still need to register
@@ -58,7 +91,7 @@ is turned off.
 
 If you don't turn off the http port, both ports will be registered on Consul. 
 
-```
+```yaml
 
 # Server configuration
 ---
@@ -95,6 +128,10 @@ serviceId: com.networknt.apia-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
 ```
 
 
@@ -105,7 +142,8 @@ the previous step.
 
 service.yml
 
-```
+```yaml
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -126,16 +164,48 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apib.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
+
 ```
 
 As API B will be called by API A, it needs to register itself to consul registry so
 that API A can discover it through the same consul registry. To do that you only need
-to enable server registry in config file.
+to enable server registry in config file and disable http connection.
 
 server.yml
 
-```
-
+```yaml
 
 # Server configuration
 ---
@@ -171,6 +241,11 @@ serviceId: com.networknt.apib-1.0.0
 
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
+
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
 ```
 
 ### API C
@@ -180,7 +255,9 @@ so that API A can discovery it from the same consul registry. Let's create servi
 
 service.yml
 
-```
+```yaml
+
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -201,12 +278,48 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apic.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
+
+
+
 ```
 
 
 server.yml
 
-```
+```yaml
+
 
 # Server configuration
 ---
@@ -242,6 +355,11 @@ serviceId: com.networknt.apic-1.0.0
 
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
+
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
 ```
 
 ### API D
@@ -251,7 +369,9 @@ so that API B can discovery it from the same consul registry. Let's create servi
 
 service.yml
 
-```
+```yaml
+
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -272,11 +392,47 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apid.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
+
+
+
 ```
 
 server.yml
 
-```
+```yaml
+
 
 # Server configuration
 ---
@@ -290,7 +446,7 @@ httpPort:  7004
 enableHttp: false
 
 # Https port if enableHttps is true.
-httpsPort:  7444
+httpsPort:  7445
 
 # Enable HTTPS should be true on official environment.
 enableHttps: true
@@ -312,6 +468,11 @@ serviceId: com.networknt.apid-1.0.0
 
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
+
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
 
 ```
 
@@ -389,15 +550,15 @@ curl -k https://localhost:7441/v1/data
 And the result will be
 
 ```
-["API C: Message 1","API C: Message 2","API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
+["API D: Message 1 from port 7445","API D: Message 2 from port 7445","API B: Message 1","API B: Message 2","API C: Message 1","API C: Message 2","API A: Message 1","API A: Message 2"]
 ```
  
 ### Start another API D
  
 Now let's start the second instance of API D. Before starting the serer, let's update
-server.yml with port 7445.
+server.yml with port 7444.
 
-```
+```yaml
 
 
 # Server configuration
@@ -412,7 +573,7 @@ httpPort:  7004
 enableHttp: false
 
 # Https port if enableHttps is true.
-httpsPort:  7445
+httpsPort:  7444
 
 # Enable HTTPS should be true on official environment.
 enableHttps: true
@@ -435,6 +596,11 @@ serviceId: com.networknt.apid-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
+
 ```
 
 And start the second instance
@@ -445,6 +611,9 @@ mvn clean install -DskipTests
 mvn exec:exec
 
 ```
+
+After you start the second instance of API D, you can go to the Web UI of consul to check if
+there are two instances for the API D. 
 
 ### Test Servers
 
@@ -460,12 +629,20 @@ curl -k https://localhost:7441/v1/data
 And the result should be the same.
 
 ```
+["API D: Message 1 from port 7445","API D: Message 2 from port 7445","API B: Message 1","API B: Message 2","API C: Message 1","API C: Message 2","API A: Message 1","API A: Message 2"]
+```
+
+Shutdown the server with port 7445. Now when you call the same curl command, you will 
+see 7444 server picks up the request.  
+
+```
 ["API C: Message 1","API C: Message 2","API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
 ```
 
-Shutdown the server with port 7444. Now when you call the same curl command, you will 
-see 7445 server picks up the request.  
+In step, we have Consul server started and each API register itself to the Consul. When we call
+the API A, all other APIs were discovered from Consul to fulfill the request. In the next step,
+we are going to start multiple instances that represent different environment with [tag][].
 
-```
-["API C: Message 1","API C: Message 2","API D: Message 1 from port 7445","API D: Message 2 from port 7445","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
-```
+
+[multiple]: /tutorial/common/discovery/multiple/
+[tag]: /tutorial/common/discovery/tag/

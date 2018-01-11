@@ -25,9 +25,10 @@ cp -r dynamic multiple
 Let's modify API B service.yml to have two API D instances that listen to 7444
 and 7445. 
 
-service.yml
+service.yml after modification.
 
-```
+```yaml
+# Singleton service factory configuration/IoC injection
 singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
@@ -43,6 +44,38 @@ singletons:
   - com.networknt.balance.RoundRobinLoadBalance
 - com.networknt.cluster.Cluster:
   - com.networknt.cluster.LightCluster
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.apib.PathHandlerProvider
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.StartupHookProvider:
+  # - com.networknt.server.Test1StartupHook
+  # - com.networknt.server.Test2StartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler
 
 ```
 
@@ -119,7 +152,7 @@ mvn clean install exec:exec
 Now let's start the second instance of API D. Before starting the serer, let's update
 server.yml with https port 7445 and disable HTTP.
 
-```
+```yaml
 
 # Server configuration
 ---
@@ -156,6 +189,11 @@ serviceId: com.networknt.apid-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: false
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
+# environment: test1
+
 ```
 
 And start the second instance
@@ -189,9 +227,11 @@ run the curl command again. You will see the following result as it failed over 
 Now, you can see API B can be failed over to either 7444 instance or 7445 instance of API D. 
 As we are caching the connection in API B, we have to shutdown one instance in order to fail
 over to another. You can change the API B to get a new connection for each request. This will
-impact the performance however, it won't pin API B to once instance for ever. The server will
+impact the performance however, it won't pin API B to one instance forever. The server will
 disconnect the connection if it is idle for a period time so eventually the load balancer will
 put load equally to all instances. Developers can try to disconnect after a period of time or
 a number of request to take advantage of cache and at the same time enable load balancing. 
 
-The next step, we are going to use consul to do the service registry and discovery.
+The next step, we are going to use [consul][] to do the service registry and discovery.
+
+[consul]: /tutorial/common/discovery/consul/

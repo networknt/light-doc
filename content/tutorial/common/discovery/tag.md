@@ -3,12 +3,12 @@ date: 2017-10-17T21:03:06-04:00
 title: Multiple instances with tags per environment
 ---
 
-In the previous step, we've setup the services to register on Consul and discover
+In the previous step, we've setup the services to register on [Consul][] and discover
 downstream services through Consul. If there are multiple instances for the same
 serviceId, then the client will try to load balance these instances.
 
 In real service delivery, there are a lot complicated testing scenarios that need
-to be addressed and one of the use cases is [environment segregation](../../../design/env-segregation.md)
+to be addressed and one of the use cases is [environment segregation][]
 
 In this step, we are going to use environment tag to separate multiple instances
 during testing so that we can have two segregated testing environment on the same
@@ -31,9 +31,10 @@ cp -r consul tag
 ### API A
 
 In order to register the service with a tag to indicate a separate environment. We
-need to update server.yml with a environment tag.
+need to update server.yml with a environment tag. Here we are using test1 as our tag.
 
-```text
+```yaml
+
 # Server configuration
 ---
 # This is the default binding address if the service is dockerized.
@@ -69,11 +70,13 @@ serviceId: com.networknt.apia-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
 environment: test1
-
 ```  
 
-Note that there is a newly added environment property with value test1. 
+Note that there is an environment property with value test1. 
 
 
 
@@ -81,7 +84,8 @@ Note that there is a newly added environment property with value test1.
 
 Let's update API B server.yml with environment tag.
 
-```text
+```yaml
+
 # Server configuration
 ---
 # This is the default binding address if the service is dockerized.
@@ -117,6 +121,9 @@ serviceId: com.networknt.apib-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
 environment: test1
 ```
 
@@ -124,7 +131,8 @@ environment: test1
 
 Let's update API C server.yml with environment tag.
 
-```text
+```yaml
+
 # Server configuration
 ---
 # This is the default binding address if the service is dockerized.
@@ -160,15 +168,18 @@ serviceId: com.networknt.apic-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
 environment: test1
-
 ```
 
 ### API D
 
 Let's update API D server.yml with environment tag.
 
-```text
+```yaml
+
 # Server configuration
 ---
 # This is the default binding address if the service is dockerized.
@@ -181,7 +192,7 @@ httpPort:  7004
 enableHttp: false
 
 # Https port if enableHttps is true.
-httpsPort:  7445
+httpsPort:  7444
 
 # Enable HTTPS should be true on official environment.
 enableHttps: true
@@ -204,14 +215,17 @@ serviceId: com.networknt.apid-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
 environment: test1
-
 ```
 
 ### Start Consul
 
 Here we are starting consul server in docker to serve as a centralized registry. To make it
-simpler, the ACL in consul is disable by setting acl_default_policy=allow.
+simpler, the ACL in consul is disable by setting acl_default_policy=allow. If you follow the
+the previous step, then your consul server should be running and you don't need to restart it.
 
 ```
 docker run -d -p 8400:8400 -p 8500:8500/tcp -p 8600:53/udp -e 'CONSUL_LOCAL_CONFIG={"acl_datacenter":"dc1","acl_default_policy":"allow","acl_down_policy":"extend-cache","acl_master_token":"the_one_ring","bootstrap_expect":1,"datacenter":"dc1","data_dir":"/usr/local/bin/consul.d/data","server":true}' consul agent -server -ui -bind=127.0.0.1 -client=0.0.0.0
@@ -283,15 +297,15 @@ curl -k https://localhost:7441/v1/data
 And the result will be
 
 ```
-["API C: Message 1","API C: Message 2","API D: Message 1 from port 7445","API D: Message 2 from port 7445","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
+["API C: Message 1","API C: Message 2","API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
 ```
  
 ### Start another API D
  
 Now let's start the second instance of API D. Before starting the serer, let's update
-server.yml with port 7444 and with environment tag test2
+server.yml with port 7445 and with environment tag test2
 
-```
+```yaml
 
 
 # Server configuration
@@ -306,7 +320,7 @@ httpPort:  7004
 enableHttp: false
 
 # Https port if enableHttps is true.
-httpsPort:  7444
+httpsPort:  7445
 
 # Enable HTTPS should be true on official environment.
 enableHttps: true
@@ -329,6 +343,9 @@ serviceId: com.networknt.apid-1.0.0
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: true
 
+# environment tag that will be registered on consul to support multiple instances per env for testing.
+# https://github.com/networknt/light-doc/blob/master/docs/content/design/env-segregation.md
+# This tag should only be set for testing env, not production. The production certification process will enforce it.
 environment: test2
 ```
 
@@ -369,18 +386,21 @@ curl -k https://localhost:7441/v1/data
 And the result should be the same.
 
 ```
-["API C: Message 1","API C: Message 2","API D: Message 1 from port 7445","API D: Message 2 from port 7445","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
+["API C: Message 1","API C: Message 2","API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
 ```
 
-Shutdown the server with port 7445. Now when you call the same curl command, you will an
-error although instance 7444 server is running.  
+Shutdown the server with port 7444. Now when you call the same curl command, you will have an
+error although instance 7445 server is running.  
 
-This is because that 7444 server has tag 'test2' and API B is looking up API D with tag
+This is because that 7445 server has tag 'test2' and API B is looking up API D with tag
 'test1'.
 
-In summary, this step show you how to use environment tag to separate testing instances
+In summary, this step shows you how to use environment tag to separate testing instances
 for microservices. 
 
-In the next step, Consul ACL will be enabled so that only services with token can register
+In the next step, Consul ACL will be enabled so that only services with [token][] can register
 and discover from it. 
 
+[Consul]: /tutorial/common/discovery/consul/
+[environment segregation]: /design/env-segregation/
+[token]: /tutorial/common/discovery/token/
