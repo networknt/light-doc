@@ -19,8 +19,8 @@ features:
 
   - heading: Built-in DevOps Tool Chain for CI/CD
     image_path: /images/icon-built-in-templates.svg
-    tagline: Jenkins pipeline, Ansible playbook, Docker and Kubernetes
-    copy: The entire tool chain (pipeline) and infrastructure (logging, metrics, messaging, security etc.) are integrated together and services are dockerized and orchestrated by Kubernetes.
+    tagline: Light-bot pipeline, Ansible playbook, Docker and Kubernetes
+    copy: The entire tool chain (pipeline) and infrastructure (logging, metrics, messaging, security etc.) are integrated together for microservices and services are dockerized and orchestrated by Kubernetes.
 
   - heading: Multi-Style Support for Different Products
     image_path: /images/icon-multilingual2.svg
