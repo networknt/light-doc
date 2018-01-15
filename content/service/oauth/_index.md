@@ -1,7 +1,7 @@
 ---
 title: "Light-OAuth2 Security"
 date: 2017-11-10T12:57:03-05:00
-description: "Service security with light-oauth2"
+description: ""
 categories: [service]
 keywords: [oauth2]
 menu:
@@ -14,15 +14,19 @@ toc: false
 draft: false
 ---
 
-Light platform follows security first design and we have provide a OAuth 2.0 provider
-which is based on light-4j framework with 7 microservices. 
+Light platform follows security first design and we have provided an OAuth 2.0 provider
+light-oauth2 which is based on light-4j and light-rest-4j frameworks with 7 microservices.
+Some of the services implement the OAuth 2.0 specifications and others implement some
+extensions to make OAuth more suitable to protect service to service communication, other 
+styles of services like GraphQL, RPC and Event Driven, Key management and distribution,
+service registration, token scope calculation and token exchange.    
 
 ## Why this OAuth 2.0 Authorization Server
 
 ### Fast and small memory footprint to lower production cost.
 
-The Development Edition can support 60000 user login and get authorization code redirect
-and can generate 700 access tokens per second on my laptop. 
+It can support 60000 user login and get authorization code redirect and can generate 
+700 access tokens per second on my laptop. 
 
 It has 7 microservices connected with in-memory data grid and each service can be
 scaled individually.
@@ -36,39 +40,62 @@ for additional security and prevent users making mistakes. For example, we
 have added an additional client type called "trusted" and only this type of
 client can issue resource owner password credentials grant type. 
 
+### More deployment options
+
+You can deploy all services or just deploy the services for your use cases. You can
+deploy token and code service to DMZ and all others internal for maximum security.
+You can have several token services or deploy token service as sidecar pattern in
+each node. You can start more instance of key service on the day that your public
+key certificate for signature verification is changed and shutdown all of the but
+one the next day. You can take the full advantages of microservices deployment.  
+
 ### Seamlessly integration with Light-Java framework
 
-* Built on top of Light-Java
-* Light-Java Client and Security modules manages all the communication with OAuth2
-* Support service on-boarding from Light-Portal
-* Support client on-boarding from Light-Portal
-* Support user management from Light-Portal
+* Built on top of light-4j and light-rest-4j
+* Light-4j Client and Security modules manages most of the communications with OAuth2
+* Support service on-boarding from light-portal
+* Support client on-boarding from light-portal
+* Support user management from light-portal
 * Open sourced OpenAPI specifications for all microserivces
 
 ### Easy to integrate with your APIs or services
 
-The OAuth2 services can be started in a docker compose and for your local devolopment
-and can managed by Kubernetes on official environment.
+The OAuth2 services can be started in a docker-compose for your local development and 
+can be managed by Kubernetes on official test and production environment. It exposes
+RESTful APIs and can be access from all languages and applications. 
 
-### Support mutilple databases and can be extended and customized easily
+### Support multiple databases and can be extended and customized easily
 
 Out of the box, it supports Mysql, Postgres and Oracle XE and H2 for unit tests. Other
-databases can be easily added with configuration change in service.json.
+databases can be easily added with configuration change in service.yml.
 
 
 ### Public key certificate distribution
 
-With distributed security verification, JWT signature public key certficates must
+With distributed security verification, JWT signature public key certificates must
 but distributed to all resource servers. The traditional push approach is not
 working with microservices architecture and pull approach is adopted. There is a 
 key service with endpoint to retrieve public key certificate from microservices 
 during runtime based on the key_id from JWT header.  
 
-### OAuth2 server, portal and light Java to form ecosystem
+### Two tokens to support microservices architecture
 
-[light-4j](https://github.com/networknt/light-4j) to build API
 
-[light-oauth2](https://github.com/networknt/light-oauth2) to control API access
 
-[light-portal](https://github.com/networknt/light-portal) to manage clients and APIs
+### Token exchange for high security
 
+
+### Service registration for scope calculation
+
+
+### OAuth2 server, portal and light-4j to form ecosystem
+
+[light-4j][] and related frameworks to build API
+
+[light-oauth2][] to control API access
+
+[light-portal][] to manage clients and APIs
+
+[light-4j]: https://github.com/networknt/light-4j
+[light-oauth2]: https://github.com/networknt/light-oauth2
+[lihgt-portal]: https://github.com/networknt/light-portal
