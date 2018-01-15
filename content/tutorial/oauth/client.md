@@ -1,5 +1,5 @@
 ---
-title: "Client"
+title: "Client Registration"
 date: 2017-11-10T14:50:54-05:00
 description: ""
 categories: []

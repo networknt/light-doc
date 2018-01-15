@@ -1,10 +1,10 @@
 ---
-title: "Token"
+title: "Token Endpoint"
 date: 2017-11-10T14:50:02-05:00
 description: ""
-categories: [oauth2]
+categories: []
 keywords: []
-weight: 20
+weight: 40
 aliases: []
 toc: false
 draft: false
@@ -12,7 +12,7 @@ draft: false
 
 This service has only one endpoint to get access token. It supports authorization
 code grant type and client credentials grant type. Also, it supports some customized
-authorization types required by our customer. These customized flows will only work
+authorization types required by our customers. These customized flows will only work
 on certain clients which have to be setup as trusted clients. 
 
 Authorization Grant with authorization code redirected in the previous step. Please

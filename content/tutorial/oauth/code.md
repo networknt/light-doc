@@ -1,10 +1,10 @@
 ---
-title: "Code"
-date: 2017-11-10T14:48:42-05:00
+title: "Authorization Code"
+date: 2017-11-10T14:50:02-05:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+weight: 30
 aliases: []
 toc: false
 draft: false

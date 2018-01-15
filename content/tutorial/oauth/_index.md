@@ -23,7 +23,7 @@ there are steps to enable all security with config files.
 
 * [How to start services][]
 
-* [Authorization Code Service][]
+* [Authorization Code][]
 
 * [Token Endpoint][]
 
@@ -39,7 +39,7 @@ there are steps to enable all security with config files.
 
 [How to generate long lived access token]: /tutorial/oauth/longlive/
 [How to start services]: /tutorial/oauth/start/
-[Authorization Code Service]: /tutorial/oauth/code/
+[Authorization Code]: /tutorial/oauth/code/
 [Token Endpoint]: /tutorial/oauth/token/
 [Service Registration]: /tutorial/oauth/service/
 [Client Registration]: /tutorial/oauth/client/

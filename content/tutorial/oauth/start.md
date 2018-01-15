@@ -1,10 +1,10 @@
 ---
-title: "Start"
-date: 2017-11-10T14:47:50-05:00
+title: "Start Services"
+date: 2017-11-10T14:50:02-05:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+weight: 20
 aliases: []
 toc: false
 draft: false
@@ -22,17 +22,18 @@ docker hub within your organization. And Kubernetes or other docker orchestratio
 used to manage containers. 
 
 There are two docker images per service and the Redhat based image is only used by one of our banking
-customers as it is the only one approved. 
+customers as it is the only one that is approved. 
 
 * Alphine Linux based image (78MB) which is smaller and recommended for most users.
 
 * Redhat Linux based image (219MB) with networknt as user instead of root for maximum security. 
 
 
-To help user to understand how each service work and enable user to modify services, the first section
+To help user to understand how each service works and enables user to modify services, the first section
 of this tutorial will focus on development mode which will build these services and dockerize them. 
 
-For each microservices, we have Dockerfile and Dockerfile-Redhat in docker folder. Here is an example:
+For each microservices, we have Dockerfile in root folder and Dockerfile-Redhat in docker folder. Here 
+is an example:
 
 https://github.com/networknt/light-oauth2/tree/master/client/docker
 
@@ -43,7 +44,7 @@ to release all services to docker hub together.
 
 The following will check out the repo, build and start services with Oracle XE database. Please don't
 use this in your production as Oracle XE is not supposed to be used in production. If you want to use
-the light-oauth2 in production, you can use Mysql or Postgres.     
+the light-oauth2 in production, you can use Mysql or Postgres or your Oracle production database.      
 
 ```
 git clone https://github.com/networknt/light-docker.git

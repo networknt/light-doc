@@ -30,7 +30,7 @@ client registration and public key certificate distribution. It can support mill
 and thousands of clients and services with scopes. It should be easily handling 
 thousands of concurrent users per instance and each microservice can be scaled individually.
 
-Specifications can be found at https://github.com/networknt/model-config/tree/master/rest/swagger
+Specifications can be found at https://github.com/networknt/model-config/tree/master/rest
 
 Three databases are supported: Oracle, Mysql and Postgres out of the box and more will be
 supported upon customer's request.
@@ -81,8 +81,17 @@ Oracle
 docker-compose -f docker-compose-oracle.yml up
 ```
 
+If you change the source code, you have to rebuild it and create docker images again. Remember to
+remove the existing docker images before running docker-compose again. 
+
+### Tutorials
+
 Once the server is up and running, you can explore them by following the [light-oauth2 tutorial][]
-step by step. If you need more information please visit [oauth] section in infrastructure service. 
+step by step. 
+
+### Document
+
+If you need more information please visit [oauth] section in infrastructure service. 
 
 
 [introduction]: /service/oauth/introduction/

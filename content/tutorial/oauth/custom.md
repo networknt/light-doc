@@ -1,5 +1,5 @@
 ---
-title: "Custom"
+title: "Custom Grant Types"
 date: 2017-12-05T20:22:01-05:00
 description: ""
 categories: []
