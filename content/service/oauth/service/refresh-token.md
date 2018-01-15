@@ -1,13 +1,21 @@
 ---
-date: 2017-09-19T21:07:30-04:00
-title: Refresh Token
+title: "Refresh Token"
+date: 2017-11-10T14:50:02-05:00
+description: ""
+categories: []
+keywords: []
+weight: 70
+aliases: []
+toc: false
+draft: false
 ---
-
-# Refresh Token
 
 Refresh Token is issued in Authorization Code Grant and Resource Owner Password Credentials 
 Grant along with access token. Also, for maximum security, a refresh token is issued every
-time the old refresh token is used to renew an access token. 
+time the old refresh token is used to renew an access token. The token service is responsible
+for issuing refresh token alone with access token. This service is used to manage the refresh
+token. For example, all all active refresh tokens, delete/revoke a refresh token or retrieve
+all information about one particular refresh token.   
 
 
 This service is listening to port number 6886.
@@ -143,7 +151,6 @@ definitions:
 
 ```
 
-## Implementation
 
 ### /oauth2/refresh_token@get
 

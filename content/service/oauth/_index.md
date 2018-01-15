@@ -154,7 +154,7 @@ Here are some important [references][] that can help you to understand OAuth 2.0
 
 [light-4j]: https://github.com/networknt/light-4j
 [light-oauth2]: https://github.com/networknt/light-oauth2
-[lihgt-portal]: https://github.com/networknt/light-portal
+[light-portal]: https://github.com/networknt/light-portal
 [light-oauth2 service]: /service/oauth/service/
 [light-oauth2 tutorial]: /tutorial/oauth/
 [getting started]: /getting-started/light-oauth2/

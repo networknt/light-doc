@@ -1,11 +1,15 @@
 ---
-date: 2017-09-19T20:57:08-04:00
-title: Authorization Code 
+title: "Authorization Code"
+date: 2017-11-05T12:31:31-05:00
+description: ""
+categories: [oauth2]
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
 
-# Code
-
-This is a service that support authorization code grant type. The authorization 
+This is a service that supports authorization code grant type. The authorization 
 code grant type is used to obtain both access tokens and refresh tokens and is 
 optimized for confidential clients. Since this is a redirection-based flow, the 
 client must be capable of interacting with the resource owner's user-agent 
@@ -16,7 +20,7 @@ The service accepts user credentials and redirects back authorization code with
 redirect URI defined in the client registration or overwritten it by passing in 
 a redirect URI in the request.
 
-## Request
+### Request
 
 The client constructs the request URI by adding the following parameters to the 
 query component of the authorization endpoint URI using the 
@@ -36,7 +40,8 @@ OPTIONAL. Redirect URI.
 
 * scope
 
-OPTIONAL. The scope of the access request.
+OPTIONAL. The scope of the access request. The client's default scope will be used
+if this value is not passed in.
 
 * state
          
@@ -55,7 +60,7 @@ OPTIONAL. PKCE Code challenge. Required for Mobile Native App
 OPTIONAL. S256 or plain if platform doesn't support S256.
  
 
-## Authorization Response
+### Authorization Response
 
 If the resource owner grants the access request, the authorization server issues 
 an authorization code and delivers it to the client by adding the following 
@@ -78,7 +83,7 @@ identifier and redirection URI.
 REQUIRED if the "state" parameter was present in the client authorization 
 request. The exact value received from the client.
 
-## Error Response
+### Error Response
         
 If the request fails due to a missing, invalid, or mismatching redirection URI, 
 or if the client identifier is missing or invalid, the authorization server 
@@ -90,7 +95,7 @@ reasons other than a missing or invalid redirection URI, the authorization serve
 informs the client by adding the following parameters to the query component of 
 the redirection URI using the "application/x-www-form-urlencoded" format.
 
-### error
+#### error
 
 REQUIRED. A single ASCII [USASCII] error code from the following:
 
@@ -134,7 +139,7 @@ via an HTTP redirect.)
 Values for the "error" parameter MUST NOT include characters outside the set 
 %x20-21 / %x23-5B / %x5D-7E.
 
-### error_description
+#### error_description
 
 OPTIONAL. Human-readable ASCII [USASCII] text providing additional information, 
 used to assist the client developer in understanding the error that occurred.
@@ -142,7 +147,7 @@ used to assist the client developer in understanding the error that occurred.
 Values for the "error_description" parameter MUST NOT include characters outside 
 the set %x20-21 / %x23-5B / %x5D-7E.
 
-### error_uri
+#### error_uri
 
 OPTIONAL. A URI identifying a human-readable web page with information about the 
 error, used to provide the client developer with additional information about the 
@@ -151,13 +156,13 @@ error.
 Values for the "error_uri" parameter MUST conform to the URI-reference syntax and 
 thus MUST NOT include characters outside the set %x21 / %x23-5B / %x5D-7E.
     
-### state
+#### state
 
 REQUIRED if a "state" parameter was present in the client authorization request.  
 The exact value received from the client.
     
          
-## Implementation
+### Implementation
 
 There are two endpoints and the service default listening port is 6881. 
 
@@ -287,7 +292,7 @@ paths:
           description: "Successful Operation"
 ```
 
-### /oauth2/code@get
+#### /oauth2/code@get
 
 The get endpoint is the most used as it is very simple and supported by all browsers
 without any customization. When request is received by the service, the following
@@ -355,6 +360,6 @@ client is registered during on-boarding process.
 
 
 
-### /oauth2/code@post
+#### /oauth2/code@post
 
 To be completed later

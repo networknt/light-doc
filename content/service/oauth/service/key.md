@@ -1,9 +1,14 @@
 ---
-date: 2017-09-19T21:06:21-04:00
-title: Key Distribution
+title: "Key Distribution"
+date: 2017-11-10T14:50:02-05:00
+description: ""
+categories: []
+keywords: []
+weight: 60
+aliases: []
+toc: false
+draft: false
 ---
-
-# Key
 
 In microservices architecture, the traditional way of copying public key certificates
 to hosts of services is not working. With container orchestration tool like Kubernetes
@@ -91,7 +96,7 @@ definitions:
 
 ```
 
-## /oauth2/key/{keyId}@get
+### /oauth2/key/{keyId}@get
 
 This endpoint is used to get public key certificate for JWT signature verification based
 on keyId in the JWT header. Light-Java framework should have packaged with several keys

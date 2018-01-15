@@ -1,16 +1,28 @@
 ---
-date: 2017-09-19T21:01:03-04:00
-title: Token Endpoint
+title: "Token Service"
+date: 2017-11-10T14:50:02-05:00
+description: ""
+categories: []
+keywords: []
+weight: 20
+aliases: []
+toc: false
+draft: false
 ---
 
-# Token
-
 This is a post endpoint to get JSON web tokens. Currently, it support three different
-grant types: authorization_code, client_credentials and password.
+grant types: authorization_code, client_credentials and password. It issues subject
+token to identify the original human caller, access token for the client and refresh
+token if needed. It also support token exchange and token chaining for maximum security.
 
-## Authorization Code Grant Type
+In this implementation, we only support JSON Web Token as Simple Web Token is not scaling
+very well. In a microservices architecture, the tokens must be verified at each service
+without calling back to the authorization server. 
 
-### Request
+
+### Authorization Code Grant Type
+
+#### Request
 
 The client makes a request to the token endpoint by sending the following 
 parameters using the "application/x-www-form-urlencoded" format.
@@ -38,7 +50,7 @@ to authenticate with the authorization server.
 
 OPTIONAL, PKCE code verifier that used by Mobile Native App
 
-### Response
+#### Response
 
 If the access token request is valid and authorized, the authorization server 
 issues an access token and a refresh token.  If the request client
@@ -46,7 +58,7 @@ authentication failed or is invalid, the authorization server returns an error
 response.
 
 
-## Client Credentials Grant Type
+### Client Credentials Grant Type
 
 The client can request an access token using only its client credentials 
 (or other supported means of authentication) when the client is requesting 
@@ -54,7 +66,7 @@ access to the protected resources under its control, or those of another
 resource owner that have been previously arranged with the authorization 
 server.
    
-### Request
+#### Request
 
 The client makes a request to the token endpoint by adding the following 
 parameters using the "application/x-www-form-urlencoded" format with a 
@@ -74,14 +86,14 @@ REQUIRED, as BASIC authorization header with encoded client_id:client_secret
 to authenticate with the authorization server.
    
    
-### Response
+#### Response
 
 If the access token request is valid and authorized, the authorization server 
 issues an access token. A refresh token SHOULD NOT be included. If the request
 failed client authentication or is invalid, the authorization server returns 
 an error response.
 
-## Resource Owner Password Credentials Grant Type
+### Resource Owner Password Credentials Grant Type
 
 The resource owner password credentials grant type is suitable in cases where 
 the resource owner has a trust relationship with the client, such as the device 
@@ -96,7 +108,7 @@ also used to migrate existing clients using direct authentication schemes such a
 HTTP Basic or Digest authentication to OAuth by converting the stored credentials 
 to an access token.
 
-### Request
+#### Request
 
 The client makes a request to the token endpoint by adding the following 
 parameters using the "application/x-www-form-urlencoded" format with a character 
@@ -123,13 +135,13 @@ OPTIONAL. The scope of the access request.
 REQUIRED, as BASIC authorization header with encoded client_id:client_secret 
 to authenticate with the authorization server.
 
-### Response
+#### Response
 
 If the access token request is valid and authorized, the authorization server 
 issues an access token and a refresh token. If the request failed client
 authentication or is invalid, the authorization server returns an error response.
 
-## Refresh Token Grant Type
+### Refresh Token Grant Type
 
 If the authorization server issued a refresh token to the client, the client 
 makes a refresh request to the token endpoint by adding the following parameters 
@@ -177,7 +189,7 @@ refresh token scope MUST be identical to that of the refresh token included by t
 client in the request.
    
    
-## Implementation
+### Implementation
 
 There is only one post endpoint for this service and the default port is 6882.
 
@@ -254,7 +266,7 @@ paths:
           description: "Successful Operation"
 ```
 
-### /oauth2/token
+#### /oauth2/token
 
 When a post request is received, the following validations and processes will be performed.
 

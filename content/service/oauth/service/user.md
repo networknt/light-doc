@@ -1,9 +1,14 @@
 ---
-date: 2017-09-19T21:05:10-04:00
-title: User Management
+title: "User Management"
+date: 2017-11-10T14:50:02-05:00
+description: ""
+categories: []
+keywords: []
+weight: 50
+aliases: []
+toc: false
+draft: false
 ---
-
-# User
 
 This is a service for user registration and management. The OAuth server supports
 integration with other user management system like active directory or LDAP.
@@ -13,7 +18,7 @@ several endpoints to manage users.
 
 In OAuth 2.0 specification, user is normally called resource owner. 
 
-## User Type
+### User Type
 
 Currently there are three user types to support. 
 
@@ -21,16 +26,16 @@ Currently there are three user types to support.
 * partner
 * employee
 
-## User Id
+### User Id
 
 User id must be unique within the system.
 
-## Password
+### Password
 
 Password is provided when registering and it is hashed and salted in persistence
 layer. 
 
-## User Micro Service
+### User Micro Service
 
 This service has several endpoints and listening to port 6885.
 
@@ -263,7 +268,7 @@ definitions:
 
 ```
 
-## /oauth2/password/{userId}@post
+### /oauth2/password/{userId}@post
 
 This endpoint is used to reset user password. The user has to provide existing password,
 the new password and password confirmation in order to reset it.
@@ -304,7 +309,7 @@ will be returned.
   }
 ```
 
-## /oauth2/user@get
+### /oauth2/user@get
 
 This endpoint gets all the users from user service with filter and sorted on 
 userId. A page query parameter is mandatory. pageSize and userId filter
@@ -341,7 +346,7 @@ The following validation will be performed in the service.
 ```
 
 
-## /oauth2/user@post
+### /oauth2/user@post
 
 This endpoint is used to create a new user. The following validations will be performed
 before a new user will be added.
@@ -392,7 +397,7 @@ will be returned.
 ```
 
 
-## /oauth2/user@put
+### /oauth2/user@put
 
 This is the endpoint to update existing user. Most of the attributes of users can be
 updated through this endpoint except password. You must use password reset endpoint
@@ -412,7 +417,7 @@ The following validations will be performed before the user will be updated.
 ```
 
 
-## /oauth2/user/{userId}@delete
+### /oauth2/user/{userId}@delete
 
 This endpoint is used to delete an existing user. It removes the user physically so
 be careful when calling this endpoint. On the user interface, please make sure the
@@ -431,7 +436,7 @@ Before the user is deleted, the following validation will be performed.
   }
 ```
 
-## /oauth2/user/{userId}get
+### /oauth2/user/{userId}get
 
 This is the endpoint to get a particular user with userId. The server will perform
 the following validations before the user object is returned to the consumer.

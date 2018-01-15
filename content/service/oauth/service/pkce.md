@@ -1,6 +1,13 @@
 ---
-date: 2017-06-24T08:05:13-04:00
-title: Proof key for code exchange (PKCE) 
+title: "Proof key for code exchange (PKCE)"
+date: 2017-11-10T14:50:02-05:00
+description: ""
+categories: []
+keywords: []
+weight: 90
+aliases: []
+toc: false
+draft: false
 ---
 
 Public OAuth clients that use the code grant and run on smartphones are susceptible to 
@@ -12,7 +19,7 @@ The OAuth work group devised an official mini extension of the protocol for that
 Proof Key for Code Exchange (PKCE) and published in September 2015 as RFC 7636. It is a 
 countermeasure against the authorization code interception attack.
 
-## How does PKCE work?
+### How does PKCE work?
 
 * The client creates a large random string called the code verifier.
 * The client then computes its SHA-256 hash, called the code_challenge.
@@ -35,7 +42,7 @@ to create code verifier and code challenge.
 
 
 
-## PKCE Authorization Request
+### PKCE Authorization Request
 
 An authorization request that uses PKCE goes out with 
 
@@ -63,7 +70,7 @@ When the used code challenge method is S256, a client application must tell it b
 code_challenge_method=S256 parameter in an authorization request. When code_challenge_method parameter 
 is omitted, an authorization server assumes plain as the default value.
 
-## PKCE Authorization Response
+### PKCE Authorization Response
 
 After generating an authorization code, an authorization server saves it into its in-memory data grid 
 with the code challenge and the code challenge method contained in the authorization request.
@@ -74,7 +81,7 @@ verify a token request from the client application.
 A response from the authorization endpoint has nothing special for PKCE. It's a normal response as usual.
 
 
-## PKCE Token Request
+### PKCE Token Request
 
 After receiving an authorization code from an authorization server, a client application makes a token 
 request. In addition to the authorization code, the token request must include the code verifier 
@@ -82,7 +89,7 @@ used to compute the code challenge.
 
 The name of the request parameter to specify a code verifier is code_verifier.
 
-## PKCE Token Response
+### PKCE Token Response
 
 A token endpoint of an authorization server that supports PKCE checks whether a token request contains 
 a valid code verifier.
@@ -107,7 +114,7 @@ regarded from a malicious application.
 If a token request is verified, an authorization server issues an access token as usual.
 
 
-## Errors
+### Errors
 
 The following errors are PKCE specific
 
@@ -161,7 +168,7 @@ ERR12041:
 
 ```
 
-## References
+### References
 
 [tools.ietf.org/html/rfc6749](https://tools.ietf.org/html/rfc6749)
 

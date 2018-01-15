@@ -2,9 +2,9 @@
 title: "Token"
 date: 2017-11-10T14:50:02-05:00
 description: ""
-categories: []
+categories: [oauth2]
 keywords: []
-slug: ""
+weight: 20
 aliases: []
 toc: false
 draft: false

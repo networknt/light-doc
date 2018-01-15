@@ -1,15 +1,26 @@
 ---
-date: 2017-06-24T08:04:57-04:00
-title: Custom Grant Type in Enterprise Edition
+title: "Custom Grant Type in Enterprise Edition"
+date: 2017-11-10T14:50:02-05:00
+description: ""
+categories: []
+keywords: []
+weight: 100
+aliases: []
+toc: false
+draft: false
 ---
 
-There are four standard grant types in OAuth2 spec and it outlines how to add custom
+
+There are four standard grant types in OAuth2 specification and it outlines how to add custom
 grant types. With more and more uses asking for some special integration with our OAuth2
 services, we are adding the following custom grant types. These are non-standard and will
-only be used with a special client_type called trusted in most of the cases. 
+only be used with a special client_type called trusted in most of the cases. For users trying
+to leverage these grant type, you have to fully understand the risks and you must ensure that
+the authorization server and services it protects reside within the same organization and ideally
+within the same network.  
 
 
-# client_authenticated_user
+## client_authenticated_user
 
 This particular grant type is to address the following use cases. 
 
