@@ -80,13 +80,36 @@ during runtime based on the key_id from JWT header.
 
 ### Two tokens to support microservices architecture
 
-
+Each service in a microservices application needs a subject token which identifies the
+original caller (the person who logged in the original client) and an access token
+which identifies the immediate caller (might be another microservices). Both tokens
+will be verified with scopes to the API endpoint level. Additional claims in these
+tokens will be used for fine-grained authorization which happens within the business
+context. 
 
 ### Token exchange for high security
 
+Even with two tokens, we can only verify who is the original calller and which client is
+the immediate caller. For some highly protected service like payment or fund transfer,
+we need to ensure that the call is routed through some known services. light-oauth2
+token service support token exchange and chaining so that a service can verify the
+entire call tree to authorize if the call is authorized or not. 
 
 ### Service registration for scope calculation
 
+light-oauth2 has a service registration to allow all service to be registered with service
+id and all endpoints as well as scopes for the endpoint. During client registration, you
+can link a client to services/endpoints and the scope of the client can be calculated
+and updated in client table. This avoids developers to pass in scopes when getting
+access token as there might be hundreds of them for a client that accesses dozens of
+microservices. 
+
+### All activities are audited 
+
+A database audit handler has been wired into all light-oauth2 services to log each
+activity across services with sensitive info masked. In the future we will put these
+logs into AI stream processing to identify abnormal behaviors just like normal service
+log processing.  
 
 ### OAuth2 server, portal and light-4j to form ecosystem
 
@@ -96,6 +119,47 @@ during runtime based on the key_id from JWT header.
 
 [light-portal][] to manage clients and APIs
 
+## Introduction
+
+This [introduction][] document contains all the basic concept of OAuth 2.0 specification
+and how it work in general. 
+
+## Getting started
+
+The easiest way to start using light-oauth2 in your development environment is through
+docker-compose in light-docker repository. Please refer to [getting started][] for more
+information. 
+
+## Architecture
+
+There are some key decision points that are documented in [architecture][] section.
+
+## Documentation
+
+The detailed [service document][] help users to understand how each individual service
+works and the specification for each services. It also contains information on which
+scenarios will trigger what kind of errors. 
+
+## Tutorial
+
+There are [tutorials][] for each service that shows how to use the most common use cases
+with examples. 
+
+## Reference
+
+There are vast amount of information about OAuth 2.0 specifications and implementations. 
+Here are some important [references][] that can help you to understand OAuth 2.0 Authorization.
+
+
+
 [light-4j]: https://github.com/networknt/light-4j
 [light-oauth2]: https://github.com/networknt/light-oauth2
 [lihgt-portal]: https://github.com/networknt/light-portal
+[light-oauth2 service]: /service/oauth/service/
+[light-oauth2 tutorial]: /tutorial/oauth/
+[getting started]: /getting-started/light-oauth2/
+[architecture]: /service/oauth/architecture/
+[service document]: /service/oauth/service/
+[tutorials]: /tutorial/oauth/
+[references]: /service/oauth/reference/
+[introduction]: /service/oauth/introduction/

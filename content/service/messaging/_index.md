@@ -1,5 +1,5 @@
 ---
-title: "Messaging Infrastructure Service"
+title: "Messaging Infrastructure"
 date: 2017-11-18T16:29:00-05:00
 description: ""
 categories: [service]

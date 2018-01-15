@@ -1,5 +1,5 @@
 ---
-title: "Light Proxy - A reverse proxy to bring alien API into light ecosystem"
+title: "Light Proxy"
 date: 2017-12-16T09:21:13-05:00
 description: ""
 categories: []
