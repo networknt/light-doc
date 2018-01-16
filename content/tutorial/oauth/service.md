@@ -70,3 +70,33 @@ To add several endpoints along with scopes to a service.
 ```
 curl -k -H "Content-Type: application/json" -X POST -d '[{"endpoint":"/v1/data@post","operation":"createData","scope":"data.w"},{"endpoint":"/v1/data@put","operation":"updateData","scope":"data.w"},{"endpoint":"/v1/data@get","operation":"retrieveData","scope":"data.r"},{"endpoint":"/v1/data@delete","operation":"deleteData","scope":"data.w"}]' https://localhost:6883/oauth2/service/AACT0001/endpoint
 ```
+
+There is no response body for this request but you will receive 200 response code. 
+
+To query the endpoints linked to the service. 
+
+```
+curl -k https://localhost:6883/oauth2/service/AACT0001/endpoint
+
+```
+
+The return value should be.
+
+```json
+[{"factoryId":5,"id":5,"operation":"createData","endpoint":"/v1/data@post","scope":"data.w"},{"factoryId":5,"id":5,"operation":"updateData","endpoint":"/v1/data@put","scope":"data.w"},{"factoryId":5,"id":5,"operation":"retrieveData","endpoint":"/v1/data@get","scope":"data.r"},{"factoryId":5,"id":5,"operation":"deleteData","endpoint":"/v1/data@delete","scope":"data.w"}]
+```
+
+Now let's delete the endpoints for the service.
+
+```
+curl -k -X DELETE https://localhost:6883/oauth2/service/AACT0001/endpoint
+
+```
+
+You should have received 200 response code. To verify if these endpoints were deleted. You can
+issue the same query command again. You should have the following error. 
+
+```json
+{"statusCode":404,"code":"ERR12042","message":"SERVICE_ENDPOINT_NOT_FOUND","description":"Service endpoint not found for serviceId AACT0001"}
+```
+

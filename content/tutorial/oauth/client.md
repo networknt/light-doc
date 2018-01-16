@@ -69,3 +69,61 @@ curl -k -X DELETE https://localhost:6884/oauth2/client/9ef89c7b-f17b-4a64-a24b-c
 
 ```
 
+The following section will try to link the client to a service and its endpoints. 
+
+First let's create endpoints for an existing service. Pay attention at the scopes for each enpoint. 
+
+```
+curl -k -H "Content-Type: application/json" -X POST -d '[{"endpoint":"/v1/data@post","operation":"createData","scope":"data.w"},{"endpoint":"/v1/data@put","operation":"updateData","scope":"data.w"},{"endpoint":"/v1/data@get","operation":"retrieveData","scope":"data.r"},{"endpoint":"/v1/data@delete","operation":"deleteData","scope":"data.w"}]' https://localhost:6883/oauth2/service/AACT0001/endpoint
+```
+
+Now let's link the above service endpoints to a client. 
+
+```
+curl -k -H "Content-Type: application/json" -X POST -d '["/v1/data@post","/v1/data@put","/v1/data@get","/v1/data@delete"]' https://localhost:6884/oauth2/client/f7d42348-c647-4efb-a52d-4c5787421e72/service/AACT0001
+```
+
+Here is the response with old scope and new scope after the change for the client.
+
+```json
+{"old_scope":"petstore.r petstore.w","new_scope":"data.w data.r"}
+```
+
+Let's query the client service endpoints with both clientId and serviceId. 
+
+```
+curl -k https://localhost:6884/oauth2/client/f7d42348-c647-4efb-a52d-4c5787421e72/service/AACT0001
+
+```
+
+And here is the result. 
+
+```json
+["/v1/data@delete","/v1/data@get","/v1/data@post","/v1/data@put"]
+```
+
+We can also query for the clientId only to list all services and their endpoints for a client.
+
+```
+curl -k https://localhost:6884/oauth2/client/f7d42348-c647-4efb-a52d-4c5787421e72/service
+```
+
+And here is the result. 
+
+```json
+{"AACT0001":["/v1/data@delete","/v1/data@get","/v1/data@post","/v1/data@put"]}
+```
+
+Now let's remove all endpoints by a clientId and a serviceId. You can also remove all services linked
+to a client. 
+
+```
+curl -k -X DELETE https://localhost:6884/oauth2/client/f7d42348-c647-4efb-a52d-4c5787421e72/service/AACT0001
+
+```
+
+And here is the result. 
+
+```json
+{"old_scope":"data.w data.r","new_scope":""}
+```
