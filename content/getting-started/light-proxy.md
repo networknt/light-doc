@@ -1,5 +1,5 @@
 ---
-title: "Light Proxy"
+title: "Light Proxy Server"
 date: 2017-11-05T12:31:31-05:00
 description: ""
 categories: [getting started]
