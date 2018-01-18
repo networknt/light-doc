@@ -31,3 +31,13 @@ updating and deleting todo items to another service that is responsible for quer
 
 [todo-list]: /tutorial/tram/todo-list/
 [todo-list implemented in light-eventuate-4j]: /tutorial/eventuate/todo-list/
+
+### [development][]
+
+Different as light-evenutate-4j, Light-tram-4j is light way to handle message deliver. Light-tram-4j doesn't handle event replay and doesn't worry about aggregate status.
+Light-tram-4j  can be simply used in those services which handle its local database process and send message to message broker together.
+
+
+
+
+[develop]: /tutorial/tram/develop/
