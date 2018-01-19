@@ -48,19 +48,25 @@ CREATE TABLE message (
 
 ```
 
-Normally, header field will save key-value pair message header. for example
+ID: unique id for the message, primary key for the message table;
+
+DESTINATION: destination topic for the message; it can be used for the message channel mapping
+
+HEADERS: define the message header; Normally, header field will save key-value pair message header. for example
 
 ```
 {"command_saga_id":"0000016106749406-0242ac1200050000","command_type":"com.networknt.example.sagas.ordersandcustomers.customer.command.ReserveCreditCommand","command_reply_to":"com.networknt.example.sagas.ordersandcustomers.order.saga.createorder.CreateOrderSaga-reply","command_saga_type":"com.networknt.example.sagas.ordersandcustomers.order.saga.createorder.CreateOrderSaga","command__destination":"customerService","ID":"000001610674941b-0242ac1200050000","command_saga_request_id":"0000016106749419-0242ac1200050000"}
 ```
 
-payload field save json format message body. for example:
+PAYLOAD: define the message payload; payload field save json format message body. for example:
 
 ```
 {"orderId":1,"orderTotal":{"amount":20},"customerId":1879729051024977}
 ```
 
+PUBLISHED: this is fields is used for oracle pulling cdc. If user chose mysql or postgre as database, please ignore this field.
 
+When user can light-tram-4j api to send message/event, this fields will use system default value 0; After oracle pulling cdc service published the message to kafka (or other message broker), the field value will be changed to 1 byn oracle pulling cdc service.
 
 
 ### Command message publish:
