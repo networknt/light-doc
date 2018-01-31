@@ -1,13 +1,13 @@
 ---
 title: What is Light Platform
 linktitle: What is Light
-description: Light is a platform written in Java SE, and designed to build cloud native Web/API with different options.
+description: Light is a platform written in Java SE and designed to build cloud native Web/API with different options.
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
 layout: single
 menu:
-  main:
+  docs:
     parent: "about"
     weight: 10
 weight: 10
@@ -38,7 +38,7 @@ changes.
 
 ## How Fast is Light Platform?
 
-{{< youtube "CdiDYZ51a2o" >}}
+https://www.techempower.com/benchmarks/previews/round15/
 
 ## What Does Light Platform Do?
 
