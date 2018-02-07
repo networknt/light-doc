@@ -24,11 +24,14 @@ and we have to create several frameworks as different customers are using differ
 
 This has huge negative impact on package management, testing and release process as there are
 a lot more moving pieces. Every time we have a release of frameworks, there are at least two days
-in testing in order to make sure the everything works together. 
+in testing in order to make sure that everything works together. 
 
 We have been looking at Devops tools on the open source world in order to streamline our process
 but all of the tools are not designed for us. They are focus on single repository monolithic app
-only as most of them build single project by putting a config file in the repository. 
+only as most of them build single project by putting a config file in the repository. Before we
+decide to build our own light-bot, we have spent countless hours on Jenkins and try to make it
+work for our repos and one of the customers who has dozens microservices and finally gave up. Here
+is a list of [Jenkins issues][] and I think other DevOps tools have these issues in common. 
 
 We need a automation tool that can handler multiple repos with dependencies for our own packages
 and at the same time, our customers are asking for a similar tool to manage their microservices
@@ -516,3 +519,4 @@ an account available on your email server.
 [Kotlin DSL]: https://github.com/gradle/kotlin-dsl
 [light-bot tutorial]: /tutorial/bot/
 [networknt/github-changelog-generator]: https://github.com/skywinder/github-changelog-generator
+[Jenkins issues]: /tool/light-bot/jenkins/
