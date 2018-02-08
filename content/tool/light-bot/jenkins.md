@@ -42,8 +42,9 @@ and observe the behaviour change accordingly.
 * Jenkins can only clone Git repository
 
 As we are dealing with too many repositories in each build, we need to pull the git repository
-instead of cloning it each time. It takes about 5 minutes to clone all networknt repository on
-a relative fast network and pulling repositories takes about 5 seconds to get workspace ready.
+instead of cloning it each time. It takes about 5 minutes to clone all networknt repositories on
+a relative fast cable network and pulling repositories takes about 5 seconds to get workspace ready.
+While we wish to run automated build at every commit, the issue compounds itself several times over.
 
 * It is very hard to share the workspace
 
@@ -96,7 +97,9 @@ must be a way that he/she can work on their git branch and changes can trigger a
 on a build server. Also, it doesn't provide support for developer tasks as it can only run on 
 the server not developers' laptop. For example, if the API framework version is upgraded, can
 a developer run a task on his local machine to update 18 APIs with the latest framework version?
-
+The Git branching model adopted for one of our customers is based on at least 2 standard branches 
+running in parallel at all times; develop and release. Adding to this feature branches, issue 
+becomes N*M. 
 
 In summary, I think Jenkins is a monolithic application built as server centric approach and
 only support horizontal scaling. When we adopt microservice, architecture, should we start
