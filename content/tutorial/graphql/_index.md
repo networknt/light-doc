@@ -44,6 +44,9 @@ This is the same example like the mutation but is generated from a schema.
 
 This is to show you how to build a GraphQL service that is working with Relayjs. 
 
+### [Subscription][]
+
+This is to show you how to build a GraphQL service with subscription. 
 
 [graphql folder]: https://github.com/networknt/light-example-4j/tree/master/graphql
 [Hello World]: /tutorial/graphql/helloworld/
@@ -51,3 +54,4 @@ This is to show you how to build a GraphQL service that is working with Relayjs.
 [Mutation]: /tutorial/graphql/mutation/
 [Mutation IDL]: /tutorial/graphql/mutation-idl/
 [Relay Todo]: /tutorial/graphql/relay-todo/
+[Subscription]: /tutorial/graphql/subscription/
