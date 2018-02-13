@@ -1,5 +1,5 @@
 ---
-title: "Configuration"
+title: "Proxy Configuration"
 date: 2017-12-16T09:35:37-05:00
 description: ""
 categories: []

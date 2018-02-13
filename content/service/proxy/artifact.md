@@ -1,5 +1,5 @@
 ---
-title: "Artifact"
+title: "Proxy Artifact"
 date: 2017-12-16T09:44:42-05:00
 description: ""
 categories: []
