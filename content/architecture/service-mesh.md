@@ -117,7 +117,7 @@ This combination of complexity and criticality motivates the need for a dedicate
 service-to-service communication decoupled from application code and able to capture the highly dynamic 
 nature of the underlying environment. This layer is the service mesh.
 
-## The future of the servie mesh
+## The future of the service mesh
 
 While service mesh adoption in the cloud native ecosystem is growing rapidly, there is an extensive and 
 exciting roadmap ahead still to be explored. The requirements for serverless computing (e.g. Amazon’s 
