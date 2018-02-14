@@ -162,9 +162,11 @@ There are positives and negatives to both approaches. However, for enterprise sc
 design first is recommended. As light platform is aiming enterprise microservices architecture, we
 are encouraging user to use design first approach as we have [light-codegen][] to generate the project.
 Also, we can use the light-codegen to regenerate the same project for upgrade the framework version. 
-In addition, we are just talked about REST API in this article as people who asked question are 
+In addition, we just talked about REST API in this article as people who asked question are 
 focusing on REST API only. If we use GraphQL or RPC style of API, you have no choose to create the
-schema first and generate code with light-codegen. There is no code first for other style of APIs. 
+schema first and generate code with light-codegen. There is no code first for other style of APIs.
+All in all, code first is for individual developer who want to create a ad hoc API out of his/her
+mind and want to get it up and running first and then rethink about design later.  
 
  
 [light-rest-4j]: /style/light-rest-4j/
