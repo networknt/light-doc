@@ -190,3 +190,9 @@ test1                Ready     <none>    19m       v1.9.3
 test2                Ready     <none>    1m        v1.9.3
 test3                Ready     <none>    49m       v1.9.3
 ```
+
+
+### references
+
+https://blog.alexellis.io/kubernetes-in-10-minutes/
+https://medium.com/@Grigorkh/install-kubernetes-on-ubuntu-1ac2ef522a36
