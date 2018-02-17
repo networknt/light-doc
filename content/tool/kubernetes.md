@@ -85,14 +85,19 @@ something like the following.
 sudo kubeadm join --token 582493.ce5e13aa64d9ccb8 10.133.15.28:6443 --discovery-token-ca-cert-hash sha256:fab46528c4a2e0d38bdf60c6ed5042a60a8535ac48443356c06d3f461204af6d
 ```
 
-Config a user account
+Config a user account or just use the current user if you have logged in with non-root user.
+
+The following is an example if you are using root so far and you want to create a new user
+called packet. 
 
 ```
 sudo useradd packet -G sudo -m -s /bin/bash
 passwd packet
 ```
 
-Switch to the new user with sudo su packet 
+Switch to the new user with sudo su packet if you have created a new user packet. Otherwise,
+stay in the current user session.  
+
 
 ```
 $ cd $HOME
