@@ -1,4 +1,7 @@
-### Environment Segregation
+---
+date: 2017-06-30T13:53:11-04:00
+title: Environment Segregation
+---
 
 Environment segregation in APIs has primarily two goals:
 

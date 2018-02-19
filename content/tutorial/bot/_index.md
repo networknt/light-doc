@@ -21,9 +21,10 @@ You can deploy it in one of your devops VMs and set it up run automatically for 
 and test. Other tasks will be triggered manually and only be used occasionally.
 
 
-* Set up [develop][] branch build and test on your computer
-
+* Set up [develop][] branch build and test on your local computer
+* Set up [devops][] sever for develop branch build automatically
 
 
 
 [develop]: /tutorial/bot/local-develop/
+[devops]: /tutorial/bot/devops-develop/
