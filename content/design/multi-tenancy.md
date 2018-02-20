@@ -1,5 +1,7 @@
-# Multi-Tenancy
-
+---
+date: 2017-06-30T13:53:11-04:00
+title: Multi-Tenancy
+---
 
 Multi-tenancy is an architecture in which a single instance of a software application serves multiple 
 customers. Each customer is called a tenant. Tenants may be given the ability to customize some parts 
