@@ -25,3 +25,17 @@ business requirement or non-functional requirement.
 
 In this section, we have several tutorials related to security configurations and implementations. 
 
+
+* How to setup your service to [bootstrap from light-oauth2 key service][] for public key distribution.
+
+* How to [encrypt and decrypt sensitive info][] from secret.yml or other config files. 
+
+* How to use [keystore and truststore][] for TLS and JWT signature verification.
+
+* A real example on [adding server public key certificate to client.truststore][].
+
+[bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
+[encrypt and decrypt sensitive info]: /tutorial/security/encrypt-decrypt/
+[keystore and truststore]: /tutorial/security/keystore-truststore/
+[adding server public key certificate to client.truststore]: /tutorial/security/publickey-truststore/
+
