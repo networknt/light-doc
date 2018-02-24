@@ -7,8 +7,8 @@ keywords: []
 menu:
   docs:
     parent: "design"
-    weight: 10
-weight: 10
+    weight: 15
+weight: 15
 aliases: []
 toc: false
 draft: false
