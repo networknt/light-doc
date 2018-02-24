@@ -1,6 +1,17 @@
 ---
-date: 2017-06-30T13:53:11-04:00
-title: Service Evolution
+title: "Service Evolution"
+date: 2018-02-13T20:50:25-05:00
+description: ""
+categories: []
+keywords: []
+menu:
+  docs:
+    parent: "design"
+    weight: 15
+weight: 15
+aliases: []
+toc: false
+draft: false
 ---
 
 Change is happening all around us, new technologies, new methodologies, but how 

@@ -1,7 +1,19 @@
 ---
-date: 2017-06-09T16:05:06-04:00
-title: Handling Partial Failure
+title: "Handling Partial Failure"
+date: 2018-02-13T20:50:25-05:00
+description: ""
+categories: []
+keywords: []
+menu:
+  docs:
+    parent: "design"
+    weight: 20
+weight: 20
+aliases: []
+toc: false
+draft: false
 ---
+
 
 ### Introduction
 

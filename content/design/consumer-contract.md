@@ -1,7 +1,19 @@
 ---
-date: 2017-07-03T08:30:37-04:00
-title: Consumer Contract and Consumer Driven Contract
+title: "Consumer Contract and Consumer Driven Contract"
+date: 2018-02-13T20:50:25-05:00
+description: ""
+categories: []
+keywords: []
+menu:
+  docs:
+    parent: "design"
+    weight: 10
+weight: 10
+aliases: []
+toc: false
+draft: false
 ---
+
 
 When discussing [service evolution](evolution/), we have mentioned consumer contract
 and recommended building consumer side regression test cases to ensure that service

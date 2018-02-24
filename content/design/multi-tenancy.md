@@ -1,6 +1,17 @@
 ---
-date: 2017-06-30T13:53:11-04:00
-title: Multi-Tenancy
+title: "Multi-Tenancy"
+date: 2018-02-13T20:50:25-05:00
+description: ""
+categories: []
+keywords: []
+menu:
+  docs:
+    parent: "design"
+    weight: 60
+weight: 60
+aliases: []
+toc: false
+draft: false
 ---
 
 Multi-tenancy is an architecture in which a single instance of a software application serves multiple 

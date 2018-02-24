@@ -1,6 +1,17 @@
 ---
-date: 2017-06-10T18:45:31-04:00
-title: Aggregate
+title: "Aggregate"
+date: 2018-02-13T20:50:25-05:00
+description: ""
+categories: []
+keywords: []
+menu:
+  docs:
+    parent: "design"
+    weight: 90
+weight: 90
+aliases: []
+toc: false
+draft: true
 ---
 
 

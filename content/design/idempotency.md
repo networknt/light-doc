@@ -1,6 +1,17 @@
 ---
-date: 2017-06-19T21:49:05-04:00
-title: Idempotency
+title: "Idempotency"
+date: 2018-02-13T20:50:25-05:00
+description: ""
+categories: []
+keywords: []
+menu:
+  docs:
+    parent: "design"
+    weight: 30
+weight: 30
+aliases: []
+toc: false
+draft: false
 ---
 
 ### Networks are unreliable. 

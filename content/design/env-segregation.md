@@ -1,6 +1,17 @@
 ---
-date: 2017-06-30T13:53:11-04:00
-title: Environment Segregation
+title: "Environment Segregation"
+date: 2018-02-13T20:50:25-05:00
+description: ""
+categories: []
+keywords: []
+menu:
+  docs:
+    parent: "design"
+    weight: 50
+weight: 50
+aliases: []
+toc: false
+draft: false
 ---
 
 Environment segregation in APIs has primarily two goals:

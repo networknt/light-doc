@@ -1,7 +1,19 @@
 ---
-date: 2017-09-21T21:20:27-04:00
-title: Why check token expiration in client
+title: "Why check token expiration"
+date: 2018-02-13T20:50:25-05:00
+description: ""
+categories: []
+keywords: []
+menu:
+  docs:
+    parent: "design"
+    weight: 70
+weight: 70
+aliases: []
+toc: false
+draft: false
 ---
+
 
 In web service architecture, normally people handle JWT token expiration re-actively. Here
 is the flow. 
