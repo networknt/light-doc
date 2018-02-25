@@ -16,12 +16,14 @@ draft: false
 
 Light-4j provide  Prometheus metrics handler as MiddlewareHandler to collects the API runtime information and save it to Prometheus Metric data module. And then use pre-defined HttpHandler (PrometheusGetHandler) to expose the prometheus Metric data module;
 Prometheus server will pull the metric from metrics_path which is configurable on
+
 Prometheus config yml file (for exampe: /v1/prometheus) ; The pulling interval is second base on the config file  (scrape_interval: 30s).
+
 
 
 ## Configuration
 
-## Configuration file for the MiddlewareHandler (com.networknt.metrics.prometheus.PrometheusHandler)
+#### Configuration file (prometheus.yml) for the MiddlewareHandler (com.networknt.metrics.prometheus.PrometheusHandler)
 
 ```
 # Metrics handler configuration
@@ -73,7 +75,7 @@ Here is an example of config.json for openapi generator.
 }
 ```
 
-Then following the step to [generate service API]: /tutorial/generator/openapi/
+Then following the step to [generate service API][].
 
 The generated service will use Prometheus metrics handler as metrics MiddlewareHandler handler and the the API runtime information will be save to prometheus Metric data module.
 
@@ -185,7 +187,8 @@ Here is the sample config file. It can be found from link:
 
 1. The latest version of light-tram-4j example todo-list has been change to use prometheus metrics handler; Please follow the step in the tutrial to start the sample service api:
 
- [light-tram todo-list service API]: /tutorial/tram/todo-list/
+[light-tram todo-list service API][]
+
 
 
 
@@ -232,3 +235,7 @@ http://127.0.0.1:8500/
 http://localhost:9090/
 
  ```
+
+
+ [generate service API]: /tutorial/generator/openapi/
+ [light-tram todo-list service API]: /tutorial/tram/todo-list/

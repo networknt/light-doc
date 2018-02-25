@@ -11,7 +11,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="prometheus.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="prometheus.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/concern/prometheus.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
@@ -44,18 +44,18 @@
       <file leaf-file-name="_index.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tutorial/tram/todo-list/_index.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-875">
-              <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="17" />
+            <state relative-caret-position="370">
+              <caret line="84" column="2" lean-forward="false" selection-start-line="84" selection-start-column="2" selection-end-line="84" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prometheus.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="prometheus.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tutorial/middleware/prometheus.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="791">
-              <caret line="180" column="0" lean-forward="true" selection-start-line="140" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+            <state relative-caret-position="911">
+              <caret line="236" column="4" lean-forward="true" selection-start-line="236" selection-start-column="4" selection-end-line="236" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -71,8 +71,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tutorial/middleware/prometheus.md" />
         <option value="$PROJECT_DIR$/concern/prometheus.md" />
+        <option value="$PROJECT_DIR$/tutorial/middleware/prometheus.md" />
       </list>
     </option>
   </component>
@@ -359,14 +359,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tutorial/tram/todo-list/_index.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-875">
-          <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/concern/metrics.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="445">
@@ -383,18 +375,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tutorial/middleware/prometheus.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="791">
-          <caret line="180" column="0" lean-forward="true" selection-start-line="140" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/concern/prometheus.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="50" column="39" lean-forward="false" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorial/tram/todo-list/_index.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="84" column="2" lean-forward="false" selection-start-line="84" selection-start-column="2" selection-end-line="84" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorial/middleware/prometheus.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="911">
+          <caret line="236" column="4" lean-forward="true" selection-start-line="236" selection-start-column="4" selection-end-line="236" selection-end-column="4" />
           <folding />
         </state>
       </provider>
