@@ -48,7 +48,8 @@ In prometheus, we need to configure it use consul_sd_targets. Prometheus will th
 
 
 
-## Configuration file for the MiddlewareHandler (com.networknt.metrics.prometheus.PrometheusHandler)
+#### Configuration file for the MiddlewareHandler (com.networknt.metrics.prometheus.PrometheusHandler)
+
 
 ```
 # Metrics handler configuration
@@ -101,7 +102,7 @@ Here is the sample config file. It can be found from link:
 ```
 
 
-##Customization
+## Customization
 
 
 
