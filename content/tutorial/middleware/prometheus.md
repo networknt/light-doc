@@ -40,7 +40,7 @@ Change the enabled value to true to enable the Prometheus metrics handler;
 
 If user want to use Prometheus metrics handler as metrics MiddlewareHandler handler for the service, simply set the config "prometheusMetrics" as true
 
-#### Config
+#### Config to generate new service by light-codegen
 
 Here is an example of config.json for openapi generator.
 
@@ -79,6 +79,10 @@ Then following the step to [generate service API][].
 
 The generated service will use Prometheus metrics handler as metrics MiddlewareHandler handler and the the API runtime information will be save to prometheus Metric data module.
 
+
+
+
+#### Change existing service to use light-4j Prometheus  MiddlewareHandler handler
 
 
 If user want to change existing service which created before based on light-4j palteform (default use  [InfluxDB metrics handler]: /concern/metrics/) to use Prometheus metrics handler, please change the service by following steps:
