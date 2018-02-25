@@ -1,22 +1,38 @@
 ---
-title: "Light Platform Principles"
+title: "Principles"
 date: 2018-02-25T09:01:05-05:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "about"
+    weight: 30
+weight: 30
+sections_weight: 30
 aliases: []
 toc: false
 draft: false
 ---
 
+
+### Prefer container and cloud native
+
+### Prefer microservice over monolith
+
 ### Prefer light-weight over heavy-weight
 
-### Prefer high throughtput
+
+### Prefer high throughtput async IO
 
 ### Prefer smaller memory footprint
 
-### Prefer Zero cost abstaction
+### Prefer shared infrastructure service
+
+### Prefer new distributed devops tools
+
+
+### Prefer zero cost abstaction
 
 ### Prefer Middleware in request/response chain
 
@@ -26,7 +42,9 @@ draft: false
 
 ### Prefer ByteBuffer over Object Serialization
 
-### Prefer container and cloud native
+### Prefer binary over text over socket
+
+
 
 ### Prefer functional over imperative
 
