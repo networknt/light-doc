@@ -22,7 +22,6 @@ draft: false
 
 ### Prefer light-weight over heavy-weight
 
-
 ### Prefer high throughtput async IO
 
 ### Prefer smaller memory footprint
@@ -31,6 +30,7 @@ draft: false
 
 ### Prefer new distributed devops tools
 
+### Prefer design first over code first
 
 ### Prefer zero cost abstaction
 
