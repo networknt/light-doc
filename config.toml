@@ -1,4 +1,4 @@
-baseURL = "https://doc.networknt.com/"
+baseURL = "https://www.networknt.com/"
 paginate =  100
 defaultContentLanguage = "en"
 enableEmoji = true
