@@ -144,3 +144,36 @@ requests_total{clientId="unknown",endpoint="/todoviews@get",instance="172.18.0.7
 
 ```
 
+
+## Integrate  Prometheus with Grafana:
+
+Light framwork provided docker-compose file (docker-compose-prometheus.yml) includes the Grafana image: image: grafana/grafana:4.6.3
+
+So user can open browser to view  the Prometheus from Grafana
+
+
+ ```
+http://127.0.0.1:3000/
+
+user: admin
+passwork: admin
+
+ ```
+
+Please follow the following step to set the Prometheus in Grafana:
+
+Adding the data source to Grafana:
+
+
+1. Open the side menu by clicking the Grafana icon in the top header.
+
+2. In the side menu under the Dashboards link you should find a link named Data Sources.
+
+3. Click the + Add data source button in the top header.
+
+4. Select Prometheus from the Type dropdown.
+
+After the Prometheus worked as backend dataSource for the Grafana, user can customize their own template or dashboard in Grafana for Prometheus metrics
+
+
+You can get the detail from: http://docs.grafana.org/features/datasources/prometheus/
