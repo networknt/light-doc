@@ -89,8 +89,8 @@ We have used request/response communication style as an example; however, messag
 microservices should follow the same approach in case duplicate messages are delivery in the
 pipeline. In fact, most message driven async microservices are more tolerant to partial 
 failures than sync style of ineractions like REST, GraphQL and RPC. That is why we have
-provided light-tram-4j(transactional messaging), light-eventuate-4j(eventual consistency with
-event sourcing and CQRS) and light-saga-4j(distributed transaction orchestraion between
+provided [light-tram-4j][](transactional messaging), [light-eventuate-4j][](eventual consistency 
+with event sourcing and CQRS) and [light-saga-4j][](distributed transaction orchestraion between
 services) frameworks and all of them rely on service idempotency. 
 
 
