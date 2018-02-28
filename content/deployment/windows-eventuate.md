@@ -28,13 +28,26 @@ The following link is the official installation document from Kafka.
 
 https://kafka.apache.org/quickstart
 
-CDC server needs to find Kafka and Zookeeper instance on the host. And it is best to just
-change the /etc/hosts(Windows has another location for this file) to add the following. 
 
+
+To start zookeeper and kafka from windows local, please use windows consoles and type following commands
+
+Start zookeeper:
 
 ```
-172.0.0.1  kafka zookeeper
-``` 
+> cd \\kafka_2.11-0.10.2.0\bin\window
+> zookeeper-server-start ../../config/zookeeper.properties
+
+```
+
+Start Kafka
+
+```
+> cd \\kafka_2.11-0.10.2.0\bin\window
+> kafka-server-start ../../config/server.properties
+
+```
+
 
 ### Mysql Database
 
@@ -42,7 +55,7 @@ Next you need to install Mysql Database on your local.
 
 https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing
 
-Once the database is up and running, you have to run the script at
+Once the database is up and running, please execute the following db script from MySql command line or MySql Workbench:
 
 https://github.com/networknt/light-docker/blob/master/mysql/eventuate.sql
 
