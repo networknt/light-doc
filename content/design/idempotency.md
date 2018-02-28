@@ -31,7 +31,7 @@ APIs and clients that will be robust in the event of failure, and will predictab
 bring a complex integration to a consistent state despite failures. Remember that a
 service might be a client when calling another service.
 
-### Planning for failure
+### Planning for failures
   
 Consider a call between any two nodes. There are a variety of failures that can occur:
 
@@ -40,7 +40,7 @@ Consider a call between any two nodes. There are a variety of failures that can 
 - The call could fail midway while the server is fulfilling the operation, leaving 
 the work in limbo.
 
-- The call could succeed, but the connection break before the server can tell its 
+- The call could succeed, but the connection breaks before the server can tell its 
 client about it.
 
 Any one of these leaves the client that made the request in an uncertain situation. 
@@ -87,7 +87,12 @@ represented by a PATCH).
 
 We have used request/response communication style as an example; however, messaging based
 microservices should follow the same approach in case duplicate messages are delivery in the
-pipeline.
+pipeline. In fact, most message driven async microservices are more tolerant to partial 
+failures than sync style of ineractions like REST, GraphQL and RPC. That is why we have
+provided light-tram-4j(transactional messaging), light-eventuate-4j(eventual consistency with
+event sourcing and CQRS) and light-saga-4j(distributed transaction orchestraion between
+services) frameworks and all of them rely on service idempotency. 
+
 
 ### Guarantee exactly once
 
@@ -121,8 +126,8 @@ has the ability to propagate traceabilityId to the next request in the service c
 header can be used as idempotency key on mutating services(i.e. anything under POST in our case).
 
 If the above one request fails due to a network connection error, you can safely retry it 
-with the same idempotency key, and the services must be designed to work with the idempotency key
-/traceabilityId to decide what the business logic with the key.
+with the same idempotency key, and the services must be designed to work with the idempotency 
+key/traceabilityId to decide what the business logic with the key.
 
 ### Being a good distributed citizen
 
@@ -175,3 +180,7 @@ clients to pass a unique value and retry requests as needed.
 - Make sure that failures are handled responsibly. Use techniques like exponential backoff 
 and random jitter. Be considerate of servers that may be stuck in a degraded state.
 
+
+[light-tram-4j]: /style/light-tram-4j/
+[light-eventuate-4j]: /style/light-eventuate-4j/
+[light-saga-4j]: /style/light-saga-4j/
