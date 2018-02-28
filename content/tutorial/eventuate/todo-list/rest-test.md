@@ -10,21 +10,20 @@ toc: false
 draft: false
 ---
 
-
 Once all modules can be built successfully, we can start the servers and test the todo-list
 application.
 
-First we need to make sure Mysql, Zookeeper, Kafka and CDC server are up and running.
+First we need to make sure Mysql, Zookeeper, Kafka and CDC server for eventuate are up and 
+running.
 
-You can follow this [tutorial](https://networknt.github.io/light-eventuate-4j/tutorial/service-dev/) 
-to start all of them with docker-compose.
+You can follow this [tutorial][] to start all of them with docker-compose.
 
 Before we start the rest-command and rest-query, let's create the database and table
 for the rest-query material view in the same Mysql database for the event store. We
 are going to create another database called todo_db
 
 Here is the db script and you can use mysql command line or just using any GUI tools
-to run it against Mysql server.
+to run it against mysql server.
 
 ```mysql
 create database todo_db;
@@ -44,7 +43,6 @@ CREATE  TABLE TODO (
   ACTIVE_FLG varchar(1) DEFAULT 'Y',
   PRIMARY KEY(ID)
 );
-
 
 ```
 
@@ -147,3 +145,4 @@ And the response will be something like this.
 Event sourcing system will subscribe the events from event store and process user defined event handlers.
 For todo-list example, the event handle simply gets the event and save the latest todo info into local TODO table.
 
+[tutorial]: /tutorial/eventuate/getting-started/

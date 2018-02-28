@@ -16,8 +16,7 @@ draft: false
 
 
 Note: If this is the first time you hear about OAuth2 or you want to get familiar with
-the grant types we are using, please read this 
-[article](https://github.com/networknt/light-oauth2/wiki/OAuth2-Introduction) first.
+the grant types we are using, please read this [article][] first.
 
 Everyone’s excited about microservices, but actual implementation is sparse. Perhaps the
 reason is that people are unclear on how these services talk to one another; especially 
@@ -133,7 +132,7 @@ server. So it is not necessary to get the new scope token for every API to API c
 retrieved and cached in memory until it is about to be expired then a new token will be retrieved.
 
 The entire token renew process is managed
-by [Client](https://networknt.github.io/light-4j/other/client/) module provided in the light-4j
+by [Client][] module provided in the light-4j
 framework. This client module encapsulate a lot of features to help API to API calls.
 
 # Authorization Token Cache
@@ -184,4 +183,8 @@ As we are using JWT token for distributed token verification on each service ins
 sure that the public key certificate from OAuth 2.0 provider can be distributed to each individual
 service instance so that they can verify the token issued by the same OAuth 2.0 token service independently.
 
-Here is the [document](https://networknt.github.io/light-4j/architecture/key-distribution/) that describes how key is distributed to the services during runtime.  
+Here is the [document][] that describes how key is distributed to the services during runtime.  
+
+[document]: /architecture/key-distribution/
+[Client]: /concern/client/
+[article]: /service/oauth/introduction/

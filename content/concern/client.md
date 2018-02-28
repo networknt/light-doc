@@ -178,13 +178,10 @@ https://github.com/networknt/light-4j/blob/master/metrics/src/main/java/io/dropw
 
 ### Tutorials that use Http2Client
 
-* Microservices Chain pattern tutorial
+* [Microservices Chain pattern tutorial][]
 
-https://networknt.github.io/light-rest-4j/tutorial/ms-chain/
+* [Service discovery tutorial][]
 
-* Service discovery tutorial
-
-https://networknt.github.io/light-rest-4j/tutorial/discovery/
 
 
 ### Close connection
@@ -364,3 +361,8 @@ clientCredentialsClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 keyClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 
 ```
+
+
+[Microservices Chain pattern tutorial]: /tutorial/rest/swagger/ms-chain/
+[Service discovery tutorial]: /tutorial/common/discovery/
+

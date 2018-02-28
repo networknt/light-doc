@@ -116,10 +116,10 @@ In order to make sure that server start up won't be impacted by all modules to
 load config files, lazy loading is encouraged unless the module must be
 initialized during server start up.
 
-The server [info](https://networknt.github.io/light-4j/other/info/) 
-module will output the config files in map format for each enabled module and 
-it creates another un-cached copy with getJsonMapConfigNoCache as some of the 
-config contains sensitive info that needs to be masked. For example, secret.yml.
+The server [info][] module will output the config files in map format for each 
+enabled module and it creates another un-cached copy with getJsonMapConfigNoCache 
+as some of the config contains sensitive info that needs to be masked. For example, 
+secret.yml.
 
 
 ## Loading sequence
@@ -278,3 +278,4 @@ can have its overwritten config files for a framework version on a specific env.
 
 For more information about light-config-server please check [README.md](https://github.com/networknt/light-config-server)
 
+[info]: /concern/info/

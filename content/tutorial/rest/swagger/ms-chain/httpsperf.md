@@ -13,7 +13,7 @@ draft: false
 
 Now let's see if these servers are performing with
 [wrk](https://github.com/wg/wrk). To learn how to use it, please see my
-article in tools [here](https://networknt.github.io/light-4j/tools/wrk-perf/)
+article in tools [here][]
 
 Assume you have wrk installed, run the following command.
 
@@ -47,3 +47,4 @@ is not that slow compare with http.
 Before starting the next step, please kill all four instances by Ctrl+C. And check in
 the httpschain folder we just created and updated. 
 
+[here]: /tool/wrk-perf/

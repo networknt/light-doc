@@ -19,7 +19,7 @@ in the JWT token header. It is tightly integrated with light-4j framework securi
 component.
 
 For more information on how light-4j security module integrates with this service, please
-refer to [key distribution](https://networknt.github.io/light-4j/architecture/key-distribution/) 
+refer to [key distribution][] 
 
 This service is listening to port number 6886.
 
@@ -153,3 +153,5 @@ then the following error will be returned.
     "description": "Unexpected runtime exception"
   }
 ```
+
+[key distribution]: /architecture/key-distribution/

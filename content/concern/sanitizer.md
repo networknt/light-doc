@@ -18,8 +18,7 @@ draft: false
 
 This is a middleware that addresses cross site scripting concerns. It encodes the header
 and body according to the configuration. As body encoding depends on
-[Body](https://networknt.github.io/light-4j/middleware/body/) middleware, it has to be
-plugged into the request/response chain after Body.
+[Body][] middleware, it has to be plugged into the request/response chain after Body.
 
 # Configuration
 
@@ -65,3 +64,4 @@ and the library can be found at https://github.com/OWASP/owasp-java-encoder
 The encode level we are using for both header and body is "forJavaScriptSource". This gives us
 certain level of confident and it won't mess up header and body in most the case.
 
+[Body]: /concern/body/

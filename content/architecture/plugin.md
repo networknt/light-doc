@@ -107,10 +107,10 @@ will be called in the request/response chain right after all middleware handlers
 
 ### Middleware Handlers
 
-There are some [builtin middleware components](https://networknt.github.io/light-4j/middleware/) 
-in the framework to address common cross cutting concerns. There are implemented in a way we think
-the best to meet most of business requirements. In other words, there are opinionated. For product
-that built top of the framework, you can add/customize/replace existing middleware handlers. 
+There are some [built-in middleware handlers][] in the framework to address common cross cutting 
+concerns. There are implemented in a way we think the best to meet most of business requirements. 
+In other words, there are opinionated. For product that built top of the framework, you can 
+add/customize/replace existing middleware handlers. 
 
 All middleware handlers need to implement interface com.networknt.handler.MiddlewareHandler.
 
@@ -154,7 +154,7 @@ completed without an error.
 There are dependencies between middleware handlers so the sequence to plug them in is very important.
 
 For default plugins generated from [light-codegen](https://github.com/networknt/light-codegen),
-please refer to [Server](https://networknt.github.io/light-4j/other/server/)
+please refer to [Server][]
 
 ### Diagram
 
@@ -164,3 +164,5 @@ please refer to [Server](https://networknt.github.io/light-4j/other/server/)
 Note that audit, metrics and exception need to hooked in the response in order to handle exceptions
 on both request and response phase, calculate response time and dump response info into the audit.
 
+[built-in middleware handlers]: /concern/
+[Server]: /concern/server/

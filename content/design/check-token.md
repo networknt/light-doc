@@ -42,7 +42,9 @@ and retry first service again then first service calls to second service. This r
 service must be idempotent with is much more complicated to handle.
 
 To avoid these complicated scenario, in light-4j framework, we check the token expiration pro-actively
-in the [client](https://networknt.github.io/light-4j/other/client/) module and renew a new token before 
-it is about to expire. The default configuration is 1 minutes before token expiration a separate thread 
-will contact [light-oauth2](https://networknt.github.io/light-oauth2/) token service to renew the token. 
+in the [client][] module and renew a new token before it is about to expire. The default configuration 
+is 1 minutes before token expiration a separate thread will contact [light-oauth2][] token service to 
+renew the token. 
 
+[client]: /concern/client/
+[light-oauth2]: /service/oauth/

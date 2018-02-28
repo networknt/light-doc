@@ -61,8 +61,8 @@ When service to service communication is synchronous, the options are very limit
 Graham Lea documented some solution in his article and I have written some related
 article before. 
 
-- [Idempotency of Microservices](https://networknt.github.io/light-4j/design/idempotency/)
-- [How to handler partial failure](https://networknt.github.io/light-4j/design/partial-failure/) 
+- [Idempotency of Microservices][]
+- [How to handler partial failure][] 
 
 ## Solution - event based
 
@@ -114,3 +114,5 @@ of the services fails.
 Our saga implementation is still working in progress and here is an [article](https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b) 
 explain it very good.
 
+[Idempotency of Microservices]: /design/idempotency/
+[How to handler partial failure]: /design/partial-failure/

@@ -116,7 +116,7 @@ frameworks is very fast that it can handle 60K user login to get authorization
 code per second. For access token, it can serve about 700 access tokens in a 
 second. It is also open sourced and can be found at [light-oauth2 repo][].
 
-[tutorial]: https://networknt.github.io/light-4j/tutorials/microservices/
+[tutorial]: /tutorial/rest/swagger/ms-chain/
 [light-example-4j repo]: https://github.com/networknt/light-example-4j
 [microservices framework benchmark]: https://github.com/networknt/microservices-framework-benchmark
 [security document]: /architecture/security/

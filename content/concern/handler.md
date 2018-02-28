@@ -60,4 +60,6 @@ public interface MiddlewareHandler extends HttpHandler {
 
 ## Implementations
 
-There are example of implementations in [middleware](https://networknt.github.io/light-4j/middleware/)
+There are example of implementations in [middleware][]
+
+[middleware]: /concern/

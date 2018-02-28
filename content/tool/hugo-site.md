@@ -1,7 +1,7 @@
 ---
 title: Hugo Site
 date: 2017-11-04T22:12:19-04:00
-description: "Hugo for static site"
+description: ""
 categories: [tool]
 keywords: []
 menu:
@@ -16,20 +16,22 @@ draft: false
 
 ## Introduction
 
-As we have known that you can use gh-pages branch to create document site for each repo, 
+As you know that you can use gh-pages branch to create document site for each repo, 
 there is also a way that you can create a site from your organization and deploy your
-site to github.com. 
+site to github.com. Furthermore, you can use hugo to create a static website and deploy
+it anywhere you want.  
 
-The following will describe the process with an example site networknt.github.io
+The following will describe the process with an example site www.networknt.com
 
 ## Installation
 
-For hugo installation, please read this [document](https://networknt.github.io/light-4j/tools/hugo-docs/)
+For hugo installation, please read this [hugo document][].
 
 ## Instructions
 
-The detail steps are documented at [hugo](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
-I am just trying to apply the step to https://networknt.github.io
+The detail steps are documented at [hugo][] site. I am just trying to apply the step to 
+
+https://www.networknt.com
 
 
 ### Create a document repo
@@ -41,7 +43,7 @@ We are using light-doc as repo name in networknt organization
 ### Create a site repo
 
 This repo contains the fully rendered version of your Hugo website. In our case, it 
-is called networknt.github.io
+is called www.networknt.com
 
 ### Create docs
 
@@ -51,6 +53,7 @@ Clone both repos to your local and create a document hugo site in light-doc
 cd light-doc
 hugo new site docs
 ```
+
 This will create a docs folder in light-doc directory. For me I have copied the docs
 folder to light-4j as a staring point.
 
@@ -122,3 +125,5 @@ If you’d like to use a custom domain for your GitHub Pages site, create a file
 
 Refer to the [official documentation for custom domains](https://help.github.com/articles/using-a-custom-domain-with-github-pages/) for further information.
 
+[hugo document]: /tool/hugo-docs/
+[hugo]: https://gohugo.io/hosting-and-deployment/hosting-on-github/

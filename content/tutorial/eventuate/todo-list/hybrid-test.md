@@ -15,7 +15,7 @@ We will start hybrid-command server and hybrid-query server manually first and
 then start them together along with services in a docker-compose.
 
 The first step is to make sure light-eventuate-4j platform is up and running.
-Please follow this [tutorial](https://networknt.github.io/light-eventuate-4j/tutorial/service-dev/)
+Please follow this [tutorial][]
 
 To start hybrid servers manually, we need to checkout light-eventuate-4j as these
 two servers are part of it.
@@ -93,3 +93,5 @@ curl -X POST \
   -H 'content-type: application/json' \
   -d '{"host":"lightapi.net","service":"todo","action":"gettodos", "version": "0.1.0"}'
 ```
+
+[tutorial]: /tutorial/eventuate/getting-started/
