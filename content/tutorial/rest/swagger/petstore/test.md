@@ -12,12 +12,15 @@ draft: false
 ---
 
 
-The best tool to test RESTful API is [Postman][]. 
-It is very easy to set headers and other parameters and save the configuration for 
-future usage.
+The best GUI tool to test RESTful API is [Postman][] and best command line tool is curl. 
 
-Some people like curl command line and it works as well. Here is one example to access
-one of the endpoint petstore serves. 
+Postman is very easy to set headers and other parameters and save the configuration for 
+future usage. If you have a lot of endpoints, it is highly recommended to save all of
+them as a project so that these endpoints can be easily retrieved. 
+
+Some people like curl command line and it works as well. In most of the cases, you should
+have a file to save the curl commands so that you don't need to reconstruct command each
+time. Here is one example to access one of the endpoint petstore serves. 
 
 ```
 curl -k https://localhost:8443/v2/pet/111
@@ -53,18 +56,24 @@ Now, let's test the server with an url that is not defined in the specification.
 ```
 curl -k https://localhost:8443/abc
 ```
+
 And the result is:
 
 ```
 {"statusCode":404,"code":"ERR10007","message":"INVALID_REQUEST_PATH","description":"Request path cannot be found in the spec."}
 ```
 
-In fact, the specification is loaded into the framework at runtime and there is a
-module called Validator that does the validation against specification for headers,
-query parameters, uri parameters and body. It also supports validation using JSON
-schema with an independent library [json-schema-validator][]
+In fact, the specification is loaded into the service instance by the light-rest-4j 
+framework at runtime and there is a module called [Swagger Validator][] that does the 
+validation against specification for headers, query parameters, uri parameters and body. 
+It also supports validation using JSON schema with an independent library [json-schema-validator][].
 
+Now the server is up and running, let's update generated config files to enable more
+features. First let's enable [security][] with OAuth 2.0 JWT token verification as built-in 
+[microservices security][] set us apart from other microservice frameworks. 
 
 [json-schema-validator]: https://github.com/networknt/json-schema-validator
 [Postman]: https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en
- 
+[Swagger Validator]: /style/light-rest-4j/swagger-validator/
+[microservices security]: /architecture/security/
+[security]: /tutorial/rest/swagger/petstore/security/

@@ -13,7 +13,9 @@ draft: false
 
 
 You need to have Java JDK 8 (I prefer OpenJDK but Oracle JDK will do), Maven, Git and 
-Docker installed before starting this tutorial.
+Docker installed before starting this tutorial. If you are using Windows, you can 
+complete all steps without docker-compose as there are some issues with to run it on
+Windows. 
  
 Assuming above software packages are installed, let's create a workspace and clone the 
 projects we need for the tutorial. The following will assume to your workspace is named
@@ -28,6 +30,7 @@ git clone https://github.com/networknt/light-example-4j.git
 git clone https://github.com/networknt/light-oauth2.git
 git clone https://github.com/networknt/light-docker.git
 git clone https://github.com/networknt/model-config.git
+git clone https://github.com/networknt/light-config-test.git
 ```
 
 We are going to re-generate petstore project in light-example-4j. So let's rename
@@ -47,5 +50,8 @@ cd ~/networknt/light-codegen
 mvn install -DskipTests
 ```
 
-Now, we have the environment and light-codegen ready. The next step, we will generate the
+Now, we have the environment and light-codegen ready. The next step, we will [generate][] the
 project with the Swagger 2.0 specification. 
+
+[generate]: /tutorial/rest/swagger/petstore/generate/
+
