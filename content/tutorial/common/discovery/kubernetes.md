@@ -164,7 +164,7 @@ docker push networknt/api_d
 
 Next, let's create a Kubernetes Deployment file. This should be in locate in a separate repo for
 deployment and that repo should be accessed from sandbox for deployment. But for now let's just 
-put it into api_a/kubernetes folder for reference only.  
+put it into api_d/kubernetes folder for reference only.
 
 ```yaml
 
@@ -331,7 +331,7 @@ docker push networknt/api_c
 
 Next, let's create a Kubernetes Deployment file. This should be in locate in a separate repo for
 deployment and that repo should be accessed from sandbox for deployment. But for now let's just 
-put it into api_d/kubernetes folder for reference only.  
+put it into api_c/kubernetes folder for reference only.
 
 ```yaml
 apiVersion: apps/v1
@@ -500,7 +500,7 @@ docker push networknt/api_b
 
 Next, let's create a Kubernetes Deployment file. This should be in locate in a separate repo for
 deployment and that repo should be accessed from sandbox for deployment. But for now let's just 
-put it into api_d/kubernetes folder for reference only.  
+put it into api_b/kubernetes folder for reference only.
 
 ```yaml
 apiVersion: apps/v1
@@ -673,7 +673,7 @@ docker push networknt/api_a
 
 Next, let's create a Kubernetes Deployment file. This should be in locate in a separate repo for
 deployment and that repo should be accessed from sandbox for deployment. But for now let's just 
-put it into api_d/kubernetes folder for reference only.  
+put it into api_a/kubernetes folder for reference only.
 
 ```yaml
 apiVersion: apps/v1
