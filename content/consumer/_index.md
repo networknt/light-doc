@@ -1,5 +1,5 @@
 ---
-title: "Service Consumer Guideline"
+title: "Service Consumer"
 date: 2018-03-01T16:44:15-05:00
 description: ""
 categories: []
