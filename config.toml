@@ -161,6 +161,12 @@ twitter = "networkntcom"
   identifier = "tool"
   url = "/tool/"
 
+[[menu.docs]]
+  name = "Service Consumer"
+  weight = 38
+  identifier = "consumer"
+  url = "/consumer/"
+
 # LOW LEVEL ITEMS
 
 [[menu.docs]]
