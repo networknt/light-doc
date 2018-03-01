@@ -4,15 +4,19 @@ date: 2018-01-07T16:40:00-05:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "tool"
+    weight: 30
+weight: 30
 aliases: []
 toc: false
 draft: false
 ---
 
 
-In this step we are going to generate a command side restful microserivce. The model-config
-for this service can be found at model-config repo.
+In this step we are going to generate a command side restful microservice from scratch. The 
+model-config for this service can be found at [model-config][] repo.
 
 Let's first checkout model-config repo from github.
 
@@ -288,4 +292,6 @@ Now let's verify that all modules can be built.
 ```
 mvn clean install
 ```
+
+[model-config]: https://github.com/networknt/model-config/tree/master/rest/todo_command/1.0.0
 

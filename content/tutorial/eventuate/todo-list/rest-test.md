@@ -72,8 +72,8 @@ java -jar target/rest-query-1.0.0.jar
 Let's create a todo item with curl
 
 ```
-curl -X POST \
-  http://localhost:8083/v1/todos \
+curl -k -X POST \
+  https://localhost:8081/v1/todos \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -d '{"title":"this is the test todo from postman","completed":false,"order":0}'
@@ -111,7 +111,7 @@ select * from events;
 Now let's access the rest-query service
 
 ```
-curl -X GET http://localhost:8082/v1/todos
+curl -k -X GET https://localhost:8082/v1/todos
 ```
 
 And the response will be something like this.

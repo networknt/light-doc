@@ -27,7 +27,7 @@ This example can be found at [light-example-4j][].
 
 * Command side microservice (Restful based or hybrid based) to trigger command API
 
-* Query side API implemented on top of light-eventuate-4j to define the event handles and subscribe events and process by defined event handles.
+* Query side API implemented on top of light-eventuate-4j to define the event handlers and subscribe events and process by defined event handlers.
 
 * Query side microservice (Restful based or hybrid based) to trigger query API.
 
@@ -35,7 +35,7 @@ This example can be found at [light-example-4j][].
 
 ![drawing5](/images/Drawing5.png)
 
-Step 1:  Application or browser sends restful http post request to command service to create a todo :
+Step 1: Application or browser sends restful http post request to command service to create a todo
 
 Step 2: Command service processes the request and generates a "create todo" event; And then publishes 
 the event to event store
