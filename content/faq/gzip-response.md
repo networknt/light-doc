@@ -1,7 +1,7 @@
 ---
 title: "Gzip Response"
 date: 2017-11-06T16:10:17-05:00
-description: "How to compress the response with gzip"
+description: ""
 categories: []
 keywords: []
 slug: ""
@@ -9,6 +9,8 @@ aliases: []
 toc: false
 draft: false
 ---
+
+### How to compress the response with gzip
 
 For some of the API endpoints, the response body are big and it might be necessary
 to compress it before return it to the client. Undertow has a built-in EncodingHandler

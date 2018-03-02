@@ -1,7 +1,7 @@
 ---
 title: "Customize Status"
 date: 2017-11-10T18:50:54-05:00
-description: "How to customize the output format for Error Status response"
+description: ""
 categories: []
 keywords: []
 slug: ""
@@ -9,6 +9,8 @@ aliases: []
 toc: false
 draft: false
 ---
+
+### How to customize the output format for Error Status response
 
 Light-4j Status module is an object that model the error response and constructed from
 error code defined in status.yml config file. The framework provide some error code and

@@ -30,11 +30,11 @@ other modern http clients. Another big issue is HTTP 2.0 support as light-*-4j
 frameworks support HTTP2 natively and we want to take advantage on the client
 side as well.
 
-In looking for Java HTTP clients that support HTTP 2.0, I was stuck there as
+In looking for Java HTTP clients that support HTTP 2.0, we were stuck there as
 none of the them support it gracefully. Some are partial support and most of
-them require you to put a version of jar file in the command line so work with
-Java 8. Everybody seems to waiting for Java 9 to come out but we cannot use it
-on production until it is ready.
+them require you to put -Xbootclasspath with a specific version of jar file per
+JDK in the command line in order to work with Java 8. Everybody seems to waiting 
+for Java 9 to come out but we cannot use it on production until it is ready.
 
 Given above situations, I decided to implement my own Http2Client based on what
 we have in Undertow. I have proposed the idea to implement a generic Http2Client
@@ -42,12 +42,12 @@ to Undertow community but it wasn't interested. It will take a long time to buil
 an independent Http2Client without depending on Undertow and it is OK with us
 as our server is based on Undertow. Other people might have a concern on that but
 the argument is Undertow core is extremely small and I don't thing it is a big
-issue for other people to use it outside of light-*-4j.
+issue for other people to use it outside of light-*-4j frameworks.
 
 I am starting an [http client benchmark](https://github.com/networknt/http2client-benchmark)
 and if there are more interests on this client, I will make it an independent
-module without depending on Undertow so that other people working on other platforms
-can use it without the extra Undertow core.
+module without depending on Undertow core so that other people working on other 
+platforms can use it without the extra Undertow core.
 
 ## Usage
 
@@ -74,7 +74,8 @@ Like Undertow core server, it is event driven with callbacks so non-blocking
 all the time to free your CPU for other important computation. Http2Client
 has two generic callback functions implemented to handle request with body(POST,
 PUT, PATCH) and request without body(GET, DELETE). Users can create their own
-customized callback functions to handle the response from the server.
+customized callback functions to handle the response from the server if they
+need special login inside the callback function.
 
 Signature for GET/DELETE
 

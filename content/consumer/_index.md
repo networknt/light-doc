@@ -36,6 +36,7 @@ The following contains architecture, design and best practices.
      + [Customized Grant Type](/consumer/customized-grant/)
      + [Get Token in Startup](/consumer/token-startup/)
      + [Long Lived Token](/consumer/long-lived-token/)
+     + [Key Distribution](/architecture/key-distribution/)
   * [Traceability](/consumer/traceability/)
      + [Traceability Id](/consumer/traceability-id/)
      + [Correlation Id](/consumer/correlation-id/)
