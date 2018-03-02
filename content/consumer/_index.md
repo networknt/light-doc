@@ -14,7 +14,7 @@ toc: false
 draft: false
 ---
 
-Mojority of the sections in this site are about how to build, deploy and manage
+Majority of the sections in this site are about how to build, deploy and manage
 services. This section will address microservices architecture and best practices 
 from consumer perspective. 
 
