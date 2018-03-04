@@ -20,3 +20,12 @@ used to build monolithic services. When you have two many services running withi
 the organization, managing these service specifications during development and instances
 during runtime become a daunting job. Light-portal provide features that help you
 to manage the entire life-cycle of services from planning to decommission. 
+
+
+
+### lightapi.net portal
+
+### Install light-portal
+
+### light-portal components
+

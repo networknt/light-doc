@@ -1,5 +1,5 @@
 ---
-title: "light-bot tutorial"
+title: "Light Bot Tutorial"
 date: 2017-12-30T11:01:56-05:00
 description: ""
 categories: []

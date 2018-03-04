@@ -1,5 +1,5 @@
 ---
-title: "Tutorial of light-proxy"
+title: "Light Proxy Tutorial"
 date: 2017-12-16T09:36:38-05:00
 description: ""
 categories: []

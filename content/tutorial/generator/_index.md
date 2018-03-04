@@ -1,5 +1,5 @@
 ---
-title: "Tutorials of light-codegen"
+title: "Light Codegen Tutorial"
 date: 2017-11-22T14:46:10-05:00
 description: ""
 categories: []
