@@ -31,11 +31,10 @@ route to the request to the right handler to handle it. The handler will be impl
 the service jar file included into the server instance. 
 
 
+
 ### rpc-security
 
 rpc-security is responsible for JWT token verification from Authorization header.  
-
-[handler interface]: /concern/handler/
 
 
 - [JSON Protocol](/style/light-hybrid-4j/json-rpc/)
@@ -45,3 +44,6 @@ rpc-security is responsible for JWT token verification from Authorization header
   * [Test Service](/style/light-hybrid-4j/test-service/)
   * [Tutorial](/tutorial/hybrid/)
 - [Binary Protocol](/style/light-hybrid-4j/binary-rpc/)
+
+[handler interface]: /concern/handler/
+

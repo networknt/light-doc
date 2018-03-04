@@ -18,3 +18,4 @@ Almost all out own services are built on top of light-hybrid-4j with JSON RPC. T
 are some examples.  
 
 - [Portal Hybrid Query with Light Codegen Web](/tutorial/hybrid/codegen-web-portal/)
+- [Portal Hybrid Query with API Certification](/tutorial/hybrid/certification-portal/)

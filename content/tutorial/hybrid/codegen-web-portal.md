@@ -53,10 +53,10 @@ mvn clean install
 ```
  
 
-### Start server with dependencies in pom.xml
+### Start server with service dependencies in pom.xml
 
-By default, hybrid-query project pom.xml include all the dependencies for light-codegen jar
-files. The following block can be found in pom.xml file.
+By default, hybrid-query project pom.xml include all the dependencies for codegen-web. The 
+following block can be found in pom.xml file.
 
 ```
         <!-- light-codegen dependencies can be removed and put the jar file into service folder. -->
@@ -85,15 +85,20 @@ files. The following block can be found in pom.xml file.
             <artifactId>light-rest-4j-generator</artifactId>
             <version>${version.light-4j}</version>
         </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>codegen-web</artifactId>
-            <version>${version.light-4j}</version>
-        </dependency>
 ```
 
 In this case, the jar files for light-codegen is loaded form maven central when the project
 is built. 
+
+Now let's copy the codegen-web jar file to ~/networknt/light-config-test/light-portal/hybrid-query/service
+
+```
+cd ~/networknt/light-config-test/light-portal/hybrid-query/service
+cp ~/networknt/light-codegen/codegen-web/target/codegen-web-1.5.11.jar .
+``` 
+
+Note that this service jar must be copied to service folder in order to load and merge schema
+file with other services on the same server. 
 
 To start the server, let's use the externalized config files in light-config-test folder.
 
@@ -161,11 +166,6 @@ dependencies.
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>light-rest-4j-generator</artifactId>
-            <version>${version.light-4j}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>codegen-web</artifactId>
             <version>${version.light-4j}</version>
         </dependency>
         -->
