@@ -14,11 +14,24 @@ toc: false
 draft: false
 ---
 
-The following components can be found in [light-portal][] repository.
+When light-portal is deployed, there might not be a lot of volume in the beginning. 
+We will be using only one hybrid-command server to host all the services that update
+the portal and one hybrid-query server to host all the services that only read info
+from the portal. Each server can be scaled to multiple instances based on the read-only 
+load or write-only load. Also, we have an option to move one or two hot services to a 
+separate server and scale it accordingly later on.
+
+All services can be found in in [light-portal][] repository on github.com
+
+### Command Services:
+
+* [user-management][] - User Management Service
+
+### Query Services: 
 
 * [api-certification][] - API-Certification Service
 
-* [user-management][] - User Management Service
+### Portal View 
 
 
 [light-portal]: https://github.com/networknt/light-portal

@@ -1,5 +1,5 @@
 ---
-title: "Light Portal"
+title: "Light Portal Service"
 date: 2017-11-05T12:34:09-05:00
 description: ""
 categories: [getting started]
