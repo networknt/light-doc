@@ -4,8 +4,8 @@ title: Kubernetes
 ---
 
 In the previous step, we have explored docker compose with multiple services and it works
-very well on users laptop or desktop. In this section, we are going to explore how to deploy
-the these services to a Kubernetes cluster with multiple instances of each and see how they
+very well on user's laptop or desktop. In this section, we are going to explore how to deploy
+these services to a Kubernetes cluster with multiple instances of each and see how they
 can discovery each other. 
 
 First let's create a Kubernetes cluster with one master and three worker nodes. For the steps
@@ -20,7 +20,7 @@ Kubernetes provides a lot components to abstract different layers and to simplif
 interactions; however, it might not be the fastest way for high speed services. In most of the
 conditions, a Layer 7 proxy will be used to load balance the traffic between nodes and pods. 
 For normal usage, this is OK but if you want to scale, the proxy hop will significantly hinder
-your throughput. If you are doing real microservices which means you have dozens services involves
+your throughput. If you are doing real microservices which means you have dozens services involved
 in most requests coming from outside, you really want to bypass these proxies and establish the
 connection directly and cache it for a while. This is one of the important reasons we have used
 client side discovery instead of server side discovery. Another reason is to support environment
@@ -44,8 +44,8 @@ test3                Ready     <none>    2d        v1.9.3
 ### Install Consul
 
 We are going to install Consul on sandbox just for testing purpose. Normally, you shouldn't
-install contain to sandbox. We are just use it to simulate that Consul is installed in data
-centre with a static IP address. 
+install any container to sandbox as it is Kubernetes master. We are just using it to simulate 
+that Consul is installed in data centre with a static IP address. 
 ```
 docker run -d -p 8400:8400 -p 8500:8500/tcp -p 8600:53/udp -e 'CONSUL_LOCAL_CONFIG={"acl_datacenter":"dc1","acl_default_policy":"allow","acl_down_policy":"extend-cache","acl_master_token":"the_one_ring","bootstrap_expect":1,"datacenter":"dc1","data_dir":"/usr/local/bin/consul.d/data","server":true}' consul agent -server -ui -bind=127.0.0.1 -client=0.0.0.0
 ```
@@ -76,7 +76,8 @@ cp -r consuldocker kubernetes
 
 In order to register on Consul, our server must know the external IP address for the node and a
 port number that is bound to the IP address. In some scenarios, we need to config server.yml to
-set up an environment to separate different environment in the same Kubernetes cluster for tests.
+set up an environment tag to separate different environment in the same Kubernetes cluster for 
+tests.
 
 As different pods can be deployed on one Kubernetes node and they might want to bind to the same
 port. In order to avoid conflict, we are going to use dynamic port allocation and let server to
@@ -162,7 +163,7 @@ docker build -t networknt/api_d .
 docker push networknt/api_d
 ```
 
-Next, let's create a Kubernetes Deployment file. This should be in locate in a separate repo for
+Next, let's create a Kubernetes Deployment file. This should be located in a separate repo for
 deployment and that repo should be accessed from sandbox for deployment. But for now let's just 
 put it into api_d/kubernetes folder for reference only.
 
