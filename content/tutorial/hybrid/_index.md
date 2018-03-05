@@ -21,3 +21,5 @@ are some examples.
 - [Portal Hybrid Query with API Certification](/tutorial/hybrid/certification-portal/)
 - [Portal Hybrid Command with Host Menu](/tutorial/hybrid/host-menu-command-portal/)
 - [Portal Hybrid Query with Host Menu](/tutorial/hybrid/host-menu-query-portal/)
+- [Portal Hybrid Command with Schema Form](/tutorial/hybrid/schema-form-command-portal/)
+- [Portal Hybrid Query with Schema Form](/tutorial/hybrid/schema-form-query-portal/)
