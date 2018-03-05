@@ -19,3 +19,5 @@ are some examples.
 
 - [Portal Hybrid Query with Light Codegen Web](/tutorial/hybrid/codegen-web-portal/)
 - [Portal Hybrid Query with API Certification](/tutorial/hybrid/certification-portal/)
+- [Portal Hybrid Command with Host Menu](/tutorial/hybrid/host-menu-command-portal/)
+- [Portal Hybrid Query with Host Menu](/tutorial/hybrid/host-menu-query-portal/)
