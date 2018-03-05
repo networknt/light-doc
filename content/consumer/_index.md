@@ -54,5 +54,5 @@ The following contains architecture, design and best practices.
   * [Consistent Hash](/consumer/consistent-hash/)
 - [Light Router](/consumer/light-router/)
   * [Use Cases](/consumer/router-use-case/)
-  * [Deploy Location](/consumer/router-location/)
+  * [Location and Ownership](/service/router/location-ownership/)
 

@@ -812,7 +812,15 @@ apid-deployment-cd57b9b45-rnnrn    1/1       Running   0          20s
 
 ``` 
 
+This tutorial shows how to deploy services to Kubernetes cluster and how to look up these services
+from Consul. For service to service communication, client module is used to perform client side
+service discovery. In the situation that client module cannot be used, for example, the client is
+not built on Java 8 or not even on Java, light-router can be used to assist client side service
+discovery and depending on the ownership of light-router, it can handler the JWT token renewal as
+well. For more details, please refer to [router][] tutorial.  
+
 
 [Kubernetes]: /tool/kubernetes/
 [Minikube]: /tool/minikube/
 [tag]: /tutorial/common/discovery/tag/
+[router]: /tutorial/common/discovery/router/

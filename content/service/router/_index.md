@@ -44,10 +44,11 @@ To learn how to use this proxy, pleases refer to
 * [Tutorial][] with step by step guide for RESTful router
 * [Artifact][] find release artifacts and deploy options
 * [Configuration][] for different configurations based on your situations
-
+* [Location and Ownership] for deployment and ownership decision
 
   
 [Getting Started]: /getting-started/light-router/
 [Tutorial]: /tutorial/router/
 [Configuration]: /service/router/configuration/
 [Artifact]: /service/router/artifact/
+[Location and Ownership]: /service/router/location-ownership/
