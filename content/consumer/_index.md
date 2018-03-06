@@ -30,7 +30,7 @@ The following contains architecture, design and best practices.
 - [Client Module](/consumer/client-module/)
   * [TLS Connection](/consumer/tls-connection/)
   * [HTTP 2.0](/consumer/http2/)
-  * [OAuth 2.0 JWT Token](/consumer/oauth2-jwt/)
+  * [Security](/architecture/security/)
      + [Subject Token](/consumer/subject-token/)
      + [Access Token](/consumer/access-token/)
      + [Customized Grant Type](/consumer/customized-grant/)
