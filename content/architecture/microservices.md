@@ -1,7 +1,7 @@
 ---
 title: "Microservices Architecture"
 date: 2017-11-06T11:14:26-05:00
-description: "Microservices Architecture"
+description: ""
 categories: []
 keywords: [architecture]
 menu:

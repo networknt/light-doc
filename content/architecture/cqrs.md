@@ -1,5 +1,5 @@
 ---
-title: "Command Query Responsibility Segregation"
+title: "CQRS"
 date: 2017-11-14T10:02:23-05:00
 description: ""
 categories: []

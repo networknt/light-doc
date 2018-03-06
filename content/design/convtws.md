@@ -49,7 +49,7 @@ point of failure. Most gateway products on the market today are Java EE based
 monolithic applications and they are against distributed principal of microservices
 architecture.
 
-Microservice architecture evolves from monolithic application architecture 
+Microservices architecture evolves from monolithic application architecture 
 naturally as a monolith grows to certain stage that becomes not maintainable
 and not scalable. Imaging that you have a big application and only one 
 developer knows it inside out and every time one line of code is changed ten
@@ -76,20 +76,20 @@ so that it can be called from different places.
 A monolithic application just like a Java class with only one main method with
 thousands line of code. In order to make it easy to read and maintain, some of
 the duplicated lines of code should be extracted into other method in the same
-class or some other classes. This make developers' life easier because when
+class or some other classes. This makes developers' life easier because when
 you work, you are dealing with only one class or one method at a time. The only
-problem with this kind of break up is classes and methods are tightly coupled
+problem with this kind of breaking up is classes and methods are tightly coupled
 and there are a lot of assumptions in these class and method calls. This is
 why you change one method to fix an issue for one caller and other callers are
 broken as they have different assumptions although the signature of the method
-has never been changed. Another issue with this kind of break up is you have to
+has never been changed. Another issue with this kind of breaking up is you have to
 package your changed method/class with others as one deployment unit to deploy
 them together to production and the entire deployment process is very risky.
 
 Microservices just go to the next step, instead of separate methods or classes
 calling in-process. We make these reusable pieces as inter-process services
-revoked through HTTP. The benefit is you can update/replace individual service 
-independently without impacting the entire application. As these service are
+invoked through HTTP. The benefit is you can update/replace individual service 
+independently without impacting the entire application. As these services are
 very small, they are easier to be implemented and maintained by developers.
 
 Unlike class or method calls, calling microservices over the network is very
@@ -97,7 +97,7 @@ slow. So it is unwise to break an application to thousands pieces and every
 request will have to go through 50 to 100 network hops to get it done. The
 network latency will kill the performance no mater how you scale your services.
 
-whenever possible, the calls to other services should be done in parallel so
+Whenever possible, the calls to other services should be done in parallel so
 that the slowest service will decide the response time. If you call multiple
 services in serial, then the sum of these services will be your response time.
 
