@@ -69,7 +69,7 @@ twitter = "networkntcom"
 
 #CUSTOM PARAMS
 [params]
-  description = "One of the world’s fastest API platforms"
+  description = "One of the world’s fastest API platform"
   ## Used for views in rendered HTML (i.e., rather than using the .Hugo variable)
   release = "1.5.0"
   ## Setting this to true will add a "noindex" to *EVERY* page on the site
