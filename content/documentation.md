@@ -1,7 +1,7 @@
 ---
 title: Light Documentation
 linktitle: Light
-description: Light is one of the world's fastest microservices platform. 
+description: Light is one of the world's fastest microservices platforms. 
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
