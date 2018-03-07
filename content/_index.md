@@ -4,7 +4,7 @@ date: 2017-03-02T12:00:00-05:00
 features:
   - heading: Blistering Speed and Small Memory Footprint
     image_path: /images/icon-fast.svg
-    tagline: Save 10s to 100s times on production provision cost
+    tagline: Save 10x to 100x on production provision costs
     copy: You need hundreds of instances of Spring Boot with Tomcat embedded to match one instance of light-4j in "Hello World" for the same throughput and latency.
 
   - heading: Embedded Gateway to Address all Cross-cutting Concerns
@@ -29,7 +29,7 @@ features:
 
   - heading: OAuth2, Portal and Services to Form an Ecosystem
     image_path: /images/icon-custom-outputs.svg
-    tagline: Provide a platform for on-premise solution and hosted solution
+    tagline: Provide a platform for on-premise solutions as well as hosted solutions
     copy: light-oauth2 for security and light-portal is for service runtime monitoring and management and API marketplace. Kafka for messaging, ELK for logging, InfluxDB and Grafana for metrics and ArangoDB for DB.
 sections:
   - heading: "Cross-Cutting Concerns"
