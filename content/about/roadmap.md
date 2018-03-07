@@ -18,7 +18,7 @@ aliases: [/meta/roadmap]
 toc: false
 ---
 
-To track each individual product's progress, see our [GitHub Milestones][milestone].
+To track each individual product's progress and road map, see our [GitHub Milestones][milestone].
 
 In no particular order, here are some other features currently being worked on:
 
