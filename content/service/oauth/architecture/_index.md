@@ -1,10 +1,14 @@
 ---
 title: "Architecture"
 date: 2017-12-07T11:40:18-05:00
-description: "Architecture of light-oauth2"
+description: ""
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "service"
+    weight: 20
+weight: 20
 aliases: []
 toc: false
 draft: false
@@ -18,7 +22,7 @@ the OAuth 2.0 provider to get token or verify token for each request due to the
 dramatically increased volume.
 
 The following are some of the architecture considerations for the microservice OAuth
-2.0 provider. 
+2 provider. 
  
 
 ### Microservices

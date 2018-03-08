@@ -7,8 +7,8 @@ keywords: [oauth2]
 menu:
   docs:
     parent: "service"
-    weight: 02
-weight: 02	#rem
+    weight: 30
+weight: 30
 aliases: []
 toc: false
 draft: false
