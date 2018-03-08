@@ -37,6 +37,7 @@ The following contains architecture, design and best practices.
      + [Get Token in Startup](/consumer/token-startup/)
      + [Long Lived Token](/consumer/long-lived-token/)
      + [Key Distribution](/architecture/key-distribution/)
+     + [Secret Encryption](/consumer/secret-encryption/)
   * [Traceability](/consumer/traceability/)
      + [Traceability Id](/consumer/traceability-id/)
      + [Correlation Id](/consumer/correlation-id/)
