@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 date: 2017-12-07T11:42:23-05:00
-description: "OAuth 2.0 Introduction"
+description: ""
 categories: []
 keywords: []
 slug: ""
@@ -22,11 +22,11 @@ communication:
 * Standalone application to API
 * API to API
 
-This informational guide is geared towards application developers, and provides an 
-overview of OAuth 2 roles, authorization grant types, use cases, and flows.
+This informational guide is geared towards application developers, and provides an overview of 
+OAuth 2 roles, authorization grant types, use cases, and flows.
 
 
-# OAuth Roles
+### OAuth 2 Roles
 
 OAuth defines four roles:
 
@@ -38,28 +38,28 @@ OAuth defines four roles:
 We will detail each role in the following subsections.
 
 
-## Resource Owner: User
+#### Resource Owner: User
 
 The resource owner is the user who authorizes an application to access their resources.
 The application's access to the user's resource is limited to the "scope" of the 
 authorization granted (e.g. read or write access).
 
-## Resource Server: API
+#### Resource Server: API
 
 The resource server hosts the protected user resources.
 
-## Authorization Server: API
+#### Authorization Server: API
 
 the authorization server verifies the identity of the user then issues access tokens to
 the application.
 
-## Client: Application
+#### Client: Application/API
 
 The client is the application that wants to access the user's resources. Before it may 
 do so, it must be authorized by the user, and the authorization must be validated by 
 the API.
 
-# Abstract Protocol Flow
+### Abstract Protocol Flow
 Now that you have an idea of what the OAuth roles are, let's look at a diagram of how 
 they generally interact with each other:
 
@@ -80,7 +80,7 @@ token for authentication.
 The actual flow of this process will differ depending on the authorization grant type in use, 
 but this is the general idea. We will explore different grant types in a later section.
 
-# Application Registration
+### Application Registration
 
 Before using OAuth with your application, you must register your application with 
 the service. This is done through a registration form in the "developer" or "API" 
@@ -92,7 +92,7 @@ portion of the service's website, where you will provide the following informati
 * Redirect URI or Callback URL
 * The redirect URI is where the service will redirect the user after they authorize (or deny) your application, and therefore the part of your application that will handle authorization codes or access tokens.
 
-# Client ID and Client Secret
+### Client ID and Client Secret
 
 Once your application is registered, the service will issue "client credentials" in 
 the form of a client identifier and a client secret. The Client ID is a publicly 
@@ -102,7 +102,7 @@ is used to authenticate the identity of the application to the service API when 
 application requests to access a user's resource, and must be kept private between
 the application and the API.
 
-# Authorization Grant
+### Authorization Grant
 In the Abstract Protocol Flow above, the first four steps cover obtaining an 
 authorization grant and access token. The authorization grant type depends on the 
 method used by the application to request authorization, and the grant types 
@@ -116,7 +116,7 @@ different cases:
 
 Now we will describe grant types in more detail, their use cases and flows, in the following sections.
 
-# Grant Type: Authorization Code
+### Grant Type: Authorization Code
 The authorization code grant type is the most commonly used because it is optimized 
 for server-side applications, where source code is not publicly exposed, and Client 
 Secret confidentiality can be maintained. This is a redirection-based flow, which 
@@ -201,7 +201,7 @@ refresh token was issued, it may be used to request new access tokens if the ori
 token has expired.
 
 
-# Grant Type: Client Credentials
+### Grant Type: Client Credentials
 The client credentials grant type provides an application a way to access its own 
 service by passing client credentials through the header and specify grant_type in body
 to "client_credentials". 
@@ -235,7 +235,7 @@ to the application. Now the application is authorized to use its own resource!
 ```
  
 
-# Example Access Token Usage
+### Example Access Token Usage
 Once the application has an access token, it may use the token to access the user's 
 resource via the API, limited to the scope of access, until the token expires.
 
@@ -249,7 +249,7 @@ Assuming the access token is valid, the API will process the request according t
 API specifications. If the access token is expired or otherwise invalid, the API will 
 return an 401 error.
 
-# Refresh Token Flow
+### Refresh Token Flow
 
 After an access token expires, using it to make a request from the API will result in 
 an "Invalid Token Error". At this point, if a refresh token was included when the 
@@ -257,7 +257,7 @@ original access token was issued, it can be used to request a fresh access token
 the authorization server.
   
 
-# Conclusion
+### Conclusion
 You should now have a good idea of how OAuth 2 works, and when a particular authorization
 flow should be used.
 
