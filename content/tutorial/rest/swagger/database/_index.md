@@ -1,9 +1,14 @@
 ---
-title: "Restful Database Access Tutorial"
+title: "Restful Database Access"
 date: 2017-11-23T14:23:52-05:00
 description: "How to access database from Restful API"
 categories: []
 keywords: [tutorial]
+menu:
+  docs:
+    parent: "tutorial"
+    weight: 30
+weight: 30
 aliases: []
 toc: false
 draft: false

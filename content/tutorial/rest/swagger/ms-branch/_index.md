@@ -1,10 +1,14 @@
 ---
-title: "_Index"
+title: "Microservices Branch Pattern"
 date: 2017-11-29T10:06:05-05:00
-description: ""
+description: "How to build Restful microservices in branch pattern"
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "tutorial"
+    weight: 60
+weight: 60
 aliases: []
 toc: false
 draft: false
