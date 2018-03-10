@@ -13,12 +13,12 @@ draft: false
 
 We have [light-codegen][] to support project scaffolding for all the frameworks provided
 by light platform. We believe that for enterprise scale and microservices, you have to
-adopt [design first vs code first][]. There are numeric ways to use light-codegen and here 
-we are just using it as command line cli tool.  
+adopt [design first][]. There are numeric ways to use light-codegen and here we are just 
+using it as command line cli tool.  
 
 This project will be updated constantly when a new version of light-4j framework 
-is released or any updates in [light-codegen][]. Both swagger petstore and openapi petstore
-projects are our test bed for [light-rest-4j][].
+is released or any updates in [light-codegen][]. Both [swagger petstore][] and 
+[openapi petstore][] projects are our test beds for [light-rest-4j][].
 
 Here is the command line to generate this project from model-config directory. It
 assumes that you have light-example-4j cloned in the same working directory and 
@@ -44,9 +44,12 @@ detailed [document][] can be found at tools section.
 
 With the project generated, the next step, we are going to [build and start][] the server. 
 
-[design first vs code first]: /design/design-first/
+[design first]: /design/design-first/
 [light-codegen]: https://github.com/networknt/light-codegen
 [light-rest-4j]: /style/light-rest-4j/
 [getting started]: /getting-started/light-codegen/
 [document]: /tool/light-codegen/
 [build and start]: /tutorial/rest/swagger/petstore/build/
+[swagger petstore]: https://github.com/networknt/light-example-4j/tree/master/rest/swagger/petstore
+[openapi petstore]: https://github.com/networknt/light-example-4j/tree/master/rest/openapi/petstore
+

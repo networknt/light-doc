@@ -24,7 +24,7 @@ cd ~/networknt/light-example-4j/rest/swagger/petstore
 mvn install exec:exec
 ```
 
-Now the server is started and listens to port 8443 on https. 
+Now the server is started and listens to port 8443 on HTTPS with HTTP 2.0 as default. 
 
 Services built on top of light platform are consists of numeric middleware handlers that are
 responsible for all cross-cutting concerns. It is a [plugin architecture][] and each plugin
@@ -32,7 +32,7 @@ has its own configuration file.
 
 The following is the default server.yml to control how server is started. 
 
-```
+```yaml
 # Server configuration
 ---
 # This is the default binding address if the service is dockerized.

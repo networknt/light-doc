@@ -17,9 +17,8 @@ draft: false
 The petstore RESTful API is used by a lot of frameworks as reference application
 and in this tutorial, we will walk you through the steps to get petstore generated
 and then deployed to production. Within these steps, we will show you how to use
-the features of light-4j and light-rest-4j Swagger 2.0 support. If you are
-interested in light-rest-4j OpenAPI 3.0 support, please take a look at 
-[OpenAPI 3.0 Petstore Tutorial][].
+the features of light-4j and light-rest-4j Swagger 2.0 support. If you are interested 
+in light-rest-4j OpenAPI 3.0 support, please take a look at [OpenAPI 3.0 Petstore Tutorial][].
 
 Please note that our frameworks are aiming microservices and there are several
 tutorials to show case multiple services interact with each other. These can be

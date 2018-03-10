@@ -20,7 +20,7 @@ them as a project so that these endpoints can be easily retrieved.
 
 Some people like curl command line and it works as well. In most of the cases, you should
 have a file to save the curl commands so that you don't need to reconstruct command each
-time. Here is one example to access one of the endpoint petstore serves. 
+time. Here is one example to access one of the endpoints petstore serves. 
 
 ```
 curl -k https://localhost:8443/v2/pet/111
@@ -70,7 +70,7 @@ It also supports validation using JSON schema with an independent library [json-
 
 Now the server is up and running, let's update generated config files to enable more
 features. First let's enable [security][] with OAuth 2.0 JWT token verification as built-in 
-[microservices security][] set us apart from other microservice frameworks. 
+[microservices security][] set us apart from other microservices frameworks. 
 
 [json-schema-validator]: https://github.com/networknt/json-schema-validator
 [Postman]: https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en
