@@ -113,6 +113,10 @@ Result:
 In order to access it, you have to provide the right JWT token. There is a long lived
 token that can be found at [https://github.com/networknt/light-oauth2](https://github.com/networknt/light-oauth2)
 
+In real client application, you need to have light-oauth2 services installed as infrastructure
+service to support the microservices. 
+
+
 Let's use that token in curl.
 
 ```
@@ -125,5 +129,8 @@ And we have the result:
 {"id":1,"name":"Jessica Right","tag":"pet"}
 ```
 
-In the next step, we are going to dockerize the API and then enable additional features
-with externalized configuration files. 
+In the next step, we are going to [dockerize][] the API and then enable additional features
+with externalized configuration files.
+
+
+[dockerize]: /tutorial/rest/openapi/petstore/docker/

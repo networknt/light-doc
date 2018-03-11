@@ -11,22 +11,51 @@ toc: false
 draft: false
 ---
 
-When petstore is generated, a default Dockerfile is there ready for any further 
-customization. 
- 
-Let's just use it to create a docker image and start a docker container. Make sure you
-are in light-example-4j/rest/openapi/petstore folder.
+When petstore is generated, a folder called docker with two default Dockerfiles were
+generated at the same time for any further customization. Also, there is a build.sh
+in the root folder that can be used to build and publish docker images. 
 
+Here is the content of Dockerfile which uses alpine Linux as base image to get minimum
+size. 
+
+```
+FROM openjdk:8-jre-alpine
+#EXPOSE  8443
+ADD /target/petstore-1.0.1.jar server.jar
+CMD ["/bin/sh","-c","java -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
+``` 
+
+Here is the content of Dockerfile-Redhat which uses Redhat openshift as based image as
+some of the customers are using Openshift as Kubernetes cloud provider. 
+
+```
+FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
+#EXPOSE  8443
+ADD /target/petstore-1.0.1.jar server.jar
+CMD ["/bin/sh","-c","java -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar server.jar"]
+```  
+ 
+Let's just use the build.sh to create docker images and publish them to docker hub. On
+your computer, the publish step will fail as you don't have credential to access networknt
+organization on docker hub. 
+
+Make sure you are in light-example-4j/rest/openapi/petstore folder and change the build.sh
+to executable. 
 
 ```
 cd ~/networknt/light-example-4j/rest/openapi/petstore
-docker build -t networknt/openapi-petstore .
+chmod +x build.sh
+build.sh {version}
 ```
+
+The build.sh will call the maven to build the project again, create docker images and publish
+them to docker hub. 
+
 
 Let's start the docker container.
 
 ```
-docker run -d -p 8443:8443 networknt/openapi-petstore
+docker run -d -p 8443:8443 networknt/com.networknt.petstore-1.0.1
 ```
 
 In another terminal, run the curl to access the server.
@@ -49,22 +78,25 @@ docker ps
 docker stop ad86cc533270
 ```
 
-The next step, let's push the docker image to docker hub. This assumes that you have
-an account on docker hub. For me, I am going to push it to networknt/openapi-petstore.
+Note that it takes about 10 seconds to stop the server as in cloud environment, the server
+needs to send notification to registry and handle all the in-flight requests until all clients 
+have switched to other instances in [client side discovery][]. 
 
-Please skip this step if you don't have a docker hub account yet.
-
-```
-docker images
-docker tag 9f0b9fe29c44 networknt/openapi-petstore:latest
-docker push networknt/openapi-petstore
-```
-
-The example-petstore can be found at https://hub.docker.com/u/networknt/dashboard/
+The networknt/com.networknt.petstore-1.0.1 can be found at 
+https://hub.docker.com/u/networknt/dashboard/
 
 And the following command can pull and run the docker image on your local if you have
 docker installed.
 
 ```
-docker run -d -p 8443:8443 networknt/openapi-petstore
+docker run -d -p 8443:8443 networknt/com.networknt.petstore-1.0.1
 ```
+
+Now we have a docker image from public docker hub and it can be started at any computer
+with docker installed. However, the configuration files are inside the docker image and
+if we want to change any configuration for any middleware handlers in side the docker
+contain, we can use externalized config folder for this purpose. In the next step, we are
+going to use [docker compose][] with externalized config in light-config-test folder.  
+
+[client side discovery]: /tutorial/common/discovery/
+[docker compose]: /tutorial/rest/openapi/petstore/compose/
