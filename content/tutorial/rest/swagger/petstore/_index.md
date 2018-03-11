@@ -46,9 +46,11 @@ frameworks.
 
 * [Docker][]
 
-* [Metrics][]
+* [Compose][]
 
 * [Logging][]
+
+* [Metrics][]
 
 * [Summary][]
 
@@ -61,8 +63,9 @@ frameworks.
 [Build and start]: /tutorial/rest/swagger/petstore/build/
 [Test service]: /tutorial/rest/swagger/petstore/test/
 [Enable security]: /tutorial/rest/swagger/petstore/security/
-[Docker]: /tutorial/rest/petstore/swagger/docker/
-[Metrics]: /tutorial/rest/petstore/swagger/metrics/
-[Logging]: /tutorial/rest/petstore/swagger/logging/
-[Summary]: /tutorial/rest/petstore/swagger/summary/
+[Docker]: /tutorial/rest/swagger/petstore/docker/
+[Metrics]: /tutorial/rest/swagger/petstore/metrics/
+[Logging]: /tutorial/rest/swagger/petstore/logging/
+[Summary]: /tutorial/rest/swagger/petstore/summary/
 [OpenAPI 3.0 Petstore Tutorial]: /tutorial/rest/openapi/petstore/
+[Compose]: /tutorial/rest/swagger/petstore/compose/
