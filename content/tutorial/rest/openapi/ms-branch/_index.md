@@ -13,3 +13,8 @@ aliases: []
 toc: false
 draft: false
 ---
+
+This pattern has been covered in service [registry and discovery][].
+
+
+[registry and discovery]: /tutorial/common/discovery/
