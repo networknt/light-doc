@@ -10,13 +10,13 @@ toc: false
 draft: false
 ---
 
-[Light-router][] is a service that provides consumers another options to do service discovery
+[Light-router][] is a service that provides consumers another option to do service discovery
 if they cannot leverage [client][] module provided by light-4j.
 
 There are two ways to [deploy light-router][] and it is highly recommended for client to own
 the instance of light-router.  
 
-From demo purpose, the light-router will be deployed in Kubernetes cluter master node as it
+For demo purpose, the light-router will be deployed in Kubernetes cluster master node as it
 has a static IP address. By following the steps below, you should have a router instance up
 and running and connect to multiple instances of API A in the Kubernetes cluster. Communication
 between API A, B, C and D is handled with client module inside each API. 
