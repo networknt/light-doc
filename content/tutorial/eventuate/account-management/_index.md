@@ -30,11 +30,11 @@ of several services. For example, bank accounts are managed by one service, mone
 another service.
 
 * Using an event-driven architecture to achieve data consistency - rather than using traditional 
-distributed transaction to maintain database consistency this application uses an eventually 
+distributed transaction to maintain database consistency, this application uses an eventually 
 consistent, event-driven approach.
 
 * Using event sourcing to implement the event-driven architecture - the domain logic consists of 
-Domain-Driven Design (DDD) aggregates that using event sourcing.
+Domain-Driven Design (DDD) aggregates using event sourcing.
 
 * Using Command Query Responsibility Segregation (CQRS) - update requests (HTTP POSTs and PUTs) 
 and view requests (HTTP GETs) are handled by separate services.
@@ -43,19 +43,17 @@ and view requests (HTTP GETs) are handled by separate services.
 a monolith or as microservices.
 
 
-
 ### Structure of the example
 
 Modules:
 
 * common - common module for the application, include DDD models and events for event sourcing. 
 
-* command - command side common components, include command, services
+* command - command side common components, include command, command services
 
-* query - query side common components, include command, services
+* query - query side common components, include query, query services
 
 * e2etest - end to end test module
-
 
 
 ### There are several services:
@@ -78,7 +76,7 @@ provides an API for retrieving accounts
 
 ##### Customer/Account creation and deletion
 
-Account Money Transfer example use event sourcing to handle the customer and account creation and deletion:
+Account Money Transfer example uses event sourcing to handle the customer/account creation and deletion:
 
 * On customer command side, system sends the create/delete customer commands and applies create/delete customer events
 
@@ -113,8 +111,11 @@ Account Money Transfer example uses event sourcing to handle money transfer tran
 
 ![account2](/images/account2.png)
 
-To build test the application, please follow [this document][]
 
+### Build and Test
+
+To build and test the application, please follow [this document][]
 
 [light-example-4j]: https://github.com/networknt/light-example-4j/tree/master/eventuate/account-management
 [this document]: /tutorial/eventuate/account-management/test/
+

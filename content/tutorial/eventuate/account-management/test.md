@@ -337,8 +337,6 @@ DELETE URL: http://localhost:8081/v1/delete/0000015cf4bec29b-0242ac1200070001
 Header: Content-Type: application/json
 
 
-
-
 ##### Customer and Account view (use any browser)
 
 --View the new customer by email (provide wildcard search):

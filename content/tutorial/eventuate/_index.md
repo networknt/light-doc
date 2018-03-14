@@ -32,15 +32,15 @@ eventuate framework. It helps the developer to focus on the flow of the eventuat
 instead of complex business logic. If you want to see a full blown business application, then 
 you can can refer to [account management tutorial][].
 
+* [todo-list][]
+* [account management tutorial][]
 
 To help users to grasp other part of the framework we have the following tutorials to focus
 each difficult areas. 
 
-[Kafka Tutorial][] helps to work with Kafka in Docker container.
-
-[Test Tutorial][] helps users to write unit tests, integration tests and end-to-end tests.
-
-[Developer's Tutorial][] guidelines for developers who working on the framework or services
+* [Kafka Tutorial][] helps to work with Kafka in Docker container.
+* [Test Tutorial][] helps users to write unit tests, integration tests and end-to-end tests.
+* [Developer's Tutorial][] guidelines for developers who working on the framework or services
 
 
 [account management tutorial]: /tutorial/eventuate/account-management/
