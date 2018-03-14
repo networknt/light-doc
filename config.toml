@@ -167,6 +167,18 @@ twitter = "networkntcom"
   identifier = "consumer"
   url = "/consumer/"
 
+[[menu.docs]]
+  name = "Development"
+  weight = 39
+  identifier = "development"
+  url = "/development/"
+
+[[menu.docs]]
+  name = "Deployment"
+  weight = 40
+  identifier = "deployment"
+  url = "/deployment/"
+
 # LOW LEVEL ITEMS
 
 [[menu.docs]]
@@ -198,18 +210,6 @@ twitter = "networkntcom"
   weight = 70
   identifier = "faq"
   url = "/faq/"
-
-[[menu.docs]]
-  name = "Development"
-  weight = 75
-  identifier = "development"
-  url = "/development/"
-
-[[menu.docs]]
-  name = "Deployment"
-  weight = 80
-  identifier = "deployment"
-  url = "/deployment/"
 
 [[menu.docs]]
   name = "Milestones"
