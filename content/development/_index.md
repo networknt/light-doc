@@ -20,7 +20,10 @@ adopting microservices architecture.
 In this section, numeric topics will be covered for developers who want to work on light
 platform or developers who want to build applications on top of light platform. 
 
- 
+
+- [Best Practices](/development/best-practices/) 
+  * [Swagger 2.0 Best Practices](/development/best-practices/swagger2/)
+  * [OpenAPI 3.0 Best Practices](/development/best-practices/openapi3/)
 - [Platform Development](/development/platform/)
   * [Build Develop Branch](/development/develop-build/)
 - [Application Development](/development/application/)

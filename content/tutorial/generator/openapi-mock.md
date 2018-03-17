@@ -8,29 +8,30 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When using light-codegen with OpenAPI 3.0 specification to generate light-rest-4j project,
 you can add examples into the specification definition so that the generated project will
-have handlers to return corresponding examples.
+have handlers to return corresponding examples in response.
 
 This is very useful for developers who are working on the service to verify that the service
 is working right off the generator. 
 
-Also it is very useful for client side developers as they can get an running service right
-off the specification to start their client side application development. Later on they
+Also, it is beneficial for client side developers as they can get a running service right
+off the specification to start their client side application development. Later on, they
 can switch to the real implementation to do the integration test. 
 
 This kind of support ensures that client side development and server side development can
-be running in parallel to speed up the overall delivery process. It is particular useful
-with microservivces architecture as each team will only focus on their own service but use
+be running in parallel to speed up the overall delivery process. It is particularly useful
+with microservices architecture as each team only focus on their service but use
 other teams mock services to start the development. 
 
-To leverage this feature in OpenAPI 3.0 specification, you need to define the example in
-each endpoint or operation. There are two different format to support single example or
+To leverage this feature in OpenAPI 3.0 specification, you need to define an example in
+each endpoint or operation. There are two different formats to support single example or
 multiple examples.  
 
-Here are serveral example endpoints as part of the [OpenAPI 3.0 petstore specification][]
+Here are several example endpoints as part of the [OpenAPI 3.0 petstore specification][]
 
 The following response defines a single example that returns an array of maps. 
 
@@ -75,7 +76,7 @@ The following response defines a single example that returns a map.
                 tag: pet
 ```
 
-The following response defines multiple examples and the generator will pick up
+The following response defines multiple examples, and the generator picks up
 the first entry to return a map. 
 
 ```yaml
@@ -95,16 +96,15 @@ the first entry to return a map.
 ```
 
 
-The [light-codegen][] will leverage the defined examples in the generated handler for 
+The [light-codegen][] leverages the defined examples in the generated handler for 
 endpoints. If you want to see the example output, please refer to [petstore tutorial][].
 
 Given this feature is built into the light-codegen, it is highly recommended to utilize it
-for your API development. It increases productivity dramatically especially in microservices
+for your API development. It increases productivity dramatically, especially in microservices
 applications. 
 
 The format of the Swagger 2.0 specification is different than OpenAPI 3.0 specification. If
 you are using Swagger 2.0, please refer to [Swagger 2.0 Mock][] tutorial for details. 
-
 
 [OpenAPI 3.0 petstore specification]: https://github.com/networknt/model-config/blob/master/rest/openapi/petstore/1.0.0/openapi.yaml
 [light-codegen]: /tool/light-codegen/
