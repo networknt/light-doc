@@ -4,10 +4,16 @@ date: 2018-03-15T05:42:50-04:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+keywords: [architecture]
+menu:
+  docs:
+    parent: "architecture"
+    weight: 10
+weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In today's IT strategy and architecture, APIs are the new frontier. No matter what industry you are in, doing business
