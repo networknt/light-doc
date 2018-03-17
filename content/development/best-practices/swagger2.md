@@ -8,6 +8,208 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-To be completed.
+Swagger 2.0 specification is a very loose specification and it gives designer too many options to write the spec. Most 
+of the cases, developers write the code with annotations and generate the specification afterward. With enterprise 
+scale in mind, we encourage [design first][] approach. The outcome is not just a document but a specification that 
+can be used to scaffold a new project and loaded during runtime to verify JWT scopes for security and validate requests 
+to protect the business layer against attacks. 
+
+To enable [light-codegen][] to generate meaningful code and utilize the full potential of the [light-rest-4j][] framework, 
+the author of the Swagger 2.0 specification should follow the best practices below. 
+
+### Security First
+
+Often API designers focus on functionalities and add security later on. We would encourage to follow security first 
+approach so that security is considered for every endpoint during the design. 
+ 
+Before working on a new specification, you can copy from an existing one and [petstore][] is a good starting point. 
+There are also other Swagger specifications in the [model-config][] repository to help you in learning the design style.   
+
+Within petstore specification you can find the following block that defines the security under the component. This section
+is optional in the specification, but here it is mandatory. [light-codegen][] throws an error if securityDefinitions are not
+found.  
+
+```yaml
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+    flow: implicit
+    scopes:
+      'write:pets': modify pets in your account
+      'read:pets': read your pets
+```
+
+Once the securityDefinitions is defined, you can specify security scopes for each endpoint. When you add a new endpoint you
+might ask yourselves a question. Do I need to create a brand new scope or pick one or more existing scopes from the scopes
+defined in securityDefinitions?
+
+The endpoint/operation definition with security definition looks like this. 
+
+```yaml
+    delete:
+      tags:
+        - pet
+      summary: Deletes a pet
+      description: ''
+      operationId: deletePet
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - name: api_key
+          in: header
+          required: false
+          type: string
+        - name: petId
+          in: path
+          description: Pet id to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+      security:
+        - petstore_auth:
+            - 'write:pets'
+            - 'read:pets'
+
+``` 
+
+Above design ensures that the [light-rest-4j][] framework compares the scopes from JWT token against the scopes defined 
+for each endpoint at runtime. It gives you the flexibility to grant permissions based on endpoints to consumers. 
+ 
+### Definitions
+
+In the specification, models define what would be the request/response body for each endpoint. There are two different 
+places to define models. Flattened/scattered in each endpoint or extracted into the definitions. 
+
+When the model definition scattered in each endpoint, there is no name and the same model might be duplicated in several 
+endpoints. The generator does not generate POJO classes as it does not make sense to generate some classes named body0, 
+body1, body2, etc. Chances are body0 is for get request, and body2 is for put request. As both of them are dealing a 
+same set of attributes, they are the same. How would developers remember that in your get handler, you should use body0 
+but in your put handler, you should use body2? They would be shocked when they found that these two classes have the 
+same fields and methods except the class names are different. 
+
+To generate POJO classes with proper names and to avoid duplications, it is best to extract common data objects into the 
+definitions section. 
+
+Here is an example in the petstore specification.
+
+```yaml
+definitions:
+  Order:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      petId:
+        type: integer
+        format: int64
+      quantity:
+        type: integer
+        format: int32
+      shipDate:
+        type: string
+        format: date-time
+      status:
+        type: string
+        description: Order Status
+        enum:
+          - placed
+          - approved
+          - delivered
+      complete:
+        type: boolean
+        default: false
+    xml:
+      name: Order
+```
+
+The above Order definition is used to generate a Java class called Order in [light-codegen][]. With Order is defined, you
+can put $ref in each point for object definition. Here is an example response that utilizes the Order definition.
+
+```yaml
+  /store/order:
+    post:
+      tags:
+        - store
+      summary: Place an order for a pet
+      description: ''
+      operationId: placeOrder
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: order placed for purchasing the pet
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Order'
+        '400':
+          description: Invalid Order
+          
+``` 
+
+Here is another response example with an array.   
+
+```yaml
+  /user/createWithArray:
+    post:
+      tags:
+        - user
+      summary: Creates list of users with given input array
+      description: ''
+      operationId: createUsersWithArrayInput
+      produces:
+        - application/xml
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: List of user object
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+      responses:
+        default:
+          description: successful operation
+          
+```
+
+### Examples
+
+Swagger specification gives you an opportunity to define an example response for each endpoint so that your API consumer 
+can easily understand what would be expected when the endpoint is accessed. Also, [light-codegen][] has a feature to 
+generate mock responses based on the examples defined in the specification. Once you have examples defined, the generated 
+project can be built and started with mock responses for consumers to start their work immediately without waiting for 
+the provider to complete the API implementation. 
+
+For more details on this topic, please refer to [Swagger 2.0 Mock][].
+
+
+### Naming Convention
+
+As schema name is translated into Java class name, it is better to follow the naming convention of Java. 
+
+[design first]: /design/design-first/
+[light-codegen]: /tool/light-codegen/
+[light-rest-4j]: /style/light-rest-4j/
+[petstore]: https://github.com/networknt/model-config/tree/master/rest/swagger/petstore/2.0.0
+[model-config]: https://github.com/networknt/model-config/tree/master/rest/swagger
+[Swagger 2.0 Mock]: /tutorial/generator/swagger-mock/
