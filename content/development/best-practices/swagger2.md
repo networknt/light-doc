@@ -205,7 +205,7 @@ For more details on this topic, please refer to [Swagger 2.0 Mock][].
 
 ### Naming Convention
 
-As schema name is translated into Java class name, it is better to follow the naming convention of Java. 
+As definition name is translated into Java class name, it is better to follow the naming convention of Java. 
 
 [design first]: /design/design-first/
 [light-codegen]: /tool/light-codegen/
