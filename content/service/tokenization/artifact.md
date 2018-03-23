@@ -9,3 +9,17 @@ aliases: []
 toc: false
 draft: false
 ---
+
+The tokenization service is shipped in three different forms to give customers maximum flexibility to consume it. 
+
+### Docker Image
+
+The docker image can be found at https://hub.docker.com/u/networknt/dashboard/
+
+### FatJar
+
+The fat jar can be downloaded from maven central with all the dependencies included for customers who can not use Docker. 
+
+### Tokenization as a Service
+
+The service is in beta testing and can be accessed from lightapi.net portal. 
