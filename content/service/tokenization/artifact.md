@@ -14,7 +14,7 @@ The tokenization service is shipped in three different forms to give customers m
 
 ### Docker Image
 
-The docker image can be found at https://hub.docker.com/u/networknt/dashboard/
+The docker image can be found at https://hub.docker.com/r/networknt/tokenization-1.0.0/
 
 ### FatJar
 

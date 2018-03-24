@@ -22,7 +22,7 @@ The light platform has [encryptor and decryptor][] for data encryption as plugin
 
 In the light platform, tokenization service is provided as part of the enterprise package and hosting service. It is built on top of light-4j, and light-rest-4j frameworks with very high throughput and very low latency as most operations are done in the cache. It also supports multi-tenancy based on the client_id in JWT token. A group of clients can share the same token vault, or each client can have its vault. 
 
-If you are interested in deploy this service in your data center or sign up our hosting service, please contact sales@networknt.com for details. 
+If you are interested in deploy this service in your data center or sign up our hosting service, please contact sales@lightapi.net for details. 
 
 
 * [Getting Started][] with our test service and tutorial
