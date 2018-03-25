@@ -29,7 +29,7 @@ If you are interested in deploy this service in your data center or sign up our 
 * [API Document] to learn the details on how it works
 * [Artifact][] find release artifacts and deploy options
 * [Configuration][] for different configurations based on your situations
-
+* [Performance][] for production like environment with both TLS and OAuth 2.0 enabled.
 
 [PCI compliant]: http://www.onlinetech.com/resources/references/what-is-pci-compliance
 [encryptor and decryptor]: /concern/decryptor/
@@ -37,3 +37,4 @@ If you are interested in deploy this service in your data center or sign up our 
 [Artifact]: /service/tokenization/artifact/
 [Configuration]: /service/tokenization/configuration/
 [API Document]: /service/tokenization/document/
+[Performance]: /service/tokenization/performance/
