@@ -12,7 +12,12 @@ draft: false
 
 ### Format Schemes
 
-There are nine schemes supported out of the box, and they cover a majority of use cases for enterprise-scale tokenization requirement. The following is the database script with descriptions. 
+Token schemes need to be flexible enough to handle multiple formats for the sensitive data they accept — such as personally identifiable information, Social Insurance Numbers, and credit card numbers. In some cases additional format constraints must be honored. As an example, a token representing a Social Insurance Number in a customer service application may need to retain the real last 4 digits. This enables customer service representatives to verify user identities without access to the rest of the SIN.
+
+When tokenizing credit cards, tokens are the same size as the original credit card number and pass the LUHN check. As the token still resembles a real card number, systems that use the numbers need not be altered to accommodate tokens. However, unlike the real credit card or Social Insurance Numbers, tokens cannot be used as financial  instruments, and have no value other than as a reference to the original transaction or real account. The relationship between a token and a card number is unique for any given payment system, so even if someone compromises the entire token database that they can commit transactions in that system (a rare but real possibility), the numbers are worthless outside the environment they were created for. And most important, real tokens cannot be decrypted or otherwise restored back to the original credit card number.
+
+Each data type has different use cases and tokenization service needs to offer various generation options to accommodate them. There are nine schemes supported out of the box, and they cover a majority of use cases for enterprise-scale tokenization requirement. The following is the database script with descriptions. 
+
 
 ```sql
 INSERT INTO format_scheme (id, name, description)
