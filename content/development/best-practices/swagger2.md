@@ -20,6 +20,13 @@ to protect the business layer against attacks.
 To enable [light-codegen][] to generate meaningful code and utilize the full potential of the [light-rest-4j][] framework, 
 the author of the Swagger 2.0 specification should follow the best practices below. 
 
+### Guidelines
+
+- clear and easily readable by architects, analysts, developers
+- well documented, with explanations provided in description tags
+- adhere to OpenAPI specifications - v2.0 at the time of this writing
+- use a design which lends itself to a clean and easily consumable object model
+
 ### Security First
 
 Often API designers focus on functionalities and add security later on. We would encourage to follow security first 
@@ -206,6 +213,139 @@ For more details on this topic, please refer to [Swagger 2.0 Mock][].
 ### Naming Convention
 
 As definition name is translated into Java class name, it is better to follow the naming convention of Java. 
+
+- Elements should always start with an upper-case letter, to respect class definitions in generated code, which always start with an upper-case letter
+
+```
+  properties:
+     error:
+       $ref: 'common/XERR0001/1.0.1/errors.yaml#/error'
+  ...
+  vs
+  ...
+  properties:
+    error:
+      $ref: 'common/XERR0001/1.0.1/errors.yaml#/Error'
+```
+
+- Elements should use only alpha-numeric characters and avoid underscores, @ signs or others. OpenAPI general guidelines recommend alpha-numeric only, and, while these would generate correct programming language code, it would break accepted programming guidelines.
+
+```
+  "@nameID":
+    $ref: "common/XPAR0001/0.0.1/elementDefs.yaml#/NameID"
+  "@resourceItemIntegrityCode":
+    $ref: "common/XPAR0001/0.0.1/elementDefs.yaml#/ResourceItemIntegrityCode"
+...
+  filterList:
+     type: array
+     items:
+       $ref: "common/XPAR0001/0.0.1/elementDefs.yaml#/FilterID_Type"
+...
+vs
+...
+  nameID:
+    $ref: "common/XPAR0001/0.0.2/elementDefs.yaml#/NameID"
+  resourceItemIntegrityCode:
+    $ref: "common/XPAR0001/0.0.2/elementDefs.yaml#/ResourceItemIntegrityCode"
+...
+  filterList:
+    type: array
+    items:
+      $ref: "common/XPAR0001/0.0.2/elementDefs.yaml#/FilterIDType"    
+```
+
+### Object definitions are to be avoided from the declaration of Body elements
+
+The objects should be moved to the __*definitions*__ section of the specification or in an external document, for __*shared definitions*__.
+
+The Body should not contain any declarations as in "type: object".
+
+__Ex.: *selection element*__:
+
+__Original version:__
+
+```
+  ...
+  selection:
+    description:  Identifies the selection to retrieve information for. Only one of the child elements of this structure are to be provided.
+    type: object
+    properties:
+      id:
+        $ref: "common/XPAR0001/0.0.1/elementDefs.yaml#/ID"
+      card:
+        $ref: "common/XPAR0001/0.0.1/elementDefs.yaml#/Card"
+  ...      
+```
+
+__Updated version:__
+```
+...
+  selection:
+    $ref: "#/definitions/SelectionEA"
+  ...
+  definitions:
+  # Party Selection structures.
+    SelectionEA:
+      type: object
+      description:  Identifies the selection to retrieve information for. Only one of the child elements of this structure are to be provided.
+      properties:
+        id:
+          $ref: "common/XPAR0001/0.0.2/elementDefs.yaml#/ID"
+        card:
+          $ref: "common/XPAR0001/0.0.2/elementDefs.yaml#/Card"
+  ...
+```
+
+### Implicit object definitions are to be avoided from the declaration of Body elements when used from collection declarations
+
+An object should be defined in the __*definitions*__ section of the specification or an external document, for __*shared definitions*__, and be referenced from the collection in the Body, instead of the declaration of an implicit object.
+
+The Body should not contain any collection declarations with implicit object definitions; the equivalent of Java inline declarations.
+
+__Ex.: *names element*__:
+
+__Original version:__
+```
+  ...
+  names:
+    description: Contact information that can be used in contacting the client. Can be used for either mailing, greeting, or for a third party reference.
+    type: array
+    items:
+      properties:
+        "id":
+          $ref: "common/XPAR0001/0.0.1/elementDefs.yaml#/ID"
+        name:
+          description: A name can contain up to two lines of name information.
+          type: array
+          items:
+            $ref: "common/XPAR0001/0.0.1/elementDefs.yaml#/Name"
+  ...          
+```
+
+__Updated version:__
+```
+...
+  names:
+    type: array
+    items:
+      $ref: "#/definitions/GetNames"
+  ...
+  definitions:
+  GetNames:
+    description: Contact information that can be used in contacting the client. Can be used for either mailing, greeting, or for a third party reference.
+    type: object
+    properties:
+      id:
+        $ref: "common/XPAR0001/0.0.2/elementDefs.yaml#/ID"
+      name:
+        description: A name can contain up to two lines of name information.
+        type: array
+        items:
+          $ref: "common/XPAR0001/0.0.2/elementDefs.yaml#/Name"
+  ...
+```
+
+
 
 [design first]: /design/design-first/
 [light-codegen]: /tool/light-codegen/
