@@ -25,3 +25,12 @@ over the years. Hopefully, these best practices help new users to get started qu
 - [OpenAPI 3.0 Best Practices](/development/best-practices/openapi3/)
 
 ### light-rest-4j
+
+
+### light-eventuate-4j
+
+- [Troubleshooting Best Practices](/development/best-practices/eventuate-troubleshooting/)
+
+### Debugging
+
+- [Debug Logging Level](/development/best-practices/debug-log/)
