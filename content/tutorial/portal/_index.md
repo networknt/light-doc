@@ -23,6 +23,11 @@ separate server and scale it accordingly later on.
 
 All services can be found in in [light-portal][] repository on github.com
 
+### Build and Start Portal Service
+
+* [light-bot portal build][] - Build portal services with light-bot
+* [start portal service][] - Start both command side and query side portal services
+
 ### Command Services:
 
 * [user-management][] - User Management Service
@@ -37,3 +42,5 @@ All services can be found in in [light-portal][] repository on github.com
 [light-portal]: https://github.com/networknt/light-portal
 [api-certification]: /tutorial/portal/api-certification/
 [user-management]: /tutorial/portal/user-management/
+[light-bot portal build]: /tutorial/bot/light-portal-local/
+[start portal service]: /tutorial/portal/start-portal-service/

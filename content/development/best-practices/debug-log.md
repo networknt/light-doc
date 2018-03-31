@@ -75,4 +75,11 @@ docker-compose -f docker-compose-cloud.yml restart hybrid-command
 
 Now you can use docker-compose logs command to monitor on the console or get into the container to check the log file in /target folder. If [centralized logging][] is used, then you can search the logs on ElasticSearch with Kibana. 
 
+You can also monitor the logs on the console/terminal. For example,  if you want to check the logs for cdcserver-eventuate page by page, you can use the following command line. 
+
+
+```
+docker-compose -f docker-compose-api.yml logs cdcserver-eventuate | more
+```
+
 [centralized logging]: /service/logging/
