@@ -55,7 +55,7 @@ sections:
     link: templates/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
-    copy: "Light-codegen is used for scaffolding project from OpenAPI spec, GraphQL IDL or Hybrid Schema. Light-bot Pipeline for building, packaging, releasing and dockerizing. Kebernetes is for service orchestration."
+    copy: "Light-codegen is used for scaffolding project from OpenAPI spec, GraphQL IDL or Hybrid Schema. Light-bot Pipeline for building, packaging, releasing and dockerizing. Kubernetes is for service orchestration."
 
 ---
 
