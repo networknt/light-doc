@@ -16,4 +16,6 @@ aliases: []
 toc: false
 layout: documentation-home
 ---
-Light is one of the **world's fastest microservices platforms.** It's written in Java 8 SE and developed by [stevehu](https://github.com/stevehu), [chenyan71](https://github.com/chenyan71), [ddobrin](https://github.com/ddobrin), [gonzalovazquez](https://github.com/gonzalovazquez), [NicholasAzar](https://github.com/NicholasAzar) and friends. Below you will find some of the most common and helpful pages from our documentation.
+Light is one of the **world's fastest microservices platforms.** It's written in Java 8 SE and developed by [stevehu](https://github.com/stevehu), [chenyan71](https://github.com/chenyan71), [ddobrin](https://github.com/ddobrin), [gonzalovazquez](https://github.com/gonzalovazquez), [NicholasAzar](https://github.com/NicholasAzar) and friends.
+Logo design was made possible by [Marie Bardari](http://mariebardari.com/).
+Below you will find some of the most common and helpful pages from our documentation.
