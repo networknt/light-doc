@@ -181,7 +181,7 @@ For more details on this topic, please refer to [OpenAPI 3.0 Mock][].
 
 As schema name is translated into Java class name, it is better to follow the naming convention of Java. 
 
-- Elements should always start with an upper-case letter, to respect class definitions in generated code, which always start with an upper-case letter
+- Elements should always start with an upper-case letter, to respect class definitions in generated code, which always start with an upper-case letter.
 
 ```
   properties:
@@ -223,7 +223,7 @@ vs
 
 ### Object definitions are to be avoided from the declaration of Body elements
 
-The objects should be moved to the __*definitions*__ section of the specification or in an external document, for __*shared definitions*__.
+The objects should be moved to the __*components/schemas*__ section of the specification or in an external document, for __*shared definitions*__.
 
 The Body should not contain any declarations as in "type: object".
 
@@ -248,9 +248,9 @@ __Updated version:__
 ```
 ...
   selection:
-    $ref: "#/definitions/SelectionEA"
+    $ref: "#/components/schemas/SelectionEA"
   ...
-  definitions:
+  schemas:
   # Party Selection structures.
     SelectionEA:
       type: object
@@ -265,7 +265,7 @@ __Updated version:__
 
 ### Implicit object definitions are to be avoided from the declaration of Body elements when used from collection declarations
 
-An object should be defined in the __*definitions*__ section of the specification or an external document, for __*shared definitions*__, and be referenced from the collection in the Body, instead of the declaration of an implicit object.
+An object should be defined in the __*components/schemas*__ section of the specification or an external document, for __*shared definitions*__, and be referenced from the collection in the Body, instead of the declaration of an implicit object.
 
 The Body should not contain any collection declarations with implicit object definitions; the equivalent of Java inline declarations.
 
@@ -295,9 +295,9 @@ __Updated version:__
   names:
     type: array
     items:
-      $ref: "#/definitions/GetNames"
+      $ref: "#/components/schemas/GetNames"
   ...
-  definitions:
+  schemas:
   GetNames:
     description: Contact information that can be used in contacting the client. Can be used for either mailing, greeting, or for a third party reference.
     type: object
