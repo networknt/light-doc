@@ -23,9 +23,11 @@ and test. Other tasks are triggered manually and only used occasionally.
 * Set up [develop][] branch build and test on your local computer
 * Set up [devops][] sever for develop branch build automatically
 * Build [light-portal local][] develop branch using cloud eventuate services
+* How to use [regex-replace][] to replace repeated string/text across all repositories
 
 
 [develop]: /tutorial/bot/local-develop/
 [devops]: /tutorial/bot/devops-develop/
 [light-portal local]: /tutorial/bot/light-portal-local/
 [build light-bot]: /tutorial/bot/build-light-bot/
+[regex-replace]: /tutorial/bot/regex-replace/
