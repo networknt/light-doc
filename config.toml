@@ -275,8 +275,15 @@ twitter = "networkntcom"
     icon = true
     identifier = "community"
     post = "external"
-    url = "https://forum.lightapi.net/"
+    url = "https://gitter.im/networknt/light-4j"
 
+  [[menu.global]]
+    name = "Reddit"
+    weight = 160
+    icon = true
+    identifier = "reddit"
+    post = "external"
+    url = "https://www.reddit.com/r/lightapi/"
 
   [[menu.global]]
     name = "GitHub"
