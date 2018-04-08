@@ -77,42 +77,34 @@ This approach only works with a desktop as it has a static IP. If you are using 
 
 ### Start eventuate services
 
-If you have used script to export DOCKER_HOST_IP, then you have clone the light-docker to your
-workspace already. If not, let's do it here. 
-
+Now you have used a script or manually export DOCKER_HOST_IP. The next step is to start eventuate services with a docker-compose file in the light-docker repository. 
 ```
 cd ~/networknt
 git clone https://github.com/networknt/light-docker.git
 cd light-docker
 ```
 
-Now let's start the docker-compose-eventuate.yml from light-docker folder. Before we run the compose,
-we need to export the DOCKER_HOST_IP on this terminal unless you have updated .bashrc file.
+Now let's start the docker-compose-integration-test.yml from light-docker folder. Before we run the compose, we need to export the DOCKER_HOST_IP on this terminal unless you have updated .bashrc file.
 
-After double check the DOCKER_HOST_IP environment variable, you can issue the following command to
-start Kafka, Zookeeper and Mysql all together.
+After double check the DOCKER_HOST_IP environment variable, you can issue the following command to start Kafka, Zookeeper, and Mysql altogether.
 
 ```
 cd ~/networknt/light-docker
-docker-compose -f docker-compose-eventuate.yml up 
+docker-compose -f docker-compose-integration-test.yml up 
 ```
 
-It will take several minutes to get all three services to start. Once all started, you can start the
-CDC server. 
+It will take several minutes to get all three services to start. Once all started, you can start the CDC server. 
 
 ### Start CDC server for eventuate
 
-Eventuate CDC is a server that monitors the events table in the database and send the events to Kafka for other
-services to subscribe. To start eventuate-cdc-server, you can use a docker-compose file in light-docker.
+Eventuate CDC is a server that monitors the events table in the database and sends the events to Kafka for other services to subscribe. To start eventuate-cdcserver, you can use a docker-compose file in light-docker.
 
 ```
 cd ~/networknt/light-docker
 docker-compose -f docker-compose-cdcserver-for-eventuate.yml up
 ```
 
-Another way to start CDC server is to start from the source code build. In this case, we need to compile
-light-eventuate-4j repo. Unless you are doing update for the CDC server, you should use the above 
-docker-compose to start CDC server for eventuate. 
+Another way to start CDC server is to start from the source code build. In this case, we need to compile light-eventuate-4j repo. Unless you are doing an update for the CDC server, you should use the above docker-compose to start CDC server for eventuate. 
 
 ```
 cd ~/networknt
@@ -123,7 +115,7 @@ cd eventuate-cdc-server
 java -jar target/eventuate-cdc-server.jar
 ```
 
-Now we have the entire infrastructure up and running, we can start some of the demo applications. 
+Now we have the entire infrastructure up and running, and we can start some of the demo applications. 
 
 
 [Mac Permanent IP]: /development/best-practices/mac-perm-ip/
