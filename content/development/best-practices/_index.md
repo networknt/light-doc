@@ -28,7 +28,7 @@ over the years. Hopefully, these best practices help new users to get started qu
 
 
 ### light-eventuate-4j
-
+- [Set up permanent IP on Mac](/development/best-practices/mac-perm-ip/)
 - [Troubleshooting Best Practices](/development/best-practices/eventuate-troubleshooting/)
 
 ### Debugging
