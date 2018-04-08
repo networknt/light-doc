@@ -95,11 +95,15 @@ cd ~/networknt/light-docker
 docker-compose -f docker-compose-integration-test.yml up 
 ```
 
-It will take several minutes to get all three services to start. Once all started, you can start the CDC server. 
+Depending on how fast your computer is and if you have all the docker images cached locally, it might take about 30 seconds to 5 minutes to get everything started. 
 
 ### Start CDC server for eventuate
 
-Eventuate CDC is a server that monitors the events table in the database and sends the events to Kafka for other services to subscribe. To start eventuate-cdcserver, you can use a docker-compose file in light-docker.
+** The following section is only for CDC server developers. If you are creating applications based on light-eventuate-4j, light-tram-4j, and light-saga-4j you don't need the steps below. **
+
+Eventuate CDC is a server that monitors the events table in the database and sends the events to Kafka for other services to subscribe. It is part of the docker-compose-integration-test.yml already so you don't need to start it separately. 
+
+However, if you are a developer who is working on the eventuate CDC server, then you might want to comment out the eventuate-cdcserver from docker-compose-integration-test.yml and start eventuate CDC server by yourself. 
 
 ```
 cd ~/networknt/light-docker

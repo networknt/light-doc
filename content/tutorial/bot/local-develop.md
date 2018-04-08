@@ -8,13 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In this tutorial, we are going to setup the develop branch build and test for networknt
-organization on github.com on my MacBookPro laptop. The configuration is designed for
-networknt projects and light-examples-4j demo applications; however it is very easy to
-customized the develop.yml to make it for your Java modules and microservices. If you
-want to learn how to use it with your microservices, please refer to [microservices develop][]
+In this tutorial, we are going to setup the develop branch build and test for networknt GitHub organization on github.com on my MacBook Pro laptop. The configuration is designed for networknt projects and light-examples-4j demo applications; however, it is straightforward to customize the develop-build.yml to make it for your Java modules and microservices. If you want to learn how to use it with your microservices, please refer to [microservices develop][]
 
 
 ### Preparation
@@ -26,8 +23,7 @@ To build all projects we need to have the following installed on your local.
 * Git - Clone source code from github.com
 * Docker - Running some of the dependencies for end-to-end testing
 
-To perform integration test and end-to-end test, we need to have the following Docker container
-up and running. 
+To perform integration test and end-to-end test, we need to have the following Docker containers up and running. 
 
 * Kafka 1.0.0 - used by light-eventuate-4j, light-tram-4j and light-saga-4j
 * Zookeeper - used by Kafka
@@ -37,12 +33,9 @@ up and running.
 * cdcserver - for light-eventuate-4j and examples
 
 
+It is straightforward to start all services with a docker-compose in the light-docker repo. However, we need to setup DOCKER_HOST_IP environment variable on a MacBook Pro or a Linux Desktop first by following [this tutorial][]
 
-It is very easy to start all services with a docker-compose in light-docker repo. However, we
-need to setup DOCKER_HOST_IP environment variable on MacBookPro first by following [this tutorial][]
-
-Let's assume we have a workspace called networknt under your user home directory. And we are in
-the same terminal that have set up the DOCKER_HOST_IP export.
+Let's assume we have a workspace called networknt under your user home directory. And we are in the same terminal that has set up the DOCKER_HOST_IP export.
 
 ```
 cd ~/networknt
@@ -51,17 +44,7 @@ cd light-docker
 docker-compose -f docker-compose-integration-test.yml up -d
 ```
 
-Above will start all dependencies for develop branch build and test; however, for the time being,
-we need to start cdcserver for tram separately as there is a bug to prevent it to start with Kafka
-at the same time. 
-
-So after the above you have to run the following docker-compose for now. Wait for a minute or so
-as we are running docker-compose as -d detached mode. If you want to see the output on the console
-then you can use a command line with -d at the end. 
-
-```
-docker-compose -f docker-compose-cdcserver-for-tram.yml up -d
-```
+Depending on how fast your computer is and if you have all the docker images cached locally, it might take about 30 seconds to 5 minutes to get everything started. 
 
 ### Clone and build light-bot
 
