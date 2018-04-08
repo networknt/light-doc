@@ -8,35 +8,32 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This tutorial will show you how to start light-eventuate-4j services with docker-compose. It is
-very convenient with developers who want to do integration test on his/her laptop or desktop. For
-official test environment and production, it is not recommended to use docker-compose or docker. 
-These services should be installed in data center or virtual machines to form clusters. 
+This tutorial will show you how to start light-eventuate-4j services with docker-compose. It is very convenient for developers who want to do integration test on his/her laptop or desktop. For official test environment and production, it is not recommended to use docker-compose or docker. These services should be installed in a data center or virtual machines to form a cluster. 
 
 ### Prepare Environment
 
-Kafka needs a network IP address for ADVERTISED_HOST_NAME and it cannot be localhost or 127.0.0.1
-as localhost within docker container means the docker container itself. It must be an address that
-is accessible within docker container. It should be the hostname of your computer or the real network
-IP address of your computer that runs docker. 
+Kafka needs a network IP address for ADVERTISED_HOST_NAME, and it cannot be localhost or 127.0.0.1 as localhost within docker container means the docker container itself. It must be an address on the host that is accessible within docker container. It should be the hostname of your computer or the real network IP address of your computer that runs docker. 
 
-There is a script in light-docker that can try to find the hostname and export it as DOCKER_HOST_IP
-but it is not reliable as hostname might just mapped to 127.0.0.1 on some computers. The best way to
-do that would be manually find out the IP address on your computer and export it.
+There is a script in light-docker that can try to find the hostname and export it as DOCKER_HOST_IP, but it is not reliable as hostname might map to 127.0.0.1 on some computers. The best way to do that would manually find out the IP address on your computer and export it.
 
 ##### Manually export DOCKER_HOST_IP
 
-On Mac/Linux, issue the following command
+On Mac/Linux, issue the following command on a terminal
 
 ```
 ifconfig
 ```
 
-You will see a list of network interfaces in the output. Depending on your network setup, the interface
-name might be en0 on Mac and enp4s0 on Linux. You basically need to find the IP start with 192.XXX.XXX.XXX
-or 10.XXX.XXX.XXX and copy it into the clipboard.
+You will see a list of network interfaces in the output. Depending on your network setup, the interface name might be en0 on Mac and enp4s0 on Linux. You need to find the IP start with 
+
+```
+192.XXX.XXX.XXX
+Or 
+10.XXX.XXX.XXX and copy it to the clipboard.
+```
 
 The next step is to export it to an environment variable DOCKER_HOST_IP.
 
@@ -44,55 +41,17 @@ The next step is to export it to an environment variable DOCKER_HOST_IP.
 export DOCKER_HOST_IP=198.168.1.120
 ```
 
-The above approach is the most reliable way to get the right IP address and on my Mac Book Pro it is the
-only working way as the computer name is not mapped to a real IP address somehow.
+##### Automatically export DOCKER_HOST_IP on Mac
 
-If you want to setup a static IP for your Mac, then you can follow the steps below to set it up. Docker 
-for Mac has [networking limitations](https://docs.docker.com/docker-for-mac/networking/) and you need to 
-follow the steps below to set it up.
+The above approach is the most reliable way to get the right IP address, and on my Mac Book Pro, it is the only way as the computer name is not mapped to a real IP address somehow.
 
-```
-sudo ifconfig lo0 alias 10.200.10.1/24  # (where 10.200.10.1 is some unused IP address)
-export DOCKER_HOST_IP=10.200.10.1
-```
+The above approach works until you reboot your computer. If you want to setup a static IP for your Mac, then you can follow this [Mac Permanent IP] to set it up. 
 
-##### Export DOCKER_HOST_IP with script
+##### Automatically export DOCKER_HOST_IP on Linux Desktop
 
-This work on my Linux desktop as the hostname joy is mapped to 198.168.1.120 in /etc/hosts. The address
-of Mac Book Pro is changing all the time depending on the WIFI network it connected to.
+At home, I am working on a Linux desktop with a fixed IP address allocated by the router. 
 
-Here is the IPV4 section in /etc/hosts on my desktop.
-
-```
-127.0.0.1	localhost
-192.168.1.120   joy
-```
-
-To run the script, we need to checkout the light-docker repository from networknt.
-
-Assume that we have a working directory called networknt under user home directory.
-
-```
-cd ~/networknt
-git clone https://github.com/networknt/light-docker.git
-cd light-docker
-source set-docker-host-ip.sh
-```
-
-After that, you can double check the DOCKER_HOST_IP from the following command line on the same
-terminal. 
-
-```
-echo $DOCKER_HOST_IP
-```
-
-In order to confirm that the IP address or hostname is valid, you can ping it and see if you have
-responses. 
-
-##### Put the export into .bashrc
-
-If you are using a desktop which has ba static IP address, then you can put the export statement
-into .bashrc under your home directory. This can eliminate the manual step and ensure that you can
+If you are using a desktop which has a static IP address, then you can put the export statement into .bashrc under your home directory. It can eliminate the manual step and ensure that you can
 run the docker-compose from any terminal. 
 
 Here is a section of my .bashrc file on my desktop.
@@ -103,13 +62,9 @@ export M2_HOME=/home/steve/tool/apache-maven-3.5.0
 export M2=%M2_HOME%\bin
 export DOCKER_HOST_IP=192.168.1.120
 ```
+Note that above manual export and script will only work on the terminal window with the export and you have to start the docker-compose with the exact terminal in order to work as the environment variable only associates to that particular terminal instance. 
 
-Note that above manual export and script will only work on the terminal window with the export and
-you have to start the docker-compose with the exact terminal in order to work as the environment
-variable only associates to that particular terminal instance. 
-
-Right after you updated .bashrc, you can run the following command and then run the docker-compose
-from the same terminal. The next time you restart your computer, you can run the docker-compose in
+Right after you updated .bashrc, you can run the following command and then run the docker-compose from the same terminal. The next time you restart your computer, you can run the docker-compose in
 any terminal.
 
 ```
@@ -117,8 +72,7 @@ cd ~
 source .bashrc
 ```
 
-This approach only works with desktop as it has a static IP. If you are using a laptop, most likely
-you will have to use the first option to export the IP manually. 
+This approach only works with a desktop as it has a static IP. If you are using a laptop, most likely you will have to use the first option to export the IP manually or find a way to create an alias interface with a fixed IP address. 
 
 
 ### Start eventuate services
@@ -170,3 +124,7 @@ java -jar target/eventuate-cdc-server.jar
 ```
 
 Now we have the entire infrastructure up and running, we can start some of the demo applications. 
+
+
+[Mac Permanent IP]: /development/best-practices/mac-perm-ip/
+
