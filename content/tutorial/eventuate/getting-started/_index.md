@@ -32,20 +32,22 @@ You will see a list of network interfaces in the output. Depending on your netwo
 ```
 192.XXX.XXX.XXX
 Or 
-10.XXX.XXX.XXX and copy it to the clipboard.
+10.XXX.XXX.XXX
 ```
 
-The next step is to export it to an environment variable DOCKER_HOST_IP.
+Once you get the IP address, copy it to the clipboard. The next step is to export it to an environment variable DOCKER_HOST_IP.
 
 ```
 export DOCKER_HOST_IP=198.168.1.120
 ```
 
+Now you can start eventuate docker-compose from the same terminal you export the DOCKER_HOST_IP. 
+
 ##### Automatically export DOCKER_HOST_IP on Mac
 
 The above approach is the most reliable way to get the right IP address, and on my Mac Book Pro, it is the only way as the computer name is not mapped to a real IP address somehow.
 
-The above approach works until you reboot your computer. If you want to setup a static IP for your Mac, then you can follow this [Mac Permanent IP] to set it up. 
+The above approach works until you reboot your computer. If you want to setup a static IP for your Mac, then you can follow this [Mac Permanent IP] to set it up. It ensures that you can start the eventuate docker-compose at any terminal and you don't need to restart it when you move from one WIFI hotspot to another WIFI hotspot. 
 
 ##### Automatically export DOCKER_HOST_IP on Linux Desktop
 
@@ -62,17 +64,17 @@ export M2_HOME=/home/steve/tool/apache-maven-3.5.0
 export M2=%M2_HOME%\bin
 export DOCKER_HOST_IP=192.168.1.120
 ```
+
 Note that above manual export and script will only work on the terminal window with the export and you have to start the docker-compose with the exact terminal in order to work as the environment variable only associates to that particular terminal instance. 
 
-Right after you updated .bashrc, you can run the following command and then run the docker-compose from the same terminal. The next time you restart your computer, you can run the docker-compose in
-any terminal.
+Right after you updated .bashrc, you can run the following command and then run the docker-compose from the same terminal. The next time you restart your computer, you can run the docker-compose in any terminal.
 
 ```
 cd ~
 source .bashrc
 ```
 
-This approach only works with a desktop as it has a static IP. If you are using a laptop, most likely you will have to use the first option to export the IP manually or find a way to create an alias interface with a fixed IP address. 
+This approach only works with a desktop as it has a static IP. If you are using a laptop, most likely you will have to use the first option to export the IP manually or find a way to create an alias interface with a fixed IP address.  
 
 
 ### Start eventuate services
@@ -115,8 +117,9 @@ cd eventuate-cdc-server
 java -jar target/eventuate-cdc-server.jar
 ```
 
-Now we have the entire infrastructure up and running, and we can start some of the demo applications. 
+Now we have the entire infrastructure up and running, and we can start some of the demo applications. The [todo-list][] application is the easiest to get started with, and if you want an app with real business scenarios, check out [account-management]. 
 
-
+[todo-list]: /tutorial/eventuate/todo-list/
+[account-management]: /tutorial/eventuate/account-management/
 [Mac Permanent IP]: /development/best-practices/mac-perm-ip/
 
