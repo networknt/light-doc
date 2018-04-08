@@ -48,39 +48,29 @@ Depending on how fast your computer is and if you have all the docker images cac
 
 ### Clone and build light-bot
 
-Now we can clone and build light-bot repository. We are going to use the same networknt workspace. 
-
-
-```
-cd ~/networknt
-git clone https://github.com/networknt/light-bot.git
-cd light-bot
-./gradlew build
-```
-
-As you can see this project is built with Gradle as we are trying to support both Maven and Gradle
-in the light-codegen for API projects. 
-
-The first time build will take a while as Gradle 4.4.1 and Kotlin DSL need to be downloaded. 
+Now we can clone and build light-bot repository based on the [build light-bot] tutorial. 
 
 ### Run the develop branch build with default config
 
 ```
 cd ~/networknt/light-bot/bot-cli/build/libs
-java -jar bot-cli-fat-1.0.jar -t develop
+java -jar bot-cli-fat-1.0.jar -t develop-build
 
 ```
 
-if the build is failed, you can check bot.log in the same directory as default email server is not
-set up with a correct password, there would be no email will be sent out if build or test is failed.
-
-
+If the build is failed, you can check bot.log in the same directory as default email server is not set up with a correct password, there would be no email will be sent out if build or test is failed.
 
 ### Run the develop branch build with customized config
 
+** Note that customized config contains tokenization service which is located in a private git server and it is not open source. If you don't have access and still want try it out, please comment tokenization from each step in the develop-build.yml file. **
 
-
-
+```
+cd ~/networknt
+git clone https://github.com/networknt/light-config-test.git
+cd light-config-test/light-bot/develop-build/build-test-all
+./run.sh
+```
 
 [microservices develop]: /tutorial/bot/microservices-develop/
 [this tutorial]: /tutorial/eventuate/getting-started/
+[build light-bot]: /tutorial/bot/build-light-bot/

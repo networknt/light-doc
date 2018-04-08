@@ -13,8 +13,6 @@ reviewed: true
 
 light-bot is a tool built on top of the light-4j framework. Before using it, we have to clone and build it locally in our workspace. 
 
-light-bot is a tool built on top of the light-4j framework. Before using it, we have to clone and build it locally in our workspace. 
-
 To make it easier, we use networknt under user home directory for our workspace. Please follow the steps below to get light-bot built locally. If you have networknt workspace already, you do not need to create the directory. 
 
 ```
@@ -27,5 +25,10 @@ cd light-bot
 ```
 
 Once build is completed, you can find a bot-cli-fat-1.0.jar file in ~/networknt/light-bot/bot-cli/build/libs folder. This jar file contains the command line class to execute light-bot tasks. 
+
+As you can see this project is built with Gradle as we are trying to support both Maven and Gradle in the light-codegen for API projects.
+
+The first time build will take a while as Gradle 4.4.1 and Kotlin DSL need to be downloaded. 
+
 
 
