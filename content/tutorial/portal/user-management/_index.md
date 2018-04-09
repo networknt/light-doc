@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-* [User Management Service Introduction](https://networknt.github.io/light-portal/tutorial/user-introduction/) - User Management Service introduction
-
+* [User Management Service Introduction][] - User Management Service introduction
 * [User Management Integration Test][] - User Management Service integration test
 
 
 [User Management Integration Test]: /tutorial/portal/user-management/user-integration/
+[User Management Service Introduction]: /service/portal/user-management/
