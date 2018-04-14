@@ -8,10 +8,11 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-Copy service jar files to service folder:
+Copy service jar files to the service folder in light-docker:
 
 For hybrid command service :
 
@@ -45,9 +46,9 @@ docker-compose -f docker-compose-eventuate-hybrid-local.yml up
 
 ```
 
-Verify result with following command
+Verify result with following commands.
 
-Create a todo item on command service with the following command.
+Create a todo item from command service with the following command.
 
 ```
 curl -X POST \
@@ -57,7 +58,7 @@ curl -X POST \
   -d '{"host":"lightapi.net","service":"todo","action":"create", "version": "0.1.0", "title": "create todo item from hybrid-command", "completed": false, "order": 1}'
 ```
 
-Let's get all the todo items from query service with the following command
+Let's get all the todo items from the query service with the following command
 
 ```
 curl -X POST \
@@ -66,4 +67,5 @@ curl -X POST \
   -H 'content-type: application/json' \
   -d '{"host":"lightapi.net","service":"todo","action":"gettodos", "version": "0.1.0"}'
 ```
+
 

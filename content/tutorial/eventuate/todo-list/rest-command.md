@@ -4,33 +4,26 @@ date: 2018-01-07T16:40:00-05:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tool"
-    weight: 30
 weight: 30
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-In this step we are going to generate a command side restful microservice from scratch. The 
-model-config for this service can be found at [model-config][] repo.
+In this step, we are going to generate a command side restful microservice from scratch. The model-config for this service can be found at [model-config][] repo.
 
-Let's first checkout model-config repo from github.
+Let's first checkout model-config repo from GitHub.
 
 ```
 git clone git@github.com:networknt/model-config.git
 
 ```
 
-The swagger specification for todo-list command side service can be found at
-~/networknt/model-config/rest/todo-command. In the same folder, there is config.json
-which is used to control how light-codegen going to generate the code.
+The swagger specification for the todo-list command side service can be found at ~/networknt/model-config/rest/todo-command. In the same folder, there is config.json which is used to control how light-codegen going to generate the code.
 
-In order to generate the rest-command service, let's first clone the light-codegen
-project and build it.
+In order to generate the rest-command service, let's first clone the light-codegen project and build it.
 
 ```
 cd ~/networknt
@@ -39,11 +32,10 @@ cd light-codegen
 mvn clean install
 ```
 
-Generate rest-command service with the following command line. Assume we are still in
-light-codegen folder.
+Generate rest-command service with the following command line. Assume we are still in the light-codegen folder.
 
 ```
-java -jar codegen-cli/target/codegen-cli.jar -f light-rest-4j -o ../light-example-4j/eventuate/todo-list/rest-command -m ../model-config/rest/todo_command/1.0.0/swagger.json -c ../model-config/rest/todo_command/1.0.0/config.json
+java -jar codegen-cli/target/codegen-cli.jar -f swagger -o ../light-example-4j/eventuate/todo-list/rest-command -m ../model-config/rest/todo_command/1.0.0/swagger.json -c ../model-config/rest/todo_command/1.0.0/config.json
 ``` 
 
 Now add this rest-command into pom.xml and build it with maven.
@@ -64,13 +56,11 @@ mvn clean install
 
 The four modules should be built successfully.
 
-Now let's update rest-command module to wire the logic.
+Now let's update rest-command module to wire in the logic.
 
-First we need to update dependencies for this project by adding the following.
+First, we need to update dependencies for this project by adding the following.
+
 ```xml
-        <version.light-eventuate-4j>1.5.7</version.light-eventuate-4j>
-
-
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>todo-common</artifactId>
@@ -254,8 +244,7 @@ public class TodosPutHandler implements HttpHandler {
 
 ```
 
-Since we are going to create some eventuate class instances from interfaces. Let's create a
-service.yml under resources/config folder.
+Since we are going to create some eventuate class instances from interfaces, let's create a service.yml under resources/config folder.
 
 ```yaml
 singletons:
@@ -293,5 +282,9 @@ Now let's verify that all modules can be built.
 mvn clean install
 ```
 
+If all modules are built successfully, we can move to the next step to complete the [query side][] Restful service. 
+
+
 [model-config]: https://github.com/networknt/model-config/tree/master/rest/todo_command/1.0.0
+[query side]: /tutorial/eventuate/todo-list/rest-query/
 

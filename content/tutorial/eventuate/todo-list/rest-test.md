@@ -8,22 +8,18 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Once all modules can be built successfully, we can start the servers and test the todo-list
-application.
+Once all modules can be built successfully, we can start the servers and test the todo-list application.
 
-First we need to make sure Mysql, Zookeeper, Kafka and CDC server for eventuate are up and 
-running.
+First, we need to make sure Mysql, Zookeeper, Kafka and CDC server for eventuate are up and running.
 
-You can follow this [tutorial][] to start all of them with docker-compose.
+You can follow this [tutorial][] to start all of them with a docker-compose.
 
-Before we start the rest-command and rest-query, let's create the database and table
-for the rest-query material view in the same Mysql database for the event store. We
-are going to create another database called todo_db
+Before we start the rest-command and rest-query, let's create the database and table for the rest-query material view in the same Mysql database for the event store. We are going to create another database called todo_db. If you are using the networknt/mysql docker image, the table is created already. 
 
-Here is the db script and you can use mysql command line or just using any GUI tools
-to run it against mysql server.
+Here is the database script and you can use mysql command line or just using any GUI tools to run it against MySQL server.
 
 ```mysql
 create database todo_db;
@@ -46,7 +42,7 @@ CREATE  TABLE TODO (
 
 ```
 
-Remember that Mysql root user and password as follows.
+Remember that MySQL root user and password as follows.
 
 ```
 dbUser: root
@@ -90,16 +86,15 @@ And the response will be
 }
 ```
 
-This request will send request which will call backe-end service to generate a "create todo" event and 
-publish to event store.
+This request will send a request which will call back-end service to generate a "create todo" event and publish to event store.
 
 Event sourcing system will save the event into event store.
 
-CDC service will be triggered and will publish event to Kafka:
+CDC service will be triggered and will publish the event to Kafka:
 
-The request will publish a "CreateTodo" event and will save the entity/event to the event store mysql database.
+The request publishes a "CreateTodo" event and will save the entity/event to the event store MySQL database.
 
-we can use sql to verify:
+We can use mysql command line tool to verify:
 
 ```
 select * from entity;
@@ -142,7 +137,12 @@ And the response will be something like this.
 ]
 ```
 
-Event sourcing system will subscribe the events from event store and process user defined event handlers.
-For todo-list example, the event handle simply gets the event and save the latest todo info into local TODO table.
+Event sourcing system will subscribe the events from event store and process the events by user-defined event handlers.
+
+For todo-list example, the event handler simply gets the event and save the latest todo info into local TODO table.
+
+
+In the next step, we are going to implement a [hybrid command][] side with the light-hybrid-4j framework. 
 
 [tutorial]: /tutorial/eventuate/getting-started/
+[hybrid command]: /tutorial/eventuate/todo-list/hybrid-command/

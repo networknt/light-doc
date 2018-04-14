@@ -8,12 +8,11 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-To create query side hybrid service, we are going to use light-codegen to generate
-the project in todo-list. Before generating the project, we need to create a config.json
-to control how generator works and a schema.json to define the service contract.
+To create query side hybrid service, we are going to use light-codegen to generate the project in todo-list. Before generating the project, we need to create a config.json to control how the generator works and a schema.json to define the service contract.
 
 These two files can be found in model-config/hybrid/todo-query folder. 
 
@@ -30,7 +29,7 @@ config.json
   "version": "0.1.0",
   "overwriteHandler": true,
   "overwriteHandlerTest": true,
-  "httpPort": 8080,
+  "httpPort": 8082,
   "enableHttp": true,
   "httpsPort": 8443,
   "enableHttps": false,
@@ -39,7 +38,8 @@ config.json
   "supportMysql": false,
   "supportPostgresql": false,
   "supportH2ForTest": false,
-  "supportClient": false
+  "supportClient": false,
+  "dockerOrganization": "networknt"
 }
 ```
 
@@ -89,8 +89,7 @@ cd ~/networknt/light-codegen
 java -jar codegen-cli/target/codegen-cli.jar -f light-hybrid-4j-service -o ../light-example-4j/eventuate/todo-list/hybrid-query -m ../model-config/hybrid/todo-query/schema.json -c ../model-config/hybrid/todo-query/config.json
 ```
 
-Let's add this newly generated project to the parent pom.xml and build all
-modules.
+Let's add this newly generated project to the parent pom.xml and build all modules.
 
 ```xml
     <modules>
@@ -113,20 +112,15 @@ modules.
 
 ```
 
-Rebuild all modules from root folder.
+Rebuild all modules from the root folder.
 
 ```
 mvn clean install
 
 ```
 
-Now let's change the dependencies to add light-eventuate-4j modules and todo-list
-modules.
+Now let's change the dependencies to add light-eventuate-4j modules and todo-list modules.
 
-```xml
-        <version.light-eventuate-4j>1.5.7</version.light-eventuate-4j>
-
-```
 
 ```xml
         <dependency>
@@ -162,8 +156,7 @@ modules.
 
 ```
 
-With all the dependencies are added, let's change the handler to wire in the
-right logic.
+With all the dependencies are added, let's change the handler to wire in the right logic.
 
 ```java
 package com.networknt.todolist.query.handler;
@@ -242,9 +235,7 @@ public class GetTodoById implements Handler {
 
 ```
 
-As we have to put the service jar into the hybrid server platform in order to run
-it, we cannot wait then to test it. So for hybrid service development, end-to-end
-test is very important to ensure what you have built is working.
+As we have to put the service jar into the hybrid server platform in order to run it, we cannot wait then to test it. So for hybrid service development, the end-to-end test is very important to ensure what you have built is working.
 
 Here are the two tests.
 
@@ -361,19 +352,27 @@ public class GetTodoByIdTest {
 }
 ```
 
-The test server will load some light-eventuate-4j classes and H2 database and it
-is defined in service.yml in src/test/resources/config folder.
+The test server will load some light-eventuate-4j classes and H2 database and it is defined in service.yml in src/test/resources/config folder.
 
 ```yaml
 singletons:
 - javax.sql.DataSource:
   - com.zaxxer.hikari.HikariDataSource:
-      DriverClassName: org.h2.jdbcx.JdbcDataSource
-      jdbcUrl: jdbc:h2:~/test
-      username: sa
-      password: sa
-- com.networknt.eventuate.common.impl.sync.AggregateCrud,com.networknt.eventuate.common.impl.sync.AggregateEvents:
-    - com.networknt.eventuate.test.jdbc.EventuateEmbeddedTestAggregateStore
+      jdbcUrl: jdbc:mysql://198.55.49.187:3306/todo_db?useSSL=false
+      username: mysqluser
+      password: mysqlpw
+      maximumPoolSize: 15
+      useServerPrepStmts: true
+      cachePrepStmts: true
+      cacheCallableStmts: true
+      prepStmtCacheSize: 4096
+      prepStmtCacheSqlLimit: 2048
+- com.networknt.eventuate.jdbc.EventuateJdbcAccess:
+  - com.networknt.eventuate.jdbc.EventuateJdbcAccessImpl
+- com.networknt.eventuate.common.impl.sync.AggregateCrud:
+  - com.networknt.eventuate.server.jdbckafkastore.EventuateLocalAggregateCrud
+- com.networknt.eventuate.common.impl.sync.AggregateEvents:
+  - com.networknt.eventuate.client.EventuateLocalAggregatesEvents
 - com.networknt.eventuate.common.impl.AggregateCrud:
   - com.networknt.eventuate.common.impl.adapters.SyncToAsyncAggregateCrudAdapter
 - com.networknt.eventuate.common.impl.AggregateEvents:
@@ -401,18 +400,34 @@ singletons:
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningCompletableFuture
   - com.networknt.eventuate.event.EventHandlerProcessorEventHandlerContextReturningCompletableFuture
   - com.networknt.eventuate.event.EventHandlerProcessorEventHandlerContextReturningVoid
-- com.networknt.eventuate.client.SubscriptionsRegistry:
-  - com.networknt.eventuate.client.SubscriptionsRegistryImpl
+# HandlerProvider implementation
+- com.networknt.server.HandlerProvider:
+  - com.networknt.rpc.router.RpcRouter
+# StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
+- com.networknt.server.StartupHookProvider:
+  - com.networknt.rpc.router.RpcStartupHookProvider
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+# - com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.server.Test1ShutdownHook
+- com.networknt.handler.MiddlewareHandler:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.rpc.security.JwtVerifyHandler
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler
 
 ```
 
-Before running the tests, we need to add the following test dependencies into
-pom.xml 
+Before running the tests, we need to add the following test dependencies into pom.xml 
 
 ```xml
-        <version.hikaricp>2.5.1</version.hikaricp>
-        <version.h2>1.3.176</version.h2>
-
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
@@ -429,9 +444,12 @@ pom.xml
 
 ```
 
-Now you can build the entire project from root folder of todo-list
+Now you can build the entire project from the root folder of the todo-list project.
 
 ```
 mvn clean install
 ``` 
 
+In the next step, we are going to [test hybrid services][] we just built.  
+
+[test hybrid services]: /tutorial/eventuate/todo-list/hybrid-test/

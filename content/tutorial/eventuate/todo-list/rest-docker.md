@@ -8,13 +8,11 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-Let's copy docker config folder to the todo-list folder from existing
-one.
-
-- docker  contains docker config files
+Let's copy docker config folder to the todo-list folder from the existing one.
 
 
 ```
@@ -25,10 +23,9 @@ cp -r ../todo-list.bak/docker .
 
 There are two sub-folders in the docker module:
 
+### command-service
 
-\command-service      -- command side config, include service.yml file
-
-Since the service runs in the docker container, we need change the mysql host name to use docker image name:
+Since the service runs in the docker container, we need to change the MySQL hostname to use docker image name:
 
 service.yml:
 
@@ -42,9 +39,9 @@ service.yml:
 
 ```
 
-\query-service        -- query side config, include service.yml and kafka.yml file
+### query-service
 
-Since the service runs in the docker container, we need change the mysql host name and kafka host name to use docker image name:
+Since the service runs in the docker container, we need to change the MySQL hostname and Kafka hostname to use docker image name:
 
 service.yml:
 
@@ -65,9 +62,9 @@ bootstrapServers: kafka:9092
 
 ```
 
-## Start command side and query side service from docker compose
+### Start command side and query side service from docker compose
 
-Instead of start service from command line, start service from docker compose file:
+Instead of start service from the command line, start service from docker compose file:
 
 ```
 cd ~/networknt/light-example-4j/eventuate/todo-list
@@ -75,6 +72,12 @@ docker-compose up
 
 ```
 
-Then following same steps above to verify the service result from command line
+Now we can follow the same steps in [rest test][] to verify the service result from with curl commands.
+
+In the next step, we are going to [dockerize the hybrid services][]. 
+
+[rest test]: /tutorial/eventuate/todo-list/rest-test/
+[dockerize the hybrid services]: /tutorial/eventuate/todo-list/hybrid-docker/
+
 
 
