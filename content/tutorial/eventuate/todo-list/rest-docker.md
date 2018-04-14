@@ -11,9 +11,7 @@ draft: false
 reviewed: true
 ---
 
-
 Let's copy docker config folder to the todo-list folder from the existing one.
-
 
 ```
 cd ~/networknt/light-example-4j/eventuate/todo-list
@@ -39,6 +37,13 @@ service.yml:
 
 ```
 
+To create and publish the rest-command docker image. 
+
+```
+./build.sh 1.5.13
+```
+
+
 ### query-service
 
 Since the service runs in the docker container, we need to change the MySQL hostname and Kafka hostname to use docker image name:
@@ -62,6 +67,12 @@ bootstrapServers: kafka:9092
 
 ```
 
+To create and publish the rest-query docker image. 
+
+```
+./build.sh 1.5.13
+```
+
 ### Start command side and query side service from docker compose
 
 Instead of start service from the command line, start service from docker compose file:
@@ -78,6 +89,4 @@ In the next step, we are going to [dockerize the hybrid services][].
 
 [rest test]: /tutorial/eventuate/todo-list/rest-test/
 [dockerize the hybrid services]: /tutorial/eventuate/todo-list/hybrid-docker/
-
-
 
