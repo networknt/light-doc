@@ -11,13 +11,9 @@ toc: false
 draft: false
 ---
 
-In the previous step, we have explored how to send logs to a centralized server so
-that activity across multiple services can be viewed on the same screen. In this
-step, we are going to setup metrics from petstore to send it to InfluxDB and then
-subsequently viewed from Chronograf UI.
+In the previous step, we have explored how to send logs to a centralized server so that activity across multiple services can be viewed on the same screen. In this step, we are going to setup metrics in the pet store to send it to InfluxDB and then subsequently viewed the dashboard from Chronograf UI.
 
-In order to start InfluxDB, Chronograf and Kapacitor, a docker-compose file will be 
-used from light-docker repository. 
+In order to start InfluxDB, Chronograf and Kapacitor, a docker-compose file will be used from light-docker repository. 
 
 Now let's start all services defined in docker-compose-metrics.yml
 
