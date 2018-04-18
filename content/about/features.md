@@ -1,20 +1,18 @@
 ---
-title: Light Platform Features
-linktitle: Features
-description: Light Platform boasts blistering speed, robust runtime management, and a powerful CI/CD delivery flow making it a great fit for all kinds of API services.
-date: 2017-02-01
-publishdate: 2017-02-01
-lastmod: 2017-02-01
-categories: [about,fundamentals]
+title: "Light Platform Features"
+date: 2018-01-30T22:01:16-05:00
+description: ""
+categories: []
+keywords: []
 menu:
   docs:
     parent: "about"
     weight: 20
 weight: 20
 sections_weight: 20
+aliases: []
+toc: false
 draft: false
-aliases: [/about/features]
-toc: true
 ---
 
 ## General
