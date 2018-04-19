@@ -1,5 +1,5 @@
 ---
-title: "Light Platform Features"
+title: "Features"
 date: 2018-01-30T22:01:16-05:00
 description: ""
 categories: []
