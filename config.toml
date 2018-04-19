@@ -262,11 +262,12 @@ twitter = "networkntcom"
     identifier = "docs"
     url = "/documentation/"
 
-  [[menu.global]]
-    name = "Blog"
-    weight = 10
-    identifier = "blog"
-    url = "/blog/"
+
+#  [[menu.global]]
+#    name = "Blog"
+#    weight = 10
+#    identifier = "blog"
+#    url = "https://blog.networknt.com/"
 
   # Anything with a weight > 100 gets an external icon
   [[menu.global]]
