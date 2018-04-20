@@ -12,17 +12,16 @@ weight: 90	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-# Introduction
+### Introduction
 
-This is a middleware that addresses cross site scripting concerns. It encodes the header
-and body according to the configuration. As body encoding depends on
-[Body][] middleware, it has to be plugged into the request/response chain after Body.
+This is a middleware that addresses cross-site scripting concerns. It encodes the header and body according to the configuration. As body encoding depends on [Body][] middleware, it has to be plugged into the request/response chain after Body.
 
-# Configuration
+### Configuration
 
-Here is the default configuration sanitizer.yml
+Here is the default configuration file sanitizer.yml
 
 ```
 # Sanitize request for cross site scripting during runtime
@@ -37,31 +36,28 @@ sanitizeBody: true
 sanitizeHeader: false
 ```
 
-If enabled is false, this middleware won't be loaded during server startup. 
-sanitizeBody and sanitizeHeader control if body and header need to be sanitized or both. In
-most of the cases, sanitizing body make sense and sanitizing header is not necessary.
+If the enabled flag is false, this middleware won't be loaded during server startup. 
 
-# When to use sanitizer
+sanitizeBody and sanitizeHeader control if body and header need to be sanitized or both. In most of the cases, sanitizing body makes sense and sanitizing header is not necessary.
 
-This handler should only be used when you are collecting user input from Web/Mobile UI and
-later on use the input data to generate web pages. For example, a forum or blog application.
+### When to use sanitizer
 
-For services that user input will never used to construct web pages, don't use this handler.
+This handler should only be used when you are collecting user input from Web/Mobile UI and later on, use the input data to generate web pages. For example, a forum or blog application.
 
-# Query Parameters
+For services that user input will never be used to construct web pages, don't use this handler. 
 
-In other platforms especially JEE containers, query parameters need to be sanitized as well.
-However, I have found that Undertow does sanitize special characters in query parameters. This
-is why this handler doesn't do anything about query parameters.
 
-# Encode Library
+### Query Parameters
 
-The library used for cross site scripting sanitization is from https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)
+In other platforms especially JEE containers, query parameters need to be sanitized as well. However, I have found that Undertow does sanitize special characters in query parameters. This is why this handler doesn't do anything about query parameters.
+
+### Encode Library
+
+The library used for cross-site scripting sanitization is from https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)
 and the library can be found at https://github.com/OWASP/owasp-java-encoder
 
-# Encode Level
+### Encode Level
 
-The encode level we are using for both header and body is "forJavaScriptSource". This gives us
-certain level of confident and it won't mess up header and body in most the case.
+The encoding level we are using for both header and body is forJavaScriptSource. It gives us certain level of confidence, and it won't mess up header and body in most the case.
 
 [Body]: /concern/body/
