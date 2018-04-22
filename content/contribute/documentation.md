@@ -28,7 +28,7 @@ You can then work on develop branch for your additions.
 
 ### Add New Content
 
-The light-doc makes heavy use of Hugo's [archetypes][] feature. All content sections in Hugo documentation have an assigned archetype.
+The light-doc makes heavy use of Hugo's archetypes feature. All content sections in Hugo documentation have an assigned archetype.
 
 Adding new content to the light-doc follows the same pattern, regardless of the content section:
 
@@ -61,7 +61,7 @@ Here is a review of the front matter fields automatically generated for you usin
 : the function's actual casing (e.g., `replaceRE` rather than `replacere`).
 
 ***`description`***
-: a brief description used to populate the [Functions Quick Reference](/functions/).
+: a brief description used to populate the Functions Quick Reference.
 
 `categories`
 : currently auto-populated with 'functions` for future-proofing and portability reasons only; ignore this field.
@@ -84,7 +84,7 @@ Here is a review of the front matter fields automatically generated for you usin
 `{{.Content}}`
 : an extended description of the new function; examples are not only welcomed but encouraged.
 
-In the body of your function, expand the short description used in the front matter. Include as many examples as possible, and leverage the Hugo docs [`code` shortcode](#adding-code-blocks). If you are unable to add examples but would like to solicit help from the Hugo community, add `needsexample: true` to your front matter.
+In the body of your function, expand the short description used in the front matter. Include as many examples as possible, and leverage the Hugo docs `code` shortcode. If you are unable to add examples but would like to solicit help from the Hugo community, add `needsexample: true` to your front matter.
 
 ### Add Code Blocks
 
