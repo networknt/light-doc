@@ -1,14 +1,16 @@
 ---
-title: "Light Platform Milestone"
-date: 2017-11-04T08:02:34-04:00
-description: "Milestones for each product"
-categories: [milestone]
-keywords: [milestone]
+title: "Milestone"
+date: 2018-04-22T14:48:16-04:00
+description: ""
+categories: []
+keywords: []
 slug: ""
-aliases: [/milestone/,/docs/]
+aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
+
 
 There are so many products in the light platform and each product has its
 milestones on the corresponding github repository. 
