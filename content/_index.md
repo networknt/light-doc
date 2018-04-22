@@ -34,25 +34,25 @@ features:
 sections:
   - heading: "Cross-Cutting Concerns"
     cta: Check out light-4j middleware handlers.
-    link: http://docs.networknt.com/
+    link: /concern/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
     copy: "Light-4j and related frameworks provide dozens of middleware handlers that can be injected into the request/response chain to give your service an embedded gateway." 
   - heading: "Interaction Styles"
     cta: Use the right framework for the right product.
-    link: templates/
+    link: /architecture/category/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
     copy: "Restful for public API, Graphql for mobile and Sing Page Application, Hybrid for serverless and take advantage of both Monolithic and Microservices architecture. Eventuate for event driven."
   - heading: "Infrastructure Services"
     cta: OAuth2, Portal and other infrastructure services.
-    link: templates/
+    link: /service/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
     copy: "OAuth2 provider is responsible for centralize policy management and services are responsible for policy enforcement. Portal is API management and marketplace. Others are third party services."
   - heading: "Tool Chains"
     cta: Tool chain for code generation, devops and CI/CD.
-    link: templates/
+    link: /tool/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
     copy: "Light-codegen is used for scaffolding project from OpenAPI spec, GraphQL IDL or Hybrid Schema. Light-bot Pipeline for building, packaging, releasing and dockerizing. Kubernetes is for service orchestration."
