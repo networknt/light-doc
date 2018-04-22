@@ -201,11 +201,13 @@ You should find a green button labeled with "New pull request". But GitHub is cl
 
 The new page summaries the most important information of your pull request. Scroll down, and you find the additions of all your commits. Make sure everything looks as expected and click on "Create pull request".
 
+<!--
 ### Accept the contributor license agreement
 
 Last but not least you should accept the contributor license agreement (CLA). A new comment should be added automatically to your pull request. Click on the yellow badge, accept the agreement and authenticate yourself with your GitHub account. It just takes a few clicks and only needs to be done once.
 
 ![Accept the CLA](/images/contribute/development/accept-cla.png)
+-->
 
 ### Automatic builds
 
@@ -219,7 +221,7 @@ Thank you for reading through this contribution guide. Hopefully, we will see yo
 
 Feel free to open an issue if you think you found a bug or you have a new idea to improve the light platform. We are happy to hear from you.
 
-### Additional References for Learning Git and Golang
+### Additional References for Learning Git
 
 * [Codecademy's Free "Learn Git" Course][codecademy] (Free)
 * [Code School and GitHub's "Try Git" Tutorial][trygit] (Free)

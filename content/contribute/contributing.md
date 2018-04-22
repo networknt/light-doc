@@ -56,7 +56,7 @@ for advice. For more details on how to contribute to the codebase, please refer 
 ## Documentation
 
 For changes of a trivial nature to comments and documentation, it is not necessary to create 
-a new issue. The document site for light platform is https://doc.networknt.com/ and each page
+a new issue. The document site for light platform is https://www.networknt.com/ and each page
 has a link to the github.com location in repo light-doc. For more details on how to contribute
 documentation, please refer to [document contribution][]. The folowing outlines the major steps:
 

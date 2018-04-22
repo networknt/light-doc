@@ -1,7 +1,7 @@
 ---
-title: Contribute to the Hugo Docs
+title: Contribute to document
 linktitle: Documentation
-description: Documentation is an integral part of any open source project. The Hugo docs are as much a work in progress as the source it attempts to cover.
+description: Documentation is an integral part of any open source project. The light-doc repository is as much a work in progress as the source it attempts to cover.
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2017-02-01
@@ -16,23 +16,21 @@ sections_weight: 20
 draft: false
 aliases: [/contribute/docs/]
 toc: true
+reviewed: true
 ---
 
-## Create Your Fork
+### Create Your Fork
 
-It's best to make changes to the Hugo docs on your local machine to check for consistent visual styling. Make sure you've created a fork of [hugoDocs](https://github.com/gohugoio/hugoDocs) on GitHub and cloned the repository locally on your machine. For more information, you can see [GitHub's documentation on "forking"][ghforking] or follow along with [Hugo's development contribution guide][hugodev].
+It is best to make changes to the light-doc on your local machine to check for consistent visual styling. Make sure you have created a fork of [light-doc](https://github.com/networknt/light-doc) on GitHub and cloned the repository locally on your machine. For more information, you can see [GitHub's documentation on "forking"][ghforking] or follow along with [development contribution guide][development].
 
-You can then create a separate branch for your additions. Be sure to choose a descriptive branch name that best fits the type of content. The following is an example of a branch name you might use for adding a new website to the showcase:
+You can then work on develop branch for your additions. 
 
-```
-git checkout -b jon-doe-showcase-addition
-```
 
-## Add New Content
+### Add New Content
 
-The Hugo docs make heavy use of Hugo's [archetypes][] feature. All content sections in Hugo documentation have an assigned archetype.
+The light-doc makes heavy use of Hugo's [archetypes][] feature. All content sections in Hugo documentation have an assigned archetype.
 
-Adding new content to the Hugo docs follows the same pattern, regardless of the content section:
+Adding new content to the light-doc follows the same pattern, regardless of the content section:
 
 ```
 hugo new <DOCS-SECTION>/<new-content-lowercase>.md
@@ -40,7 +38,7 @@ hugo new <DOCS-SECTION>/<new-content-lowercase>.md
 
 ### Add a New Function
 
-Once you have cloned the Hugo repository, you can create a new function via the following command. Keep the file name lowercase.
+Once you have cloned the light-doc repository, you can create a new function via the following command. Keep the file name lowercase.
 
 ```
 hugo new functions/newfunction.md
@@ -88,13 +86,13 @@ Here is a review of the front matter fields automatically generated for you usin
 
 In the body of your function, expand the short description used in the front matter. Include as many examples as possible, and leverage the Hugo docs [`code` shortcode](#adding-code-blocks). If you are unable to add examples but would like to solicit help from the Hugo community, add `needsexample: true` to your front matter.
 
-## Add Code Blocks
+### Add Code Blocks
 
-Code blocks are crucial for providing examples of Hugo's new features to end users of the Hugo docs. Whenever possible, create examples that you think Hugo users will be able to implement in their own projects.
+Code blocks are crucial for providing examples of the light platform new features to end users of the light-doc. Whenever possible, create examples that you think users will be able to implement in their own projects.
 
 ### Standard Syntax
 
-Across all pages on the Hugo docs, the typical triple-back-tick markdown syntax is used. If you do not want to take the extra time to implement the following code block shortcodes, please use standard GitHub-flavored markdown. The Hugo docs use a version of [highlight.js](https://highlightjs.org/) with a specific set of languages.
+Across all pages on the light-doc, the typical triple-back-tick markdown syntax is used. If you do not want to take the extra time to implement the following code block shortcodes, please use standard GitHub-flavored markdown. The Hugo docs use a version of [highlight.js](https://highlightjs.org/) with a specific set of languages.
 
 Your options for languages are `xml`/`html`, `go`/`golang`, `md`/`markdown`/`mkd`, `handlebars`, `apache`, `toml`, `yaml`, `json`, `css`, `asciidoc`, `ruby`, `powershell`/`ps`, `scss`, `sh`/`zsh`/`bash`/`git`, `http`/`https`, and `javascript`/`js`.
 
@@ -106,7 +104,7 @@ Your options for languages are `xml`/`html`, `go`/`golang`, `md`/`markdown`/`mkd
 
 ### Code Block Shortcode
 
-The Hugo documentation comes with a very robust shortcode for adding interactive code blocks.
+The light-doc documentation comes with a very robust shortcode for adding interactive code blocks.
 
 {{% note %}}
 With the `code` shortcodes, *you must include triple back ticks and a language declaration*. This was done by design so that the shortcode wrappers were easily added to legacy documentation and will be that much easier to remove if needed in future versions of the Hugo docs.
@@ -127,20 +125,21 @@ A whole bunch of coding going on up in here!
 The following are the arguments passed into `code`:
 
 ***`file`***
-: the only *required* argument. `file` is needed for styling but also plays an important role in helping users create a mental model around Hugo's directory structure. Visually, this will be displayed as text in the top left of the code block.
+: the only *required* argument. `file` is needed for styling but also plays an important role in helping users create a mental model around directory structure. Visually, this will be displayed as text in the top left of the code block.
 
 `download`
-: if omitted, this will have no effect on the rendered shortcode. When a value is added to `download`, it's used as the filename for a downloadable version of the code block.
+: if omitted, this will not affect the rendered shortcode. When a value is added to `download`, it is used as the filename for a downloadable version of the code block.
 
 `copy`
 : a copy button is added automatically to all `code` shortcodes. If you want to keep the filename and styling of `code` but don't want to encourage readers to copy the code (e.g., a "Do not do" snippet in a tutorial), use `copy="false"`.
 
-#### Example `code` Input
 
-This example HTML code block tells Hugo users the following:
+##### Example `code` Input
+
+This example HTML code block tells users the following:
 
 1. This file *could* live in `layouts/_default`, as demonstrated by `layouts/_default/single.html` as the value for `file`.
-2. This snippet is complete enough to be downloaded and implemented in a Hugo project, as demonstrated by `download="single.html"`.
+2. This snippet is complete enough to be downloaded and implemented in a Hugo document project, as demonstrated by `download="single.html"`.
 
 ```
 {{</* code file="layouts/_default/single.html" download="single.html" */>}}
@@ -188,6 +187,7 @@ The output of this example will render to the Hugo docs as follows:
 {{ end }}
 {{< /code >}}
 
+
 <!-- #### Output Code Block
 
 The `output` shortcode is almost identical to the `code` shortcode but only takes and requires `file`. The purpose of `output` is to show *rendered* HTML and therefore almost always follows another basic code block *or* and instance of the `code` shortcode:
@@ -208,7 +208,7 @@ The preceding `output` example will render as follows to the Hugo docs:
 <p>I am excited to be using Hugo.</p>
 {{< /output >}} -->
 
-## Blockquotes
+### Blockquotes
 
 Blockquotes can be added to the Hugo documentation using [typical Markdown blockquote syntax][bqsyntax]:
 
@@ -234,7 +234,7 @@ Which will render as follows in the Hugo docs:
 Previous versions of Hugo documentation used blockquotes to draw attention to text. This is *not* the [intended semantic use of `<blockquote>`](http://html5doctor.com/cite-and-blockquote-reloaded/). Use blockquotes when quoting. To note or warn your user of specific information, use the admonition shortcodes that follow.
 {{% /note %}}
 
-## Admonitions
+### Admonitions
 
 **Admonitions** are common in technical documentation. The most popular is that seen in [reStructuredText Directives][sourceforge]. From the SourceForge documentation:
 
@@ -246,7 +246,7 @@ The Hugo docs contain three admonitions: `note`, `tip`, and `warning`.
 
 Use the `note` shortcode when you want to draw attention to information subtly. `note` is intended to be less of an interruption in content than is `warning`.
 
-#### Example `note` Input
+##### Example `note` Input
 
 {{< code file="note-with-heading.md" >}}
 {{%/* note */%}}
@@ -254,7 +254,7 @@ Here is a piece of information I would like to draw your **attention** to.
 {{%/* /note */%}}
 {{< /code >}}
 
-#### Example `note` Output
+##### Example `note` Output
 
 {{< output file="note-with-heading.html" >}}
 {{% note %}}
@@ -262,7 +262,7 @@ Here is a piece of information I would like to draw your **attention** to.
 {{% /note %}}
 {{< /output >}}
 
-#### Example `note` Display
+##### Example `note` Display
 
 {{% note %}}
 Here is a piece of information I would like to draw your **attention** to.
@@ -272,26 +272,26 @@ Here is a piece of information I would like to draw your **attention** to.
 
 Use the `tip` shortcode when you want to give the reader advice. `tip`, like `note`, is intended to be less of an interruption in content than is `warning`.
 
-#### Example `tip` Input
+##### Example `tip` Input
 
 {{< code file="using-tip.md" >}}
 {{%/* tip */%}}
-Here's a bit of advice to improve your productivity with Hugo.
+Here's a bit of advice to improve your productivity.
 {{%/* /tip */%}}
 {{< /code >}}
 
-#### Example `tip` Output
+##### Example `tip` Output
 
 {{< output file="tip-output.html" >}}
 {{% tip %}}
-Here's a bit of advice to improve your productivity with Hugo.
+Here's a bit of advice to improve your productivity.
 {{% /tip %}}
 {{< /output >}}
 
-#### Example `tip` Display
+##### Example `tip` Display
 
 {{% tip %}}
-Here's a bit of advice to improve your productivity with Hugo.
+Here's a bit of advice to improve your productivity.
 {{% /tip %}}
 
 ### `warning` Admonition
@@ -324,13 +324,14 @@ This is a warning, which should be reserved for *important* information like bre
 Similar to [contributing to Hugo development](/contribute/development/), the Hugo team expects you to create a separate branch/fork when you make your contributions to the Hugo docs.
 {{% /note %}}
 
+[ghforking]: https://help.github.com/articles/fork-a-repo/
+[development]: /contribute/development/
+
 [abe]: https://en.wikipedia.org/wiki/Kobo_Abe
 [archetypes]: /content-management/archetypes/
 [bqsyntax]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#blockquotes
 [charcount]: http://www.lettercount.com/
 [`docs/static/images/showcase/`]: https://github.com/gohugoio/hugo/tree/master/docs/static/images/showcase/
-[ghforking]: https://help.github.com/articles/fork-a-repo/
-[hugodev]: /contribute/development/
 [shortcodeparams]: content-management/shortcodes/#shortcodes-without-markdown
 [sourceforge]: http://docutils.sourceforge.net/docs/ref/rst/directives.html#admonitions
 [templating function]: /functions/
