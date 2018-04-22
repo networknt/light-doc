@@ -1,21 +1,18 @@
 ---
-title: Contribute to Light Development
-linktitle: Development
-description: Light platform relies heavily on contributions from the open source community.
-date: 2017-02-01
-publishdate: 2017-02-01
-lastmod: 2017-02-01
-categories: [contribute]
-keywords: [dev,open source]
+title: "Contribute Development"
+date: 2018-04-22T15:04:32-04:00
+description: ""
+categories: []
+keywords: []
 menu:
   docs:
     parent: "contribute"
     weight: 10
 weight: 10
 sections_weight: 10
+aliases: []
+toc: false
 draft: false
-aliases: [/contribute/development/]
-toc: true
 reviewed: true
 ---
 
