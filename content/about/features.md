@@ -17,18 +17,18 @@ draft: false
 
 ## General
 
-* [Extremely fast][] Up to 3 million requests per second
-* Support or encourage [design driven][] and [test driven][] development
-* [Easy to install][] Support all platforms with JDK 8 and up installed or Docker
-* [Powerful plugins][] Allow users to choose built-in plugins or customer plugins
-* [Host your App][hostanywhere] in your data center, public cloud or lightapi.net
+* [Extremely fast][] Up to 3 million requests per second on commodity hardware
+* Support or encourage [design first][] and [test driven][] development
+* [Easy to install][] Support all platforms with JDK 8 and up installed or Docker containers
+* [Powerful plugins][] Allow users to choose built-in plugins or customized plugins
+* [Host your App][] in your data center, public cloud or lightapi.net
 
 See what's coming next in the [roadmap][].
 
-[design driven]: /design/design-driven/
+[design first]: /design/design-first/
 [Extremely fast]: https://www.techempower.com/benchmarks/previews/round15/
 [Easy to Install]: /deployment/installation/
 [hostanywhere]: /deployment/
 [roadmap]: /about/roadmap
 [Powerful plugins]: /plugins/
-[test driven]: /test/test-driven/
+[test driven]: /design/test-driven/
