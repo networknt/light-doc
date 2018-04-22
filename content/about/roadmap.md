@@ -16,11 +16,14 @@ sections_weight: 50
 draft: false
 aliases: [/meta/roadmap]
 toc: false
+reviewed: true
 ---
 
-To track each individual product's progress and road map, see our [GitHub Milestones][milestone].
+To track each product's progress and roadmap, see our [GitHub Milestones][milestone].
 
-In no particular order, here are some other features currently being worked on:
+For short term and medium term enhancements, see our [GitHub RFCs][light-rfcs]
+
+In no particular order, here are some features currently being worked on:
 
 * A distributed transaction orchestration tool [light-saga-4j][].
 * An API runtime management and marketplace [light-portal][].
@@ -28,11 +31,9 @@ In no particular order, here are some other features currently being worked on:
 
 ## Contributions Welcome
 
-Feel free to [contribute to Light's development][devcontribute], [improve Light's documentation][doccontribute], 
-, [add a new example][exacontribute] or [write a tutorial][tutcontribute]. If you have an idea 
-or found a defect, please [open an issue][issue] at corresponding repository in [networknt github organization][github].
-If you have a question, please ask in the [gitter chat rooms][gitter]. All your activities will
-help the community to grow. 
+Feel free to [contribute to Light's development][devcontribute], [improve Light's documentation][doccontribute], [add a new example][exacontribute] or [write a tutorial][tutcontribute]. If you have an idea or found a defect, please [open an issue][issue] at corresponding repository in [networknt github organization][github].
+
+If you have a question, please ask in the [gitter chat rooms][gitter] or [lightapi sub reddit][subredit]. All your activities will help the community to grow. 
 
 
 [light-saga-4j]: https://github.com/networknt/light-saga-4j
@@ -46,3 +47,5 @@ help the community to grow.
 [milestone]: /milestone/
 [github]: https://github.com/networknt
 [***your*** best ideas!]: /contribute/
+[light-rfcs]: https://github.com/networknt/light-rfcs
+[subreddit]: https://www.reddit.com/r/lightapi/

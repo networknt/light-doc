@@ -4,7 +4,11 @@ date: 2018-04-05T22:05:30-04:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "contribute"
+    weight: 10
+weight: 10
 aliases: []
 toc: false
 draft: false
