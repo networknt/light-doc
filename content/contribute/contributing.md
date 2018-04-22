@@ -4,7 +4,11 @@ date: 2017-11-22T18:50:35-05:00
 description: ""
 categories: [contribute]
 keywords: [dev,open source]
-slug: ""
+menu:
+  docs:
+    parent: "contribute"
+    weight: 1
+weight: 1
 aliases: []
 toc: false
 draft: false

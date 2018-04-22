@@ -7,8 +7,8 @@ keywords: []
 menu:
   docs:
     parent: "contribute"
-    weight: 40
-weight: 40
+    weight: 90
+weight: 90
 aliases: []
 toc: false
 draft: false

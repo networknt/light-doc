@@ -1,23 +1,23 @@
 ---
-title: Contribute to document
-linktitle: Documentation
-description: Documentation is an integral part of any open source project. The light-doc repository is as much a work in progress as the source it attempts to cover.
-date: 2017-02-01
-publishdate: 2017-02-01
-lastmod: 2017-02-01
-categories: [contribute]
-keywords: [docs,documentation,community, contribute]
+title: "Documentation"
+date: 2018-04-22T19:04:29-04:00
+description: ""
+categories: []
+keywords: []
 menu:
   docs:
     parent: "contribute"
     weight: 20
 weight: 20
-sections_weight: 20
+aliases: []
+toc: false
 draft: false
-aliases: [/contribute/docs/]
-toc: true
 reviewed: true
 ---
+
+Documentation is an integral part of any open source project. The light-doc repository is as much a work in progress as the source it attempts to cover. For most open source projects, documentation is the weaker point especially for the light platform which consists of numeric cross-cutting concerns, frameworks, infrastructure services and tools. We have put a lot of effort on the documents but there are still a lot of materials need to be written. There are a lot of senior developers who can write beautiful code but cannot document their ideas, or they need other professional writers to help to review the document. For people who are reading the document, please help us to open issues if you see a syntax error or incorrect information. Let us know how we can improve the document site. Any small improvement will eventually make the platform a better product that benefits the entire community. 
+
+If you want to contribute the document site directly, please follow the guidelines below. If you have questions, please contact us at [gitter][]and [reddit][] so that we can work together. 
 
 ### Create Your Fork
 
@@ -79,7 +79,7 @@ Here is a review of the front matter fields automatically generated for you usin
 : the version of Hugo that will ship with this new function.
 
 `relatedfuncs`
-: other [templating functions][] you feel are related to your new function to help fellow Hugo users.
+: other templating functions you feel are related to your new function to help fellow Hugo users.
 
 `{{.Content}}`
 : an extended description of the new function; examples are not only welcomed but encouraged.
@@ -326,12 +326,7 @@ Similar to [contributing to Hugo development](/contribute/development/), the Hug
 
 [ghforking]: https://help.github.com/articles/fork-a-repo/
 [development]: /contribute/development/
-
-[abe]: https://en.wikipedia.org/wiki/Kobo_Abe
-[archetypes]: /content-management/archetypes/
 [bqsyntax]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#blockquotes
-[charcount]: http://www.lettercount.com/
-[`docs/static/images/showcase/`]: https://github.com/gohugoio/hugo/tree/master/docs/static/images/showcase/
-[shortcodeparams]: content-management/shortcodes/#shortcodes-without-markdown
 [sourceforge]: http://docutils.sourceforge.net/docs/ref/rst/directives.html#admonitions
-[templating function]: /functions/
+[gitter]: https://gitter.im/networknt/light-4j
+[reddit]: https://www.reddit.com/r/lightapi/

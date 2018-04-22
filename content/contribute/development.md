@@ -16,8 +16,6 @@ draft: false
 reviewed: true
 ---
 
-### Introduction
-
 The light platform consists dozens of open-source projects and lives by the work of its [contributors][]. There are plenty of [open issues][issues] and [request for comments][rfcs], and we need your help to make Light even brighter. You do not need to be a Java guru to contribute to the projects.
 
 ### Assumptions
