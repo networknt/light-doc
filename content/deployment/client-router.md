@@ -1,5 +1,5 @@
 ---
-title: "Client module vs light-router"
+title: "Client vs light-router"
 date: 2018-02-26T20:20:02-05:00
 description: ""
 categories: []

@@ -14,10 +14,6 @@ toc: false
 draft: false
 ---
 
-There are a lot of options to deploy services built on top of light frameworks. You can
-deploy them as a jar file and run with java -jar on data center physical machines or VMs.
-You an also package services into docker images and deploy them to the cloud environment
-with Kubernetes. In addition, you can host your services in our cloud at lightapi.net.
-
+There are many options to deploy services built on top of light frameworks. You can deploy them as a jar file and run with `java -jar` on data center physical machines or VMs. You can also package services into docker images and deploy them to the cloud environment with Kubernetes. Also, you can host your services in our cloud at lightapi.net(working in progress). 
 
 
