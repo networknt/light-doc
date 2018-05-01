@@ -1,5 +1,5 @@
 ---
-title: "SPA Discovery"
+title: "SPA and Mobile Discovery"
 date: 2018-04-30T19:58:40-04:00
 description: ""
 categories: []
