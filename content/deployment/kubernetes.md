@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes"
+title: "Deploy to Kubernetes"
 date: 2018-04-30T22:02:40-04:00
 description: ""
 categories: []
