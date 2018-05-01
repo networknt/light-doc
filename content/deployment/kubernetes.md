@@ -116,7 +116,7 @@ kubectl get pods
 
 ### Memory Limit
 
-In the above deployment.yaml, we have set the memory limit for the container. To verify that, let's put some load on the server and see if the service respects the limitation. 
+In the above deployment.yaml, we have set the [memory limit][] for the container. To verify that, let's put some load on the server and see if the service respects the limitation. 
 
 To access the server, go to the consul server first to find the IP and port number for the petstore service. Verify if it works with a curl command. 
 
@@ -149,3 +149,4 @@ You can find that the container only use about 300MB memory with the limit of 51
 [light-config-test]: https://github.com/networknt/light-config-test
 [light-config-prod]: https://github.com/networknt/light-config-prod
 [petstore]: https://github.com/networknt/light-config-test/tree/master/light-example-4j/rest/swagger/petstore/kubernetes
+[memory limit]: /deployment/memory-limit/
