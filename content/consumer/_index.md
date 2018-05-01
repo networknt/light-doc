@@ -49,6 +49,7 @@ The following contains architecture, design and best practices.
   * [Discovery](/consumer/discovery/)
      + [Consul](/consumer/consul-discovery/)
      + [Zookeeper](/consumer/zookeeper-discovery/)
+  * [SPA and Mobile](/consumer/spa-mobile/)   
 - [Load Balance](/consumer/load-balance/)
   * [Round Robin](/consumer/round-robin/)
   * [Local First](/consumer/local-first/)
