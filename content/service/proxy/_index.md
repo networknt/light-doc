@@ -12,6 +12,7 @@ weight: 7	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 All the services developed on top of light*4j frameworks support [client side service discovery](http://microservices.io/patterns/client-side-discovery.html), load balance and cluster natively. So there is no need to put a reverse proxy instance in front of our services like other API frameworks that support only [server side service discovery](http://microservices.io/patterns/server-side-discovery.html).
