@@ -23,7 +23,7 @@ Everyone’s excited about microservices, but the actual implementation is spars
 While designing microservices, a big monolithic application is broken down into smaller services that can be independently developed and deployed. The final application will have more HTTP calls than a single monolithic application, how can we protect these calls between services?
 
 To protect APIs/services, the answer is OAuth 2.0, and most simple and popular solution will be simple web token as an access token. The client authenticates itself on OAuth 2.0 server and OAuth server issues a simple web token (a UUID in most of the cases), then the client sends the request to API server with access token in the Authorization header. Once API server receives the request,
-it has to send the access token to OAuth server to verify if this is valid token and if this token is allowed to access this API. As you can see, there must be a database lookup on OAuth server to do that. Distributed cache helps a lot, but there is still a network call and lookup for every single request. OAuth server eventually becomes a bottleneck and a single point of failure.
+it has to send the access token to OAuth server to verify if this is valid token and if this token is allowed to access this API. As you can see, there must be a database lookup on OAuth server to do that. Distributed cache helps a lot, but there is still a network call and lookup for every single request. OAuth server eventually becomes a bottleneck and a single point of failure. For more details on why Simple Web Token is not suitable for microservices architecture, please refer to [swt vs jwt][].
 
 Years ago, when JWT draft specification was out, I came up with the idea to do the distributed security verification with JWT to replace Simple Web Token for one of the big banks in Canada. At that time, there was nobody using JWT this way, and the bank sent the design to Paul Madson and John Bradley who are the Authors of OAuth 2.0 and JWT specifications and got their endorsements to use JWT this way.
 
@@ -133,3 +133,4 @@ Here is the [document][] that describes how the key is distributed to the servic
 [article]: /service/oauth/introduction/
 [token exchange]: https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-12
 [should not be sent to the browser]: /consumer/spa-session-jwt/
+[swt vs jwt]: /architecture/swt-vs-jwt/
