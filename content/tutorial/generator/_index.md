@@ -30,6 +30,8 @@ on the IDL (Interface Definition Language) with light-codegen.
 
 * [Generate Hybrid Server Hosts Hybrid services][]
 
+* [Generate CQRS Eventuate based Restful API with OpenAPI 3.0 Specification][]
+
 * [Generate Swagger 2.0 Mock API with Examples][]
 
 * [Generate OpenAPI 3.0 Mock API with Examples][]
@@ -39,6 +41,7 @@ on the IDL (Interface Definition Language) with light-codegen.
 [Generate GraphQL API with GraphQL IDL]: /tutorial/generator/graphql/
 [Generate Hybrid Service with Schema]: /tutorial/generator/hybridservice/
 [Generate Hybrid Server Hosts Hybrid services]: /tutorial/generator/hybridserver/
+[Generate CQRS Eventuate based Restful API with OpenAPI 3.0 Specification]: /tutorial/generator/eventuate/
 [Generate Swagger 2.0 Mock API with Examples]: /tutorial/generator/swagger-mock/
 [Generate OpenAPI 3.0 Mock API with Examples]: /tutorial/generator/openapi-mock/
 

@@ -32,7 +32,7 @@ thousands of concurrent users per instance and each microservice can be scaled i
 
 Specifications can be found at https://github.com/networknt/model-config/tree/master/rest
 
-Three databases are supported: Oracle, Mysql and Postgres out of the box and more will be
+Four databases are supported: Oracle, Mysql, Postgres and SQL Server out of the box and more will be
 supported upon customer's request.
 
 
@@ -79,6 +79,12 @@ Oracle
 
 ```
 docker-compose -f docker-compose-oracle.yml up
+```
+
+SQL Server
+
+```
+docker-compose -f docker-compose-sqlserver.yml up
 ```
 
 If you change the source code, you have to rebuild it and create docker images again. Remember to
