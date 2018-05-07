@@ -28,6 +28,7 @@ another service.
 The following contains architecture, design and best practices. 
 
 - [Client Module](/consumer/client-module/)
+  * [Which Jar Files](/consumer/jar-files/)
   * [TLS Connection](/consumer/tls-connection/)
   * [HTTP 2.0](/consumer/http2/)
   * [Security](/architecture/security/)
