@@ -27,10 +27,6 @@ Let's make the following change in `service.yml`:
 ```yaml
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
-      protocol: light
-      host: localhost
-      port: 8080
-      path: consul
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
@@ -62,10 +58,6 @@ service.yml
 # Singleton service factory configuration/IoC injection
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
-      protocol: light
-      host: localhost
-      port: 8080
-      path: consul
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
@@ -97,10 +89,6 @@ so that `API A` can discovery it from the same consul registry.
 ```yaml
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
-      protocol: light
-      host: localhost
-      port: 8080
-      path: consul
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
@@ -125,10 +113,6 @@ enableRegistry: true
 ```yaml
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
-      protocol: light
-      host: localhost
-      port: 8080
-      path: consul
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
