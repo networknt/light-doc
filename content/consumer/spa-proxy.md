@@ -25,3 +25,4 @@ proxy: {
 
 Above configuration will ensure that all request to /v1 path will be routed to https://localhost:8443 service. As the target server is listening to HTTPS, we need to set the secure to false if a self-signed certificate is used on the server. 
 
+For more info about the proxy settings, please refer to https://webpack.js.org/configuration/dev-server/
