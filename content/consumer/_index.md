@@ -43,6 +43,7 @@ The following contains architecture, design and best practices.
      + [SPA Stateless](/consumer/spa-cookie-jwt/)
      + [SPA CSRF Prevention](/consumer/spa-csrf/)
      + [SPA XSS Prevention](/consumer/spa-xss/)
+     + [SPA Proxy](/consumer/spa-proxy/)
   * [Traceability](/consumer/traceability/)
      + [Traceability Id](/consumer/traceability-id/)
      + [Correlation Id](/consumer/correlation-id/)
