@@ -1,9 +1,19 @@
 ---
-date: 2017-10-17T18:12:46-04:00
 title: Static Configuration
+linktitle: Static Configuration
+date: 2017-10-17T18:12:46-04:00
+lastmod: 2018-05-15
+description: "Statically connecting microservices in a realistic call hierarchy where each
+service is hard-bounded to a known ip and host."
+weight: 20
+sections_weight: 20
+draft: false
+toc: true
 ---
 
-Now we have four standalone services and the next step is to connect them together.
+## Introduction
+
+Now that we have four standalone services, the next step is to connect them together.
 
 Here is the call tree for these services:
 
@@ -28,7 +38,9 @@ using Intellij IDEA Community Edition, you need to open the discovery folder in
 folder and select Add as Maven project.
 
 As indicated from the title, we're going to hard code urls in API to API calls
-within configuration files (ie. services will be deployed on the known hosts with known ports) 
+within configuration files (ie. services will be deployed on the known hosts with known ports)
+
+## Configuring the APIs 
 
 ### API A
 
@@ -248,18 +260,18 @@ public class DataGetHandler implements HttpHandler {
 ```
 
 
-### Start Servers
+## Starting the Servers
 
 Now let's start all four servers from four terminals.
 
-API A
+**API A**
 
 ```
 cd ~/networknt/discovery/api_a/static
 mvn clean install exec:exec
 ```
 
-API B
+**API B**
 
 ```
 cd ~/networknt/discovery/api_b/static
@@ -267,7 +279,7 @@ mvn clean install exec:exec
 
 ```
 
-API C
+**API C**
 
 ```
 cd ~/networknt/discovery/api_c/static
@@ -275,7 +287,7 @@ mvn clean install exec:exec
 
 ```
 
-API D
+**API D**
 
 ```
 cd ~/networknt/discovery/api_d/static
@@ -283,7 +295,7 @@ mvn clean install exec:exec
 
 ```
 
-### Test Servers
+## Testing the Servers
 
 Let's access API A and see if we can get messages from all four servers.
 

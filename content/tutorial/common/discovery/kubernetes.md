@@ -2,6 +2,10 @@
 date: 2017-10-19T19:57:17-04:00
 title: Kubernetes
 reviewed: true
+weight: 90
+sections_weight: 90
+draft: false
+toc: true
 ---
 
 In the previous step, we have explored docker compose with multiple services and it works very well on user's laptop or desktop. In this section, we are going to explore how to deploy these services to a Kubernetes cluster with multiple instances of each and see how they can discover each other. 

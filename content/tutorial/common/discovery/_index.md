@@ -1,9 +1,12 @@
 ---
 title: "Registry and Discovery"
 date: 2017-11-06T17:45:44-05:00
-categories: []
-keywords: [tutorial]
-aliases: []
+lastmod: 2018-05-15
+menu:
+  docs:
+    parent: "tutorial"
+    weight: 10
+keywords: []
 toc: false
 draft: false
 ---
@@ -17,21 +20,4 @@ containerized environments where the number of instances of a service and their 
 
 This tutorial shows how to use the service registry and discovery feature of light platform.
 
-* [Introduction and code generation](generated)
-
-* [Static Configuration](static)
-
-* [Dynamic service discovery with direct registry](dynamic)
-
-* [Multiple Instances of the same service](multiple)
-
-* [Consul service registry and discovery](consul)
-
-* [Multiple instances with tags per environment](tag)
-
-* [Access consul with acl_token for security](token)
-
-* [Service discovery for Docker container](docker)
-
-* [Service discovery for Kubernetes](kubernetes)
 

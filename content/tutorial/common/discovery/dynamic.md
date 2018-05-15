@@ -1,9 +1,17 @@
 ---
+title: Dynamic Service Discovery with Direct Registry
+linktitle: Dynamic Service Discovery with Direct Registry
 date: 2017-10-17T18:46:16-04:00
-title: Dynamic service discovery with direct registry
+lastmod: 2018-05-15
+description: "Service discovery through endpoints defined in configuration 
+allows a seamless move to external registries without code changes."
+weight: 30
+sections_weight: 30
+draft: false
+toc: true
 ---
 
-Previous step: [Static][]
+## Introduction
 
 In dynamic discovery, we are going to use cluster components with direct registry
 so that we don't need to start external consul or zookeeper instances. We still go 
@@ -26,6 +34,8 @@ cp -r ~/networknt/discovery/api_d/static/ ~/networknt/discovery/api_d/dynamic
 
 Lets begin by updating our `API A` service to dynamically resolve the host and
 ports of `API B` and `API C` based on given service ids.
+
+## Configuring the APIs
 
 ### API A
 
@@ -224,7 +234,7 @@ API C is not calling any other APIs, so there is no change to its handler.
 
 API D is not calling any other APIs, so there is no change to its handler.
 
-### Start Servers
+## Starting the Servers
 
 Now let's start all four servers from four terminals.
 
@@ -259,7 +269,7 @@ mvn clean install exec:exec
 
 ```
 
-### Test Servers
+## Testing the Servers
 
 Let's access API A and see if we can get messages from all four servers.
 
@@ -275,8 +285,6 @@ The result is
 
 In the next step we are going to start multiple instances of `API D` and see 
 how direct registry will handle the situation.
-
-Next Step: [Multiple]({{< relref "/tutorial/common/discovery/multiple.md" >}})
 
 [Static]: /tutorial/common/discovery/static/
 [consul]: /tutorial/common/discovery/consul/

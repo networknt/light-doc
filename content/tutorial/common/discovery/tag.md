@@ -1,9 +1,17 @@
 ---
+title: Multiple Instances with Environment Segregation
+linktitle: Multiple Instances with Environment Segregation
 date: 2017-10-17T21:03:06-04:00
-title: Multiple instances with tags per environment
+lastmod: 2018-05-15
+description: "Using tags to denote and differentiate services deployed in the
+same cluster into logical environments."
+weight: 60
+sections_weight: 60
+draft: false
+toc: true
 ---
 
-Previous Step: [Consul]({{< relref "/tutorial/common/discovery/consul.md" >}})
+## Introduction
 
 In the previous step, we've setup the services to register and discover
 downstream services through Consul. If there are multiple instances for the same
@@ -14,6 +22,9 @@ to be addressed and one of the use cases is [environment segregation][]
 
 In this step, we are going to use an environment tag to separate multiple instances
 during testing so that we can have segregated environments using the same Consul server.
+
+
+## Configuring the APIs
 
 First, let's copy our current state from last step into the `tag` directory.
 
@@ -57,7 +68,7 @@ Let's update `API D` `server.yml` with environment tag.
 environment: test1
 ```
 
-### Start Consul
+## Starting Consul
 
 Here we are starting consul server in docker to serve as a centralized registry. To make it
 simpler, the ACL in consul is disable by setting acl_default_policy=allow. If you follow the
@@ -67,7 +78,7 @@ the previous step, then your consul server should be running and you don't need 
 docker run -d -p 8400:8400 -p 8500:8500/tcp -p 8600:53/udp -e 'CONSUL_LOCAL_CONFIG={"acl_datacenter":"dc1","acl_default_policy":"allow","acl_down_policy":"extend-cache","acl_master_token":"the_one_ring","bootstrap_expect":1,"datacenter":"dc1","data_dir":"/usr/local/bin/consul.d/data","server":true}' consul agent -server -ui -bind=127.0.0.1 -client=0.0.0.0
 ```
 
-### Start four servers
+## Starting the Servers
 
 Now let's start four terminals to start servers.  
 
@@ -94,7 +105,6 @@ mvn clean install exec:exec
 
 **API D**
 
-
 And start the first instance that listen to `7445` as default
 
 ```bash
@@ -111,7 +121,7 @@ http://localhost:8500/ui
 If pay attention you can find tag `test1` for all services registered on Consul.
 
 
-### Test four servers
+## Testing the Servers
 
 ```bash
 curl -k https://localhost:7441/v1/data
@@ -123,7 +133,7 @@ And the result will be
 ["API D: Message 1 from port 7444","API D: Message 2 from port 7444","API C: Message 1","API C: Message 2"]
 ```
  
-### Start another API D
+## Adding another API
  
 Now let's start the second instance of `API D`. Before starting the serer, let's update
 server.yml with port `7445` and with environment tag `test2`
@@ -154,7 +164,7 @@ Can you guess what will be returned if you don't have tag query parameter? The
 answer is all available instances will be returned. 
 
 
-### Test Servers
+## Testing the added Server
 
 Let's issue the same command again. 
 

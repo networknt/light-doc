@@ -1,9 +1,17 @@
 ---
+title: Introduction and Code Generation
+linktitle: Introduction and Code Generation
+description: "The starting point of the discovery tutorials will walk you through
+code generation for the services that will be used throughout."
 date: 2017-10-17T17:58:29-04:00
-title: Introduction and code generation
+lastmod: 2018-05-15
+weight: 10
+sections_weight: 10
+draft: false
+toc: true
 ---
 
-### Introduction
+## Introduction
 
 This is a tutorial to show you how to use service registry and discovery
 for microservices. The example services are implemented in a RESTful style but
@@ -13,19 +21,18 @@ simplicity. There are some details that might not be shown in this tutorial,
 for example, walking through light-codegen config files etc.
 It is recommended to go through [ms-chain][] before this tutorial. 
 
-### Preparation
+## Preparation
 
 In order to follow the steps below, please make sure you have your 
-development environment setup [develop-build][].
+[development environment][] setup.
 
 * Create a working directory under your user directory called networknt.
 
 ```bash
-cd ~
-mkdir networknt
+mkdir ~/networknt
 ```
 
-### Clone the specifications
+## Clone the specifications
 
 In order to generate the initial projects, we use light-codegen to scaffold
 these services from configuration outlining the API specs.
@@ -35,7 +42,7 @@ cd ~/networknt
 git clone https://github.com/networknt/model-config.git
 ```
 
-### Code generation
+## Code generation
 
 In order to generate the four projects, let's clone and build the light-codegen 
 into the workspace. We are going to use command line utility instead of Docker container.
@@ -60,7 +67,7 @@ java -jar codegen-cli/target/codegen-cli.jar -f swagger -o ../discovery/api_d/ge
 
 We have four projects generated in `~/networknt` within the discovery folder. 
 
-### Test generated code
+## Test generated code
 
 Now you can test the generated projects to make sure they are working with mock
 data. We will pick up one project to test it but you can test them all.
@@ -88,4 +95,4 @@ Next Step: [Static]({{< relref "/tutorial/common/discovery/static.md" >}})
 
 [ms-chain]: /tutorial/rest/swagger/ms-chain/
 [static]: /tutorial/common/discovery/static/
-[develop-build]: /development/develop-build/
+[development environment]: /development/develop-build/

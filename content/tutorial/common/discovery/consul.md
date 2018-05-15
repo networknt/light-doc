@@ -1,9 +1,17 @@
 ---
+title: Consul Service Registry and Discovery
+linktitle: Consul Service Registry and Discovery 
 date: 2017-10-17T19:41:50-04:00
-title: Consul service registry and discovery
+lastmod: 2018-05-15
+description: "Using Consul as a resilient and fault tolerant registry 
+for service discovery by id."
+weight: 50
+sections_weight: 50
+draft: false
+toc: true
 ---
 
-Previous Step: [Multiple]({{< relref "/tutorial/common/discovery/multiple.md" >}})
+## Introduction
 
 In this step, we are going to use Consul for registry to enable cluster scaling and load balancing.
 
@@ -15,6 +23,8 @@ cp -r ~/networknt/discovery/api_b/multiple ~/networknt/discovery/api_b/consul
 cp -r ~/networknt/discovery/api_c/multiple ~/networknt/discovery/api_c/consul
 cp -r ~/networknt/discovery/api_d/multiple ~/networknt/discovery/api_d/consul
 ```
+
+## Configuring the APIs
 
 
 ### API A
@@ -130,7 +140,7 @@ enableRegistry: true
 enableRegistry: true
 ```
 
-### Start Consul
+## Start Consul
 
 Here we are starting consul server in docker to serve as a centralized registry. To make it
 simpler, the ACL in consul is disable by setting acl_default_policy=allow.
@@ -139,7 +149,7 @@ simpler, the ACL in consul is disable by setting acl_default_policy=allow.
 docker run -d -p 8400:8400 -p 8500:8500/tcp -p 8600:53/udp -e 'CONSUL_LOCAL_CONFIG={"acl_datacenter":"dc1","acl_default_policy":"allow","acl_down_policy":"extend-cache","acl_master_token":"the_one_ring","bootstrap_expect":1,"datacenter":"dc1","data_dir":"/usr/local/bin/consul.d/data","server":true}' consul agent -server -ui -bind=127.0.0.1 -client=0.0.0.0
 ```
 
-### Start four servers
+## Starting the servers
 
 Now let's start four terminals to start servers.  
 
@@ -179,7 +189,7 @@ Now you can see the registered service from Consul UI.
 http://localhost:8500/ui
 ```
 
-### Test four servers
+## Testing the servers
 
 ```bash
 curl -k https://localhost:7441/v1/data
@@ -191,7 +201,7 @@ And the result will be
 ["API D: Message 1 from port 7445","API D: Message 2 from port 7445","API C: Message 1","API C: Message 2"]
 ```
  
-### Start another API D
+## Adding another API D
  
 Now let's start the second instance of API D. Before starting the serer, let's update
 `server.yml` with port 7444.
@@ -236,8 +246,6 @@ In this step we have used Consul for API registration. When we call `API A `, al
 from Consul to fulfill the request.
 In the next step, we are going to start multiple instances that represent different environments
 differentiated by tag.
-
-Next Step: [Tags][]
 
 [multiple]: /tutorial/common/discovery/multiple/
 [Tags]: /tutorial/common/discovery/tag/

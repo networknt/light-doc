@@ -1,11 +1,19 @@
 ---
-date: 2017-10-17T19:08:51-04:00
 title: Multiple Instances of the same Service
+linktitle: Multiple Instances of the same Service
+date: 2017-10-17T19:08:51-04:00
+lastmod: 2018-05-15
+description: "Client side load balancing through direct service discovery 
+using configuration."
+weight: 40
+sections_weight: 40
+draft: false
+toc: true
 ---
 
-Previous step: [Dynamic][]
+## Introduction
 
-In this step we're going to start two API D instances that listen to 7444 and 7445.
+In this step we're going to start two `API D` instances that will listen to `7444` and `7445`.
 
 Let's copy our current state from last step into the `multiple` directory.
 
@@ -16,6 +24,7 @@ cp -r ~/networknt/discovery/api_c/dynamic/ ~/networknt/discovery/api_c/multiple
 cp -r ~/networknt/discovery/api_d/dynamic/ ~/networknt/discovery/api_d/multiple
 ```
 
+## Configuring the Servers
  
 ### API B 
 
@@ -78,7 +87,8 @@ public class DataGetHandler implements HttpHandler {
 
 ```
 
-### Start Servers
+## Starting the Servers
+
 Now let's start all five servers from five terminals. API D has two instances.
 
 **API A**
@@ -130,7 +140,7 @@ mvn clean install exec:exec
 
 ```
 
-### Test Servers
+## Testing the Servers
 
 ```
 curl -k https://localhost:7441/v1/data
@@ -147,7 +157,5 @@ And the result can be from port 7444 or 7445 as Round Robin load balancer will p
 ```
 
 The next step, we are going to use consul to do the service registry and discovery.
-
-Next Step: [Consul]({{< relref "/tutorial/common/discovery/consul.md" >}})
 
 [Dynamic]: /tutorial/common/discovery/dynamic/

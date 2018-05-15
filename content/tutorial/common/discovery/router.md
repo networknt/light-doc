@@ -8,6 +8,8 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+weight: 100
+sections_weight: 100
 ---
 
 [Light-router][] is a service that provides consumers another option to do service discovery
