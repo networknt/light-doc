@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When developing React single page application with a client-side framework like React, it is wise to take advantage of WebPack hot loader for higher productivity. This requires that we start a Nodejs server to serve the single page application to the browser. When the single page application is calling some of the APIs, the API servers might be on another host or the same host but with a different port number. To make sure that Javascript application only needs to specify the relative path without worry about the host and port, we need to setup a proxy in the generated package.json file. 
