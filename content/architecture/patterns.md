@@ -24,7 +24,7 @@ When adopting this approach, we want to ensure that the changes to the existing 
 
 Most traditional multi-tier web applications are using sessions for authentication and authorization; however, when consuming microservices, it needs to provide JWT in the header to authenticate itself, and for some services, it requires additional user info in JWT for fine-grained authorization. What is the best approach to make a minimum change in the monolith and convert the user session to JWT to consume microservices? Switch from session to OAuth 2.0 and JWT is not an option as the changes are too significant for entire monolithic. So the next logical choice is to convert the user session to JWT token as the session instance has all the information about the user.  To do that, the OAuth 2.0 provider needs to support this with a customized grant type.
 
-In [light-oauth2][] we have added a new client type called trusted along with public and confidential client types defined in the OAuth 2.0 specification. This client type supports a new grant type called [client_authenticated_user][]. 
+In [light-oauth2][] we have added a new client type called trusted along with public and confidential client types defined in the OAuth 2.0 specification. This client type supports a new grant type called [client_authenticated_user][]. There is also a [tutorial] to show you how to use this grant type. 
 
 The existing legacy application still uses session which contains user info after successful authentication. Before calling the APIs, it will call the light-oauth2 token service to exchange a JWT token and refresh token with the user info. The JWT token will be expired, and it can always renew a new JWT token with the refresh token from light-oauth2 token service. In this design, we are making a minimum change to the existing application to meet the security requirement in consuming the APIs. 
 
@@ -35,4 +35,5 @@ From the end-user perspective, all the changes are transparent. The login sessio
 
 
 [light-oauth2]: /service/oauth/
-[client_authenticated_user]: /tutorial/oauth/custom/
+[client_authenticated_user]: /service/oauth/service/custom/
+[tutorial]: /tutorial/oauth/custom/
