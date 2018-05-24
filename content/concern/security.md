@@ -14,41 +14,30 @@ toc: false
 draft: false
 ---
 
-API security is very important and today most APIs don't have security built-in at all but
-relying on third party API gateway to handle the security at network level. This assumes
-that within the organization, it is safe or some sort of firewall setup to ensure that
-only Gateway host can access the service host. 
+API security is paramount, and today most APIs don't have security built-in at all but relying on third-party API gateway to handle the security at the network level. It assumes that within the organization, it is safe or some firewall setup to ensure that only Gateway host can access the service host. 
 
-Once we move to the cloud, everything is dynamic and firewall won't work anymore as services
-can be down on one VM but started in another VM immediately with container orchestration tools.
+Once we move to the cloud, everything is dynamic, and [firewall won't work][] anymore as services can be down on one VM but started in another VM immediately by container orchestration tools.
 
-The traditional gateway also add another layer of network calls and if there are so many 
-service to service calls, the added up latency is unacceptable. 
+The traditional gateway also adds another layer of network calls.  If so many service-to-service calls, the add-up latency is unacceptable. 
 
-Here is an [gateway article][] in the architecture section that talks about the drawbacks of the API 
-gateway and why it is not suitable for microservices architecture. 
+Here is a [gateway article][] in the architecture section that talks about the drawbacks of the API  gateway and why it is not suitable for microservices architecture. 
 
-In order to make sure that security works for microservies, we have extended the OAuth 2.0
-specification and come up with a brand new approach for authorization with JWT. Here is an
-[security article][] talks about the API security in light*4j frameworks. 
+To make sure that security works for microservices, we have extended the OAuth 2.0 specification and come up with a brand new approach for authorization with JWT. Here is a [security article][] talks about the API security in light*4j frameworks. 
 
-Basically, we have [light-oauth2][] OAuth 2.0 provider and built-in JWT security verification 
-in the frameworks. The security policy is managed by the OAuth2 provider with service registration 
-and client registration; however, the policy enforcement is done distributed at each service level. 
-With PIK signed JWT token issued from the light-oauth2, all services can verify the token with the 
-JWT signature public key certificate. 
+Basically, we have [light-oauth2][] OAuth 2.0 provider and built-in JWT security verification in the frameworks. The security policy is managed by the OAuth2 provider with service registration and client registration; however, the policy enforcement is done distributed at each service level. 
+With PIK signed JWT token issued from the light-oauth2, all services can verify the token with the JWT signature public key certificate. 
 
 The following is a list of key components in light-4j security.
 
+
 ## light-oauth2 server
 
-Light-4j and related frameworks support OAuth 2.0 and related specifications to authorize service 
-access. By default, the framework contains two pairs of public key certificates issued by our own 
-testing oauth2 server which can be installed from Docker. For more info, please refer to 
+Light-4j and related frameworks support OAuth 2.0 and related specifications to authorize service access. By default, the framework contains two pairs of public key certificates issued by our testing oauth2 server which can be installed from Docker. For more info, please refer to 
 https://github.com/networknt/light-oauth2
 
-Light-4j also provides a client module that can communicate with light-oauth2 in the background to
-get access token and renew the access token before it is expired. 
+Light-4j also provides a client module that can communicate with light-oauth2 in the background to get access token and renew the access token before it is expired. 
+
+The light-4j platform also supports other OAuth 2.0 providers with some customizations for microservices architecture. 
 
 ## alg
 
@@ -231,3 +220,4 @@ will be packaged into production configuration.
 [security article]: /architecture/security/
 [light-oauth2]: /service/oauth/
 [light-oauth2 key service]: /service/oauth/service/key/
+[firewall won't work]: /architecture/firewall/
