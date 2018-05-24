@@ -22,7 +22,8 @@ This document only describes the features and processes of each service. Please 
 to [tutorial][] on how to access these services.
  
 
-* [Authorization Code][] - Login to OAuth2 and get authorization code
+* [Authorization Code][] - Authenticate to OAuth2 and get authorization code
+* [SPNEGO/Kerberos][] - Authenticate to OAuth2 with SPNEGO/Kerberos
 * [Token Endpoint][] - Token endpoint of OAuth2 provider
 * [Service Registration][] - Service registration endpoints
 * [Client Registration][] - Client registration endpoints
@@ -45,3 +46,4 @@ to [tutorial][] on how to access these services.
 [User Management]: /service/oauth/service/user/
 [Key Distribution]: /service/oauth/service/key/
 [Refresh Token]: /service/oauth/service/fresh-token/
+[SPNEGO/Kerberos]: /service/oauth/service/spnego/
