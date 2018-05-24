@@ -41,11 +41,11 @@ In all OAuth 2.0 grant types, authorization code grant type is the safest; howev
 
 When using the light platform, there are three types of BFFs. 
 
-* Existing web server
-* An aggregator built on the light-4j framework
-* light-router
+* Existing legacy web server
+* An aggregator that is built on the light-4j framework
+* light-router which is a part of the light platform
 
-The first type has been discussed in the above section for the legacy web server. The rest of two types are built on top of the light platform which can leverage light-oauth2 authorization code flow and light-spa-4j [stateless-auth][] handler.  The stateless-auth middleware handler can be used in any API built with the light-4j frameworks. It handles the authentication with SPNEGO/Kerberos and downgrades to basic authentication. It also provides XSS and CSRF protections with OAuth 2.0 access token auto renewal with the refresh token. 
+The first type has been discussed in the above section for the legacy web server. The rest of two types are built on top of the light platform which can leverage light-oauth2 authorization code flow and light-spa-4j [Stateless Auth][] handler. The stateless-auth middleware handler can be used in any API built with the light-4j frameworks. It handles the authentication with SPNEGO/Kerberos and downgrades to basic authentication. It also provides XSS and CSRF protections with OAuth 2.0 access token auto-renewal with the refresh token. 
 
 Please refer to [SPNEGO/Kerberos authentication][] in light-oauth2 code service and [Stateless Auth][] middleware handler for details. 
 
@@ -54,5 +54,5 @@ Please refer to [SPNEGO/Kerberos authentication][] in light-oauth2 code service 
 [client_authenticated_user]: /service/oauth/service/custom/
 [tutorial]: /tutorial/oauth/custom/
 [Stateless Auth]: /style/light-spa-4j/stateless-auth/
-[SPNEGO/Kerberos authentication]: /service/oauth/service/code/
+[SPNEGO/Kerberos authentication]: /service/oauth/service/spnego/
 
