@@ -36,7 +36,7 @@ to [tutorial][] on how to access these services.
 
 [OpenID Connect]: /service/oauth/serivce/openid/
 [PKCE]: /service/oauth/service/pkce/
-[Custom grant type]: /service/oauth/serivce/custom/
+[Custom grant type]: /service/oauth/service/custom/
 [tutorial]: /tutorial/oauth/
 [Authorization Code]: /service/oauth/service/code/
 [Token Endpoint]: /service/oauth/service/token/
