@@ -12,6 +12,10 @@ weight: 09
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When building APIs that are consumed by Single Page Applications running on browsers, the security control is different from service to service calls. This repository contains all the middleware handlers designed for SPA only. 
+
+* [Stateless Auth](/style/light-spa-4j/stateless-auth/)
+

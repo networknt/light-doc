@@ -12,6 +12,7 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 While working with our customers, we have extracted the following patterns from use cases we encountered. The list is not exhausted as this is a live document. 
@@ -32,8 +33,26 @@ From the end-user perspective, all the changes are transparent. The login sessio
 
 ### Single Page App Consuming APIs
 
+These days, more and more web applications are built with Javascript frameworks like React, Angular or Vue. Naturally, these browser applications will consume backend services which implement business logic. To protect the services, some authentication and authorization mechanisms must be applied. 
+
+Most online tutorials are written by the front-end developers and OAuth 2.0 implicit grant type is used as the browser cannot keep the client_secret. This design is OK for online forums or blogs, but when building financial applications, implicit grant type cannot be trusted. As we are aiming for enterprise customers, a safer approach must be adopted in the design.
+
+In all OAuth 2.0 grant types, authorization code grant type is the safest; however, it requires that you have a server that is responsible for handling the authorization code and get access token. For most financial organizations, it is not allowed to expose internal services to the SPAs directly as the access is coming from the Internet. This requires a static IP address BFF (backend for frontend)  service to serve the single page application and static content, manage security and perform service discovery to access internal services. In another word, it is acting as an API gateway but fully distributed as every single page application has its own API gateway. 
+
+When using the light platform, there are three types of BFFs. 
+
+* Existing web server
+* An aggregator built on the light-4j framework
+* light-router
+
+The first type has been discussed in the above section for the legacy web server. The rest of two types are built on top of the light platform which can leverage light-oauth2 authorization code flow and light-spa-4j [stateless-auth][] handler.  The stateless-auth middleware handler can be used in any API built with the light-4j frameworks. It handles the authentication with SPNEGO/Kerberos and downgrades to basic authentication. It also provides XSS and CSRF protections with OAuth 2.0 access token auto renewal with the refresh token. 
+
+Please refer to [SPNEGO/Kerberos authentication][] in light-oauth2 code service and [Stateless Auth][] middleware handler for details. 
 
 
 [light-oauth2]: /service/oauth/
 [client_authenticated_user]: /service/oauth/service/custom/
 [tutorial]: /tutorial/oauth/custom/
+[Stateless Auth]: /style/light-spa-4j/stateless-auth/
+[SPNEGO/Kerberos authentication]: /service/oauth/service/code/
+
