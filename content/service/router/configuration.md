@@ -20,7 +20,7 @@ to certain configurations to deploy the light-router server based on the require
 Here is an example of router.yml
 
 ```yaml
-# Client Router Configuration
+# Light Router Configuration
 # As this router is built to support discovery and security for light-4j services,
 # the outbound connection is always HTTP 2.0 with TLS enabled.
 
@@ -33,6 +33,14 @@ httpsEnabled: false
 # Max request time in milliseconds before timeout to the server.
 maxRequestTime: 1000
 
+# Rewrite Host Header with the target host and port and write X_FORWARDED_HOST with original host
+rewriteHostHeader: true
+
+# Reuse XForwarded for the target XForwarded header
+reuseXForwarded: false
+
+# Max Connection Retries
+maxConnectionRetries: 3
 ```
 
 ### Http 2.0 Connection from client
@@ -303,12 +311,60 @@ singletons:
 
 ## token.yml
 
-This the config file for TokenHandler which is a middleware handler for getting JWT token 
+This is the config file for TokenHandler which is a middleware handler for getting JWT token 
 from OAuth 2.0 provider. Here is an example. 
 
 ```yaml
 enabled: true
 ```
+
+## pathService.yml
+
+This is the config file for [PathServiceHandler][] which is located in the request chain to set service_id in the request header based on the endpoint identified by the incoming request. Once this handler is used, there is no need for the original client to pass the service_id header anymore. 
+
+```yaml
+# indicate if PathServiceHandler is enabled or not
+enabled: true
+# mapping from request endpoints to serviceIds
+mapping:
+  /v1/address/{id}@get: party.address-1.0.0
+  /v2/address@get: party.address-2.0.0
+  /v1/contact@post: party.contact-1.0.0
+
+```
+
+## header.yml
+
+The [RouterProxyClient][] requires that both service_id and env_tag must be in the header of the incoming request to do the service discovery. The PathServiceHandler can be used to set the service_id based on the endpoint identified. If you want to set the default env_tag for the environment, you can use the generic HeaderHandler to do so. Here is an example of header.yml config file. 
+
+```yaml
+# Enable header handler or not, default to false
+enabled: true
+# Request header manipulation
+request:
+  # Remove all the headers listed here
+  # remove:
+  # - header1
+  # - header2
+  # Add or update the header with key/value pairs
+  # Although HTTP header supports multiple values per key, it is not supported here.
+  update:
+    env_tag: dev
+
+# Response header manipulation
+# response:
+  # Remove all the headers listed here
+  # remove:
+  # - header1
+  # - header2
+  # Add or update the header with key/value pairs
+  # Although HTTP header supports multiple values per key, it is not supported here.
+  # update:
+  #   key1: value1
+  #   key2: value2
+
+```
+
 
 ## Other default handlers
 
@@ -325,3 +381,5 @@ you shouldn't need to touch these config files unless you know what you are doin
 [security]: /concern/security/
 [server]: /concern/server/
 [secret]: /tutorial/security/encrypt-decrypt/
+[RouterProxyClient]: /service/router/proxy-client/
+[PathServiceHandler]: /service/router/path-service/
