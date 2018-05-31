@@ -31,17 +31,30 @@ Years ago, when JWT draft specification was out, I came up with the idea to do t
 
 Different organizations have different security requirement. When designing the security architecture of the light platform, we have to make sure that it is suitable for all types of organizations. In most of the cases, security is a tradeoff between performance and risk. If you build a blog application, you want it to be as fast as possible with adequate security. If you are building a banking application, you want it to be as secure as possible. So we cannot have one security design for all customers. We need to have multi-tier of security ranged from low, medium and high. In the next section, we list all the use cases in the consideration. 
 
+Beside above requirements, we need to ensure that interactions to the OAuth 2.0 provide is miniume so that we can save network hops. 
+
+Another requirement is to follow OAuth 2.0 flow as much as possible. Only extend it if absolute possible. 
+
 ## Use Cases
 
 #### Traditional Web Service
 
+Traditional Web Service is flattened and typically only used within the internal network. If it is exposed to the internet, an API gateway is used for security. As this is the use case addressed in the OAuth 2.0 specification, authorization code or client credentials flow are used with only one access token in the Authorization header. 
+
 #### Microservice to Microservice
+
+When a original client calling the first microservice, it only pass one token in the Authorization header. That token can be authorization code token or client credientials token. When the first microservice calls another one, the original token is still passed in Authorization header to the next service; however, the orginal token won't have the right scope 
 
 #### Standalone App to Microservices
 
+Standalone application like desktop application or batch job might not have a specific user info but it need to access API or services to fulfill its task. In this case, the client credentials grant type will be followed. 
+
 #### Single Page App to Microservices
 
+
+
 #### Native Mobile App to Microservices
+
 
 
 ## Design Principal
