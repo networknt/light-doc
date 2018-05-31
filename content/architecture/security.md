@@ -27,6 +27,27 @@ it has to send the access token to OAuth server to verify if this is valid token
 
 Years ago, when JWT draft specification was out, I came up with the idea to do the distributed security verification with JWT to replace Simple Web Token for one of the big banks in Canada. At that time, there was nobody using JWT this way, and the bank sent the design to Paul Madson and John Bradley who are the Authors of OAuth 2.0 and JWT specifications and got their endorsements to use JWT this way.
 
+## Requirement
+
+Different organizations have different security requirement. When designing the security architecture of the light platform, we have to make sure that it is suitable for all types of organizations. In most of the cases, security is a tradeoff between performance and risk. If you build a blog application, you want it to be as fast as possible with adequate security. If you are building a banking application, you want it to be as secure as possible. So we cannot have one security design for all customers. We need to have multi-tier of security ranged from low, medium and high. In the next section, we list all the use cases in the consideration. 
+
+## Use Cases
+
+#### Traditional Web Service
+
+#### Microservice to Microservice
+
+#### Standalone App to Microservices
+
+#### Single Page App to Microservices
+
+#### Native Mobile App to Microservices
+
+
+## Design Principal
+
+OAuth 2.0 is the de facto standard for API security, and we are following it as close as possible. However, OAuth 2.0 was written for web services, not Microservices and there is no coverage for service to service invocation. The solution is to add more functionalities when OAuth 2.0 is not enough. 
+
 ## Distributed JWT Verification
 
 Here is the diagram of distributed JWT verification for microservices.
