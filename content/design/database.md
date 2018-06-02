@@ -60,4 +60,3 @@ For metrics information, we need a time-serial database. Currently, we are suppo
 ### Big Data
 
 Either Cassandra and HBase can be used. 
-
