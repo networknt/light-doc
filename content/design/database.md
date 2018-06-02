@@ -17,7 +17,7 @@ The following list of points that need to be considered.
 
 ### SQL Database
 
-When an organization moves to microservices architecture from existing monolithic application built with SQL database, the existing database running in a data center may be used again with some process updates. For a mission-critical application, it is still recommended to use a commercial database like Oracle or MS SQLServer. The real problems with these commercial databases are the associated cost(Licenses, Hardware, Maintenance, etc.) and provisioning process.
+When an organization moves to microservices architecture from existing monolithic application built with SQL database, the existing database running in a data center may be used again with some process updates. For a mission-critical application, it is still recommended to use a commercial database like Oracle or MS SQLServer. The real problems with these commercial databases are the associated cost(Licenses, Hardware, Maintenance, etc.) and provisioning process. Oracle is industry's single largest database vendor - which was great during the days before cloud and open source. But now [Oracle is in trouble][]. 
 
 When you start a microservice that needs to be done within 2 weeks, you cannot wait for an Oracle database instance to be created within 3 months. When moving to the cloud, open source SQL databases are more flexible as vendors have fully automated everything for the popular ones. Most cloud providers have multiple database offerings and users can create their instance from the GUI console on their own. This is called database as a service. 
 
@@ -60,3 +60,8 @@ For metrics information, we need a time-serial database. Currently, we are suppo
 ### Big Data
 
 Either Cassandra and HBase can be used. 
+
+
+[Oracle is in trouble]: https://www.theregister.co.uk/2018/05/31/rise_of_the_open_source_data_strategies/
+
+
