@@ -12,48 +12,42 @@ weight: 100	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ### Why do we re-invent the wheel 
 
-While building a light-weight microservices platform, we need an IoC service
-to bind implementations to interfaces. Given light-4j has server startup and
-shutdown hooks, normally we only need to inject during the server startup with
-constructor injection only. 
+While building a light-weight microservices platform, we need an IoC service to bind implementations to interfaces. Given light-4j has server startup and shutdown hooks, we usually only need to inject during the server startup with constructor injection only. 
 
-We have evaluate several IoC containers and found them to be too heavy for my
-use cases. Also most of them are still using XML as configuration or annotations
-which eliminate the benefit of configurable IoC.
+We have evaluated several IoC containers and found them to be too heavy for my use cases. Also, most of them are still using XML as configuration or annotations which eliminate the benefit of configurable IoC.
+
+There are three different injection patterns: 
+
+* Field injection
+* Setter injection
+* Constructor injection
+
+In my opinion, both Field and Setter injections are bad, and the only way injection should be used is the instructor injection. Numeric articles are talking about the pros and cons of each pattern. 
+
+https://kinbiko.com/java/dependency-injection-patterns/
+https://advancedweb.hu/2018/03/06/dependency-injection-boundaries/
+
 
 ### Features of Singleton Service Factory
 
-Given above reasons, We have built our own IoC service module which is a light-weight 
-and fast dependency injection framework without any third party dependencies. It 
-only support constructor inject and the injection is done during server startup. All 
-the object is saved into a map and the key is the interface class name. This can 
-guarantee that only one instance of implementation is available during runtime. 
+Given above reasons, We have built our own IoC service module which is a light-weight and fast dependency injection framework without any third party dependencies. It only supports constructor inject, and the injection is done during server startup. All the objects are saved into a map, and the key is the interface class name. It can guarantee that only one instance of implementation is available during runtime. 
 
-Light 4J framework encourage developers to build microservices with Functional
-Programming Style. One of the key principle is immutability so that the code can
-be optimized to take advantage of multi-core CPUs. All singleton classes should
-be designed as immutable and the initialized object will be cached in the service
-map ready to be looked up. 
+The Light Platform encourages developers to build microservices with Functional Programming Style. One of the fundamental principles is immutability so that the code can be optimized to take advantage of multi-core CPUs. All singleton classes should be designed as immutable and the initialized object will be cached in the service map ready to be looked up. 
 
-Unlike other IoC container, our service module only deals with singleton during
-server startup with constructor injection. It give developer an opportunity to
-choose from several implementations of an interface in service.yml config file.
+Unlike other IoC container, our service module only deals with singleton during server startup with constructor injection. It gives developers an opportunity to choose from several implementations of an interface in the service.yml config file.
 
-For example, if you have an interface with two different implementations, you can
-change externalized service.yml file on production to switch between two 
-implementations.
+For example, if you have an interface with two different implementations, you can change the externalized service.yml file on production to switch between two implementations.
 
 ### YAML configuration
 
 The following is an example of service.yml in the test folder for this module.
 
-Please note that the sequence of of binding in the config file are very important. 
-If one implementation uses another injected object, that object must be defined
-in the configuration first. 
+Please note that the sequence of binding in the config file is crucial. If one implementation uses another injected object, that object must be defined in the configuration first. 
 
 
 ```
@@ -115,22 +109,19 @@ singletons:
 
 ### How to use the Singleton Service Factory
 
-Here is the code that gets the singleton object from service map by passing
-in a interface class. 
+Here is the code that gets the singleton object from service map by passing in an interface class. 
 
 ```java
 A a = SingletonServiceFactory.getBean(A.class);
 ```
 
-Here is another API that you can get a list of implementations for a single
-interface. 
+Here is another API that you can get a list of implementations for a single interface. 
 
 ```java
 J[] j = SingletonServiceFactory.getBeans(J.class);
 ```
 
-Here is another API that you can get an object that implement an interface with
-generic types. 
+Here is another API that you can get an object that implements an interface with generic types. 
 
 ```java
 Validator<Info> infoValidator = SingletonServiceFactory.getBean(Validator.class, Info.class);
@@ -138,9 +129,7 @@ Validator<Info> infoValidator = SingletonServiceFactory.getBean(Validator.class,
 
 ### Tutorial
 
-The service module is one of the most important modules in light platform and a
-lot of other components are relying on it. To help developers to learn it quickly,
-we have provided a [service tutorial][] in the tutorial section. 
+The service module is one of the most important modules in the light platform and a lot of other components are relying on it. To help developers to learn it quickly, we have provided a [service tutorial][] in the tutorial section. 
   
 [service tutorial]: /tutorial/common/service/
 
