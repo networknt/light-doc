@@ -13,7 +13,7 @@ draft: false
 
 ### Issue
 
-We were asked by one of our customers who has unlimited Oracle license if our messaging based framework can utilize Oracle Streams instead of GoldenGate which requires a separate license.
+We were asked by one of our customers if our messaging based framework can utilize Oracle Streams instead of GoldenGate which requires a separate license.
 
 After several days of investigation,  we don't think Oracle Streams is working in this use case.
 
