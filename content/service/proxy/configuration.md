@@ -34,7 +34,16 @@ hosts: https://localhost:8081,https://localhost:8082,https://localhost:8083
 connectionsPerThread: 20
 
 # Max request time in milliseconds before timeout
-maxRequestTime: 10000
+maxRequestTime: 1000
+
+# Rewrite Host Header with the target host and port and write X_FORWARDED_HOST with original host
+rewriteHostHeader: true
+
+# Reuse XForwarded for the target XForwarded header
+reuseXForwarded: false
+
+# Max Connection Retries
+maxConnectionRetries: 3
 
 ```
 
