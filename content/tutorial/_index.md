@@ -47,6 +47,8 @@ section, some of the most important tutorials are listed here and more will be a
      + [Access consul with acl_token for security](/tutorial/common/discovery/token/)
      + [Service discovery for Docker container](/tutorial/common/discovery/docker/)
      + [Service discovery for Kubernetes](/tutorial/common/discovery/kubernetes/)
+  * [Client](/tutorial/client/)
+     + [Connect to public HTTPS site](/tutorial/client/public-https/)
        
 ### API Styles
 
