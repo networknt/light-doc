@@ -109,9 +109,10 @@ microservices.
 
 ### All activities are audited 
 
-A database audit handler has been wired into all light-oauth2 services to log each
-activity across services with sensitive info masked. In the future we will put these
-logs into AI stream processing to identify abnormal behaviors just like normal service
+The database audit info handler has been wired into all light-oauth2 services to log each
+activity across services with sensitive info masked. To enable the audit info handler, simply set the "enableAudit" property in the oauth config file for
+each services (for example: oauth_client.yml for light-oauth client service) to true.
+In the future we will put these logs into AI stream processing to identify abnormal behaviors just like normal service
 log processing.  
 
 ### OAuth2 server, portal and light frameworks form an ecosystem
