@@ -10,18 +10,9 @@ toc: false
 draft: false
 ---
 
-Main difference between trustStore vs keyStore is that trustStore (as name suggest) is used to store 
-certificates from trusted Certificate authorities(CA) which are used to verify certificate presented 
-by Server in SSL Connection while keyStore is used to store private key and own identity certificate 
-which program should present to other parties (Server or client) to verify its identity. That was one 
-liner difference between trustStore vs keyStore in Java but no doubt these two terms are quite a confusion 
-not just for anyone who is the first time doing SSL connection in Java but also many intermediate and 
-senior level programmer. One reason of this could be SSL setup being a one-time job and not many 
-programmers get opportunity to do that. 
+Main difference between trustStore vs keyStore is that trustStore (as name suggest) is used to store certificates from trusted Certificate authorities(CA) which are used to verify certificate presented by Server in SSL Connection while keyStore is used to store private key and own identity certificate which program should present to other parties (Server or client) to verify its identity. That was one liner difference between trustStore vs keyStore in Java but no doubt these two terms are quite a confusion not just for anyone who is the first time doing SSL connection in Java but also many intermediate and senior level programmers. One reason of this could be SSL setup being a one-time job and not many programmers get opportunity to do that. 
 
-In this Java tutorial, we will explore both keystore and truststore and understand key differences 
-between them. By the way, you can use a keytool command to view certificates from truststore and 
-keystore. keytool command comes with Java installation and its available in the bin directory of JAVA_HOME.
+In this Java tutorial, we will explore both keystore and truststore and understand key differences between them. By the way, you can use a keytool command to view certificates from truststore and keystore. keytool command comes with Java installation and its available in the bin directory of JAVA_HOME.
 
 
 ### KeyStore vs TrustStore
