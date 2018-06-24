@@ -12,6 +12,7 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 OAuth 2.0 is an authorization framework that enables applications to obtain limited access to user's resources on an HTTP service - normally exposed as a REST API. It works by delegating user authentication to an authorization service which contains all sorts of login service providers like LDAP for employees and database for customers.
