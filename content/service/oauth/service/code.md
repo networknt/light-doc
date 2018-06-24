@@ -41,12 +41,20 @@ RECOMMENDED. An opaque value used by the client to maintain state between the re
 
 * code_challenge
 
-OPTIONAL. PKCE Code challenge. Required for Mobile Native App
+OPTIONAL. PKCE Code challenge. Required for Mobile Native Appilication
  
 * code_challenge_method 
 
 OPTIONAL. S256 or plain if the platform doesn't support S256.
  
+* user_type
+
+OPTIONAL. used to trigger different authentication providers based on the user type.
+
+* roles
+
+OPTIONAL. User roles concat with a space for fine-grained authorization.
+
 
 ### Authorization Response
 
@@ -185,6 +193,16 @@ paths:
         description: "The password for authorization code in clear text"
         required: false
         type: "string"
+      - name: "user_type"
+        in: "query"
+        description: "The type of user that drives authentication and authorization"
+        required: false
+        type: "string"
+      - name: "roles"
+        in: "query"
+        description: "User roles concat with a space for fine-grained authorization"
+        required: false
+        type: "string"
       - name: "state"
         in: "query"
         description: "to prevent cross-site request forgery"
@@ -193,6 +211,16 @@ paths:
       - name: "scope"
         in: "query"
         description: "scope of the request"
+        required: false
+        type: "string"
+      - name: "code_challenge"
+        in: "query"
+        description: "PKCE code challenge"
+        required: false
+        type: "string"
+      - name: "code_challenge_method"
+        in: "query"
+        description: "PKCE code challenge method"
         required: false
         type: "string"
       responses:
@@ -240,8 +268,18 @@ paths:
         required: false
         type: "string"
       - name: "scope"
-        in: "query"
+        in: "formData"
         description: "scope of the request"
+        required: false
+        type: "string"
+      - name: "code_challenge"
+        in: "formData"
+        description: "PKCE code challenge"
+        required: false
+        type: "string"
+      - name: "code_challenge_method"
+        in: "formData"
+        description: "PKCE code challenge method"
         required: false
         type: "string"
       responses:
