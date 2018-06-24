@@ -20,7 +20,7 @@ Before digging into the details of implementation, let's clarify some concepts a
 
 ### Client Type
 
-OAuth defines two client types, based on their ability to authenticate securely with the authorization server (i.e., ability to maintain the confidentiality of their client credentials):
+OAuth 2.0 defines two client types, based on their ability to authenticate securely with the authorization server (i.e., ability to maintain the confidentiality of their client credentials).
 
 * confidential
 
@@ -30,11 +30,19 @@ Clients capable of maintaining the confidentiality of their credentials (e.g., c
 
 Clients incapable of maintaining the confidentiality of their credentials (e.g., clients executing on the device used by the resource owner, such as an installed native application or a web browser-based application), and incapable of secure client authentication via any other means.
 
-Above are standard client types defined in the specification and we have added another one to control which client can issue resource owner password credentials grant request. 
+### Extended Client Type
+
+Above are standard client types defined in the specification and we have added another two client types to control which client can issue resource owner password credentials grant request or customized grant types and which client will receive by-reference tokens or by-value tokens. 
 
 * trusted
 
 These clients are marked as trusted and they are the only clients that can issue resource owner password credentials grant type. For API management team, please make sure that trusted client is also confidential and the client and resource must be deployed and managed by the same organization as this flow is not as secure as authorization code and client credentials flows.
+
+When using customized grant types, the client must be marked as trusted as these grant type normally makes a lot assumptions and might not be working at the same security level as authorization code and client credentials grant types. 
+
+* external
+
+For some of the organizations, it is not comfortable to send a JWT to a third party client, user's device or browser. In this case, the client can be registered as external client type and the token issued to the client will be just a UUID. Once the requests come back to the corporate network, a BFF can go to the AS to exchange the by-reference token to a JWT. A BFF client id can be registered as well optionally so that the AS can authorize only one client can send request to exchange the opaque token to a JWT. 
 
 
 The client type designation is based on the authorization server's definition of secure authentication and its acceptable exposure levels of client credentials. The authorization server does not make assumptions about the client type.
@@ -82,6 +90,8 @@ f7d42348-c647-4efb-a52d-4c5787421e72
 
 Clients in possession of a client secret MAY use the HTTP Basic authentication scheme as defined in [RFC2617] to authenticate with the authorization server. The client identifier is encoded using the "application/x-www-form-urlencoded" encoding algorithm , and the encoded value is used as the username; the client secret is encoded using the same algorithm and used as the password. The authorization server supports the HTTP Basic authentication scheme for authenticating clients that were issued a client secret.
 
+The client secret is generated on the client service and sent in the registration response. This is the only time you can receive the client secret. It MUST be write down as there is no way to recover it later on.
+
 For example (with extra line breaks for display purposes only):
 
 ```
@@ -89,9 +99,11 @@ For example (with extra line breaks for display purposes only):
 ```
 
    
-### Other Authentication Methods
+### Other Authenticate Class
    
-Currently we don't support other authentication method but we are open to support others if there are request from our users.
+When registering a client, you can specify which authenticate class will be used in the authenticate_class column. Your own authenticate class can be added as a plugin in the service.yml configuration file. In a typical organization, you might need to support vary authentication providers. For example, your API portal supports employee to be authenticated with SPNEGO/Kerberos SSO with AD and customers with a user table in a database.
+
+By default, we have implemented LDAP, SPNEGO/Kerberos, User table and GitHub repo for authentication and authorization. Other authentication method can be easily supported if there are requests from our users. 
 
 ### Unregistered Clients
 
@@ -375,6 +387,7 @@ definitions:
           - confidential
           - public
           - trusted
+          - external
       clientProfile:
         type: string
         description: client profile
@@ -402,6 +415,12 @@ definitions:
       redirectUri:
         type: string
         description: redirect uri
+      authenticateClass:
+        type: string
+        description: authenticate class
+      derefClientId:
+        type: string
+        description: the client that can call de-reference token endpoint
 
 ```
 
