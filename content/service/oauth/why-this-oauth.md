@@ -91,3 +91,8 @@ The database audit info handler has been wired into all light-oauth2 services to
 
 [light-portal][] to manage consumers and providers life cycles. 
 
+[light-4j]: /style/
+[light-oauth2]: /service/oauth/
+[light-portal]: /service/portal/
+
+
