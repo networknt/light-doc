@@ -14,21 +14,15 @@ toc: false
 draft: false
 ---
 
-OAuth 2 is an authorization framework that enables applications to obtain limited access 
-to user's resources on an HTTP service - normally exposed as a REST API. It works by 
-delegating user authentication to an authorization service which contains all sorts of login
-service providers like LDAP for employees and database for customers.
+OAuth 2.0 is an authorization framework that enables applications to obtain limited access to user's resources on an HTTP service - normally exposed as a REST API. It works by delegating user authentication to an authorization service which contains all sorts of login service providers like LDAP for employees and database for customers.
 
-OAuth 2 provides authorization flows for the following types of application to application
-communication:
+OAuth 2.0 provides authorization flows for the following types of application to application communication:
 
 * Web server to API
 * Standalone application to API
 * API to API
 
-This informational guide is geared towards application developers, and provides an overview of 
-OAuth 2 roles, authorization grant types, use cases, and flows.
-
+This informational guide is geared towards application developers and provides an overview of OAuth 2.0 roles, authorization grant types, use cases, and flows.
 
 ### OAuth 2 Roles
 
@@ -45,8 +39,7 @@ We will detail each role in the following subsections.
 #### Resource Owner: User
 
 The resource owner is the user who authorizes an application to access their resources.
-The application's access to the user's resource is limited to the "scope" of the 
-authorization granted (e.g. read or write access).
+The application's access to the user's resource is limited to the "scope" of the authorization granted (e.g., read or write access).
 
 #### Resource Server: API
 
@@ -54,42 +47,32 @@ The resource server hosts the protected user resources.
 
 #### Authorization Server: API
 
-the authorization server verifies the identity of the user then issues access tokens to
-the application.
+the authorization server verifies the identity of the user then issues access tokens to the application.
 
 #### Client: Application/API
 
-The client is the application that wants to access the user's resources. Before it may 
-do so, it must be authorized by the user, and the authorization must be validated by 
-the API.
+The client is the application that wants to access the user's resources. Before it may do so, it must be authorized by the user, and the authorization must be validated by the API.
 
 ### Abstract Protocol Flow
-Now that you have an idea of what the OAuth roles are, let's look at a diagram of how 
-they generally interact with each other:
+Now that you have an idea of what the OAuth roles are, let's look at a diagram of how they generally interact with each other:
 
 ![Abstract Flow](https://assets.digitalocean.com/articles/oauth/abstract_flow.png)
   
 Here is a more detailed explanation of the steps in the diagram:
 
-1. The application requests authorization to access service resources from the user
-2. If the user authorized the request, the application receives an authorization grant
-3. The application requests an access token from the authorization server (API) by 
-presenting authentication of its own identity, and the authorization grant
+1. The application requests authorization to access service resources from the user.
+2. If the user authorized the request, the application receives an authorization grant.
+3. The application requests an access token from the authorization server (API) by presenting authentication of its own identity, and the authorization grant.
 4. If the application identity is authenticated and the authorization grant is valid, 
 the authorization server issues an access token to the application.
-5. The application requests the resource from the resource server (API) and presents the access 
-token for authentication.
+5. The application requests the resource from the resource server (API) and presents the access token for authentication/authorization.
 6. If the access token is valid, the resource server (API) serves the resource to the application.
 
-The actual flow of this process will differ depending on the authorization grant type in use, 
-but this is the general idea. We will explore different grant types in a later section.
+The actual flow of this process will differ depending on the authorization grant type in use, but this is a general idea. We will explore different grant types in a later section.
 
 ### Application Registration
 
-Before using OAuth with your application, you must register your application with 
-the service. This is done through a registration form in the "developer" or "API" 
-portion of the service's website, where you will provide the following information 
-(and probably details about your application):
+Before using OAuth with your application, you must register your application with the service. This is done through a registration form in the "developer" or "API" portion of the service's website, where you will provide the following information (and probably details about your application):
 
 * Application Name
 * Application Website
@@ -98,20 +81,12 @@ portion of the service's website, where you will provide the following informati
 
 ### Client ID and Client Secret
 
-Once your application is registered, the service will issue "client credentials" in 
-the form of a client identifier and a client secret. The Client ID is a publicly 
-exposed string that is used by the service API to identify the application, and is 
-also used to build authorization URLs that are presented to users. The Client Secret 
-is used to authenticate the identity of the application to the service API when the 
-application requests to access a user's resource, and must be kept private between
-the application and the API.
+Once your application is registered, the service will issue "client credentials" in the form of a client identifier and a client secret. The Client ID is a publicly exposed string that is used by the service API to identify the application and is also used to build authorization URLs that are presented to users. The Client Secret is used to authenticate the identity of the application to the service API when the application requests to access a user's resource and must be kept private between the application and the API.
 
 ### Authorization Grant
+
 In the Abstract Protocol Flow above, the first four steps cover obtaining an 
-authorization grant and access token. The authorization grant type depends on the 
-method used by the application to request authorization, and the grant types 
-supported by the Authorization server. OAuth 2 defines four grant types, each of which is useful in
-different cases:
+authorization grant and access token. The authorization grant type depends on the method used by the application to request authorization, and the grant types supported by the Authorization server. OAuth 2.0 defines four grant types, each of which is useful in different cases:
 
 * Authorization Code: used with server-side Applications
 * Implicit: used with Mobile Apps or Web Applications (applications that run on the user's device)
@@ -121,12 +96,8 @@ different cases:
 Now we will describe grant types in more detail, their use cases and flows, in the following sections.
 
 ### Grant Type: Authorization Code
-The authorization code grant type is the most commonly used because it is optimized 
-for server-side applications, where source code is not publicly exposed, and Client 
-Secret confidentiality can be maintained. This is a redirection-based flow, which 
-means that the application must be capable of interacting with the user-agent 
-(i.e. the user's web browser) and receiving API authorization codes that are routed 
-through the user-agent.
+
+The authorization code grant type is the most commonly used because it is optimized for server-side applications, where source code is not publicly exposed, and Client Secret confidentiality can be maintained. This is a redirection-based flow, which means that the application must be capable of interacting with the user-agent (i.e., the user's web browser) and receiving API authorization codes that are routed through the user-agent.
 
 Now we will describe the authorization code flow:
 
@@ -137,43 +108,36 @@ Step 1: Authorization Code Link
 First, the user is given an authorization code link that looks like the following:
 
 ```
-http://localhost:8888/oauth2/code?response_type=code&client_id=6e9d1db3-2feb-4c1f-a5ad-9e93ae8ca59d&redirect_uri=http://localhost:8080/authorization
+https://localhost:6881/oauth2/code?response_type=code&client_id=6e9d1db3-2feb-4c1f-a5ad-9e93ae8ca59d&redirect_uri=https://localhost:8080/authorization
 ```
 
 Here is an explanation of the link components:
 
-* http://localhost:8888/oauth2/code: the authorization endpoint
-* client_id=6e9d1db3-2feb-4c1f-a5ad-9e93ae8ca59d: the application's client_id (how the API identifies
-the application)
-* redirect_uri=http://localhost:8080/authorization: where the service redirects the user-agent after 
-an authorization code is granted
+* https://localhost:6881/oauth2/code: the authorization endpoint
+* client_id=6e9d1db3-2feb-4c1f-a5ad-9e93ae8ca59d: the application's client_id (how the API identifies the application)
+* redirect_uri=https://localhost:8080/authorization: where the service redirects the user-agent after an authorization code is granted
 * response_type=code: specifies that your application is requesting an authorization code grant
 
 Step 2: User Authorizes Application
 
-When the user clicks the link, they must first log in to the authorization service, to authenticate
-their identity (unless they are already logged in). 
+When the user clicks the link, they must first log in to the authorization service, to authenticate their identity (unless they are already logged in). 
 
 Step 3: Application Receives Authorization Code
 
-If the user is authenticated, the service redirects the user-agent to 
-the application redirect URI, which was specified during the client registration, 
-along with an authorization code. The redirect would look something like this: 
+If the user is authenticated, the service redirects the user-agent to the application redirect URI, which was specified during the client registration, along with an authorization code. The redirect would look something like this: 
 
 
 ```
-http://localhost:8080/authorization?code=rlbQn-mUT4ep-GLyRHaFsg
+https://localhost:8080/authorization?code=rlbQn-mUT4ep-GLyRHaFsg
 ```
 
 Step 4: Application Requests Access Token
 
-The application requests an access token from the API, by passing the authorization 
-code along with authentication details, including the client secret, to the API 
-token endpoint. Here is an example POST request to token endpoint:
+The application requests an access token from the API, bypassing the authorization code along with authentication details, including the client secret, to the API token endpoint. Here is an example POST request to the token endpoint:
 
 ```
 Url:
-http://localhost:8888/oauth2/token
+https://localhost:8888/oauth2/token
 
 Header:
 Authorization Basic 6e9d1db3-2feb-4c1f-a5ad-9e93ae8ca59d:sQesTWAnTwaw-Nn0oK35GA
@@ -186,9 +150,14 @@ code=rlbQn-mUT4ep-GLyRHaFsg
 
 Step 5: Application Receives Access Token
 
-If the authorization is valid, the Authorization server will send a response containing the
-access token (and optionally, a refresh token) to the application. The entire response
-will look something like this:
+If the authorization is valid, the Authorization server will send a response containing the access token (and optionally, a refresh token) to the application. The entire response will look something like this:
+
+
+
+
+
+
+
 
 
 ```
@@ -199,25 +168,19 @@ will look something like this:
 }
 ```
 
-Now the application is authorized! It may use the token to access the user's resource
-via the service API, limited to the scope of access, until the token expires. If a
-refresh token was issued, it may be used to request new access tokens if the original
-token has expired.
+Now the application is authorized! It may use the token to access the user's resource via the service API, limited to the scope of access until the token expires. If a refresh token was issued, it may be used to request new access tokens if the original token has expired.
 
 
 ### Grant Type: Client Credentials
-The client credentials grant type provides an application a way to access its own 
-service by passing client credentials through the header and specify grant_type in body
-to "client_credentials". 
+
+The client credentials grant type provides an application a way to access its own service by passing client credentials through the header and specify grant_type in the body to "client_credentials". 
 
 
-The application requests an access token by sending its credentials, its client_id
-and client_secret to the authorization server. An example POST request might look
-like the following:
+The application requests an access token by sending its credentials, its client_id, and client_secret to the authorization server. An example POST request might look like the following:
 
 ```
 Url:
-http://localhost:8888/oauth2/token
+https://localhost:8888/oauth2/token
 
 Header:
 Authorization Basic 6e9d1db3-2feb-4c1f-a5ad-9e93ae8ca59d:sQesTWAnTwaw-Nn0oK35GA
@@ -227,8 +190,8 @@ grant_type=client_credentials
 
 ```
 
-If the client credentials is correct, the authorization server returns an access token
-to the application. Now the application is authorized to use its own resource!
+If the client credentials are correct, the authorization server returns an access token to the application. Now the application is authorized to use its own resource!
+
  
 ```
 {
@@ -240,32 +203,26 @@ to the application. Now the application is authorized to use its own resource!
  
 
 ### Example Access Token Usage
-Once the application has an access token, it may use the token to access the user's 
-resource via the API, limited to the scope of access, until the token expires.
 
-Here is an example of an API request, using curl. Note that it includes the access 
-token:
+Once the application has an access token, it may use the token to access the user's resource via the API, limited to the scope of access, until the token expires.
+
+Here is an example of an API request, using curl. Note that it includes the access token:
 
 ```
-curl -X POST -H "Authorization: Bearer ACCESS_TOKEN" "http://localhost:8080/customer/111" 
+curl -k -X POST -H "Authorization: Bearer ACCESS_TOKEN" "https://localhost:8080/customer/111" 
 ```
-Assuming the access token is valid, the API will process the request according to its 
-API specifications. If the access token is expired or otherwise invalid, the API will 
-return an 401 error.
+Assuming the access token is valid, the API will process the request according to its API specifications. If the access token is expired or otherwise invalid, the API will return a 401 error.
 
 ### Refresh Token Flow
 
-After an access token expires, using it to make a request from the API will result in 
-an "Invalid Token Error". At this point, if a refresh token was included when the 
-original access token was issued, it can be used to request a fresh access token from 
-the authorization server.
+After an access token expires, using it to make a request from the API will result in an "Invalid Token Error". At this point, if a refresh token was included when the original access token was issued, it can be used to request a fresh access token from the authorization server.
   
 
 ### Conclusion
-You should now have a good idea of how OAuth 2 works, and when a particular authorization
-flow should be used.
 
-If you want to learn more about OAuth 2, check out these valuable resources:
+You should now have a good idea of how OAuth 2.0 works, and when a particular authorization flow should be used.
+
+If you want to learn more about OAuth 2.0, check out these valuable resources:
 
 [OAuth2 RFC](http://tools.ietf.org/html/rfc6749)
 
