@@ -12,19 +12,17 @@ weight: 30
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-OAuth2 server has a list of services that cover standard OAuth2 grant flows and extended 
-features like service on-boarding, client on-boarding, user management, token exchange,
-token chaining, scope calculation and public key certificate distribution.  
+OAuth 2.0 provider has a list of services that cover standard OAuth 2.0 grant flows and extended features like service on-boarding, client onboarding, user management, token exchange, token chaining, scope calculation, federation and public key certificate distribution.  
  
-This document only describes the features and processes of each service. Please refer 
-to [tutorial][] on how to access these services.
+This document only describes the features and processes of each service. Please refer to [tutorial][] on how to access these services.
  
 
-* [Authorization Code][] - Authenticate to OAuth2 and get authorization code
-* [SPNEGO/Kerberos][] - Authenticate to OAuth2 with SPNEGO/Kerberos
-* [Token Endpoint][] - Token endpoint of OAuth2 provider
+* [Authorization Code][] - Authenticate to OAuth 2.0 and get authorization code
+* [SPNEGO/Kerberos][] - Authenticate to OAuth 2.0 with SPNEGO/Kerberos
+* [Token Endpoint][] - Token endpoint of OAuth 2.0 provider
 * [Service Registration][] - Service registration endpoints
 * [Client Registration][] - Client registration endpoints
 * [User Management][] - User management endpoints
