@@ -44,6 +44,10 @@ REQUIRED. The authenticated user type, i.e. employee or customer.
          
 OPTIONAL. The scope of the access request.
 
+* roles
+
+OPTIONAL. The roles of the user for fine-grained authorization.
+
 * client_id:client_secret
          
 REQUIRED, as BASIC authorization header with encoded client_id:client_secret 
