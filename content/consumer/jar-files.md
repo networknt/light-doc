@@ -12,6 +12,14 @@ draft: false
 
 When using the client module from any Java application built on top of Java 8 but not on the light platform, several modules need to be included together to perform multiple functions including HTTP/2 request, service discovery, load balance and cluster support. These jar files are tiny which only contain 2 to 5 classes. The following list includes all the related jar files from Maven Central when using client module. 
 
+For all the modules listed below, there are three configuration files that need to be externalized in order to work. There are: 
+
+1. client.yml - defines client configuration and OAuth 2.0 communication. It is used by client module only.
+2. service.yml - balance, cluster, registry, consul and decryptor configurations are defined in this file. 
+3. secret.yml - OAuth 2.0 client secret and certificate password etc. are defined in this file for easy secret management. All secrets can be encrypted so that no clear text can be seen in the config file. 
+
+
+
 
 * [client.jar][]
 
