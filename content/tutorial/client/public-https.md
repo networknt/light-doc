@@ -1,13 +1,11 @@
 ---
-title: "Public Https"
+title: Public Https
+linktitle: Including Client Dependencies 
 date: 2018-06-06T23:15:01-04:00
-description: ""
-categories: []
-keywords: []
-slug: ""
-aliases: []
-toc: false
+weight: 100
+sections_weight: 100
 draft: false
+toc: false
 ---
 
 When using our Http2Client to communication with public API with CA-signed certificates, we have to find a way to download the certificate from the site and put it into our client.trustore file in order to establish TLS connection to the site. 
