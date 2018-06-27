@@ -10,9 +10,10 @@ draft: false
 toc: true
 ---
 
-## Java - Maven
+This dependency will include the submodules required to support client consumption of an api like service discovery,
+load balancing, oauth2 integration, etc..
 
-To include the client module within your application, the following will need to be added to your `pom.xml`:
+## Maven
 
 ```xml
 <dependency>
@@ -22,10 +23,14 @@ To include the client module within your application, the following will need to
 </dependency>
 ```
 
-This dependency will include the submodules required to support client consumption of an api like service discovery,
-load balancing, oauth2 integration, etc..
+## Gradle
 
-Next we'll see how to configure the client module for integration with the external tools.
+```groovy
+dependencies {
+    compile 'com.networknt:light-client-all-4j:1.5.15'
+}
+```
+
 
 
 
