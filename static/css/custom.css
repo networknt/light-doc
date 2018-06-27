@@ -1,0 +1,45 @@
+@media screen and (min-width: 30em) {
+    .ph5-ns {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    .measure-wide-l {
+        max-width: 50em;
+    }
+}
+
+.documentation-copy h2 {
+    margin-top: 1em;
+}
+
+.mw7 {
+    width: 60%;
+    max-width: 100%;
+}
+
+@media (min-width: 75em) {
+    [data-scrolldir=down] .sticky, [data-scrolldir=up] .sticky {
+        position: inherit;
+        top: 100px;
+        right: 0;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    .measure-wide-l {
+        max-width: 60em;
+    }
+}
+
+/* Hide the right sidebar when in a small screen */
+@media screen and (max-width: 60em) {
+    .ph5-m {
+        display: none;
+    }
+    .mw7 {
+        width: 100%;
+    }
+}
