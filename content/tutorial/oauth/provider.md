@@ -63,3 +63,68 @@ Pre-steps, Light-oauth server B and light-oauth server C register as light-oauth
 
 To add a new provider.
 
+
+```
+curl -X POST \
+  https://localhost:6889/oauth2/provider \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -d '{"providerId":"05","serverUrl":"http://google.ca/light-4j:8080","uri":"/oauth/key","providerName":"cloud light-4j"}'
+
+ ```
+
+To update a provider with new serverUrl.
+
+
+```
+curl -X POST \
+  https://localhost:6889/oauth2/provider \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -d '{"providerId":"05","serverUrl":"http://google.ca/light-4j:8080","uri":"/oauth/key","providerName":"cloud light-4j"}'
+
+ ```
+
+To delete a provider by the providerId.
+
+```
+curl -X DELETE \
+  https://localhost:6889/oauth2/provider/02 \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -d '{"providerId":"05","serverUrl":"http://networknt/light-4j:8080","uri":"/oauth/key","providerName":"cloud light-4j"}'
+
+ ```
+
+
+
+To query all provider.
+
+```
+curl -X GET \
+  https://localhost:6889/oauth2/provider \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -d '{"providerId":"02","serverUrl":"http://yahoo.ca/light-4j:8080","uri":"/oauth/key","providerName":"cloud light-4j"}'
+
+ ```
+
+ Result of the query request:
+
+ ```
+{
+    "05": {
+        "providerId": "05",
+        "serverUrl": "http://networknt/light-4j:8080",
+        "uri": "/oauth/key",
+        "providerName": "cloud light-4j"
+    },
+    "02": {
+        "providerId": "02",
+        "serverUrl": "http://yahoo.ca/light-4j:8080",
+        "uri": "/oauth/key",
+        "providerName": "cloud light-4j"
+    }
+}
+
+  ```

@@ -28,6 +28,7 @@ This document only describes the features and processes of each service. Please 
 * [User Management][] - User management endpoints
 * [Key Distribution][] - Public key certificate distribution
 * [Refresh Token][] - Refresh token service
+* [Provider Registration][] - Oauth provider server service
 * [Custom grant type][] - Client authenticated user grant type
 * [PKCE][] PKCE implementation
 * [OpenID Connect][] OpenID Connect implementation
@@ -44,4 +45,5 @@ This document only describes the features and processes of each service. Please 
 [User Management]: /service/oauth/service/user/
 [Key Distribution]: /service/oauth/service/key/
 [Refresh Token]: /service/oauth/service/fresh-token/
+[Provider Registration]: /service/oauth/service/provider/
 [SPNEGO/Kerberos]: /service/oauth/service/spnego/
