@@ -32,6 +32,46 @@ The Internal AS needs to have the public key certificate from External AS in ord
 
 Pre-steps, Light-oauth server B and light-oauth server C register as light-oauth security provider on light-Oauth server A. Please follow Provider Registration section for detail of registration.
 
+### /oauth2/provider@post
+
+And set the two digits provider Id in the request Json format body, for example:
+
+```
+{"providerId":"05","serverUrl":"http://google.ca/light-4j:8080","uri":"/oauth/key","providerName":"cloud light-4j"
+```
+
+If the provider Id is been registered by other light-oauth server, then the following error will be returned.
+
+```
+  "ERR12048": {
+    "statusCode": 400,
+    "code": "ERR12048",
+    "message": "PROVIDER_ID_EXISTS",
+    "description": "Provider id %s exists; It has been regristed already."
+  }
+```
+
+Change the provider Id and the registration request again.
+
+If the registration sucuessfully returned, we need add the provider Id to security.yml file of the light-oauth provider service (in our example, Light-oauth server B or light-oauth server C )
+
+```
+# light-oauth server also work as provider for other light-oauth server, following is the provider id
+
+providerId: 05
+
+# JWT signature public certificates. kid and certificate path mappings.
+jwt:
+  certificate:
+    '100': oauth/primary.crt
+    '101': oauth/secondary.crt
+  clockSkewInSeconds: 60
+
+
+```
+
+
+
 
 
 1.  Client get token from local light-oauth server (from the diagram, Light-Oauth B). The token header includes certificate Key Id
