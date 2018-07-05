@@ -39,6 +39,8 @@ there are steps to enable all security with config files.
 
 * [Provider Service][]
 
+* [Deploy to Kubernetes Cluster][]
+
 [How to generate long lived access token]: /tutorial/oauth/longlive/
 [How to start services]: /tutorial/oauth/start/
 [Authorization Code]: /tutorial/oauth/code/
@@ -49,4 +51,5 @@ there are steps to enable all security with config files.
 [Key Distribution]: /tutorial/oauth/key/
 [Client Authenticated User]: /tutorial/oauth/custom/
 [Provider Service]: /tutorial/oauth/provider/
+[Deploy to Kubernetes Cluster]: /tutorial/oauth/kubernetes/
  
