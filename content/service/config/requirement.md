@@ -53,6 +53,11 @@ The final config zip file loaded from config server contains all the sensitive i
 
 The first time interacting with the config server must be done from an operator; however, the service must be allowed the be restarted afterward without operator involvement. If deployed to a Kubernetes cluster, the orchestrator should be allowed to shut down and startup replicas. 
 
+* Share key/value pairs across services
+
+It is not necessary to define key/value pair per service all the time. Sometimes, it is OK to share some key/value pairs across services. For example, the OAuth 2.0 provider URL might be the same for all services per environment. For sensitive values, they must be defined per service so that they can be managed securely. 
+
+
 
 
 
