@@ -1,5 +1,5 @@
 ---
-title: "Process"
+title: "Config Server Process"
 date: 2018-07-04T14:47:31-04:00
 description: ""
 categories: []

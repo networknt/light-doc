@@ -1,5 +1,5 @@
 ---
-title: "Api"
+title: "Config Server API"
 date: 2018-07-04T14:48:25-04:00
 description: ""
 categories: []

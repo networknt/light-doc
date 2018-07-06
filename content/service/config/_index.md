@@ -33,5 +33,5 @@ When managing the configurations, the following things need to be considered:
 - [Design](/service/config/design/)
 - [Process](/service/config/process/)
 - [API Doc](/service/config/api/)
-- 
+
 
