@@ -22,10 +22,21 @@ There is another option that we can skip the UI but calling the API directly wit
 
 ### Service Owner - Serivce Maintenance
 
-This API has several endpoint to create/update/delete/query service(s) and it is used by mainly by the service owner role. 
+This API has several endpoints to create/update/delete/query service(s) and it is used by mainly by the service owner role. 
 
 The service owner can create a new service on the config server and specify algo, salt and template repository. 
 
+
+### Value Operator - Key/Value Maintenance
+
+This API has several endpoints to create/update/delete/query common key/value pairs that are shared across multiple services. Also, it has several endpoints to create/update/delete/query service specific key/value pairs. As these values are not sensitive, the security level for these operators is not high. 
+
+
+### Secret Operator - Key/Secret Maintenance
+
+This API has several endpoints to create/update/delete/query common key/secret pairs that are shared across multiple services. Also, it has several endpoints to create/update/delete/query service specific key/secret pairs. As these secret are sensitive, the security level for these operators is high. 
+
+Above basically defines four differen roles in the config server. When light-oauth2 is integrated with the AD, these roles can be retrieved from the LDAP. Or the roles can be managed by the light-oauth2 user table if that is desired. 
 
 
 
