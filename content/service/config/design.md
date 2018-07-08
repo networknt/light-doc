@@ -40,6 +40,10 @@ There are a lot interaction with the UI and only our team is accessing the API o
 
 The light-portal is using ArangoDB by default. As we are dealing with key/value most of the case, it would be natural to use ArangoDB; however, we need to provide another plugin layer to access SQL database in case someone wants to use it independently. Once the database layer is abstracted, it would be very easy to replace it with service.yml configuration change. 
 
+### Model and Schema
+
+The latest model-schema can be found at https://github.com/networknt/model-config/tree/develop/hybrid/config-server
+
 
 
 
