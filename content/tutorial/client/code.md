@@ -55,7 +55,14 @@ final CountDownLatch latch = new CountDownLatch(1);
 ClientRequest request = new ClientRequest().setMethod(Methods.GET).setPath(apiPath);
 ```
 
+If we needed to include Client Credential Authorization in the request, then the following can be added:
+
+```java
+client.addCcToken(request);
+```
+
 After we have these objects created, we now only have to send the request, and wait for the response.
+
 
 ```java
 
