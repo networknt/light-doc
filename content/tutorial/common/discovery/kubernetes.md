@@ -166,7 +166,7 @@ spec:
       hostNetwork: true
       containers:
       - name: apid
-        image: networknt/api_d
+        image: networknt/com.networknt.apid-1.0.0
         env:
         - name: STATUS_HOST_IP
           valueFrom:
@@ -321,7 +321,7 @@ spec:
       hostNetwork: true
       containers:
       - name: apic
-        image: networknt/api_c
+        image: networknt/com.networknt.apic-1.0.0
         env:
         - name: STATUS_HOST_IP
           valueFrom:
@@ -478,7 +478,7 @@ spec:
       hostNetwork: true
       containers:
       - name: apib
-        image: networknt/api_b
+        image: networknt/com.networknt.apib-1.0.0
         env:
         - name: STATUS_HOST_IP
           valueFrom:
@@ -639,7 +639,7 @@ spec:
       hostNetwork: true
       containers:
       - name: apia
-        image: networknt/api_a
+        image: networknt/com.networknt.apia-1.0.0
         env:
         - name: STATUS_HOST_IP
           valueFrom:
