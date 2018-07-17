@@ -15,7 +15,7 @@ draft: false
 reviewed: true
 ---
 
-Light-router can be used in the case that client doesn't have Java 8 support or implemented with other programming languages. There are two different locations that the router can be deployed.
+Light-router can be used in the case that client doesn't have Java 8 support or is implemented with other programming languages. There are two different locations that the router can be deployed.
 
 For more details, please refer to [light-router location and ownership][].
 
@@ -28,5 +28,3 @@ The tutorials are still working in progress and more will be added later.
 
 [light-router location and ownership]: /service/router/location-ownership/
 [light-router configuration]: /service/router/configuration/
-
-

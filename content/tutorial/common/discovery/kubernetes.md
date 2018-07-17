@@ -14,8 +14,7 @@ First, let's create a Kubernetes cluster with one master and three worker nodes.
 
 This step is for production use; however, to simplify the discovery I have not enabled JWT token verification. All communication is in HTTPS and HTTP 2.0 though.
 
-Kubernetes provides many components to abstract different layers and to simplify the service interactions; however, it might not be the fastest way for high-speed services. In most of the conditions, a Layer 7 proxy is used to load balance the traffic between nodes and pods. For normal usage, this is OK but if you want to scale, the proxy hop significantly hinder your throughput. If you are doing real microservices which means you have dozens of services involved in most requests coming from outside, you want to bypass these proxies and establish the connection directly and cache it for a while. It is one of the principal reasons we have used client side discovery instead of server-side discovery. Another reason is to support environment
-segregation with tags which we have shown in the [tag][] section.    
+Kubernetes provides many components to abstract different layers and to simplify the service interactions; however, it might not be the fastest way for high-speed services. In most of the conditions, a Layer 7 proxy is used to load balance the traffic between nodes and pods. For normal usage, this is OK but if you want to scale, the proxy hop significantly hinder your throughput. If you are doing real microservices which means you have dozens of services involved in most requests coming from outside, you want to bypass these proxies and establish the connection directly and cache it for a while. It is one of the principal reasons we have used client side discovery instead of server-side discovery. Another reason is to support environment segregation with tags which we have shown in the [tag][] section.    
 
 ### Environment
 
@@ -141,8 +140,7 @@ Now let's create a Docker image and upload it to docker hub.
 ```
 cd ~/networknt/light-example-4j/discovery/api_d/kubernetes
 mvn clean install
-docker build -t networknt/api_d .
-docker push networknt/api_d
+./build.sh 1.5.18
 ```
 
 Next, let's create a Kubernetes Deployment file. This should be located in a separate repo for deployment and that repo should be accessed from sandbox for deployment. However, for now, let's just put it into api_d/kubernetes folder for reference only.
@@ -298,9 +296,7 @@ Now let's create a Docker image and upload it to docker hub.
 ```
 cd ~/networknt/light-example-4j/discovery/api_c/kubernetes
 mvn clean install
-docker build -t networknt/api_c .
-docker push networknt/api_c
-
+./build.sh 1.5.18
 ```
 
 Next, let's create a Kubernetes Deployment file. This should be in a separate repo for deployment and that repo should be accessed from sandbox for deployment. However, for now, let's just put it into api_c/kubernetes folder for reference only.
@@ -457,9 +453,7 @@ Now let's create a Docker image and upload it to docker hub.
 ```
 cd ~/networknt/light-example-4j/discovery/api_b/kubernetes
 mvn clean install
-docker build -t networknt/api_b .
-docker push networknt/api_b
-
+./build.sh 1.5.18
 ```
 
 Next, let's create a Kubernetes Deployment file. This should be in a separate repo for deployment and that repo should be accessed from sandbox for deployment. However, for now, let's just put it into api_b/kubernetes folder for reference only.
@@ -620,9 +614,7 @@ Now let's create a Docker image and upload it to docker hub.
 ```
 cd ~/networknt/light-example-4j/discovery/api_a/kubernetes
 mvn clean install
-docker build -t networknt/api_a .
-docker push networknt/api_a
-
+./build.sh 1.5.18
 ```
 
 Next, let's create a Kubernetes Deployment file. This should be in a separate repo for deployment and that repo should be accessed from sandbox for deployment. However, for now, let's just put it into api_a/kubernetes folder for reference only.

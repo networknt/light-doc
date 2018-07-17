@@ -12,21 +12,15 @@ weight: 100
 sections_weight: 100
 ---
 
-[Light-router][] is a service that provides consumers another option to do service discovery
-if they cannot leverage [client][] module provided by light-4j.
+[Light-router][] is a service that provides consumers another option to do service discovery if they cannot leverage [client][] module provided by light-4j.
 
-There are two ways to [deploy light-router][] and it is highly recommended for client to own
-the instance of light-router.  
+There are two ways to [deploy light-router][] and it is highly recommended for client to own the instance of light-router.  
 
-For demo purpose, the light-router will be deployed in Kubernetes cluster master node as it
-has a static IP address. By following the steps below, you should have a router instance up
-and running and connect to multiple instances of API A in the Kubernetes cluster. Communication
-between API A, B, C and D is handled with client module inside each API. 
+For demo purpose, the light-router will be deployed in Kubernetes cluster master node as it has a static IP address. By following the steps below, you should have a router instance up and running and connect to multiple instances of API A in the Kubernetes cluster. Communication between API A, B, C and D is handled with client module inside each API. 
 
 ### Environment
 
-The light-router will be deployed to sandbox which is our development Kubernetes cluster master
-node. 
+The light-router will be deployed to sandbox which is our development Kubernetes cluster master node. 
 
 
 ### Config
@@ -72,11 +66,9 @@ docker-compose up -d
 
 ### Test
 
-Before we start using the light-router, let's make sure that we can access the reference apis
-with API A. 
+Before we start using the light-router, let's make sure that we can access the reference apis with API A. 
 
-Go to the consul server http://38.113.162.50:8500/ to find an instance of API A. Here is an
-example.  
+Go to the consul server http://38.113.162.50:8500/ to find an instance of API A. Here is an example.  
 
 ```
 curl -k https://38.113.162.51:2406/v1/data
