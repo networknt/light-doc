@@ -33,6 +33,7 @@ one of the instances.
 
 ## Calling the Service
 
+### 1. Building the Request
 Given a url, first open a connection to that server:
 
 ```java
@@ -55,14 +56,23 @@ final CountDownLatch latch = new CountDownLatch(1);
 ClientRequest request = new ClientRequest().setMethod(Methods.GET).setPath(apiPath);
 ```
 
-If we needed to include Client Credential Authorization in the request, then the following can be added:
+### 2. Security 
+If we needed to include Client Credential Authorization in the request as a standalone client, then the following can be added:
 
 ```java
-client.addCcToken(request);
+static boolean securityEnabled = (Boolean)securityConfig.get(JwtHelper.ENABLE_VERIFY_JWT);
+if (securityEnabled) client.addCcToken(request);
+```
+
+And if we need to include and propagate tokens in a request, then we would use:
+
+```java
+if (securityEnabled) client.propagateHeaders(request, httpServerExchange);
 ```
 
 After we have these objects created, we now only have to send the request, and wait for the response.
 
+### 3. Sending the request
 
 ```java
 
