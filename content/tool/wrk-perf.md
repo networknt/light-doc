@@ -99,12 +99,14 @@ request = function()
 end
 
 response = function (status, headers, body)
-  io.write("------------------------------\n")
-  io.write("Response with status: ".. status .."\n")
-  io.write("------------------------------\n")
+  if status ~= 200 then
+    io.write("------------------------------\n")
+    io.write("Response with status: ".. status .."\n")
+    io.write("------------------------------\n")
 
-  io.write("[response] Body:\n")
-  io.write(body .. "\n")
+    io.write("[response] Body:\n")
+    io.write(body .. "\n")
+  end
 end
 ```
 
