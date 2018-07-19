@@ -16,6 +16,8 @@ When managing the configurations, the following things need to be considered as 
 
 For each environment, there should be an instance of config server with config templates and key/value pairs for the environment. The authentication and authorization would be different so that developers can access the DEV config server. Operators can access the UAT config server, and Production operators can access the PROD config server. 
 
+The config server url will be passed to the contain through environment variable.
+
 * Multiple config template files per service.
 
 Each service has numeric plugins, and each plugin has its configuration file to control if it is enabled and the runtime behavior. That means for each service there would be a list of configuration files per environment like DIT, SIT, UAT, and PROD. To ease the burden to manage different config files per environment, we would create config file templates instead and replace some of the values per environment from an environmental specific config server. 
@@ -34,7 +36,7 @@ Some of the key/value pairs are public info like server URL etc. Some of the key
 
 * Minimum config files to access config server from service
 
-If service is bootstrapped from a config server, the config server URL will be passed in as an environment variable. Every service should have a default client.yml config file as it is provided from the light-4j client module as default. This file will contain all the commercial CA certificate to ensure the connectivity to the config server. All other config files will be downloaded from config server and unzip to the config folder specified. 
+If service is bootstrapped from a config server, the config server URL will be passed in as an environment variable. Every service should have a default client.yml config file as it is provided from the light-4j client module as default. This file will contain all the commercial CA certificates to ensure the connectivity to the config server. All other config files will be downloaded from config server and unzip to the config folder specified. 
 
 * Propagate config changes to an existing service
 
@@ -46,7 +48,7 @@ For a big organization, there might be multiple LOBs and each will have their ow
 
 * The final config files must be sent to the service in a secure way
 
-The final config zip file loaded from config server contains all the sensitive info that is populated by the config server. It must be secure by during the transportation with TLS. Alos, all sensitive info must be encrypted that only the service itself can decrypt it. 
+The final config zip file loaded from config server contains all the sensitive info that is populated by the config server. It must be secure during the transportation with TLS. Alos, all sensitive info must be encrypted that only the service itself can decrypt it. 
 
 
 * The service needs to be allowed to be restarted automatically
@@ -58,6 +60,9 @@ The first time interacting with the config server must be done from an operator;
 It is not necessary to define key/value pair per service all the time. Sometimes, it is OK to share some key/value pairs across services. For example, the OAuth 2.0 provider URL might be the same for all services per environment. For sensitive values, they must be defined per service so that they can be managed securely. 
 
 
+* certificate management template
+
+For each truststore, we can create a template with list of certificates so that config server can create the truststore with the template. 
 
 
 

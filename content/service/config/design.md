@@ -20,7 +20,7 @@ To allow the service to start automatically, the encryption key must be put into
 
 * The encryption algorithm
 
-There will be numeric encryption algorithm supported by both config server and light-4j services. Each service will pick up one to be built in and only the development team knows it. When the service is initialized on the config server, the product owner of the service will provide picks up the right algorithm for the service. 
+There will be numeric encryption algorithms supported by both config server and light-4j services. Each service will pick up one to be built in and only the development team knows it. When the service is initialized on the config server, the product owner of the service will provide the right algorithm for the service. 
 
 * Salt
 
@@ -30,11 +30,11 @@ For deployment operators, they cannot see the algorithm and salt for the service
 
 ### Database Encryption
 
-To protect the interaction between the config server and services is not enough. We need to encrypt the database value so that even the database is stolen, no sensitive info will be leaked. This requires that an encryption key must be available for the config server and it must be saved in the server instance instead in the database itself. We cannot generate random key as this key is needed to recover database if the current instance is down and we have to start another instance. To maximum the security, the key is splitted into two parts for two operators. Both of them will input their key to recover the real encryption key for the database values. 
+To protect the interaction between the config server and services is not enough. We need to encrypt the database values so that even the database file is stolen, no sensitive info will be leaked. This requires that an encryption key must be available for the config server and it must be saved in the server instance instead in the database itself. We cannot generate random key as this key is needed to recover database if the current instance is down and we have to start another instance. To maximize the security, the key is splitted into two parts for two operators. Both of them will input their key to recover the real encryption key for the database values. 
 
 ### Framework
 
-There are a lot interaction with the UI and only our team is accessing the API of config server. It is a lot easy to utilize light-hybrid-4j with react-schema-form for the UI. The other benefit is that it can be integrated seamlessly with light-portal in our deployment. But for customers who doesn't want to use light-portal, they can still use the light-config -server independently. 
+There are a lot interaction with the UI and only our team is accessing the API of config server. It is a lot easily to utilize light-hybrid-4j with react-schema-form for the UI. The other benefit is that it can be integrated seamlessly with light-portal in our deployment. But for customers who doesn't want to use light-portal, they can still use the light-config-server independently. 
 
 ### Database
 
