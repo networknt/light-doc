@@ -8,7 +8,7 @@ draft: false
 toc: false
 ---
 
-When using our Http2Client to communication with public API with CA-signed certificates, we have to find a way to download the certificate from the site and put it into our client.trustore file in order to establish TLS connection to the site. 
+When using our Http2Client to communication with public API with CA-signed certificates, we have to find a way to download the certificate from the site and put it into our client.trustore file in order to establish TLS connection to the site if you cannot get the certifcate from the right channel. 
 
 There are multiple options to do that and the simple one is from the browser; however, the certificate downloaded from the browser might not be completed as we need to the entire chain in order to verify the certificate during the handshake. 
 
@@ -39,7 +39,7 @@ For other keytool commands and options, please refer to [keytool][] document.
 
 After the client.truststore is modified, you need to use Http2Client to access the target server. There are numeric examples that can be found in light-example-4j and all the test cases. 
 
-Please note that you need to set the host header for all the requests. 
+Please note that you need to set the host header for all the requests to HTTP/1.1 servers. 
 
 ```
 request.getRequestHeaders().put(Headers.HOST, "localhost");
@@ -48,5 +48,10 @@ request.getRequestHeaders().put(Headers.HOST, "localhost");
 
 To see the demo application source code which accesses tableau server, please refer to https://github.com/networknt/light-example-4j/tree/master/client/tableau
 
+For debugging your TLS connection, please refer to [Debugging SSL/TLS Connections][]
+
+Please note that download client certificate might not work all the time as the server might be behind a proxy which has its certificate and the proxy is setup as TLS passthrough. In that case, the certificate downloaded is for proxy server and the real server will reject your certificate during the handshake. This happens with most Kubernetes cluster or OpenShift cluster.
+
 [keytool]: /tool/keytool/
+[Debugging SSL/TLS Connections]: https://docs.oracle.com/javase/7/docs/technotes/guides/security/jsse/ReadDebug.html
 
