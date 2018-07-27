@@ -25,6 +25,7 @@ The light-oauth2 is not just an OAuth 2.0 provider. Some of the services impleme
 - [Getting started](/getting-started/light-oauth2/)
 - [Architecture](/service/oauth/architecture/)
 - [Documentation](/service/oauth/service/)
+- [Authenticator](/service/oauth/authenticator/)
 - [Tutorial](/tutorial/oauth/)
 - [Reference](/service/oauth/reference/)
 
