@@ -12,32 +12,30 @@ reviewed: true
 ---
 
 When your organization wants to adopt API economy, you need a way to secure the API access. OAuth 2.0 is a de facto standard in securing APIs these days. You can choose a third-party cloud service, but most likely you want to deploy an instance of OAuth 2.0 provider in-house.  
-There are so many products to choose from the market. Some of them are commercial, and some of them are open source. When you are aiming to microservices, your choice is very limited. The light-oauth2 is designed for microservices architecture. In fact, it is built as microservices on top of light-4j and light-rest-4j frameworks. There are so many distinct attributes that set this product apart from others. 
+There are so many products to choose from the market. Some of them are commercial, and some of them are open source. When you are aiming to microservices, your choice is very limited. The light-oauth2 is designed for microservices architecture at enterprise scale. In fact, it is built as microservices on top of light-4j and light-rest-4j frameworks. There are so many distinct attributes that set this product apart from others. 
 
 
 ### Fast and small memory footprint to lower production cost.
 
-It can support 60000 user login and get authorization code redirect and can generate 700 JWT access tokens per second on my laptop. 
+The authorize code service can support 60000 users log in and get authorization code redirect in a second and the token service can generate 700 JWT access tokens per second on my laptop. 
 
-It has 7 microservices connected with in-memory data grid, and each service can be scaled individually or exposed to individually. 
+It has 7 microservices connected with an in-memory data grid, and each service can be scaled individually or exposed to outside individually. 
 
 It is open source and free for commercial use with end-user friendly Apache 2.0 license. 
 
 ### More secure than other implementations
 
-OAuth 2.0 is just a specification, and many details are in the individual
-implementation. Our implementation has a lot of extensions and enhancements for additional security. Also, there are some limitations to prevent users from making mistakes. For example, we have added a new client type called "trusted" and only this type of client can issue resource owner password credentials grant type or any custom grant types. We don't use implicit grant type in this implementation as it is not secure. When dealing with an external client, we can register it as "external" client type so that the token issued to it is a by-reference token that has to be exchanged to JWT once requests come into the internal network.
+OAuth 2.0 is just a specification, and many details are in the implementations. Our implementation has a lot of extensions and enhancements for additional security. Also, there are some limitations to prevent users from making mistakes. For example, we have added a new client type called "trusted" and only this type of client can issue resource owner password credentials grant type or any custom grant types. We don't use implicit grant type in this implementation as it is not secure. When dealing with an external client, we can register it as "external" client type so that the token issued to it is a by-reference token that has to be exchanged to JWT once requests come into the internal network.
 
 Microservices architecture reduces the attack surface as with only authorization code, security token, and key distribution services need to be exposed to the network. Other services can be locked down and accessed by light-portal only. 
 
-
 ### More deployment options
 
-You can deploy all services or just deploy several services for your use cases. You can only expose token and code services to the Internet through firewall or light-proxy installed in DMZ and all others can only be accessed locally for maximum security. You can have several token services or deploy token service as sidecar pattern in each node. You can start more instance of key service on the day that your public key certificate for signature verification is changed and shut down all of them but one the next day. You can take the full advantages of microservices deployment.  
+You can deploy all services or just deploy several services for your use cases. You can only expose token and code services to the Internet through firewall or light-router installed in DMZ, and all others can only be accessed locally for maximum security. You can have several token services or deploy token service as sidecar pattern in each node. You can start more instance of key service on the day that your public key certificate for signature verification is changed and shut down all of them but one the next day. You can take the full advantages of microservices deployment.  Unlike monolithic OAuth 2.0 providers, each microservice has different IP and port number so that it is easy to control access from F5 or firewall rules. 
 
 ### Seamlessly integration with Light-4J frameworks
 
-* Built on top of light-4j and light-rest-4j
+* Built on top of light-4j and light-rest-4j frameworks
 * Light-4j Client and Security modules manage most of the interactions with light-oauth2
 * Support service on-boarding from light-portal
 * Support client on-boarding from light-portal
@@ -45,7 +43,7 @@ You can deploy all services or just deploy several services for your use cases. 
 * services built on top of the light platform can bootstrap from the key distribution service 
 * Source code and OpenAPI specifications for all microservices can be accessed on github.com
 * Federated OAuth 2.0 providers can exchange keys upon request from services. 
-* A middleware handler is provided to exchange the opaque token to JWT token at the perimeter. 
+* A middleware handler is provided to dereference the opaque token to JWT token at the perimeter. 
 
 ### Easy to integrate with your APIs or services
 
@@ -57,11 +55,11 @@ Out of the box, it supports MySQL, MariaDB, Postgres, SQL Server, Oracle and H2 
 
 ### Pluggable authentication provider per client
 
-When authorization code grant type is used, depending on the client id and user type, a customized authentication provider might be invoked. The light-oauth2 provides custom users table, LDAP, SPNEGO/Kerberos, GitHub repository for authentication and authorization. New providers can be plugged in with the service module and client registration. 
+When authorization code grant type is used, depending on the client id and user type, a customized authentication provider might be invoked. The light-oauth2 provides custom users table, LDAP, SPNEGO/Kerberos, GitHub repository for authentication and authorization. New providers can be plugged in with the service module and client registration. The default authentication provider is SPNEGO/Kerberos with Microsoft AD with basic authentication falls back.
 
 ### Federated OAuth 2.0 providers
 
-Most OAuth 2.0 providers support only one instance in an organization. The light-oauth2 supports numeric instances in a federation. For example, an external AS for external clients and an internal AS for internal clients. One instance per data center and all of them are active and working independently. A payment service company with an AS that trusts all other partner financial institutions' providers and vice versa. 
+Most OAuth 2.0 providers support only one instance in an organization. The light-oauth2 supports numeric instances in a federation. For example, an external AS for external clients and an internal AS for internal clients. One instance per data center and all of them are active as independent clusters. A payment service company with an AS that trusts all other partner financial institutions' providers and vice versa. 
 
 ### Public key certificate distribution
 
@@ -81,7 +79,7 @@ light-oauth2 has a service registration to allow all service to be registered wi
 
 ### All activities can be audited 
 
-The database audit info handler has been wired into all light-oauth2 services to log each activity across services with sensitive info masked. To enable the audit info handler, simply set the "enableAudit" property in the config file for each service (For example oauth_client.yml for light-oauth client service) to true. In the future, we will put these logs into AI stream processing to identify abnormal behaviors just like normal service log processing.  
+The database audit info handler has been wired into all light-oauth2 services to log each activity across services with sensitive info masked. To enable the audit info handler, simply set the "enableAudit" property in the config file for each service (For example oauth_client.yml for light-oauth2 client service) to true. In the future, we will put these logs into AI stream processing to identify abnormal behaviors just like normal service log processing.  
 
 ### OAuth2 server, portal and light frameworks form an ecosystem
 
