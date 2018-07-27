@@ -57,6 +57,25 @@ If the server is not the production, several test user accounts need to be creat
 
 ### Light-oauth2 Configuration
 
+As user authentication is part of the authorization code grant flow, all the authenticator configuration will be externalized for the code service. 
 
+The following files are listed here as examples. 
+
+- service.yml
+
+Please ensure that all used auth providers are wired in. Here is an example that has two auth providers. 
+
+```
+- com.networknt.oauth.auth.Authenticator<com.networknt.oauth.auth.DefaultAuth>:
+  - com.networknt.oauth.auth.DefaultAuthenticator
+- com.networknt.oauth.auth.Authenticator<com.networknt.oauth.auth.MarketPlaceAuth>:
+  - com.networknt.oauth.auth.MarketPlaceAuthenticator
+
+```
+
+
+- krb5.conf
+
+This file is for Kerberos configuration. In development mode, it should be located in light-oauth2/code/
 
 
