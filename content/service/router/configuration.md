@@ -333,6 +333,21 @@ mapping:
 
 ```
 
+## pathPrefixService.yml
+
+This is the config file for [PathPrefixServiceHandler][] which is located in the request chain to set service_id in the request header based on the endpoint identified by the incoming request. Once this handler is used, there is no need for the original client to pass the service_id header anymore. This is an alternative option for [PathServiceHandler][]. 
+
+```yaml
+# indicate if PathPrefixServiceHandler is enabled or not
+enabled: true
+# mapping from request path prefixes to serviceIds
+mapping:
+  /v1/address: party.address-1.0.0
+  /v2/address: party.address-2.0.0
+  /v1/contact: party.contact-1.0.0
+
+```
+
 ## header.yml
 
 The [RouterProxyClient][] requires that both service_id and env_tag must be in the header of the incoming request to do the service discovery. The PathServiceHandler can be used to set the service_id based on the endpoint identified. If you want to set the default env_tag for the environment, you can use the generic HeaderHandler to do so. Here is an example of header.yml config file. 
@@ -383,3 +398,4 @@ you shouldn't need to touch these config files unless you know what you are doin
 [secret]: /tutorial/security/encrypt-decrypt/
 [RouterProxyClient]: /service/router/proxy-client/
 [PathServiceHandler]: /service/router/path-service/
+[PathPrefixServiceHandler]: /service/router/path-prefix-service/

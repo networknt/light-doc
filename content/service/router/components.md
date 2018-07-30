@@ -17,4 +17,5 @@ Light-router uses some of the middleware handles from light-4j and light-rest-4j
 * [RouterHandlerProvider](/service/router/handler-provider/)
 * [TokenHandler](/service/router/token-handler/)
 * [PathServiceHandler](/service/router/path-service/)
+* [PathPrefixServiceHandler](/service/router/path-prefix-serivce/)
 
