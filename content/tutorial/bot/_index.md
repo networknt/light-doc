@@ -20,6 +20,7 @@ You can deploy it in one of your DevOps VMs and set it up to run automatically f
 and test. Other tasks are triggered manually and only used occasionally.
 
 * Clone and [build light-bot][] project and command line tool with Gradle
+* Clone and build [dependency][] in develop branches for light platform developers
 * Set up [develop][] branch build and test on your local computer
 * Set up [devops][] sever for develop branch build automatically
 * Build [light-portal local][] develop branch using cloud eventuate services
