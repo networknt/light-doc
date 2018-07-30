@@ -25,7 +25,7 @@ and test. Other tasks are triggered manually and only used occasionally.
 * Build [light-portal local][] develop branch using cloud eventuate services
 * How to use [regex-replace][] to replace repeated string/text across all repositories
 
-
+[dependency]: /tutorial/bot/dependency/
 [develop]: /tutorial/bot/local-develop/
 [devops]: /tutorial/bot/devops-develop/
 [light-portal local]: /tutorial/bot/light-portal-local/
