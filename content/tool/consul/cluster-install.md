@@ -401,4 +401,49 @@ Here is the consul3 config.json
 Once you switch your browser to https from http, the existing ACL token is not working anymore and you have to input the token from ACL tab again. 
 
 
+As we are using public IP for consul servers, we have to protect other nodes to join the same cluster. To do that we have setup the firewall to only allow the connection from another two nodes. Here is the firewall status on the first consul server.
+
+```
+sudo ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+8500/tcp                   ALLOW       Anywhere                  
+Anywhere                   ALLOW       198.55.49.187             
+Anywhere                   ALLOW       198.55.49.186             
+22/tcp                     ALLOW       Anywhere                  
+8500/tcp (v6)              ALLOW       Anywhere (v6)             
+22/tcp (v6)                ALLOW       Anywhere (v6) 
+```
+
+### Install with private IP addresses. 
+
+In the case that you are using private IP addresses, you don't need to specify the exact ip to bind. For example, you can use the following config.json. 
+
+```
+{
+"bootstrap": false,
+"server": true,
+"datacenter": "dc1",
+"client_addr":"0.0.0.0",
+"data_dir": "/var/consul",
+"encrypt": "T9hm99zu12SPcZcutuQN4w==",
+"log_level": "INFO",
+"enable_syslog": true,
+"addresses": { "http": "0.0.0.0" },
+"ports": {"http": -1, "https": 8500 },
+"ca_file": "/etc/consul.d/ssl/ca.cert",
+"cert_file": "/etc/consul.d/ssl/consul.cert",
+"key_file": "/etc/consul.d/ssl/consul.key",
+"verify_incoming": false,
+"verify_outgoing": true,
+"acl_datacenter": "dc1",
+"acl_master_token": "bio324k3lje23",
+"acl_default_policy": "deny",
+"acl_down_policy": "extend-cache",
+"start_join": ["198.55.49.187", "198.55.49.186"]
+}
+```
+
 [download page]: https://www.consul.io/downloads.html
