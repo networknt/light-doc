@@ -307,29 +307,98 @@ https://www.digitalocean.com/community/tutorials/how-to-secure-consul-with-tls-e
 
 http://russellsimpkins.blogspot.ca/2015/10/consul-adding-tls-using-self-signed.html
 
-Example Configuration File, with TLS
+
+After the configuration is done, here is the consul1 config.json
 
 ```
 {
-"datacenter": "east-aws",
-"data_dir": "/opt/consul",
-"log_level": "INFO",
-"node_name": "foobar",
+"bootstrap": false,
 "server": true,
-"addresses": {
-"https": "0.0.0.0"
-},
-"ports": {
-"https": 8080
-},
-"key_file": "/etc/pki/tls/private/my.key",
-"cert_file": "/etc/pki/tls/certs/my.crt",
-"ca_file": "/etc/pki/tls/certs/ca-bundle.crt"
+"datacenter": "dc1",
+"client_addr":"198.55.49.188",
+"bind_addr": "198.55.49.188",
+"data_dir": "/var/consul",
+"encrypt": "T9hm99zu12SPcZcutuQN4w==",
+"log_level": "INFO",
+"enable_syslog": true,
+"addresses": { "http": "198.55.49.188" },
+"ports": {"http": -1, "https": 8500 },
+"ca_file": "/etc/consul.d/ssl/ca.cert",
+"cert_file": "/etc/consul.d/ssl/consul.cert",
+"key_file": "/etc/consul.d/ssl/consul.key",
+"verify_incoming": false,
+"verify_outgoing": true,
+"acl_datacenter": "dc1",
+"acl_master_token": "bio324k3lje23",
+"acl_default_policy": "deny",
+"acl_down_policy": "extend-cache",
+"start_join": ["198.55.49.187", "198.55.49.186"]
 }
-See, especially, the use of the ports setting:
-"ports": {
-"https": 8080
-}
+
 ```
+
+Please note that verify_incoming is false in this server so that browser can connect without providing certificate. 
+
+
+Here is the consul2 config.json
+
+```
+{
+"bootstrap": false,
+"server": true,
+"datacenter": "dc1",
+"client_addr":"198.55.49.187",
+"bind_addr": "198.55.49.187",
+"data_dir": "/var/consul",
+"encrypt": "T9hm99zu12SPcZcutuQN4w==",
+"log_level": "INFO",
+"enable_syslog": true,
+"addresses": { "http": "198.55.49.187" },
+"ports": {"http": -1, "https": 8500 },
+"ca_file": "/etc/consul.d/ssl/ca.cert",
+"cert_file": "/etc/consul.d/ssl/consul.cert",
+"key_file": "/etc/consul.d/ssl/consul.key",
+"verify_incoming": true,
+"verify_outgoing": true,
+"acl_datacenter": "dc1",
+"acl_master_token": "bio324k3lje23",
+"acl_default_policy": "deny",
+"acl_down_policy": "extend-cache",
+"start_join": ["198.55.49.188", "198.55.49.186"]
+}
+
+```
+
+Here is the consul3 config.json
+
+```
+{
+"bootstrap": false,
+"server": true,
+"datacenter": "dc1",
+"client_addr":"198.55.49.186",
+"bind_addr": "198.55.49.186",
+"data_dir": "/var/consul",
+"encrypt": "T9hm99zu12SPcZcutuQN4w==",
+"log_level": "INFO",
+"enable_syslog": true,
+"addresses": { "http": "198.55.49.186" },
+"ports": {"http": -1, "https": 8500 },
+"ca_file": "/etc/consul.d/ssl/ca.cert",
+"cert_file": "/etc/consul.d/ssl/consul.cert",
+"key_file": "/etc/consul.d/ssl/consul.key",
+"verify_incoming": true,
+"verify_outgoing": true,
+"acl_datacenter": "dc1",
+"acl_master_token": "bio324k3lje23",
+"acl_default_policy": "deny",
+"acl_down_policy": "extend-cache",
+"start_join": ["198.55.49.188", "198.55.49.187"]
+}
+
+```
+
+Once you switch your browser to https from http, the existing ACL token is not working anymore and you have to input the token from ACL tab again. 
+
 
 [download page]: https://www.consul.io/downloads.html
