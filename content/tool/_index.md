@@ -32,3 +32,5 @@ Tools we use.
 
 - [Git](/tool/git/)
   * [Remove Big Binary Files from Repo](/tool/git/remove-bigfile/)
+- [Consul](/tool/consul/)
+  * [Production Installation](/tool/consul/prod-install/)
