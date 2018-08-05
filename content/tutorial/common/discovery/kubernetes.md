@@ -6,15 +6,16 @@ weight: 90
 sections_weight: 90
 draft: false
 toc: true
+reviewed: true
 ---
 
-In the previous step, we have explored docker compose with multiple services and it works very well on user's laptop or desktop. In this section, we are going to explore how to deploy these services to a Kubernetes cluster with multiple instances of each and see how they can discover each other. 
+In the previous step, we have explored docker compose with multiple services, and it works very well on a user's laptop or desktop. In this section, we are going to explore how to deploy these services to a Kubernetes cluster with multiple instances of each and see how they can discover each other. 
 
-First, let's create a Kubernetes cluster with one master and three worker nodes. For the steps to install Kubernetes, please follow [Kubernetes][] in the tool section. If you do not have access to multiple VMs to install a real cluster, you can use [Minikube][] for this tutorial, but I have not tried it myself. 
+First, let's create a Kubernetes cluster with one master and three worker nodes. For the steps to install Kubernetes, please follow [Kubernetes][] in the tool section. If you do not have access to multiple VMs to create a real cluster, you can use [Minikube][] for this tutorial, but I have not tried it myself. 
 
 This step is for production use; however, to simplify the discovery I have not enabled JWT token verification. All communication is in HTTPS and HTTP 2.0 though.
 
-Kubernetes provides many components to abstract different layers and to simplify the service interactions; however, it might not be the fastest way for high-speed services. In most of the conditions, a Layer 7 proxy is used to load balance the traffic between nodes and pods. For normal usage, this is OK but if you want to scale, the proxy hop significantly hinder your throughput. If you are doing real microservices which means you have dozens of services involved in most requests coming from outside, you want to bypass these proxies and establish the connection directly and cache it for a while. It is one of the principal reasons we have used client side discovery instead of server-side discovery. Another reason is to support environment segregation with tags which we have shown in the [tag][] section.    
+Kubernetes provides many components to abstract different layers and to simplify the service interactions; however, it might not be the fastest way for high-speed services. In most of the conditions, a Layer 7 proxy is used to load balance the traffic between nodes and pods. For normal usage, this is OK, but if you want to scale, the proxy hop significantly hinder your throughput. If you are doing real microservices which means you have dozens of services involved in most requests coming from outside, you want to bypass these proxies and establish the connection directly and cache it for a while. It is one of the principal reasons we have used client-side discovery instead of server-side discovery. Another reason is to support environment segregation with tags which we have shown in the [tag][] section.    
 
 ### Environment
 
@@ -22,17 +23,16 @@ Here is the information about our Kubernetes cluster.
 
 ```
 steve@sandbox:~$ kubectl get nodes
-NAME                 STATUS    ROLES     AGE       VERSION
-sandbox              Ready     master    2d        v1.9.3
-test1                Ready     <none>    2d        v1.9.3
-test2                Ready     <none>    2d        v1.9.3
-test3                Ready     <none>    2d        v1.9.3
-
+NAME            STATUS    ROLES     AGE       VERSION
+38-113-162-51   Ready     <none>    4d        v1.11.0
+38-113-162-52   Ready     <none>    4d        v1.11.0
+38-113-162-53   Ready     <none>    4d        v1.11.0
+sandbox         Ready     master    4d        v1.11.0
 ```
 
 ### Install Consul
 
-We are going to install Consul on sandbox just for testing purpose. Normally, you should not install any container in the sandbox as it is Kubernetes master. We are just using it to simulate that Consul is installed in a data center with a static IP address. 
+We are going to install Consul on sandbox just for testing purpose. Usually, you should not install any container in the sandbox as it is Kubernetes master. We are just using it to simulate that Consul is installed in a data center with a static IP address. 
 
 ```
 docker run -d -p 8400:8400 -p 8500:8500/tcp -p 8600:53/udp -e 'CONSUL_LOCAL_CONFIG={"acl_datacenter":"dc1","acl_default_policy":"allow","acl_down_policy":"extend-cache","acl_master_token":"the_one_ring","bootstrap_expect":1,"datacenter":"dc1","data_dir":"/usr/local/bin/consul.d/data","server":true}' consul agent -server -ui -bind=127.0.0.1 -client=0.0.0.0
