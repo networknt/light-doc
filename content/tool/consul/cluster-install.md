@@ -260,7 +260,7 @@ To restart the server.
 sudo systemctl restart consul
 ```
 
-### Create an Agent Token
+### Generate an Agent Token
 
 We can create a token using the ACL API, and the ACL master token we set in the previous step:
 
@@ -272,13 +272,23 @@ curl \
 '{
 "Name": "Agent Token",
 "Type": "client",
-"Rules": "node \"\" { policy = \"write\" } service \"\" { policy = \"read\" }"
+"Rules": "node \"\" { policy = \"write\" } service \"\" { policy = \"write\" }"
 }' http://198.55.49.188:8500/v1/acl/create
 ```
+
+The result would be something like the following.
 
 ```
 {"ID":"3f5f1cef-2966-4964-73c5-7ebeb21ba337"}
 ```
+
+The above curl command is assuming that http is used. Once the TLS is enabled on the Consul server, you need to use the following command line instead. 
+
+```
+curl -k --request PUT --header "X-Consul-Token: bio324k3lje23" --data '{"Name": "Agent Token","Type": "client","Rules": "node \"\" { policy = \"write\" } service \"\" { policy = \"write\" }"}' https://198.55.49.188:8500/v1/acl/create
+```
+
+### Create an Agent Token
 
 In Consul 0.9.1 and later you can also introduce the agent token using an API, so it doesn't need to be set in the configuration file:
 
@@ -293,6 +303,36 @@ curl \
 ```
 
 With that ACL agent token set, the servers will be able to sync themselves with the catalog.
+
+In most of our case, we are going to generate a token instead creating a token with known id. 
+
+### ACL Policy
+
+In light platform, there are two different clients that need to communicate with Consul and the policies are different. 
+
+* Service
+
+For a service, it needs to register itself to the consul during startup and deregister itself during shutdown. Also, it need to call health check endpoint to declare that it is healthy. Some of the services might need to call other services so that it needs to lookup other services as a client. 
+
+Except the lookup query, service needs to have a token that policy defined as write. 
+
+For example, we are using the following command to create a token that is writable for service. As write policy has default read covered, this token can read the service catalog as well. 
+
+```
+curl -k --request PUT --header "X-Consul-Token: bio324k3lje23" --data '{"Name": "Agent Token","Type": "client","Rules": "node \"\" { policy = \"write\" } service \"\" { policy = \"write\" }"}' https://198.55.49.188:8500/v1/acl/create
+
+```
+
+* Original Client
+
+For an original client, there is no need to update anything on the Consul server, it only need a read-only policy for service. Here is an example to create a read-only token for a client. 
+
+```
+curl -k --request PUT --header "X-Consul-Token: bio324k3lje23" --data '{"Name": "Agent Token","Type": "client","Rules": "node \"\" { policy = \"write\" } service \"\" { policy = \"read\" }"}' https://198.55.49.188:8500/v1/acl/create
+
+```
+
+For an organzation with a lot of services and clients, it is recommended that we create a service token and client token for one LOB instead of create separate tokens for each individual service. 
 
 
 ### Enable TLS
@@ -445,5 +485,24 @@ In the case that you are using private IP addresses, you don't need to specify t
 "start_join": ["198.55.49.187", "198.55.49.186"]
 }
 ```
+
+### Useful Commands
+
+The following are some useful commands that access consul APIs.
+
+```
+curl -k -H "X-Consul-Token: 3f5f1cef-2966-4964-73c5-7ebeb21ba337" https://198.55.49.188:8500/v1/agent/checks
+
+
+curl -k -H "X-Consul-Token: 3f5f1cef-2966-4964-73c5-7ebeb21ba337" https://198.55.49.188:8500/v1/catalog/services
+
+
+curl -k -H "X-Consul-Token: 3f5f1cef-2966-4964-73c5-7ebeb21ba337" https://198.55.49.188:8500/v1/catalog/service/com.networknt.apid-1.0.0
+
+
+curl -k -H "X-Consul-Token: 3f5f1cef-2966-4964-73c5-7ebeb21ba337" https://198.55.49.188:8500/v1/health/checks/com.networknt.apid-1.0.0
+
+```
+
 
 [download page]: https://www.consul.io/downloads.html
