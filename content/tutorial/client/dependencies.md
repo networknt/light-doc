@@ -18,19 +18,10 @@ load balancing, oauth2 integration, etc..
 ```xml
 <dependency>
     <groupId>com.networknt</groupId>
-    <artifactId>light-client-all-4j</artifactId>
+    <artifactId>light-consumer-4j</artifactId>
     <version>1.5.15</version>
 </dependency>
 ```
-
-## Gradle
-
-```groovy
-dependencies {
-    compile 'com.networknt:light-client-all-4j:1.5.15'
-}
-```
-
 
 
 
