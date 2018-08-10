@@ -293,7 +293,7 @@ The result would be something like the following.
 {"ID":"3f5f1cef-2966-4964-73c5-7ebeb21ba337"}
 ```
 
-The above curl command is assuming that http is used. Once the TLS is enabled on the Consul server, you need to use the following command line instead. 
+The above curl command is assuming that HTTP is used. Once the TLS is enabled on the Consul server, you need to use the following command line instead. 
 
 ```
 curl -k --request PUT --header "X-Consul-Token: bio324k3lje23" --data '{"Name": "Agent Token","Type": "client","Rules": "agent \"\" { policy = \"write\" } node \"\" { policy = \"write\" } service \"\" { policy = \"write\" }"}' https://198.55.49.188:8500/v1/acl/create
@@ -319,7 +319,7 @@ Please note, to set the token using API won't persist the token, so if the entir
 
 In most of our case, we are going to create the token with API above and update the config.json so that the token can be persisted. 
 
-Here is section of the config.json after adding the agent token. 
+Here is the section of the config.json after adding the agent token. 
 
 ```
 {
@@ -333,13 +333,13 @@ Here is section of the config.json after adding the agent token.
 
 ### ACL Policy
 
-In light platform, there are two different clients that need to communicate with Consul and the policies are different. 
+In the light platform, two different clients need to communicate with Consul and the policies are different. 
 
 * Service
 
-For a service, it needs to register itself to the consul during startup and deregister itself during shutdown. Also, it need to call health check endpoint to declare that it is healthy. Some of the services might need to call other services so that it needs to lookup other services as a client. 
+For service, it needs to register itself to the consul during startup and deregister itself during the shutdown. Also, it needs to call health check endpoint to declare that it is healthy in TTL check option. Some of the services might need to call other services so that it needs to lookup other services as a client. 
 
-Except the lookup query, service needs to have a token that policy defined as write. 
+Except for the lookup query, service needs to have a token that policy defined as write. 
 
 For example, we are using the following command to create a token that is writable for service. As write policy has default read covered, this token can read the service catalog as well. 
 
@@ -350,20 +350,21 @@ curl -k --request PUT --header "X-Consul-Token: bio324k3lje23" --data '{"Name": 
 
 * Original Client
 
-For an original client, there is no need to update anything on the Consul server, it only need a read-only policy for service. Here is an example to create a read-only token for a client. 
+For an original client, there is no need to update anything on the Consul server, and it only needs a read-only policy for service. Here is an example to create a read-only token for a client. 
 
 ```
 curl -k --request PUT --header "X-Consul-Token: bio324k3lje23" --data '{"Name": "Agent Token","Type": "client","Rules": "node \"\" { policy = \"write\" } service \"\" { policy = \"read\" }"}' https://198.55.49.188:8500/v1/acl/create
 
 ```
 
-For an organzation with a lot of services and clients, it is recommended that we create a service token and client token for one LOB instead of create separate tokens for each individual service. 
+For an organization with a lot of services and clients, it is recommended that we create a service token and client token for one LOB instead of creating separate a token for each service.  
 
+This is to make ACL token management simpler. If you have DevOps pipeline or light-config-server is deployed, then it is recommended to have each service and client to have their own token. 
 
 ### Enable TLS
 
-Above installation is suitable for non-production environment to test initial Consul connectivity issues. This setup and configuration should be suitable for a production environment, however TLS/SSL must be implemented on the WebUI and communication ports to future ensure secure communication. 
-
+Above installation is suitable for the non-production environment to test initial Consul connectivity issues. This setup and configuration should be OK for a production environment; however, TLS/SSL must be implemented on the WebUI and communication between nodes to ensure secure communication. 
+ 
 https://www.consul.io/docs/agent/encryption.html#configuring-tls-on-an-existing-cluster
 
 Self Signed SSL with Consul
@@ -397,12 +398,13 @@ After the configuration is done, here is the consul1 config.json
 "acl_master_token": "bio324k3lje23",
 "acl_default_policy": "deny",
 "acl_down_policy": "extend-cache",
+"acl_agent_token": "5834dc4c-e733-5404-4ece-f8de72dda008",
 "start_join": ["198.55.49.187", "198.55.49.186"]
 }
 
 ```
 
-Please note that verify_incoming is false in this server so that browser can connect without providing certificate. 
+Please note that verify_incoming is false in this server so that browser can connect without providing a certificate. 
 
 
 Here is the consul2 config.json
@@ -423,12 +425,13 @@ Here is the consul2 config.json
 "ca_file": "/etc/consul.d/ssl/ca.cert",
 "cert_file": "/etc/consul.d/ssl/consul.cert",
 "key_file": "/etc/consul.d/ssl/consul.key",
-"verify_incoming": true,
+"verify_incoming": false,
 "verify_outgoing": true,
 "acl_datacenter": "dc1",
 "acl_master_token": "bio324k3lje23",
 "acl_default_policy": "deny",
 "acl_down_policy": "extend-cache",
+"acl_agent_token": "5834dc4c-e733-5404-4ece-f8de72dda008",
 "start_join": ["198.55.49.188", "198.55.49.186"]
 }
 
@@ -452,21 +455,21 @@ Here is the consul3 config.json
 "ca_file": "/etc/consul.d/ssl/ca.cert",
 "cert_file": "/etc/consul.d/ssl/consul.cert",
 "key_file": "/etc/consul.d/ssl/consul.key",
-"verify_incoming": true,
+"verify_incoming": false,
 "verify_outgoing": true,
 "acl_datacenter": "dc1",
 "acl_master_token": "bio324k3lje23",
 "acl_default_policy": "deny",
 "acl_down_policy": "extend-cache",
+"acl_agent_token": "5834dc4c-e733-5404-4ece-f8de72dda008",
 "start_join": ["198.55.49.188", "198.55.49.187"]
 }
 
 ```
 
-Once you switch your browser to https from http, the existing ACL token is not working anymore and you have to input the token from ACL tab again. 
+Once you switch your browser to HTTPS from HTTP, the existing ACL token is not working anymore and you have to input the token from ACL tab again. 
 
-
-As we are using public IP for consul servers, we have to protect other nodes to join the same cluster. To do that we have setup the firewall to only allow the connection from another two nodes. Here is the firewall status on the first consul server.
+As we are using public IP for consul servers, we have to protect other nodes to join the same cluster. To do that we have set up the firewall only to allow the connection from another two nodes. Here is the firewall status on the first consul server.
 
 ```
 sudo ufw status
@@ -484,7 +487,7 @@ Anywhere                   ALLOW       198.55.49.186
 
 ### Install with private IP addresses. 
 
-In the case that you are using private IP addresses, you don't need to specify the exact ip to bind. For example, you can use the following config.json. 
+In the case that you are using private IP addresses, you don't need to specify the exact IP to bind. For example, you can use the following config.json. 
 
 ```
 {
@@ -507,6 +510,7 @@ In the case that you are using private IP addresses, you don't need to specify t
 "acl_master_token": "bio324k3lje23",
 "acl_default_policy": "deny",
 "acl_down_policy": "extend-cache",
+"acl_agent_token": "5834dc4c-e733-5404-4ece-f8de72dda008",
 "start_join": ["198.55.49.187", "198.55.49.186"]
 }
 ```
@@ -528,6 +532,5 @@ curl -k -H "X-Consul-Token: 3f5f1cef-2966-4964-73c5-7ebeb21ba337" https://198.55
 curl -k -H "X-Consul-Token: 3f5f1cef-2966-4964-73c5-7ebeb21ba337" https://198.55.49.188:8500/v1/health/checks/com.networknt.apid-1.0.0
 
 ```
-
 
 [download page]: https://www.consul.io/downloads.html
