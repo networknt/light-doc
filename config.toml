@@ -254,7 +254,7 @@ twitter = "networkntcom"
     name = "News"
     weight = 1
     identifier = "news"
-    url = "/news/"
+    url = "/news/index.html"
 
   [[menu.global]]
     name = "Docs"
