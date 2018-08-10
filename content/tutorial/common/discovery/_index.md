@@ -38,6 +38,7 @@ This tutorial shows how to use the service registry and discovery feature of the
 
 * [Consul Production with TLS][]
 
+* [External Config][]
 
 [Introduction and Code Generation]: /tutorial/common/discovery/generated/
 [Static Configuration]: /tutorial/common/discovery/static/
@@ -50,4 +51,5 @@ This tutorial shows how to use the service registry and discovery feature of the
 [Kubernetes]: /tutorial/common/discovery/kubernetes/
 [Router Assisted Service Discovery]: /tutorial/common/discovery/router/
 [Consul Production with TLS]: /tutorial/common/discovery/consul-tls/
+[External Config]: /tutorial/common/discovery/external-config/
 
