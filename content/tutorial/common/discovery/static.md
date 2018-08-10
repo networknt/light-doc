@@ -9,6 +9,7 @@ weight: 20
 sections_weight: 20
 draft: false
 toc: true
+reviewed: true
 ---
 
 ## Introduction
@@ -22,8 +23,7 @@ API A -> API B -> API D
       -> API C
 ```
 
-Before we change the code, let's copy the generated projects to new folders so
-that we can compare the changes later on.
+Before we change the code, let's copy the generated projects to new folders so that we can compare the changes later on.
 
 ```
 cp -r ~/networknt/discovery/api_a/generated/ ~/networknt/discovery/api_a/static
@@ -32,21 +32,15 @@ cp -r ~/networknt/discovery/api_c/generated/ ~/networknt/discovery/api_c/static
 cp -r ~/networknt/discovery/api_d/generated/ ~/networknt/discovery/api_d/static
 ```
 
-Let's start updating the code in static folders for each project. If you are
-using Intellij IDEA Community Edition, you need to open the discovery folder in
-`~/networknt` and then import each project by right click pom.xml from the static
-folder and select Add as Maven project.
+Let's start updating the code in static folders for each project. If you are using IntelliJ IDEA Community Edition, you need to open the discovery folder in `~/networknt` and then import each project by right click pom.xml from the static folder and select Add as Maven project.
 
-As indicated from the title, we're going to hard code urls in API to API calls
-within configuration files (ie. services will be deployed on the known hosts with known ports)
+As indicated from the title, we're going to hard-code URLs in API to API calls within configuration files (i.e. services will be deployed on the known hosts with known ports)
 
 ## Configuring the APIs 
 
 ### API A
 
-For `API A`, as it is calling `API B` and `API C`, its handler needs to be changed to
-call two other APIs and needs to load a configuration file that define the 
-urls for `API B` and `API C`.
+For `API A`, as it is calling `API B` and `API C`, its handler needs to be changed to call two other APIs and needs to load a configuration file that defines the URLs for `API B` and `API C`.
 
 `DataGetHandler.java`
 
@@ -122,10 +116,7 @@ public class DataGetHandler implements HttpHandler {
 }
 ```
 
-The following is the config file that define the url for `API B` and `API C`. This is hard
-coded and can only be changed in this config file and restart the server. For now, I
-am just creating the file in `src/main/resources/config` folder, but it should be 
-externalized on official environment.
+The following is the config file that defines the URL for `API B` and `API C`. This is hardcoded and can only be changed in this config file and restart the server. For now, I am just creating the file in `src/main/resources/config` folder, but it should be externalized on the official testing environment.
 
 `api_a.yml`
 
@@ -138,7 +129,7 @@ api_c_path: /v1/data
 
 ### API B
 
-Change the handler to call `API D` and load configuration for `API D` url.
+Change the handler to call `API D` and load configuration for `API D` URL.
 
 `DataGetHandler.java`
 
@@ -309,11 +300,10 @@ The result is
 ["API D: Message 1","API D: Message 2","API C: Message 1","API C: Message 2"]
 ```
 
-For now we have four APIs updated and with configured host and path, `API A` can call `API B`,
-`API C` and `API B` can call `API D`. As you can see we are using https connection between API calls. 
+For now, we have four APIs updated and with configured host and path, `API A` can call `API B`, `API C` and `API B` can call `API D`. As you can see we are using https connection between API calls.  
 
 In the next step, we are going to switch our implementation to dynamic discovery with service.yml
 
-Next Step: [Dynamic]({{< relref "/tutorial/common/discovery/dynamic.md" >}})
+Next Step: [Dynamic][]
 
-[dynamic]: /tutorial/common/discovery/dynamic/
+[Dynamic]: /tutorial/common/discovery/dynamic/

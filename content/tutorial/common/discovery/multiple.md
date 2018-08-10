@@ -3,8 +3,7 @@ title: Multiple Instances of the same Service
 linktitle: Multiple Instances of the same Service
 date: 2017-10-17T19:08:51-04:00
 lastmod: 2018-05-15
-description: "Client side load balancing through direct service discovery 
-using configuration."
+description: "Client-side load balancing through direct service discovery using configuration with multiple instances."
 weight: 40
 sections_weight: 40
 draft: false
@@ -13,9 +12,9 @@ toc: true
 
 ## Introduction
 
-In this step we're going to start two `API D` instances that will listen to `7444` and `7445`.
+In this step, we're going to start two `API D` instances that will listen to `7444` and `7445`.
 
-Let's copy our current state from last step into the `multiple` directory.
+Let's copy our current state from the last step into the `multiple` directory.
 
 ```bash
 cp -r ~/networknt/discovery/api_a/dynamic/ ~/networknt/discovery/api_a/multiple
@@ -28,8 +27,7 @@ cp -r ~/networknt/discovery/api_d/dynamic/ ~/networknt/discovery/api_d/multiple
  
 ### API B 
 
-Let's modify API B service.yml to have two API D instances that listen to 7444
-and 7445.
+Let's modify API B service.yml to have two API D instances that listen to 7444 and 7445.
 
 ```yaml
 - com.networknt.registry.URL:
@@ -38,10 +36,10 @@ and 7445.
         com.networknt.apid-1.0.0: https://localhost:7444,https://localhost:7445
 ```
 
-Also, so that we can see different end points being hit, lets disable the connection
-caching in the request to `API D`.
+Also, to see different endpoints being hit, let's disable the connection caching in the request to `API D`.
 
 Change the following section in `DataGetHandler.java`:
+
 ```java
 if(connection == null || !connection.isOpen()) {
     connection = getConnectionD();
@@ -56,8 +54,7 @@ connection = getConnectionD();
 
 ### API D
 
-In order to start two instances with the same code base, we need to modify the
-server.yml before starting the second server. 
+In order to start two instances with the same code base, we need to modify the server.yml before starting the second server. 
 
 Also, let's update the handler so that we know which port serves the request.
 
@@ -125,8 +122,7 @@ mvn clean install exec:exec
 
 ```
  
-Now let's start the second instance of `API D`. Before starting the serer, let's update
-server.yml with https port 7445 and disable HTTP.
+Now let's start the second instance of `API D`. Before starting the server, let's update server.yml with https port 7445 and disable HTTP.
 
 ```yaml
 httpsPort: 7445
@@ -149,13 +145,15 @@ curl -k https://localhost:7441/v1/data
 And the result can be from port 7444 or 7445 as Round Robin load balancer will pick up on of them.
 
 ```
-["API D: Message 1 from port 7445","API D: Message 2 from port 7445","API C: Message 1","API C: Message 2"]
+["Message 1 from port 7444","Message 2 from port 7444","API C: Message 1","API C: Message 2","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
 ```
 
+Or
+
 ```
-["API D: Message 1 from port 7444","API D: Message 2 from port 7444","API C: Message 1","API C: Message 2"]
+["Message 1 from port 7445","Message 2 from port 7445","API C: Message 1","API C: Message 2","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
 ```
 
-The next step, we are going to use consul to do the service registry and discovery.
+The next step, we are going to use [Consul][] to do the service registry and discovery.
 
-[Dynamic]: /tutorial/common/discovery/dynamic/
+[Consul]: /tutorial/common/discovery/consul/

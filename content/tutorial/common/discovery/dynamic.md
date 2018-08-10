@@ -3,8 +3,7 @@ title: Dynamic Service Discovery with Direct Registry
 linktitle: Dynamic Service Discovery with Direct Registry
 date: 2017-10-17T18:46:16-04:00
 lastmod: 2018-05-15
-description: "Service discovery through endpoints defined in configuration 
-allows a seamless move to external registries without code changes."
+description: "Service discovery through endpoints defined in a configuration allows a seamless move to external registries without code changes."
 weight: 30
 sections_weight: 30
 draft: false
@@ -13,17 +12,11 @@ toc: true
 
 ## Introduction
 
-In dynamic discovery, we are going to use cluster components with direct registry
-so that we don't need to start external consul or zookeeper instances. We still go 
-through registry for service discovery but the registry is defined in service.yml.
+In dynamic discovery, we are going to use cluster components with the direct registry so that we don't need to start external Consul or Zookeeper instances. We still go through the registry for service discovery, but the registry is defined in service.yml.
 
-With direct registry in service.yml, we can easily move to consul for service
-discovery without changing the code. Each service can be package with docker
-and utilize different service discovery option by change the configuration in
-service.yml file.
+With direct registry in service.yml, we can easily move to [Consul] for service discovery without changing the code. Each service can be packaged with Docker and utilize different service discovery option by changing the configuration in the service.yml file.
 
-
-First let's copy our previous static code into the to dynamic folder.
+First, let's copy our previous static code into the dynamic folder.
 
 ```
 cp -r ~/networknt/discovery/api_a/static/ ~/networknt/discovery/api_a/dynamic
@@ -32,8 +25,7 @@ cp -r ~/networknt/discovery/api_c/static/ ~/networknt/discovery/api_c/dynamic
 cp -r ~/networknt/discovery/api_d/static/ ~/networknt/discovery/api_d/dynamic
 ```
 
-Lets begin by updating our `API A` service to dynamically resolve the host and
-ports of `API B` and `API C` based on given service ids.
+Let's begin by updating our `API A` service to dynamically resolve the host and ports of `API B` and `API C` based on given service ids.
 
 ## Configuring the APIs
 
@@ -121,9 +113,7 @@ public class DataGetHandler implements HttpHandler {
 }
 ```
 
-The service configuration also needs to be updated to inject the singleton implementations of
-`Cluster`, `LoadBanlance`, `URL` and `Registry`. Please note that the key in parameters
-is serviceId of your calling APIs
+The service configuration also needs to be updated to inject the singleton implementations of `Cluster`, `LoadBalance`, `URL` and `Registry`. Please note that the key in parameters is serviceId of your calling APIs
 
 The following should be added to the `service.yml` `singletons` list:
 
@@ -143,8 +133,7 @@ The following should be added to the `service.yml` `singletons` list:
 
 As we don't need `api_a.yml` anymore, it can be removed.
 
-Now we do the same for `API B` which needs to resolve the endpoint of 
-`API D`. 
+Now we do the same for `API B` which needs to resolve the endpoint of `API D`. 
 
 ### API B
 
@@ -280,12 +269,10 @@ curl -k https://localhost:7441/v1/data
 The result is 
 
 ```
-["API D: Message 1","API D: Message 2","API C: Message 1","API C: Message 2"]
+["API D: Message 1","API D: Message 2","API C: Message 1","API C: Message 2","API B: Message 1","API B: Message 2","API A: Message 1","API A: Message 2"]
 ```
 
-In the next step we are going to start multiple instances of `API D` and see 
-how direct registry will handle the situation.
+In the next step, we are going to start [multiple][] instances of `API D` and see how direct registry will handle the situation.
 
-[Static]: /tutorial/common/discovery/static/
-[consul]: /tutorial/common/discovery/consul/
+[Consul]: /tutorial/common/discovery/consul/
 [multiple]: /tutorial/common/discovery/multiple/
