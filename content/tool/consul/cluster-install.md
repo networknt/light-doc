@@ -8,13 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ### Introduction
 
-HashiCorp Consul provides distributed, highly available, datacenter-aware service discovery and configuration for microservices. It allows services to register itself and client to discover interested services. 
+HashiCorp Consul provides distributed, highly available, datacenter-aware service registry and discovery for microservices. It allows services to register itself and client to discover interested services. 
 
-In the following tutorial, we are going to install a three nodes Consul server. It is recomended that you have 3 or 5 Consul servers running in each datacenter and each instance should be installed in a physical machine or a VM. 
+In the following tutorial, we are going to install a three nodes Consul cluster in three KVM VMs. It is recommended that you have 3 or 5 Consul servers running in each data center and each instance should be installed in a physical machine or a VM. 
 
 Here is the list of machines with Consul server to be installed. 
 
@@ -44,7 +45,7 @@ sudo chown consul:consul /var/consul
 
 ### Creating the Bootstrap Configuration 
 
-We want to implement some encryption to the whisper protocol that consul uses. It has this functionality built in using a shared secret system. 
+We want to implement some encryption to the whisper protocol that consul uses. It has this functionality built-in using a shared secret system. 
 
 ```
 consul keygen
@@ -94,7 +95,7 @@ sudo vi /etc/consul.d/server/config.json
 
 ### Create Server Config for other nodes
 
-The encrypt key must be the same for all of the participants in the cluster, so copying the file has already taken care of that requirement for us. Keep this in mind when creating new configurations. Copy the contents of this configuration file to the other machines that will be acting as your consul servers. Place them in a file at /etc/consul.d/server/config.json just as you did in the first host.
+The encryption key must be the same for all of the participants in the cluster, so copying the file has already taken care of that requirement for us. Keep this in mind when creating new configurations. Copy the contents of this configuration file to the other machines that will be acting as your consul servers. Place them in a file at /etc/consul.d/server/config.json just as you did in the first host.
 
 The only value you need to modify on the other hosts is the IP addresses that it should attempt to connect to. You should make sure that it attempts to connect to the first server instead of its own IP. For instance, the second server in our example would have a file that looks like this:
 
@@ -119,7 +120,7 @@ sudo vi /etc/consul.d/server/config.json
 }
 ```
 
-The third node will have server config like this. 
+The third node will have the server config like this. 
 
 sudo vi /etc/consul.d/server/config.json
 
@@ -141,10 +142,12 @@ sudo vi /etc/consul.d/server/config.json
 
 ```
 
+As the VMs we are using only have a public IP address, we have to explicitly bind to the IP, for an internal network with private IP address, you can just specify client_addr with 0.0.0.0 without using bind_addr in the config. There are example config.json below for internal network. 
+
 
 ### Create Start Script
 
-On all nodes, create start script. As we are using public IP address, we need to bind it in the command line. Please remember to change the bind ip in each node. 
+On all nodes, create a start script. 
 
 sudo vi /etc/systemd/system/consul.service
 
@@ -175,7 +178,7 @@ sudo systemctl enable consul
 
 ### Start Cluster
 
-On a server that contains the bootstrap configuration file (the first node), use su to change to the consul user briefly. We can then call consul and pass in the bootstrap directory as an argument:
+On a server that contains the bootstrap configuration file (the first node), use 'su' to change to the consul user briefly. We can then call consul and pass in the bootstrap directory as an argument:
 
 ```
 su consul
@@ -194,12 +197,11 @@ On your other consul servers, start the server.
 sudo systemctl start consul
 ```
 
-
-These servers will connect to the bootstrapped server, completing the cluster. At this point, we have a cluster of three servers, two of which are operating normally, and one of which is in bootstrap mode, meaning that it can make executive decisions without consulting the other servers. This is not what we want. We want each of the servers on equal footing. Now that the cluster is created, we can shutdown the bootstrapped consul instance and then re-enter the cluster as a normal server.
+These servers will connect to the bootstrapped server, completing the cluster. At this point, we have a cluster of three servers, two of which are operating normally, and one of which is in bootstrap mode, meaning that it can make executive decisions without consulting the other servers. This is not what we want. We want each of the servers on equal footing. Now that the cluster is created, we can shut down the bootstrapped consul instance and then re-enter the cluster as a regular server.
 
 To do this, hit CTRL-C in the bootstrapped server's terminal: 
 
-Now, exit back into your root session and start the consul service like you did with the rest of the servers:
+Now, exit back into your root session and start the consul service as you did with the rest of the servers:
 
 ```
 sudo systemctl start consul
@@ -216,21 +218,24 @@ Node           Address             Status  Type    Build  Protocol  DC   Segment
 198-55-49-188  198.55.49.188:8301  alive   server  1.2.2  2         dc1  <all>
 ```
 
-To enable these nodes to access each other, the firewall rules might need to be defined. The following is on my server.
+To enable these nodes to access each other, the firewall rules might need to be defined. The following is on my server. Basically, these three nodes can access each other freely. 
 
 ```
 sudo ufw status
+[sudo] password for steve: 
 Status: active
 
 To                         Action      From
 --                         ------      ----
 8500/tcp                   ALLOW       Anywhere                  
-8300/tcp                   ALLOW       Anywhere                  
-8301/tcp                   ALLOW       Anywhere                  
+Anywhere                   ALLOW       198.55.49.187             
+Anywhere                   ALLOW       198.55.49.186             
+22/tcp                     ALLOW       Anywhere                  
 8500/tcp (v6)              ALLOW       Anywhere (v6)             
-8300/tcp (v6)              ALLOW       Anywhere (v6)             
-8301/tcp (v6)              ALLOW       Anywhere (v6)
+22/tcp (v6)                ALLOW       Anywhere (v6)       
 ```
+
+Once you enable the ufw, you need to ensure that port 22 is allowed so that you can still connect to the server from SSH. The port 8500 is open for other services to access to consul APIs. 
 
 ### Enable ACLs on the Consul Servers
 
@@ -241,7 +246,7 @@ The first step for bootstrapping ACLs is to enable ACLs on the Consul servers in
 3. A default policy of "deny" which means we are in whitelist mode
 4. A down policy of "extend-cache" which means that we will ignore token TTLs during an outage
 
-Here's the corresponding JSON configuration file. Please add the content into the /etc/consul.d/server/config.json
+Here's the corresponding JSON configuration file. Please add the content into the /etc/consul.d/server/config.json for all nodes.
 
 ```
 {
@@ -260,6 +265,12 @@ To restart the server.
 sudo systemctl restart consul
 ```
 
+To ensure that the server instance is started successfully, you can check the log with the following command. 
+
+```
+sudo tail -100 /var/log/syslog
+```
+
 ### Generate an Agent Token
 
 We can create a token using the ACL API, and the ACL master token we set in the previous step:
@@ -272,7 +283,7 @@ curl \
 '{
 "Name": "Agent Token",
 "Type": "client",
-"Rules": "node \"\" { policy = \"write\" } service \"\" { policy = \"write\" }"
+"Rules": "agent \"\" { policy = \"write\" } node \"\" { policy = \"write\" } service \"\" { policy = \"write\" }"
 }' http://198.55.49.188:8500/v1/acl/create
 ```
 
@@ -285,10 +296,10 @@ The result would be something like the following.
 The above curl command is assuming that http is used. Once the TLS is enabled on the Consul server, you need to use the following command line instead. 
 
 ```
-curl -k --request PUT --header "X-Consul-Token: bio324k3lje23" --data '{"Name": "Agent Token","Type": "client","Rules": "node \"\" { policy = \"write\" } service \"\" { policy = \"write\" }"}' https://198.55.49.188:8500/v1/acl/create
+curl -k --request PUT --header "X-Consul-Token: bio324k3lje23" --data '{"Name": "Agent Token","Type": "client","Rules": "agent \"\" { policy = \"write\" } node \"\" { policy = \"write\" } service \"\" { policy = \"write\" }"}' https://198.55.49.188:8500/v1/acl/create
 ```
 
-### Create an Agent Token
+### Set an Agent Token
 
 In Consul 0.9.1 and later you can also introduce the agent token using an API, so it doesn't need to be set in the configuration file:
 
@@ -304,7 +315,21 @@ curl \
 
 With that ACL agent token set, the servers will be able to sync themselves with the catalog.
 
-In most of our case, we are going to generate a token instead creating a token with known id. 
+Please note, to set the token using API won't persist the token, so if the entire cluster is restarted, you have to do this manually again. 
+
+In most of our case, we are going to create the token with API above and update the config.json so that the token can be persisted. 
+
+Here is section of the config.json after adding the agent token. 
+
+```
+{
+"acl_datacenter": "dc1",
+"acl_master_token": "bio324k3lje23",
+"acl_default_policy": "deny",
+"acl_down_policy": "extend-cache",
+"acl_agent_token": "5834dc4c-e733-5404-4ece-f8de72dda008",
+}
+```
 
 ### ACL Policy
 
