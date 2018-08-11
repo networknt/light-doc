@@ -1,6 +1,7 @@
 ---
 date: 2017-10-19T19:57:17-04:00
 title: Kubernetes
+description: "Deploying services to Kubernetes and using Consul for service registry and discovery"
 reviewed: true
 weight: 90
 sections_weight: 90
@@ -38,7 +39,7 @@ We are going to install Consul on sandbox just for testing purpose. Usually, you
 docker run -d -p 8400:8400 -p 8500:8500/tcp -p 8600:53/udp -e 'CONSUL_LOCAL_CONFIG={"acl_datacenter":"dc1","acl_default_policy":"allow","acl_down_policy":"extend-cache","acl_master_token":"the_one_ring","bootstrap_expect":1,"datacenter":"dc1","data_dir":"/usr/local/bin/consul.d/data","server":true}' consul agent -server -ui -bind=127.0.0.1 -client=0.0.0.0
 ```
 
-To verify that Consul is up and running from the Web UI, go to your browser and issue. 
+To verify that Consul is up and running from the Web UI, go to your browser and paste the following link. 
 
 ```
 http://sandbox:8500/ui/#/dc1/services
@@ -125,6 +126,34 @@ maxPort: 2500
 ``` 
 
 As you can see, enableRegistry is true and dynamicPort is true. A range of ports has been specified by providing minPort and maxPort. 
+
+Now let's change the consul.yml to the following. 
+
+```
+# Consul URL for accessing APIs
+consulUrl: http://consul:8500
+# deregister the service after the amount of time after health check failed.
+deregisterAfter: 90m
+# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
+# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
+# then mark the service is critical.
+checkInterval: 30s
+# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
+# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
+# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
+tcpCheck: true
+# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
+# coming back. This is suitable for service that depending on database or other infrastructure services. You should
+# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
+httpCheck: false
+# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
+# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
+# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
+ttlCheck: false
+
+```
+
+Please note that we are using consul as the host name to consul server on the sandbox. Also we have change health check to tcpCheck so that consul server will try to ping all services to sure they are up and running. 
 
 When we use dynamicPort, we cannot have EXPOSE in Dockerfile anymore and let's comment this line out in Dockerfile. In the future, we are going to remove this from light-codegen. 
 
@@ -282,6 +311,36 @@ maxPort: 2500
 
 As you can see, enableRegistry is true and dynamicPort is true. A range of ports has been specified by providing minPort and maxPort. 
 
+Now let's change the consul.yml to the following. 
+
+```
+# Consul URL for accessing APIs
+consulUrl: http://consul:8500
+# deregister the service after the amount of time after health check failed.
+deregisterAfter: 90m
+# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
+# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
+# then mark the service is critical.
+checkInterval: 30s
+# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
+# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
+# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
+tcpCheck: true
+# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
+# coming back. This is suitable for service that depending on database or other infrastructure services. You should
+# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
+httpCheck: false
+# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
+# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
+# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
+ttlCheck: false
+
+```
+
+Please note that we are using consul as the host name to consul server on the sandbox. Also we have change health check to tcpCheck so that consul server will try to ping all services to sure they are up and running. 
+
+
+
 When we use dynamicPort, we cannot have EXPOSE in Dockerfile anymore and let's comment this line out in Dockerfile. In the future, we are going to remove this from light-codegen. 
 
 ```
@@ -438,6 +497,35 @@ maxPort: 2500
 ``` 
 
 As you can see, enableRegistry is true and dynamicPort is true. A range of ports has been specified by providing minPort and maxPort. 
+
+Now let's change the consul.yml to the following. 
+
+```
+# Consul URL for accessing APIs
+consulUrl: http://consul:8500
+# deregister the service after the amount of time after health check failed.
+deregisterAfter: 90m
+# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
+# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
+# then mark the service is critical.
+checkInterval: 30s
+# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
+# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
+# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
+tcpCheck: true
+# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
+# coming back. This is suitable for service that depending on database or other infrastructure services. You should
+# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
+httpCheck: false
+# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
+# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
+# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
+ttlCheck: false
+
+```
+
+Please note that we are using consul as the host name to consul server on the sandbox. Also we have change health check to tcpCheck so that consul server will try to ping all services to sure they are up and running. 
+
 
 When we use dynamicPort, we cannot have EXPOSE in Dockerfile anymore and let's comment this line out in Dockerfile. In the future, we are going to remove this from light-codegen. 
 
@@ -599,6 +687,36 @@ maxPort: 2500
 ``` 
 
 As you can see, enableRegistry is true and dynamicPort is true. A range of ports has been specified by providing minPort and maxPort. 
+
+Now let's change the consul.yml to the following. 
+
+```
+# Consul URL for accessing APIs
+consulUrl: http://consul:8500
+# deregister the service after the amount of time after health check failed.
+deregisterAfter: 90m
+# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
+# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
+# then mark the service is critical.
+checkInterval: 30s
+# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
+# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
+# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
+tcpCheck: true
+# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
+# coming back. This is suitable for service that depending on database or other infrastructure services. You should
+# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
+httpCheck: false
+# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
+# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
+# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
+ttlCheck: false
+
+```
+
+Please note that we are using consul as the host name to consul server on the sandbox. Also we have change health check to tcpCheck so that consul server will try to ping all services to sure they are up and running. 
+
+
 
 When we use dynamicPort, we cannot have EXPOSE in Dockerfile anymore and let's comment this line out in Dockerfile. In the future, we are going to remove this from light-codegen. 
 
