@@ -1,7 +1,7 @@
 ---
 title: "Router Assisted Service Discovery"
 date: 2018-03-05T10:47:40-05:00
-description: ""
+description: "Service discovery with light-router for client that is not running in a JVM. "
 categories: []
 keywords: []
 slug: ""
@@ -10,18 +10,18 @@ toc: false
 draft: false
 weight: 100
 sections_weight: 100
+reviewed: true
 ---
 
-[Light-router][] is a service that provides consumers another option to do service discovery if they cannot leverage [client][] module provided by light-4j.
+[Light-router][] is a service that provides consumers with another option to do service discovery if they cannot leverage [client][] module provided by light-4j.
 
-There are two ways to [deploy light-router][] and it is highly recommended for client to own the instance of light-router.  
+There are two ways to [deploy light-router][], and it is highly recommended for the client to own the instance of light-router.  
 
-For demo purpose, the light-router will be deployed in Kubernetes cluster master node as it has a static IP address. By following the steps below, you should have a router instance up and running and connect to multiple instances of API A in the Kubernetes cluster. Communication between API A, B, C and D is handled with client module inside each API. 
+For demo purpose, the light-router will be deployed in Kubernetes cluster master node as it has a static IP address. By following the steps below, you should have a router instance up and running and connect to multiple instances of API A in the Kubernetes cluster. Communication between API A, B, C, and D is handled with the client module inside each API. 
 
 ### Environment
 
-The light-router will be deployed to sandbox which is our development Kubernetes cluster master node. 
-
+The light-router will be deployed to the sandbox which is our development Kubernetes cluster master node. 
 
 ### Config
 
@@ -66,7 +66,7 @@ docker-compose up -d
 
 ### Test
 
-Before we start using the light-router, let's make sure that we can access the reference apis with API A. 
+Before we start using the light-router, let's make sure that we can access the reference APIs. 
 
 Go to the consul server http://38.113.162.50:8500/ to find an instance of API A. Here is an example.  
 
@@ -91,6 +91,10 @@ And the result is:
 ```json
 ["API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API C: Message 1","API C: Message 2","API A: Message 1","API A: Message 2"]
 ```
+
+### Summary
+
+Light-router is an infrastructure service that can assist internal client which is not built on top of Java 8 for service discovery and security. It also can act as an external access point for external client to access internal service. In this case, it is playing a role of distributed API gateway.  
 
 
 [Light-router]: /service/router/

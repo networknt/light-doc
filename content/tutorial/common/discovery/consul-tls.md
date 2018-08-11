@@ -1,7 +1,7 @@
 ---
 title: "Consul Production with TLS"
 date: 2018-08-03T15:36:59-04:00
-description: ""
+description: "Service discovery with a production ready Consul cluster with TLS enabled from Kubernetes cluster."
 categories: []
 keywords: []
 slug: ""
