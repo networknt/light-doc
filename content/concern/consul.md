@@ -96,7 +96,7 @@ To map the ConsulClientImpl to the interface ConsulClient, there is an entry in 
 ```
 singletons:
 - com.networknt.consul.client.ConsulClient:
-  - com.networknt.consul.client.ConsulClientImpl:
+  - com.networknt.consul.client.ConsulClientImpl
 - com.networknt.registry.Registry:
   - com.networknt.consul.ConsulRegistry
 
