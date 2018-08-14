@@ -10,21 +10,20 @@ toc: false
 draft: false
 ---
 
-Graphql Security verifies JWT token in request header and verifies scopes if it is enabled.
-It is very similar with swagger-security / openapi-security but as there is no swagger 
-specification we cannot verify scopes against specification. GraphQL recommend authorization 
-outside of schema so that we can only verify query scope and mutation scope for read and write 
-access.
+Graphql Security verifies JWT token in request header and verifies scopes if it is enabled. It is very similar with swagger-security / openapi-security but as there is no swagger specification we cannot verify scopes against specification. GraphQL recommend authorization 
+outside of schema so that we can only verify query scope and mutation scope for read and write access.
 
+This is the handler that should be put before graphql-validator. There is no need to do any validation if JWT token does not exist in the request header.
 
+From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a security configuration file for different frameworks, a new graphql-security.yml with the same content has been introduced. The security.yml is still loaded if graphql-security.yml doesn't exist for backward compatibility. 
 
-This is the handler that should be put before graphql-validator. There is no need to do any 
-validation if JWT token does not exist in the request header.
-
-The module share the same security.yml and here is an example.
+Here is an example of graphql-security.yml
 
 ```
-# Security configuration in light framework.
+# Security configuration for graphql-security in light-graphql-4j. It is a specific config
+# for GraphQL framework security. It is introduced to support multiple frameworks in the
+# same server instance. If this file cannot be found, the generic security.yml will be
+# loaded for backward compatibility.
 ---
 # Enable JWT verification flag.
 enableVerifyJwt: true
@@ -38,20 +37,15 @@ enableMockJwt: false
 # JWT signature public certificates. kid and certificate path mappings.
 jwt:
   certificate:
-    '100': oauth/primary.crt
-    '101': oauth/secondary.crt
+    '100': primary.crt
+    '101': secondary.crt
   clockSkewInSeconds: 60
 
-# Enable or disable JWT token logging for audit. This is to log the entire token
-# or choose the next option that only logs client_id, user_id and scope.
+# Enable or disable JWT token logging
 logJwtToken: true
 
-# Enable or disable client_id, user_id and scope logging if you don't want to log
-# the entire token. Choose this option or the option above.
+# Enable or disable client_id, user_id and scope logging.
 logClientUserScope: false
-
-# If OAuth2 provider support http2 protocol. If using light-oauth2, set this to true.
-oauthHttp2Support: true
 
 # Enable JWT token cache to speed up verification. This will only verify expired time
 # and skip the signature verification as it takes more CPU power and long time.
@@ -62,4 +56,5 @@ enableJwtCache: true
 # the first token is arrived. Default to false for dev environment without oauth2 server
 # or official environment that use other OAuth 2.0 providers.
 bootstrapFromKeyService: false
+
 ```
