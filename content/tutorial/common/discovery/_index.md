@@ -39,6 +39,8 @@ This tutorial shows how to use the service registry and discovery feature of the
 
 * [Consul Production with TLS][]
 
+* [Consul HTTP Health Check][]
+
 * [External Config][]
 
 [Introduction and Code Generation]: /tutorial/common/discovery/generated/
@@ -53,4 +55,5 @@ This tutorial shows how to use the service registry and discovery feature of the
 [Router Assisted Service Discovery]: /tutorial/common/discovery/router/
 [Consul Production with TLS]: /tutorial/common/discovery/consul-tls/
 [External Config]: /tutorial/common/discovery/external-config/
+[Consul HTTP Health Check]: /tutorial/common/discovery/http-health/
 
