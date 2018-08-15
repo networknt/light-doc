@@ -39,6 +39,25 @@ start up if validator.yml enableValidator is true. By default, only
 RequestValidator will be called. Response validation should be done in the
 [client][] module. 
 
+### Configuration
+
+From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a validator configuration file for different frameworks, a new openapi-validator.yml with the same content has been introduced. The validator.yml is still loaded if openapi-validator.yml doesn't exist for backward compatibility. 
+
+Here is an example of openapi-validator.yml
+
+```
+# This is specific OpenAPI validator configuration file. It is introduced to support multiple
+# frameworks in the same server instance and it is recommended. If this file cannot be found,
+# the generic validator.yml will be loaded as a fallback.
+---
+# Enable request validation. Response validation is not done on the server but client.
+enabled: true
+# Log error message if validation error occurs
+logError: true
+
+```
+
+
 ### RequestValidator
 
 It will validate the following:
