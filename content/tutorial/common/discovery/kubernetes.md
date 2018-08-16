@@ -133,7 +133,7 @@ Now let's change the consul.yml to the following.
 # Consul URL for accessing APIs
 consulUrl: http://consul:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
@@ -317,7 +317,7 @@ Now let's change the consul.yml to the following.
 # Consul URL for accessing APIs
 consulUrl: http://consul:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
@@ -504,7 +504,7 @@ Now let's change the consul.yml to the following.
 # Consul URL for accessing APIs
 consulUrl: http://consul:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
@@ -694,7 +694,7 @@ Now let's change the consul.yml to the following.
 # Consul URL for accessing APIs
 consulUrl: http://consul:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.

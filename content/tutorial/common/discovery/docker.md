@@ -37,7 +37,7 @@ When starting the docker-compose for services, we need to set up the DOCKER_HOST
 # Consul URL for accessing APIs
 consulUrl: http://192.168.1.120:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
@@ -82,7 +82,7 @@ docker build -t networknt/com.networknt.apia-1.0.0 -f docker/Dockerfile .
 # Consul URL for accessing APIs
 consulUrl: http://192.168.1.120:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
@@ -127,7 +127,7 @@ docker build -t networknt/com.networknt.apib-1.0.0 -f docker/Dockerfile .
 # Consul URL for accessing APIs
 consulUrl: http://192.168.1.120:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
@@ -172,7 +172,7 @@ docker build -t networknt/com.networknt.apic-1.0.0 -f docker/Dockerfile .
 # Consul URL for accessing APIs
 consulUrl: http://192.168.1.120:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.

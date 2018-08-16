@@ -75,7 +75,7 @@ Here is the consul.yml for api_a and api_d
 # Consul URL for accessing APIs
 consulUrl: https://198.55.49.188:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
@@ -100,7 +100,7 @@ Here is the consul.yml for api_b
 # Consul URL for accessing APIs
 consulUrl: https://198.55.49.187:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
@@ -125,7 +125,7 @@ Here is the consul.yml for api_c
 # Consul URL for accessing APIs
 consulUrl: https://198.55.49.186:8500
 # deregister the service after the amount of time after health check failed.
-deregisterAfter: 90m
+deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
 # TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
 # then mark the service is critical.
