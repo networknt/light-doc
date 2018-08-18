@@ -12,13 +12,12 @@ weight: 30
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This document will give you step-by-step guidelines on how to use light-codegen which
-is an in-house generator to support all API frameworks/styles in light platform and beyond.
+This document will give you step-by-step guidelines on how to use light-codegen which is an in-house generator to support all API frameworks/styles in the light platform and beyond.
   
-All frameworks in light platform are design-driven and you can scaffold a new project based
-on the IDL (Interface Definition Language) with light-codegen. 
+All frameworks in the light platform are design-driven, and you can scaffold a new project based on the IDL (Interface Definition Language) with light-codegen. 
 
 * [Generate Restful API with Swagger 2.0 Specification][]
 
