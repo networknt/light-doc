@@ -91,6 +91,8 @@ The implementation is simple restful API invocation with Http2Client in the ligh
 
 ### Configuration
 
+* service.yml
+
 To map the ConsulClientImpl to the interface ConsulClient, there is an entry in the service.yml config file. The following is an example.
 
 ```
@@ -123,6 +125,8 @@ singletons:
   - com.networknt.consul.ConsulRegistry
 ```
 
+* consul.yml
+
 There is also a consul.yml to control the behaviour of the consul client. It is important to understand the difference between three options for the health check in this config file. 
 
 Here is an example of consul.yml
@@ -149,6 +153,8 @@ httpCheck: true
 # is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
 ttlCheck: false
 ```
+
+* server.yml
 
 In the server.yml, we need to enable registry and dynamic port. Here is an example. 
 
@@ -211,6 +217,8 @@ maxPort: 2500
 
 Please note that enableRegistry is true and dynamicPort is true. Also there is minPort and maxPort to define a range for port allocation. You need to talk to your cluster admin to find out which port range is availabe to use and confirm that the firewall is opened for the range. You can also set up environment if you want to deploy multiple environments to the same cluster. 
 
+* secret.yml
+
 In the secret.yml config file, we need to put the Consul ACL token in so that we can call the Consul API to register and discover the service. 
 
 ```
@@ -263,9 +271,73 @@ emailPassword: change-to-real-password
 
 Please note the consulToken defined in the secret.yml example. 
 
+* client.trustore
 
 Assuming that TLS is used, we need to import the consul certificate to the client.truststore with keytool. You can ask the Consul admin for the certicate. Please refer to [keystore truststore][] for more info. 
 
+* handler.yml
+
+In the handler.yml, we need to define the /health/{serviceId} endpoint to map to a framework implementation of health check handler or your own customized health check. 
+
+```
+enabled: true
+
+handlers:
+  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
+  - com.networknt.exception.ExceptionHandler@exception
+  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
+  - com.networknt.metrics.MetricsHandler@metrics
+  # Traceability Put traceabilityId into response header from request header if it exists
+  - com.networknt.traceability.TraceabilityHandler@traceability
+  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
+  - com.networknt.correlation.CorrelationHandler@correlation
+  # Swagger Parsing swagger specification based on request uri and method.
+  - com.networknt.swagger.SwaggerHandler@specification
+  # Security JWT token verification and scope verification (depending on SwaggerHandler)
+  - com.networknt.security.JwtVerifyHandler@security
+  # Body Parse body based on content type in the header.
+  - com.networknt.body.BodyHandler@body
+  # SimpleAudit Log important info about the request into audit log
+  - com.networknt.audit.AuditHandler@audit
+  # Sanitizer Encode cross site scripting
+  - com.networknt.sanitizer.SanitizerHandler@sanitizer
+  # Validator Validate request based on swagger specification (depending on Swagger and Body)
+  - com.networknt.validator.ValidatorHandler@validator
+  # Health Check Handler
+  - com.networknt.health.HealthGetHandler@health
+  # Server Info Handler
+  - com.networknt.info.ServerInfoGetHandler@info
+  # Data handler
+  - com.networknt.apid.handler.DataGetHandler@data
+chains:
+  default:
+    - exception
+    - metrics
+    - traceability
+    - correlation
+    - specification
+    - body
+    - audit
+    - sanitizer
+    - validator
+
+paths:
+  - path: '/v1/data'
+    method: 'get'
+    exec:
+      - default
+      - data
+  - path: '/health/com.networknt.apid-1.0.0'
+    method: 'get'
+    exec:
+      - health
+  - path: '/server/info'
+    method: 'get'
+    exec:
+      - info
+```
+
+When the service register itself to Consul, it will tell Consul to call the /heath/com.networknt.apid-1.0.0 to ensure the service is alive every 10 seconds. 
 
 ### Deployment
 
