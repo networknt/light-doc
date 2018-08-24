@@ -374,7 +374,7 @@ spec:
               fieldPath: status.hostIP
 ```
 
-Please note that hostNetwork is set to true and an env variable "STATUS_HOST_IP" must be passed into the container from a fieldPath called status.hostIP. 
+Please note that hostNetwork is set to true and an env variable "STATUS_HOST_IP" must be passed into the container from a fieldPath called status.hostIP. No static value needs to be put into the deployment config, but it directs the Kubernetes to call its API to get the host ip address and pass it into the container. 
 
 
 ### Tutorial
