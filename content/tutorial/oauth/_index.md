@@ -41,6 +41,8 @@ there are steps to enable all security with config files.
 
 * [Deploy to Kubernetes Cluster][]
 
+* [Deploy to Openshift Cluster][]
+
 * [Integrate Kerberos/SPNEGO on Mac][]
 
 [How to generate long lived access token]: /tutorial/oauth/longlive/
@@ -54,4 +56,5 @@ there are steps to enable all security with config files.
 [Client Authenticated User]: /tutorial/oauth/custom/
 [Provider Service]: /tutorial/oauth/provider/
 [Deploy to Kubernetes Cluster]: /tutorial/oauth/kubernetes/
+[Deploy to Openshift Cluster]: /tutorial/oauth/openshift/
 [Integrate Kerberos/SPNEGO on Mac]: /tutorial/oauth/kerberos/

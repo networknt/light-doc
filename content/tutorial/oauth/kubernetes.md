@@ -27,28 +27,13 @@ node3           Ready     <none>    13d       v1.11.0
 sandbox         Ready     master    13d       v1.11.0
 ```
 
-In most of the cases, we would recommend to install light-oauth2 into the VMs so that we can easily control how to form the cluster. In this tutorial, we will deploy all the services to the first node using host network. After the deployment, we can access these services with the IP and default port numbers. There are numeric other ways to deploy the light-oauth2 to a Kubernetes cluster. You can deploy them to all three nodes dynamically and user service name to access each service. We will explore it in another tutorial. 
-
-### Label Node
-
-We want to deploy all light-oauth2 services with their default ports on the host network on node1 above. First we need to setup the nodeSelector label. 
-
-```
-kubectl label nodes node1 oauth2=dc1
-```
-The above give node1 a label oauth2=dc1 which means this is simulating data center 1 and we will deploy another data center in the subsequent tuturial to demo the federated light-oauth2 deployment across two different data centers. 
-
-You can verify the result by running. 
-
-```
-kubectl get nodes --show-labels
-```
+In most of the cases, we would recommend installing light-oauth2 into the VMs so that we can easily control how to form the cluster with the internal Hazelcast IMDG. In this tutorial, we will deploy all the services to the Kubernetes cluster and access these services from Kubernetes service names. There are numeric other ways to deploy the light-oauth2 to a Kubernetes cluster. We will explore them in other tutorials. 
 
 ### Docker Images
 
 In this tutorail, we are going to use the docker images from https://hub.docker.com/u/networknt/dashboard/
 
-1.5.18 is the latest tag at the moment when this tutorial is written. 
+1.5.19 is the latest tag at the moment when this tutorial is written. 
 
 ### Deployment Config
 
@@ -57,7 +42,7 @@ As light-oauth2 doesn't have any internal configuration files in the docker imag
 We are going to use the light-config-test repo for this tutorial and the folder we are using is the following.
 
 ```
-
+light-config-test/light-oauth2/kubernetes
 ```
 
 
