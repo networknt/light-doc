@@ -27,6 +27,7 @@ Here is a list of cross-cutting concerns provided by the light platform.
 
 * [Audit log](/concern/audit/)
 * [Load Balance](/concern/balance/)
+* [Basic Authentication](/concern/basic/)
 * [Body Parser](/concern/body/)
 * [HTTP/2 Client](/concern/client/)
 * [Cluster Support](/concern/cluster/)
@@ -43,6 +44,7 @@ Here is a list of cross-cutting concerns provided by the light platform.
 * [Header Handler](/concern/header/)
 * [Health Check](/concern/health/)
 * [Server Info](/concern/info/)
+* [IP Whitelist](/concern/ip-whitelist/)
 * [Rate Limit](/concern/limit/)
 * [Log Mask](/concern/mask/)
 * [InfluxDB Metrics](/concern/metrics/)
