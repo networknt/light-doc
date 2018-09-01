@@ -14,11 +14,9 @@ toc: false
 draft: false
 ---
 
-Compare with monolithic application development, the process is totally different when
-adopting microservices architecture. 
+Compare with monolithic application development, the process is totally different when adopting microservices architecture. 
 
-In this section, numeric topics will be covered for developers who want to work on light
-platform or developers who want to build applications on top of light platform. 
+In this section, numeric topics will be covered for developers who want to work on light platform or developers who want to build applications on top of light platform. 
 
 
 - [Best Practices](/development/best-practices/) 
@@ -30,3 +28,7 @@ platform or developers who want to build applications on top of light platform.
   * [Development Flow](/development/flow/)
   * [Service Provider](/development/service-provider/)
   * [Service Consumer](/development/service-consumer/)
+- [Debugging](/development/debugging/)
+  * [TLS Debugging](/development/debugging/tls/)
+  * [Configuration](/development/debugging/configuration/)
+  
