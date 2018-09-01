@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When you have service to service communications between services, HTTPS is a must and we have both client and server [keystore and truststore][] to support one-way TLS or two-way TLS. 
+When you have service to service communications between microservices, HTTPS is a must, and we have both client and server [keystore and truststore][] to support one-way TLS or two-way TLS. 
 
-For most developers, manipulating keystore and truststore with [keytool][] would be new for them. If it is not working, turn on the network debug would help greatly. 
+For most developers, manipulating keystore and truststore with [keytool][] would be new for them. If it is not working, turn on the network debugger would help a lot. 
 
 Just put the following line into the VM options in the run/debug configurations window to enable the net debugging. 
 
