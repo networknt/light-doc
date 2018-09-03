@@ -8,21 +8,16 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Graphql Router is responsible for handling GraphQL and GraphiQL requests and hooks schema provider.
-It provides RouteHandler and SchemaProvider interfaces and implement both GET and POST handlers 
-for GraphQL.
+Graphql Router is responsible for handling GraphQL and GraphiQL requests and hooks schema provider. It provides RouteHandler and SchemaProvider interfaces and implements both GET and POST handlers for GraphQL.
 
-The router is a HandlerProvider and it needs to be put into service.yml config file.
+The router is a HandlerProvider, and it needs to be put into the service.yml config file.
 
 This [link][] is an example.
 
-The user developed schema needs to be hooked to the GraphqlPostHandler in this module through 
-SchemaProvider interface. The service.yml config file should include the implementation of the
-com.networknt.graphql.router.SchemaProvider
+The user developed schema needs to be hooked to the GraphqlPostHandler in this module through SchemaProvider interface. The service.yml config file should include the implementation of the com.networknt.graphql.router.SchemaProvider
 
-Another [example][].
 
-[link]: https://github.com/networknt/light-example-4j/blob/master/graphql/mutation/src/main/resources/META-INF/services/com.networknt.server.HandlerProvider
-[example]: https://github.com/networknt/light-example-4j/blob/master/graphql/mutation/src/main/resources/META-INF/services/com.networknt.graphql.router.SchemaProvider
+[link]: https://github.com/networknt/light-example-4j/blob/master/graphql/mutation/src/main/resources/config/service.yml

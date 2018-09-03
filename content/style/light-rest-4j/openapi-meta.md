@@ -1,5 +1,5 @@
 ---
-title: "Openapi Meta"
+title: "OpenAPI Meta"
 date: 2017-11-22T22:46:11-05:00
 description: ""
 categories: []

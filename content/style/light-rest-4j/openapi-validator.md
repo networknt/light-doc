@@ -1,5 +1,5 @@
 ---
-title: "Openapi Validator"
+title: "OpenAPI Validator"
 date: 2017-11-22T22:46:26-05:00
 description: ""
 categories: []

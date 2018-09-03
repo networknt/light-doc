@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Graphql Security verifies JWT token in request header and verifies scopes if it is enabled. It is very similar with swagger-security / openapi-security but as there is no swagger specification we cannot verify scopes against specification. GraphQL recommend authorization 
+Graphql Security verifies JWT token in request header and verifies scopes if it is enabled. It is very similar with swagger-security / openapi-security but as there is no swagger specification we cannot verify scopes against the specification. GraphQL recommend authorization 
 outside of schema so that we can only verify query scope and mutation scope for read and write access.
 
 This is the handler that should be put before graphql-validator. There is no need to do any validation if JWT token does not exist in the request header.

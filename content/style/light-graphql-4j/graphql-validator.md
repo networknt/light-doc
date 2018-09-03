@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Graphql Validator validates the path and methods of the request. Other schema validation will be handled by the GraphQL component.
