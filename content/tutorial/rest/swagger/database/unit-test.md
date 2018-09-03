@@ -317,7 +317,7 @@ Here is the one for testing with H2 data source.
 # Singleton service factory configuration
 singletons:
 # HandlerProvider implementation
-- com.networknt.server.HandlerProvider:
+- com.networknt.handler.HandlerProvider:
   - com.networknt.database.PathHandlerProvider
 # StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
 # - com.networknt.server.StartupHookProvider:

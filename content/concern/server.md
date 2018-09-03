@@ -142,7 +142,7 @@ Here is an example of the config.
 
 ```
 # HandlerProvider implementation
-- com.networknt.server.HandlerProvider:
+- com.networknt.handler.HandlerProvider:
   - com.networknt.petstore.PathHandlerProvider
 ```
 

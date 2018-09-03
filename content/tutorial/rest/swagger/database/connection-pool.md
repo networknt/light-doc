@@ -24,7 +24,7 @@ service.yml in ~/networknt/light-example-4j/rest/swagger/database/generated/src/
 # Singleton service factory configuration/IoC injection
 singletons:
 # HandlerProvider implementation
-- com.networknt.server.HandlerProvider:
+- com.networknt.handler.HandlerProvider:
   - com.networknt.database.PathHandlerProvider
 # StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
 # - com.networknt.server.StartupHookProvider:

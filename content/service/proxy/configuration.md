@@ -291,7 +291,7 @@ For swagger specification, it should be something look like this.
 # Singleton service factory configuration/IoC injection
 singletons:
 # HandlerProvider implementation
-- com.networknt.server.HandlerProvider:
+- com.networknt.handler.HandlerProvider:
   - com.networknt.proxy.ProxyHandlerProvider
 # StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
 # - com.networknt.server.StartupHookProvider:
@@ -383,7 +383,7 @@ singletons:
 - com.networknt.oas.validator.Validator<com.networknt.oas.model.Xml>:
   - com.networknt.oas.validator.impl.XmlValidator
 # HandlerProvider implementation
-- com.networknt.server.HandlerProvider:
+- com.networknt.handler.HandlerProvider:
   - com.networknt.proxy.ProxyHandlerProvider
 # StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
 # - com.networknt.server.StartupHookProvider:

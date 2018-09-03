@@ -92,7 +92,7 @@ is a generated petstore handler provider that has the mapping for all endpoints.
 The above is using light-rest-4j as example, for GraphQL and Hybrid, the handler provider will be
 different.
 
-Handler provider implements interface com.networknt.server.HandlerProvider
+Handler provider implements interface com.networknt.handler.HandlerProvider
 
 ```
 public interface HandlerProvider {

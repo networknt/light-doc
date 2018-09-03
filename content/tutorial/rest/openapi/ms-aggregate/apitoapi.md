@@ -45,7 +45,7 @@ Let's take a look at the PathHandlerProvider.java in ms-aggregate/ad/https/src/m
 package com.networknt.ad;
 
 import com.networknt.config.Config;
-import com.networknt.server.HandlerProvider;
+import com.networknt.handler.HandlerProvider;
 import io.undertow.Handlers;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
