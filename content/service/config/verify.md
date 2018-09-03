@@ -56,12 +56,12 @@ docker-compose -f docker-compose-hybrid-service.yml up
 
 -- Some sensitive values need to be encrypted
 
- When the light-config-server hybrid service started, system will create an encrpt/decrpt key file on the files system (by default will be in the user home folder).
+ When the light-config-server hybrid service started, system will create an encrypt/decrypt key file on the files system (by default will be in the user home folder).
 
  File name:  light-config-server.conf
 
 
-System admin should trigger the Initial server service first after light-config-server service start to run to set the encrpt/decrpt key into the key file ( light-config-server.conf)
+System admin should trigger the Initial server service first after light-config-server service start to run to set the encrypt/decrypt key into the key file ( light-config-server.conf)
 
 
 --Initial server by add secret key for the service (in real settig, it should be done by admin only):
@@ -154,7 +154,7 @@ curl -X POST \
 '
 ```
 
-6. update config values (list of key-value pairs):
+7. update config values (list of key-value pairs):
 
 ```
 curl -X POST \
@@ -166,7 +166,7 @@ curl -X POST \
 ```
 
 
-7. update config secret values (list of key-value pairs):
+8. update config secret values (list of key-value pairs):
 
 ```
 curl -X POST \
@@ -180,7 +180,7 @@ curl -X POST \
 ```
 
 
-8. query  service:
+9. query  service:
 
 ```
 curl -X POST \
