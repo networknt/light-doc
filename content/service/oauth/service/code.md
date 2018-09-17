@@ -320,11 +320,11 @@ The get endpoint is the most used as it is very simple and supported by all brow
 * If response_type doesn't equal "code" then the following error will return
 
 ```
-  "ERR11002": {
+  "ERR11004": {
     "statusCode": 400,
-    "code": "ERR11002",
-    "message": "VALIDATOR_REQUEST_PARAMETER_ENUM_INVALID",
-    "description": "Value '%s' for parameter '%s' is not allowed. Allowed values are <%s>."
+    "code": "ERR11004",
+    "message": "VALIDATOR_SCHEMA",
+    "description": "Schema Validation Error - %s"
   }
 ```
 
