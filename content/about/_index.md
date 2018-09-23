@@ -17,4 +17,4 @@ aliases: [/about-light/,/docs/]
 toc: false
 ---
 
-Light is a fast, lightweight and cloud native microservices platform.
+Light is a fast, lightweight and cloud native microservices platform. The main design goal is high throughput, low latency and small memory footprint. 
