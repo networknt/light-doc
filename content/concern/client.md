@@ -231,6 +231,24 @@ If you send multiple request through one connection, here is an example.
 
 ```
 
+### Post Request
+
+I got a lot of questions on how to make a post request to the server and above is an example. Please remember the following. 
+
+* You need the following headers. 
+
+```
+  request.getRequestHeaders().put(Headers.HOST, "localhost");
+  request.getRequestHeaders().put(Headers.TRANSFER_ENCODING, "chunked");
+  request.getRequestHeaders().put(Headers.CONTENT_TYPE, "application/json");
+```
+
+* You need to pass the request body into the callback funcation. 
+
+```
+connection.sendRequest(request, client.createClientCallback(reference, latch, json));
+```
+
 ### NPE at reference.get()
 
 When accessing a server with heavy load, the response time might be longer. In the above example, we waited 1000ms to ensure that the response is comming back. If we only wait 10ms, chances are the response is not backed yet and the subsequent call to get statusCode will throw NullPointerException. If you see this exception, try to increase the await timeout to bigger number like 1000ms. In the above example, we are sending 100 big requests(48k) to the server so the wait time is set as 1000ms. 
@@ -238,9 +256,9 @@ When accessing a server with heavy load, the response time might be longer. In t
 ```
 latch.await(1000, TimeUnit.MILLISECONDS);
 ```
-### Connecting to HTTP 1.1 server
+### HOST Header
 
-If you are connecting to HTTP 1.1 server, you need to add the following header to the request. 
+When using Http2Client, you need to add the following header to the request. 
 
 ```
 request.getRequestHeaders().put(Headers.HOST, "localhost");
