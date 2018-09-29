@@ -84,6 +84,8 @@ there must be a client.yml defined in light-router. Here is an example.
 ```yaml
 # This is the configuration file for Http2Client.
 ---
+# Buffer Size in the buffer pool in KB. If should be bigger than your request or response body size.
+bufferSize: 24
 # Settings for TLS
 tls:
   # if the server is using self-signed certificate, this need to be false. If true, you have to use CA signed certificate
@@ -92,11 +94,11 @@ tls:
   # trust store contains certifictes that server needs. Enable if tls is used.
   loadTrustStore: true
   # trust store location can be specified here or system properties javax.net.ssl.trustStore and password javax.net.ssl.trustStorePassword
-  trustStore: tls/client.truststore
+  trustStore: client.truststore
   # key store contains client key and it should be loaded if two-way ssl is uesed.
   loadKeyStore: false
   # key store location
-  keyStore: tls/client.keystore
+  keyStore: client.keystore
 # settings for OAuth2 server communication
 oauth:
   # OAuth 2.0 token endpoint configuration
@@ -111,6 +113,8 @@ oauth:
     server_url: https://localhost:6882
     # token service unique id for OAuth 2.0 provider
     serviceId: com.networknt.oauth2-token-1.0.0
+    # set to true if the oauth2 provider supports HTTP/2
+    enableHttp2: true
     # the following section defines uri and parameters for authorization code grant type
     authorization_code:
       # token endpoint for authorization code grant
@@ -133,6 +137,15 @@ oauth:
       scope:
       - petstore.r
       - petstore.w
+    refresh_token:
+      # token endpoint for refresh token grant
+      uri: "/oauth2/token"
+      # client_id for refresh token grant flow. client_secret is in secret.yml
+      client_id: f7d42348-c647-4efb-a52d-4c5787421e72
+      # optional scope, default scope in the client registration will be used if not defined.
+      scope:
+      - petstore.r
+      - petstore.w
   # light-oauth2 key distribution endpoint configuration
   key:
     # key distribution server url
@@ -143,16 +156,27 @@ oauth:
     uri: "/oauth2/key"
     # client_id used to access key distribution service. It can be the same client_id with token service or not.
     client_id: f7d42348-c647-4efb-a52d-4c5787421e72
-
+    # set to true if the oauth2 provider supports HTTP/2
+    enableHttp2: true
+  # de-ref by reference token to JWT token. It is separate service as it might be the external OAuth 2.0 provider.
+  deref:
+    # Token service server url, this might be different than the above token server url.
+    server_url: https://localhost:6882
+    # token service unique id for OAuth 2.0 provider. Need for service lookup/discovery.
+    serviceId: com.networknt.oauth2-token-1.0.0
+    # set to true if the oauth2 provider supports HTTP/2
+    enableHttp2: true
+    # the path for the key distribution endpoint
+    uri: "/oauth2/deref"
+    # client_id used to access key distribution service. It can be the same client_id with token service or not.
+    client_id: f7d42348-c647-4efb-a52d-4c5787421e72
 ```
 
-As you have seen that the interaction with OAuth 2.0 provider is defined in client.yml and
-the light-router will be responsible for retrieving JWT token and renewing JWT token. 
+As you have seen that the interaction with OAuth 2.0 provider is defined in client.yml and the light-router will be responsible for retrieving JWT token and renewing JWT token. 
 
-Also, the client.truststore is defined and loaded to support outbound TLS connection. If you
-want to support Two-Way TLS, then you need to loadKeyStore to true and put the client key into
-tls/client.keystore.
+Also, the client.truststore is defined and loaded to support outbound TLS connection. If you want to support Two-Way TLS, then you need to loadKeyStore to true and put the client key into client.keystore.
 
+If you have request body bigger than 24*1024, then you need to adjust bufferSize in the client.yml file. For more details, please refer to https://github.com/networknt/light-example-4j/tree/master/router
   
 ## server.yml
 
