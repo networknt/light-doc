@@ -16,9 +16,9 @@ reviewed: true
 ---
 
 
-It is a consul registry implementation that uses HashiCorp Consul as registry and discovery server. It implements both registry and discovery in the same module for Consul communication. The server module is responsible for registering itself during startup and deregistering during shut down. 
+It is a service registry implementation that uses HashiCorp Consul as registry and discovery server. It implements both registry and discovery in the same module for Consul communication. The server module is responsible for registering itself during startup and deregistering during shut down. 
 
-In some cases, if the server is crashed, there is no chance for the server to invoke the deregister endpoint on the Consul agent. A health check must be configured to sure that Consul service catalog reflects the current status of the service instances. The health check also allows Consul to deregister service after a configurable period if the service is in the critical state. 
+In some cases, if the server is crashed, there is no chance for the server to invoke the deregister endpoint on the Consul agent. A health check must be configured to sure that Consul service catalog reflects the current status of the service instances. The health check also allows Consul to deregister service after a configurable period if the service instance is in the critical state. 
 
 The framework provides three options to update health status for a particular service instance. For more details on which option to choose for your service, please see the comment in the consul.yml below. 
 
@@ -28,11 +28,11 @@ The Consul agent will check if the port number is open on a particular IP addres
 
 * HTTP
 
-The Consul agent will send an HTTP request to the /health/{serviceId} endpoint on the service periodically. This is the recommended approach for services deployed to the Kubernetes cluster with host network and dynamic port enabled. When Consul calls the endpoint, the serviceId is the path parameter so it guarantees that it is the right service. 
+The Consul agent will send an HTTP request to the /health/{serviceId} endpoint on the service periodically. This is the recommended approach for services deployed to the Kubernetes cluster with host network and dynamic port enabled. When Consul calls the endpoint, the serviceId is the path parameter so it guarantees that it is the right service. HTTP health check also gives you more accurate info about the server. For example, the service instance might be still listening to the port but no request can be processed. Or the service depends on a database which is down. If your service has dependencies, you need to customize the default Health Check handler from the framework to give the more accurate status of the service. 
 
 * TTL
 
-The Consul agent set up a TTL and expects service to send heartbeat to the Consul check API before the TTL expires periodically. This approach put a lot of load on the Consul agent and should be only used when you service cannot be accessed from the Consul agent. For example, if your client and service are running on another subnet. 
+The Consul agent set up a TTL and expects service to send heartbeat to the Consul check API before the TTL expires periodically. This approach put a lot of load on the Consul server/agent and should be only used when you service cannot be accessed from the Consul agent. For example, if your client and service are running on another subnet. It is recommended that you deploy Consul agent to the same host as your service so that the load can be reduced on the Consul server cluster.  
 
 ### Interface
 
@@ -87,7 +87,7 @@ public interface ConsulClient {
 
 ### Implementation
 
-The implementation is simple restful API invocation with Http2Client in the light-4j client module. If TLS is enabled on the Consul cluster, HTTP/2 will be used automatically for efficiency. In a test environment with HTTP connection to Consul, the connection will be downgraded to HTTP/1.1 and it won't support high throughput due to the lack of multiplexing. 
+The implementation is simple restful API invocation with Http2Client in the light-4j client module. If TLS is enabled on the Consul cluster, HTTP/2 will be used automatically for efficiency. In a test environment with HTTP connection to Consul, the connection will be downgraded to HTTP/1.1 and it won't support high throughput due to the lack of multiplexing. Consul is implemented in Go and it doesn't support HTTP/2 if http is used. It is highly recommend installing Consul with TLS and HTTP/2 in the beginning. For installation guide, please refer to this [Consul Installation Tutorial][]
 
 ### Configuration
 
@@ -215,7 +215,9 @@ maxPort: 2500
 # environment: test1
 ```
 
-Please note that enableRegistry is true and dynamicPort is true. Also there is minPort and maxPort to define a range for port allocation. You need to talk to your cluster admin to find out which port range is availabe to use and confirm that the firewall is opened for the range. You can also set up environment if you want to deploy multiple environments to the same cluster. 
+Please note that enableRegistry is true and dynamicPort is true. Also, there is minPort and maxPort to define a range for port allocation. You need to talk to your cluster admin to find out which port range is available to use and confirm that the firewall is opened for the range. You can also set up environment if you want to deploy multiple environments to the same cluster. This is called [environment segregation][]
+
+The above configuration with enableRegistry set to true only works with stand-alone Java instance and Kubernetes cluster with host networking. Currently, docker-compose is not working, and the direct registry is the recommended approach for service discovery. 
 
 * secret.yml
 
@@ -269,11 +271,11 @@ consulToken: d08744e7-bb1e-dfbd-7156-07c2d57a0527
 emailPassword: change-to-real-password
 ```
 
-Please note the consulToken defined in the secret.yml example. 
+Please note the consulToken defined in the secret.yml example above. 
 
 * client.trustore
 
-Assuming that TLS is used, we need to import the consul certificate to the client.truststore with keytool. You can ask the Consul admin for the certicate. Please refer to [keystore truststore][] for more info. 
+Assuming that TLS is used, we need to import the consul certificate to the client.truststore with keytool. You can ask the Consul admin for the certificate. Please refer to [keystore truststore][] for more info. 
 
 * handler.yml
 
@@ -337,7 +339,9 @@ paths:
       - info
 ```
 
-When the service register itself to Consul, it will tell Consul to call the /heath/com.networknt.apid-1.0.0 to ensure the service is alive every 10 seconds. 
+Above /health/{serviceId} endpoint is not protected. If you feel that it needs to be protected and only Consul nodes should access it, you can add IP Whitelist middleware handler in the handler.yml and put it in front of exec: health endpoint. 
+
+When the service register itself to Consul, it will tell Consul to call the /heath/com.networknt.apid-1.0.0 to ensure the service is alive every 10 seconds. The time is configuable for 10 seconds work for most of the scenarios. 
 
 ### Deployment
 
@@ -377,6 +381,14 @@ spec:
 Please note that hostNetwork is set to true and an env variable "STATUS_HOST_IP" must be passed into the container from a fieldPath called status.hostIP. No static value needs to be put into the deployment config, but it directs the Kubernetes to call its API to get the host ip address and pass it into the container. 
 
 
+### Downward API
+
+In the Deployment configuration above, the status.hostIP is calling Kubernetes Downward API to get the IP address for the host to allow light-4j application to bind to the host IP address during startup. For Google Cloud Platform, it looks like the internal IP is used when the downward API is called. This is a known issue and we are still working with Google to find a solution. 
+
+### Consul Blocking Queries
+
+For service discovery, we are using Consul Blocking Queries (Long polling). It basically sends a request to the Consul server and tells Consul don't do anything within 10 minutes if the subscribed service instances are not changed. If the subscribed service instances are changed, it will return the result immediately with the changes. After 10 minutes, the request will timeout and a new request will be issued. In this way, we can maintain a list of healthy service instances all the time at the client side. If it is necessary to create a new connection, there is no need to go to Consul for a discovery as the local cache is the latest. This design is the fast way to let the client be notified if any service instance is gracefully shutdown or crashed. 
+
 ### Tutorial
 
 There are several tutorials for [service registry and discovery][] and it can help you to understand the details. 
@@ -384,3 +396,5 @@ There are several tutorials for [service registry and discovery][] and it can he
 
 [keystore truststore]: /tutorial/security/keystore-truststore/
 [service registry and discovery]: /tutorial/common/discovery/
+[Consul Installation Tutorial]: /tool/consul/cluster-install/
+[environment segregation]: /design/env-segregation/
