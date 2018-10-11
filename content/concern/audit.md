@@ -38,7 +38,13 @@ overall performance. Turning off statusCode and responseTime can make it faster
 as these have to be captured on the response chain instead of request chain.
 
 For most business and majority of microservices, you don't need to enable this 
-handler due to performance reason. The default audit log will be audit.log config 
+handler due to performance reasons. There are situations during troubleshooting or 
+integration testing, where teams need to collect more information based on the success 
+or failure of the execution, or collect complete request and response payloads. 
+Teams need to recognize that collecting this information will negatively impact performance 
+and it is not recommended to be used in production environments.
+
+The default audit log will be audit.log config 
 in the default logback.xml; however, it can be changed to syslog or Kafka with 
 customized appender.
 
@@ -59,6 +65,8 @@ By default, the following fields are included:
  * endpoint (uriPattern@method)
  * statusCode
  * responseTime
+ * request (the request body, if available)
+ * response (the response payload, if set)
 
 The audit.log is in JSON format and it is easy to be parsed and monitored. 
 
@@ -91,9 +99,6 @@ headers:
 # Output from id token and access token
 audit:
 
-# Service Id
-- service_id
-
 # Client Id
 - client_id
 
@@ -105,6 +110,15 @@ audit:
 
 # Request endpoint uri@method.
 - endpoint
+
+# Service ID assigned to the service, this is optional and must be set by the service in its implementation
+- serviceId
+
+# Request Body, this is optional and must be set by the service in its implementation
+- request
+
+# Response payload, this is optional and must be set by the service in its implementation
+- response
 
 ```
 
