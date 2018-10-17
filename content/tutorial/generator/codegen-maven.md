@@ -13,18 +13,18 @@ reviewed: true
 
 Besides using java command line to generate microservice API based on the OpenAPI 3.0 specification, light-codegen also can be integrated with the project maven build process.
 
-Sometime the specification could be changed by different team members frequently. In this case it could be difficult to re-generate the API project from java command line for every specification change.
+Sometimes the specification could be changed by different team members frequently. In this case, it could be challenging to re-generate the API project from the Java command line for every specification change.
 
-To serve this purpose a new way is introduced here which could integrate the light-codegen into maven build process. The code reference for [petstore maven codegen example][]
+To serve this purpose a new way is introduced here which could integrate the light-codegen into the maven build process. You can find the reference example at [petstore maven codegen example][].
 
 
 #### Work Steps
 
-- Initial the mocroservice API project. Define one module for the service and another module for specification
+- Initiate the microservice API project. Define one module for the service and another module for specification
 
-- create or copy the specification and the config json file to the specification module, for example /petstore-spec/config
+- create or copy the specification and the config JSON file to the specification module, for example, /petstore-spec/config
 
-- In specification module, add maven plugin to run the light-codegen ([pom example in the petstore project][]):
+- In the specification module, add maven plugin to run the light-codegen [pom example in the petstore project][]
 
 ```xml
              <plugin>
@@ -59,7 +59,7 @@ To serve this purpose a new way is introduced here which could integrate the lig
              </plugin>
 ```
 
-- At the first time to run the build process to generate initial service module, set config value "specChangeCodeReGenOnly" as false from config json file:
+- At the first time to run the build process to generate an initial service module, set config value "specChangeCodeReGenOnly" as false from config JSON file:
 
   ```
   {
@@ -87,7 +87,7 @@ To serve this purpose a new way is introduced here which could integrate the lig
   }
   ```
 
-- Run maven install to build the project and the maven build will trigger the light-codegen to generate the initial service into the service module
+- Run maven install to build the project, and the maven build will trigger the light-codegen to generate the initial service into the service module
 
    ```
       cd ~/networknt/light-example-4j/rest/perstore-with-codegen
@@ -99,11 +99,11 @@ To serve this purpose a new way is introduced here which could integrate the lig
 - After the service project generated, developers start to work on the service; then change  config value "specChangeCodeReGenOnly" to true:
 
   ```
-    "specChangeCodeReGenOnly": false,
+    "specChangeCodeReGenOnly": true,
 
   ```
 
-- The light-codegen will be triggered every time maven install be executed; but since the "specChangeCodeReGenOnly" set as true, only specification change related code will be generated to service project. :
+- The light-codegen will be triggered every time maven install be executed; but since the "specChangeCodeReGenOnly" set as true, only specification change related code will be generated to the service project.
 
   For example, data model, endpoint, handler.yml...
 
