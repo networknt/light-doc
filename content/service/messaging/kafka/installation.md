@@ -37,14 +37,6 @@ Verify installation
 java -version
 ```
 
-### Install Zookeeper
-
-Apache Kafka uses zookeeper for the electing controller, cluster membership, and topics configuration. Zookeeper s a distributed configuration and synchronization service.
-
-```
-sudo apt install zookeeperd -y
-```
-
 ### Install Kafka
 
 In this step, we will install the Apache Kafka using the binary files that can be downloaded from the Kafka website. We will install and configure apache Kafka and run it as a non-root user.
@@ -80,19 +72,71 @@ sudo tar -xf kafka_2.11-2.0.0.tgz -C /opt/kafka --strip-components=1
 sudo chown -R kafka:kafka /opt/kafka
 ```
 
-Now login to the 'kafka' user and edit the server.properties configuration.
+Create another directory under /opt for kafka logs
+
+```
+sudo mkdir /opt/kafka-logs
+sudo chown -R kafka:kafka /opt/kafka-logs
+```
+
+Create a directory in /var for zookeeper data
+
+```
+sudo mkdir /var/zookeeper
+sudo chown -R kafka:kafka /var/zookeeper
+```
+
+Now login to the 'kafka' user and edit the zookeeper.properties configuration
+
+```
+su - kafka
+vi config/zookeeper.properties
+```
+
+```
+dataDir=/var/zookeeper
+ 
+server.1=38.113.162.51:2888:3888
+server.2=38.113.162.52:2888:3888
+server.3=38.113.162.53:2888:3888
+#add here more servers if you want
+initLimit=5
+syncLimit=2
+
+```
+Now create a myid file under /var/zookeeper and then insert unique id into this file.
+
+On 38.113.162.51
+```
+echo "1" > /var/zookeeper/myid
+```
+On 38.113.162.52
+```
+echo "2" > /var/zookeeper/myid
+```
+On 38.113.162.53
+```
+echo "3" > /var/zookeeper/myid
+```
+
+
+Now edit the server.properties configuration.
 
 ```
 su - kafka
 vi config/server.properties
 ```
 
-Paste the following configuration to the end of the line.
+Update the following configuration
 
 ```
-delete.topic.enable=true
+broker.id=0 # for test1 host, increase for test2 and test3
+log.dirs=/opt/kafka-logs # directory we created in the previous step
+num.partitions=3
+offsets.topic.replication.factor=3
+advertised.listeners=PLAINTEXT://38.113.162.51:9092
+zookeeper.connect=38.113.162.51:2181,38.113.162.52:2181,38.113.162.53:2181
 ```
-
 
 ### Config Kafka and Zookeeper as Services
 
@@ -173,7 +217,53 @@ Zookeeper running under port '2181', and Kafka on port '9092', check it using th
 netstat -plntu
 ```
 
+### Test Zookeeper
+
+To confirm zookeeper cluster is running, log in to three nodes and issue command like this.
+
+```
+echo mntr | nc localhost 2181
+```
+
+Two of them will be followers and one of them should be the leader. 
+
+Here is something output from the leader node. You can see that it has two followers. 
+
+
+```
+zk_version	3.4.13-2d71af4dbe22557fda74f9a9b4309b15a7487f03, built on 06/29/2018 00:39 GMT
+zk_avg_latency	0
+zk_max_latency	58
+zk_min_latency	0
+zk_packets_received	4168
+zk_packets_sent	4171
+zk_num_alive_connections	3
+zk_outstanding_requests	0
+zk_server_state	leader
+zk_znode_count	32
+zk_watch_count	15
+zk_ephemerals_count	4
+zk_approximate_data_size	1459
+zk_open_file_descriptor_count	117
+zk_max_file_descriptor_count	4096
+zk_fsync_threshold_exceed_count	0
+zk_followers	2
+zk_synced_followers	2
+zk_pending_syncs	0
+zk_last_proposal_size	32
+zk_max_proposal_size	294
+zk_min_proposal_size	32
+
+```
+
+### Install Test2 and Test3
+
+Follow the same steps above to get test2 and test3 installed. Remember that certain variables need to be changed per host basis. 
+
+
 ### Test Kafka
+
+Login to test1
 
 ```
 su - kafka
@@ -183,9 +273,7 @@ cd bin/
 Create a new topic. 
 
 ```
-./kafka-topics.sh --create --zookeeper localhost:2181 \
---replication-factor 1 --partitions 1 \
---topic SteveTesting
+./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic SteveTesting
 ```
 
 And run the 'kafka-console-producer.sh' with the 'SteveTesting' topic.
@@ -194,7 +282,12 @@ And run the 'kafka-console-producer.sh' with the 'SteveTesting' topic.
 ./kafka-console-producer.sh --broker-list localhost:9092 --topic SteveTesting
 ```
 
-Now open a new terminal and log in to the server, then login to the 'kafka' user.
+Now login to test2, then login to the 'kafka' user.
+
+```
+su - kafka
+cd bin/
+```
 
 Run 'kafka-console-consumer.sh' for the 'SteveTesting' topic.
 
@@ -202,8 +295,25 @@ Run 'kafka-console-consumer.sh' for the 'SteveTesting' topic.
 ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic SteveTesting --from-beginning
 ```
 
-And when you type any input from the 'kafka-console-producer.sh' shell, you will get the same result on the 'kafka-console-consumer.sh' shell.
+And when you type any input from the 'kafka-console-producer.sh' shell on test1, you will get the same result on the 'kafka-console-consumer.sh' shell on test2.
 
+Now login to test3
 
-### Install Test2 and Test3
+```
+su - kafka
+cd bin/
+```
+
+Run 'kafka-console-consumer.sh' for the 'SteveTesting' topic.
+
+```
+./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic SteveTesting --from-beginning
+```
+
+You should see the producer input immedately from the beginning.
+
+### Security
+
+We have both zookeeper and kafka clusters running on three node and they are exposed on the internet. We need to find a way to secure both. 
+
 
