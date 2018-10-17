@@ -35,6 +35,8 @@ All frameworks in the light platform are design-driven, and you can scaffold a n
 
 * [Generate OpenAPI 3.0 Mock API with Examples][]
 
+* [Integrate Code generation with maven build process with Examples][]
+
 [Generate Restful API with Swagger 2.0 Specification]: /tutorial/generator/swagger/
 [Generate Restful API with OpenAPI 3.0 Specification]: /tutorial/generator/openapi/
 [Generate GraphQL API with GraphQL IDL]: /tutorial/generator/graphql/
@@ -43,4 +45,5 @@ All frameworks in the light platform are design-driven, and you can scaffold a n
 [Generate CQRS Eventuate based Restful API with OpenAPI 3.0 Specification]: /tutorial/generator/eventuate/
 [Generate Swagger 2.0 Mock API with Examples]: /tutorial/generator/swagger-mock/
 [Generate OpenAPI 3.0 Mock API with Examples]: /tutorial/generator/openapi-mock/
+[Integrate Code generation with maven build process with Examples]: /tutorial/generator/codegen-maven/
 
