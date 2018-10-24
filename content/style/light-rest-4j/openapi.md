@@ -20,7 +20,10 @@ There are some middleware handlers designed for OpenAPI 3.0 specification.
 * [openapi-meta][] loads the openapi.yaml or openapi.json from the config folder during server start and caches the specification per endpoint.
 * [openapi-security][] verifies the JWT token signature and expiration as well as scopes if they are defined in the specification.
 * [openapi-validator][] validates the request headers, path parameters, query parameters and body against the specification.
+* [openapi-display][] display openapi specification for the service API, include specification content display and specification swagger ui display.
 
 [openapi-meta]: /style/light-rest-4j/openapi-meta/
 [openapi-security]: /style/light-rest-4j/openapi-security/
 [openapi-validator]: /style/light-rest-4j/openapi-validator/
+[openapi-display]: /style/light-rest-4j/openapi-display/
+
