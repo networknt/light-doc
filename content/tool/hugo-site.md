@@ -12,55 +12,44 @@ weight: 10	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ## Introduction
 
-As you know that you can use gh-pages branch to create document site for each repo, 
-there is also a way that you can create a site from your organization and deploy your
-site to github.com. Furthermore, you can use hugo to create a static website and deploy
-it anywhere you want.  
+As you know that you can use `gh-pages` branch to create document site for each repo, there is also a way that you can build a site from your organization and deploy your
+site to github.com. Furthermore, you can use Hugo to create a static website and deploy it anywhere you want.  
 
-The following will describe the process with an example site www.networknt.com
+The following will describe the process with an example site www.networknt.com which is deployed to [netlify.com][]
 
 ## Installation
 
-For hugo installation, please read this [hugo document][].
+For Hugo installation, please read this [hugo document][].
 
 ## Instructions
 
-The detail steps are documented at [hugo][] site. I am just trying to apply the step to 
-
-https://www.networknt.com
-
-
-### Create a document repo
-
-This repo will contain Hugo's content and other source files. 
-
-We are using light-doc as repo name in networknt organization
+The detail steps are documented at [hugo][] site. I am just trying to apply the steps to  https://www.networknt.com
 
 ### Create a site repo
 
-This repo contains the fully rendered version of your Hugo website. In our case, it 
-is called www.networknt.com
+This repo will contain Hugo's content and other source files. We are using light-doc as repo name in the networknt organization.
+
+This repo contains the fully rendered version of your Hugo website. In our case, it is called www.networknt.com
 
 ### Create docs
 
-Clone both repos to your local and create a document hugo site in light-doc
+Clone the repos to your local and create a document Hugo site in light-doc
 
 ```
-cd light-doc
-hugo new site docs
+cd networknt
+hugo new site light-doc
 ```
 
-This will create a docs folder in light-doc directory. For me I have copied the docs
-folder to light-4j as a staring point.
+This will create folders in light-doc directory. For me I have copied the files from docs folder to light-4j as a staring point.
 
 Make sure that you test your content with "hugo serve" and open browser to http://localhost:1313
 
-Once you are happy with the result, kill the server and remove the generated
-public folder under docs.
+Once you are happy with the result, kill the server and remove the generated public folder under docs.
 
 ```
 cd light-doc/docs
@@ -73,8 +62,7 @@ rm -rf public
 cd light-doc/docs
 git submodule add -b master git@github.com:networknt/networknt.github.io.git public
 ```
-This creates a git submodule. Now when you run the hugo command to build your site to 
-public, the created public directory will have a different remote origin (i.e. hosted 
+This creates a git submodule. Now when you run the hugo command to build your site to public, the created public directory will have a different remote origin (i.e. hosted 
 GitHub repository). You can automate some of these steps with the following script.
 
 ### Build site
@@ -127,3 +115,4 @@ Refer to the [official documentation for custom domains](https://help.github.com
 
 [hugo document]: /tool/hugo-docs/
 [hugo]: https://gohugo.io/hosting-and-deployment/hosting-on-github/
+[netlify.com]: https://app.netlify.com
