@@ -34,9 +34,58 @@ Self-signed keystore can be easily created with keytool command. But if you have
 
 Here are the steps to follow.
 
+##### PKCS12 keystore
+
+Create PKCS 12 file using your private key and CA signed certificate of it. You can use openssl command for this.
+
+```
+openssl pkcs12 -export -in [path to certificate] -inkey [path to private key] -certfile [path to certificate ] -out server.p12
+```
+
+As an example, assume that I have a private key called "privkey.pem" and full chain certificate called "fullchain.pem" in the current folder.
+
+```
+openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -certfile fullchain.pem -out server.p12
+```
+
+It will ask you to enter the export password. Once it is done, you can find the server.p12 in the same folder.
 
 
+##### Create server.keystore
 
+Now let's create server.keystore from server.p12 generated above.
+
+```
+keytool -importkeystore -srckeystore server.p12 -srcstoretype pkcs12 -destkeystore server.keystore -deststoretype JKS
+```
+
+Created server.p12 PKCS 12 file has been given as the source keystore and new file name server.keystore has been given as the destination keystore.
+
+As an example. 
+
+```
+keytool -importkeystore -srckeystore server.p12 -srcstoretype pkcs12 -destkeystore server.keystore -deststoretype JKS
+Importing keystore server.p12 to server.keystore...
+Enter destination keystore password:  
+Re-enter new password: 
+Enter source keystore password:  
+Entry for alias 1 successfully imported.
+Import command completed:  1 entries successfully imported, 0 entries failed or cancelled
+```
+
+For demo purpose, I am using `password` as password for both keystore and private key. 
+
+By using the following command line you can change the private key password. 
+
+```
+keytool -keypasswd -alias [Alias name for private key] -keystore [path to key store]
+```
+
+Also, you can change the alias name for your private key.
+
+```
+keytool -changealias -keystore [path to key store] -alias [current alias]
+```
 
 
 
