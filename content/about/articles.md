@@ -34,3 +34,5 @@ The following is a list of articles that mention light platform.
 * [API imperative: From IT concern to business mandate](https://www2.deloitte.com/insights/us/en/focus/tech-trends/2018/api-program-strategy.html)
 
 * [How Banks Are Becoming Uberized](https://nordicapis.com/how-banks-are-becoming-uberized/)
+
+* [CIBC - Winners Of The 2018 Forrester And InfoWorld EA Awards](https://go.forrester.com/blogs/winners-of-the-2019-forrester-and-infoworld-ea-awards-contest-show-eas-role-in-digital-transformation/)
