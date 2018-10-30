@@ -32,9 +32,15 @@ In this section, we have several tutorials related to security configurations an
 
 * How to [install a self-signed or commercial CA-signed server certificate][] to light-4j service
 
+* How to get free [Let's Encrypt certificate][] for public-facing light-4j service
+
+* How to [convert CA-signed certificate to server.keystore][] that can be used by light-4j service
+
 [bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
 [encrypt and decrypt sensitive info]: /tutorial/security/encrypt-decrypt/
 [keystore and truststore]: /tutorial/security/keystore-truststore/
 [adding server public key certificate to client.truststore]: /tutorial/security/publickey-truststore/
 [Install a self-signed or commercial CA-signed server certificate]: /tutorial/security/install-certificate/
+[Let's Encrypt certificate]: /tutorial/security/lets-encrypt/
+[convert CA-signed certificate to server.keystore]: /tutorial/security/ca-certificate/
 
