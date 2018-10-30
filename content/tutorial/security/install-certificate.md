@@ -21,10 +21,7 @@ If you are unsure what kind of certificate should be used in your use case, plea
 
 The following tutorial will only focus on the server side configuration. If you want to setup client-side certificate, please follow [adding server certificate to client.truststore][] for one-way TLS. 
 
-
-You can use the existing server.keystore and replace the default certificate with your new one, but it is not recommended as the process is a little bit more complicated. It is easier to just create your own server.keystore with the certificate you have. Different vendor 
-
-You can use the existing server.keystore and replace the default certificate with the new one, but we don't recommend it as the process is a little bit more complicated and error-prone. It is easier to create your server.keystore with the certificate you have. Different vendors will have different formats with their issued certificate. There would be a lot of tutorial on the Internet on how to use Java keytool to create .keystore with varying formats of the certificate. You vendor might have a guideline for Java application as well. 
+You can use the existing server.keystore and replace the default certificate with the new one, but we don't recommend it as the process is a little bit more complicated and error-prone. It is easier to create your server.keystore with the certificate you have. Different vendors will have different formats with their issued certificate. Sometimes you will get two files, and sometimes you will get three files. There would be a lot of tutorials on the Internet on how to use Java keytool to create .keystore with varying formats of the certificate. You vendor might have a guideline for Java application as well. If you are using [Let's Encrypt][], then you can follow this [CA-signed certificate][] tutorial to create a server.keystore. 
 
 If you want a quick reference of Java keytool, please refer to [keytool][]. 
 
@@ -57,3 +54,5 @@ If you config folder is externalized, then you need to restart your service. Oth
 [Self-signed vs CA-signed certificate]: /faq/self-ca-signed-cert/
 [adding server certificate to client.truststore]: /tutorial/security/publickey-truststore/
 [keytool]: /tool/keytool/
+[Let's Encrypt]: /tutorial/security/lets-encrypt/
+[CA-signed certificate]: /tutorial/security/ca-certificate/
