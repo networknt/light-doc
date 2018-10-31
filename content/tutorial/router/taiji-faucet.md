@@ -381,6 +381,9 @@ As you can see that the light-router server is listening to 8443 for HTTPS/2. Th
 
 As this light-router is public-facing, we have created a server.keystore with certs from Let's Encrypt. If you want to learn the process, please refer to [security tutorial][]
 
+Here a video to walk through the above steps and a demo at the end. 
+
+{{< youtube aVSN8Bhso9Y >}}
 
 [adding the consul certificate]: /tutorial/common/discovery/consul-tls/
 [security tutorial]: /tutorial/security/
