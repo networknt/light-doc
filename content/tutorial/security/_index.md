@@ -33,7 +33,7 @@ In this section, we have several tutorials related to security configurations an
 
 * How to [install a self-signed or commercial CA-signed server certificate][] to light-4j service
 
-* How to get free [Let's Encrypt certificate][] for public-facing light-4j service
+* How to get free [Let's Encrypt certificate][] for public-facing light-4j secd rvice
 
 * How to [convert CA-signed certificate to server.keystore][] that can be used by light-4j service
 
