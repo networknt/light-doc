@@ -9,14 +9,12 @@ weight: 70      #rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-To connect to database we need to have service.yml that can inject connection pool
-to the microservice you are building.
+To connect to the database we need to have service.yml that can inject connection pool to the microservice you are building.
 
-Now we have generated project with configuration for Mysql, let's take a look at the
-generated service.yml and you can see the following section for Mysql connection pool
-configuration. 
+Now we have a generated project with configuration for MySQL, let's take a look at the generated service.yml, and you can see the following section for MySQL connection pool configuration. 
 
 service.yml in ~/networknt/light-example-4j/rest/swagger/database/generated/src/main/resources/config
 
@@ -73,10 +71,9 @@ singletons:
 
 ```
 
-As you can see that the last section is the DataSource configuration for Mysql database. 
+As you can see, the last section is the DataSource configuration for MySQL database. 
 
-Before we make any change, let's create a new folder so that we can always compare with
-the generated folder if needed. 
+Before we make any change, let's create a new folder so that we can always compare with the generated folder if needed. 
  
 
 ```
@@ -84,17 +81,13 @@ cd ~/networknt/light-example-4j/rest/swagger/database
 cp -r generated connection
 ```
 
-
-The service.yaml will make sure the a Hikari DataSource will be created during server startup 
-with the dependency injection module. You can find other database's service.yml in 
+The service.yaml will make sure that a Hikari DataSource will be created during server startup with the dependency injection module. You can find other database's service.yml in 
 https://github.com/networknt/light-example-4j/tree/master/rest/swagger/database/dbscript
 
-
-As we are running the service as a standalone Java application without Docker, we need to
-change the service.yml for the jdbcUrl to point the database to localhost instead of mysqldb. 
-Also, we need to switch our database to hello_world from oauth2. 
+As we are running the service as a standalone Java application without Docker, we need to change the service.yml for the jdbcUrl to point the database to localhost instead of mysqldb. Also, we need to switch our database to hello_world from oauth2. 
 
 Here is the updated DataSource.
+
 
 ```
 - javax.sql.DataSource:
@@ -112,11 +105,7 @@ Here is the updated DataSource.
       connectionTimeout: 2000
 ```
 
-
-In the config.json for light-codegen, we've enabled Mysql databases support so that pom.xml
-should have all the dependencies included. 
-
-
+In the config.json for light-codegen, we've enabled MySQL databases support so that pom.xml should have all the dependencies included. 
 
 Now you can add a line in each handler to get the DataSource as a static variable.
 
@@ -125,6 +114,7 @@ Now you can add a line in each handler to get the DataSource as a static variabl
     private static final DataSource ds = SingletonServiceFactory.getBean(DataSource.class);
 
 ```
+
 If you are using IDE, it will help you to add imports, otherwise, you have to add the following imports.
 
 ```
@@ -133,7 +123,6 @@ import javax.sql.DataSource;
 
 ```
 
-If you can build, start and access the server with curl, that means the database connection
-is created although we are not using it in our code yet. The next step we will try to [query database][].
+If you can build, start and access the server with curl, that means the database connection is created although we are not using it in our code yet. The next step we will try to [query database][].
 
-[query database]: /tutorial/rest/swagger/database/querydb/
+[query database]: /tutorial/rest/swagger/database/single-query/

@@ -9,14 +9,10 @@ weight: 20	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-First let's build an Swagger 2.0 specification with several endpoints to demo database
-access. You will need [swagger editor][] to create a specification. Once the specification
-is created, you can export it into both YAML and JSON format. YAML is easy for designers to
-work in an editor and JSON is easy to be consumed by the [light-codegen][] and [light-rest-4j][]
-framework. 
- 
+First, let's build a Swagger 2.0 specification with several endpoints to demo database access. You will need [swagger editor][] to create a specification. Once the specification is created, you can export it into both YAML and JSON format. YAML is easy for designers to work in an editor and JSON is easy to be consumed by the [light-codegen][] and [light-rest-4j][] framework. 
 
 Here is the Swagger 2.0 specification created and it can be found in [model-config][] 
 
@@ -123,16 +119,17 @@ definitions:
         description: "a random number"
 ```
 
-Now let's clone the model-config repo to your working directory so that we can use the Swagger
-specification as well as the config.json to generate a service project. 
+Now let's clone the model-config repo to your working directory so that we can use the Swagger specification as well as the config.json to generate a service project. 
 
 ```
 cd ~/networknt
 git clone https://github.com/networknt/model-config.git
 ```
 
+In the next step, we are going to [generate and build][] a new project. 
 
 [swagger editor]: /tool/swagger-editor/
 [light-codegen]: /tool/light-codegen/
 [light-rest-4j]: /style/light-rest-4j/
 [model-config]: https://github.com/networknt/model-config/tree/master/rest/swagger/database
+[generate and build]: /tutorial/rest/swagger/database/generation/

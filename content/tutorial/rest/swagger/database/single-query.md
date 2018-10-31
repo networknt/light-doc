@@ -1,5 +1,5 @@
 ---
-title: "Querydb"
+title: "Query DB"
 date: 2017-11-24T13:18:03-05:00
 description: ""
 categories: []
@@ -9,13 +9,12 @@ weight: 70      #rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In the previous step, we have created a private static data source in each handler. In
-this step, we are going to use that connection pool to access mysql database. 
+In the previous step, we have created a private static data source in each handler. In this step, we are going to use that connection pool to access the MySQL database. 
 
-Before we add logic to query database, let's copy connection to query folder.
-
+Before we add logic to query the database, let's copy connection to query folder.
 
 ```
 cd ~/networknt/light-example-4j/rest/swagger/database
@@ -23,8 +22,7 @@ cp -r connection query
 
 ```
 
-And add a constructor that accept two integer as parameters for RandomNumber in model folder.
-This will ensure that it is easy to construct an object from QueryGetHandler. 
+And add a constructor that accepts two integers as parameters for RandomNumber in model folder. This will ensure that it is easy to construct an object from QueryGetHandler. 
 
 ```
   public RandomNumber(int id, int randomNumber) {
@@ -34,8 +32,7 @@ This will ensure that it is easy to construct an object from QueryGetHandler.
 
 ```
 
-And add a helper class Helper.java to provide some utilities to be called from our 
-handlers. It will make the handler code much simpler and clearer. 
+And add a helper class Helper.java to provide some utilities to be called from our handlers. It will make the handler code much simpler and clearer. 
 
 ```
 package com.networknt.database.handler;
@@ -100,10 +97,7 @@ public class Helper {
 
 ```
 
-
-
-
-And let's update QueryGetHandler.java
+Let's update QueryGetHandler.java
 
 ```
 package com.networknt.database.handler;
@@ -180,11 +174,10 @@ cd ~/networknt/light-example-4j/rest/swagger/database/query
 mvn clean install exec:exec
 ```
 
-Access the query endpoint and you will result the random number as result.
+Access the query endpoint, and you will get the random number as a result.
 
-Note that we need to make sure Mysql database docker container is up and running. If you got
-an error in the console, chances are your mysql database is not running. Please refer to
-[start databases][] for instructions to start mysql database in Docker. 
+Note that we need to make sure MySQL database docker container is up and running. If you got an error in the console, chances are your MySQL database is not running. Please refer to
+[start databases][] for instructions to start MySQL database in Docker. 
 
 
 ```
@@ -197,6 +190,7 @@ Result:
 {"randomNumber":0,"id":2}
 ```
 
-In the next step, we are going to update multiple queries handler.
+In the next step, we are going to update [multiple queries][] handler.
 
 [start databases]: /tutorial/rest/swagger/database/startdb/
+[multiple queries]: /tutorial/rest/swagger/database/multiple-queries/

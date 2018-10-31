@@ -1,5 +1,5 @@
 ---
-title: "Startdb"
+title: "Start Database"
 date: 2017-11-24T11:23:03-05:00
 description: ""
 categories: []
@@ -9,16 +9,13 @@ weight: 60	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In the previous step, we've already prepared the scripts for Oracle, Mysql and Postgres
-databases and put these script file under light-example-4j/rest/swagger/database. At
-this moment, you should have two sub-folders under database. generated and dbscript.
+In the previous step, we've already prepared the scripts for Oracle, MySQL, and Postgres databases and put these script files under light-example-4j/rest/swagger/database. At this moment, you should have two sub-folders under database. generated and dbscript.
 
 
-In order to work on our service, we need to start database standalone for now. Depending
-on which database you are working on, you can choose one of them below. For this demo 
-use mysql and later on we can switch to Postgres and Oracle.
+In order to work on our service, we need to start database standalone for now. Depending on which database you are working on, you can choose one of them below. For this demo we use MySQL, and later on, we can switch to Postgres and Oracle.
 
 
 Oracle Database
@@ -28,10 +25,10 @@ docker run -v ~/networknt/light-example-4j/rest/swagger/database/dbscript/oracle
 ```
 
  
-Mysql Database
+MySQL Database
 
 ```
-docker run -v ~/networknt/light-example-4j/rest/swagger/database/dbscript/mysql:/docker-entrypoint-initdb.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 3306:3306 mysql
+docker run -v ~/networknt/light-example-4j/rest/swagger/database/dbscript/mysql:/docker-entrypoint-initdb.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 3306:3306 mysql:5.6
 
 ```
 
@@ -42,9 +39,7 @@ docker run -v ~/networknt/light-example-4j/rest/swagger/database/dbscript/postgr
 
 ```
 
-In this step, let's first start the Mysql database and in the next step, we will setup the
-[database connection pool][] in our project.
+In this step, let's first start the MySQL database, and in the next step, we will set up the [database connection pool][] in our project.
 
- 
 [database connection pool]: /tutorial/rest/swagger/database/connection-pool/
  

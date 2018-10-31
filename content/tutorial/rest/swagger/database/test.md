@@ -9,12 +9,12 @@ weight: 40	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In the previous steps, we have generated the project and built it. Now the service 
-is up and running. Let's access it from curl
+In the previous steps, we have generated the project and built it. Now the service is up and running. Let's access it from the curl command.
 
-Single query
+Single query.
 
 ```
 curl -k https://localhost:8443/v1/query
@@ -29,7 +29,7 @@ Result:
                             }
 ```
 
-Multiple queries with default number of object returned
+Multiple queries with the default number of objects returned.
 
 ```
 curl -k https://localhost:8443/v1/queries
@@ -50,7 +50,7 @@ Result:
                             ]
 ```
 
-Multiple queries with 10 numbers returned
+Multiple queries with ten objects returned.
 
 ```
 curl -k https://localhost:8443/v1/queries?queries=10
@@ -71,7 +71,7 @@ Result:
                             ]
 ```
 
-Multiple updates with default number of object updated
+Multiple updates with the default number of objects updated.
 
 ```
 curl -k https://localhost:8443/v1/updates
@@ -93,7 +93,7 @@ Result:
 ```
 
 
-Multiple updates with 10 numbers updated
+Multiple updates with ten objects updated.
 
 ```
 curl -k https://localhost:8443/v1/updates?queries=10
@@ -114,9 +114,7 @@ Result:
                             ]
 ```
 
-As you can see, the we have a newly generated project that can output mock data
-from each endpoint defined in the Swagger 2.0 specification. There is no db access
-code behind the scene. In the next step, we are going to wire in the code for
-Mysql database. 
-
+As you can see, we have a newly generated project that can output mock data from each endpoint defined in the Swagger 2.0 specification. There is no DB access code behind the scene. In the next step, we are going to create [DB script][] and wire in the code for the MySQL database. 
  
+
+[DB script]: /tutorial/rest/swagger/database/dbscripts/

@@ -1,5 +1,5 @@
 ---
-title: "Oracle, Mysql and Postgres Scripts"
+title: "Oracle, MySQL and Postgres Scripts"
 date: 2017-11-24T11:07:39-05:00
 description: ""
 categories: []
@@ -9,16 +9,10 @@ weight: 50      #rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-For database access, we are going to prepare three scripts for Oracle, Mysql and Postgres.
-The three databases are all relational databases and the SQL scripts are very similar. There
-a slightly differences in the DDL and you should only focus on the database your are going
-to use for your project and ignore others. Also, the framework support other type of SQL and
-NoSQL databases as well but you might need to update pom.xml and service.yml to add dependencies
-and database configurations.
-
-
+For database access, we are going to prepare three scripts for Oracle, MySQL, and Postgres. The three databases are all relational databases, and the SQL scripts are very similar. There are slight differences in the DDL, and you should only focus on the database you are going to use for your project and ignore others. Also, the framework supports other types of SQL and NoSQL databases as well, but you might need to update pom.xml and service.yml to add dependencies and database configurations.
 
 Oracle
 ```
@@ -59,7 +53,8 @@ INSERT INTO fortune (id, message) VALUES (11, '<script>alert("This should not be
 INSERT INTO fortune (id, message) VALUES (12, 'フレームワークのベンチマーク');
 ```
 
-Mysql
+MySQL
+
 ```
 # modified from SO answer http://stackoverflow.com/questions/5125096/for-loop-in-mysql
 DROP DATABASE IF EXISTS hello_world;
@@ -156,11 +151,9 @@ INSERT INTO fortune (id, message) VALUES (12, 'フレームワークのベンチ
 
 ```
 
-Above scripts can be found in https://github.com/networknt/light-example-4j/tree/master/rest/swagger/database/dbscript
-You can just copy the dbscript folder from database.bak to database folder as scripting for these three databases
-are out of scope in this tutorial.
+Above scripts can be found in https://github.com/networknt/light-example-4j/tree/master/rest/swagger/database/dbscript You can copy the dbscript folder from database.bak to database folder as scripting for these three databases are out of scope in this tutorial.
 
-In the next step, we are going to start three databases with Docker and make them ready to be
-connected from the project we are building. 
+In the next step, we are going to [start three databases][] with Docker and make them ready to be connected from the project we are building. 
 
+[start three databases]: /tutorial/rest/swagger/database/startdb/
 

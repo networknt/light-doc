@@ -9,6 +9,7 @@ weight: 30      #rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 With the specification in place, we can generate the code with [light-codegen][]
@@ -19,7 +20,7 @@ There are three different ways to generate the code with light-codegen:
 * Docker container
 * Script with docker container
 
-To learn how to use the tool, please refer to this the [light-codegen tutorial][]
+To learn how to use the tool, please refer to the [light-codegen tutorial][]
 
 ### Generate code with local build
 
@@ -32,11 +33,9 @@ cd light-codegen
 mvn clean install -DskipTests
 ```
 
-For this demo, I am going to generate the code into light-example-4j/rest/swagger/database/generated
-folder so that users can check the code later on from this repo. 
+For this demo, I am going to generate the code into light-example-4j/rest/swagger/database/generated folder so that users can check the code later on from this repository. 
 
-Let's checkout the light-example-4j repo and backup the existing database project. You can later
-compare your working folder with the .bak folder to see any difference. 
+Let's check out the light-example-4j repository and back up the existing database project. You can later compare your working folder with the .bak folder to see any difference. 
 
 ```
 cd ~/networknt
@@ -45,8 +44,7 @@ cd light-example-4j/rest/swagger
 mv database database.bak
 ```
 
-Before generating the project, we need to create a config.json to define packages,
-artifactId, groupId and other options for the project.
+Before generating the project, we need to create a config.json to define packages, artifactId, groupId and other options for the project.
 
 Here is the content of the file and it can be found in ~/networknt/model-config/rest/swagger/database
 
@@ -66,6 +64,7 @@ Here is the content of the file and it can be found in ~/networknt/model-config/
   "enableHttp": false,
   "httpsPort": 8443,
   "enableHttps": true,
+  "enableHttp2": true,
   "enableRegistry": false,
   "supportDb": true,
   "dbInfo": {
@@ -76,11 +75,12 @@ Here is the content of the file and it can be found in ~/networknt/model-config/
     "password": "my-secret-pw"
   },
   "supportH2ForTest": true,
-  "supportClient": false
+  "supportClient": false,
+  "dockerOrganization": "networknt"
 }
 ```
 
-As you can see that we have enabled Mysql database and H2 for test cases. 
+As you can see, we have enabled the Mysql database and H2 for test cases. 
 
 Code generation
 
@@ -116,9 +116,7 @@ cd ~/networknt
 docker run -it -v ~/networknt/model-config/rest/swagger/database:/light-api/input -v ~/networknt/light-example-4j/rest/swagger/database:/light-api/out networknt/light-codegen -f swagger -m /light-api/input/swagger.json -c /light-api/input/config.json -o /light-api/out/generated
 ```
 
-Node that on Linux, the generated folder in ~/networknt/light-example-4j/rest/swagger/database will be 
-owned by root:root and it needs to be changed to your user:group before compile the project. On other
-operating systems like Mac and Windows, you don't need this step. 
+Node that on Linux, the generated folder in ~/networknt/light-example-4j/rest/swagger/database will be owned by root:root and it needs to be changed to your user:group before compile the project. On other operating systems like Mac and Windows, you don't need this step. 
 
 ```
 cd ~/networknt/light-example-4j/rest/swagger/database
