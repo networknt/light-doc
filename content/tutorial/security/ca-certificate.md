@@ -36,16 +36,16 @@ Here are the steps to follow.
 
 ##### PKCS12 keystore
 
-Create PKCS 12 file using your private key and CA signed certificate of it. You can use openssl command for this.
+Create PKCS 12 file using your private key and CA-signed certificate of it. You can use `openssl` command for this. Please specify the alias to `server` as light-4j is looking for this alias name in the server.keystore. If you don't specify the alias name and there is only one key/certificate in the store, the light-4j is still working but the `/server/info` endpoint won't return the fingerprint of the certificate. 
 
 ```
-openssl pkcs12 -export -in [path to certificate] -inkey [path to private key] -certfile [path to certificate ] -out server.p12
+openssl pkcs12 -export -in [path to certificate] -inkey [path to private key] -certfile [path to certificate ] -name [alias] -out server.p12
 ```
 
 As an example, assume that I have a private key called "privkey.pem" and full chain certificate called "fullchain.pem" in the current folder.
 
 ```
-openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -certfile fullchain.pem -out server.p12
+openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -certfile fullchain.pem -name server -out server.p12
 ```
 
 It will ask you to enter the export password. Once it is done, you can find the server.p12 in the same folder.
@@ -87,7 +87,11 @@ Also, you can change the alias name for your private key.
 keytool -changealias -keystore [path to key store] -alias [current alias]
 ```
 
+Here is an example if you forget to set the -name in openssl pkcs12 -export command above. The default alias is 1. 
 
+```
+keytool -changealias -keystore server.keystore -alias server
+```
 
 [let's encrypt]: /tutorial/security/lets-encrypt/
 
