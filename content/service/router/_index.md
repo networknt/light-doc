@@ -48,10 +48,12 @@ To learn how to use this router, please refer to
 * [Artifact][] find release artifacts and deploy options
 * [Configuration][] for different configurations based on your situations
 * [Location and Ownership] for deployment and ownership decision
-  
+* [Static Content][] render a single page application
+
 [Getting Started]: /getting-started/light-router/
 [Tutorial]: /tutorial/router/
 [Components]: /service/router/components/
 [Configuration]: /service/router/configuration/
 [Artifact]: /service/router/artifact/
 [Location and Ownership]: /service/router/location-ownership/
+[Static Content]: /service/router/static-content/
