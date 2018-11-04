@@ -8,13 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Apache Kafka is a distributed streaming platform developed by Apache Software Foundation and written in Java and Scala. Light Platform uses Kafka for messaging broker for event based frameworks (light-eventuate-4j, light-tram-4j and light-saga-4j). In this document, we will show you how to install Kafka 2.0 on Ubuntu 18.04 VMs to form a three nodes cluster. 
+Apache Kafka is a distributed streaming platform developed by Apache Software Foundation and written in Java and Scala. Light Platform uses Kafka for messaging broker for event-based frameworks (light-eventuate-4j, light-tram-4j, and light-saga-4j). In this document, we will show you how to install Kafka 2.0 on Ubuntu 18.04 VMs to form a three nodes cluster. 
 
 ### Prerequisites
 
-Three KVM boxes with 32GB memory each and you need to have sudo access to all the VMs. In the following steps, we are going to use names of the hosts as test1, test2 and test3. First let's login to test1 and install everything. 
+Three KVM boxes with 32GB memory each and you need to have `sudo` access to all the VMs. In the following steps, we are going to use the names of the hosts as test1, test2, and test3. First, let's log in to test1 and install everything. 
 
 ### Install OpenJDK 8
 
@@ -64,7 +65,7 @@ Create a new kafka folder
 sudo mkdir -p /opt/kafka
 ```
 
-Extract the kafka_*.tar.gz file to the 'kafka' directory and change the owner of directory to the 'kafka' user and group.
+Extract the kafka_*.tar.gz file to the `kafka` directory and change the owner of the directory to the `kafka` user and group.
 
 ```
 
@@ -86,7 +87,7 @@ sudo mkdir /var/zookeeper
 sudo chown -R kafka:kafka /var/zookeeper
 ```
 
-Now login to the 'kafka' user and edit the zookeeper.properties configuration
+Now login to the `kafka` user and edit the zookeeper.properties configuration
 
 ```
 su - kafka
@@ -258,7 +259,7 @@ zk_min_proposal_size	32
 
 ### Install Test2 and Test3
 
-Follow the same steps above to get test2 and test3 installed. Remember that certain variables need to be changed per host basis. 
+Follow the same steps above to get test2 and test3 installed. Remember that certain variables need to be changed per-host basis. 
 
 
 ### Test Kafka
@@ -314,6 +315,20 @@ You should see the producer input immedately from the beginning.
 
 ### Security
 
-We have both zookeeper and kafka clusters running on three node and they are exposed on the internet. We need to find a way to secure both. 
+We have both Zookeeper and Kafka clusters running on three nodes and they are exposed on the Internet. We need to find a way to secure both. 
+
+
+For now, we are going to disable the access to Zookeeper and Kafka from the Internet. Let's enable the firewall with `ufw`.
+
+```
+sudo ufw status
+sudo ufw enable
+sudo ufw allow ssh
+sudo ufw allow from 38.113.162.51
+sudo ufw allow from 38.113.162.52
+sudo ufw allow from 38.113.162.53
+```
+
+This means that the cluster can only be accessed from these three nodes locally. If we build applications, we need to deploy them to the three nodes or enable firewall for the hosts with the applications individually. 
 
 
