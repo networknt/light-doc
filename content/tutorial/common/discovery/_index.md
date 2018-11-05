@@ -43,6 +43,8 @@ This tutorial shows how to use the service registry and discovery feature of the
 
 * [External Config][]
 
+* [Docker-compose and Consul Production]
+
 [Introduction and Code Generation]: /tutorial/common/discovery/generated/
 [Static Configuration]: /tutorial/common/discovery/static/
 [Dynamic Service Discovery with Direct Registry]: /tutorial/common/discovery/dynamic/
@@ -56,4 +58,5 @@ This tutorial shows how to use the service registry and discovery feature of the
 [Consul Production with TLS]: /tutorial/common/discovery/consul-tls/
 [External Config]: /tutorial/common/discovery/external-config/
 [Consul HTTP Health Check]: /tutorial/common/discovery/http-health/
+[Docker-compose and Consul Production]: /tutorial/common/discovery/compose-consul/
 

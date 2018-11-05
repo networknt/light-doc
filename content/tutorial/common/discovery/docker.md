@@ -29,7 +29,7 @@ cp -r ~/networknt/discovery/api_d/consul ~/networknt/discovery/api_d/consuldocke
 
 We will be running in a dockerized environment, so having consul configured at "localhost" is no longer valid. We will be using the DOCKER_HOST_IP in the consul.yml file. On my local computer, the IP is 192.168.1.120. You can use ifconfig on Linux to find out your local IP. 
 
-When starting the docker-compose for services, we need to set up the DOCKER_HOST_IP as environment variable to pass it into the container. For more info on how to setup the DOCKER_HOSTI_IP, please refer to [docker host ip][]. 
+When starting the docker-compose for services, we need to set up the DOCKER_HOST_IP as environment variable to pass it into the container. For more info on how to setup the DOCKER_HOST_IP, please refer to [docker host ip][]. 
 
 `consul.yml`
 
@@ -250,9 +250,10 @@ And here is the result.
 ["API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API C: Message 1","API C: Message 2","API A: Message 1","API A: Message 2"]
 ```
 
-In this step, we have dockerized all APIs and start them together. We also, start Consul with separate compose first to allow all services to register them to the Consul server.
+In this step, we have dockerized all APIs and start them together. We also, start Consul with separate compose first to allow all services to register them to the Consul server. To make it simple, we are using HTTP to connect to the Consul and still using the static port in the server.yml config file. If you want to learn production like docker-compose and Consul integration please take a look at [Docker compose and Consul production][].
 
 In the next step, we are going to deploy all services to [Kubernetes][] cluster instead of docker-compose. 
 
 [Kubernetes]: /tutorial/common/discovery/kubernetes/
 [docker host ip]: /tutorial/eventuate/getting-started/
+[Docker compose and Consul production]: /tutorial/common/discovery/compose-consul/
