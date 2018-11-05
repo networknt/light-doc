@@ -219,6 +219,11 @@ https://localhost:8443/
 
 You will see an React starter application running. The next step is to update the React applicationt to access APIs on the portal. 
 
+The following is a video that walks through the process. 
+
+{{< youtube JULDeqnK5ek >}}
+
+
 [create an instance of light-router for taiji-faucet service]: /tutorial/router/taiji-faucet/
 
 
