@@ -1,57 +1,34 @@
 ---
-title: "Audit"
+title: "Audit Log"
 date: 2017-11-05T10:24:06-05:00
 description: ""
 categories: [concerns]
 keywords: []
-menu:
-  docs:
-    parent: "concern"
-    weight: 03
-weight: 03	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-There are two built-in audit handlers that write logs into audit.log that setup 
-in the logback appender. End user can add more customized audit handlers if need.
+Two built-in audit handlers write logs into audit.log which is set up in the logback appender. The end user can add more customized audit handlers if need. For example, some customers are writing audit info in a relational database, and others write it into a Kafka topic. 
 
-In the audit module, there is AuditHandler which is a generic and configurable
-with audit.yml config file. 
+In the audit module, there is AuditHandler which is generic and configurable with the audit.yml config file. 
 
-There is another audit provided by the light-4j framework called DumpHandler in
-[dump](/middleware/dump/) module. 
+There is another audit provided by the light-4j framework called DumpHandler in [dump](/concern/dump/) module. 
 
-## Introduction 
+### Introduction 
 
-Only logs several fields from request header and the fields are configurable. 
-Optional, it can log response status and response time.
+This handler only logs several fields from request header, and the fields are configurable. Optional, it can log response status and response time.
 
-This is a generic audit handler that dump most important info per request basis. 
-The following elements will be logged if it's available in auditInfo object 
-attached to exchange. This object wil be populated by other upstream handlers 
-like swagger-meta and swagger-security for light-rest-4j framework.
+This is a generic audit handler that dumps the most important info per request basis. The following elements will be logged if it's available in the AuditInfo object attached to exchange. This object will be populated by other upstream handlers like swagger-meta and swagger-security for the light-rest-4j framework.
 
-This handler can be used on production but be aware that it will impact the 
-overall performance. Turning off statusCode and responseTime can make it faster 
-as these have to be captured on the response chain instead of request chain.
+This handler can be used on production but be aware that it will impact the overall performance. Turning off statusCode and responseTime can make it faster as these have to be captured on the response chain instead of request chain.
 
-For most business and majority of microservices, you don't need to enable this 
-handler due to performance reasons. There are situations during troubleshooting or 
-integration testing, where teams need to collect more information based on the success 
-or failure of the execution, or collect complete request and response payloads. 
-Teams need to recognize that collecting this information will negatively impact performance 
-and it is not recommended to be used in production environments.
+For most business and majority of microservices, you don't need to enable this handler due to performance reasons. There are situations during troubleshooting or integration testing, where teams need to collect more information based on the success or failure of the execution or collect complete request and response payloads. Teams need to recognize that collecting this information will negatively impact performance and it is not recommended to use it on production environments.
 
-The default audit log will be audit.log config 
-in the default logback.xml; however, it can be changed to syslog or Kafka with 
-customized appender.
+The default audit log will be audit.log config in the default logback.xml; however, it can be changed to syslog or Kafka with a customized appender.
 
-Majority of the fields in audit log are collected in request and response; 
-however, to allow user to customize it, we have put an attachment into the 
-exchange to allow other handlers to write important info into it. The audit.yml 
-can control which fields should be included in the final log.
+Majority of the fields in audit log are collected in request and response; however, to allow users to customize it, we have put an attachment into the exchange to allow other handlers to write important info into it. The audit.yml can control which fields should be included in the final log.
 
 By default, the following fields are included:
 
@@ -68,12 +45,11 @@ By default, the following fields are included:
  * request (the request body, if available)
  * response (the response payload, if set)
 
-The audit.log is in JSON format and it is easy to be parsed and monitored. 
+The audit.log is in JSON format, and it is easy to be parsed and monitored. 
 
-## Configuration
+### Configuration
  
-The output fields are populated based on the config file audit.yml and here is
-and example. 
+The output fields are populated based on the config file audit.yml and here is an example. 
 
 ```
 # AuditHandler will pick some important fields from headers and tokens and logs into a audit appender.
@@ -122,7 +98,7 @@ audit:
 
 ```
 
-## Logback config
+### Logback config
 
 The following is the appender defined in the logback.xml or logback-test.xml
 
@@ -148,7 +124,7 @@ The following is the appender defined in the logback.xml or logback-test.xml
 
 ```
 
-## Logging example
+### Logging example
 
 ```
 INFO  [XNIO-1 I/O-1] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {"timestamp":1494286353929,"X-Correlation-Id":"abS_cAyTT5SIrHayM-11pQ","X-Traceability-Id":null,"statusCode":200,"responseTime":16}
@@ -156,8 +132,6 @@ INFO  [XNIO-1 I/O-3] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {"timestamp
 ```
 
 
-## Customized Handler
-For some users that need special audit logic or other channel to redirect the audit
-to, they can create their own audit handler and replace the default audit handler in
-/src/main/resources/META-INF/services/com.networknt.handler.MiddlewareHandler
+### Customized Handler
 
+For some users that need special audit logic or other channels to redirect the audit to, they can create their audit handler and replace the default audit handler in server.yml or handler.yml depending on how you wire your middleware handlers in your application. 

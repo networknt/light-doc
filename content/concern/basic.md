@@ -4,17 +4,11 @@ date: 2018-06-25T22:19:20-04:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "concern"
-    weight: 10
-weight: 10
 aliases: []
 toc: false
 draft: false
 reviewed: true
 ---
-
 
 As we know that the default security for the light platform is OAuth 2.0 and we have a provider light-oauth2 implemented as microservices. However, for some special use cases we do need to support other authentication mechanisms. One of them is basic authentication that is constantly asked by our customers who want to deploy the service to IoT devices. 
 

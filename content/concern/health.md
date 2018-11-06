@@ -4,11 +4,6 @@ date: 2017-11-05T10:24:06-05:00
 description: ""
 categories: [concerns]
 keywords: []
-menu:
-  docs:
-    parent: "concern"
-    weight: 60
-weight: 60	#rem
 aliases: []
 toc: false
 draft: false

@@ -320,5 +320,11 @@ Now we need to set up the debugging session IntelliJ IDEA for the externalized c
 If you are unsure how to debug light-4j application, please refer to this [video](https://www.youtube.com/watch?v=qW0xIC_A_KI&t=50s)
 
 
+### Video
+
+Here is a video that walks through the configuration and gives a demo. 
+
+{{< youtube fYr3GmunLMU >}}
+
 
 

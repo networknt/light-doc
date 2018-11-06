@@ -26,7 +26,8 @@ The tutorials are still working in progress and more will be added later.
 - [Deploy light-router to cloud server](/tutorial/common/discovery/router/)
 - [Deploy light-router for taiji-faucet service](/tutorial/router/taiji-faucet/)
 - [Add a react single page application to taiji-faucet router](/tutorial/router/router-spa/)
-- [Virutal hosts on taiji-faucet router](/tutorial/router/virtual-host/)
+- [Virtual hosts on taiji-faucet router](/tutorial/router/virtual-host/)
+- [Virtual hosts on light-portal](/tutorial/router/light-portal/)
 
 [light-router location and ownership]: /service/router/location-ownership/
 [light-router configuration]: /service/router/configuration/
