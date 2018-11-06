@@ -69,61 +69,58 @@ hosts:
 
 ### Firewall
 
-Make sure that 443 is accepted on the portal server. 
+Follow the [Port 443 tutorial][] to setup the firewall on the server. 
+
+
+After the iptables rules update, the ufw status looks like this.
 
 ```
-sudo ufw allow https
+ sudo ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+8500/tcp                   ALLOW       Anywhere                  
+Anywhere                   ALLOW       198.55.49.187             
+Anywhere                   ALLOW       198.55.49.186             
+22/tcp                     ALLOW       Anywhere                  
+443/tcp                    ALLOW       Anywhere                  
+8443/tcp                   ALLOW       Anywhere                  
+8500/tcp (v6)              ALLOW       Anywhere (v6)             
+22/tcp (v6)                ALLOW       Anywhere (v6)             
+443/tcp (v6)               ALLOW       Anywhere (v6)             
+8443/tcp (v6)              ALLOW       Anywhere (v6)      
 ```
 
-Make sure that 8443 is acceted on the portal server.
-
-```
-sudo iptables -I INPUT -p tcp -m tcp --dport 8443 -j ACCEPT
-sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-```
-
-Port forwarding from 443 to 8443
-
-```
-sudo iptables -A PREROUTING -t nat -i ens2 -p tcp --dport 443 -j REDIRECT --to-port 8443
-```
-
-- Check Rules
-
-After you change something, you might wondering what is the rules at the moment. You can export the current rules to a text file to check it out. And you can restore the rules with the text file. 
-
-```
-sudo iptables-save > iptables_rules.txt
-```
-
-You can use command line to check the rules. 
-
-```
-sudo iptables -L -n
-```
-
-As PREROUTING rule is part of the NAT, the above command line won't show the PREROUTING rule, to see them, use the following command. 
-
-```
-sudo iptables -L -n -t nat
-```
-
-
-- Remove Rules
-
-If you make a mistake and add/insert an incorrect PREROUTING rule, you can delete it with the following commands. 
-
-First you need to find out which line number the rule is. 
+And the PREROUTING rules look like. 
 
 ```
 sudo iptables -t nat --line-numbers -L
+Chain PREROUTING (policy ACCEPT)
+num  target     prot opt source               destination         
+1    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 8443
+2    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 8443
+3    DOCKER     all  --  anywhere             anywhere             ADDRTYPE match dst-type LOCAL
+
+Chain INPUT (policy ACCEPT)
+num  target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+num  target     prot opt source               destination         
+1    DOCKER     all  --  anywhere            !localhost/8          ADDRTYPE match dst-type LOCAL
+
+Chain POSTROUTING (policy ACCEPT)
+num  target     prot opt source               destination         
+1    MASQUERADE  all  --  172.19.0.0/16        anywhere            
+2    MASQUERADE  all  --  172.17.0.0/16        anywhere            
+3    MASQUERADE  tcp  --  172.19.0.2           172.19.0.2           tcp dpt:8443
+
+Chain DOCKER (2 references)
+num  target     prot opt source               destination         
+1    RETURN     all  --  anywhere             anywhere            
+2    RETURN     all  --  anywhere             anywhere            
+3    DNAT       tcp  --  anywhere             anywhere             tcp dpt:8443 to:172.19.0.2:8443
+
 ```
 
-Then delete the rule in PREROUTING by line number. 
-
-```
-sudo iptables -t nat -D PREROUTING 5
-```
-
-As the line number might be changed after removing one record, you need to rerun the --line-numbers command if you want to remove another record. 
-
+[Port 443 tutorial]: /tutorial/security/port443/
