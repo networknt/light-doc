@@ -48,12 +48,11 @@ Since your server architecture doesn't yet support automatic installation you'll
 ```
 sudo certbot certonly
 ```
-
-Select Spin up a temporary web server
-Enter email address
-Agree the Terms of Service
-Select if you want to share your email
-Select your domain name
+- Select Spin up a temporary web server
+- Enter email address
+- Agree the Terms of Service
+- Select if you want to share your email
+- Select your domain name
 
 
 The cert and key will be written to your /etc/letsencrypt/live folder
@@ -71,5 +70,12 @@ The cert and key will be written to your /etc/letsencrypt/live folder
 
 Now you have the fullchain certificate and the private key. The next step is to create a server.keystore that can be used by light-4j service. 
 
+If you want to create a certificate with multiple domains, it is easier to list the domains in the commmand line. 
+
+```
+sudo certbot certonly -d taiji.io -d faucet.taiji.io -d lightapi.net
+```
+
+If you have an existing certificate for only one domain, it will ask you if you want to expend it. Select (E) to proceed. 
 
 

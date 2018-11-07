@@ -123,4 +123,26 @@ num  target     prot opt source               destination
 
 ```
 
+### Certificate
+
+Given the above configuration, we have three domains on the same host. In this step, we are going to get a certificate that can validate these three domains. 
+
+- taiji.io
+- faucet.taiji.io
+- lightapi.net
+
+
+First we need go to the cloudflare to disable the pass through from it so that all three domain DNS will point to the real IP on the portal server. 
+
+Now let's log into the portal to get the certificate. For details, please refer to [lets-encrytp][] tutorial.
+
+```
+sudo certbot certonly -d taiji.io -d faucet.taiji.io -d lightapi.net
+```
+
+Copy the fullchain.pem and privkey.pem to direcoty and use openssl and keytool to [create server.keystore][].
+
 [Port 443 tutorial]: /tutorial/security/port443/
+[lets-encrytp]: /tutorial/security/lets-encrypt/
+[create server.keystore]: /tutorial/security/ca-certificate/
+

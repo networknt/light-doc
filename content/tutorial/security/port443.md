@@ -131,3 +131,9 @@ sudo ufw allow 8443/tcp
 sudo ufw allow 443/tcp
 ```
 
+If you are unsure how the rules are working or what is blocking your request, you can monitor the log of iptables. 
+
+```
+sudo tail -f /var/log/syslog
+```
+
