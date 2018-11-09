@@ -75,6 +75,13 @@ This is the timeout period if backend instance is too slow to respond. In above 
 it is set as 1 seconds. You should set it properly based on the normal response time
 of you backend service. In general, you should set this number as small as possible.
 
+If you backend service is slow, you might see this error message in the light-router log. 
+
+```
+ERROR io.undertow.proxy cancel - UT005027: Timing out request to ...
+```
+
+When you see this error message, you need to bump up the timeout in the configuraiton and restart the light-router. 
 
 ## client.yml
 
