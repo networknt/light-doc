@@ -8,12 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-
-The light-router is a client routing server that provides a lot of features other
-proxy servers cannot provide. This document will explain all user cases and map
-to certain configurations to deploy the light-router server based on the requirements.
+The light-router is a client routing server that provides a lot of features other proxy servers don't have. This document will explain all use cases and map to specific configurations to deploy the light-router server based on the requirements.
 
 ##  router.yml
 
@@ -339,6 +337,241 @@ singletons:
   - com.networknt.header.HeaderHandler
 
 ```
+
+## handler.yml
+
+If your downstream service is using handler.yml to define the middleware handler chains instead of service.yml, you need to add this configuration file to the light-router. This file defines the paths allowed for the backend service so that light-router can block invalid request to reach the downstream service. When you upgrade the backend service to add new endpoints, please don't forget to update the handler.yml on the light-router. Otherwise, there is no way for the client to access your new endpoints. 
+
+Here is an example of handler.yml for the backend service for the taiji-faucet. 
+
+```
+# Handler middleware chain configuration
+---
+enabled: true
+
+#------------------------------------------------------------------------------
+# Support individual handler chains for each separate endpoint. It allows framework
+# handlers like health check, server info to bypass majority of the middleware handlers
+# and allows mixing multiple frameworks like OpenAPI and GraphQL in the same instance.
+#
+# handlers  --  list of handlers to be used across chains in this microservice
+#               including the routing handlers for ALL endpoints
+#           --  format: fully qualified handler class name@optional:given name
+# chains    --  allows forming of [1..N] chains, which could be wholly or
+#               used to form handler chains for each endpoint
+#               ex.: default chain below, reused partially across multiple endpoints
+# paths     --  list all the paths to be used for routing within the microservice
+#           ----  path: the URI for the endpoint (ex.: path: '/v1/pets')
+#           ----  method: the operation in use (ex.: 'post')
+#           ----  exec: handlers to be executed -- this element forms the list and
+#                       the order of execution for the handlers
+#
+# IMPORTANT NOTES:
+# - to avoid executing a handler, it has to be removed/commented out in the chain
+#   or change the enabled:boolean to false for a middleware handler configuration.
+# - all handlers, routing handler included, are to be listed in the execution chain
+# - for consistency, give a name to each handler; it is easier to refer to a name
+#   vs a fully qualified class name and is more elegant
+# - you can list in chains the fully qualified handler class names, and avoid using the
+#   handlers element altogether
+#------------------------------------------------------------------------------
+handlers:
+  # Light-framework cross-cutting concerns implemented in the microservice
+  - com.networknt.exception.ExceptionHandler@exception
+  - com.networknt.metrics.MetricsHandler@metrics
+  - com.networknt.traceability.TraceabilityHandler@traceability
+  - com.networknt.correlation.CorrelationHandler@correlation
+  - com.networknt.cors.CorsHttpHandler@cors
+  - com.networknt.openapi.OpenApiHandler@specification
+  - com.networknt.openapi.JwtVerifyHandler@security
+  - com.networknt.body.BodyHandler@body
+  - com.networknt.audit.AuditHandler@audit
+  - com.networknt.sanitizer.SanitizerHandler@sanitizer
+  - com.networknt.openapi.ValidatorHandler@validator
+  # Customer business domain specific cross-cutting concerns handlers
+  # - com.example.validator.CustomizedValidator@custvalidator
+  # Framework endpoint handlers
+  - com.networknt.health.HealthGetHandler@health
+  - com.networknt.info.ServerInfoGetHandler@info
+  - com.networknt.specification.SpecDisplayHandler@spec
+  - com.networknt.specification.SpecSwaggerUIHandler@swaggerui
+  # - com.networknt.metrics.prometheus.PrometheusGetHandler@getprometheus
+  # Business Handlers
+  - io.taiji.faucet.handler.FaucetAddressPostHandler
+  - io.taiji.faucet.handler.FaucetAddressGetHandler
+  - io.taiji.faucet.handler.FaucetAddressCurrencyGetHandler
+
+
+chains:
+  default:
+    - exception
+    - metrics
+    - traceability
+    - correlation
+    - cors
+    - specification
+    - security
+    - body
+    - audit
+    - sanitizer
+    - validator
+
+paths:
+  - path: '/faucet/{address}'
+    method: 'POST'
+    exec:
+      - default
+      - io.taiji.faucet.handler.FaucetAddressPostHandler
+  - path: '/faucet/{address}'
+    method: 'GET'
+    exec:
+      - default
+      - io.taiji.faucet.handler.FaucetAddressGetHandler
+  - path: '/faucet/{address}/{currency}'
+    method: 'GET'
+    exec:
+      - default
+      - io.taiji.faucet.handler.FaucetAddressCurrencyGetHandler
+
+  - path: '/health/io.taiji.faucet-1.0.0'
+    method: 'get'
+    exec:
+      - health
+
+  - path: '/server/info'
+    method: 'get'
+    exec:
+      - info
+
+
+  - path: '/spec.yaml'
+    method: 'get'
+    exec:
+      - spec
+  - path: '/specui.html'
+    method: 'get'
+    exec:
+      - swaggerui
+
+```
+
+And here is the corresponding handler.yml on the light-router. 
+
+```
+# Handler middleware chain configuration
+---
+enabled: true
+
+#------------------------------------------------------------------------------
+# Support individual handler chains for each separate endpoint. It allows framework
+# handlers like health check, server info to bypass majority of the middleware handlers
+# and allows mixing multiple frameworks like OpenAPI and GraphQL in the same instance.
+#
+# handlers  --  list of handlers to be used across chains in this microservice
+#               including the routing handlers for ALL endpoints
+#           --  format: fully qualified handler class name@optional:given name
+# chains    --  allows forming of [1..N] chains, which could be wholly or
+#               used to form handler chains for each endpoint
+#               ex.: default chain below, reused partially across multiple endpoints
+# paths     --  list all the paths to be used for routing within the microservice
+#           ----  path: the URI for the endpoint (ex.: path: '/v1/pets')
+#           ----  method: the operation in use (ex.: 'post')
+#           ----  exec: handlers to be executed -- this element forms the list and
+#                       the order of execution for the handlers
+#
+# IMPORTANT NOTES:
+# - to avoid executing a handler, it has to be removed/commented out in the chain
+#   or change the enabled:boolean to false for a middleware handler configuration.
+# - all handlers, routing handler included, are to be listed in the execution chain
+# - for consistency, give a name to each handler; it is easier to refer to a name
+#   vs a fully qualified class name and is more elegant
+# - you can list in chains the fully qualified handler class names, and avoid using the
+#   handlers element altogether
+#------------------------------------------------------------------------------
+handlers:
+  # Light-framework cross-cutting concerns implemented in the microservice
+  - com.networknt.exception.ExceptionHandler@exception
+  # - com.networknt.metrics.MetricsHandler@metrics
+  - com.networknt.traceability.TraceabilityHandler@traceability
+  - com.networknt.correlation.CorrelationHandler@correlation
+  #Cors handler to handler post/put pre-flight
+  - com.networknt.cors.CorsHttpHandler@cors
+  # - com.networknt.openapi.OpenApiHandler@specification
+  # - com.networknt.openapi.JwtVerifyHandler@security
+  # - com.networknt.body.BodyHandler@body
+  # - com.networknt.audit.AuditHandler@audit
+  # - com.networknt.sanitizer.SanitizerHandler@sanitizer
+  # - com.networknt.openapi.ValidatorHandler@validator
+  # Header middleware to manipulate request and/or response headers before or after downstream server
+  - com.networknt.header.HeaderHandler@header
+  # Direct requests to named services based on the request path
+  - com.networknt.router.middleware.PathPrefixServiceHandler@path
+  - com.networknt.router.RouterHandler@router
+  - com.networknt.resource.VirtualHostHandler@virtual
+  # Customer business domain specific cross-cutting concerns handlers
+  # - com.example.validator.CustomizedValidator@custvalidator
+  # Framework endpoint handlers
+  - com.networknt.health.HealthGetHandler@health
+  - com.networknt.info.ServerInfoGetHandler@info
+  # - com.networknt.metrics.prometheus.PrometheusGetHandler@getprometheus
+
+chains:
+  default:
+    - exception
+    #- metrics
+    - traceability
+    - correlation
+    - cors
+    - header
+    - path
+    - router
+    #- specification
+    #- security
+    #- body
+    #- audit
+    #- sanitizer
+    #- validator
+
+paths:
+  - path: '/faucet/{address}'
+    method: 'GET'
+    exec:
+      - default
+  - path: '/faucet/{address}'
+    method: 'POST'
+    exec:
+      - default
+  - path: '/faucet/{address}/{currency}'
+    method: 'GET'
+    exec:
+      - default
+  - path: '/spec.yaml'
+    method: 'get'
+    exec:
+      - default
+  - path: '/specui.html'
+    method: 'get'
+    exec:
+      - default
+
+  - path: '/health/com.networknt.router-0.1.0'
+    method: 'get'
+    exec:
+      - health
+
+  # In most case, the /server/info endpoint shouldn't be exposed. If it is, then it must be protected by OAuth 2.0 or Basic Auth
+  - path: '/server/info'
+    method: 'get'
+    exec:
+      - info
+
+
+defaultHandlers:
+  - virtual
+
+```
+
+The light-router defines all the paths available from the backend service only let the request pass through. However, the taiji-faucet service will handle request with its hanlder chain. 
 
 ## token.yml
 
