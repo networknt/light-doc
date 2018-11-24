@@ -34,3 +34,5 @@ Tools we use.
   * [Remove Big Binary Files from Repo](/tool/git/remove-bigfile/)
 - [Consul](/tool/consul/)
   * [Production Installation](/tool/consul/cluster-install/)
+- [IntelliJ Idea](/tool/idea/)
+- [SDKMAN](/tool/sdk/)

@@ -24,22 +24,33 @@ Here I will introduce another way to manage documents in gh-pages with [Hugo](ht
 
 ## Installation
 
+
 ### Hugo
 
-For Linux, download the binary from the [latest release](https://github.com/spf13/hugo/releases)
 
-I am using hugo_0.17-64bit.deb on Ubuntu and install it with the following command.
+- Manual
+
+For Linux, download the binary from the [latest release](https://github.com/gohugoio/hugo/releases)
+
+I am using hugo_0.51_Linux-64bit.deb on Ubuntu and install it with the following command.
 
 
 ```
-
-sudo dpkg -i hugo_0.17-64bit.deb
+sudo dpkg -i hugo_0.51_Linux-64bit.deb
 ```
 
 To verify that Hugo is installed successfully.
 
 ```
 hugo version
+```
+
+- Package Manager
+
+Another way to install Hugo is to use the package manager on your Linxu distro. For example, if you are using Ubuntu 18.04, then you can install HUgo by issuing the following command. This is not recommended at the moment as most Linux distros have only older version of the Hugo available. 
+
+```
+sudo apt install hugo
 ```
 
 For Mac, the easiest way is to use Homebrew.
