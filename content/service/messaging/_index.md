@@ -28,3 +28,7 @@ The light platform is very flexible in term of injecting other components, and w
 - [Kafka](/service/messaging/kafka/)
   * [Installation](/service/messaging/kafka/installation/)
   * [Security](/service/messaging/kafka/security/)
+  * [Purge Topic](/service/messaging/kafka/purge/)
+- [Schema Registry](/service/messaging/schema-registry/)
+  * [Installation](/service/messaging/schema-registry/installation/)
+  * [Security](/service/messaging/schema-registry/security/)

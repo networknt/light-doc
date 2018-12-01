@@ -38,9 +38,14 @@ specification.
 
 * [Proxy docker][] will show you how to use dockerized proxy with externalized config files
 
+### Confluent Schema Registry
+
+* [Schema Registry][] shows how to give read-only access to the Internet applications and give write access to internal applications 
+
 [Swagger backend service]: /tutorial/proxy/swagger-backend/
 [Swagger proxy]: /tutorial/proxy/swagger-proxy/
 [OpenAPI backend service]: /tutorial/proxy/openapi-backend/
 [OpenAPI proxy]: /tutorial/proxy/openapi-proxy/
 [Proxy docker]: /tutorial/proxy/docker/
+[Schema Registry]: /tutorial/proxy/schema-registry/
 
