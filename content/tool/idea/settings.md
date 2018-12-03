@@ -1,5 +1,5 @@
 ---
-title: "IntelliJ Idea"
+title: "IntelliJ Idea Settings"
 date: 2018-11-24T13:25:31-05:00
 description: ""
 categories: []
@@ -43,3 +43,4 @@ Restart your IDE once it is done.
 
 
 **Note:** the watches limit is per-account setting. If there are other programs running under the same account which also uses Inotify the limit should be raised high enough to suit needs of all of them.
+
