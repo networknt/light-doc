@@ -20,12 +20,10 @@ Tools we build.
 
 - [Light Bot](/tool/light-bot/)
   * [Why Not Jenkins](/tool/light-bot/jenkins/)
-- [Light Codegen](/consumer/service-discovery/)
-  * [Why Another Generator](/consumer/registry/)
-- [OpenAPI Parser](/consumer/load-balance/)
-  * [Why This Parser](/consumer/round-robin/)
-- [Swagger Bundler](/consumer/light-router/)
-  * [Why Build It](/consumer/router-use-case/)
+- [Light Codegen](/tool/light-codegen/)
+  * [Light Codegen Tutorials](/tutorial/generator/)
+- [OpenAPI Parser](/tool/openapi-parser/)
+- [Swagger Bundler](/tool/swagger-bundler/)
 - [OpenAPI Converter](/tool/openapi-converter/)
 
 Tools we use. 
@@ -36,3 +34,6 @@ Tools we use.
   * [Production Installation](/tool/consul/cluster-install/)
 - [IntelliJ Idea](/tool/idea/)
 - [SDKMAN](/tool/sdk/)
+- [Postman](/tool/postman/)
+- [Wrk Performance Test](/tool/wrk-perf/)
+- [Java Keytool](/tool/keytool/)
