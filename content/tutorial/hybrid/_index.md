@@ -25,3 +25,4 @@ are some examples.
 - [Portal Hybrid Command with Schema Form](/tutorial/hybrid/schema-form-command-portal/)
 - [Portal Hybrid Query with Schema Form](/tutorial/hybrid/schema-form-query-portal/)
 - [Portal Hybrid Service with User Management](/tutorial/hybrid/user-management-portal/)
+- [Taiji Blockchain Web Client Server SPA with handler.yml](/tutorial/hybrid/web-client-spa/)
