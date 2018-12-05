@@ -47,6 +47,7 @@ The following contains architecture, design and best practices.
   * [Traceability](/consumer/traceability/)
      + [Traceability Id](/consumer/traceability-id/)
      + [Correlation Id](/consumer/correlation-id/)
+- [light-consumer-4j](/consumer/light-consumer-4j/)
 - [Service Discovery](/consumer/service-discovery/)
   * [Registry](/consumer/registry/)
      + [Standalone](/consumer/standalone-registry/)
