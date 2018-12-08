@@ -55,5 +55,5 @@ mvn install -DskipTests
 Now, we have the environment and light-codegen ready. The next step, we will [generate][] the
 project with the OpenAPI 3.0 specification. 
 
-[generate]: /tutorial/rest/swagger/petstore/generate/
+[generate]: /tutorial/rest/openapi/petstore/generate/
 [use light-codegen]: /tutorial/generator/
