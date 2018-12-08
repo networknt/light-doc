@@ -332,3 +332,18 @@ sudo ufw allow from 38.113.162.53
 This means that the cluster can only be accessed from these three nodes locally. If we build applications, we need to deploy them to the three nodes or enable firewall for the hosts with the applications individually. 
 
 
+### Check Brokers
+
+To check how many brokers in the cluster, you can switch to kafka user and issue the following command. 
+
+```
+su - kafka
+bin/zookeeper-shell.sh localhost:2181 <<< "ls /brokers/ids"
+```
+
+You should see something like below. 
+
+```
+WatchedEvent state:SyncConnected type:None path:null
+[0, 1, 2]
+```
