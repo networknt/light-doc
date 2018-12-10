@@ -10,19 +10,24 @@ draft: false
 ---
 
 Body parser is a middleware handler designed for [light-rest-4j][]only. It will parse 
-the body to a list or map depending on the first character of the body content if 
-application/json is the content-type in the HTTP header for POST, PUT and PATCH HTTP 
-methods. After the body is parsed, it will be attached to the exchange so that subsequent 
-handlers can use it directly. In the future, other content-type might be supported if needed.
+the body to a list or map according to the content-type in the HTTP header for POST, 
+PUT and PATCH HTTP methods. The content-type can be parsed includes application/json,
+multipart/form-data and application/x-www-form-urlencoded. The application/json type is 
+parsed into list or map depending on the first character of the body while the others 
+is parsed into map by using FormParserFactory provided by io.undertow. After the body 
+is parsed, it will be attached to the exchange so that subsequent handlers can use it 
+directly. 
 
 ### Introduction
 
 In order for this handler to work, the content-type in header must be started with 
-"application/json". If the content type is correct, it will parse it to List or Map 
-and put it into REQUEST_BODY exchange attachment.
+"application/json", "multipart/form-data" or "application/x-www-form-urlencoded". 
+If the content type is correct, it will parse it to List or Map and put it into 
+REQUEST_BODY exchange attachment.
 
-If content type is missing or if it is not started as "application/json", the body
-won't be parsed and this handler will just call next handler in the chain. 
+If content type is missing or if it is not started as "application/json", "multipart/form-data" 
+or "application/x-www-form-urlencoded". the bodywon't be parsed and this handler will 
+just call next handler in the chain. 
 
 [Sanitizer][], [Openapi Validator][] and [Swagger Validator][] depend on this middleware.
 
@@ -40,22 +45,57 @@ enabled: true
 Here is the parsing logic. 
 
 ```java
-                        String s = new Scanner(is, "UTF-8").useDelimiter("\\A").next();
-                        s = s.trim();
-                        if (s.startsWith("{")) {
-                            body = Config.getInstance().getMapper().readValue(s, new TypeReference<HashMap<String, Object>>() {
-                            });
-                        } else if (s.startsWith("[")) {
-                            body = Config.getInstance().getMapper().readValue(s, new TypeReference<List<Object>>() {
-                            });
-                        } else {
-                            // error here. The content type in head doesn't match the body.
-                            Status status = new Status(CONTENT_TYPE_MISMATCH, contentType);
-                            exchange.setStatusCode(status.getStatusCode());
-                            exchange.getResponseSender().send(status.toString());
+                    if (contentType != null && contentType.startsWith("application/json")) {
+                        if (exchange.isInIoThread()) {
+                            exchange.dispatch(this);
                             return;
                         }
-                        exchange.putAttachment(REQUEST_BODY, body);
+                        exchange.startBlocking();
+                        InputStream is = exchange.getInputStream();
+                        try {
+                            Object body;
+                            String s = StringUtils.inputStreamToString(is, StandardCharsets.UTF_8);
+                            if (s != null) {
+                                s = s.trim();
+                                if (s.startsWith("{")) {
+                                    body = Config.getInstance().getMapper().readValue(s, new TypeReference<HashMap<String, Object>>() {});
+                                } else if (s.startsWith("[")) {
+                                    body = Config.getInstance().getMapper().readValue(s, new TypeReference<List<Object>>() {});
+                                } else {
+                                    // error here. The content type in head doesn't match the body.
+                                    setExchangeStatus(exchange, CONTENT_TYPE_MISMATCH, contentType);
+                                    return;
+                                }
+                                exchange.putAttachment(REQUEST_BODY, body);
+                            }
+                        } catch (IOException e) {
+                            logger.error("IOException: ", e);
+                            setExchangeStatus(exchange, CONTENT_TYPE_MISMATCH, contentType);
+                            return;
+                        }
+                        // parse the body to form-data if content type is multipart/form-data or application/x-www-form-urlencoded
+                    } else if (contentType != null &&
+                            (contentType.startsWith("multipart/form-data") || contentType.startsWith("application/x-www-form-urlencoded"))) {
+                        if (exchange.isInIoThread()) {
+                            exchange.dispatch(this);
+                            return;
+                        }
+                        exchange.startBlocking();
+                        try {
+                            Object data;
+                            FormParserFactory formParserFactory = FormParserFactory.builder().build();
+                            FormDataParser parser = formParserFactory.createParser(exchange);
+                            if (parser != null) {
+                                FormData formData = parser.parseBlocking();
+                                data = BodyConverter.convert(formData);
+                                exchange.putAttachment(REQUEST_BODY, data);
+                            }
+                        } catch (Exception e) {
+                            logger.error("IOException: ", e);
+                            setExchangeStatus(exchange, CONTENT_TYPE_MISMATCH, contentType);
+                            return;
+                        }
+                    }
 
 ```
 ### Example
