@@ -48,6 +48,7 @@ Here is an example of config.json for openapi generator.
   "enableHttps": true,
   "enableHttp2": true,  
   "enableRegistry": false,
+  "enableParamDescription": true,
   "supportDb": true,
   "dbInfo": {
     "name": "mysql",
@@ -77,6 +78,7 @@ Here is an example of config.json for openapi generator.
 - enableHttps to specify if the server listens to https port. Https should be used in any official environment for security reason.
 - enableHttp2 to specify if the server supports HTTP/2 connection. It should be true always.
 - enableRegistry to control if built-in service registry/discovery is used. Only necessary if running as standalone java -jar xxx.
+- enableParamDescription is to decide if generate parameter description from specifications as annotation.
 - supportDb to control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml
 - dbInfo section is the database connection pool configuration info.
 - supportH2ForTest if true, add H2 in pom.xml as test scope to support unit test with H2 database.
