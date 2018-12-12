@@ -26,16 +26,13 @@ docker-compose -f docker-compose-test1.yaml down
 repeat the above for test2 and test3
 
 
-login to sandbox to stop the token-reader. Optionally, we can stop the faucet.
+Stop the schema-registry server on the sandbox. If this server is left running, the old schema are still cached and will saved back to the new Kafka topic. 
 
 ```
 ssh sandbox
-cd light-chain/light-kube/token-reader
-kubectl detete -f deployment.yml
+cd networknt/light-docker
+docker-compose -f docker-compose-schema-registry.yml down
 ```
-
-Stop the schema-registry server on the sandbox. 
-
 
 
 ### Stop Kafka
@@ -44,7 +41,6 @@ Stop Kafka instances on three nodes.
 
 ```
 sudo systemctl stop kafka
-
 ```
 
 ### Stop Zookeeper
