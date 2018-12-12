@@ -6,7 +6,7 @@ categories: [concerns]
 keywords: []
 aliases: []
 toc: false
-draft: true
+draft: false
 ---
 
 This is a handler that dumps the entire request and response into a log file. It
@@ -19,11 +19,9 @@ This handler can log HTTP request/response info based on configuration.
 
 This is a generic dump handler may be useful to troubleshooting in developing/testing environment.
 
-This handler is not suggested to be used on production because it will impact the overall performance.
+The dump request/response log file should be configured in logback.xml.
 
-The default request/response log will be dump.log config.
-
-The dump.log is in JSON format, and it is easy to be parsed and monitored. 
+The dumping request/response info format can be default format or json format depends on the configuration. 
 
 ### Configuration
  
