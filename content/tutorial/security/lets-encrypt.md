@@ -10,9 +10,9 @@ toc: false
 draft: false
 ---
 
-If you are using light-router as a public facing access point on a static IP or expose your services to the public, it makes perfect sense to use a CA-signed certificate instead of self-signed. If you don't want to foot the cost of the certificate, Let's Encrypt provides the free certificate which can be recognized by almost all browsers. 
+If you are using light-router as a public facing access point on a static IP or expose your services to the public, it makes perfect sense to use a CA-signed certificate instead of self-signed. If you don't want to foot the cost of the certificate, Let's Encrypt provides free certificates which can be recognized by almost all browsers. 
 
-The following is the process to get a certificate on only of my public facing VMs.
+The following is the process to get a certificate on my public facing VMs.
 
 There are a lot of different ways to use Let's Encrypt, and the certbot is the most convenient one. 
 
@@ -73,7 +73,20 @@ Now you have the fullchain certificate and the private key. The next step is to 
 If you want to create a certificate with multiple domains, it is easier to list the domains in the commmand line. 
 
 ```
-sudo certbot certonly -d taiji.io -d faucet.taiji.io -d lightapi.net
+sudo certbot certonly -d taiji.io -d faucet.taiji.io -d lightapi.net -d demo.taiji.io
+```
+
+If you want to create a new cert with other domain added, you can add the --duplicate option. 
+
+```
+sudo certbot --duplicate certonly -d taiji.io -d faucet.taiji.io -d lightapi.net -d demo.taiji.io
+
+```
+
+As on the website, we have port 443 occupied already, when getting the cert, we want to use port 80 instead of 443. 
+
+```
+sudo certbot --duplicate --preferred-challenges http certonly -d taiji.io -d faucet.taiji.io -d lightapi.net -d demo.taiji.io
 ```
 
 If you have an existing certificate for only one domain, it will ask you if you want to expend it. Select (E) to proceed. 
