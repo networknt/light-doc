@@ -162,6 +162,12 @@ twitter = "networkntcom"
   url = "/tool/"
 
 [[menu.docs]]
+  name = "Utility Library"
+  weight = 36
+  identifier = "library"
+  url = "/library/"
+
+[[menu.docs]]
   name = "Service Consumer"
   weight = 38
   identifier = "consumer"
