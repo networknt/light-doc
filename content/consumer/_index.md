@@ -64,4 +64,8 @@ The following contains architecture, design and best practices.
 - [Light Router](/consumer/light-router/)
   * [Use Cases](/consumer/router-use-case/)
   * [Location and Ownership](/service/router/location-ownership/)
-
+- [Single Page Application](/consumer/spa/)
+  * [React](/consumer/react/)
+  * [React-schema-form](/consumer/react-schema-form/)
+  * [Vue](/consumer/vue/)
+  * [Angular](/consumer/angular/)

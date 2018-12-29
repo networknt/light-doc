@@ -234,6 +234,20 @@ If you send multiple request through one connection, here is an example.
     }
 
 ```
+### Get Request
+
+Setting GET parameters via URL string.
+
+```
+ClientRequest request = new ClientRequest().setMethod(Methods.GET).setPath("/oauth2/client?page=1&api_key=asdfsomthingelse");
+```
+
+You might need to set some headers. 
+
+```
+request.getRequestHeaders().put(Headers.HOST, "localhost");
+request.getRequestHeaders().put(Headers.CONTENT_TYPE, "application/json");
+```
 
 ### Post Request
 
@@ -266,6 +280,8 @@ If you want to wait until the default timeout defined in client.yml is reached, 
 ```
 latch.await();
 ```
+
+For some slow services, you might need to adjust the default timeout in client.yml to allow the client to wait longer before timeout. This is usually dealing with legacy services, and these services should be upgraded with the async approach if possible. 
 
 ### HOST Header
 
