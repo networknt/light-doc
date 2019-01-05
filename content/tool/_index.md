@@ -21,6 +21,8 @@ Tools we build.
 - [Light Bot](/tool/light-bot/)
   * [Why Not Jenkins](/tool/light-bot/jenkins/)
 - [Light Codegen](/tool/light-codegen/)
+  * [Light Codegen Getting Started](/getting-started/light-codegen/)
+  * [Light Codegen Reference](/tool/light-codegen/)
   * [Light Codegen Tutorials](/tutorial/generator/)
 - [OpenAPI Parser](/tool/openapi-parser/)
 - [Swagger Bundler](/tool/swagger-bundler/)
