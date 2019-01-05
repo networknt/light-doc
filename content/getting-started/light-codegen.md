@@ -1,5 +1,5 @@
 ---
-title: "Light Codegen"
+title: "Light Codegen Tool"
 date: 2017-11-05T12:34:57-05:00
 description: ""
 categories: [getting started]
@@ -14,22 +14,20 @@ aliases: []
 toc: false
 draft: false
 ---
-The code generator [light-codegen][] could be used to support project scaffolding for all the frameworks provided
-by light platform.
 
-The code generator based on Rocker template engine what can be used as an utility or web service. It is
-used currently as scaffold services which include [light-rest-4j][], [light-graphql-4j][],  [light-eventuate-4j][]
-and [light-hybrid-4j][].
+The code generator [light-codegen][] could be used to support project scaffolding for all the frameworks provided by the light platform.
+
+The code generator based on Rocker template engine that can be used as a utility or web service. It is used currently as scaffold services which include [light-rest-4j][], [light-graphql-4j][],  [light-eventuate-4j][] and [light-hybrid-4j][].
 
 ### Workflow
 
-Light-codegen generate initialized microservice project based on user defined specification and configuration file:
+Light-codegen generates initialized microservice project based on user-defined specification and configuration file:
 
 -- Light-rest-4j
 
-  for OpenAPI based generation:  OpenAPI json format specification and configuration file
+  for OpenAPI based generation:  OpenAPI JSON/YAML format specification and configuration file
 
-  for Swagger based generation:  Swagger json format specification and configuration file
+  for Swagger based generation:  Swagger JSON format specification and configuration file
 
 -- Light-graphql-4j
 
@@ -43,7 +41,7 @@ Light-codegen generate initialized microservice project based on user defined sp
 
 -- Light-eventuate-4j (rest API service)
 
-   OpenAPI json format specification which include the specification for both CQRS command side service and query side service;  configuration file
+   OpenAPI JSON/YAML format specification which includes the specification for both CQRS command side service and query side service and configuration file
 
 
 
@@ -51,7 +49,7 @@ Light-codegen generate initialized microservice project based on user defined sp
 
 
 
-For detail introduction, please refer to [light-codegen-tool][]
+For detail introduction, please refer to [light-codegen][]
 
 
 
@@ -60,5 +58,5 @@ For detail introduction, please refer to [light-codegen-tool][]
 [light-hybrid-4j]: /style/light-hybrid-4j/
 [light-rest-4j]: /style/light-rest-4j/
 [light-eventuate-4j]: /style/light-eventuate-4j/
-[light-codegen-tool]: /tool/light-codegen/
+[light-codegen]: /tool/light-codegen/
 

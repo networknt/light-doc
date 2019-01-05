@@ -1,5 +1,5 @@
 ---
-title: "Light Codegen Tool"
+title: "Light Codegen"
 date: 2017-11-08T11:39:11-05:00
 description: "Command line tool that is used to scaffold project for light-4j frameworks"
 categories: [tool]
