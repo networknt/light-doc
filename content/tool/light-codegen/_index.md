@@ -23,11 +23,11 @@ In the ealier days of light-platform, we only have a Restful framework, and we a
 Given all the drawbacks, we have decided to build our own generator. light-codegen is built with Java 8 and using rocker template engine which compiles the templates to Java class to speed it up. It also uses our IoC service module to enable new generators to be added without touch the source code. 
 
 - [Specification Best Practices](/tool/light-codegen/best-practice/)
-- [Swagger 2.0 Generator](/tool/light-codegen/swagger/)
-- [OpenAPI 3.0 Generator](/tool/light-codegen/openapi/)
-- [GraphQL Generator](/tool/light-codegen/graphql/)
-- [Hybrid Generator](/tool/light-codegen/hybrid/)
-- [Eventuate Generator](/tool/light-codegen/eventuate/)
+- [Swagger 2.0 Generator](/tool/light-codegen/swagger-generator/)
+- [OpenAPI 3.0 Generator](/tool/light-codegen/openapi-generator/)
+- [GraphQL Generator](/tool/light-codegen/graphql-generator/)
+- [Hybrid Generator](/tool/light-codegen/hybrid-generator/)
+- [Eventuate Generator](/tool/light-codegen/eventuate-generator/)
 - [DevOps Integration](/tool/light-codegen/integration/)
 - [Customization](/tool/light-codegen/customization/)
 - [Tutorials](/tutorial/generator/)
