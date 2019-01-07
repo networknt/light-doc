@@ -7,24 +7,25 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ## Introduction
 
 In microservices architecture, service to service communication can be done by request/response style or messaging/event style. An efficient HTTP client is crucial in request/response style as the number of interactions between services are high and extra latency can kill the entire application performance to cause the failure of a microservices application.
 
-In the early day of light-4j, we have a client module based on Apache HttpClient and Apache HttpAsyncClient which supports HTTP 1.1 and is very popular in the open source community. However, it was designed long ago, and it is tough to use because of too many configurations. It is also huge and slow compare with other modern HTTP clients. Another big issue is HTTP 2.0 support as light-*-4j frameworks support HTTP2 natively and we want to take advantage of the client side as well.
+In the early days of light-4j, we have a client module based on Apache HttpClient and Apache HttpAsyncClient which supports HTTP 1.1 and is very popular in the open source community. However, it was designed long ago, and it is tough to use because of too many configurations. It is also huge, and slow compare with other modern HTTP clients. Another big issue is HTTP 2.0 support as light-*-4j frameworks support HTTP2 natively and we want to take advantage of the client side as well.
 
-In looking for Java HTTP clients that support HTTP 2.0, we were stuck there as none of them support it gracefully. Some are partial support and most of them require you to put -Xbootclasspath with a specific version of jar file per JDK version in the command line to work with Java 8. Everybody seems to wait for Java 9 to come out but we cannot use it on production until it is ready.
+In looking for Java HTTP clients that support HTTP 2.0, we were stuck there as none of them supports it gracefully. Some are partial support, and most of them require you to put -Xbootclasspath with a specific version of jar file per JDK version in the command line to work with Java 8. Everybody seems to wait for Java 9 to come out, but we cannot use it on production until it is ready.
 
-Given the above situations, I decided to implement our own Http2Client based on what we have in Undertow. I have proposed the idea to implement a generic Http2Client to Undertow community but it wasn't interested. It will take a long time to build an independent Http2Client without depending on Undertow, and it is OK with us as our server is based on Undertow anyway. Other people might have a concern on that but the argument is Undertow core is extremely small, and I don't think it is an issue for other people to use it outside of light-*-4j frameworks.
+Given the above situations, I decided to implement our own Http2Client based on what we have in Undertow. I have proposed the idea to implement a generic Http2Client to Undertow community, but it wasn't interested. It will take a long time to build an independent Http2Client without depending on Undertow, and it is OK with us as our server is based on Undertow anyway. Other people might have a concern on that, but the argument is Undertow core is extremely small, and I don't think it is an issue for other people to use it outside of light-*-4j frameworks.
 
 I am starting an [http client benchmark](https://github.com/networknt/http2client-benchmark)
 and if there are more interests on this client, I will make it an independent module without depending on Undertow core so that other people working on other platforms can use it without the extra Undertow core.
 
 ## Usage
 
-Http2Client supports both HTTP 1.1 and HTTP 2.0 transparently depending on if the server supports HTTP 2.0 and is used to call APIs from the following sources:
+Http2Client supports both HTTP 1.1 and HTTP 2.0 transparently depending on if the target server supports HTTP 2.0 and is used to call APIs from the following sources:
 
 1. Web Server
 2. Standalone Application/Mobile Application
@@ -33,6 +34,10 @@ Http2Client supports both HTTP 1.1 and HTTP 2.0 transparently depending on if th
 It provides methods to get authorization token and automatically gets client credentials token for scopes in API to API calls. It also helps to pass correlationId and traceabilityId and other configurable headers to the next service.
 
 Although it supports HTTP 1.1, it requires the user to create a connection pool as HTTP 1.1 connection doesn't support multiplex and one connection can only handle one request concurrently. I am planning to add an internal connection pool if there is a need but currently it is not necessary as all the communication is on HTTP 2.0
+
+Http2Client is a very low-level component, and it is best to be used in service to service communication. If you are trying to write an original client application in Java 8, please take a look at [light-consumer-4j][] which is written by Nicholas Azar and contributed by the community. It is built on top of Http2Client and has a lot of extra features like connection pooling etc. 
+
+
 
 ### Generic response callback functions
 
@@ -56,9 +61,14 @@ Note that you need to pass in a requestBody for POST, PUT or PATCH.
 
 The renew of token happens behind the scene, and it supports the circuit breaker if the OAuth 2.0 server is down or busy. It renews the token pro-actively before the current one is expired and lets all requests go with the current token. It only blocks other requests if the current request is trying to renew an expired token. When token renewal in this case fails, all requests will be rejected with a timeout and subsequent requests the same until a grace period is passed so that the renew process starts again. 
 
+There is a good reason we renew the token proactively. If we leave the token to the expiration, the traditional API service can return 401 error with the token expired message to notify the client to get a new token. In the microservices architecture, this is not possible. What if the token is one second before the expiration and service A accepts it and write something into its database and then service B accepts it and write something into its database. However, when service C receives it, it is expired already and rejected. There must be extra logic to compensate the transactions service A and B have performed already. We have a framework [light-saga-4j][] for this type of microservices orchestration, but it is really not necessary for just token expiration handling. It would be better to handle it gracefully in the client module to ensure that the token sent has a longer expiration time than the entire application SLA. 
+
+
 ### Examples
 
 #### Get a client instance
+
+Http2Client is a singleton, and you only need one instance in your application. You can create as many connections from the same instance though. 
 
 ```
     Http2Client client = Http2Client.getInstance();
@@ -70,7 +80,6 @@ To set the header with authorization code JWT token.
 
 ```
     public void addAuthToken(HttpRequest request, String token) 
-
 ```
 
 To set the header with authorization code JWT token and traceabilityId.
@@ -225,6 +234,20 @@ If you send multiple request through one connection, here is an example.
     }
 
 ```
+### Get Request
+
+Setting GET parameters via URL string.
+
+```
+ClientRequest request = new ClientRequest().setMethod(Methods.GET).setPath("/oauth2/client?page=1&api_key=asdfsomthingelse");
+```
+
+You might need to set some headers. 
+
+```
+request.getRequestHeaders().put(Headers.HOST, "localhost");
+request.getRequestHeaders().put(Headers.CONTENT_TYPE, "application/json");
+```
 
 ### Post Request
 
@@ -251,6 +274,15 @@ When accessing a server with heavy load, the response time might be longer. In t
 ```
 latch.await(1000, TimeUnit.MILLISECONDS);
 ```
+
+If you want to wait until the default timeout defined in client.yml is reached, you can just call. 
+
+```
+latch.await();
+```
+
+For some slow services, you might need to adjust the default timeout in client.yml to allow the client to wait longer before timeout. This is usually dealing with legacy services, and these services should be upgraded with the async approach if possible. 
+
 ### HOST Header
 
 When using Http2Client, you need to add the following header to the request. 
@@ -423,3 +455,5 @@ emailPassword: change-to-real-password
 [Microservices Chain pattern tutorial]: /tutorial/rest/swagger/ms-chain/
 [Service discovery tutorial]: /tutorial/common/discovery/
 [tutorial]: https://github.com/networknt/light-example-4j/tree/master/router
+[light-consumer-4j]: https://github.com/networknt/light-consumer-4j
+[light-saga-4j]: /style/light-saga-4j/

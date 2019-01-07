@@ -10,11 +10,11 @@ toc: false
 draft: false
 ---
 
-During the development cycle, chances are you want to reset the entire Kafka cluster to the original state just like a referesh installation. Here is the steps to archive that. 
+During the development cycle, chances are you want to reset the entire Kafka cluster to the original state just like a referesh installation. Here are the steps to archive that. 
 
 ### Stop Applications
 
-If there are consumers or producers that are connecting to your Kafka cluster, you need to stop them. For Taiji-chain cluster, we need to stop the chain-writer and chain-reader on each Kafka node. 
+If there are consumers or producers that are connecting to your Kafka cluster, you need to stop them. For Taiji-chain cluster, we need to stop the chain-writer, chain-reader and token-reader on each Kafka node. 
 
 
 ```
@@ -25,13 +25,22 @@ docker-compose -f docker-compose-test1.yaml down
 
 repeat the above for test2 and test3
 
+
+Stop the schema-registry server on the sandbox. If this server is left running, the old schema are still cached and will saved back to the new Kafka topic. 
+
+```
+ssh sandbox
+cd networknt/light-docker
+docker-compose -f docker-compose-schema-registry.yml down
+```
+
+
 ### Stop Kafka
 
 Stop Kafka instances on three nodes. 
 
 ```
 sudo systemctl stop kafka
-
 ```
 
 ### Stop Zookeeper
@@ -44,18 +53,13 @@ sudo systemctl stop zookeeper
 
 ### Clean up
 
-Let's clearn up Kafka data in /opt/kafka-logs on each node
+Let's clearn up Kafka data in /opt/kafka-logs and zookeeper data in /var/zookeeper/version-2 on each node
 
 ```
-cd /opt/kafka-logs
-sudo rm -rf *
+sudo rm -rf /opt/kafka-logs/*
+sudo rm -rf /var/zookeeper/version-2/
 ```
 
-Let's clean up Zookeeper data in /var/zookeeper on each node
-
-```
-sudo rm -rf version-2
-```
 
 ### Restart
 
@@ -81,4 +85,8 @@ Check if there are several checkpoint files created in /opt/kafka-logs folder.
 Now you can create your topics again. Have fun. 
 
 
+### Create topics
 
+Right after the Kafka and Zookeeper clusters are up and running, we need to create the topics with the command line before starting the services with docker-compose or kubectl.
+
+Please follow corresponding instructions to create topics. 
