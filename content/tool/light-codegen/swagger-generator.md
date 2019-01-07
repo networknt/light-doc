@@ -26,7 +26,7 @@ In light-rest-4j framework generator, the model that drives code generation is t
 specification. When editing it, normally it will be in yaml format with separate files for 
 readability and flexibility. Before leverage it in light-rest-4j framework, all yaml files need 
 to be bundled and converted into json format in order to be consumed by the framework and generator. 
-Also, a validation needs to be done to make sure that the generated swagger.json is valid against 
+Also, a validation needs to be done to make sure hat the generated swagger.json is valid against 
 json schema of Swagger 2.0 specification. 
  
 Note: currently, we support Swagger 2.0 specification and OpenAPI 3.0 specification. You can
@@ -195,6 +195,78 @@ To test it.
 ```
 curl localhost:8080/v2/pet/111
 ```
+
+#### Output
+```
+.  
+├── app-name
+│   ├── LICENSE
+│   ├── README.md
+│   ├── build.sh
+│   ├── dependency-reduced-pom.xml
+│   ├── docker
+│   │   ├── Dockerfile
+│   │   └── Dockerfile-Redhat
+│   ├── pom.xml
+│   ├── app-name.iml
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── com
+│       │   │       └── networknt
+│       │   │           └── app-name
+│       │   │               ├── handler
+│       │   │               │   ├── ItemDeleteHandler.java
+│       │   │               │   ├── ItemGetHandler.java
+│       │   │               │   ├── ItemPutHandler.java
+│       │   │               │   └── ItemPostHandler.java
+│       │   │               └── model
+│       │   │                   └── Model.java
+│       │   └── resources
+│       │       ├── config
+│       │       │   ├── handler.yml
+│       │       │   ├── mask.yml
+│       │       │   ├── openapi-security.yml
+│       │       │   ├── openapi-validator.yml
+│       │       │   ├── openapi.yaml
+│       │       │   ├── primary.crt
+│       │       │   ├── secondary.crt
+│       │       │   ├── secret.yml
+│       │       │   ├── server.keystore
+│       │       │   ├── server.truststore
+│       │       │   ├── server.yml
+│       │       │   └── service.yml
+│       │       ├── logback.xml
+│       │       └── todos.properties
+│       └── test
+│           ├── java
+│           │   └── com
+│           │       └── networknt
+│           │           └── app-name
+│           │               └── handler
+│           └── resources
+│               ├── config
+│               │   ├── client.keystore
+│               │   ├── client.truststore
+│               │   ├── client.yml
+│               │   └── server.yml
+│               └── logback-test.xml
+└── app-name.iml
+```
+
+#### Configs
+[handler.yml]: /configs/handler/
+mask.yml
+openapi-security.yml
+openapi-validator.yml
+openapi.yaml
+primary.crt
+secondary.crt
+secret.yml
+server.keystore
+server.truststore
+server.yml
+service.yml
 
 #### Docker Scripting
 
