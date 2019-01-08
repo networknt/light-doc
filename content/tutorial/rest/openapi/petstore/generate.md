@@ -11,20 +11,21 @@ toc: false
 draft: false
 ---
 
-We have [light-codegen][] to support project scaffolding for all the frameworks provided
-by light platform. We believe that for enterprise scale and microservices, you have to
-adopt [design first][]. There are numeric ways to use light-codegen and here we are just 
-using it as command line cli tool.  
-
-This project will be updated constantly when a new version of light-4j framework 
-is released or any updates in [light-codegen][]. Both [swagger petstore][] and 
+We have built [light-codegen][] to support project scaffolding for all the frameworks 
+provided by the light platform. We believe that in order to build scalable enterprise 
+applications and microservices, you have to adopt a [design first][] methodology. 
+There are numerous ways to use light-codegen but for the purposes of this tutorial, 
+we are using it as a command line tool.
+ 
+This project will be updated periodically when a new version of the light-4j framework is 
+released or if any updates are made to [light-codegen][]. Both [swagger petstore][] and 
 [openapi petstore][] projects are our test beds for [light-rest-4j][].
 
-Here is the command line to generate this project from model-config directory. It
-assumes that you have light-example-4j cloned in the same working directory and 
-petstore directory is removed or renamed. If you have changed the specification
-and want to regenerate the project, it is better to generate into another folder
-and then do a full text comparison to merge the new project into the old project. 
+Here is the command to generate this project from the model-config directory. It assumes that 
+you have light-example-4j cloned to the same working directory and that the petstore 
+directory is moved or renamed. If you have changed the specification and want to regenerate 
+the project, it is better to generate it into another folder and then do a full-text 
+comparison to merge the new project into the old project.  
 
 ```
 cd ~/networknt
@@ -39,10 +40,10 @@ The cli tool needs to specify:
 * -c config        - choose config file to control how the project is generated
 
 
-For information on how to use light-codegen, please check out the [getting started][]. The
-detailed [document][] can be found at tools section. 
+For information on how to use light-codegen, please check out the [getting started][] page. The
+detailed [documention][] can be found in the tools section.
 
-With the project generated, the next step, we are going to [build and start][] the server. 
+With the project generated, our next step is to [build and start][] the server. 
 
 [design first]: /design/design-first/
 [light-codegen]: https://github.com/networknt/light-codegen
