@@ -11,14 +11,19 @@ toc: false
 draft: false
 ---
 
-You need to have Java JDK 8 (I prefer OpenJDK but Oracle JDK will do), Maven, Git and 
-Docker installed before starting this tutorial. If you are using Windows, you can 
-complete all steps without docker-compose as there are some issues to run it on
-Windows. 
+You will need the following dependencies before starting this tutorial:
+
+- Java JDK 8 (I prefer OpenJDK but Oracle JDK will do)
+- Maven
+- Git
+- Docker
+
+The use of docker-compose is optional but can sometimes 
+be problematic for Windows users. 
  
-Assuming above software packages are installed, let's create a workspace and clone the 
-projects we need for the tutorial. The following will assume your workspace is named
-networknt under your home directory. 
+Assuming the above software packages are installed, we need to create a workspace and clone the 
+projects needed for this tutorial. The following will assume your workspace is in a directory 
+named networknt under your home directory. 
 
 ```
 cd ~
@@ -32,11 +37,11 @@ git clone https://github.com/networknt/model-config.git
 git clone https://github.com/networknt/light-config-test.git
 ```
 
-We are going to re-generate petstore project in light-example-4j. So let's rename
-the existing directory in light-example-4j to petstore.bak
+We are going to re-generate the petstore project in light-example-4j. Rename the existing directory 
+in light-example-4j to petstore.bak
 
-At any step, if you are unsure if you have followed correctly, you can always compare
-your working code with petstore.bak folder to find the difference.
+If you feel like you may have made an error while following this tutorial, you can compare your 
+working code with the petstore.bak directory to find any differences.
 
 ```
 cd ~/networknt/light-example-4j/rest/openapi
@@ -44,16 +49,16 @@ mv petstore petstore.bak
 cd ~/networknt
 ```
 
-Now let's build the light-codegen to make it ready to generate petstore project. There are
-many ways to [use light-codegen][] but here we just build and use the command line codgen-cli.
+Build the light-codegen project so we can use it to generate our petstore project. There are many ways 
+to [use light-codegen][] but for the purposes of this tutorial, we will just build and use the codgen-cli.
 
 ```
 cd ~/networknt/light-codegen
 mvn install -DskipTests
 ```
 
-Now, we have the environment and light-codegen ready. The next step, we will [generate][] the
-project with the OpenAPI 3.0 specification. 
+Our environment and light-codegen are now ready. In the next step, we will [generate][] the project using 
+the OpenAPI 3.0 specification. 
 
 [generate]: /tutorial/rest/openapi/petstore/generate/
 [use light-codegen]: /tutorial/generator/
