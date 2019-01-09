@@ -1,4 +1,55 @@
+---
+title: "handler.yml"
+date: 2019-01-09T10:24:06-05:00
+description: ""
+categories: [configs]
+keywords: []
+aliases: []
+toc: false
+draft: false
+---
+ handler.yml is the configuration file of handler middleware chain
+#### handlers:
+ list of handlers to be used across chains in this microservice including the routing handlers for ALL endpoints  
+ format: fully qualified handler class name@optional:given name  
+ below are default integrated handlers after code generation:  
+  [- com.networknt.exception.ExceptionHandler@exception](/concern/exception)    
+  [- com.networknt.metrics.MetricsHandler@metrics](/concern/metrics)  
+  [- com.networknt.traceability.TraceabilityHandler@traceability](/concern/traceability)  
+  [- com.networknt.correlation.CorrelationHandler@correlation](/concern/correlation)  
+  [- com.networknt.openapi.OpenApiHandler@specification](/style/light-rest-4j/openapi-meta/)  
+  [- com.networknt.openapi.JwtVerifyHandler@security](/concern/security)  
+  [- com.networknt.body.BodyHandler@body](/concern/body)  
+  [- com.networknt.audit.AuditHandler@audit](/concern/audit)  
+  [- com.networknt.dump.DumpHandler@dump](/concern/dump)  
+  [- com.networknt.sanitizer.SanitizerHandler@sanitizer](/concern/sanitizer)  
+  [- com.networknt.openapi.ValidatorHandler@validator](/concern/validator)  
+  [- com.networknt.health.HealthGetHandler@health](/concern/health)  
+  [- com.networknt.info.ServerInfoGetHandler@info](/concern/info)  
+  [- com.networknt.specification.SpecDisplayHandler@spec](/style/light-rest-4j/openapi-display)  
+  [- com.networknt.specification.SpecSwaggerUIHandler@swaggerui](/style/light-rest-4j/openapi-display)  
+  
+#### chains:
+To predefine handler chains so that can be reused in paths. Each handler in a chain will be executed by sequence.
+Some handlers have dependencies of other handlers, to have a correct sequence is important.
+default:  
+    - exception  
+    - metrics  
+    - traceability  
+    - correlation  
+    - specification  
+    - security  
+    - body  
+    - audit  
+    - dump   
+    - sanitizer  
+    - validator
+    
+#### paths:
+Defined paths will be intercepted based on "path" and "method" property. Then will execute handlers and handler chains
+that defined in "exec" property
 
+#### Config Example
 ```
 # Handler middleware chain configuration
 ---
@@ -109,7 +160,6 @@ paths:
     method: 'get'
     exec:
       - info
-
 
   - path: '/spec.yaml'
     method: 'get'

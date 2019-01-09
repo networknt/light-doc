@@ -197,6 +197,7 @@ curl localhost:8080/v2/pet/111
 ```
 
 #### Output
+Below is the folder structure after generate. 
 ```
 .  
 ├── app-name
@@ -254,19 +255,19 @@ curl localhost:8080/v2/pet/111
 └── app-name.iml
 ```
 
-#### Configs
-[handler.yml]: /configs/handler/
-mask.yml
-openapi-security.yml
-openapi-validator.yml
-openapi.yaml
-primary.crt
-secondary.crt
-secret.yml
-server.keystore
-server.truststore
-server.yml
-service.yml
+#### Reference of Generated Configs
+[handler.yml](/configs/handler/)  
+[mask.yml](/configs/mask/)    
+openapi-security.yml  
+openapi-validator.yml  
+openapi.yaml  
+primary.crt  
+secondary.crt  
+secret.yml  
+server.keystore  
+server.truststore  
+server.yml  
+service.yml  
 
 #### Docker Scripting
 
