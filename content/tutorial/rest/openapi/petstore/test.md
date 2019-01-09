@@ -12,50 +12,50 @@ draft: false
 ---
 
 
-The best GUI tool to test RESTful API is [Postman][] and best command line tool is curl. 
+The best GUI tool to test a RESTful API is [Postman][] and the best command line tool is curl. 
 
-Postman is very easy to set headers and other parameters and save the configuration for 
-future usage. If you have a lot of endpoints, it is highly recommended to save all of
+Postman makes it very easy to set headers and query parameters while being able to save the configuration 
+for future usage. If you have a lot of endpoints, it is highly recommended to save all of
 them as a project so that these endpoints can be easily retrieved. 
 
-Some people like curl command line and it works as well. In most of the cases, you should
-have a file to save the curl commands so that you don't need to reconstruct command each
-time. Here is one example to access one of the endpoints petstore serves. 
+Some people like the curl command line and it works as well. In most of the cases, you should
+save the curl commands to a file which saves you time when reconstructing each command. Here is 
+one example to access one of the endpoints the petstore API serves. 
 
 ```
 curl -k https://localhost:8443/v1/pets/111
 ```
 
-Note that -k is to disable the tls certificate verification as we are using a self-signed
-certificate on the server. The generated server.yml only enables https by default. 
+Note that -k is to disable the TLS certificate verification as we are using a self-signed
+certificate on the server. The generated server.yml enables HTTPS only by default. 
 
-And the result looks like this. This is the generated example response based on swagger
+The response looks like this, which is the generated example response based on the Swagger
 specification.
 
 ```
 {"id":1,"name":"Jessica Right","tag":"pet"}
 ```
 
-Now, let's test the server with an url that is not defined in the specification.
+Now, let's test the server with a url that is not defined in the specification.
 
 ```
 curl -k https://localhost:8443/abc
 ```
 
-And the result is:
+And the response is:
 
 ```
-{"statusCode":404,"code":"ERR10007","message":"INVALID_REQUEST_PATH","description":"Request path cannot be found in the spec."}
+{"statusCode":400,"code":"ERR10016","message":"MISSING_HANDlER","description":"Could not find the handler for the endpoint Method: GET, RequestPath: /abc.","severity":"ERROR"}
 ```
 
-In fact, the specification is loaded into the framework at runtime and there is a
-module called OpenAPI Validator that does the validation against specification for headers,
-query parameters, uri parameters and body. It also supports validation using JSON
+The specification is loaded into the framework at runtime where there is a
+module called OpenAPI Validator that does the validation against the specification for headers,
+query parameters, URI parameters and body. It also supports validation using JSON
 schema with an independent library [json-schema-validator][].
 
-Now the server is up and running, let's update generated config files to enable more
-features. First let's enable [security][] with OAuth 2.0 JWT token verification as built-in 
-[microservices security][] set us apart from other microservices frameworks. 
+Now the server is up and running, let's update the generated config files to enable more
+features. First let's enable [security][] with OAuth 2.0 JWT token verification which is built into
+[microservices security][] which sets us apart from other microservices frameworks. 
 
 [json-schema-validator]: https://github.com/networknt/json-schema-validator
 [Postman]: https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en
