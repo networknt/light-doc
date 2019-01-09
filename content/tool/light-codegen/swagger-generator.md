@@ -26,7 +26,7 @@ In light-rest-4j framework generator, the model that drives code generation is t
 specification. When editing it, normally it will be in yaml format with separate files for 
 readability and flexibility. Before leverage it in light-rest-4j framework, all yaml files need 
 to be bundled and converted into json format in order to be consumed by the framework and generator. 
-Also, a validation needs to be done to make sure hat the generated swagger.json is valid against 
+Also, a validation needs to be done to make sure that the generated swagger.json is valid against 
 json schema of Swagger 2.0 specification. 
  
 Note: currently, we support Swagger 2.0 specification and OpenAPI 3.0 specification. You can
