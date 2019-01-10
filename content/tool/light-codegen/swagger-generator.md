@@ -196,6 +196,79 @@ To test it.
 curl localhost:8080/v2/pet/111
 ```
 
+#### Output
+Below is the folder structure after generate. 
+```
+.  
+├── app-name
+│   ├── LICENSE
+│   ├── README.md
+│   ├── build.sh
+│   ├── dependency-reduced-pom.xml
+│   ├── docker
+│   │   ├── Dockerfile
+│   │   └── Dockerfile-Redhat
+│   ├── pom.xml
+│   ├── app-name.iml
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── com
+│       │   │       └── networknt
+│       │   │           └── app-name
+│       │   │               ├── handler
+│       │   │               │   ├── ItemDeleteHandler.java
+│       │   │               │   ├── ItemGetHandler.java
+│       │   │               │   ├── ItemPutHandler.java
+│       │   │               │   └── ItemPostHandler.java
+│       │   │               └── model
+│       │   │                   └── Model.java
+│       │   └── resources
+│       │       ├── config
+│       │       │   ├── handler.yml
+│       │       │   ├── mask.yml
+│       │       │   ├── openapi-security.yml
+│       │       │   ├── openapi-validator.yml
+│       │       │   ├── openapi.yaml
+│       │       │   ├── primary.crt
+│       │       │   ├── secondary.crt
+│       │       │   ├── secret.yml
+│       │       │   ├── server.keystore
+│       │       │   ├── server.truststore
+│       │       │   ├── server.yml
+│       │       │   └── service.yml
+│       │       ├── logback.xml
+│       │       └── todos.properties
+│       └── test
+│           ├── java
+│           │   └── com
+│           │       └── networknt
+│           │           └── app-name
+│           │               └── handler
+│           └── resources
+│               ├── config
+│               │   ├── client.keystore
+│               │   ├── client.truststore
+│               │   ├── client.yml
+│               │   └── server.yml
+│               └── logback-test.xml
+└── app-name.iml
+```
+
+#### Reference of Generated Configs
+[handler.yml](/configs/handler/)  
+[mask.yml](/configs/mask/)    
+openapi-security.yml  
+openapi-validator.yml  
+openapi.yaml  
+primary.crt  
+secondary.crt  
+secret.yml  
+server.keystore  
+server.truststore  
+server.yml  
+service.yml  
+
 #### Docker Scripting
 
 You can use docker run command to call the generator but it is very complicated for the parameters.
