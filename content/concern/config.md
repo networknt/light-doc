@@ -46,17 +46,20 @@ be checked into the git along with other config files, the content should be
 just placeholders and it needs to be updated during deployment. With Kubernets,
 this file will be mapped to Secrets.
 
-
-For now, only file system configuration is supported; however, config files
-can be served by light-config-server in a zip format and the server module
-can be started to load all config from light-config-server in a zip file
-format. It will automatically unzip it and put the config files into the 
+For now, only file system optionally associate with environment variables configuration 
+is supported; however, config files can be served by light-config-server in a zip format 
+and the server module can be started to load all config from light-config-server in a 
+zip file format. It will automatically unzip it and put the config files into the 
 right location to bootstrap the server. Given the risk of single point failure, 
 only when the server start, it will contact external light-config-sever to load 
 (first time) or update local file system so that config files are cached. Except 
 first time start the server, the server can use the local cache to start if 
 config service is not available.
 
+In 1.5.26 release, an external config file 'values' with extension json, yaml or yml
+are provided which can be optionally used to inject value into the config. By configuring 
+this file, environment-specific values in the configuration file can be managed more easily 
+and directly. The guidance also can be found in this document.
 
 ## Singleton
 
@@ -193,57 +196,121 @@ which is generated from swagger editor. If you want to overwrite the default
 config for one of the modules, you must use the {module name}.yml in your app
 config folder or externalized to config directory specified by system properties.
 
-## Environment Variable
+## Environment/External config Injection
 
-Some of the customers and vendors asked for environment variable support in config
-module and this feature was added in 1.5.7 release. As environment variables are
-highly dependable on the environment, we don't want to put it into our config module
-directly but provide a utility for users to substitute values from environment props.
+In 1.5.26 release, values in the configuration file can be managed/override by setting environment variables or using an external config 'values' with extension yml, yaml, json. 
 
-Here is an utility method added to StringUtil in utility module. 
+In each config file (take yaml as the example here). you can replace fixed configuration as 
+following:
+```
+some_key: ${VAR} 
+```
+Retrieve the value named 'VAR' from the environment or external config 'values. (yaml/yml.json)' 
+and replace '${VAR}' with the value. If the value cannot be found, a ConfigException will be 
+thrown.
+```
+some_key: ${VAR:default} 
+```
+Retrieve the value named 'VAR' from the environment or external config 'values. (yaml/yml.json)' 
+and replace '${VAR}' with the value. If the value cannot be found,'${VAR}' will be replaced 
+with 'default'.
+```
+some_key: ${VAR:?error}
+```
+Retrieve the value named 'VAR' from the environment or external config 'values. (yaml/yml.json)' 
+and replace '${VAR}' with the value. If the value cannot be found, a ConfigException contains 
+'error' will be thrown.
+```
+some_key: ${VAR:$}
+```  
+Skip injection and '${VAR}' remains in the config.
 
-```java
-    public static String expandEnvVars(String text) {
-        Map<String, String> envMap = System.getenv();
-        String pattern = "\\$\\{([A-Za-z0-9-_]+)\\}";
-        Pattern expr = Pattern.compile(pattern);
-        Matcher matcher = expr.matcher(text);
-        while (matcher.find()) {
-            String envValue = envMap.get(matcher.group(1).toUpperCase());
-            if (envValue == null) {
-                envValue = "";
-            } else {
-                envValue = envValue.replace("\\", "\\\\");
-            }
-            Pattern subexpr = Pattern.compile(Pattern.quote(matcher.group(0)));
-            text = subexpr.matcher(text).replaceAll(envValue);
-        }
-        return text;
-    }
+Three injection mode are provided. If you have a privileged requirement, you can do this through the command line `java -Dinjection_order=" mode number" application_launcher_class`. Otherwise, 
+the injection mode defaults to mode [2]. 
+   
+Mode [0] Inject from "values.yaml" only.
+   
+Mode [1] Inject from system environment first, then overwrite by "values.yaml" if exist.
+   
+Mode [2] Inject from "values.yaml" first, then overwrite with the values in the system environment.
 
+After setting the injection mode, you can set environment or values. (yaml/yml/JSON) based on the mode you chose. environment variables can be simply export by using command line like this.
+`export DOCKER_HOST_IP=192.168.1.120` while the values.(yaml/yml/JSON) can be set as following example.
+The values can be set as String, List or Map inside this external config.
+
+whitelists.yaml:
+```
+paths:${IPS}
+```
+values.yaml:
+```
+IPS:
+- '127.0.0.1'
+- '10.10.*.*'
+```
+result of whitelists.yaml:
+```
+paths:
+- '127.0.0.1'
+- '10.10.*.*'
+```
+To further explain, a detailed example are provide below as reference:
+    
+server.yml:
+```
+buildNumber: ${server.buildNumber:latest}
+```
+values.yml:
+```
+server.buildNumber: 123
+```
+environment variable:
+```
+server.buildNumber=456
 ```
 
-The format of the config string should be something like this. "IP=${DOCKER_HOST_IP}"
-and ${DOCKER_HOST_IP} will be replaced with the environment variable DOCKER_HOST_IP.
+* case1: Both value sources exist
 
-This is a the test case that show you have it can be used.
+    If the order code equals to [0]: buildNumber: 123
 
-```java
-    public void testExpandEnvVars() {
-        String s = "IP=${DOCKER_HOST_IP}";
-        Assert.assertEquals("IP=192.168.1.120", StringUtil.expandEnvVars(s));
-    }
+    If the order code equals to [1]: buildNumber: 123
 
-```
+    If the order code equals to [2]: buildNumber: 456
 
-Before you run the test case above, please export the environment variable. 
+    If the order code equals not set:buildNumber: 456 (default[2])
 
-```
-export DOCKER_HOST_IP=192.168.1.120
-```
 
-On my desktop, I have it defined in the .bashrc in my home directory so I don't need
-to run the export every time. 
+* case2: Only environment variable is provided
+
+    If the order code equals to [0]: buildNumber: latest
+
+    If the order code equals to [1]: buildNumber: 456
+
+    If the order code equals to [2]: buildNumber: 456
+
+    If the order code equals not set:buildNumber: 456 (default[2])
+
+
+* case3: only values.yaml is provided
+
+    If the order code equals to [0]: buildNumber: 123
+
+    If the order code equals to [1]: buildNumber: 123
+
+    If the order code equals to [2]: buildNumber: 123
+
+    If the order code equals not set:buildNumber: 123 (default[2])
+
+
+* case4: Neither environment variable or values.yaml is not provided
+
+    If the order code equals to [0]: buildNumber: latest
+
+    If the order code equals to [1]: buildNumber: latest
+
+    If the order code equals to [2]: buildNumber: latest
+
+    If the order code equals not set:buildNumber: latest (default[2])
 
 ## Example
 
