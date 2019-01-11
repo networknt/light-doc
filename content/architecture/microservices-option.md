@@ -4,7 +4,11 @@ date: 2019-01-10T20:37:30-05:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "architecture"
+    weight: 11
+weight: 11
 aliases: []
 toc: false
 draft: false

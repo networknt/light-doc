@@ -30,7 +30,7 @@ pygmentsUseClassic = false
 pygmentsStyle = "friendly"
 
 [outputs]
-home = [ "HTML", "RSS", "REDIR", "HEADERS" ]
+home = [ "HTML", "RSS", "REDIR", "HEADERS", "Algolia"]
 section = [ "HTML", "RSS"]
 
 [mediaTypes]
@@ -50,6 +50,13 @@ baseName = "_headers"
 isPlainText = true
 notAlternative = true
 
+[outputFormats.Algolia]
+baseName = "algolia"
+isPlainText = true
+mediaType = "application/json"
+notAlternative = true
+
+
 [related]
 
 threshold = 80
@@ -68,6 +75,10 @@ pattern = "2006"
 twitter = "networkntcom"
 
 #CUSTOM PARAMS
+[params.algolia]
+vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
+params = ["categories", "tags"]
+
 [params]
   description = "One of the world’s fastest API platforms"
   ## Used for views in rendered HTML (i.e., rather than using the .Hugo variable)
