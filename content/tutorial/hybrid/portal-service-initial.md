@@ -10,7 +10,7 @@ toc: false
 draft: false
 ---
 
-Light-hybrid-4j is a generic RPC framework and it supports JSON RPC and binary RPC like gRPC or other binary protocol later.
+The light-hybrid-4j is a generic RPC framework, and it supports JSON RPC at the moment. In the future, we are going to support binary RPC like gRPC or other binary protocols.
 
 Light-portal build based the the light-hybrid-4j framework. All services in the light-portal provide hybrid services for as microservice API.
 
