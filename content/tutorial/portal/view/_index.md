@@ -28,6 +28,7 @@ As this is a live project, the scope is not fixed and we might add certain topic
 * [Add material-ui][] - Add masterial-ui for React components
 * [Add react-router][] - Add react-router for routing in SPA
 * [Tree View Menu][] - Make dynamic tree view menu with local definition file
+* [React Schema Form][] - Form generation with react-schema-form
 
 [react-schema-form]: https://github.com/networknt/react-schema-form
 [create-react-app]: /tutorial/portal/view/create-react-app/
@@ -38,4 +39,5 @@ As this is a live project, the scope is not fixed and we might add certain topic
 [Add material-ui]: /tutorial/portal/view/add-material-ui/
 [Add react-router]: /tutorial/portal/view/add-react-router/
 [Tree View Menu]: /tutorial/portal/view/tree-view-menu/
+[React Schema Form]: /tutorial/portal/view/react-schema-form/
 
