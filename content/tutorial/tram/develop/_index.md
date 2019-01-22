@@ -29,7 +29,7 @@ Atomicity is guaranteed since this is a local ACID transaction. Figure diagram s
 
 
 
-![Message-Queue](images/message-queue.png)
+![Message-Queue](/images/message-queue.png)
 
 
 
