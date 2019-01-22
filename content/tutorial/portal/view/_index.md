@@ -12,7 +12,7 @@ draft: false
 
 This is a very long tutorial that documents the steps we build light-portal UI  with React and other related libraries. It is not part of the core features of our [light-4j platform][]; however, I think it is essential for the following reasons. 
 
-Most of our developers are backend focused, and the front end Javascript is not the strengths for us. When starting the UI for the portal, I are going to document the steps so that our team member can learn from the tutorial. Also, for contributors, it is an essential document to learn how the UI is constructed before contributing. For the customers who are deploying the light-portal on-premise with customizations or with customized view on our virtual host cloud, this document will give them an entry point to start their work. 
+Most of our developers are backend focused, and the front end Javascript is not the strengths for us. When starting the UI for the portal, I am going to document the steps so that our team member can learn from the tutorial. Also, for contributors, it is an essential document to learn how the UI is constructed before contributing. For the customers who are deploying the light-portal on-premise with customizations or with customized view on our virtual host cloud, this document will give them an entry point to start their work. 
 
 I have used the earlier versions of React in 2015 and created [react-schema-form] to ease the pain for UI form development. Since then, most of my focus is on the light-4j platform in Java. The entire landscape of React ecosystem changed a lot, and I am in a learning process. By writing the tutorial, I am hoping some experts can point out my errors and provide recommendations for improvement. 
 
@@ -27,6 +27,7 @@ As this is a live project, the scope is not fixed and we might add certain topic
 * [Wire in Redux][] - Wire in Redux Provider for state store
 * [Add material-ui][] - Add masterial-ui for React components
 * [Add react-router][] - Add react-router for routing in SPA
+* [Tree View Menu][] - Make dynamic tree view menu with local definition file
 
 [react-schema-form]: https://github.com/networknt/react-schema-form
 [create-react-app]: /tutorial/portal/view/create-react-app/

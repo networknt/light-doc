@@ -603,9 +603,9 @@ git push origin ui-tree-view-menu
 
 ```
 
-In the next section, we are going to update the format of the data file so that it is the same format as we can get from the light-portal host-menu service. We need [transform tree list][] to do so. 
+In the next section, we are going to add [react-schema-form][] component to have a generic form generation and handling for the majority of the pages. 
 
 
 [added react-router]: /tutorial/portal/add-react-router/
-[transform tree list]: /tutorial/portal/transform-tree-list/
+[react-schema-form]: /tutorial/portal/react-schema-form/
 
