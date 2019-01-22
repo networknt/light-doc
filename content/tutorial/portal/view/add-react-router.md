@@ -280,6 +280,6 @@ git push origin ui-add-react-router
 ```
 
 
-At this stage, we have react-router works and a static menu displays on a responsive drawer. In the next step, we are going to add [react-schema-form][] with static definitions. 
+At this stage, we have react-router works and a static menu displays on a responsive drawer. In the next step, we are going to change the flattened menu to [tree view menu][] with a static json definition. 
 
-[react-schema-form]: /tutorial/portal/view/react-schema-form/
+[tree view menu]: /tutorial/portal/view/tree-view-menu/

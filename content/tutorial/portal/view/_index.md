@@ -36,4 +36,5 @@ As this is a live project, the scope is not fixed and we might add certain topic
 [Wire in Redux]: /tutorial/portal/view/wire-in-redux/
 [Add material-ui]: /tutorial/portal/view/add-material-ui/
 [Add react-router]: /tutorial/portal/view/add-react-router/
+[Tree View Menu]: /tutorial/portal/view/tree-view-menu/
 
