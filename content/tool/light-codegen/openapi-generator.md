@@ -44,6 +44,7 @@ Here is an example of config.json for openapi generator.
   "overwriteHandlerTest": true,
   "overwriteModel": true,
   "generateModelOnly": false,
+  "generateValuesYml": fale,
   "regenerateCodeOnly":false,
   "httpPort": 8080,
   "enableHttp": false,
@@ -97,6 +98,8 @@ Here is an example of config.json for openapi generator.
 - regenerateCodeOnly controls whether you wish to regenerate only the model and handler classes, while skipping the underlying scripts, pom.xml and other files
   - optionality: optional
   - recommendation: to be used when there are changes in the model and teams wish to regenerate only the artifacts affected by such change: model, handler classes and handler.yml
+  - default: false
+- generateValuesYml controls whether a values.yml is to be generated, with commonly changed values across test and production environments
   - default: false
 - httpPort is the port number of Http listener if enableHttp is true
   - optionality: mandatory
