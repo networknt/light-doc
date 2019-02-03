@@ -28,9 +28,11 @@ The light platform consists dozens of open-source projects and lives by the work
 
 * Any functional change needs one or more test cases to ensure the quality of the code and help the reviewer to understand how the feature works. The reviewers will enforce this rule during the review. 
 
+* As version 1.5.x is used on production, all changes need to be backward compatible. The reviewers need to enforce this rule. For broken changes, please merge to JDK 11 branch which is the base for the 2.0.x release. 
+
 * For all the repositories that are used on productions or used by a lot of projects, the master and develop branches are locked down. Only the organization admin and repository owner can merge the PR to the develop branch. The light-bot release pipeline will merge to the master branch during the release. 
 
-* For any substantial change, it needs to be reviewed by at least two reviewers. For low-risk changes, show stoppers and urgent defect fixes, the organization admin or repository owner can overwrite the rule to review and merge directly. 
+* For any substantial change, it needs to be reviewed by at least two reviewers. For low-risk changes, show stoppers and urgent defect fixes, the organization admin or repository owner can overwrite the rule to review and merge directly. In most of the cases, the person who opens the issue will be added to the reviewer list to ensure that the requirement is met.  
 
 * For corporate contributions, one or two team leads must review and approve a PR before the PR can be reviewed and approved by the community member. 
 
