@@ -30,9 +30,15 @@ draft: false
 
 ### Prefer new distributed devops tools
 
+### Prefer continuous delivery through DevOps
+
+### Prefer auto-provisioning
+
 ### Prefer design first over code first
 
 ### Prefer zero cost abstaction
+
+### Prefer fail-fast and failure isolation
 
 ### Prefer Middleware in request/response chain
 
@@ -43,8 +49,6 @@ draft: false
 ### Prefer ByteBuffer over Object Serialization
 
 ### Prefer binary over text over socket
-
-
 
 ### Prefer functional over imperative
 

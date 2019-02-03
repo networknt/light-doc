@@ -1,23 +1,18 @@
 ---
 title: "Blog"
-date: 2018-04-22T18:48:09-04:00
+date: 2019-02-02T20:47:57-05:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "contribute"
-    weight: 75
-weight: 75
+slug: ""
 aliases: []
 toc: false
 draft: false
 ---
 
-For people who are not developers but understand the platform, you are encouraged to write your knowledge and experience for the platform. We have a brand new tab called `blog` is reserved and your blogs can be published on our site www.networknt.com
+To introduce the Light platform to more users, we encourage our users to write articles or blogs on their own sites or public blog hosting sites. Once your blogs is published, please let us know in the [gitter room][] or [lightapi reddit][] so that we can add your blog to the [articles][] section on our document site. 
 
-There is no limitation on what topics you can write and we will publish anything related to the platform. Also, you can publish the blog to other websites as you wish. 
 
-When you are unsure if the content you are writing is 100% accurate, you can send the article to us for review before publishing. 
-
-As a brand new platform, we are changing the landscape of Java enterprise development without using Jakarta EE. It is a paradigm shift and we need the community to spread the knowledge and promote the platform. With all of us working together, we can build a successful platform that can be beneficial for all of us. 
+[gitter room]: https://gitter.im/networknt/light-4j
+[lightapi reddit]: https://www.reddit.com/r/lightapi/
+[articles]: /about/articles/

@@ -21,7 +21,7 @@ If you want to contribute the document site directly, please follow the guidelin
 
 ### Create Your Fork
 
-It is best to make changes to the light-doc on your local machine to check for consistent visual styling. Make sure you have created a fork of [light-doc](https://github.com/networknt/light-doc) on GitHub and cloned the repository locally on your machine. For more information, you can see [GitHub's documentation on "forking"][ghforking] or follow along with [development contribution guide][development].
+It is best to make changes to the light-doc on your local machine to check for consistent visual styling. Make sure you have created a fork of [light-doc](https://github.com/networknt/light-doc) on GitHub and cloned the repository locally on your machine. For more information, you can see [GitHub's documentation on "forking"][ghforking] or follow along with [developer guide][].
 
 You can then work on develop branch for your additions. 
 
@@ -325,7 +325,7 @@ Similar to [contributing to Hugo development](/contribute/development/), the Hug
 {{% /note %}}
 
 [ghforking]: https://help.github.com/articles/fork-a-repo/
-[development]: /contribute/development/
+[developer guide]: /contribute/developer-guide/
 [bqsyntax]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#blockquotes
 [sourceforge]: http://docutils.sourceforge.net/docs/ref/rst/directives.html#admonitions
 [gitter]: https://gitter.im/networknt/light-4j

@@ -19,8 +19,27 @@ For most developers working with applications built on top of the light platform
 
 The guideline for contributing example project is very similar to [development][]. The only difference is that we have so many examples located in one repository and you need to find the best location for your example. 
 
-To start working with the light-example-4j repository, please fork it and clone the forked repo to your local. For the rest of the steps, please refer to [development][].
+The following outlines the major steps. 
 
-[development]: /contribute/development/
+#### Getting started
+
+* Make sure you have a [GitHub account](https://github.com/signup/free)
+* It recommended to create a ticket in light-example-4j before adding an example so that other people can learn more about the example. 
+* Fork light-example-4j repository on Github
+* Fork light-doc repository on Github
+
+
+#### Making Changes
+
+* Push your changes to a topic branch in your light-example-4j fork of the repository.
+* Write a README.md in the folder of your example for other people to learn how to use your example.
+* Update example section in light-doc fork repository to explain your example in detail.
+* Submit a pull request to the light-example-4j repository in the networknt organization.
+* Submit a pull request to the light-doc repository in the networknt organization.
+* The core team looks at Pull Requests on a regular basis and will merge the pull request. 
+* Sometimes, we might need to contact contributor understand the details of the pull request.
+
+For more details, please refer to [developer guide][].
+
+[developer guide]: /contribute/developer-guide/
 [light-example-4j]: https://github.com/networknt/light-example-4j
-

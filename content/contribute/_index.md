@@ -18,13 +18,13 @@ toc: false
 reviewed: true
 ---
 
-The light platform relies heavily on the enthusiasm and participation of the open-source community. We need your support in its development, documentation, examples, and tutorials. In addition to above activities, opening issues on github.com and asking questions on gitter rooms help the team to improve the products and help other members to learn how to use the platform. 
+The light platform relies heavily on the enthusiasm and participation of the open-source community. We need your support in its [development][], [documentation][], [example][], and [tutorial][]. In addition to above activities, opening issues on github.com and asking questions on gitter rooms help the team to improve the products and help other members to learn how to use the platform. 
 
-Light's contribution guidelines are detailed in [contributing][].
+The light platform contains a list of open-source projects and lives by the work of its contributors. There are plenty of open issues in each repository, and we need your help to make Light even more remarkable. You do not need to be a guru to contribute to the project's development. If you are a new developer that need help with git and development tools, please visit [GitHub Help][].
 
-The light platform contains a list of open-source projects and lives by the work of its [contributors][]. There are plenty of [open issues][], and we need your help to make Light even more remarkable. You do not need to be a guru to contribute to the project's development.  If you are a new developer that need help with git and development tools, please refer [development guideline][].
-
-[contributors]: /contribute/contributors/
-[open issues]: /contribute/issues/
 [contributing]: /contribute/contributing/
-[development guideline]: /contribute/development/
+[development]: /contribute/development/
+[documentation]: /contribute/documentation/
+[example]: /contribute/example/
+[tutorial]: /contribute/tutorial/
+[GitHub Help]: https://help.github.com/
