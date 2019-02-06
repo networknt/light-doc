@@ -207,7 +207,7 @@ rules of snakeyaml, as follows:
 | key: ${value:1.1} | key set to Double 1.1 |
 | key: ${value:true} | key set to Boolean true (True, TRUE, False, FALSE also valid) |
 
-To further explain, a detailed example are provide below as reference:
+To further explain, a detailed example is provided below as reference:
     
 server.yml:
 ```
