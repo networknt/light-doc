@@ -254,6 +254,18 @@ paths:
 - '127.0.0.1'
 - '10.10.*.*'
 ```
+
+In version 1.5.26, all values from environment variables and default values are strings. It may cause an exception in
+terms of the type casting error if do not pay attention to use, especially for setting boolean. So in 1.5.29, the type
+of environment variables and default values will be cast based on their content. The rules are similar to the conversion 
+rules of snakeyaml, as follows:
+
+| Config | Result |
+| ------ | ------ |
+| key: ${value:1} | key set to Integer 1 |
+| key: ${value:1.1} | key set to Double 1.1 |
+| key: ${value:true} | key set to Boolean true (True, TRUE, False, FALSE also valid) |
+
 To further explain, a detailed example are provide below as reference:
     
 server.yml:
@@ -268,7 +280,6 @@ environment variable:
 ```
 server.buildNumber=456
 ```
-
 * case1: Both value sources exist
 
     If the order code equals to [0]: buildNumber: 123
@@ -311,6 +322,15 @@ server.buildNumber=456
     If the order code equals to [2]: buildNumber: latest
 
     If the order code equals not set:buildNumber: latest (default[2])
+    
+Notes:
+1. An alternate format is provided. Spaces can be added after the colon in curly braces. For example,
+`"{value: 1}"`, It should be noticed that the quotes outside the parentheses cannot be omitted in this
+case.
+
+2. In order to prevent some unchangeable files from being affected by this feature. Variable injection 
+can be prevented by setting config.yml. In 1.5.29, a default config.yml will be generated. For details, 
+see the comments in the file.
 
 ## Example
 
