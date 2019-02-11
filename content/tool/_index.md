@@ -25,7 +25,8 @@ Tools we build.
   * [Light Codegen Reference](/tool/light-codegen/)
   * [Light Codegen Tutorials](/tutorial/generator/)
 - [OpenAPI Parser](/tool/openapi-parser/)
-- [Swagger Bundler](/tool/swagger-bundler/)
+- [Swagger Bundler](https://github.com/networknt/swagger-bundler)
+- [OpenAPI Bundler](https://github.com/networknt/openapi-bundler)
 - [OpenAPI Converter](/tool/openapi-converter/)
 
 Tools we use. 

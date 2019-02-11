@@ -8,10 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-There are so many tools that help us to build restful microservices and here is a small list we
-use ver often. 
+There are so many tools that help us to build restful microservices and here is a small list we use very often. 
 
 * [Swagger Editor][]/tool/swagger-editor/) is used to create and update swagger specifications.
 
@@ -21,8 +21,10 @@ use ver often.
 
 * [Swagger Bundler] to merge multiple files specification into one self-contained JSON with all $ref resolved locally.
 
+* [OpenAPI Bundler] to merge multiple files specification into one self-contained JSON or YAML with all $ref resolved locally. 
 
 [Swagger Editor]: /tool/swagger-editor/
 [Swagger CLI]: /tool/swagger-cli/
 [OpenAPI Parser]: /tool/openapi-parser/
-[Swagger Bundler]: /tool/swagger-bundler/
+[Swagger Bundler]: https://github.com/networknt/swagger-bundler
+[OpenAPI Bundler]: https://github.com/networknt/openapi-bundler
