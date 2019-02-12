@@ -205,7 +205,13 @@ rules of snakeyaml, as follows:
 | ------ | ------ |
 | key: ${value:1} | key set to Integer 1 |
 | key: ${value:1.1} | key set to Double 1.1 |
-| key: ${value:true} | key set to Boolean true (True, TRUE, False, FALSE also valid) |
+| key: ${value:true} | key set to Boolean true |
+
+The full list of strings that can be cast to boolean:
+
+true: {"y", "Y", "yes", "Yes", "YES", "true", "True", "TRUE", "on", "On", "ON"}
+
+false: {"n", "N", "no", "No", "NO", "false", "False", "FALSE", "off", "Off", "OFF"}
 
 To further explain, a detailed example is provided below as reference:
     
