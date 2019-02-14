@@ -65,7 +65,16 @@ Here is an example of config.json for openapi generator.
   "supportClient": false,
   "skipHealthCheck": false,
   "skipServerInfo": false,
-  "prometheusMetrics": false
+  "prometheusMetrics": false,
+  "generateEnvVars": {
+  	"generate": true,
+  	"skipArray": true,
+  	"skipMap": true,
+  	"exclude": [
+  		"handerl.yml",
+  		"values.yml"
+  	]
+  }
 }
 ```
 
@@ -138,6 +147,13 @@ Here is an example of config.json for openapi generator.
 - prometheusMetrics is to decide whether to wire the Prometheus metrics collection handler in the handler chain. Set to true to skip the wiring of the Prometheus metrics collection handler
     - optionality: optional
     - default: false
+- generateEnvVars specifies how [environment-based variables](https://github.com/networknt/light-codegen/issues/217) should be generated.
+    - generateEnvVars.generate:boolean whether the environment based variables should be generated. This is considered `false` if not set.
+        - If this is set to false, config files are copied to target folder (if it is different from source folder).
+        - If this is set to true, config values are re-written to environment based values.
+    - generateEnvVars.skipArray: boolean whether Arrays in the config files should be re-written or not. This is considered `false` if not set.
+    - generateEnvVars.skipMap: boolean whether Maps in the config files should be re-written or not. This is considered `false` if not set.
+    - generateEnvVars.exclude: Array a list of files that should not be re-written
 
 In most of the cases, developers will only update handlers, handler tests and models in a generated project. Of course, you might need a different database for your project, and we have a [database tutorial] that can help you to further config Oracle and Postgres.   
 
