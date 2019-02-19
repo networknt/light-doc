@@ -37,7 +37,9 @@ Although it supports HTTP 1.1, it requires the user to create a connection pool 
 
 Http2Client is a very low-level component, and it is best to be used in service to service communication. If you are trying to write an original client application in Java 8, please take a look at [light-consumer-4j][] which is written by Nicholas Azar and contributed by the community. It is built on top of Http2Client and has a lot of extra features like connection pooling etc. 
 
+### Localhost vs 127.0.0.1
 
+When using the client module to call a service on the same host, you can use localhost or 127.0.0.1 before release 1.5.29 as there was a hostname verification bug in the framework. Since 1.5.29, you must use localhost in the URL as the bug was fixed and localhost is matching the hostname in the generated client.truststore and server.keystore files. 
 
 ### Generic response callback functions
 
