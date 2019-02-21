@@ -11,11 +11,11 @@ draft: false
 reviewed: true
 ---
 
-light-portal contains too many independent microservices, and it is very tedious to build them one by one. To make the developer's life easier, we have created a light-bot develop-build config in the [light-config-test][] repository.
+The light-portal contains too many independent microservices, and it is very tedious to build them one by one. To make the developer's life easier, we have created a light-bot develop-build config in the [light-config-test][] repository.
 
 Before using light-bot, you need to build it locally by following [build light-bot][] tutorial. 
 
-Once you have light-bot built inside network workspace, the next step is to build light-portal with the command line tool provided by light-bot. 
+Once you have light-bot built inside `~/networknt` workspace, the next step is to build light-portal with the command line tool provided by light-bot. 
 
 First, let's check out the light-config-test repository which contains vary configuration folders for different builds used by light-bot.
 
@@ -143,13 +143,10 @@ If you want to rebuild all repositories even there is no change, skip_checkout f
 
 After the build is done, all artifacts are copied to ~/networknt/light-config-test/light-portal/hybrid-query/service or ~/networknt/light-config-test/light-portal/hybrid-command/service folder depending on if the service is command side or query side. 
 
-Now you have light-portal built in your workspace. To start the light-portal services, you can follow [start light-portal service][] tutorial. 
-
+Now you have light-portal built in your `~/networknt` workspace. To start the light-portal services, you can follow [start light-portal service][] tutorial. 
 
 
 [build light-bot]: /tutorial/bot/build-light-bot/
 [start light-portal service]: /tutorial/portal/start-portal-service/
 [light-config-test]: https://github.com/networknt/light-config-test/tree/master/light-bot/develop-build/build-portal
-
-
 

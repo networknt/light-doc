@@ -16,7 +16,7 @@ Before starting light-portal services, the light-portal and its related reposito
 
 Once light-portal is built, you can start command side and query side services with a docker-compose command. 
 
-The docker-compose-cloud.yml is located at ~/networknt/light-config-test/light-portal folder. 
+The docker-compose-cloud.yml is located at `~/networknt/light-config-test/light-portal` folder. 
 
 docker-compose-cloud.yml
 
@@ -56,7 +56,7 @@ networks:
     external: true
 ```
 
-As you can see there are two services are included. Both read corresponding config files and service jar files with volume mappings. 
+As you can see there are two services are included. Both read/write corresponding config files and service jar files with volume mappings. 
 
 The hybrid-command service listens to port 8443, and hybrid-query service listens to port 8442.  
 
