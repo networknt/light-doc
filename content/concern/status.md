@@ -124,10 +124,14 @@ In addition, each individual API/service might have its API specific errors. As 
 can see, the errors are in a hierarchical structure and the final one for a particular
 API needs to be merged from all levels. 
 
-This can be done manually and put the final status.yml into your service src/main/resources/config
-folder or externalized config folder. 
+Three ways can be chosen to merge status:
 
-Another option is to use [light-config-server][] which can automatically merge status
+1. This can be done manually and put the final status.yml into your service src/main/resources/config
+folder or externalized config folder.
+
+2. You can store the custom status code by configuring app-status.yml. Its contents are automatically merged with the framework's status.yml when the server starts. However, it should be noted that please do not use the status code that already exists in the status.yml in the app-status.yml, or it will cause an exception.
+
+3. Another option is to use [light-config-server][] which can automatically merge status
 error codes from multiple levels.
 
  
