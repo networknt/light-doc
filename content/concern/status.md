@@ -109,7 +109,7 @@ teams, here is the rule
     Status status = new Status(STATUS_METHOD_NOT_ALLOWED);
     exchange.setStatusCode(status.getStatusCode());
     exchange.getResponseSender().send(status.toString());
-    # return; # return if there are other code below.
+    # rstoreeturn; # return if there are other code below.
 ```
 
 The above code will terminate the exchange if this is the last line of code in the
@@ -126,12 +126,12 @@ API needs to be merged from all levels.
 
 Three ways can be chosen to merge status:
 
-1. This can be done manually and put the final status.yml into your service src/main/resources/config
+1. Merging manually and put the final status.yml into your service src/main/resources/config
 folder or externalized config folder.
 
-2. You can store the custom status code by configuring app-status.yml. Its contents are automatically merged with the framework's status.yml when the server starts. However, it should be noted that please do not use the status code that already exists in the status.yml in the app-status.yml, or it will cause an exception.
+2. Merging automatically by configuring app-status.yml. The contents in app-status.yml are automatically merged with the framework's status.yml when the server starts. However, it should be noted that please do not use the status code that already exists in the status.yml in the app-status.yml, or it will cause an exception.
 
-3. Another option is to use [light-config-server][] which can automatically merge status
+3. Using [light-config-server][] which can automatically merge status
 error codes from multiple levels.
 
  
