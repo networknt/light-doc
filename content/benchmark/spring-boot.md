@@ -208,7 +208,9 @@ Transfer/sec:    472.63MB
 
 Compare the two results, we can see that the light-4j path is about 20 times throughput than spring-boot path and the latency is 0.93ms vs. 19.89ms. Imagine if you want to reach the same throughput and same latency of light-4j path, how many Spring Boot instances are needed. We have one customer switched from Spring Boot to Light-4j for their service that collects data from IoT devices and they reduced from 250 medium size AWS VMs to only 4 small size AWS VMs with much better performance. 
 
+The test was done on my desktop comptuer with AMD 2700X and 32GB memory. The [source code][] can be found at Github and you can run it locally. 
 
 [microservices-framework-benchmark]: https://github.com/networknt/microservices-framework-benchmark
 [performance difference]: https://github.com/networknt/microservices-framework-benchmark
 [light-spring-boot]: https://github.com/networknt/light-spring-boot
+[source code]: https://github.com/networknt/light-example-4j/tree/develop/springboot/performance
