@@ -28,11 +28,12 @@ As we are dealing with POJO in Java SE, you can debug your entire application in
 
 ### Known Issues
 
-
+* [Request with French character in body to light-router with http2 to backend with early version of light-4j service][]
 
 
 [gitter]: https://gitter.im/networknt/light-4j
 [reddit]: https://www.reddit.com/r/lightapi/
 [Debug with IntelliJ Idea]: /tutorial/common/debug/idea/
 [Debug with Eclipse]: /tutorial/common/debug/eclipse/
+[Request with French character in body to light-router with http2 to backend with early version of light-4j service]: /troubleshooting/router-http2-to-older-version-service/
 
