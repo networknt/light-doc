@@ -456,7 +456,7 @@ emailPassword: change-to-real-password
 
 ### Hostname verification in Caas environments
 
-The config item `verifyHostname` in [Configuration] (#Configuration) section enables default HTTPS hostname verification. That means the hostname in the clientrequest URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected.
+The config item `verifyHostname` in [Configuration](#Configuration) section enables default HTTPS hostname verification. That means the hostname in the clientrequest URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected.
 
 However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS enviroment, we provide another means for hostname verification. The following provides the steps to enabling the hostname verfication in CaaS environments.
 
