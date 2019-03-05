@@ -456,11 +456,12 @@ emailPassword: change-to-real-password
 
 ### Hostname verification in Caas environments
 
-The config item `verifyHostname` in the [Configuration](#Configuration) section enables default HTTPS hostname verification. That means the hostname in the client request URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected.
+The config item `verifyHostname` in the [Configuration](#Configuration) section enables default HTTPS hostname verification. That means the hostname in the client request URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected. It is a common practice for APIs with a proper DNS. 
 
-However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS enviroment, we provide another means for hostname verification. The following provides the steps to enabling the hostname verfication in CaaS environments.
+However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS environment, we provide another means for hostname verification. The following provides the steps to enabling the hostname verification in CaaS environments.
 
-1. put service IDs into the server certificate. Ideally, the service IDs should be put in subject alternatoive names of the certificate (as shown below). If subject alternative names are not set, common name is used in the verification. 
+1. Put service IDs into the server certificate. Ideally, the service IDs should be put in subject alternative names of the certificate (as shown below). If subject alternative names are not set, the common name is used in the verification. For each service, the service ID can be found in the server.yml configuration file. 
+
 ```
 subjectAltName = @alt_names
 
@@ -469,7 +470,8 @@ DNS.1 = service_id1
 DNS.2 = service_id2
 ```
 
-2. add service IDs to trustedNames in `client.yml`. Service IDs can be separated into multiple groups if needed and any group name can be used (as long as it is a valid yml map key). Mutliple service IDs in a group should be delimited by comma.
+2. Add service IDs to `trustedNames` in the `client.yml`. Service IDs can be separated into multiple groups if needed, and any group name can be used (as long as it is a valid YAML map key). Multiple service IDs in a group should be delimited by a comma.
+
 ```
 tls:
   verifyHostname: true
@@ -477,7 +479,8 @@ tls:
     group1: service_id1, service_id2
 ```
 
-3. create XnioSsl instances using the trusted names. An example is shown below. The default Http2Client.SSL does not accept any trustedNames settings. 
+3. Create XnioSsl instances using the trusted names. An example is shown below. The default Http2Client.SSL does not accept any `trustedNames` settings. 
+
 ```
 Http2Client client = Http2Client.getInstance();
 
