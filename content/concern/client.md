@@ -456,11 +456,11 @@ emailPassword: change-to-real-password
 
 ### Hostname verification in Caas environments
 
-The config item `verifyHostname` in [Configuration](#Configuration) section enables default HTTPS hostname verification. That means the hostname in the clientrequest URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected.
+The config item `verifyHostname` in the [Configuration](#Configuration) section enables default HTTPS hostname verification. That means the hostname in the client request URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected.
 
 However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS enviroment, we provide another means for hostname verification. The following provides the steps to enabling the hostname verfication in CaaS environments.
 
-1. put service ids into the server certificate. Ideally, the service ids should be put in subject alternatoive names of the certificate (as shown below). If subject alternative names are not set, common name is used in the verification. 
+1. put service IDs into the server certificate. Ideally, the service IDs should be put in subject alternatoive names of the certificate (as shown below). If subject alternative names are not set, common name is used in the verification. 
 ```
 subjectAltName = @alt_names
 
@@ -469,7 +469,7 @@ DNS.1 = service_id1
 DNS.2 = service_id2
 ```
 
-2. add service IDs to trustedNames in `client.yml`. Service IDs can be separated into multiple groups if needed and there is no specifical contraints on group names.
+2. add service IDs to trustedNames in `client.yml`. Service IDs can be separated into multiple groups if needed and any group name can be used (as long as it is a valid yml map key). Mutliple service IDs in a group should be delimited by comma.
 ```
 tls:
   verifyHostname: true
