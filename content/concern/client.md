@@ -454,6 +454,49 @@ emailPassword: change-to-real-password
 ```
 
 
+### Hostname verification in Caas environments
+
+The config item `verifyHostname` in [Configuration] (#Configuration) section enables default HTTPS hostname verification. That means the hostname in the clientrequest URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected.
+
+However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS enviroment, we provide another means for hostname verification. The following provides the steps to enabling the hostname verfication in CaaS environments.
+
+1. put service ids into the server certificate. Ideally, the service ids should be put in subject alternatoive names of the certificate (as shown below). If subject alternative names are not set, common name is used in the verification. 
+```
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = service_id1
+DNS.2 = service_id2
+```
+
+2. add service IDs to trustedNames in `client.yml`. Service IDs can be separated into multiple groups if needed and there is no specifical contraints on group names.
+```
+tls:
+  verifyHostname: true
+  trustedNames:
+    group1: service_id1, service_id2
+```
+
+3. create XnioSsl instances using the trusted names. An example is shown below. The default Http2Client.SSL does not accept any trustedNames settings. 
+```
+Http2Client client = Http2Client.getInstance();
+
+// create ssl instance using the trusted names
+XnioSsl ssl= new UndertowXnioSsl(Http2Client.WORKER.getXnio(), OptionMap.EMPTY, Http2Client.BUFFER_POOL, Http2Client.createSSLContext("trustedNames.group1"));
+
+try {
+	// Create an HTTP 2.0 connection to the server
+	final ClientConnection connection = client.connect(new URI("https://1.2.3.4:8443"), Http2Client.WORKER,
+			ssl, Http2Client.BUFFER_POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true))
+			.get();
+
+	return getData(client, connection, path);
+} catch (Throwable t) {
+	logger.error(t.getMessage(), t);
+}
+```
+
+
 [Microservices Chain pattern tutorial]: /tutorial/rest/swagger/ms-chain/
 [Service discovery tutorial]: /tutorial/common/discovery/
 [tutorial]: https://github.com/networknt/light-example-4j/tree/master/router
