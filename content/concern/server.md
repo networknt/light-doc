@@ -10,11 +10,11 @@ draft: false
 reviewed: true
 ---
 
-This module is responsible for managing the life cycle of the embedded Undertow core HTTP server. It starts the server and initializes all middleware handlers/plugins along with a route handler provider. It stops the server and allows the resources to be released even someone clicks CTRL+C on the terminal.
+This module is responsible for managing the life cycle of the embedded Undertow core HTTP server. It starts the server and initializes all middleware handlers/plugins along with a route handler provider when the handler chain is defined in the `service.yml`  or OrchestrationHandler when the handler chains are defined in the `handler.yml`. It gracefully stops the server and allows the resources to be released and all in-flight requests to be processed before the server instance is deregistered on the service registry even someone clicks CTRL+C on the terminal.
 
 ### Startup Hooks
 
-During server startup, a list of startup hooks is called to initialize the context and environment for the server instance. For example, creating database connection pool, initialize cache.
+During server startup, a list of startup hooks is called to initialize the context and environment for the server instance. For example, creating a database connection pool, initialize cache, etc.
 
 All startup hooks must implement the following interface.
 
@@ -24,7 +24,7 @@ public interface StartupHookProvider {
 }
 ```
 
-Startup hooks are loaded from [service][] module and the config file to bind all startupHooksProviders is service.yml file. This file is in src/main/resources/config folder in your generated project from [light-codegen][] and it should be externalized for any official deployment environment. 
+Startup hooks are loaded during the server startup from [service][] module and the config file that binds all startupHooksProviders is the `service.yml` file. This file is in src/main/resources/config folder in your generated project from [light-codegen][], and it should be externalized for any official deployment environment. 
 
 Here is an example.
 
@@ -34,7 +34,6 @@ Here is an example.
   - com.networknt.server.Test1StartupHook
   - com.networknt.server.Test2StartupHook
 ```
-
 
 ### Shutdown Hooks
 
@@ -48,7 +47,7 @@ public interface ShutdownHookProvider {
 }
 ```
 
-Shutdown hooks are loaded from the service module and the configuration is defined in service.yml file as startupHookProviders. Here is an example config section. 
+Shutdown hooks are loaded during the server startup from the service module, and the configuration is defined in the `service.yml` file as startupHookProviders. Here is an example config section. These hooks will be invoked based on the sequence defined in the config file right before the server is shut down after the grace period is passed and all pending requests are handled. 
  
 ```
 # ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
@@ -57,81 +56,20 @@ Shutdown hooks are loaded from the service module and the configuration is defin
 
 ```
 
+### Middleware Handler vs Business Handler
 
-### Middleware Handlers
+Light-4j has two different types of handlers: middleware handler and business handler. 
 
-Middleware handlers/plugins are the fundamental components in the framework as they perform the heavy lifting behind the scene. These components address the cross-cutting concerns for all API implementations so that API developers can focus on their domain business logic only. Each component has a config file (same name but with .yml/.yaml/.json extension) to control if the component is enabled and its behavior. The framework has provided a list of the middleware handlers/plugins, and experienced developers can add other plugins into the request/response chain. All middleware handlers in the request/response chain form an embedded gateway for the service running on top of it. 
+Middleware handler doesn't return anything except errors as a response but only manipulate the request or the response in the request/response chain. Each middleware handler handles the request/response and then pass the request/response to the next middleware handler in the chain. 
 
-Every middleware handler must implement the following interface.
+Business handler is the final handler in the chain that runs the business logic and return the real business response to the caller. 
 
+For more information about handlers, please visit the [handler][] cross-cutting concern. 
 
-```java
-public interface MiddlewareHandler extends HttpHandler {
-
-    /**
-     * Get the next handler in the chain
-     *
-     * @return HttpHandler
-     */
-    HttpHandler getNext();
-
-    /**
-     * Set the next handler in the chain
-     *
-     * @param next HttpHandler
-     * @return MiddlewareHandler
-     */
-    MiddlewareHandler setNext(final HttpHandler next);
-
-    /**
-     * Indicate if this handler is enabled or not.
-     *
-     * @return
-     */
-    boolean isEnabled();
-
-    /**
-     * Register this handler to the handler registration.
-     */
-    void register();
-
-}
-
-```
-
-
-To add/remove/replace middleware handlers/plugins, update service.yml config file to bind them with MiddlewareHandler interface. These handlers/plugins will be executed in sequence for every incoming request. 
-
-Here is the default middleware configuration generated by [light-codegen][] for RESTful API built with OpenAPI 3.0 specification. 
-
-```yaml
-- com.networknt.handler.MiddlewareHandler:
-  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
-  - com.networknt.exception.ExceptionHandler
-  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
-  - com.networknt.metrics.MetricsHandler
-  # Traceability Put traceabilityId into response header from request header if it exists
-  - com.networknt.traceability.TraceabilityHandler
-  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
-  - com.networknt.correlation.CorrelationHandler
-  # Parsing OpenAPI 3.0 specification based on request uri and method.
-  - com.networknt.openapi.OpenApiHandler
-  # Security JWT token verification and scope verification (depending on OpenApiHandler)
-  - com.networknt.openapi.JwtVerifyHandler
-  # Body Parse body based on content type in the header.
-  - com.networknt.body.BodyHandler
-  # SimpleAudit Log important info about the request into audit log
-  - com.networknt.audit.AuditHandler
-  # Sanitizer Encode cross site scripting
-  - com.networknt.sanitizer.SanitizerHandler
-  # Validator Validate request based on OpenAPI 3.0 specification (depending on OpenApiHandler and BodyHandler)
-  - com.networknt.openapi.ValidatorHandler
-
-```
 
 ### Route Provider
 
-[light-codegen][] generates all the business domain handlers and corresponding test cases based on the specifications (OpenAPI 3.0, Swagger 2.0, GraphQL IDL and Hybrid Schema). The generated handlers output examples defined in the specification and test cases are commented out. The generator also generates a HandlerProvider class to wire in business domain handlers together into the request/response chain. These business handlers are located after request middleware handlers and before response middleware handlers. This class is loaded by the server during the server startup, and the binding is configured in service.yml file. 
+[light-codegen][] generates all the business domain handlers and corresponding test cases based on the specifications (OpenAPI 3.0, Swagger 2.0, GraphQL IDL and Hybrid Schema). The generated handlers output examples defined in the specification and test cases are commented out. The generator also generates a HandlerProvider class to wire in business domain handlers together into the request/response chain. These business handlers are located after request middleware handlers and before response middleware handlers. This class is loaded by the server during the server startup, and the binding is configured in the `service.yml` file. 
 
 Here is an example of the config.
 
@@ -140,7 +78,6 @@ Here is an example of the config.
 - com.networknt.handler.HandlerProvider:
   - com.networknt.petstore.PathHandlerProvider
 ```
-
 
 
 ### Configuration
@@ -213,25 +150,111 @@ maxPort: 2500
 
 ### Config Server
 
-If you want the server to load configuration files from config server, the following environment variable must be set in the java -jar as option or pass to Docker container as environment variables.
+If you want the server to load configuration files from the config server, the following environment variable must be set in the java -jar as option or pass to Docker container as environment variables.
 
 * light-env
 * light-config-server-uri
 
-Once the server starts, it will access the [light-config-server](https://github.com/networknt/light-config-server) instance to get a zip file that contains config files for the particular service for the environment and the framework version. The zip file will be deflated automatically and put all file into /config folder which is specified by light-4j-config-dir system properties. 
+Once the server starts, it will access the [light-config-server](https://github.com/networknt/light-config-server) instance to get a map of key/value pairs that match the values.yml config files for the particular service for the environment and the framework version. The key/value map will be injected by the [config][] module automatically into the config file templates in /config folder which is specified by light-4j-config-dir system properties or src/main/resources/config folder. 
 
-If you are deploying hundreds or thousands of services, it would be much easier to many the configurations with light-config-server which supports hierarchical config file management with multiple GitHub organizations and repositories. 
+If you are deploying hundreds or thousands of services, it would be much easier to manage the configurations with light-config-server which supports hierarchical config file management with multiple GitHub organizations and repositories as well as encryption and decryption values between the config server and services inside the containers.
+
 
 
 ### Service Registry
 
-If enableRegistry is true in server.yml, then the server will register itself to Consul or Zookeeper whichever is configured in service.yml. The self-registration is used in data center deployment which you might have several Java instances running on the same host. It is also used in Kubernetes cluster as all the services are running on host network to take advantages of direct service discovery. 
+If enableRegistry is true in server.yml, then the server will register itself to Consul or Zookeeper whichever is configured in service.yml. The self-registration is used in data center deployment which you might have several Java instances running on the same host. It is also used in Kubernetes cluster as all the services are running on the host network to take advantages of direct service discovery. 
 
-For self-registration, you can specify dynamicPort to true so that the server module will try to bind a port in a range defined between minPort and maxPort. 
+For service registration, you can specify dynamicPort to true so that the server module will try to bind a port in a range defined between minPort and maxPort. 
+
+* Standalone Application
+
+If the server is started as a standalone Java application with java -jar command line, there is no extra work that needs to be done. If the dynamic port is enabled and a range of ports are specified, then the server will try to bind the first available port on the host. 
+
+* Docker Compose
+
+When starting the service in a docker container with a docker-compose.yml file, the service cannot find the host IP address to register itself. It knows the port number as it tries to bind one by one in a configured range. This requires us to pass the DOCKER_HOST_IP to the STATUS_HOST_IP environment variable for the server instance. In some instances, for example, Kafka consumer or streams applications, you cannot use the docker overlay network, and network_mode need to be set as host. 
+
+Here is an example of a docker-compose.yml file. 
+
+```
+# testnet test1 docker-compose
+version: "2"
+services:
+  chainwriter:
+    image: networknt/com.networknt.chainwriter-1.0.0:latest
+    volumes:
+      - ./test1/chain-writer:/config
+    environment:
+      - STATUS_HOST_IP=${DOCKER_HOST_IP}
+    network_mode: host
+  chainreader:
+    image: networknt/com.networknt.chainreader-1.0.0:latest
+    volumes:
+      - ./test1/chain-reader:/config
+    environment:
+      - STATUS_HOST_IP=${DOCKER_HOST_IP}
+    network_mode: host    
+  # there is only one instance of token reader and it is allocated at test1
+  tokenreader:
+    image: networknt/com.networknt.tokenreader-1.0.0:latest
+    volumes:
+      - ./test1/token-reader:/config
+    environment:
+      - STATUS_HOST_IP=${DOCKER_HOST_IP}
+    network_mode: host    
+  # there is only one instance of kyc reader and it is allocated at test1
+  kycreader:
+    image: networknt/com.networknt.kycreader-1.0.0:latest
+    volumes:
+      - ./test1/kyc-reader:/config
+    environment:
+      - STATUS_HOST_IP=${DOCKER_HOST_IP}
+    network_mode: host    
+```
+
+On a Linux server, we usually set the DOCKER_HOST_IP in the .profile file so that all containers running on the same host can get the same IP. 
+
+* Kubernetes
+
+When deploying to a Kubernetes cluster or Openshift cluster, the situation is very similar to Docker Compose. You need to use the host network and pass the host IP to the container through Kubernetes downward API in the deployment YAML file. 
+
+Here is an example of deployment.yaml
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apia-deployment
+  labels:
+    app: apia
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: apia
+  template:
+    metadata:
+      labels:
+        app: apia
+    spec:
+      hostNetwork: true
+      containers:
+      - name: apia
+        image: networknt/com.networknt.apia-1.0.0
+        env:
+        - name: STATUS_HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+```
+
+As you can see in the spec section that the `hostNetwork` is true and the environment variable STATUS_HOST_IP is passed in as status.hostIP from the downward API of Kubernetes. 
+
 
 ### Port Allocation
 
-If you are using service registry, you should only use HTTPS port and disable the HTTP port all the time. In fact, although we support HTTP connection, we recommend using HTTPS all the time even in the development environment as TLS is supported out of the box. 
+If you are using the service registry, you should only use the HTTPS port and disable the HTTP port all the time. In fact, although we support HTTP connection, we recommend using HTTPS all the time even in the development environment as TLS is supported out of the box from the [light-codegen][]. 
 
 When you are trying to sign the port number manually, be sure that there is no conflict on the same host. For some services running inside another container or service platform, there is a way to pass the HTTP or HTTPS port into the light-4j service from an environment variable. One example is to deploy light-4j service into Azure App Service platform. The port number must be allocated by the Azure App Service and pass to the internal service. 
 
@@ -246,16 +269,18 @@ By setting above environment variables, the server.yml settings are overwritten.
 
 For more info about setting port number with environment variables, please refer to https://github.com/networknt/light-4j/issues/210
 
+Since release 1.5.29, we have updated the [config][] module to support config file templates and environment variables to replace values in the config file in general. We don't need the above workaround anymore. However, the feature is kept for backward compatibility. 
+
 ### Gracefully Shutdown
 
-As we are using service registry, discovery and client-side load balance, our client module maintains a list of live services per serviceId interested. If any service is shutting down, it takes a short while to propagate to all clients. To handle in-flight request from the clients that don't know the server instance is down, the server has to send a shutdown signal to the registry(Consul or Zookeeper) and keep processing for at least 20 to 30 seconds and then shut down. Within this period of time, all client should have known the service instance is gone and won't send any new request to it.
+As we are using the service registry, discovery and client-side load balance, our client module maintains a list of live services per serviceId interested. If any service is shutting down, it takes a short while to propagate to all clients. To handle in-flight request from the clients that don't know the server instance is down, the server has to send a shutdown signal to the registry(Consul or Zookeeper) and keep processing for at least 20 to 30 seconds and then shut down. Within this period of time, all client should have known the service instance is gone and won't send any new request to it.
 
 
 ### TLS Hostname Verification
 
-For testing, we can disable the hostname verification on the client for the certificate; however, it is recommended that on production, hostname verification should be turned on to eliminate man-in-the-middle attacks. 
+For testing, we can disable the hostname verification on the [client][] for the certificate; however, it is recommended that on production, hostname verification should be turned on to eliminate man-in-the-middle attacks. If possible, the two-way TLS should be enabled on both client.yml and server.yml to maximize the security. For more information on the verifyHostname setup, plese visit [client][] module.
 
-You have two options:
+To get the certificates, you have two options:
 
 * Buy certificates from a CA like VeriSign.
 * Setup a CA in your organization and use OpenSSL to generate certificates.
@@ -267,3 +292,6 @@ https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning
 
 [service]: /concern/service/
 [light-codegen]: /tool/light-codegen/
+[handler]: /concern/handler/
+[config]: /concern/config/
+[client]: /concern/client/
