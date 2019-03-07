@@ -1,5 +1,5 @@
 ---
-title: "User Management Introduction"
+title: "User Management"
 date: 2018-03-03T20:18:13-05:00
 description: ""
 categories: []
@@ -9,8 +9,6 @@ aliases: []
 toc: false
 draft: false
 ---
-
-# Introduction
 
 This portal service can be found at [https://github.com/networknt/light-portal](https://github.com/networknt/light-portal)
 
