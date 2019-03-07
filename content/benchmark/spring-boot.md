@@ -15,6 +15,9 @@ Recently, one of the big customers asked if we can integrate light-4j middleware
 
 The customer realizes the [performance difference] between Light-4j and Spring Boot as they have compared both with their typical applications. While we are working on the integration in [light-spring-boot][] project, we can easily inject Light-4j handlers to the Spring Boot application in the same process. So we did a simple performance test to figure out what is the difference between the Light-4j implementation vs. Spring Boot controller. 
 
+If you want to watch a video walk through. 
+
+{{< youtube JcVJr00cDOw >}}
 
 ### Setup
 
