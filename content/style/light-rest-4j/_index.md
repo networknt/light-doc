@@ -21,10 +21,11 @@ For [API categories and frameworks][] and in which situation to choose which fra
  
 Chances are you are building a public Web API and want to follow RESTful style to make sure everyone can understand and consume it. 
 
-The light-rest-4j is a framework that is designed to speed up RESTful API development and deployment. On top of light-4j, it has several middleware handlers designed explicitly around Swagger 2.0 and OpenAPI 3.0 specifications. There are completely two different frameworks to support Swagger 2.0 and OpenAPI 3.0 as later is not backward compatible. 
+The light-rest-4j is a framework that is designed to speed up RESTful API development and deployment. On top of light-4j, it has several middleware handlers designed explicitly around Swagger 2.0 and OpenAPI 3.0 specifications. There are completely two different frameworks to support Swagger 2.0 and OpenAPI 3.0 as the later is not backward compatible. 
 
 At the moment, most of our users are using the OpenAPI 3.0 specification, and it is highly recommended if you are starting a new project. 
 
+* [Getting Help](/about/community/)
 * [Getting Started](/getting-started/light-rest-4j/)
 * [Dependency Versions](/style/light-rest-4j/dependency/)
 * [Examples](/style/light-rest-4j/example/)

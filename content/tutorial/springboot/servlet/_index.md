@@ -1,10 +1,15 @@
 ---
-title: "Spring Servlet"
+title: "Spring Boot Servlet"
 date: 2019-03-06T20:57:46-05:00
 description: ""
-categories: []
+categories: [getting started]
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "getting-started"
+    weight: 130
+weight: 130
+sections_weight: 130
 aliases: []
 toc: false
 draft: false
