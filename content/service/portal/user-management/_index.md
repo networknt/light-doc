@@ -12,32 +12,29 @@ draft: false
 
 This portal service can be found at [https://github.com/networknt/light-portal](https://github.com/networknt/light-portal)
 
-This service is part of light-portal and it is used for managing user for light-4j. And user can get the service to run separate for user management for their own project.
+This service is part of light-portal, and it is used for managing users for the light-4j platform. And users can get the service to run separately for user management for their own project.
 
-## Scoop
+### Scope
 
-User Management Service only manage user create, confirm, update, delete and login. The user role and authorization will be implemented in light-oauth.
-
-And the session management will be implement in light-4j framework
+User Management Service only manages user create, confirm, update, delete and log in. The user role and authorization will be implemented in [light-oauth2][]. And the session management will be implemented in [light-session-4j][] framework.
 
 
-## Non-functional requirements
+### Non-functional requirements
 
-User stories usually don't define non-functional requirements, such as security, development principles, technology stack, etc.  So let's list them here separately.
+User stories usually don't define non-functional requirements, such as security, development principles, technology stack, etc. So let's list them here separately.
 
-The domain model is implemented in pure Java using Domain-driven design principles and its independent of the underlying technology stack to be used
+The domain model is implemented in pure Java using Domain-driven design principles and its independent of the underlying technology stack.
 
-When users log in, a JWT token is generated for them, which is valid for 24 hours. By providing this token for subsequent requests they can perform operation which require authentication
+When users log in, a JWT token is generated for them, which is valid for 15 minutes. Also, a refresh token will be issued with 24 hours expiration. By providing the JWT access token for subsequent requests they can perform operations which require authentication for 15 minutes. Before the access token is about to be expired, a new access token will be retrieved by sending the refresh token to the token service. 
 
-Password reset tokens are valid for 10 minutes and email address confirmation tokens for a day
+Password reset tokens are valid for 10 minutes and email address confirmation tokens for a day.
 
-Passwords are encrypted with a cryptographically strong algorithm (Bcrypt) with per-user salt
+Passwords are encrypted with a cryptographically strong algorithm (Bcrypt) with a per-user salt.
 
-A RESTful API is provided for interacting with the user registration service
+GDPR(General Data Protection Regulation) compliance. That means we cannot use event sourcing with Kafka only but need a database so that user info can be deleted if necessary. For the current implementation, we are using light-eventuate-4j, so the aggregation is in a MySQL database. Of course, users can have their implementation if they want some extra features. 
 
 
-
-## Basic requirement & use case:
+### Basic requirement & use case:
 
 As a user, I want to register, so that I can get access to content which requires registration
 
@@ -64,13 +61,13 @@ As an admin, I want to list all users, even those once who closed their account
 As an admin, I want to be able to see users' activity (login, logout, password reset, confirmation, profile update), so that I can comply with external audit requirements
 
 
-## Workflow
+### Workflow
 
 
 ![User_registration_workflow](/images/User_registration_workflow.png)
 
 
-## Service Rest Api
+### Service Rest Api
 
 GET /user/{user_id}
 
@@ -109,9 +106,9 @@ PUT /user/login
 Login user with given login form
 
 
-## Project modules
+### Project modules
 
-## Common module:
+### Common module:
 
 common module includes all common objects for the service:
 
@@ -147,7 +144,7 @@ Validator (validate user input email, password etc),
 EmailSender  (send confirm email for new signup user or email change)
 
 
-## auth module:
+### auth module:
 
 auth module includes the service class for user authentication, and command side component for eventuate system.
 
@@ -159,9 +156,9 @@ service  -- java service POJO class for user signup and user authentication
 
 
 
-## We provide two types of services:
+### We provide two types of services:
 
-## Normal microservice:
+### Normal microservice:
 
 It can be run local to and persist the user info to local database only.
 
@@ -170,7 +167,7 @@ Module:
 usermanagement-service
 
 
-## Event sourcing microservice:
+### Event sourcing microservice:
 
 Integrate the service with light-eventuate-4j framework to process user management with event sourcing. It include command side service and query side service.
 
@@ -182,6 +179,5 @@ rest-query      -- query side service
 
 
 
-
-## End
-
+[light-oauth2]: /service/oauth/
+[light-session-4j]: /style/light-session-4j/
