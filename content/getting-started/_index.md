@@ -29,6 +29,7 @@ If you don't have JDK 8 and Git installed, please prepare your [environment][].
 
 There are several frameworks available to support different styles of API. If this is the very first time you try to create an API, please try [light-rest-4j][]. If you are unsure which style you should choose for your project, please visit [API category][].
 
+* [Light-4j][] - For an expert that need absolute high throughput and low latency
 * [Light-rest-4j][] - Restful API with OpenAPI 3.0 or Swagger 2.0 specification
 * [Light-graphql-4j][] - GraphQL API with query, mutation and subscription based on IDL
 * [Light-hybrid-4j][] - RPC style of hybrid monolithic and microservices serverless framework
@@ -136,6 +137,7 @@ source code for the tutorial can be found at [https://github.com/networknt/light
 [API category]: /architecture/category/
 [middleware handlers]: /architecture/middleware-handler/
 [business handlers]: /architecture/business-handler/
+[Light-4j]: /style/light-4j/
 [Light-rest-4j]: /style/light-rest-4j/
 [Light-graphql-4j]: /style/light-graphql-4j/
 [Light-hybrid-4j]: /style/light-hybrid-4j/

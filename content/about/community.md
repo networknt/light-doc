@@ -21,7 +21,7 @@ If you have trouble with Light-4j, we would like to help.
 
 * Try the [FAQ][] documents. They provide solutions to the most common questions. 
 * Ask a question on Stack Overflow. We monitor stackoverflow.com for questions tagged with light-4j.
-* For topic based questions, ask on Light-4j [Google Group][] or [Sub Reddit][]
+* For topic based questions or discussions, start a thread on Light-4j [Google Group][] or [Sub Reddit][]
 * For generic questions or confirmations, ask on the [Gitter Room]
 
 [get involved]: /contribute/
