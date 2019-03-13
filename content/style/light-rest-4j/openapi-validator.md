@@ -7,7 +7,7 @@ keywords: []
 slug: ""
 aliases: []
 toc: false
-draft: false
+draft: false 
 reviewed: true
 ---
 
@@ -67,8 +67,43 @@ It will validate the following:
 When necessary, [json-schema-validator][] will be called to do json schema validation.
 
 ### ResponseValidator
-
-It will validate the following:
+ResponseValidator can validate a given response content object with schema coordinate (uri, httpMethod, statusCode, mediaTypeName)  
+Based on OpenAPI specification, the [Response Object][] is located in Path Object -> Operation Object -> Responses-> Response Object. For example:
+```
+paths:
+  /pets:
+    get:
+      summary: List all pets
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: An paged array of pets
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+```
+Thus, to locate a response schema, we need to know the path: "/pets", the operation method: "get", the corresponding status code: "200", and the content media type: "application/json"
+the method call will be like:
+```$xslt
+    Status status = responseValidator.validateResponseContent(responseBody, "/pets", "get", "200", "application/json");
+```
+The status code and content media type is **optional**, if not specify status code, it will be default to 200. if not specify content media type, it should be default to "application/json"  
+We will add a response validator handler later on, it will validate the following:
 
 * header
 * response code
@@ -92,3 +127,4 @@ In order to test validator, the test suite starts a light-4j server and serves t
 [light-router]: /service/router/
 [light-proxy]: /service/proxy/
 [light-spring-boot]: /style/light-spring-boot/
+[Response Object]: https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#response-object
