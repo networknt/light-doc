@@ -1,6 +1,6 @@
 ---
-title: "OpenAPI Generator Tutorial"
-date: 2017-11-22T15:24:27-05:00
+title: "OpenAPI Kotlin Generator Tutorial"
+date: 2019-03-15T18:38:39-04:00
 description: ""
 categories: []
 keywords: []
@@ -8,11 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
-reviewed: true
 ---
 
 For examples of usage for this generator, please refer to https://github.com/networknt/model-config/tree/master/rest/openapi
 
 For detailed usage, please refer to [reference document][].
 
-[reference document]: /tool/light-codegen/openapi-generator/
+[reference document]: /tool/light-codegen/openapi-kotlin-generator/

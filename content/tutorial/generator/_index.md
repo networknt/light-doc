@@ -23,6 +23,8 @@ All frameworks in the light platform are design-driven, and you can scaffold a n
 
 * [Generate Restful API with OpenAPI 3.0 Specification][]
 
+* [Generate Restful API in Kotlin with OpenAPI 3.0 Specification][]
+
 * [Generate GraphQL API with GraphQL IDL][]
 
 * [Generate Hybrid Service with Schema][]
@@ -39,6 +41,7 @@ All frameworks in the light platform are design-driven, and you can scaffold a n
 
 [Generate Restful API with Swagger 2.0 Specification]: /tutorial/generator/swagger/
 [Generate Restful API with OpenAPI 3.0 Specification]: /tutorial/generator/openapi/
+[Generate Restful API in Kotlin with OpenAPI 3.0 Specification]: /tutorial/generator/openapikotlin/
 [Generate GraphQL API with GraphQL IDL]: /tutorial/generator/graphql/
 [Generate Hybrid Service with Schema]: /tutorial/generator/hybridservice/
 [Generate Hybrid Server Hosts Hybrid services]: /tutorial/generator/hybridserver/

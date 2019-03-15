@@ -29,6 +29,7 @@ Given all the drawbacks, we have decided to build our own generator. light-codeg
 - [Specification Best Practices](/tool/light-codegen/best-practice/)
 - [Swagger 2.0 Generator](/tool/light-codegen/swagger-generator/)
 - [OpenAPI 3.0 Generator](/tool/light-codegen/openapi-generator/)
+- [OpenAPI 3.0 Kotlin Generator](/tool/light-codegen/openapi-kotlin-generator/)
 - [GraphQL Generator](/tool/light-codegen/graphql-generator/)
 - [Hybrid Generator](/tool/light-codegen/hybrid-generator/)
 - [Eventuate Generator](/tool/light-codegen/eventuate-generator/)
