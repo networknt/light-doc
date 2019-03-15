@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 If you are using light-router as a public facing access point on a static IP or expose your services to the public, it makes perfect sense to use a CA-signed certificate instead of self-signed. If you don't want to foot the cost of the certificate, Let's Encrypt provides free certificates which can be recognized by almost all browsers. 
