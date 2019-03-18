@@ -499,7 +499,7 @@ try {
 }
 ```
 
-From version 1.5.32, the default Http2Client.SSL accepts the group specified by `defaultGroupKey`. An example config is shown below. No custom XnioSsl instance is needed in order to use trusted names in the default group. If names in other groups are used, the custom XnioSSL instance still needs to be created and used as shown above.
+From version 1.5.32, the default Http2Client.SSL accepts the group specified by `defaultGroupKey`. An example config is shown below. No custom XnioSsl instance is needed in order to use trusted names in the default group. That being said, if names in other groups are used, the custom XnioSSL instance still needs to be created and used as shown above.
 
 ```
 tls:
