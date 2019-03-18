@@ -479,7 +479,7 @@ tls:
     group1: service_id1, service_id2
 ```
 
-3. Create XnioSsl instances using the trusted names. An example is shown below. The default Http2Client.SSL does not accept any `trustedNames` settings. 
+3. Create XnioSsl instances using the trusted names. An example is shown below. Before version 1.5.32, the default Http2Client.SSL does not accept any `trustedNames` settings. 
 
 ```
 Http2Client client = Http2Client.getInstance();
@@ -499,6 +499,16 @@ try {
 }
 ```
 
+From version 1.5.32, the default Http2Client.SSL accepts the group specified by `defaultGroupKey`. An example config is shown below. No custom XnioSsl instance is needed in order to use trusted names in the default group. If names in other groups are used, the custom XnioSSL instance still needs to be created and used as shown above.
+
+```
+tls:
+  verifyHostname: true
+  defaultGroupKey: trustedNames.group1
+  trustedNames:
+    group1: service_id1, service_id2
+    group2: service_id3
+```
 
 [Microservices Chain pattern tutorial]: /tutorial/rest/swagger/ms-chain/
 [Service discovery tutorial]: /tutorial/common/discovery/
