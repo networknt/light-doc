@@ -302,7 +302,7 @@ In order to make it easier, we have provided a [light-config-server](https://git
 
 For more information about light-config-server please check [README.md](https://github.com/networknt/light-config-server)
 
-## Handling encrypted values in config files
+## Handle encrypted values in config files
 Encrypted values are inevitable in configuration files. It's not acceptable to put confidential information, such as passwords, access tokens, or keys, in plain text in configration files.
 In early versions of light-4j (before 1.5.32), users needs to put all encrypted values in the special config file `secret.yml` and use the utility class `DecryptUtil` to decrypt the file before they can use the configured values. This approach is not convinient in two aspects:
 1. it increases the difficulty in maintaining configuration files. People may forget to update or delete an encrypted configuration item when it's context changed.
