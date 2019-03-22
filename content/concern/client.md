@@ -458,7 +458,9 @@ emailPassword: change-to-real-password
 
 The config item `verifyHostname` in the [Configuration](#Configuration) section enables default HTTPS hostname verification. That means the hostname in the client request URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected. It is a common practice for APIs with a proper DNS. 
 
-However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS environment, we provide another means for hostname verification. The following provides the steps to enabling the hostname verification in CaaS environments.
+However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS environment, we provide a configuration based approach for service identity check. In this approach, the server side ssl certificate needs to include a service identity. Users can choose any meaningful ids or names to identify their services. Once the ids or names are added to server ssl certificate, the clients of the service need to add the specified ids or names in to `trustedNames` of the configuration file `client.yml`. At runtime, the https or http2 client verifies server certificates agains configured `trustedNames`. If a match is found, the service is identified as trusted and connections are established. Otherwise, connections are terminated or refused.
+
+The following steps illustrate how to set up service identify check using service IDs. 
 
 1. Put service IDs into the server certificate. Ideally, the service IDs should be put in subject alternative names of the certificate (as shown below). If subject alternative names are not set, the common name is used in the verification. For each service, the service ID can be found in the server.yml configuration file. 
 
