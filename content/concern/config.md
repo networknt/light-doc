@@ -306,7 +306,7 @@ For more information about light-config-server please check [README.md](https://
 Encrypted values are inevitable in configuration files. It's not acceptable to put confidential information, such as passwords, access tokens, or keys, in plain text in configration files.
 In early versions of light-4j (before 1.5.32), users needs to put all encrypted values in the special config file `secret.yml` and use the utility class `DecryptUtil` to decrypt the file before they can use the configured values. This approach is not convinient in two aspects:
 1. it increases the difficulty in maintaining configuration files. People may forget to update or delete an encrypted configuration item when it's context changed.
-2. extra efforts are needed to compose or load configurations from multiple configuration files. The extra efforts can be large when integration with third party applications are involved.
+2. extra efforts are needed to compose or load configurations from multiple configuration files. The extra efforts can be large when integration with third party applications is involved.
 
 To address this issue, we enhanced the `config` module in release light-4j-1.6.0 and provide transparent access to encrypted values. With this enhancement, all values returned from `Config.getJson...()` methods are decrypted using the provided decryptor. Users can specify the decryptor in `config.yml` as shown below. The value of `decryptorClass` needs to be a concrete class that implements the interface `com.networknt.decrypt.Decryptor`. If `decryptorClass` is not configured, values are not decrypted (that is, same behavior as before). 
 
