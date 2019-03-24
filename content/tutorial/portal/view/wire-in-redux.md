@@ -9,6 +9,7 @@ weight: 40
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous tutorial, we have hooked up the [Jest Test Runner][] and watch the file change to rerun all test cases. In this tutorial, we are going to wire in Redux to manage the state of the application. 
