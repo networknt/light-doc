@@ -15,9 +15,7 @@ draft: false
 reviewed: true
 ---
 
-This is the tutorial to learn how to run the light-bot for networknt projects and how to leverage it for your organizations and repositories. As it is using config module from light-4j, the config files can be externalized to somewhere in the host filesystem.
-You can deploy it in one of your DevOps VMs and set it up to run automatically for developing build
-and test. Other tasks are triggered manually and only used occasionally.
+This is the tutorial to learn how to run the light-bot for networknt projects and how to leverage it for your organizations and repositories. As it is using config module from light-4j, the config files can be externalized to somewhere in the host filesystem. You can deploy it in one of your DevOps VMs and set it up to run automatically for developing build and test. Other tasks are triggered manually and only used occasionally.
 
 * Clone and [build light-bot][] project and command line tool with Gradle
 * Clone and build [dependency][] in develop branches for light platform developers
