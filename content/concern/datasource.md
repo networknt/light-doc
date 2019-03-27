@@ -28,7 +28,18 @@ The above config section in service.yml creates an H2 datasource automatically w
 * There is no way you can customize the datasource with its JDBC specific parameters.
 * The password is clear text in the service.yml which is not allowed by some organizations.
 
-To resolve above limitations, a new datasource module is created in light-4j. All datasources are defined in datasource.yml file as following.
+To resolve above limitations, a new datasource module is created in light-4j:
+
+```
+<!-- https://mvnrepository.com/artifact/com.networknt/data-source -->
+<dependency>
+    <groupId>com.networknt</groupId>
+    <artifactId>data-source</artifactId>
+    <version>${version.light-4j}</version>
+</dependency>
+```
+
+All common RDBMS datasources are defined in datasource.yml file as following.
 
 datasource.yml
 
@@ -192,7 +203,10 @@ singletons:
 - com.networknt.utility.Decryptor:
   - com.networknt.decrypt.AESDecryptor
 
-- javax.sql.DataSource: com.networknt.db.H2DataSource::getDataSource
+- javax.sql.DataSource:
+  - com.networknt.db.MysqlDataSource::getDataSource:
+    - java.lang.String: MysqlDataSource
+
 
 - com.networknt.db.MysqlDataSource:
   - com.networknt.db.MysqlDataSource:
