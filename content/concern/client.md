@@ -65,6 +65,46 @@ The renew of token happens behind the scene, and it supports the circuit breaker
 
 There is a good reason we renew the token proactively. If we leave the token to the expiration, the traditional API service can return 401 error with the token expired message to notify the client to get a new token. In the microservices architecture, this is not possible. What if the token is one second before the expiration and service A accepts it and write something into its database and then service B accepts it and write something into its database. However, when service C receives it, it is expired already and rejected. There must be extra logic to compensate the transactions service A and B have performed already. We have a framework [light-saga-4j][] for this type of microservices orchestration, but it is really not necessary for just token expiration handling. It would be better to handle it gracefully in the client module to ensure that the token sent has a longer expiration time than the entire application SLA. 
 
+### Sign Request API
+
+The light-oauth2 Token service has a signing endpoint to sign the incoming map object to support information exchange signature verification between multiple microservices. For more information about the service, please visit [signing][]. 
+
+For the issuer service which wants to provide the signed JWT, it needs to use the client module to access the remote service in the light-oauth2. The client module provided an API to simplify access. 
+
+There is a seciton in the client.yml to define OAuth 2.0 service parameters, and it would be something like the following in the `oauth/token` section. 
+
+For the default config file, please visit [client.yml][]
+
+```
+  # sign endpoint configuration
+  sign:
+    # token server url. The default port number for token service is 6882.
+    server_url: https://localhost:6882
+    # signing endpoint for the sign request
+    uri: "/oauth2/token"
+    # timeout in milliseconds
+    timeout: 2000
+    # set to true if the oauth2 provider supports HTTP/2
+    enableHttp2: true
+    # client_id for client authentication
+    client_id: f7d42348-c647-4efb-a52d-4c5787421e72
+    # client secret for client authentication and it can be encrypted here.
+    client_secret: f6h1FTI8Q3-7UScPZDzfXA
+
+```
+
+Before calling the API, you need to create a POJO object for the SignRequest. The class constructor will load the above configuration parameter into the object. You need to provide to properties: 
+
+* expires - which is the number of seconds the token expires
+* payload - which is a map contains all the attributes you want to put as JWT claims
+
+Once you have the SignRequest object created, you can call the OauthHelper class with the following static method.
+
+```
+    public static Result<TokenResponse> getSignResult(SignRequest signRequest) {
+```
+
+If there is no error, then the response will be in the TokenResponse. 
 
 ### Examples
 
@@ -517,3 +557,5 @@ tls:
 [tutorial]: https://github.com/networknt/light-example-4j/tree/master/router
 [light-consumer-4j]: https://github.com/networknt/light-consumer-4j
 [light-saga-4j]: /style/light-saga-4j/
+[signing]: /service/oauth/service/signing/
+[client.yml]: https://github.com/networknt/light-4j/blob/master/client/src/main/resources/config/client.yml
