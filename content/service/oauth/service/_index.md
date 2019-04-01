@@ -23,6 +23,7 @@ This document only describes the features and processes of each service. Please 
 * [Authorization Code][] - Authenticate to OAuth 2.0 and get authorization code
 * [SPNEGO/Kerberos][] - Authenticate to OAuth 2.0 with SPNEGO/Kerberos
 * [Token Endpoint][] - Token endpoint of OAuth 2.0 provider
+* [Signing Endpoint][] - Securely exchange information between microservices
 * [Service Registration][] - Service registration endpoints
 * [Client Registration][] - Client registration endpoints
 * [User Management][] - User management endpoints
@@ -47,3 +48,4 @@ This document only describes the features and processes of each service. Please 
 [Refresh Token]: /service/oauth/service/fresh-token/
 [Provider Registration]: /service/oauth/service/provider/
 [SPNEGO/Kerberos]: /service/oauth/service/spnego/
+[Signing Endpoint]: /service/oauth/service/signing/
