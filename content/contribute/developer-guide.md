@@ -10,7 +10,7 @@ toc: false
 draft: false
 ---
 
-The light platform consists dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][], and we need your help to make Light even brighter. You do not need to be a Java guru to contribute to the projects.
+The light platform consists dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][], and we need your help to make Light even brighter. You do not need to be a Java/Kotlin/Javascript guru to contribute to the projects.
 
 ### Assumptions
 
@@ -20,7 +20,7 @@ This contribution guide takes a step-by-step approach in hopes of helping newcom
 * You are a fan of the light platform and enthusiastic about contributing to the projects
 
 {{% note "Additional Questions?" %}}
-If you are struggling at any point in this contribution guide, reach out to the community in [gitter](https://gitter.im/networknt/light-4j) or [reddit](https://www.reddit.com/r/lightapi/).
+If you are struggling at any point in this contribution guide, reach out to the community in [gitter](https://gitter.im/networknt/light-4j) or [reddit](https://www.reddit.com/r/lightapi/) or [Google Group](https://groups.google.com/forum/#!forum/light-4j).
 {{% /note %}}
 
 ### Install Java
@@ -60,7 +60,7 @@ If you are not familiar with this term, GitHub's [help pages](https://help.githu
 
 > A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.
 
-Open a GitHub and click on the "Fork" button in the top right.
+Open a GitHub repository and click on the "Fork" button in the top right.
 
 Now open your fork repository on GitHub and copy the remote url of your fork. You can choose between HTTPS and SSH as the protocol that Git should use for the following operations. HTTPS always works [if you are not sure](https://help.github.com/articles/which-remote-url-should-i-use/).
 
@@ -80,14 +80,14 @@ Or
 git clone git@github.com:networknt/light-4j.git
 ```
 
-### Contribute to develop
+### Contribute to master
 
-You should never develop against the "master" branch. The development team will not accept a pull request against that branch. Instead, create a descriptive named branch from develop branch and work on it. Alternatively, work directly on develop branch in your forked repository. 
+For each repository, the master branch is the main branch for contribution. The development team will not accept a pull request against other release branches. If you have permission to access networknt repositories, create a descriptive named branch from master branch and work on it. Alternatively, work directly on master branch in your forked repository. 
 
-First, you should always pull the latest changes from the develop branch:
+First, you should always pull the latest changes from the master branch:
 
 ```
-git checkout develop
+git checkout master
 git pull
 ```
 
@@ -107,7 +107,7 @@ While making changes in the codebase, it is a good idea to build the binary to t
 mvn clean package
 ```
 
-When you are working on the develop branch, chances are there are some dependencies are missing if you are not working on the light-4j project. Here is a [light-bot tutorial][] to help you to build all repositories in one shot. 
+When you are working on the master branch, chances are there are some dependencies are missing if you are not working on the light-4j project. Here is a [light-bot tutorial][] to help you to build all repositories in one shot. 
 
 
 ### Test Project
@@ -154,15 +154,15 @@ git commit --amend
 
 ### Push commits
 
-To push our commits to the fork on GitHub we need to specify a destination. A destination is defined by the remote and a branch name. Earlier, the defined that the remote url of our fork is the same as our GitHub handle, in my case `stevehu`. The branch should have the same as our local one. This makes it easy to identify corresponding branches.
+To push our commits to the fork on GitHub we need to specify a destination. A destination is defined by the remote and a branch name. When you fork to your personal account, the remote url of our fork is the same as our GitHub handle, in my case `stevehu`. The branch should have the same as our local one. This makes it easy to identify corresponding branches.
 
 ```
 git push --set-upstream <YOUR-GITHUB-USERNAME> <BRANCHNAME>
 ```
 
-Now Git knows the destination. Next time when you to push commits you just need to enter `git push`.
+Now Git knows the destination. Next time when you push commits you just need to enter `git push`.
 
-If you modified your commit history in the last step, GitHub will reject your try to push. This is a safety feature because the commit history is not the same and new commits cannot be appended as usual. You can enforce this push explicitly with `git push --force`.
+If you modified your commit history in the last step, GitHub will reject if you try to push. This is a safety feature because the commit history is not the same and new commits cannot be appended as usual. You can enforce this push explicitly with `git push --force`.
 
 ### Open a pull request
 
@@ -191,7 +191,9 @@ If you have questions, leave a comment on the pull request. We are willing to as
 
 ### Contribute to Documentation
 
-Perhaps you want to start contributing to the documents. If so, you can ignore most of the above steps and focus on the `light-doc` repository. 
+For core developers who have write permission to networknt repositories are required to update the documentation in the light-doc repository for the changes if necessary. For community contributors, it is optional, and we will help to update the document during the merging process. 
+
+Perhaps you only want to start contributing to the documents. If so, you can ignore most of the above steps and focus on the `light-doc` repository. 
 
 You can start Hugo's built-in server via `hugo server`. Browse the documentation by entering [http://localhost:1313](http://localhost:1313) in the address bar of your browser. The server automatically updates the page whenever you change content.
 

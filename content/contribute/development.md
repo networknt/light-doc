@@ -16,7 +16,7 @@ draft: false
 reviewed: true
 ---
 
-The light platform consists dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][rfcs], and we need your help to make Light even brighter. You do not need to be a Java guru to contribute to the projects.
+The light platform consists dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][rfcs], and we need your help to make Light even brighter. You do not need to be a Java/Kotlin/Javascript guru to contribute to the projects.
 
 ### Contribution Flow
 
@@ -28,15 +28,19 @@ The light platform consists dozens of open-source projects and lives by the work
 
 * Any functional change needs one or more test cases to ensure the quality of the code and help the reviewer to understand how the feature works. The reviewers will enforce this rule during the review. 
 
-* As version 1.5.x is used on production, all changes need to be backward compatible. The reviewers need to enforce this rule. For broken changes, please merge to JDK 11 branch which is the base for the 2.0.x release. 
+* Any new source file that is written by the contributor should have the license/copyright header copied from another file in the same repository. The contributor should also put his/her name as the author of the code. 
 
-* For all the repositories that are used on productions or used by a lot of projects, the master and develop branches are locked down. Only the organization admin and repository owner can merge the PR to the develop branch. The light-bot release pipeline will merge to the master branch during the release. 
+* If the entire file or parts of the file is copied from another open source repository, please put their license/copyright in the header of the file and leave the author intact. You can put your name as part of the author if you modify the source code. 
+
+* As version 1.5.x is used on production, all changes should be bug fixes and need to be backward compatible. The reviewers need to enforce this rule. For broken changes, please merge to master branch which is the base for the 1.6.x release. 
+
+* For all the repositories that are used on productions or used by a lot of projects, the master, jkd11 and 1.5.x branches are locked down. Only the organization admin and repository owner can merge the PR to these branches. 
 
 * For any substantial change, it needs to be reviewed by at least two reviewers. For low-risk changes, show stoppers and urgent defect fixes, the organization admin or repository owner can overwrite the rule to review and merge directly. In most of the cases, the person who opens the issue will be added to the reviewer list to ensure that the requirement is met.  
 
 * For corporate contributions, one or two team leads must review and approve a PR before the PR can be reviewed and approved by the community member. 
 
-* Every team is encouraged to submit integration test cases to light-bot [build-test-all](https://github.com/networknt/light-config-test/tree/master/light-bot/develop-build/build-test-all) to cover their application to ensure new changes won't break their applications.
+* Every team is encouraged to submit integration test cases to light-bot [build-test-all](https://github.com/networknt/light-config-test/tree/master/light-bot/develop-build) to cover their application to ensure new changes won't break their applications.
 
 * To avoid duplicate work, each developer should self-signed up to three issues to him/her to indicate that the issues are in progress. People shouldn't work on issues already signed to other people; however, you can politely ask the assignee to reassign an issue to you if you see there is no activity for the issue over a period of time. 
 
@@ -45,22 +49,10 @@ The light platform consists dozens of open-source projects and lives by the work
 * If you have a question about the contribution process, please visit [develop guide][] or ask in the [gitter](https://gitter.im/networknt/light-4j) room. 
 
 
-### Additional References for Learning Git
-
-* [Codecademy's Free "Learn Git" Course][codecademy] (Free)
-* [Code School and GitHub's "Try Git" Tutorial][trygit] (Free)
-* [The Git Book][gitbook] (Free)
-* [GitHub Pull Request Tutorial, Thinkful][thinkful]
-
-
-[codecademy]: https://www.codecademy.com/learn/learn-git
 [rfcs]: https://github.com/networknt/light-rfcs
 [docscontrib]: /contribute/documentation/
 [light-bot tutorial]: /tutorial/bot/local-develop/
 [light-bot]: /tool/light-bot/
-[gitbook]: https://git-scm.com/
-[thinkful]: https://www.thinkful.com/learn/github-pull-request-tutorial/
-[trygit]: https://try.github.io/levels/1/challenges/1
 [develop guide]: /contribute/developer-guide/
 [issues-defects]: /contribute/issues-defects/
 [new-features]: /contribute/new-features/
