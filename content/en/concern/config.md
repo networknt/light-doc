@@ -308,10 +308,22 @@ In early versions of light-4j (before 1.5.32), users needs to put all encrypted 
 1. it increases the difficulty in maintaining configuration files. People may forget to update or delete an encrypted configuration item when it's context changed.
 2. extra efforts are needed to compose or load configurations from multiple configuration files. The extra efforts can be large when integration with third party applications is involved.
 
-To address this issue, we enhanced the `config` module in release light-4j-1.6.0 and provide transparent access to encrypted values. With this enhancement, all values returned from `Config.getJson...()` methods are decrypted using the provided decryptor. Users can specify the decryptor in `config.yml` as shown below. The value of `decryptorClass` needs to be a concrete class that implements the interface `com.networknt.decrypt.Decryptor`. If `decryptorClass` is not configured, values are not decrypted (that is, same behavior as before). 
+To address this issue, we enhanced the `config` module in release light-4j-1.6.0 and provide transparent access to encrypted values. With this enhancement, all values returned from `Config.getJson...()` methods are decrypted using the provided decryptor. Users can specify the decryptor in `config.yml` as shown below. There are three types of decryptor to choose from AESDcryptor, AutoAESDcryptor, and ManualAESDecryptor. The value of `decryptorClass` needs to be a concrete class that implements the interface `com.networknt.decrypt.Decryptor`. If `decryptorClass` is not configured, values are not decrypted (that is, the same behavior as before). 
 
 ```
-decryptorClass: com.networknt.decrypt.AESDecryptor
+decryptorClass: 
+    com.networknt.decrypt.AESDecryptor
+ #  com.networknt.decrypt.ManualAESDecryptor
+ #  com.networknt.decrypt.AutoAESDecryptor
+```
+1. AESDecryptor: The decryptor with default password `light`. The user does not need to provide a password.  
+2. ManualAESDecryptor: The decryptor that gets the password from the terminal input. The user need to input the password in the console when the server starts. The following line will be displayed in the console:
+```
+Password for config decryption: 
+```
+3. AutoAESDecryptor: The decryptor that gets the password from the environment automatically. The user needs to set the password as an environment variable by using the key `light-4j-config-password` as shown below.
+```
+export light-4j-config-password=your_password
 ```
 
 [info]: /concern/info/
