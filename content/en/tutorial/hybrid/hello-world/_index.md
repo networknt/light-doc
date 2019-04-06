@@ -28,5 +28,3 @@ In this tutorial, we are going to generate a server instance that can be contain
 * [Deploy Service2](/tutorial/hybrid/hello-world/deploy-service2/)
 * [Hybrid Summary](/tutorial/hybrid/hello-world/hybrid-summary/)
 
-
-
