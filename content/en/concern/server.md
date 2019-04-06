@@ -147,6 +147,44 @@ maxPort: 2500
 # environment: test1
 
 ```
+To obtain flexible adaptations to the user's needs and extract max performance, parts of undertow server options also can be configured in server.yml since release 1.6.x. 
+
+Here is an example that can be appended to the above configuration file.
+```
+ # Buffer size of undertow server. 
+ bufferSize: 10000
+ 
+ # Number of IO thread 
+ ioThreads: 1
+ 
+ # Number of worker thread
+ workerThreads: 100
+ 
+ # Backlog size
+ backlog: 10000
+ 
+ # Flag to set UndertowOptions.ALWAYS_SET_DATE
+ alwaysSetDate: false
+ 
+ # Server string used to mark the server
+ serverString: TEST 
+```
+The configuration of server options works follows the rules:
+1. All server options will be set to default values when users do not provide server options.
+
+2. When the server options are provided by the user but these values are invalid, the default values are used and a warning is added in the log.
+
+    Invalid situations are as follows:
+
+    * ioThreads <= 0
+    * workerThreads <= 0
+    * bufferSize <= 0
+    * logback <= 0
+    * serverString == null || serverString.equals("")
+
+3. Using the values provided by the user when the server options are provided and these server options are valid
+
+Please note that improper settings of server options can have a significant impact on overall performance. Be careful to configure these values.
 
 ### Config Server
 
