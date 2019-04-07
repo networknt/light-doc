@@ -71,4 +71,8 @@ light-proxy
 
 https://github.com/networknt/light-proxy/commit/05d50403569e3b71ee7ee624344d23122a610972
 
+light-consumer-4j
+
+https://github.com/networknt/light-consumer-4j/commit/1498a9a56b1e9bbc6872b1fdb16b09a00a766a4b
+
 
