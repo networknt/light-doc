@@ -15,6 +15,8 @@ The light-hybrid-4j is a framework built on top of the light-4j for modularized 
 
 In this tutorial, we are going to generate a server instance that can be containerized. And then generate two services to deploy with the server instance. 
 
+{{< youtube -vlpRFhd6f8 >}}
+
 * [Prepare Workspace](/tutorial/hybrid/hello-world/workspace/)
 * [Build light-codegen](/tutorial/hybrid/hello-world/build-codegen/)
 * [Generate Server](/tutorial/hybrid/hello-world/generate-server/)
