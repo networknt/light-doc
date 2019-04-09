@@ -36,7 +36,7 @@ rpc-router is a middleware handler that implement light-4j [handler interface][]
 
 rpc-security is responsible for JWT token verification from Authorization header.  
 
-
+- [Getting Started](/getting-started/light-hybrid-4j/)
 - [JSON Protocol](/style/light-hybrid-4j/json-rpc/)
   * [Schema Definition](/style/light-hybrid-4j/json-schema/)
   * [Code Generator](/tutorial/generator/)
