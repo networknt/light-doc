@@ -21,4 +21,5 @@ The config file defines the parameters for execution and specifies repositories 
 - [Merge Branch](/tool/light-bot/task/merge-branch/)
 - [Release Docker](/tool/light-bot/task/release-docker/)
 - [Release Maven](/tool/light-bot/task/release-maven/)
+- [Release Snapshot](/tool/light-bot/task/release-snapshot/)
 - [Version Upgrade](/tool/light-bot/task/version-upgrade/)
