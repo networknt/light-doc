@@ -37,13 +37,26 @@ rpc-router is a middleware handler that implement light-4j [handler interface][]
 rpc-security is responsible for JWT token verification from Authorization header.  
 
 - [Getting Started](/getting-started/light-hybrid-4j/)
-- [Merge Multiple Services](/tutorial/hybrid/)
+- [Merge Multiple Services](/tutorial/hybrid/merge-services/)
 - [JSON Protocol](/style/light-hybrid-4j/json-rpc/)
   * [Schema Definition](/style/light-hybrid-4j/json-schema/)
   * [Code Generator](/tutorial/generator/)
   * [Start Server](/style/light-hybrid-4j/start-server/)
   * [Test Service](/style/light-hybrid-4j/test-service/)
   * [Tutorial](/tutorial/hybrid/)
+	  + [Merge two services with one server](/tutorial/hybrid/merge-services/)
+	  + [Hello World Hybrid Server and Services](/tutorial/hybrid/hello-world/)
+	  + [Eventuate Todo-list Hybrid Implementation](/tutorial/hybrid/todo-list/)
+	  + [Portal Hybrid Service initialization](/tutorial/hybrid/hybrid-service-initial/)
+	  + [Portal Hybrid Query with Light Codegen Web](/tutorial/hybrid/codegen-web-portal/)
+	  + [Portal Hybrid Query with API Certification](/tutorial/hybrid/certification-portal/)
+	  + [Portal Hybrid Command with Host Menu](/tutorial/hybrid/host-menu-command-portal/)
+	  + [Portal Hybrid Query with Host Menu](/tutorial/hybrid/host-menu-query-portal/)
+	  + [Portal Hybrid Command with Schema Form](/tutorial/hybrid/schema-form-command-portal/)
+	  + [Portal Hybrid Query with Schema Form](/tutorial/hybrid/schema-form-query-portal/)
+	  + [Portal Hybrid Service with User Management](/tutorial/hybrid/user-management-portal/)
+	  + [Taiji Blockchain Web Client Server SPA with handler.yml](/tutorial/hybrid/web-client-spa/)
+
 - [Binary Protocol](/style/light-hybrid-4j/binary-rpc/)
 
 [handler interface]: /concern/handler/

@@ -18,6 +18,7 @@ Almost all out own services are built on top of light-hybrid-4j with JSON RPC. T
 are some examples.  
 
 
+- [Merge two services with one server](/tutorial/hybrid/merge-services/)
 - [Hello World Hybrid Server and Services](/tutorial/hybrid/hello-world/)
 - [Eventuate Todo-list Hybrid Implementation](/tutorial/hybrid/todo-list/)
 - [Portal Hybrid Service initialization](/tutorial/hybrid/hybrid-service-initial/)
