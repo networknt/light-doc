@@ -168,6 +168,9 @@ Here is an example that can be appended to the above configuration file.
  
  # Server string used to mark the server
  serverString: TEST 
+ 
+ # Flag to set UndertowOptions.ALLOW_UNESCAPED_CHARACTERS_IN_URL
+ allowUnescapedCharactersInUrl: true
 ```
 The configuration of server options works follows the rules:
 1. All server options will be set to default values when users do not provide server options.
