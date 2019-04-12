@@ -48,6 +48,7 @@ To build the project, just run "./gradlew build" in the root folder of [light-bo
   * [Merge Branch](/tool/light-bot/task/merge-branch/)
   * [Release Docker](/tool/light-bot/task/release-docker/)
   * [Release Maven](/tool/light-bot/task/release-maven/)
+  * [Release Snapshot](/tool/light-bot/task/release-snapshot/)
   * [Version Upgrade](/tool/light-bot/task/version-upgrade/)
 - [Email](/tool/light-bot/email/)
 
