@@ -28,5 +28,6 @@ In this tutorial, we are going to generate a server instance that can be contain
 * [Generate Service2](/tutorial/hybrid/hello-world/generate-service2/)
 * [Test Service2](/tutorial/hybrid/hello-world/test-service2/)
 * [Deploy Service2](/tutorial/hybrid/hello-world/deploy-service2/)
+* [Registry Service](/tutorial/hybrid/hello-world/register-service/)
 * [Hybrid Summary](/tutorial/hybrid/hello-world/hybrid-summary/)
 
