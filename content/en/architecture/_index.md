@@ -12,24 +12,22 @@ weight: 1
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-light-4j is aiming microservices and it has to be high throughput, low latency, light-weight and
-address a lot of cross-cutting concerns at the same time. It is based on Undertow Core Http server
-and depending on minimum third party libraries.
+The light-4j is aiming microservices, and it has to be high throughput, low latency, light-weight and address a lot of cross-cutting concerns at the same time. It is based on Undertow Core Http server and depending on minimum third-party libraries.
 
-The topics here are architectural considerations. In a nutshell, architecture is a type of design
-where the focus is quality attributes and wide(er) scope whereas design focuses on functional
-requirements and more localized concerns. There is another [design][] section for detail oriented 
-decisions.
+The topics here are architectural considerations. In a nutshell, architecture is a type of design where the focus is quality attributes and wide(er) scope whereas design focuses on functional requirements and more localized concerns. There is another [design][] section for detail-oriented decisions.
 
-Here is a list of architecture decisions for the framework:
+Here is a list of architecture decisions for the platform:
 
 * Designed for [microservices][] that can be dockerized and deployed within containers.
 
 * Base on pure HTTP without JavaEE as it has too many problems and is [declining][].
  
-* [Security][] first design with OAuth2 integration and distributed verification with embedded distributed gateway.
+* [Security][] first design with OAuth2 integration and distributed verification with the embedded distributed gateway.
+
+* The platform handles the [coarse-grained authorization with scopes and fine-grained authorization with custom claims][]. 
 
 * How to handler distributed [transaction][] in microservices.
 
@@ -37,13 +35,13 @@ Here is a list of architecture decisions for the framework:
 
 * Can be [integrated][] with existing application to protect investment over the years for your organization.
 
-* Support client side discovery without any [gateway][], proxy between service to service calls as they add too much overhead. 
+* Support client-side discovery without any [gateway][] and proxy between service to service calls as they add too much overhead. 
 
 * Service logs will be aggregated with ElasticSearch, LogStash and Kibana with [monitoring and alerting][].
 
 * Built-in [CorrelationId and TraceabilityId][] to trace service to service calls in aggregated logs.
 
-* Designed for [scalability][] so that you can have thousands instances running at the same time. 
+* Designed for [scalability][] so that you can have thousands of instances running at the same time. 
  
 * Has its own dependency injection framework so that developers can avoid heavy Spring or Guice as they are [bloated][]. 
 
@@ -71,3 +69,4 @@ Here is a list of architecture decisions for the framework:
 [category]: /architecture/category/
 [service mesh]: /architecture/service-mesh/
 [Firewall is killed by Cloud]: /architecture/firewall/
+[coarse-grained authorization with scopes and fine-grained authorization with custom claims]: /architecture/cga-fga/
