@@ -74,6 +74,12 @@ Here is an example of config.json for openapi generator.
   		"handerl.yml",
   		"values.yml"
   	]
+  },
+  "specGeneration": {
+  	"modelPackages": "com.networknt.petstore.model",
+  	"mergeTo": "/tmp/codegen/openapi.json",
+  	"outputFormat": "yaml, json",
+  	"outputFilename": "openapi_gen_test"
   }
 }
 ```
@@ -154,6 +160,11 @@ Here is an example of config.json for openapi generator.
     - generateEnvVars.skipArray: boolean whether Arrays in the config files should be re-written or not. This is considered `false` if not set.
     - generateEnvVars.skipMap: boolean whether Maps in the config files should be re-written or not. This is considered `false` if not set.
     - generateEnvVars.exclude: Array a list of files that should not be re-written
+- specGeneration specifies information required for generating openapi specifications from source code.
+    - modelPackages: string the codegen tool can only generate specfication for models now. This config item specifies the package names of models in the class path. Mutliple package names are delimited by comma.
+    - mergeTo: string If there is an existing openapi specification and users wants to merge the generated model sepcifications to it, this config item can be used to specify the location of the existing specification.
+    - outputFormat: string Specifies the expected output format of the specification. Value can be `yaml`, `json`, or `both`
+    - outputFilename: string the name of the generated openapi file. If not specified, the output file name is default to `openapi_generated`.
 
 In most of the cases, developers will only update handlers, handler tests and models in a generated project. Of course, you might need a different database for your project, and we have a [database tutorial] that can help you to further config Oracle and Postgres.   
 
@@ -247,6 +258,16 @@ rm -rf /tmp/openapi-petstore
 cd ~/networknt
 java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o /tmp/openapi-petstore -m model-config/rest/openapi/petstore/1.0.0/openapi.json -c model-config/rest/openapi/petstore/1.0.0/config.json
 
+```
+
+* Generate openapi specifications from source code (supports for code-first development)
+
+To support code-first development, we provide the openapi specification generator to generate specifications from code. The command below demonstrates the usage of the specifcation generator.
+Please note that the configuration item `specGeneration` is required to generate specifications. For details of this congiration item, please see [Config](#config).
+
+```
+cd ~/networknt/light-codegen/code-cli/target
+java -cp .:./codegen-cli.jar:/path/to/project/target/classes com.networknt.codegen.Cli -f openapi-spec -o /path/to/config/config.json
 ```
 
 #### Docker Command Line
