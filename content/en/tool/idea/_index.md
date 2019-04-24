@@ -4,7 +4,11 @@ date: 2018-12-02T22:31:26-05:00
 description: ""
 categories: []
 keywords: []
-slug: ""
+menu:
+  docs:
+    parent: "tool"
+    weight: 85
+weight: 85	#rem
 aliases: []
 toc: false
 draft: false
@@ -18,4 +22,4 @@ While using the IDE, we found some tricks that might help other users.
 
 * [Add jars to the classpath](/tool/idea/classpath/)
 * [IntelliJ IDEA settings](/tool/idea/settings/)
-
+* [Error Prone Plugin](/tool/idea/errorprone-plugin/)
