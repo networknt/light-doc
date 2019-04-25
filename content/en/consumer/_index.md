@@ -47,6 +47,8 @@ The following contains architecture, design and best practices.
   * [Traceability](/consumer/traceability/)
      + [Traceability Id](/consumer/traceability-id/)
      + [Correlation Id](/consumer/correlation-id/)
+  * [Circuit Breaker](/consumer/circuit-breaker/)
+  * [CompletableFuture](/consumer/completable-future/)
 - [light-consumer-4j](/consumer/light-consumer-4j/)
 - [Service Discovery](/consumer/service-discovery/)
   * [Registry](/consumer/registry/)
