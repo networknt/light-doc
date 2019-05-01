@@ -1,71 +1,62 @@
 ---
-title: "Consumidor de serviço"
-date: 2019-04-27T13:37:28-03:00
-description: ""
-categories: []
-keywords: []
-menu:
-  docs:
-    parent: "consumer"
-    weight: 1
-weight: 1
-aliases: []
-toc: false
-draft: false
+title: "A High Throughput, Low Latency and Small Memory Footprint API Platform"
+date: 2017-03-02T12:00:00-05:00
+features:
+  - heading: Blistering Speed and Small Memory Footprint
+    image_path: /images/icon-fast.svg
+    tagline: Save 10x to 100x on production provision costs
+    copy: You need hundreds of instances of Spring Boot with Tomcat embedded to match one instance of light-4j in "Hello World" for the same throughput and latency.
+
+  - heading: Embedded Gateway to Address all Cross-cutting Concerns
+    image_path: /images/icon-content-management.svg
+    tagline: Maximize developers productivity by focusing on business logic only
+    copy: Plugin architecture that allows middleware handlers to be injected into the request/response chain to handler security, metrics, audit etc.
+
+  - heading: Design and Test Driven Development
+    image_path: /images/icon-shortcodes.svg
+    tagline: OpenAPI specification, Unit, Integration, End-to-End and Client Tests
+    copy: Generate code from specification and encourage unit tests, integration tests, end-to-end test as well as client tests to ensure quality and interoperability.
+
+  - heading: Built-in DevOps Tool Chain for CI/CD
+    image_path: /images/icon-built-in-templates.svg
+    tagline: Light-bot pipeline, Ansible playbook, Docker and Kubernetes
+    copy: The entire tool chain (pipeline) and infrastructure (logging, metrics, messaging, security etc.) are integrated together for microservices and services are dockerized and orchestrated by Kubernetes.
+
+  - heading: Multi-Style Support for Different Products
+    image_path: /images/icon-multilingual2.svg
+    tagline: Both synchronous request/response and asynchronous event driven frameworks
+    copy: Support Restful(light-rest-4j), Graphql(light-graphql-4j), Hybrid(light-hybrid-4j) and Eventuate Consistency(light-eventuate-4j). Also Saga(light-saga-4j) for transaction orchestration between services.
+
+  - heading: OAuth2, Portal and Services to Form an Ecosystem
+    image_path: /images/icon-custom-outputs.svg
+    tagline: Provide a platform for on-premise solutions as well as hosted solutions
+    copy: light-oauth2 for security and light-portal is for service runtime monitoring and management and API marketplace. Kafka for messaging, ELK for logging, InfluxDB and Grafana for metrics and ArangoDB for DB.
+sections:
+  - heading: "Cross-Cutting Concerns"
+    cta: Check out light-4j middleware handlers.
+    link: /concern/
+    color_classes: bg-primary-color-light black
+    image: /images/home-page-templating-example.png
+    copy: "Light-4j and related frameworks provide dozens of middleware handlers that can be injected into the request/response chain to give your service an embedded gateway." 
+  - heading: "Interaction Styles"
+    cta: Use the right framework for the right product.
+    link: /architecture/category/
+    color_classes: bg-primary-color-light black
+    image: /images/home-page-templating-example.png
+    copy: "Restful for public API, Graphql for mobile and Sing Page Application, Hybrid for serverless and take advantage of both Monolithic and Microservices architecture. Eventuate for event driven."
+  - heading: "Infrastructure Services"
+    cta: OAuth2, Portal and other infrastructure services.
+    link: /service/
+    color_classes: bg-primary-color-light black
+    image: /images/home-page-templating-example.png
+    copy: "OAuth2 provider is responsible for centralize policy management and services are responsible for policy enforcement. Portal is API management and marketplace. Others are third party services."
+  - heading: "Tool Chains"
+    cta: Tool chain for code generation, devops and CI/CD.
+    link: /tool/
+    color_classes: bg-primary-color-light black
+    image: /images/home-page-templating-example.png
+    copy: "Light-codegen is used for scaffolding project from OpenAPI spec, GraphQL IDL or Hybrid Schema. Light-bot Pipeline for building, packaging, releasing and dockerizing. Kubernetes is for service orchestration."
+
 ---
 
-Maioria dessas seções neste site são como construir, implantar e gerenciar serviços.
-Esta seção discutirá arquitetura de microserviços e melhores práticas da perspectiva do consumidor.
-
-Ao contrário de monolitos web services JavaEE com somente um cliente e um servidor, há muitos microserviços
-envolvidos em uma requisição externa e é muito importante a latência geral na eficiência na comunicação cliente e servidor.
-
-A definição de cliente vs servidor ou consumidor vs provedor é ofuscada como um serviço que pode ser o servidor para um outro serviço 
-e ao mesmo tempo isto pode ser um cliente para outro serviço.
-
-O menu abaixo contém arquitetura, design e melhores práticas: 
-
-- [Client Module](/consumer/client-module/)
-  * [Which Jar Files](/consumer/jar-files/)
-  * [TLS Connection](/consumer/tls-connection/)
-  * [HTTP 2.0](/consumer/http2/)
-  * [Security](/architecture/security/)
-     + [Subject Token](/consumer/subject-token/)
-     + [Access Token](/consumer/access-token/)
-     + [Customized Grant Type](/consumer/customized-grant/)
-     + [Get Token in Startup](/consumer/token-startup/)
-     + [Long Lived Token](/consumer/long-lived-token/)
-     + [Key Distribution](/architecture/key-distribution/)
-     + [Secret Encryption](/consumer/secret-encryption/)
-     + [SPA Stateful](/consumer/spa-session-jwt/)
-     + [SPA Stateless](/consumer/spa-cookie-jwt/)
-     + [SPA CSRF Prevention](/consumer/spa-csrf/)
-     + [SPA XSS Prevention](/consumer/spa-xss/)
-     + [SPA BFF](/consumer/spa-bff/)
-  * [Traceability](/consumer/traceability/)
-     + [Traceability Id](/consumer/traceability-id/)
-     + [Correlation Id](/consumer/correlation-id/)
-  * [Circuit Breaker](/consumer/circuit-breaker/)
-  * [CompletableFuture](/consumer/completable-future/)
-- [light-consumer-4j](/consumer/light-consumer-4j/)
-- [Service Discovery](/consumer/service-discovery/)
-  * [Registry](/consumer/registry/)
-     + [Standalone](/consumer/standalone-registry/)
-     + [Docker](/consumer/docker-registry/)
-     + [Kubernetes](/consumer/kubernetes-registry/)
-  * [Discovery](/consumer/discovery/)
-     + [Consul](/consumer/consul-discovery/)
-     + [Zookeeper](/consumer/zookeeper-discovery/)
-  * [SPA and Mobile](/consumer/spa-mobile/)   
-- [Load Balance](/consumer/load-balance/)
-  * [Round Robin](/consumer/round-robin/)
-  * [Local First](/consumer/local-first/)
-  * [Consistent Hash](/consumer/consistent-hash/)
-- [Light Router](/consumer/light-router/)
-  * [Use Cases](/consumer/router-use-case/)
-  * [Location and Ownership](/service/router/location-ownership/)
-- [Single Page Application](/consumer/spa/)
-  * [React](/consumer/react/)
-  * [React-schema-form](/consumer/react-schema-form/)
-  * [Vue](/consumer/vue/)
-  * [Angular](/consumer/angular/)
+Light means light-weight, lighting fast and shed light on how to program with modern Java SE.
