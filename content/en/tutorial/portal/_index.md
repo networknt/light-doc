@@ -23,6 +23,7 @@ Most services for portal can be found in the [light-portal][] repository on gith
 
 * [light-bot portal build][] - Build portal services with light-bot
 * [start portal service][] - Start both command side and query side portal services
+* [start local light-router][] - Start light-router instance for service discovery and UI.
 
 ### Command Services:
 
@@ -45,3 +46,4 @@ Most services for portal can be found in the [light-portal][] repository on gith
 [view]: https://github.com/networknt/light-portal/tree/master/view
 [light-config-test]: https://github.com/networknt/light-config-test/tree/master/light-router/light-portal/lightapi
 [portal view]: /tutorial/portal/view/
+[start local light-router]: /tutorial/portal/local-router/
