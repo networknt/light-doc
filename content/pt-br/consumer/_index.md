@@ -63,7 +63,7 @@ O menu abaixo contém arquitetura, design e melhores práticas:
   * [Consistent Hash](/consumer/consistent-hash/)
 - [Light Router](/consumer/light-router/)
   * [Casos de uso](/consumer/router-use-case/)
-  * [localização e propriedade](/service/router/location-ownership/)
+  * [Localização e propriedade](/service/router/location-ownership/)
 - [Single Page Application](/consumer/spa/)
   * [React](/consumer/react/)
   * [React-schema-form](/consumer/react-schema-form/)
