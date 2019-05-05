@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Circuit breaker can be used through Http2Client::getRequestService method, it uses a request wrapped by java.util.concurrent.CompletableFuture producer, in other words, whenever execute CircuitBreaker::call, it create a new request and execute it.
+The circuit breaker can be used through Http2Client::getRequestService method, it uses a request wrapped by java.util.concurrent.CompletableFuture producer, in other words, whenever to execute CircuitBreaker::call, it creates a new request and executes it.
 
 There is a specifc configuration on client.yml, e.g.:
 
@@ -21,8 +22,9 @@ request:
   resetTimeout: 600000
 ```
 
-* errorThreshold: amount of timeout errors before change state for open (default value: 5).
-* timeout: amount of time in milliseconds for wait for response of a request (default value: 3000).
-* resetTimeout: amount of time in milliseconds for keep state open before change for half open (default value: 600000).
+* errorThreshold: the number of timeout errors before change state for open (default value: 5).
+* timeout: the amount of time in milliseconds for wait for the response of a request (default value: 3000).
+* resetTimeout: the amount of time in milliseconds to keep state open before the change for half open (default value: 600000).
 
-whether is not provided a value for any parameter, is adoted default value.
+Whether it is not provided a value for any parameter, is adopted default value.
+
