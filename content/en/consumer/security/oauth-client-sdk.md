@@ -14,7 +14,7 @@ These days, most API endpoints are protected by OAuth 2.0 standard either throug
 
 In a microservices architecture, there are lots of service to service communications. The traditional Monolithic API Gateway won't work in this case as it becomes the single point of failure and bottleneck. 
 
-In most microservices platform, JWT is used instead of simple web token which has to go to the OAuth 2.0 provider for introspection. 
+In most microservices platforms, JWT is used instead of simple web token which has to go to the OAuth 2.0 provider for introspection. 
 
 We have received a lot of questions from our users regarding which is the best OAuth 2.0 client SDK in Java, Node.js or .NET. Here we are going to answer the questions based on our best knowledge. 
 
@@ -51,6 +51,8 @@ For most API frameworks, they have a client module that is responsible for the c
 
 ### Java
 
+Light-4j has a client module that includes an OAuth 2.0 client SDK with a lot of extra features; however, it needs Java 8 and above. If you are still using an older Java version, then the following open source projects might be an option. 
+
 Most Java-based OAuth 2.0 client with hundreds of stars are not updated or not released for the last two or more years. For example
 
 googleapis/google-oauth-java-client
@@ -61,11 +63,9 @@ dynamind/spring-boot-security-oauth2-minimal
 Although updating from the author, mttkay/signpost only supports OAuth 1.0 with 556 stars. 
 
 
-The most promising standalone library for Andriod is https://github.com/openid/AppAuth-Android with 831 stars, and it was last updated 10 months ago. It is highly recommended for Andriod applications to communicate with backend services projected with OAuth 2.0. 
+The most promising standalone library for Andriod is https://github.com/openid/AppAuth-Android with 831 stars, and it was last updated 10 months ago. It is highly recommended for Andriod applications to communicate with backend services protected with OAuth 2.0. 
 
-Other client libraries like are mostly integrated with the OAuth 2.0 providers, and they are tightly coupled with the server side implementation like the oxAuth at https://github.com/GluuFederation/oxAuth.  It is an OAuth 2.0 provider with a built-in client. Since OAuth 2.0 specification is a standard, we can be sure that the client can work with other OAuth 2.0 providers. Please be aware that most OAuth 2.0 providers will have some extra features and extensions and you might need to customize the client library to leverage these features. The project has 176 stars, 20 releases, and recent updates. 
-
-Another type of OAuth 2.0 client is part of the API platform. These clients are generic and configurable to support multiple OAuth 2.0 providers. One of the examples is light-4j Http2Client. https://github.com/networknt/light-4j/tree/master/client. The platform has 2259 stars, 80 releases, and recent updates.
+Other client libraries are mostly integrated with the OAuth 2.0 providers, and they are tightly coupled with the server side implementation like the oxAuth at https://github.com/GluuFederation/oxAuth.  It is an OAuth 2.0 provider with a built-in client. Since OAuth 2.0 specification is a standard, we can be sure that the client can work with other OAuth 2.0 providers. Please be aware that most OAuth 2.0 providers will have some extra features and extensions and you might need to customize the client library to leverage these features. The project has 176 stars, 20 releases, and recent updates. 
 
 Depending on our use case, the best solution might be just pick up one of the above and customize it for our needs. 
 
