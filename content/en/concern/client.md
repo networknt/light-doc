@@ -445,6 +445,15 @@ tls:
   keyStore: ssl/client.keystore
   ...
 ```
+Otherwise, if all config files flattened into one folder. The configuration could be simplified as:
+```yaml
+tls:
+  ...
+  trustStore: client.truststore
+  ...
+  keyStore: client.keystore
+  ...
+```
 
 And here is an example of secret.yaml with client secrets.
 
