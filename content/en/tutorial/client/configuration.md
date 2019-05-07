@@ -42,6 +42,16 @@ tls:
   # key store location
   keyStore: tls/client.keystore
 ```
+It should be noticed that the values of `keystore` and `truststore` represent the paths of them. They should be relative to the external config directory. It means that the absolute path of above truststore and keystore should be `config/tls/client.truststore` and `config/tls/client.keystore` representively.
+ Otherwise, if all config files flattened into one folder. The configuration could be simplified as:
+ ```yaml
+ tls:
+    ...
+    trustStore: client.truststore
+    ...
+    keyStore: client.keystore
+    ...
+ ```
 
 ### oauth
 The `oauth` configuration will specify all the endpoints and parameters required to communicate with a service protected by oauth2.
