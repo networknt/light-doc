@@ -69,7 +69,7 @@ Other client libraries are mostly integrated with the OAuth 2.0 providers, and t
 
 Depending on our use case, the best solution might be just pick up one of the above and customize it for our needs. 
 
-### DotNet
+### .NET
 
 https://github.com/titarenko/OAuth2
 
