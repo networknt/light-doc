@@ -10,9 +10,9 @@ categories: [about,fundamentals]
 menu:
   docs:
     parent: "about"
-    weight: 30
-weight: 30
-sections_weight: 30
+    weight: 4
+weight: 4
+sections_weight: 4
 draft: false
 aliases: []
 toc: false
