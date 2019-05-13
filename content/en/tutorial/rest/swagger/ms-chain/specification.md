@@ -37,7 +37,7 @@ API A -> API B -> API C -> API D
 ```
 
 Here is the API A swagger.yaml and others can be found at [model-config][] or 
-model-config/rest/swagger folder in your workspace. 
+model-config/rest/swagger folder in your workspace.
 
 ```
 swagger: '2.0'
@@ -92,7 +92,7 @@ securityDefinitions:
       api_a.r: read access
 ```
 
-As defined in the specification, API A will return a list of stings and it requires
+As defined in the specification, API A will return a list of strings and it requires
 scope api_a.r or scope api_a.w to access the endpoint /data.
 
 The next step, we will build the generator and generate the projects based on the specs.

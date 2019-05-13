@@ -34,38 +34,41 @@ like light-4j and related light*4j frameworks.
 
 
 This tutorial shows you how to build 4 services chained together one by one. And it will
-be the foundation for our microserives benchmarks.
+be the foundation for our microservices benchmarks.
 
 API A -> API B -> API C -> API D
 
 It is a very long tutorial as we want to package as much info as possible. So we have
-separated the it into the following steps. 
+separated it into the following steps. 
 
-* [Environment preparation][]
 
-* [Create specification][]
+#### If you would like to gain a general understanding of how this application will work visit our **[Quick Start][]** to read a step-by-step of how our pre-built Microservices Chain example works.
 
-* [Generate and Build][]
 
-* [Http Chain][]
+1. [Environment preparation][]
 
-* [Performance with Http][]
+2. [Create specification][]
 
-* [Https Chain][]
+3. [Generate and Build][]
 
-* [Performance with Https][]
+4. [Http Chain][]
 
-* [Security][]
+5. [Performance with Http][]
 
-* [Metrics][]
+6. [Https Chain][]
 
-* [Docker compose][]
+7. [Performance with Https][]
 
-* [Docker compose performance][]
+8. [Security][]
 
-* [Kubernetes][]
+9. [Metrics][]
 
-* [Conclusion][]
+10. [Docker compose][]
+
+11. [Docker compose performance][]
+
+12. [Kubernetes][]
+
 
 [Environment preparation]: /tutorial/rest/swagger/ms-chain/preparation/
 [Create specification]: /tutorial/rest/swagger/ms-chain/specification/
@@ -79,4 +82,4 @@ separated the it into the following steps.
 [Docker compose]: /tutorial/rest/swagger/ms-chain/compose/
 [Docker compose performance]: /tutorial/rest/swagger/ms-chain/composeperf/
 [Kubernetes]: /tutorial/rest/swagger/ms-chain/kubernetes/
-[Conclusion]: /tutorial/rest/swagger/ms-chain/conclusion/
+[Quick Start]: /tutorial/rest/swagger/ms-chain/quickstart
