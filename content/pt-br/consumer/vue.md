@@ -10,6 +10,6 @@ toc: false
 draft: false
 ---
 
-Vue is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with modern tooling and supporting libraries.
+O Vue é uma estrutura progressiva para construir interfaces com o usuário. Ao contrário de outros frameworks monolíticos, o Vue é projetado desde o início para ser incrementalmente adotável. A biblioteca central é focada apenas na camada de visualização e é fácil de ser coletada e integrada a outras bibliotecas ou projetos existentes. Por outro lado, o Vue também é perfeitamente capaz de fornecer SPAs sofisticados quando usado em combinação com ferramentas modernas e bibliotecas de suporte.
 
-The following is a list of open source projects that use Vue as UI. 
+A seguir, uma lista de projetos de software livre que usam o Vue como interface do usuário.

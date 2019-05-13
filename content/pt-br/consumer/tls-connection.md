@@ -10,13 +10,13 @@ toc: false
 draft: false
 ---
 
-The light platform supports One-Way SSL by default in the [light-codegen][] and Two-Way SSL by updating server.yml to enable. Unless you are using some old tools that don't support HTTPS, it is recommended to use at least One-Way SSL even in the development phase, so you don't have any surprise when releasing to an official test environment. 
+A plataforma light suporta SSL de uma via por padrão no [light-codegen] [] e SSL de duas vias atualizando server.yml para ativar. A menos que você esteja usando algumas ferramentas antigas que não suportam HTTPS, recomenda-se usar pelo menos SSL unidirecional, mesmo na fase de desenvolvimento, para que você não tenha nenhuma surpresa ao liberar para um ambiente de teste oficial.
 
-### TLS certificates
+### certificados TLS
 
-There are four keystore files can be generated from light-codegen depending on the config.json in the model-config repository.
+Existem quatro arquivos keystore que podem ser gerados a partir do light-codegen, dependendo do config.json no repositório model-config.
 
-Here is an example of config.json for light-codegen. 
+Aqui está um exemplo de config.json para light-codegen.
 
 ```
 {
@@ -41,32 +41,31 @@ Here is an example of config.json for light-codegen.
 }
 
 ```
+Por padrão, o código gerado terá server.keystore e server.truststore na pasta de configuração. Mas se supportClient for true em config.json, o client.keystore e o client.truststore também serão gerados.
 
-By default, the generated code will have server.keystore and server.truststore in the config folder. But if supportClient is true in config.json, then client.keystore and client.truststore will be generated as well. 
+Para obter informações sobre arquivos de armazenamento de chaves, consulte [armazenamento confiável de keystore][].
 
-For information about keystore files, please refer to [keystore truststore][]. 
+Os keystores e truststores gerados contêm certificados auto-assinados expiram no ano de 2023 e devem ser usados apenas para desenvolvimento. Depois de passar para um ambiente de teste oficial, eles precisam ser substituídos por outros certificados auto-assinados ou certificados assinados pela CA.
 
-The generated keystores and truststores contains self-signed certificates expire in the year 2023, and these should be used for development only. Once move to an official test environment, they need to be replaced with other self-signed certificates or CA-signed certificates.  
+Por favor consulte o [certificado assinado por si mesmo vs assinado pela CA] [] para obter detalhes sobre quando usar o certificado autoassinado ou assinado pela CA.
 
-Please refer to [self-signed vs. CA-signed certificate][] for details on when to use self-signed or CA-signed certificate. 
+### Habilitar TLS direcional ou bidirecional
 
-### Enable One-Way or Two-Way TLS
+Por favor consulte [server config][] para mais detalhes.
 
-Please refer to the [server config][] for more details.
+### Download certificado do servidor
 
-### Download certificate from the server
+Ao se conectar a um servidor com HTTPS, você deve solicitar o certificado de cliente do administrador do servidor. Se você não puder obter o certificado do administrador do servidor, poderá baixá-lo do servidor com o openssl.
 
-While connecting to a server with HTTPS, you should ask for the client certificate from the server admin. If you cannot get the certificate from the server admin, you can download it from the server with openssl.
+Por favor, consulte o tutorial [public https][] para mais detalhes.
 
-Please refer to the [public https][] tutorial for more details. 
+### Conexão de TLS modo Debug 
 
-### Debug TLS connection
+Ao fazer conexão TLS com o servidor, você precisa adicionar certificados ao client.truststore na maioria dos casos. Para a maioria dos desenvolvedores, pode ser um desafio fazer tudo certo na primeira vez. Se a conexão não for estabelecida com o servidor, é provável que você tenha o client.truststore sem o certificado do cliente. Para descobrir se o problema de conexão é devido ao certificado, você pode habilitar a depuração do tls em seu IDE.
 
-When make TLS connection to the server, you need to add certificates into client.truststore most of the cases. For most developers, it might be a challenge to get it done right in the first place. If you connection is not established to the server, chances are that you have the client.truststore missing the client certifiate. To figure out if the connection issue is due to the certificate, you can enable the tls debug in your IDE. 
+Aqui está um artigo que contém todos os detalhes em [Debugging SSL / TLS Connections][].
 
-Here is an article that contains all the details on [Debugging SSL/TLS Connections][].
-
-Baiscally, you need to put the following JVM option when starting your server in IDE. 
+Basicamente, você precisa colocar a seguinte opção JVM ao iniciar seu servidor no IDE.
 
 ```
 -Djavax.net.debug=all

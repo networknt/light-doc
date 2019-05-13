@@ -10,9 +10,9 @@ toc: false
 draft: false
 ---
 
-When you build microservices, there must be an ultimate consumer somewhere at the top of the food chain, and it is usually a single page application that provides an interface to interact with end users. 
+Quando você constrói microsserviços, deve haver um consumidor final em algum lugar no topo da cadeia alimentar, e geralmente é um SPA que fornece uma interface para interagir com os usuários finais.
 
-There are so many frameworks and libraries to build single page applications, and we highly recommend [React][]. Along with React, we have a lot of users are using [Vue][] and [Angular][]. 
+Existem muitos frameworks e bibliotecas para construir SPAs, e nós recomendamos fortemente [React][]. Juntamente com o React, temos muitos usuários usando [Vue][] e [Angular][].
 
 [React]: /consumer/react/
 [Vue]: /consumer/vue/

@@ -10,7 +10,7 @@ toc: false
 draft: false
 ---
 
-Apache Zookeeper can used as service registry and discovery with [zookeeper][] module in light-4j; however, it is not recommended given it is very heavy and slow. It should only be used when you have the cluster implemented in house already and the number of services running is small. Otherwise, it is recommended to use [Consul][] for service registry and discovery. 
+O Apache Zookeeper pode ser usado como registro de serviço e descoberta com o módulo [zookeeper][] na light-4j; no entanto, não é recomendado, pois é muito pesado e lento. Ele só deve ser usado quando você já tiver o cluster implementado em casa e o número de serviços em execução for pequeno. Caso contrário, recomenda-se usar [Consul][] para registro e descoberta de serviço.
 
 [zookeeper]: /concern/zookeeper/
 [Consul]: /consumer/consul-discovery/
