@@ -34,25 +34,25 @@ to enable other features in following steps.
 This tutorial shows how to use the service registry and discovery feature of light*4j
 frameworks. 
 
-* [Environment preparation][]
+1. [Environment preparation][]
 
-* [Code generation][]
+2. [Code generation][]
 
-* [Build and start][]
+3. [Build and start][]
 
-* [Test service][]
+4. [Test service][]
 
-* [Enable security][]
+5. [Enable security][]
 
-* [Docker][]
+6. [Docker][]
 
-* [Compose][]
+7. [Compose][]
 
-* [Logging][]
+8. [Logging][]
 
-* [Metrics][]
+9. [Metrics][]
 
-* [Summary][]
+10. [Summary][]
 
 
 [rest tutorial]: /tutorial/rest/

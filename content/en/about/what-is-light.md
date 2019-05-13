@@ -25,7 +25,7 @@ including serverless solution built on top of light-hybrid-4j and light-eventuat
 We think of Light Platform as the ideal website or services creation tool with flexible architecture so that plugins can be injected or enabled with externalized configuration changes. 
 
 ## How Fast is Light Platform?
-
+Visit our github link to compare how fast Light is:   
 https://github.com/networknt/microservices-framework-benchmark
 
 ## What Does Light Platform Do?

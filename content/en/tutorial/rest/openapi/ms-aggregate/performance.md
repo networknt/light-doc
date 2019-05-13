@@ -1,6 +1,6 @@
 ---
 title: "Aggregate Performance"
-date: 2018-03-11T20:37:26-04:00
+date: 2018-03-11T16:00:00-04:00
 description: ""
 categories: []
 keywords: []

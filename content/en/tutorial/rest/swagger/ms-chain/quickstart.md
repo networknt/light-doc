@@ -8,15 +8,23 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+toc: true
 ---
+You will need the following dependencies before starting this tutorial:
+
+- Java JDK 8 (I prefer OpenJDK but Oracle JDK will do)
+- Maven
+- Git
+- Docker
+
 This quick start tutorial is designed for anyone beginning to utilize Light-4j and wants to gain a general understanding of how to setup a microservice chain application utilizing four APIs. This example found in *[light-example-4j/rest/swagger/ms_chain](https://github.com/networknt/light-example-4j)* shows four APIs being utilized as such:
 ```
 API A -> API B, API B -> API C, API C -> API D
 ```
-## Environment
-After cloning the above git repository, the *ms_chain* directory must be opened and in order to correctly run Maven, we must execute our *pom.xml* file.
+## Setting up the Environment
+For the purpose of this guide we will be using IntelliJ's Java IDE.
 
->If utilizing a Java IDE, edit classpath once pom.xml is executed.
+After cloning the above git repository, the *ms_chain* directory must be opened and in order to correctly run Maven, we must go into the directory containing the **pom.xml** file *(/rest/swagger/api_a/httpschain)* and option click>*"Add as Maven Project"*. This will create a **classpath of module** which should be selected in IntelliJ's *"Edit Configurations"*.
 
 Once we have our environment set up, we can begin to test it and see if API A will call the other three APIs.
 
@@ -36,7 +44,7 @@ Https Server started on ip:0.0.0.0 Port:7441
 ```
 Run this three more times for APIs B, C, and D. The output, excluding port numbers, should be the same.
 
->If you come across and error with initializing a port, visit your *server.yml* file in each directory (A, B, C, and D) and change the *Httpsport" number to a unique port currently not in use.
+>If you come across an error when initializing a port, visit your *server.yml* file in each directory (A, B, C, and D) and change the *Httpsport" number to a unique port currently not in use.
 >Note: each API must have a separate port number.
 
 Once this is completed separately for all four APIs, you can begin execution and testing. Open a new shell and execute the following command.
@@ -62,7 +70,7 @@ The remaining 3 API files also append their strings, and the final output return
 
 ## Explore Further
 
-In order to understand the differences between these four APIs, explore the **PathHandlerProvider.java** in the respective directories **(api_x/httpschain)**. API A holds more connection establishment calls and checks than API D.
+In order to understand the differences between these four entities, explore the **PathHandlerProvider.java** in the respective directories **(api_x/httpschain)**. API A holds more connection establishment calls and checks than API D.
 
 ## Attempt Other Handlers
 
@@ -81,11 +89,11 @@ Ok%
 
 In this tutorial, a Microservice Chain Pattern application was implemented locally with general understanding of the difference between our *generated* directory and our *httpschain* directory, and their differing uses. It is also recommended to strengthen your understanding by creating your own system using Light-4j
 
-Return to our [Getting Started][] page.
+Return to our [Tutorials][] page to explore more.
 
 
 
 
 [Swagger 2.0 specification]: https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
 [OpenAPI 3.0 specification]: https://swagger.io/specification/
-[Getting Started]: /getting-started
+[Tutorials]: /tutorial
