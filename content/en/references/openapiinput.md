@@ -11,5 +11,16 @@ draft: false
 ---
 
 Testing some openAPI generator inputs here
+
+```
 More testing
+```
+
+OpenAPI documents have **three** required sections:
+
+| Title      |                        Description                       |
+|------------|:--------------------------------------------------------:|
+| 1. OpenAPI | Semantic version number of OpenAPI specification version |
+| 2. Info    |                    Metadata about API                    |
+| 3. Paths   |          Available paths and operations for API          |
 
