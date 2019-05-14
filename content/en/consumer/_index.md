@@ -31,7 +31,7 @@ The following contains architecture, design and best practices.
   * [Which Jar Files](/consumer/jar-files/)
   * [TLS Connection](/consumer/tls-connection/)
   * [HTTP 2.0](/consumer/http2/)
-  * [Security](/architecture/security/)
+  * [Security](/consumer/security/)
      + [Subject Token](/consumer/subject-token/)
      + [Access Token](/consumer/access-token/)
      + [Customized Grant Type](/consumer/customized-grant/)

@@ -435,6 +435,25 @@ oauth:
 
 Please be aware that bufferSize need to be increased to the size of your maximum request body. The default 24*1024 should be good enough for most of the application. There is a [tutorial][] to give you more details on the bufferSize configuration. 
 
+Also, the values of `keystore` and `truststore` represent the paths of them. They should be relative to the external config directory. For example, If the server start with `-Dlight-4j-config-dir=/external_dir/config`, and the absolute path of `keystore` is `/external_dir/config/ssl/client.keystore`, their configuration in client.yml should be: 
+
+```yaml
+tls:
+  ...
+  trustStore: ssl/client.truststore
+  ...
+  keyStore: ssl/client.keystore
+  ...
+```
+Otherwise, if all config files flattened into one folder. The configuration could be simplified as:
+```yaml
+tls:
+  ...
+  trustStore: client.truststore
+  ...
+  keyStore: client.keystore
+  ...
+```
 
 And here is an example of secret.yaml with client secrets.
 

@@ -21,3 +21,5 @@ This tutorial helps users to learn how to set up production like environment loc
 * [Start light-router](/tutorial/portal/local-router/light-router/)
 * [Portal View](/tutorial/portal/local-router/portal-view/)
 * [Deploy View](/tutorial/portal/local-router/deploy-view/)
+* [Build Portal](/tutorial/bot/light-portal-local/)
+* [Start Portal](/tutorial/portal/local-router/start-portal/)
