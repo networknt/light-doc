@@ -41,7 +41,7 @@ The cli tool needs to specify:
 
 
 For information on how to use light-codegen, please check out the [getting started][] page. The
-detailed [documention][] can be found in the tools section.
+detailed [documentation][] can be found in the tools section.
 
 With the project generated, our next step is to [build and start][] the server. 
 
@@ -49,7 +49,7 @@ With the project generated, our next step is to [build and start][] the server.
 [light-codegen]: https://github.com/networknt/light-codegen
 [light-rest-4j]: /style/light-rest-4j/
 [getting started]: /getting-started/light-codegen/
-[document]: /tool/light-codegen/
+[documentation]: /tool/light-codegen/
 [build and start]: /tutorial/rest/openapi/petstore/build/
 [swagger petstore]: https://github.com/networknt/light-example-4j/tree/master/rest/swagger/petstore
 [openapi petstore]: https://github.com/networknt/light-example-4j/tree/master/rest/openapi/petstore
