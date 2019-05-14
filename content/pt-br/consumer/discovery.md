@@ -33,5 +33,5 @@ Acima está a razão pela qual temos que fornecer nosso próprio registro de ser
 
 Há vários produtos de código aberto que suportam registro de serviço e descoberta no mercado. Nós implementamos o módulo em light-4j para suportar tanto [Consul] [] quanto [Zookeeper] [].
 
-[Consul]: /consumer/consul-discovery/
-[Zookeeper]: /consumer/zookeeper-discovery/
+[Consul]: /ptbr/consumer/consul-discovery/
+[Zookeeper]: /ptbr/consumer/zookeeper-discovery/
