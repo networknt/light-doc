@@ -322,9 +322,18 @@ params = ["categories", "tags"]
     contentDir = "content/zh"
     languageName = "中文"
     weight = 2
+  [languages.ptbr]
+    contentDir = "content/pt-br"
+    languageName = "Português do Brasil"
+    weight = 3
 
 
 ### LANGUAGE-SPECIFIC MENUS ###
+
+
+
+
+  
 
 # Chinese menus
 
@@ -481,6 +490,171 @@ params = ["categories", "tags"]
   url = "https://www.reddit.com/r/lightapi/"
 
 [[languages.zh.menu.global]]
+  name = "GitHub"
+  weight = 200
+  identifier = "github"
+  post = "external"
+  url = "https://github.com/networknt/light-4j"
+
+
+# Brazilian portuguese menus
+
+[[languages.ptbr.menu.docs]]
+  name = "Light"
+  weight = 1
+  identifier = "about"
+  url = "/ptbr/about/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Documentação"
+  weight = 5
+  identifier = "getting-started"
+  url = "/ptbr/getting-started/"
+
+
+# Core languages.ptbr.menus
+
+[[languages.ptbr.menu.docs]]
+  name = "Arquitetura"
+  weight = 10
+  identifier = "architecture"
+  post = "expanded"
+  url = "/ptbr/architecture/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Design"
+  weight = 15
+  identifier = "design"
+  post = "expanded"
+  url = "/ptbr/design/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Referências"
+  weight = 20
+  identifier = "concern"
+  url = "/ptbr/concern/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Estilo"
+  weight = 25
+  identifier = "style"
+  url = "/ptbr/style/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Serviço"
+  weight = 30
+  identifier = "service"
+  url = "/ptbr/service/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Ferramentas"
+  weight = 35
+  post = "expanded"
+  identifier = "tool"
+  url = "/ptbr/tool/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Biblioteca"
+  weight = 36
+  post = "expanded"
+  identifier = "library"
+  url = "/ptbr/library/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Consumidor"
+  weight = 38
+  identifier = "consumer"
+  url = "/ptbr/consumer/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Desenvolvimento"
+  weight = 39
+  identifier = "development"
+  url = "/ptbr/development/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Implantação"
+  weight = 40
+  identifier = "deployment"
+  url = "/ptbr/deployment/"
+
+
+# LOW LEVEL ITEMS
+
+[[languages.ptbr.menu.docs]]
+  name = "Exemplo"
+  weight = 40
+  identifier = "example"
+  url = "/ptbr/example/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Tutorial"
+  weight = 45
+  identifier = "tutorial"
+  url = "/ptbr/tutorial/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Benchmark"
+  weight = 50
+  identifier = "benchmark"
+  url = "/ptbr/benchmark/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Solução de problemas"
+  weight = 60
+  identifier = "troubleshooting"
+  url = "/ptbr/troubleshooting/"
+
+[[languages.ptbr.menu.docs]]
+  name = "F.A.Q."
+  weight = 70
+  identifier = "faq"
+  url = "/ptbr/faq/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Milestone"
+  weight = 90
+  identifier = "milestone"
+  url = "/ptbr/milestone/"
+
+[[languages.ptbr.menu.docs]]
+  name = "Contribua"
+  weight = 100
+  post = "break"
+  identifier = "contribute"
+  url = "/ptbr/contribute/"
+
+[[languages.ptbr.menu.global]]
+  name = "Novidades"
+  weight = 1
+  identifier = "news"
+  url = "/ptbr/news/"
+
+[[languages.ptbr.menu.global]]
+  name = "Documentação"
+  weight = 5
+  identifier = "docs"
+  url = "/ptbr/documentation/"
+
+
+# Anything with a weight > 100 gets an external icon
+[[languages.ptbr.menu.global]]
+  name = "Comunidade"
+  weight = 150
+  icon = true
+  identifier = "community"
+  post = "external"
+  url = "https://discourse.gohugo.io/"
+
+[[languages.ptbr.menu.global]]
+  name = "Reddit"
+  weight = 160
+  icon = true
+  identifier = "reddit"
+  post = "external"
+  url = "https://www.reddit.com/r/lightapi/"
+
+[[languages.ptbr.menu.global]]
   name = "GitHub"
   weight = 200
   identifier = "github"
