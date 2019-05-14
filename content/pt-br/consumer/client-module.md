@@ -10,7 +10,7 @@ toc: false
 draft: false
 ---
 
-O [módulo cliente][] em light-4j é um componente muito importante na plataforma light para
+O [Módulo Cliente][] em light-4j é um componente muito importante na plataforma light para
 interações entre cliente para serviço ou serviço para serviço em requisições/respostas sincronas 
 sobre HTTPS e HTTP2. Microserviços são esperado ter alta performance a baixa latência para
 que múltiplos serviços podem ser encadeados juntos para cumprir uma requisição externa.
@@ -23,14 +23,14 @@ Há muitas funcionalidades no módulo cliente e esses deveriam ser utilizado em 
 A seguinte seçao mostra como usar o módulo cliente para casos de uso comum e os detalhes é documentado
 aqui também.
 
-- [Conexão TLS](/consumer/tls-connection/)
-- [HTTP 2.0](/consumer/http2/)
-- [OAuth 2.0 JWT Token](/consumer/oauth2-jwt/)
-  * [Token de entidade](/consumer/subject-token/)
-  * [Token de acesso](/consumer/access-token/)
-  * [Tipo de concessão personalizado](/consumer/customized-grant/)
-  * [Obter Token no Startup](/consumer/token-startup/)
-  * [Token de longa duração](/consumer/long-lived-token/)
+- [Conexão TLS](/ptbr/consumer/tls-connection/)
+- [HTTP 2.0](/ptbr/consumer/http2/)
+- [OAuth 2.0 JWT Token](/ptbr/consumer/oauth2-jwt/)
+  * [Token de entidade](/ptbr/consumer/subject-token/)
+  * [Token de acesso](/ptbr/consumer/access-token/)
+  * [Tipo de concessão personalizado](/ptbr/consumer/customized-grant/)
+  * [Obter Token no Startup](/ptbr/consumer/token-startup/)
+  * [Token de longa duração](/ptbr/consumer/long-lived-token/)
 
 
 [Módulo cliente]: /concern/client/

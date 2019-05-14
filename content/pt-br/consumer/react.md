@@ -15,4 +15,4 @@ auto encapsulado.
 
 Internamente, estamos usando o React para quase todas as interfaces para vários serviços. Para acelerar o desenvolvimento, também desenvolvemos [react-schema-form] [], que pode gerar formulários e lógica para interagir com os serviços de back-end de forma unificada.
 
-[react-schema-form]: /consumer/react-schema-form/
+[react-schema-form]: /ptbr/consumer/react-schema-form/

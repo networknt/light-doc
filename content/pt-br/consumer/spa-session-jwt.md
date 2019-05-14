@@ -31,5 +31,5 @@ Esse padrão é simples, direto e, o mais importante: seguro. E sim, você pode 
 [pare de usar localstorage]: https://dev.to/rdegges/please-stop-using-local-storage-1i04
 [artigo do Jeff Atwood]: https://blog.codinghorror.com/protecting-your-cookies-httponly/
 [CSRF]: https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
-[light-session-4j]: /sytle/light-session-4j/
+[light-session-4j]: /ptbr/sytle/light-session-4j/
 

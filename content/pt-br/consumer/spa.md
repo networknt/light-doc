@@ -14,7 +14,7 @@ Quando você constrói microsserviços, deve haver um consumidor final em algum 
 
 Existem muitos frameworks e bibliotecas para construir SPAs, e nós recomendamos fortemente [React][]. Juntamente com o React, temos muitos usuários usando [Vue][] e [Angular][].
 
-[React]: /consumer/react/
-[Vue]: /consumer/vue/
-[Angular]: /consumer/angular/
+[React]: /ptbr/consumer/react/
+[Vue]: /ptbr/consumer/vue/
+[Angular]: /ptbr/consumer/angular/
 

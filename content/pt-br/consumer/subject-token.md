@@ -33,5 +33,5 @@ is the situation webserver as a client calling APIs.
 
 
 [security architecture]: /architecture/security/
-[Access Token]: /consumer/access-token/
+[Access Token]: /ptbr/consumer/access-token/
 

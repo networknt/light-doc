@@ -23,4 +23,4 @@ Se access token é somente o token disponível, isso é passado em Authorization
 isso é passado em um X-Scope-Token na requisição.
 
 
-[Token de entidade]: /consumer/subject-token/
+[Token de entidade]: /ptbr/consumer/subject-token/

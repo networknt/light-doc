@@ -1,5 +1,5 @@
 ---
-title: "Secret Encryption"
+title: "Codificador de segredos"
 date: 2018-03-07T21:17:38-05:00
 description: ""
 categories: []

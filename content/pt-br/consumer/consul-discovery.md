@@ -14,4 +14,4 @@ draft: false
 Serviço de descoberta do Consul é habilitada pelo [consul][] módulo em light-4j e isso é a melhor solução geral para o registro de serviço e descoberta na plataforma light. Você pode também escolher zookeeper mas isso não é recomendável.
 
 [consul]: /concern/consul/
-[zookeeper]: /consumer/zookeeper-discovery/
+[zookeeper]: /ptbr/consumer/zookeeper-discovery/
