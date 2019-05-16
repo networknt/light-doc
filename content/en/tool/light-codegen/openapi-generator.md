@@ -31,7 +31,7 @@ Note: currently, we support both OpenAPI 3.0 specification and Swagger 2.0 speci
 
 Here is an example of config.json for openapi generator.
 
-```
+```json
 {
   "name": "petstore",
   "version": "1.0.1",
@@ -44,7 +44,7 @@ Here is an example of config.json for openapi generator.
   "overwriteHandlerTest": true,
   "overwriteModel": true,
   "generateModelOnly": false,
-  "generateValuesYml": fale,
+  "generateValuesYml": false,
   "regenerateCodeOnly":false,
   "httpPort": 8080,
   "enableHttp": false,
@@ -87,35 +87,35 @@ Here is an example of config.json for openapi generator.
 
 | Field Name | Description |
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name | Used in generated prom.xml for project name <br><br> Optionality: mandatory |
-| version | Used in generated pom.xml for project version<br><br>Optionality: mandatory |
-| groupId | Used in generated pom.xml for project groupId<br><br> Optionality: mandatory |
-| artifactId | used in generated pom.xml for project artifactId<br><br> Optionality: mandatory |
-| rootPackage | root package name for your project and it will normally be your domain plug project name. <br>Optionality: optional |
-| handlerPackage | the Java package for all generated handlers. <br><br>Optionality: mandatory |
-| modelPackage | the Java package for all generated models or POJOs. <br><br>Optionality: mandatory |
-| overwriteHandler | controls if you want to overwrite handler when regenerating the same project into the same folder. <br>Optionality: mandatory <br>Recommendation: set to false if you only want to upgrade the framework to another minor version and don't want to overwrite handlers |
-| overwriteHandlerTest | controls if you want to overwrite handler test cases. <br><br>Optionality: mandatory |
-| overwriteModel | controls if you want to overwrite generated models. <br><br>Optionality: mandatory Recommendation: set to false to prevent the model classes being overwritten |
-| generateModelOnly | controls whether you wish to generate only the model classes <br><br>Optionality: optional <br>Recommendation: to be used by teams consuming an API and who wish to generate the model classes only Default: false |
-| regenerateCodeOnly | controls whether you wish to regenerate only the model and handler classes, while skipping the underlying scripts, pom.xml and other files <br><br>Optionality: optional <br>Recommendation: to be used when there are changes in the model and teams wish to regenerate only artifacts affected by the change: model, handler classes, and handler.yml <br>Default: false |
-| generateValuesYml | controls whether a values.yml is to be generated, with commonly changed values across test and production environments <br>Default: false |
-| httpPort | the port number of Http listener if enableHttp is true <br><br>Optionality: mandatory |
-| enableHttp | specify if the server listens to http port. <br><br>Optionality: mandatory <br>Recommendation: Http should be enabled in dev |
-| httpsPort | the port number of Https listener if enableHttps is true. <br><br>Optionality: mandatory |
-| enableHttps | specify if the server listens to https port. <br><br>Optionality: mandatory <br>Recommendation: Https should be used in any official environment for security reason Note: when Https is enabled, Http will automatically be disabled |
-| enableHttp2 |  specify if the server supports HTTP/2 connection.  <br><br>Optionality: mandatory <br>Recommendation: Should always be set to true |
-| enableRegistry | control if built-in service registry/discovery is used <br><br>Optionality: mandatory <br>Note: Only necessary if running as standalone java -jar xxx |
-| enableParamDescription | decide if generate parameter description from specifications as annotation. <br><br>Optionality: optional Default: true |
-| supportDb | control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml <br><br>Optionality: mandatory |
-| dbInfo | database connection pool configuration info <br><br>Optionality: mandatory |
-| supportH2ForTest | if true, add H2 in pom.xml as test scope to support unit test with H2 database. <br><br>Optionality: mandatory |
-| supportClient | if true, add com.networknt.client module to pom.xml to support service to service call. <br><br>Optionality: mandatory |
-| skipHealthCheck | decides whether to enable the health check in the handler chain and expose the health check endpoint. Set to true to skip the wiring of the health check <br><br>Optionality: optional <br>Default: false |
-| skipServerInfo | decides whether to wire the server info in the handler chain and expose the server info endpoint. Set to true to skip the wiring of the server info retrieval <br><br><br>Optionality: optional <br>Default: false |
-| prometheusMetrics | decides whether to wire the Prometheus metrics collection handler in the handler chain. Set to true to skip the wiring of the Prometheus metrics collection handler <br><br>Optionality: optional <br>Default: false |
-| generateEnvVars | how environment-based variables should be <ul><li>generatedgenerateEnvVars.generate:boolean whether the environment based variables should be generated.</li> Default: false.<ul> <li>If set to false, config files are copied to target folder (if different from source folder)</li><li>If set to true, config values are re-written to environment based</li> </ul><li>valuesgenerateEnvVars.skipArray: boolean whether Arrays in the config files should be re-written or not. This is considered false if not set.</li><li>generateEnvVars.skipMap: boolean whether Maps in the config files should be re-written or not. This is considered false if not set.</li><li>generateEnvVars.exclude: Array a list of files that should not be re-written </li></ul> |
-| specGeneration | specifies information required for generating openapi specifications from source code.<ul><li>modelPackages: string the codegen tool can only generate specfication for models now. This config item specifies the package names of models in the class path. Mutliple package names are delimited by comma.</li><li>mergeTo: string If there is an existing openapi specification and users wants to merge the generated model sepcifications to it, this config item can be used to specify the location of the existing specification.</li><li>outputFormat: string Specifies the expected output format of the specification. Value can be yaml, json, or both </li><li>outputFilename: string the name of the generated openapi file. If not specified, the output file name is default to openapi_generated.</ul> |
+| **name** | Used in generated prom.xml for project name <br><br> *Optionality*: mandatory |
+| **version** | Used in generated pom.xml for project version<br><br>*Optionality*: mandatory |
+| **groupId** | Used in generated pom.xml for project groupId<br><br> *Optionality*: mandatory |
+| **artifactId** | used in generated pom.xml for project artifactId<br><br> *Optionality*: mandatory |
+| **rootPackage** | root package name for your project and it will normally be your domain plug project name. <br>*Optionality*: optional |
+| **handlerPackage** | the Java package for all generated handlers. <br><br>*Optionality*: mandatory |
+| **modelPackage** | the Java package for all generated models or POJOs. <br><br>*Optionality*: mandatory |
+| **overwriteHandler** | controls if you want to overwrite handler when regenerating the same project into the same folder. <br>*Optionality*: mandatory <br>Recommendation: set to false if you only want to upgrade the framework to another minor version and don't want to overwrite handlers |
+| **overwriteHandlerTest** | controls if you want to overwrite handler test cases. <br><br>*Optionality*: mandatory |
+| **overwriteModel** | controls if you want to overwrite generated models. <br><br>*Optionality*: mandatory Recommendation: set to false to prevent the model classes being overwritten |
+| **generateModelOnly** | controls whether you wish to generate only the model classes <br><br>*Optionality*: optional <br>Recommendation: to be used by teams consuming an API and who wish to generate the model classes only Default: false |
+| **regenerateCodeOnly** | controls whether you wish to regenerate only the model and handler classes, while skipping the underlying scripts, pom.xml and other files <br><br>*Optionality*: optional <br>Recommendation: to be used when there are changes in the model and teams wish to regenerate only artifacts affected by the change: model, handler classes, and handler.yml <br>Default: false |
+| **generateValuesYml** | controls whether a values.yml is to be generated, with commonly changed values across test and production environments <br>Default: false |
+| **httpPort** | the port number of Http listener if enableHttp is true <br><br>*Optionality*: mandatory |
+| **enableHttp** | specify if the server listens to http port. <br><br>*Optionality*: mandatory <br>Recommendation: Http should be enabled in dev |
+| **httpsPort** | the port number of Https listener if enableHttps is true. <br><br>*Optionality*: mandatory |
+| **enableHttps** | specify if the server listens to https port. <br><br>*Optionality*: mandatory <br>Recommendation: Https should be used in any official environment for security reason Note: when Https is enabled, Http will automatically be disabled |
+| **enableHttp2** |  specify if the server supports HTTP/2 connection.  <br><br>*Optionality*: mandatory <br>Recommendation: Should always be set to true |
+| **enableRegistry** | control if built-in service registry/discovery is used <br><br>*Optionality*: mandatory <br>Note: Only necessary if running as standalone java -jar xxx |
+| **enableParamDescription** | decide if generate parameter description from specifications as annotation. <br><br>*Optionality*: optional Default: true |
+| **supportDb** | control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml <br><br>*Optionality*: mandatory |
+| **dbInfo** | database connection pool configuration info <br><br>*Optionality*: mandatory |
+| **supportH2ForTest** | if true, add H2 in pom.xml as test scope to support unit test with H2 database. <br><br>*Optionality*: mandatory |
+| **supportClient** | if true, add com.networknt.client module to pom.xml to support service to service call. <br><br>*Optionality*: mandatory |
+| **skipHealthCheck** | decides whether to enable the health check in the handler chain and expose the health check endpoint. Set to true to skip the wiring of the health check <br><br>*Optionality*: optional <br>Default: false |
+| **skipServerInfo** | decides whether to wire the server info in the handler chain and expose the server info endpoint. Set to true to skip the wiring of the server info retrieval <br><br><br>*Optionality*: optional <br>Default: false |
+| **prometheusMetrics** | decides whether to wire the Prometheus metrics collection handler in the handler chain. Set to true to skip the wiring of the Prometheus metrics collection handler <br><br>*Optionality*: optional <br>Default: false |
+| **generateEnvVars** | how environment-based variables should be <ul><li>generatedgenerateEnvVars.generate:boolean whether the environment based variables should be generated.</li> Default: false.<ul> <li>If set to false, config files are copied to target folder (if different from source folder)</li><li>If set to true, config values are re-written to environment based</li> </ul><li>valuesgenerateEnvVars.skipArray: boolean whether Arrays in the config files should be re-written or not. This is considered false if not set.</li><li>generateEnvVars.skipMap: boolean whether Maps in the config files should be re-written or not. This is considered false if not set.</li><li>generateEnvVars.exclude: Array a list of files that should not be re-written </li></ul> |
+| **specGeneration** | specifies information required for generating openapi specifications from source code.<ul><li>modelPackages: string the codegen tool can only generate specfication for models now. This config item specifies the package names of models in the class path. Mutliple package names are delimited by comma.</li><li>mergeTo: string If there is an existing openapi specification and users wants to merge the generated model sepcifications to it, this config item can be used to specify the location of the existing specification.</li><li>outputFormat: string Specifies the expected output format of the specification. Value can be yaml, json, or both </li><li>outputFilename: string the name of the generated openapi file. If not specified, the output file name is default to openapi_generated.</ul> |
 
 In most of the cases, developers will only update handlers, handler tests and models in a generated project. Of course, you might need a different database for your project, and we have a [database tutorial] that can help you to further config Oracle and Postgres.   
 
@@ -143,7 +143,7 @@ cd light-codegen
 mvn clean install
 ```
 
-* JSON Model
+### JSON Model
 
 Given we have test openapi.json and config.json in light-rest-4j/src/test/resources folder, the following command line will generate a RESTful  API at /tmp/openapi-json folder.
 
@@ -165,7 +165,7 @@ To test the service from another terminal:
 curl http://localhost:8080/server/info
 ```
 
-* YAML Model
+### YAML Model
 
 Given we have test openapi.yaml and config.json in light-rest-4j/src/test/resources folder, the following command line will generate a RESTful  API at /tmp/openapi-yaml folder.
 
@@ -214,7 +214,7 @@ java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o /tmp/op
 * Generate openapi specifications from source code (supports for code-first development)
 
 To support code-first development, we provide the openapi specification generator to generate specifications from code. The command below demonstrates the usage of the specifcation generator.
-Please note that the configuration item `specGeneration` is required to generate specifications. For details of this congiration item, please see [Config](#config).
+Please note that the configuration item `specGeneration` is required to generate specifications. For details of this configuration item, please see [Config](#config).
 
 ```
 cd ~/networknt/light-codegen/code-cli/target
@@ -245,10 +245,9 @@ curl localhost:8080/v1/pets/111
 
 #### Docker Scripting
 
-You can use docker run command to call the generator but it is very complicated for the parameters. In order to make things easier and friendlier to devops flow. Let's create a script to call the command line from docker image.
+You can use docker run command to call the generator but it is very complicated for the parameters. In order to make things easier and friendlier to DevOps flow let's create a script to call the command line from docker image.
 
-If you look at the docker run command you can see that we basically need one input folder for schema and config files and one output folder to generated code. Once these volumes are mapped to local directory and with framework specified, it is easy to derive other files based on
-convention.
+If you look at the docker run command you can see that we basically need one input folder for schema and config files and one output folder to generated code. Once these volumes are mapped to local directory and with framework specified, it is easy to derive other files based on convention.
 
 
 ```
