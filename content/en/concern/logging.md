@@ -3,6 +3,8 @@
 Logging is a module in Light-4j framework which will use to get the loggers and their current logging levels, And also can able to
 change the logging level for given logger at runtime (Example: Change logging level to DEBUG for “com.networknt” logger for troubleshooting purpose).
 
+**Note:** This feature is only supposed to be used in development environment but not in production due to security reasons.
+
 There are three LoggerHandlers available in logging module.
  
  * LoggerGetHandler : This handler will provide the current logging level for given logger.
@@ -32,7 +34,7 @@ There are three LoggerHandlers available in logging module.
       
       Example URL    : https://localhost:8443/api/customers/loggers/com.networknt
  
- Note : Input is mandatory, If you provide the input in request body, it will change
+ Input is mandatory, If you provide the input in request body, it will change
  and return the updated logging level for given logger else it will throw an error.
            
  
