@@ -23,3 +23,4 @@ This tutorial helps users to learn how to set up production like environment loc
 * [Deploy View](/tutorial/portal/local-router/deploy-view/)
 * [Build Portal](/tutorial/bot/light-portal-local/)
 * [Start Portal](/tutorial/portal/local-router/start-portal/)
+* [OAuth2 Console](/tutorial/portal/local-router/oauth2-console/)
