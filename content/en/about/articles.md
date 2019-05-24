@@ -36,3 +36,8 @@ The following is a list of articles that mention light platform.
 * [How Banks Are Becoming Uberized](https://nordicapis.com/how-banks-are-becoming-uberized/)
 
 * [CIBC - Winners Of The 2018 Forrester And InfoWorld EA Awards](https://go.forrester.com/blogs/winners-of-the-2019-forrester-and-infoworld-ea-awards-contest-show-eas-role-in-digital-transformation/)
+
+* [Introduction to Light 4J Microservices Framework](https://www.findbestopensource.com/article-detail/introduction-light4j-framework)
+
+* [Light4j Cookbook - Rest API, CORS and RDBMS](https://www.findbestopensource.com/article-detail/light4j-cookbook-part1)
+
