@@ -35,6 +35,7 @@ Given all the drawbacks, we have decided to build our own generator. light-codeg
 - [Eventuate Generator](/references/light-codegen/eventuate-generator/)
 - [DevOps Integration](/references/light-codegen/integration/)
 - [Customization](/references/light-codegen/customization/)
+- [Rocker Hot Reloading](references/light-codegen/rocker-hot-reloading.md)
 - [Tutorials](/tutorial/generator/)
 
 
