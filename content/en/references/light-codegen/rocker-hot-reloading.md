@@ -1,8 +1,6 @@
-## Rocker hot reloading
-
 With support for rocker hot reloading, light-codegen can load customized templates and render classes so that each organization can generate content specific to their own frameworks built on the top of light-4j frameworks.
 
-#### Usage
+## Usage
 
 To enable rocker hot reloading, extra classpath setting is needed. A script `codegen-cli/codegen.sh` is provided to help the code generation with hot reloading.
 
