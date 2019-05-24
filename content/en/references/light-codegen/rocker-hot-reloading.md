@@ -19,6 +19,6 @@ To enable rocker hot reloading, extra classpath setting is needed. A script `cod
     ```bash
     cd light-codegen/codegen-cli/target
     
-    .././codegen.sh -r -f openapi -o /Users/jiachensun/workspace/reference-rest-api/test/fix -m /Users/jiachensun/workspace/reference-rest-api/swagger/petstore/1.0.0/openapi.json -c /Users/jiachensun/workspace/reference-rest-api/swagger/petstore/1.0.0/config.json
+    .././codegen.sh -r -f openapi -o /Users/workspace/test -m /Users/swagger/petstore/1.0.0/openapi.json -c /Users/swagger/petstore/1.0.0/config.json
     ```
     This `-r` means rocker hot reloading is enabled
