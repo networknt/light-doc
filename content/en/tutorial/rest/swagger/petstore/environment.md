@@ -11,10 +11,15 @@ toc: false
 draft: false
 ---
 
-You need to have Java JDK 8 (I prefer OpenJDK but Oracle JDK will do), Maven, Git and 
-Docker installed before starting this tutorial. If you are using Windows, you can 
-complete all steps without docker-compose as there are some issues to run it on
-Windows. 
+You will need the following dependencies before starting this tutorial:
+
+- Java JDK 8 (I prefer OpenJDK but Oracle JDK will do)
+- Maven
+- Git
+- Docker
+
+The use of docker-compose is optional but can sometimes 
+be problematic for Windows users. 
  
 Assuming above software packages are installed, let's create a workspace and clone the 
 projects we need for the tutorial. The following will assume your workspace is named
@@ -32,7 +37,7 @@ git clone https://github.com/networknt/model-config.git
 git clone https://github.com/networknt/light-config-test.git
 ```
 
-We are going to re-generate petstore project in light-example-4j. So let's rename
+We are going to **re-generate** petstore project in light-example-4j. So let's rename
 the existing directory in light-example-4j to petstore.bak
 
 At any step, if you are unsure if you have followed correctly, you can always compare

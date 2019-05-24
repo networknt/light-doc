@@ -19,7 +19,7 @@ toc: false
 reviewed: true
 ---
 
-Light-4j frameworks provide [middleware handlers][] to address cross-cutting concerns for your application so that you only need to implement the final [business handlers][] to process the request and return a response without thinking about exception handling, metrics, traceability, correlation, security, validation etc. If you have the specification available, the [light-codegen][] can scaffold the application for you to fill in the business logic into the generated handlers and write assertions in the generated tests for these handlers. 
+Light-4j frameworks provide [middleware handlers][] to address cross-cutting concerns for your application so that you only need to implement the final [business handlers][] to process the request and return a response without thinking about exception handling, metrics, traceability, correlation, security, validation, etc. If you have the specification available, the [light-codegen][] can scaffold the application for you to fill in the business logic into the generated handlers and write assertions in the generated tests for these handlers. 
 
 ### Local Development Environment
 
@@ -89,8 +89,8 @@ The easiest way to start your RESTful API project is from Swagger 2.0 specificat
 [light-4j-getting-started](https://youtu.be/xSJhF1LcE0Q)
 
 
-And here is the [step to step rest tutorial][] with one of them is [Swagger petstore][] and
-another one is [OpenAPI petstore][]. 
+And here is the [step by step REST tutorial][] one walking through [Swagger petstore][] example and
+the other is a [OpenAPI petstore][] example.
 
 If you are interested in GraphQL framework, please refer to [light-graphql-4j][].
 
@@ -108,18 +108,20 @@ OpenAPI specification or your service has very special requirement that cannot b
 can find many example projects at a separate repo [light-example-4j][] and start by copying one 
 of them.
 
-There are folders in light-example-4j that contains examples:
+There are folders in light-example-4j that contains examples like:
 
 * rest folder container examples built on top of light-rest-4j framework
 * graphql folder contains examples built on top of light-graphql-4j framework
 * hybrid folder contains examples built on top of light-hybrid-4j framework
 * eventuate folder contains examples built on top of light-eventuate framework
 
+**To get started, check out the [Quick Start][] page, to gain a general knowledge of how our Light-4j platform can be used and built upon.**
+
 
 ### Tutorials
 
 Follow the [microservices tutorial][] to build multiple services that communicate each other. The 
-source code for the tutorial can be found at [https://github.com/networknt/light-example-4j][] 
+source code for the tutorial can be found at [https://github.com/networknt/light-example-4j]
 
 * api_a is calling api_b and api_c
 * api_b is calling api_d
@@ -127,10 +129,11 @@ source code for the tutorial can be found at [https://github.com/networknt/light
 * api_d is an independent service
 
 
-[step to step rest tutorial]: /tutorial/rest/
+[step by step REST tutorial]: /tutorial/rest/
 [Swagger petstore]: /tutorial/rest/swagger/petstore/
 [OpenAPI petstore]: /tutorial/rest/openapi/petstore/
 [light-example-4j]: https://github.com/networknt/light-example-4j
+[Quick Start]: /tutorial/rest/swagger/ms-chain/quickstart
 [microservices tutorial]: /tutorial/
 
 [environment]: /getting-started/environment/

@@ -7,9 +7,9 @@ keywords: []
 menu:
   docs:
     parent: "about"
-    weight: 30
-weight: 30
-sections_weight: 30
+    weight: 3
+weight: 3
+sections_weight: 3
 aliases: []
 toc: false
 draft: false

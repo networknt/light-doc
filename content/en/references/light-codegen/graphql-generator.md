@@ -38,9 +38,27 @@ We recommend using IDL. For more information about IDL, please check [here](http
 
 #### Config
 
+| Field Name | Description |
+|----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| **name** | used in generated pom.xml for project version |
+| **version** | used in generated pom.xml for project version |
+| **groupID** | used in generated pom.xml for project groupId |
+| **artifactId** | used in generated pom.xml for project artifactId |
+| **schemaPackage** | the package name for generated schema class |
+| **schemaClass** | the generated schema class name |
+| **overwriteSchemaClass** | controls if the schema class needs to be generated or not. For new project, it should be true. If you want to upgrade the framework to a new version but don't want to overwrite the updated schema class, then set it to false and regenerate to the same folder. |
+| **httpPort** | the http port number the server is listening to if it is enabled. |
+| **enableHttp** | the flag to control if http is enabled or not. |
+| **httpsPort** | the https port number the server is listening to if it is enabled. |
+| **enableHttps** | the flag to control if https is enabled or not. |
+| **supportDb** | to control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml |
+| **dbInfo** | section is the database connection pool configuration info. |
+| **supportH2ForTest** | a flag to control if H2 code is included in the test server and H2 jar is included in pom.mxl |
+| **supportClient** | a flag to control if client module is included in the generated project to call other services. |
+
 Here is an example of config.json for light-graphql-4j generator.
 
-```
+```json
 {
   "name": "starwars",
   "version": "1.0.1",
@@ -67,22 +85,6 @@ Here is an example of config.json for light-graphql-4j generator.
 }
 ```
 
-- name is used in generated pom.xml for project name
-- version is used in generated pom.xml for project vesion
-- groupId is used in generated pom.xml for project groupId
-- artifactId is used in generated pom.xml for project artifactId
-- schemaPackage is the package name for generated schema class
-- schemaClass is the generated schema class name
-- overwriteSchemaClass controls if the schema class needs to be generated or not. For new project, it should be true. If you want to upgrade the framework to a new version but don't want to overwrite the updated schema class, then set it to false and regenerate to the same folder. 
-- httpPort is the http port number the server is listening to if it is enabled.
-- enableHttp is the flag to control if http is enabled or not.
-- httpsPort is the https port number the server is listening to if it is enabled.
-- enableHttps is the flag to control if https is enabled or not.
-- supportDb to control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml
-- dbInfo section is the database connection pool configuration info.
-- supportH2ForTest is a flag to control if H2 code is included in the test server and H2 jar is included in pom.mxl
-- supportClient is a flag to control if client module is included in the generated project to call other services.
- 
 
 In most of the cases, developers will only update schema class and other depending classes in schema package. 
 

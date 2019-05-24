@@ -10,9 +10,9 @@ keywords: ["License","apache"]
 menu:
   docs:
     parent: "about"
-    weight: 60
-weight: 60
-sections_weight: 60
+    weight: 10
+weight: 10
+sections_weight: 10
 aliases: [/meta/license]
 toc: true
 ---

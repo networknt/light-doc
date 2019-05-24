@@ -35,8 +35,8 @@ API AA calls API AB, API AC and API AD to fulfill its request.
 It is a very long tutorial as we want to package as much info as possible. So we have
 separated the it into the following steps. 
 
-- [Environment preparation](/tutorial/rest/openapi/ms-aggregate/preparation/)
-- [Create specification](/tutorial/rest/openapi/ms-aggregate/specification/)
-- [Generate and Build](/tutorial/rest/openapi/ms-aggregate/generation/)
-- [API to API Communication](/tutorial/rest/openapi/ms-aggregate/apitoapi/)
-- [Performance Test](/tutorial/rest/openapi/ms-aggregate/performance/)
+1. [Environment preparation](/tutorial/rest/openapi/ms-aggregate/preparation/)
+2. [Create specification](/tutorial/rest/openapi/ms-aggregate/specification/)
+3. [Generate and Build](/tutorial/rest/openapi/ms-aggregate/generation/)
+4. [API to API Communication](/tutorial/rest/openapi/ms-aggregate/apitoapi/)
+5. [Performance Test](/tutorial/rest/openapi/ms-aggregate/performance/)

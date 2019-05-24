@@ -26,9 +26,43 @@ Note: we only support OpenAPI 3.0 specification for Kotlin.
 
 #### Config
 
-Here is an example of config.json for openapi Kotlin generator.
+<!-- Reference Table -->
 
-```
+Here is a reference table for the example `config.json` below:
+
+| Field Name | Description |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **name** | Used in generated prom.xml for project name <br><br> *Optionality*: mandatory |
+| **version** | Used in generated pom.xml for project version<br><br>*Optionality*: mandatory |
+| **groupId** | Used in generated pom.xml for project groupId<br><br> *Optionality*: mandatory |
+| **artifactId** | used in generated pom.xml for project artifactId<br><br> *Optionality*: mandatory |
+| **rootPackage** | root package name for your project and it will normally be your domain plug project name. <br>*Optionality*: optional |
+| **handlerPackage** | the Java package for all generated handlers. <br><br>*Optionality*: mandatory |
+| **modelPackage** | the Java package for all generated models or POJOs. <br><br>*Optionality*: mandatory |
+| **overwriteHandler** | controls if you want to overwrite handler when regenerating the same project into the same folder. <br>*Optionality*: mandatory <br>Recommendation: set to `false` if you only want to upgrade the framework to another minor version and don't want to overwrite handlers |
+| **overwriteHandlerTest** | controls if you want to overwrite handler test cases. <br><br>*Optionality*: mandatory |
+| **overwriteModel** | controls if you want to overwrite generated models. <br><br>*Optionality*: mandatory Recommendation: set to `false` to prevent the model classes being overwritten |
+| **generateModelOnly** | controls whether you wish to generate only the model classes <br><br>*Optionality*: optional <br>Recommendation: to be used by teams consuming an API and who wish to generate the model classes only Default: `false` |
+| **regenerateCodeOnly** | controls whether you wish to regenerate only the model and handler classes, while skipping the underlying scripts, pom.xml and other files <br><br>*Optionality*: optional <br>Recommendation: to be used when there are changes in the model and teams wish to regenerate only artifacts affected by the change: model, handler classes, and handler.yml <br>Default: `false` |
+| **generateValuesYml** | controls whether a values.yml is to be generated, with commonly changed values across test and production environments <br>Default: `false` |
+| **httpPort** | the port number of Http listener if enableHttp is `true` <br><br>*Optionality*: mandatory |
+| **enableHttp** | specify if the server listens to http port. <br><br>*Optionality*: mandatory <br>Recommendation: Http should be enabled in dev |
+| **httpsPort** | the port number of Https listener if enableHttps is `true`. <br><br>*Optionality*: mandatory |
+| **enableHttps** | specify if the server listens to https port. <br><br>*Optionality*: mandatory <br>Recommendation: Https should be used in any official environment for security reason Note: when Https is enabled, Http will automatically be disabled |
+| **enableHttp2** |  specify if the server supports HTTP/2 connection.  <br><br>*Optionality*: mandatory <br>Recommendation: Should always be set to `true` |
+| **enableRegistry** | control if built-in service registry/discovery is used <br><br>*Optionality*: mandatory <br>Note: Only necessary if running as standalone java -jar xxx |
+| **enableParamDescription** | decide if generate parameter description from specifications as annotation. <br><br>*Optionality*: optional Default: `true` |
+| **supportDb** | control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml <br><br>*Optionality*: mandatory |
+| **dbInfo** | database connection pool configuration info <br><br>*Optionality*: mandatory |
+| **supportH2ForTest** | if `true`, add H2 in pom.xml as test scope to support unit test with H2 database. <br><br>*Optionality*: mandatory |
+| **supportClient** | if `true`, add com.networknt.client module to pom.xml to support service to service call. <br><br>*Optionality*: mandatory |
+| **skipHealthCheck** | decides whether to enable the health check in the handler chain and expose the health check endpoint. Set to `true` to skip the wiring of the health check <br><br>*Optionality*: optional <br>Default: `false` |
+| **skipServerInfo** | decides whether to wire the server info in the handler chain and expose the server info endpoint. Set to `true` to skip the wiring of the server info retrieval <br><br><br>*Optionality*: optional <br>Default: `false` |
+| **prometheusMetrics** | decides whether to wire the Prometheus metrics collection handler in the handler chain. Set to `true` to skip the wiring of the Prometheus metrics collection handler <br><br>*Optionality*: optional <br>Default: `false` |
+| **generateEnvVars** | how [environment-based variables](https://github.com/networknt/light-codegen/issues/217) should be generated<ul><li>generatedgenerateEnvVars.generate:boolean whether the environment based variables should be generated.</li> Default: `false`.<ul> <li>If set to `false`, config files are copied to target folder (if different from source folder)</li><li>If set to `true`, config values are re-written to environment based</li> </ul><li>valuesgenerateEnvVars.skipArray: boolean whether Arrays in the config files should be re-written or not. This is considered `false` if not set.</li><li>generateEnvVars.skipMap: boolean whether Maps in the config files should be re-written or not. This is considered `false` if not set.</li><li>generateEnvVars.exclude: Array a list of files that should not be re-written </li></ul> |
+
+
+```json
 {
   "name": "petstore",
   "version": "1.0.1",
@@ -41,7 +75,7 @@ Here is an example of config.json for openapi Kotlin generator.
   "overwriteHandlerTest": true,
   "overwriteModel": true,
   "generateModelOnly": false,
-  "generateValuesYml": fale,
+  "generateValuesYml": false,
   "regenerateCodeOnly":false,
   "httpPort": 8080,
   "enableHttp": false,
@@ -54,7 +88,7 @@ Here is an example of config.json for openapi Kotlin generator.
   "dbInfo": {
     "name": "mysql",
     "driverClassName": "com.mysql.jdbc.Driver",
-    "jdbcUrl": "jdbc:mysql://mysqldb:3306/oauth2?useSSL=false",
+    "jdbcUrl": "jdbc:mysql://mysqldb:3306/oauth2?useSSL=`false`",
     "username": "root",
     "password": "my-secret-pw"
   },
@@ -74,83 +108,6 @@ Here is an example of config.json for openapi Kotlin generator.
   }
 }
 ```
-
-- name is used in generated pom.xml for project name
-  - optionality: mandatory
-- version is used in generated pom.xml for project version
-  - optionality: mandatory
-- groupId is used in generated pom.xml for project groupId
-  - optionality: mandatory
-- artifactId is used in generated pom.xml for project artifactId
-  - optionality: mandatory
-- rootPackage is the root package name for your project and it will normally be your domain plug project name.
-  - optionality: optional
-- handlerPackage is the Java package for all generated handlers.
-  - optionality: mandatory
-- modelPackage is the Java package for all generated models or POJOs.
-  - optionality: mandatory
-- overwriteHandler controls if you want to overwrite handler when regenerating the same project into the same folder.
-  - optionality: mandatory
-  - recommendation: set to false if you only want to upgrade the framework to another minor version and don't want to overwrite handlers
-- overwriteHandlerTest controls if you want to overwrite handler test cases.
-  - optionality: mandatory
-- overwriteModel controls if you want to overwrite generated models.
-  - optionality: mandatory
-  - recommendation: set to false to prevent the model classes being overwritten
-- generateModelOnly controls whether you wish to generate only the model classes
-  - optionality: optional
-  - recommendation: to be used by teams consuming an API and who wish to generate the model classes only
-  - default: false
-- regenerateCodeOnly controls whether you wish to regenerate only the model and handler classes, while skipping the underlying scripts, pom.xml and other files
-  - optionality: optional
-  - recommendation: to be used when there are changes in the model and teams wish to regenerate only the artifacts affected by such change: model, handler classes and handler.yml
-  - default: false
-- generateValuesYml controls whether a values.yml is to be generated, with commonly changed values across test and production environments
-  - default: false
-- httpPort is the port number of Http listener if enableHttp is true
-  - optionality: mandatory
-- enableHttp to specify if the server listens to http port.
-  - optionality: mandatory
-  - recommendation: Http should only be enabled in dev.
-- httpsPort is the port number of Https listener if enableHttps is true.
-  - optionality: mandatory
-- enableHttps to specify if the server listens to https port.
-  - optionality: mandatory
-  - recommendation: Https should be used in any official environment for security reason.
-  - note: when Https is enabled, Http will automatically be disabled
-- enableHttp2 to specify if the server supports HTTP/2 connection.
-  - optionality: mandatory
-  - recommendation: it should be set always to true
-- enableRegistry to control if built-in service registry/discovery is used.
-  - optionality: mandatory
-  - note: Only necessary if running as standalone java -jar xxx
-- enableParamDescription is to decide if generate parameter description from specifications as annotation.
-  - optionality: optional
-  - default: true
-- supportDb to control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml
-  - optionality: mandatory
-- dbInfo section is the database connection pool configuration info.
-  - optionality: mandatory
-- supportH2ForTest if true, add H2 in pom.xml as test scope to support unit test with H2 database.
-  - optionality: mandatory
-- supportClient if true, add com.networknt.client module to pom.xml to support service to service call.
-  - optionality: mandatory
-- skipHealthCheck is to decide whether to enable the health check in the handler chain and expose the health check endpoint. Set to true to skip the wiring of the health check
-  - optionality: optional
-  - default: false
-- skipServerInfo is to decide whether to wire the server info in the handler chain and expose the server info endpoint. Set to true to skip the wiring of the server info retrieval
-    - optionality: optional
-    - default: false
-- prometheusMetrics is to decide whether to wire the Prometheus metrics collection handler in the handler chain. Set to true to skip the wiring of the Prometheus metrics collection handler
-    - optionality: optional
-    - default: false
-- generateEnvVars specifies how [environment-based variables](https://github.com/networknt/light-codegen/issues/217) should be generated.
-    - generateEnvVars.generate:boolean whether the environment based variables should be generated. This is considered `false` if not set.
-        - If this is set to false, config files are copied to target folder (if it is different from source folder).
-        - If this is set to true, config values are re-written to environment based values.
-    - generateEnvVars.skipArray: boolean whether Arrays in the config files should be re-written or not. This is considered `false` if not set.
-    - generateEnvVars.skipMap: boolean whether Maps in the config files should be re-written or not. This is considered `false` if not set.
-    - generateEnvVars.exclude: Array a list of files that should not be re-written
 
 In most cases, developers will only update handlers, handler tests, and models in a generated project. Of course, you might need a different database for your project, and we have a [database tutorial] that can help you to further config Oracle and Postgres.   
 

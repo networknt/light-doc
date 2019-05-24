@@ -62,16 +62,20 @@ These examples will show you:
 * How to collect metrics for each services
 * How to deployed with Kubernetes
 
-##### Microservices Chain Pattern
+##### Microservices Chain Pattern - Swagger
 
 This example can be found at [/rest/swagger/ms_chain][] and there is a [chain tutorial][] for it.
 
 In this example, there are four services chained together. A calls B, B calls C and C calls D in a
-chain patter. 
+chain pattern. 
 
 ##### Microservices Branch Pattern
 
-##### Microservices Aggregate Pattern
+Coming soon!
+
+##### Microservices Aggregate Pattern - OpenAPI
+
+This example can be found at [/rest/openapi/ms_aggregate][] and you can use the above **chain tutorial Quick Start** link to understand how to run it as they are executed similarly. For a step-by-step tutorial you can visit [aggregate tutorial][].
 
 
 
@@ -119,7 +123,9 @@ The source code repo can be found at [routing repository][]
 [techempower repo]: https://github.com/TechEmpower/FrameworkBenchmarks/tree/master/frameworks/Java/light-java
 [techempower benchmark]: https://www.techempower.com/benchmarks/previews/round15/
 [/rest/swagger/ms_chain]: https://github.com/networknt/light-example-4j/tree/master/rest/swagger/ms_chain
-[chain tutorial]: tutorial/rest/swagger/ms-chain/
+[/rest/openapi/ms_aggregate]: https://github.com/networknt/light-example-4j/tree/master/rest/openapi/ms-aggregate
+[chain tutorial]: /tutorial/rest/swagger/ms-chain/
+[aggregate tutorial]: /tutorial/rest/openapi/ms-aggregate/
 [benchmark repository]: https://github.com/networknt/microservices-framework-benchmark
 [routing repository]: https://github.com/networknt/light-example-4j/tree/master/routing
 

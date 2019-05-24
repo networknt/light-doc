@@ -29,7 +29,7 @@ implemented and binary formatted protocol will follow.
 
 Here is an exmaple of schema that defines several services. 
 
-```
+```json
 {
   "host": "lightapi.net",
   "service": "world",
