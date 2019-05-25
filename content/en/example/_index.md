@@ -14,12 +14,19 @@ toc: false
 draft: false
 ---
 
-Starting with examples is a good way to learn how to use each frameworks. Some of the examples
-have a corresponding tutorials so that you can follow them to rebuilt the examples step by step.
+Starting with examples is an excellent way to learn how to use each framework. Some of the examples have a corresponding tutorial so that you can follow them to rebuild the examples step by step.
 
-Most examples are in [light-examples-4j][] repository in networknt organization on github.com;
-however, there are some other examples scattered in other organizations or repositories. 
+Most examples are in [light-example-4j][] repository in the networknt organization on github.com; however, there are some other examples scattered in other organizations or repositories. 
 
+Every example has a README.md to clearly state the purpose of the example and how to build and test it. 
+
+# Light-4j
+
+### Routing
+
+It is an example to show you how to use undertow routing handler. It opens the door to customize it and put your handlers in front of common handlers provided. This is a very low-level implementation on top of the light-4j framework.
+
+The source code repo can be found at [routing repository][]
 
 ### Database
 
@@ -100,13 +107,6 @@ but there are still a lot of room to optimize the result especially the multiple
 multiple database updates. 
 
 
-### Routing
-
-This is an example to show you how to use undertow routing handler. It opens
-the door to customize it and put your own handlers in front of common handlers
-provided.
-
-The source code repo can be found at [routing repository][]
 
 
 ### Web Server
@@ -116,8 +116,7 @@ The source code repo can be found at [routing repository][]
 
 
 
-
-[light-examples-4j]: https://github.com/networknt/light-example-4j
+[light-example-4j]: https://github.com/networknt/light-example-4j
 [rest/swagger/database]: https://github.com/networknt/light-example-4j/tree/master/rest/swagger/database
 [database tutorial]: /tutorial/rest/swagger/database/
 [techempower repo]: https://github.com/TechEmpower/FrameworkBenchmarks/tree/master/frameworks/Java/light-java
