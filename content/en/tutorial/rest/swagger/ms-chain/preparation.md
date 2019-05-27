@@ -1,6 +1,6 @@
 ---
 title: "Preparation"
-date: 2017-11-29T10:14:30-05:00
+date: 2017-11-29T16:42:32-05:00
 description: ""
 categories: []
 keywords: []
@@ -9,6 +9,8 @@ aliases: []
 toc: false
 draft: false
 ---
+
+2017-11-29T10:32:34-05:00
 
 All specifications and code of the services are on github.com but we are going to
 redo it again by following the steps in the tutorial. Let's first create a

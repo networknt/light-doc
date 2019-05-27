@@ -1,15 +1,18 @@
 ---
 title: "Quick Start - Microservices Chain Application"
-date: 2017-11-29T10:12:34-05:00
+date: 2017-11-29T02:42:32-05:00
 description: ""
 categories: []
 keywords: []
 slug: ""
 aliases: []
-toc: false
-draft: false
 toc: true
+draft: false
 ---
+>This is the Quick Start tutorial that utilizes the pre-built repository to provide an introduction to MS Chain Services. 
+>If you prefer to do a step-by-step setup of MS Chain Services please visit the [MS Chain Services Home](/tutorial/rest/swagger/ms-chain/)
+
+
 You will need the following dependencies before starting this tutorial:
 
 - Java JDK 8 (I prefer OpenJDK but Oracle JDK will do)
@@ -24,7 +27,13 @@ API A -> API B, API B -> API C, API C -> API D
 ## Setting up the Environment
 For the purpose of this guide we will be using IntelliJ's Java IDE.
 
-After cloning the above git repository, the *ms_chain* directory must be opened and in order to correctly run Maven, we must go into the directory containing the **pom.xml** file *(/rest/swagger/api_a/httpschain)* and option click>*"Add as Maven Project"*. This will create a **classpath of module** which should be selected in IntelliJ's *"Edit Configurations"*.
+After cloning the above git repository, the *ms_chain* directory must be opened and in order to correctly run Maven, we must go into the directory containing the **pom.xml** file *(/rest/swagger/ms_chain/api_a/httpschain)* and option click>*"Add as Maven Project"*. This will create a **classpath of module** which should be selected in IntelliJ's *"Edit Configurations"*.
+
+<img src="/images/quickstart_tut1.png" alt="intellij debug image one" style="width:300px;"/>
+
+<img src="/images/ij-idea-debug1.png" alt="intellij debug image one" style="width:300px;"/>
+
+<img src="/images/quickstart_tut2.png" alt="intellij debug image one" style="width:500px;"/>
 
 Once we have our environment set up, we can begin to test it and see if API A will call the other three APIs.
 
@@ -40,9 +49,10 @@ mvn install exec:exec
 
 Following many completed tests, the output for running API A should be:
 ```
+Http Server started on ip:0.0.0.0 Port:7441
 Https Server started on ip:0.0.0.0 Port:7441
 ```
-Run this three more times for APIs B, C, and D. The output, excluding port numbers, should be the same.
+Run this three more times for APIs B, C, and D. Do not forget to <span style="color:green">"*Add As Maven Project*"</span> for the remaining APIs. The output, excluding port numbers, should be the same.
 
 >If you come across an error when initializing a port, visit your *server.yml* file in each directory (A, B, C, and D) and change the *Httpsport" number to a unique port currently not in use.
 >Note: each API must have a separate port number.

@@ -70,6 +70,7 @@ separated it into the following steps.
 12. [Kubernetes][]
 
 
+
 [Environment preparation]: /tutorial/rest/swagger/ms-chain/preparation/
 [Create specification]: /tutorial/rest/swagger/ms-chain/specification/
 [Generate and Build]: /tutorial/rest/swagger/ms-chain/generation/
