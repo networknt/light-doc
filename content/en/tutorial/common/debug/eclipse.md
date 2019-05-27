@@ -1,6 +1,6 @@
 ---
 title: "Eclipse"
-date: 2017-12-20T17:47:50-05:00
+date: 2017-12-20T17:47:25-05:00
 description: ""
 categories: []
 keywords: []
@@ -38,5 +38,7 @@ code or set a break point in framework code. To pick up the framework class to d
 click External Libraries on the Project tree and click the class name. IDEA will
 automatically decompile the class. You can import the source code of that particular
 version of framework source code from [Release](https://github.com/networknt/light-4j/releases)
+
+##### Return to [Common Tutorial Home Page](/tutorial/common)
 
 

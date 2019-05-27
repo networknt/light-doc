@@ -1,6 +1,6 @@
 ---
 title: "Intellij IDEA"
-date: 2017-12-20T17:47:37-05:00
+date: 2017-12-20T17:47:35-05:00
 description: ""
 categories: []
 keywords: []
@@ -40,3 +40,4 @@ automatically decompile the class. You can import the source code of that partic
 version of framework source code from [Release](https://github.com/networknt/light-4j/releases)
 
 
+##### Return to [Common Tutorial Home Page](/tutorial/common)
