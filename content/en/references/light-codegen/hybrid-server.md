@@ -30,7 +30,7 @@ have any model for input.
 
 Here is an example of config.json for light-hybrid-4j server generator.
  
-```
+```json
 {
   "name": "petstore",
   "version": "1.0.1",
@@ -57,21 +57,24 @@ Here is an example of config.json for light-hybrid-4j server generator.
 }
 ```
 
-- name is used in generated pom.xml for project name
-- version is used in generated pom.xml for project vesion
-- groupId is used in generated pom.xml for project groupId
-- artifactId is used in generated pom.xml for project artifactId
-- rootPackage is the root package name for your project and it will normally be your domain plug project name.
-- handlerPackage is the Java package for all generated handlers. 
-- modelPackage is the Java package for all generated models or POJOs.
-- httpPort is the http port number the server is listening to if it is enabled.
-- enableHttp is the flag to control if http is enabled or not.
-- httpsPort is the https port number the server is listening to if it is enabled.
-- enableHttps is the flag to control if https is enabled or not.
-- supportDb to control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml
-- dbInfo section is the database connection pool configuration info.
-- supportH2ForTest is a flag to control if H2 code is included in the test server and H2 jar is included in pom.mxl
-- supportClient is a flag to control if client module is included in the generated project to call other services.
+| **Field Name** | **Description** |
+|------------------|:---------------------------------------------------------------------------------------------------------------------:|
+| **name** | used in generated pom.xml for project version |
+| **version** | used in generated pom.xml for project version |
+| **groupID** | used in generated pom.xml for project groupId |
+| **artifactId** | used in generated pom.xml for project artifactId |
+| **rootPackage** | the root package name for your project and it will normally be your domain plug project name. |
+| **handlerPackage** | the Java package for all generated handlers. |
+| **modelPackage** | the Java package for all generated models or POJOs |
+| **httpPort** | the port number of Http listener if enableHttp is true. |
+| **enableHttp** | to specify if the server listens to http port. Http should only be enabled in dev. |
+| **httpsPort** | the port number of Https listener if enableHttps is true. |
+| **enableHttps** | to specify if the server listens to https port. Https should be used in any official environment for security reason. |
+| **enableRegistry** | to control if built-in service registry/discovery is used. Only necessary if running as standalone java -jar xxx. |
+| **supportDb** | to control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml |
+| **dbInfo** | section is the database connection pool configuration info. |
+| **supportH2ForTest** | if true, add H2 in pom.xml as test scope to support unit test with H2 database. |
+| **supportClient** | if true, add com.networknt.client module to pom.xml to support service to service call. |
 
 
 ## Usage

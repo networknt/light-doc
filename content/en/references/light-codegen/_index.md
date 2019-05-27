@@ -6,7 +6,7 @@ categories: []
 keywords: []
 menu:
   docs:
-    parent: "tool"
+    parent: "references"
     weight: 80
 slug: ""
 aliases: []
