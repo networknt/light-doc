@@ -61,7 +61,7 @@ To serve this purpose a new way is introduced here which could integrate the lig
 
 - At the first time to run the build process to generate an initial service module, set config value "specChangeCodeReGenOnly" as false from config JSON file:
 
-  ```
+  ```json
   {
     "name": "petstore",
     "version": "3.0.1",

@@ -12,4 +12,4 @@ draft: false
 
 For detailed usage, please refer to [reference document][].
 
-[reference document]: /tool/light-codegen/eventuate-generator/
+[reference document]: /references/light-codegen/eventuate-generator/
