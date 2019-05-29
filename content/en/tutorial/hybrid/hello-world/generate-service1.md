@@ -1,6 +1,6 @@
 ---
 title: "Generate Service1"
-date: 2019-04-04T10:25:45-04:00
+date: 2019-04-16T12:10:44-04:00
 description: ""
 categories: []
 keywords: []
@@ -17,7 +17,7 @@ The config.json should be very similar to the config.json for the server. You ca
 
 config.json
 
-```
+```json
 {
   "rootPackage": "com.networknt.hello",
   "handlerPackage":"com.networknt.hello.handler",

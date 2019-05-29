@@ -1,6 +1,6 @@
 ---
 title: "Service1 Schema"
-date: 2019-04-04T10:25:36-04:00
+date: 2019-04-16T13:10:44-04:00
 description: ""
 categories: []
 keywords: []
@@ -19,7 +19,7 @@ You can find the schema.json for service1 at https://github.com/networknt/model-
 
 Here is the schema.json for the service1. 
 
-```
+```json
 {
   "host": "lightapi.net",
   "service": "service1",

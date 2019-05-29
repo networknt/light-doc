@@ -1,6 +1,6 @@
 ---
 title: "Generate Hello World Hybrid Server"
-date: 2019-04-04T10:25:21-04:00
+date: 2019-04-16T14:10:44-04:00
 description: ""
 categories: []
 keywords: []
@@ -15,7 +15,7 @@ To generate a hybrid server, we only need a config.json to specify project relat
 
 The config.json can be accessed at https://github.com/networknt/model-config/tree/master/hybrid/hello-world/server
 
-```
+```json
 {
   "rootPackage": "com.networknt.hello",
   "handlerPackage":"com.networknt.hello.handler",

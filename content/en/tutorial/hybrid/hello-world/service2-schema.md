@@ -1,6 +1,6 @@
 ---
 title: "Service2 Schema"
-date: 2019-04-04T10:26:21-04:00
+date: 2019-04-16T09:17:44-04:00
 description: ""
 categories: []
 keywords: []
@@ -17,7 +17,7 @@ To create service2, we need to create a schema.json and a config.json first. The
 
 The config.json is almost the same as service1. The only difference is the name of the service and artifactId. 
 
-```
+```json
 {
   "rootPackage": "com.networknt.hello",
   "handlerPackage":"com.networknt.hello.handler",
@@ -44,7 +44,7 @@ The config.json is almost the same as service1. The only difference is the name 
 
 The following is the schema.json for the service2.
 
-```
+```json
 {
   "host": "lightapi.net",
   "service": "service2",

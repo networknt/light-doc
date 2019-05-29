@@ -1,6 +1,6 @@
 ---
 title: "Test Service1"
-date: 2019-04-04T10:25:55-04:00
+date: 2019-04-16T11:17:44-04:00
 description: ""
 categories: []
 keywords: []
@@ -23,7 +23,7 @@ In the src/main, there are two handlers in the `com.networknt.hello.handler` pac
 
 Info.java
 
-```
+```java
 
 package com.networknt.hello.handler;
 
@@ -46,7 +46,7 @@ Let's change the handler method a little bit to return "info" instead of "".
 
 After the change, the file should be. 
 
-```
+```java
 
 package com.networknt.hello.handler;
 
@@ -70,7 +70,7 @@ Let's change the Query.java to return "query".
 
 Query.java
 
-```
+```java
 package com.networknt.hello.handler;
 
 import com.networknt.utility.NioUtils;
@@ -94,7 +94,7 @@ With the two handlers updated, let's update the test cases in the src/test folde
 
 The generated InfoTest.java should look like. 
 
-```
+```java
 
 package com.networknt.hello.handler;
 
@@ -174,7 +174,7 @@ Let's uncomment the code and replace the request body with the following.
 
 The updated InfoTest.java should look like this.
 
-```
+```java
 package com.networknt.hello.handler;
 
 import com.networknt.client.Http2Client;
@@ -247,7 +247,7 @@ Now the test case should be passed if you run it from the IDE. You can write neg
 
 let's change the QueryTest.java to the following.
 
-```
+```java
 package com.networknt.hello.handler;
 
 import com.networknt.client.Http2Client;

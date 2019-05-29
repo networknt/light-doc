@@ -58,7 +58,7 @@ In light-codegen, light-hybrid-4j framework generator needs a config.json as inp
 
 Here is the content of config.json
 
-```
+```json
 {
   "rootPackage": "com.networknt.gserver",
   "handlerPackage":"com.networknt.gserver.handler",
@@ -102,9 +102,9 @@ mvn clean install
 
 Now let’s generate a service. For hybrid service generator, it needs a config.json and also a schema.json to define the interface/contract for the service.
 
-Service config.json can be found in model-config/hybrid/generic-service, and its content is
+Service `config.json` can be found in model-config/hybrid/generic-service, and its content is
 
-```
+```json
 {
   "rootPackage": "com.networknt.gservice",
   "handlerPackage":"com.networknt.gservice.handler",
@@ -130,9 +130,9 @@ Service config.json can be found in model-config/hybrid/generic-service, and its
 
 ```
 
-The schema.json can be found in the same folder. 
+The `schema.json` can be found in the same folder. 
 
-```
+```json
 {
   "host": "lightapi.net",
   "service": "world",
@@ -245,9 +245,9 @@ cd ~/networknt
 java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f light-hybrid-4j-service -o light-example-4j/hybrid/generic-service -m model-config/hybrid/generic-service/schema.json -c model-config/hybrid/generic-service/config.json
 ```
 
-Once the service is generated, let's update the HelloWorld2.java to return a JSON object instead of an empty string. 
+Once the service is generated, let's update the `HelloWorld2.java` to return a JSON object instead of an empty string. 
 
-```
+```java
 package com.networknt.gservice.handler;
 
 import com.networknt.utility.NioUtils;
@@ -303,5 +303,5 @@ You will have a response like this.
 
 This getting started guide shows you the steps without any extra options. You can get a feeling of how the light-hybrid-4j framework works. If you are interested in this framework, please visit the [tutorial][]. 
 
-[light-codegen]: /tool/light-codegen/
+[light-codegen]: /references/light-codegen/
 [tutorial]: /tutorial/hybrid/
