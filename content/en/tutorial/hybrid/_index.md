@@ -30,3 +30,4 @@ are some examples.
 - [Portal Hybrid Query with Schema Form](/tutorial/hybrid/schema-form-query-portal/)
 - [Portal Hybrid Service with User Management](/tutorial/hybrid/user-management-portal/)
 - [Taiji Blockchain Web Client Server SPA with handler.yml](/tutorial/hybrid/web-client-spa/)
+- [Register individual handlers to Consul for discovery](/tutorial/hybrid/register-handler/)
