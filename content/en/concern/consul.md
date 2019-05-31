@@ -147,6 +147,13 @@ httpCheck: true
 # but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
 # is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
 ttlCheck: false
+# endpoints that support blocking will also honor a wait parameter specifying a maximum duration for the blocking request.
+# This is limited to 10 minutes.This value can be specified in the form of "10s" or "5m" (i.e., 10 seconds or 5 minutes,		 # This is limited to 10 minutes.This value can be specified in the form of "10s" or "5m" (i.e., 10 seconds or 5 minutes,
+# respectively).		 # respectively).
+wait: 600s		 wait: 600s
+# enable using HTTP/2 to connect to consul, for now doesn't support consul version 1.4 or above, please make it false when consul version maches.
+# value is default to false 
+enableHttp2: false
 ```
 
 * server.yml
