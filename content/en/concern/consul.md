@@ -152,7 +152,7 @@ ttlCheck: false
 # respectively).
 wait: 600s
 # enable using HTTP/2 to connect to consul, for now doesn't support consul version 1.4 or above, please make it false when 
-consul version maches. The value is default to false to ensure compatibility. 
+# consul version maches. The value is default to false to ensure compatibility. 
 enableHttp2: false
 ```
 
