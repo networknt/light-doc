@@ -1,15 +1,18 @@
 ---
 title: "Quick Start - Microservices Chain Application"
-date: 2017-11-29T10:12:34-05:00
+date: 2017-11-29T02:42:32-05:00
 description: ""
 categories: []
 keywords: []
 slug: ""
 aliases: []
-toc: false
-draft: false
 toc: true
+draft: false
 ---
+>This is the Quick Start tutorial that utilizes the pre-built repository to provide an introduction to MS Chain Services. 
+>If you prefer to do a step-by-step setup of MS Chain Services please visit the [MS Chain Services Home](/tutorial/rest/swagger/ms-chain/)
+
+
 You will need the following dependencies before starting this tutorial:
 
 - Java JDK 8 (I prefer OpenJDK but Oracle JDK will do)
@@ -22,13 +25,22 @@ This quick start tutorial is designed for anyone beginning to utilize Light-4j a
 API A -> API B, API B -> API C, API C -> API D
 ```
 ## Setting up the Environment
-For the purpose of this guide we will be using IntelliJ's Java IDE.
 
-After cloning the above git repository, the *ms_chain* directory must be opened and in order to correctly run Maven, we must go into the directory containing the **pom.xml** file *(/rest/swagger/api_a/httpschain)* and option click>*"Add as Maven Project"*. This will create a **classpath of module** which should be selected in IntelliJ's *"Edit Configurations"*.
+You are able to utlized two methods in order to build the `pom.xml`. One method shown below is how to run all four APIs within IntelliJ IDEA through the application solely. In order to gain a deeper look into this demonstration, it is recommended to attempt it through the command line.
+
+### Utilizing IntelliJ IDEA
+
+After cloning the above git repository, the *ms_chain* directory must be opened and in order to correctly run Maven, we must go into the directory containing the **pom.xml** file *(/rest/swagger/ms_chain/api_a/httpschain)* and option click>*"Add as Maven Project"*. This will create a **classpath of module** which should be selected in IntelliJ's *"Edit Configurations"*.
+
+<img src="/images/quickstart_tut1.png" alt="intellij debug image one" style="width:300px;"/>
+
+<img src="/images/ij-idea-debug1.png" alt="intellij debug image one" style="width:300px;"/>
+
+<img src="/images/quickstart_tut2.png" alt="intellij debug image one" style="width:500px;"/>
 
 Once we have our environment set up, we can begin to test it and see if API A will call the other three APIs.
 
-## Execution
+### Utilizing Command Line
 
 In order to run the Microservices Chain Pattern we must finally execute all APIs (A, B, C, and D) onto their ports. The example sets up the ports 7441, 7442, 7443, and 7444, respectively. Within the separate API folder directories (E.g. api_a/httpschain) run the Maven command to run the API on the port:
 
@@ -38,13 +50,17 @@ mvn install exec:exec
 >If you do not specify where your pom.xml file is, we must run the maven command from the directory it is in. In this example it is in api_a/httpschain. 
 >Also note that our api_a/generated does not include the chain services code, but is simply the "blueprint" of our APIs.
 
-Following many completed tests, the output for running API A should be:
+
+## Execution
+
+Regardless of the platform you used to build the `pom.xml`  after the completion of many tests, the output for running API A should be :
 ```
+Http Server started on ip:0.0.0.0 Port:7441
 Https Server started on ip:0.0.0.0 Port:7441
 ```
-Run this three more times for APIs B, C, and D. The output, excluding port numbers, should be the same.
+Run this three more times for APIs B, C, and D. Do not forget to <span style="color:green">"*Add As Maven Project*"</span> for the remaining APIs if you are utilizing IntelliJ and utilizing <span style="color:green">"`mvn install exec:exec`"</span> in separate terminal windows if using the command line. The output, excluding port numbers, should be the same.
 
->If you come across an error when initializing a port, visit your *server.yml* file in each directory (A, B, C, and D) and change the *Httpsport" number to a unique port currently not in use.
+>If you come across an error when initializing a port, visit your *server.yml* file in each directory (A, B, C, and D) and change the *Httpsport" number to a unique port currently not in use OR ensure the port is not already in use.
 >Note: each API must have a separate port number.
 
 Once this is completed separately for all four APIs, you can begin execution and testing. Open a new shell and execute the following command.

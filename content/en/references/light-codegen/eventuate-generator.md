@@ -52,9 +52,35 @@ User can refer to [todo-list example spec][] to build their own specification fo
 
 #### Config
 
+| **Field Name** | **Description** |
+|--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| **name** | used in generated pom.xml for project version |
+| **version** | used in generated pom.xml for project version |
+| **groupID** | used in generated pom.xml for project groupId |
+| **artifactId** | used in generated pom.xml for project artifactId |
+| **rootPackage** | the root package name for your project and it will normally be your domain plug project name. |
+| **handlerPackage** | the Java package for all generated handlers. |
+| **modelPackage** | the Java package for all generated models or POJOs |
+| **eventuateEventPackage** | the Java package for Eventuate common module which defined components could be shared by command service and query service; Normally we can put events objects and domain objects in this module. |
+| **eventuateCommandPackage** | the Java package for Eventuate command side component module; Normally we put commands definition and aggregation classes in this module. |
+| **eventuateQueryPackage** | the Java package for Eventuate query side component module; It includes query side DAO or repository service module. |
+| **overwriteHandler** | controls if you want to overwrite handler when regenerate the same project into the same folder. If you only want to upgrade the framework to another minor version and don’t want to overwrite handlers, then set this property to false. |
+| **overwriteHandlerTest** | control if you want to overwrite handler test cases |
+| **overwriteModel** | controls if you want to overwrite generated models |
+| **overwriteEventuateModule** | controls if you want to overwrite generated eventuate modules, which include commnon module, command module and query module. |
+| **httpPort** | the port number of Http listener if enableHttp is `true`. |
+| **enableHttp** | to specify if the server listens to http port. Http should only be enabled in dev. |
+| **httpsPort** | the port number of Https listener if enableHttps is `true`. |
+| **enableHttps** | to specify if the server listens to https port. Https should be used in any official environment for security reason. |
+| **enableRegistry** | to control if built-in service registry/discovery is used. Only necessary if running as standalone java -jar xxx. |
+| **supportDb** | to control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml |
+| **dbInfo** | section is the database connection pool configuration info. |
+| **supportH2ForTest** | if `true`, add H2 in pom.xml as test scope to support unit test with H2 database. |
+| **supportClient** | if `true`, add com.networknt.client module to pom.xml to support service to service call. |
+
 Here is an example of config.json for openapi generator.
 
-```
+```json
 {
   "name": "todolist",
   "version": "1.0.0",
@@ -84,45 +110,19 @@ Here is an example of config.json for openapi generator.
 }
 ```
 
-- name is used in generated pom.xml for project name
-- version is used in generated pom.xml for project vesion
-- groupId is used in generated pom.xml for project groupId
-- artifactId is used in generated pom.xml for project artifactId
-- rootPackage is the root package name for your project and it will normally be your domain plug project name.
-- handlerPackage is the Java package for all generated handlers. 
-- modelPackage is the Java package for all generated models or POJOs.
-- eventuateEventPackage is the Java package for  Eventuate common module which defined components could be shared by command service and query service; Normally we can put events objects and domain objects in this module.
-- eventuateCommandPackage is the Java package for Eventuate command side component module; Normally we  put commands definition and aggregation classes in this module.
-- eventuateQueryPackage is the Java package for  Eventuate query side component module; It includes query side DAO or repository service module.
-- overwriteHandler controls if you want to overwrite handler when regenerate the same project into the same folder. If you only want to upgrade the framework to another minor version and don't want to overwrite handlers, then set this property to false. 
-- overwriteHandlerTest controls if you want to overwrite handler test cases.
-- overwriteModel controls if you want to overwrite generated models.
-- overwriteEventuateModule controls if you want to overwrite generated eventuate modules, which include commnon module, command module and query module.
-- httpPort is the port number of Http listener if enableHttp is true.
-- enableHttp to specify if the server listens to http port. Http should only be enabled in dev.
-- httpsPort is the port number of Https listener if enableHttps is true.
-- enableHttps to specify if the server listens to https port. Https should be used in any official environment for security reason.
-- enableRegistry to control if built-in service registry/discovery is used. Only necessary if running as standalone java -jar xxx.
-- supportDb to control if db connection pool will be setup in service.yml and db dependencies are included in pom.xml
-- dbInfo section is the database connection pool configuration info.
-- supportH2ForTest if true, add H2 in pom.xml as test scope to support unit test with H2 database.
-- supportClient if true, add com.networknt.client module to pom.xml to support service to service call.
 
-
-
-
-For initialize the eventuate based the API service, the config value "overwriteEventuateModule" should be set as true.
+For initialize the eventuate based the API service, the config value `overwriteEventuateModule` should be set as `true`.
 The the light-codegen eventuate generator will generate the eventuate rest API project with the following modules:
 
--- common module:      Shared components module which will be used on both  command side service module and  query side service module. Normally, it includes events definition and data module for rest API
+-- **common module**:      Shared components module which will be used on both  command side service module and  query side service module. Normally, it includes events definition and data module for rest API
 
--- command module:     Eventuate command side component module; Normally we  put commands definition and aggregation classes in this module.
+-- **command module**:     Eventuate command side component module; Normally we  put commands definition and aggregation classes in this module.
 
--- query module:       Eventuate query side component module; It includes query side DAO or repository service module.
+-- **query module**:       Eventuate query side component module; It includes query side DAO or repository service module.
 
--- command side service module:     CQRS command side service module
+-- **command side service module**:     CQRS command side service module
 
--- query side service module:       CQRS query side service module
+-- **query side service module**:       CQRS query side service module
 
 
 

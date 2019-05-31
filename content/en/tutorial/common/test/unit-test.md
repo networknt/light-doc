@@ -34,7 +34,7 @@ method names prefix with test* are test cases.
 Majority of our unit tests were written in Junit 4.12 and we are in a transition to Junit
 5 now. To use Junit5, you need to put the dependency into the parent pom.
 
-```
+```xml
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
@@ -51,7 +51,7 @@ The current junit version is 5.0.1
 Unit test cases are executed by surefire plugin and this is defined in the pom.xml in
 the parent pom.
 
-```
+```xml
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -82,3 +82,6 @@ If you want to run both unit tests and integration tests.
 ```
 mvn clean verify
 ```
+
+
+##### Return to [Common Tutorial Home Page](/tutorial/common)
