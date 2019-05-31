@@ -29,7 +29,7 @@ be located in src/integration folder and all test classes will end with "IT".
 As integration is not the default test source folder or resources folder, we need to add
 this in pom.xml
 
-```
+```xml
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -69,7 +69,7 @@ this in pom.xml
 
 The integration tests will be called from maven failsafe plugin.
 
-```
+```xml
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -101,4 +101,7 @@ or
 
 mvn clean verify
 ```
+
+
+##### Return to [Common Tutorial Home Page](/tutorial/common)
 

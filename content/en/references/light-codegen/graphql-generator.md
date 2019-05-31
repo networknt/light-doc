@@ -38,7 +38,7 @@ We recommend using IDL. For more information about IDL, please check [here](http
 
 #### Config
 
-| Field Name | Description |
+| **Field Name** | **Description** |
 |----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | **name** | used in generated pom.xml for project version |
 | **version** | used in generated pom.xml for project version |

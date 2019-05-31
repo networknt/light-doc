@@ -40,7 +40,7 @@ find a similar [tutorial for OpenAPI 3.0 generator][]
 
 #### Config
 
-| Field Name | Description |
+| **Field Name** | **Description** |
 |------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | **name** | used in generated pom.xml for project name |
 | **version** | used in generated pom.xml for project vesion |

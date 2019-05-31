@@ -1,7 +1,7 @@
 ---
 title: "Logging"
-date: 2017-11-29T16:38:53-05:00
-description: "Enable Logging"
+date: 2017-11-29T06:38:53-05:00
+description: ""
 categories: []
 keywords: []
 slug: ""
@@ -10,5 +10,4 @@ toc: false
 draft: false
 ---
 
-
-This is missing and need to be added.
+### Currently Under Construction
