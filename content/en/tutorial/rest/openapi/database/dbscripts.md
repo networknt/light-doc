@@ -151,9 +151,8 @@ INSERT INTO fortune (id, message) VALUES (12, 'フレームワークのベンチ
 
 ```
 
-Above scripts can be found in https://github.com/networknt/light-example-4j/tree/master/rest/swagger/database/dbscript You can copy the dbscript folder from database.bak to database folder as scripting for these three databases are out of scope in this tutorial.
+Above scripts can be found in https://github.com/networknt/light-example-4j/tree/master/rest/openapi/database/dbscript You can copy the dbscript folder from database.bak to database folder as scripting for these three databases are out of scope in this tutorial.
 
 In the next step, we are going to [start three databases][] with Docker and make them ready to be connected from the project we are building. 
 
-[start three databases]: /tutorial/rest/swagger/database/startdb/
-
+[start three databases]: /tutorial/rest/openapi/database/startdb/

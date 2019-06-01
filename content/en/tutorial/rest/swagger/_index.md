@@ -15,7 +15,6 @@ This section contains tutorials based on the Swagger 2.0 specifications. As most
 
 * [Swagger 2.0](/tutorial/rest/swagger/)
    + [Swagger 2.0 Petstore](/tutorial/rest/swagger/petstore/)
-   + [Restful Database Access](/tutorial/rest/swagger/database/)
    + [Microservices Chain Pattern](/tutorial/rest/swagger/ms-chain/)
 
 [OpenAPI 3.0]: /tutorial/rest/openapi/

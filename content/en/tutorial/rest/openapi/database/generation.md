@@ -33,20 +33,20 @@ cd light-codegen
 mvn clean install -DskipTests
 ```
 
-For this demo, I am going to generate the code into light-example-4j/rest/swagger/database/generated folder so that users can check the code later on from this repository. 
+For this demo, I am going to generate the code into light-example-4j/rest/openapi/database/generated folder so that users can check the code later on from this repository. 
 
 Let's check out the light-example-4j repository and back up the existing database project. You can later compare your working folder with the .bak folder to see any difference. 
 
 ```
 cd ~/networknt
 git clone https://github.com/networknt/light-example-4j.git
-cd light-example-4j/rest/swagger
+cd light-example-4j/rest/openapi
 mv database database.bak
 ```
 
-Before generating the project, we need to create a config.json to define packages, artifactId, groupId and other options for the project.
+Before generating the project, we need to create a config.json to define packages, artifactId, groupId, and other options for the project.
 
-Here is the content of the file and it can be found in ~/networknt/model-config/rest/swagger/database
+Here is the content of the file and it can be found in `~/networknt/model-config/rest/openapi/database`
 
 ```
 {
@@ -86,13 +86,13 @@ Code generation
 
 ```
 cd ~/networknt
-java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f swagger -o light-example-4j/rest/swagger/database/generated -m model-config/rest/swagger/database/swagger.json -c model-config/rest/swagger/database/config.json
+java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o light-example-4j/rest/openapi/database/generated -m model-config/rest/openapi/database/openapi.yaml -c model-config/rest/openapi/database/config.json
 ```
 
 Now you should have a project generated. Let's build it and run it.
 
 ```
-cd ~/networknt/light-example-4j/rest/swagger/database/generated
+cd ~/networknt/light-example-4j/rest/openapi/database/generated
 mvn clean install exec:exec
 ```
 
@@ -101,11 +101,11 @@ Now you can access the service with curl following the [next step][] below.
 
 ### Generate code with docker container
 
-Let's remove the generated folder from light-example-4j/rest/swagger/database folder and
-generate the project again with docker container.
+Let's remove the generated folder from light-example-4j/rest/openapi/database folder and
+generate the project again with the docker container.
 
 ```
-cd ~/networknt/light-example-4j/swagger/rest/database
+cd ~/networknt/light-example-4j/openapi/rest/database
 rm -rf generated
 ```
 
@@ -113,20 +113,20 @@ Now let's generate the project again with docker.
 
 ```
 cd ~/networknt
-docker run -it -v ~/networknt/model-config/rest/swagger/database:/light-api/input -v ~/networknt/light-example-4j/rest/swagger/database:/light-api/out networknt/light-codegen -f swagger -m /light-api/input/swagger.json -c /light-api/input/config.json -o /light-api/out/generated
+docker run -it -v ~/networknt/model-config/rest/openapi/database:/light-api/input -v ~/networknt/light-example-4j/rest/openapi/database:/light-api/out networknt/light-codegen -f openapi -m /light-api/input/openapi.yaml -c /light-api/input/config.json -o /light-api/out/generated
 ```
 
-Node that on Linux, the generated folder in ~/networknt/light-example-4j/rest/swagger/database will be owned by root:root and it needs to be changed to your user:group before compile the project. On other operating systems like Mac and Windows, you don't need this step. 
+Note that on Linux, the generated folder in ~/networknt/light-example-4j/rest/openapi/database will be owned by root:root and it needs to be changed to your user:group before compiling the project. On other operating systems like Mac and Windows, you don't need this step. 
 
 ```
-cd ~/networknt/light-example-4j/rest/swagger/database
+cd ~/networknt/light-example-4j/rest/openapi/database
 sudo chown -R steve:steve .
 ```
 
 Let's build and start the service
 
 ```
-cd ~/networknt/light-example-4j/rest/swagger/database/generated
+cd ~/networknt/light-example-4j/rest/openapi/database/generated
 mvn clean install exec:exec
 ```
 
@@ -134,5 +134,5 @@ Now you can access the service with curl following the [next step][].
 
 [light-codegen]: /tool/light-codegen/
 [light-codegen tutorial]: /tutorial/generator/
-[next step]: /tutorial/rest/swagger/database/test/
+[next step]: /tutorial/rest/openapi/database/test/
 

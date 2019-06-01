@@ -17,12 +17,12 @@ In the previous step, we have created a private static data source in each handl
 Before we add logic to query the database, let's copy connection to query folder.
 
 ```
-cd ~/networknt/light-example-4j/rest/swagger/database
+cd ~/networknt/light-example-4j/rest/openapi/database
 cp -r connection query
 
 ```
 
-And add a constructor that accepts two integers as parameters for RandomNumber in model folder. This will ensure that it is easy to construct an object from QueryGetHandler. 
+And add a constructor that accepts two integers as parameters for RandomNumber in the model folder. This will ensure that it is easy to construct an object from QueryGetHandler. 
 
 ```
   public RandomNumber(int id, int randomNumber) {
@@ -105,8 +105,8 @@ package com.networknt.database.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.config.Config;
 import com.networknt.database.model.RandomNumber;
+import com.networknt.handler.LightHttpHandler;
 import com.networknt.service.SingletonServiceFactory;
-import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 
@@ -119,10 +119,11 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
-public class QueryGetHandler implements HttpHandler {
-    private static final DataSource ds = (DataSource) SingletonServiceFactory.getBean(DataSource.class);
-    private static final ObjectMapper mapper = Config.getInstance().getMapper();
+public class QueryGetHandler implements LightHttpHandler {
 
+    private static final DataSource ds = SingletonServiceFactory.getBean(DataSource.class);
+    private static final ObjectMapper mapper = Config.getInstance().getMapper();
+    
     @Override
     public void handleRequest(HttpServerExchange exchange) throws Exception {
         if (exchange.isInIoThread()) {
@@ -170,14 +171,13 @@ public class QueryGetHandler implements HttpHandler {
 We are good to go.
 
 ```
-cd ~/networknt/light-example-4j/rest/swagger/database/query
+cd ~/networknt/light-example-4j/rest/openapi/database/query
 mvn clean install exec:exec
 ```
 
 Access the query endpoint, and you will get the random number as a result.
 
-Note that we need to make sure MySQL database docker container is up and running. If you got an error in the console, chances are your MySQL database is not running. Please refer to
-[start databases][] for instructions to start MySQL database in Docker. 
+Note that we need to make sure MySQL database docker container is up and running. If you got an error in the console, chances are your MySQL database is not running. Please refer to [start databases][] for instructions to start MySQL database in Docker. 
 
 
 ```
@@ -190,7 +190,9 @@ Result:
 {"randomNumber":0,"id":2}
 ```
 
+You can run the same command several times to see the different results.
+
 In the next step, we are going to update [multiple queries][] handler.
 
-[start databases]: /tutorial/rest/swagger/database/startdb/
-[multiple queries]: /tutorial/rest/swagger/database/multiple-queries/
+[start databases]: /tutorial/rest/openapi/database/startdb/
+[multiple queries]: /tutorial/rest/openapi/database/multiple-queries/

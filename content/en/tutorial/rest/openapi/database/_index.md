@@ -19,9 +19,9 @@ There are numeric options to connect to databases in the light platform, and thi
 
 Also, for large-scale microservices deployment, it is seldom dealing with the database directly from your service. Chances are your service is working with in-memory cache or in-memory data grid or some No-SQL database directly. For service to service orchestration, you might take a look at the [light-eventuate-4j][] to adopt Event Sourcing and CQRS as your architecture pattern. 
 
-In this tutorial, we will walk through the following steps with Oracle/Postgres/Mysql for light-rest-4j framework. If you use light-graphql-4j or light-hybrid-4j frameworks, the steps will be somewhat different, but the concept is the same. Please note, the specification we use in this tutorial is based on Swagger 2.0, and it is replaced by OpenAPI 3.0 already. 
+In this tutorial, we will walk through the following steps with Oracle/Postgres/Mysql for light-rest-4j framework. If you use light-graphql-4j or light-hybrid-4j frameworks, the steps will be somewhat different, but the concept is the same. Please note, the specification we use in this tutorial is based on OpenAPI 3.0 which is migrated from the Swagger 2.0. 
 
-* How to set up database connection pool
+* How to set up the database connection pool
 * How to connect to the database instance
 * How to do query database tables
 * How to update database tables
@@ -48,22 +48,27 @@ This tutorial shows how to use the SQL database in your microservices based on l
 
 * [Multiple updates][]
 
+* [Switch to Oracle][]
+
+* [Switch to Postgre][]
+
 * [Unit tests][]
 
 * [Performance][]
 
-[Environment preparation]: /tutorial/rest/swagger/database/preparation/
-[Create specification]: /tutorial/rest/swagger/database/specification/
-[Generate and Build]: /tutorial/rest/swagger/database/generation/
-[Test mock service]: /tutorial/rest/swagger/database/test/
-[Database scripts]: /tutorial/rest/swagger/database/dbscripts/
-[Start databases]: /tutorial/rest/swagger/database/startdb/
-[Connection pool]: /tutorial/rest/swagger/database/connection-pool/
-[Single query]: /tutorial/rest/swagger/database/single-query/
-[Multiple queries]: /tutorial/rest/swagger/database/multiple-queries/
-[Multiple updates]: /tutorial/rest/swagger/database/multiple-updates/
-[Unit tests]: /tutorial/rest/swagger/database/unit-test/
-[Performance]: /tutorial/rest/swagger/database/performance/
+[Environment preparation]: /tutorial/rest/openapi/database/preparation/
+[Create specification]: /tutorial/rest/openapi/database/specification/
+[Generate and Build]: /tutorial/rest/openapi/database/generation/
+[Test mock service]: /tutorial/rest/openapi/database/test/
+[Database scripts]: /tutorial/rest/openapi/database/dbscripts/
+[Start databases]: /tutorial/rest/openapi/database/startdb/
+[Connection pool]: /tutorial/rest/openapi/database/connection-pool/
+[Single query]: /tutorial/rest/openapi/database/single-query/
+[Multiple queries]: /tutorial/rest/openapi/database/multiple-queries/
+[Multiple updates]: /tutorial/rest/openapi/database/multiple-updates/
+[Unit tests]: /tutorial/rest/openapi/database/unit-test/
+[Performance]: /tutorial/rest/openapi/database/performance/
 [data-source]: /concern/datasource/
 [light-eventuate-4j]: /style/light-eventuate-4j/
-
+[Switch to Oracle]: /tutorial/rest/openapi/database/oracle/
+[Switch to Postgre]: /tutorial/rest/openapi/database/postgres/
