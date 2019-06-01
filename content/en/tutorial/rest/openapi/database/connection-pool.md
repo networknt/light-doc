@@ -12,47 +12,26 @@ draft: false
 reviewed: true
 ---
 
-To connect to the database we need to have service.yml that can inject connection pool to the microservice you are building.
+To connect to the database, we need to have service.yml that can inject a connection pool to the microservice you are building.
 
-Now we have a generated project with configuration for MySQL, let's take a look at the generated service.yml, and you can see the following section for MySQL connection pool configuration. 
+Now we have a generated project with the configuration for MySQL, let's take a look at the generated service.yml, and you can see the following section for MySQL connection pool configuration. 
 
-service.yml in ~/networknt/light-example-4j/rest/swagger/database/generated/src/main/resources/config
+service.yml in `~/networknt/light-example-4j/rest/openapi/database/generated/src/main/resources/config`
+
 
 ```
+
 # Singleton service factory configuration/IoC injection
 singletons:
-# HandlerProvider implementation
-- com.networknt.handler.HandlerProvider:
-  - com.networknt.database.PathHandlerProvider
 # StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
 # - com.networknt.server.StartupHookProvider:
+  # If you are using mask module to remove sensitive info before logging, uncomment the following line.
+  # - com.networknt.server.JsonPathStartupHookProvider
   # - com.networknt.server.Test1StartupHook
   # - com.networknt.server.Test2StartupHook
 # ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
 # - com.networknt.server.ShutdownHookProvider:
   # - com.networknt.server.Test1ShutdownHook
-# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
-- com.networknt.handler.MiddlewareHandler:
-  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
-  - com.networknt.exception.ExceptionHandler
-  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
-  - com.networknt.metrics.MetricsHandler
-  # Traceability Put traceabilityId into response header from request header if it exists
-  - com.networknt.traceability.TraceabilityHandler
-  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
-  - com.networknt.correlation.CorrelationHandler
-  # Swagger Parsing swagger specification based on request uri and method.
-  - com.networknt.swagger.SwaggerHandler
-  # Security JWT token verification and scope verification (depending on SwaggerHandler)
-  - com.networknt.security.JwtVerifyHandler
-  # Body Parse body based on content type in the header.
-  - com.networknt.body.BodyHandler
-  # SimpleAudit Log important info about the request into audit log
-  - com.networknt.audit.AuditHandler
-  # Sanitizer Encode cross site scripting
-  - com.networknt.sanitizer.SanitizerHandler
-  # Validator Validate request based on swagger specification (depending on Swagger and Body)
-  - com.networknt.validator.ValidatorHandler
 
 
 - javax.sql.DataSource:
@@ -62,12 +41,13 @@ singletons:
       username: root
       password: my-secret-pw
       maximumPoolSize: 10
-      useServerPrepStmts: true,
-      cachePrepStmts: true,
-      cacheCallableStmts: true,
-      prepStmtCacheSize: 10,
-      prepStmtCacheSqlLimit: 2048,
+      useServerPrepStmts: true
+      cachePrepStmts: true
+      cacheCallableStmts: true
+      prepStmtCacheSize: 10
+      prepStmtCacheSqlLimit: 2048
       connectionTimeout: 2000
+
 
 ```
 
@@ -77,7 +57,7 @@ Before we make any change, let's create a new folder so that we can always compa
  
 
 ```
-cd ~/networknt/light-example-4j/rest/swagger/database
+cd ~/networknt/light-example-4j/rest/openapi/database
 cp -r generated connection
 ```
 
@@ -123,6 +103,6 @@ import javax.sql.DataSource;
 
 ```
 
-If you can build, start and access the server with curl, that means the database connection is created although we are not using it in our code yet. The next step we will try to [query database][].
+If you can build, start, and access the server with curl, that means the database connection is created although we are not using it in our code yet. The next step we will try to [query database][].
 
-[query database]: /tutorial/rest/swagger/database/single-query/
+[query database]: /tutorial/rest/openapi/database/single-query/

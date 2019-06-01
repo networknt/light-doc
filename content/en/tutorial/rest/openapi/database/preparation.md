@@ -26,6 +26,6 @@ cd ~
 mkdir networknt
 ```
 
-Once your environment is ready, go to the next step to [create a Swagger specification file][]. 
+Once your environment is ready, go to the next step to [create an OpenAPI specification file][]. 
 
-[create a Swagger specification file]: /tutorial/rest/swagger/database/specification/
+[create a Swagger specification file]: /tutorial/rest/openapi/database/specification/
