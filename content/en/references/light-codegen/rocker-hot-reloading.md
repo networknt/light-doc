@@ -5,18 +5,17 @@ With support for rocker hot reloading, light-codegen can load customized templat
 To enable rocker hot reloading, extra classpath setting is needed. A script `codegen-cli/codegen.sh` is provided to help the code generation with hot reloading.
 
 #### MacOS
-1. Create rocker compiler config and setting the directory of customized templates (or change the codegen.sh directly), for example `src/test/resources/externalTemplates/`
+1. Setting the directory of customized templates in codegen.sh, for example `src/test/resources/externalTemplates/`
     ```bash
-    cd $workDir
-    
-    echo "generate config $workDir/rocker-compiler.conf"
     echo "rocker.template.dir=src/test/resources/externalTemplates/" > rocker-compiler.conf
     ```
-    The $workDir must contain the `codegen-cli.jar`
-    
     This step can be skipped if customized rocker templates locate at the directory of `codegen-cli.jar`.
 
-2. Using `codegen.sh` instead of `java -jar` to execute codegen-cli.jar
+2. Using `codegen.sh` instead of `java -jar` to execute codegen-cli.jar. In order to run the script, two pre-conditions need to be satisfied:
+
+    the working dir has codegen-cli.jar from the codegen-cli/target folder;
+    
+    the templates in the working dir have the same folder structures as provided templates if old templates need to be overwritten.
     ```bash
     cd $workDir
     
@@ -24,12 +23,9 @@ To enable rocker hot reloading, extra classpath setting is needed. A script `cod
     ```
     This `-r` means rocker hot reloading is enabled
 
-#### Windows (PowerShell IES)
-1. Create rocker compiler config and setting the directory of customized templates (or change the codegen.ps1 directly), for example `src/test/resources/externalTemplates/`
+#### Windows (PowerShell ISE)
+1. Setting the directory of customized templates in codegen.ps1, for example `src/test/resources/externalTemplates/`
     ```bash
-    cd $workDir
-    
-    Write-Host "generate config $compilerConf"
     $escapedDir = $workDir -replace '\\', '/'
     Set-Content -Path src/test/resources/externalTemplates/ -Value "rocker.template.dir=$escapedDir"
     ```
@@ -37,7 +33,11 @@ To enable rocker hot reloading, extra classpath setting is needed. A script `cod
     
     This step can be skipped if customized rocker templates locate at the directory of `codegen-cli.jar`.
 
-2. Using `codegen.ps1` instead of `java -jar` to execute codegen-cli.jar
+2. Using `codegen.ps1` instead of `java -jar` to execute codegen-cli.jar. In order to run the script, two pre-conditions need to be satisfied:
+
+    the working dir has codegen-cli.jar from the codegen-cli/target folder;
+    
+    the templates in the working dir have the same folder structures as provided templates if old templates need to be overwritten.
     ```bash
     cd $workDir
     
