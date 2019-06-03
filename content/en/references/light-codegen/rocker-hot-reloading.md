@@ -26,12 +26,11 @@ To enable rocker hot reloading, extra classpath setting is needed. A script `cod
 #### Windows (PowerShell ISE)
 1. Setting the directory of customized templates in codegen.ps1, for example `src/test/resources/externalTemplates/`
     ```bash
-    $escapedDir = $workDir -replace '\\', '/'
     Set-Content -Path src/test/resources/externalTemplates/ -Value "rocker.template.dir=$escapedDir"
     ```
     The $workDir must contain the `codegen-cli.jar`
     
-    This step can be skipped if customized rocker templates locate at the directory of `codegen-cli.jar`.
+    This step can be skipped if customized rocker templates located at the directory of `codegen-cli.jar`.
 
 2. Using `codegen.ps1` instead of `java -jar` to execute codegen-cli.jar. In order to run the script, two pre-conditions need to be satisfied:
 
