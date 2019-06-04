@@ -30,6 +30,7 @@ The light platform is very flexible in term of injecting other components, and w
   * [Security](/service/messaging/kafka/security/)
   * [Purge Topic](/service/messaging/kafka/purge/)
   * [Docker Access Local Kafka](/service/messaging/kafka/docker-local-kafka/)
+  * [Upgrade Kafka Cluster](/service/messaging/kafka/upgrade/)
 - [Schema Registry](/service/messaging/schema-registry/)
   * [Installation](/service/messaging/schema-registry/installation/)
   * [Security](/service/messaging/schema-registry/security/)

@@ -135,7 +135,7 @@ broker.id=0 # for test1 host, increase for test2 and test3
 log.dirs=/opt/kafka-logs # directory we created in the previous step
 num.partitions=3
 offsets.topic.replication.factor=3
-advertised.listeners=PLAINTEXT://38.113.162.51:9092
+advertised.listeners=PLAINTEXT://38.113.162.51:9092 # change IP for test2 and test3
 zookeeper.connect=38.113.162.51:2181,38.113.162.52:2181,38.113.162.53:2181
 ```
 
