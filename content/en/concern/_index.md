@@ -48,6 +48,7 @@ Here is a list of cross-cutting concerns provided by the light platform.
 * [IP Whitelist](/concern/ip-whitelist/)
 * [Rate Limit](/concern/limit/)
 * [Log Mask](/concern/mask/)
+* [Logger Config](/concern/logger-config/)
 * [InfluxDB Metrics](/concern/metrics/)
 * [Prometheus Metrics](/concern/prometheus/)
 * [Registry Discovery](/concern/registry/)
