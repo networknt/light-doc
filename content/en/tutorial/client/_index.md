@@ -24,6 +24,6 @@ When communicating with public websites or API servers, it would be great to get
 - [Standalone Consul Discovery](/tutorial/client/consul-discovery/)
 
 
-[keystore vs truststore]: /tutorial/security/keystore-truststore/
+[keystore vs. truststore]: /tutorial/security/keystore-truststore/
 [Public HTTPS]: /tutorial/client/public-https/
 [Http2Client]: /concern/client/

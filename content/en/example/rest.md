@@ -16,6 +16,7 @@ All examples in Java can be found at [light-example-4j][], and the majority of R
 * [Swagger 2.0 example](https://github.com/networknt/light-example-4j/tree/master/rest/swagger)
 * [Kotlin OpenAPI example](https://github.com/networknt/light-example-kotlin/tree/master/openapi)
 * [Service Registry and Discovery](https://github.com/networknt/light-example-4j/tree/master/discovery)
+* [ServiceMesher Async service call](https://github.com/networknt/light-example-4j/tree/master/servicemesher)
 
 [light-rest-4j]: /style/light-rest-4j/
 [light-example-kotlin]: https://github.com/networknt/light-example-kotlin
