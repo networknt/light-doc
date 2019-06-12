@@ -15,33 +15,21 @@ reviewed: true
 
 This example project used to show how to use light-4j client module and consumer component to call multi-service APIs in servicemesher environment.
 
-It use java async concurrent feature and process the service call parallel
-
+It uses java async concurrent feature and processes the service call in parallel. 
 
 
 ### Introduction:
 
- For microservice application, The application will be split into a set of smaller, interconnected services instead of building a single monolithic application.
- Each microservice is a small application that has its own hexagonal architecture consisting of business logic along with various adapters.
- So there will be lots service to service call to get the required data for business method.
- Microservices architecture adding a complexity to the project just by the fact that a microservices application is a distributed system.
+For microservice application, The application will be split into a set of smaller, interconnected services instead of building a single monolithic application. Each microservice is a small application that has its own hexagonal architecture consisting of business logic along with various adapters. So there will be lots of service to service calls to get the required data for the business method. Microservices architecture adds complexity to the project just by the fact that a microservices application is a distributed system.
 
+So massive service call needs to guarantee excellent performance to complete the business logic in a short time. If those service calls implement synchronously, that means the service calls will be invoked one by one, and any of them takes longer time will hang up the whole application.
 
- So massive service call need guarantee very good performance in order to complete the business logic in short time. If those service call implement synchronously that means the service calls
- will be implement one by one and any of them take long time will hangup the whole service.
+Light-4j client module and light-consumer-4j component use Jave CompletableFuture asynchronous programming to implement
+non-blocking code by running a task on a separate thread than the main application thread and notifying the main thread about its progress, completion or failure;
 
-
- Light-4j client module and light-consumer-4j component use jave CompletableFuture asynchronous programming to implement
- non-blocking code by running a task on a separate thread than the main application thread and notifying the main thread about its progress, completion or failure;
-
-
- We will introduce the detail steps for the implementation in this project as below.
-
-
+We will introduce the detail steps for the implementation of this project as below.
 
 ![diagram](/images/servicemesher.png)
-
-
 
 
 ### Modules
@@ -51,12 +39,12 @@ In this example, we build two types of project setting for light-4j based micros
 First type: one project has multiple service APIs,  for each service API, it has two maven modules: one module for API specification, one for API source code.
 
 
-You can refer to [sample server side services](https://github.com/networknt/light-example-4j/tree/master/servicemesher/services)
+You can refer to [sample server-side services](https://github.com/networknt/light-example-4j/tree/master/servicemesher/services)
 
 
- -- server side services
+-- server-side services
 
- Inside services folder, we build four simple server side mock service APIs:
+Inside the services folder, we build four simple server-side mock service APIs:
 
 
 ```
@@ -81,13 +69,13 @@ Second type: one project for a single service API.
 
 User can use command line to run [light-codegen] /references/light-codegen/openapi-generator/
 
-Or use [light-api-template] (https://github.com/mservicetech/light-api-template) to start build the service API project
+Or use [light-api-template] (https://github.com/mservicetech/light-api-template) to start building the service API project
 
 
 
--- client side service
+-- client-side service
 
-In client folder, we build a client service API which use light-4j client module's consumer component to call the service APIs parallel.
+In the client folder, we build a client service API which use light-4j client module's consumer component to call the service APIs parallel.
 
 
 ###  Structure diagram
@@ -126,7 +114,7 @@ service-define.serviceMap:
 
 ```
 
-The service config will be convert to ServiceMapper object by Config mapping:
+The service config will be converted to ServiceMapper object by Config mapping:
 
 ```
     ServiceMapper serviceMapper = (ServiceMapper) Config.getInstance().getJsonObjectConfig(ServiceMapper.CONFIG_NAME, ServiceMapper.class);
@@ -162,9 +150,7 @@ public class ServiceMapper {
 ```
 
 
-Then in the
-
-`MarketServiceImpl.java`
+Then in the `MarketServiceImpl.java`
 
 ```java
 
@@ -234,15 +220,11 @@ public class MarketServiceImpl implements MarketService{
 
 ```
 
-The `getHttp2ServiceRequest` method will get `Http2ServiceRequest` light-consumer-4j component based on service define.
-The `Http2ServiceRequest` class provides an abstraction for making parallel HTTP calls.
+The `getHttp2ServiceRequest` method will get `Http2ServiceRequest` light-consumer-4j component based on service define. The `Http2ServiceRequest` class provides an abstraction for making parallel HTTP calls.
 
-And we will send multi-service APIs call request parallel asynchronously which will return CompletableFuture.
-This will can make sure system won't wait for each service call one by one.
+And we will send multi-service APIs call requests in parallel asynchronously which will return CompletableFuture. It can make sure the system won't wait for each service call one by one.
 
-
-
-Next step application add the return futures and result process futures to a collection of CompletableFuture. All independent futures run in parallel and system set to return it less than 3 seconds (it is configurable based on the config value:  in client.yml file ).
+Next step application adds the return futures and result process futures to a collection of CompletableFuture. All independent futures run in parallel and system set to return it less than 3 seconds (it is configurable based on the config value:  in the client.yml file ).
 
 ```
 CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).get(3, TimeUnit.SECONDS);
@@ -263,12 +245,7 @@ If you do not have a class definition for the response, you can use a generic Ma
 CompletableFuture<Map> futureResponse = request.callForTypedObject(Map.class);
 ```
 
-The response received from making a request can be held in a [CompletableFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html),
-which allows for further asynchronous chaining of operations. They will be asynchronous with respect to the original thread because a different thread was already assigned
-to execute the HTTP request and wait for its response, so either that thread or an additional thread will be responsible for completing each chained operation.
-
-
-
+The response received from making a request can be held in a [CompletableFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html), which allows for further asynchronous chaining of operations. They will be asynchronous with respect to the original thread because a different thread was already assigned to execute the HTTP request and wait for its response, so either that thread or an additional thread will be responsible for completing each chained operation.
 
 Additional references to the Java 8 CompletableFuture API:
 - [Guide to CompletableFuture](https://www.baeldung.com/java-completablefuture)
@@ -276,57 +253,56 @@ Additional references to the Java 8 CompletableFuture API:
 - [When to use non-async methods of CompletableFuture?](https://stackoverflow.com/q/49649298)
 
 
-
 ### Build and verify
 
- #### Build and start server side services:
+#### Build and start server side services:
 
- Step 1 (build server side services and start local consul):
+Step 1 (build server-side services and start local consul):
 
- ```
- cd ~/networknt
- git clone git@github.com:networknt/light-example-4j.git
- cd ~/networknt/light-example-4j/servicemesher/services
+```
+cd ~/networknt
+git clone git@github.com:networknt/light-example-4j.git
+cd ~/networknt/light-example-4j/servicemesher/services
 
- mvn clean install
+mvn clean install
 
- docker-compose -f docker-compose-consul.yml up
+cd ~/networknt/light-docker
+docker-compose -f docker-compose-consul.yml up -d
+```
 
- ```
+Step 2 (start server side services by open new terminal):
 
-  Step 2 (start server side services by open new terminal):
+```
+cd ~/networknt/light-example-4j/servicemesher/services
+docker-compose  up
+```
 
-   ```
-    cd ~/networknt/light-example-4j/servicemesher/services
-   docker-compose  up
+#### Build and start client side service:
 
-   ```
+In another terminal
 
- #### Build and start client side service:
+```
+cd ~/networknt
+git clone git@github.com:networknt/light-example-4j.git
+cd ~/networknt/light-example-4j/servicemesher/client
 
-  ```
-  cd ~/networknt
-  git clone git@github.com:networknt/light-example-4j.git
-  cd ~/networknt/light-example-4j/servicemesher/client
+mvn clean install
 
-  mvn clean install
+docker-compose  up
 
-  docker-compose  up
+```
 
-  ```
+### verify service:
 
-  ### verify service:
+From browser or Postman (GET):
 
-  From browser or Postman (GET):
+```
+https://localhost:8448/v1/market
+```
 
-   ```
-     https://localhost:8448/v1/market
+The client-side service will call all four server-side services parallel and get the result to build a market object. The sample result will look like below:
 
-   ```
-
-   The client side service will call all four server side services parallel and get the result to build a market object. The sample result will looks like below:
-
-    ```
+```
      {
          "name": "name": "light-4j sample market",
          "pets": [
@@ -379,4 +355,4 @@ Additional references to the Java 8 CompletableFuture API:
          ]
      }
 
-     ```
+```
