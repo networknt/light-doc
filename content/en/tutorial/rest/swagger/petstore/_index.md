@@ -4,11 +4,6 @@ date: 2017-11-06T17:45:44-05:00
 description: "How to build petstore API from Swagger 2.0 specification"
 categories: []
 keywords: [tutorial]
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 20
-weight: 20
 aliases: []
 toc: false
 draft: false
@@ -31,7 +26,7 @@ found [here][]. After the project is generated, we will try to change the config
 to enable other features in following steps.
 
 
-This tutorial shows how to use the service registry and discovery feature of light*4j
+This tutorial shows how to use the service registry and discovery feature of light-4j
 frameworks. 
 
 1. [Environment preparation][]

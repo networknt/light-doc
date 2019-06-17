@@ -4,11 +4,6 @@ date: 2018-03-03T20:07:43-05:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 170
-weight: 170
 aliases: []
 toc: false
 draft: false
@@ -25,13 +20,9 @@ Most services for portal can be found in the [light-portal][] repository on gith
 * [start portal service][] - Start both command side and query side portal services
 * [start local light-router][] - Start light-router instance for service discovery and UI.
 
-### Command Services:
+### Portal Services:
 
 * [user-management][] - User Management Service
-
-### Query Services: 
-
-* [api-certification][] - API-Certification Service
 
 ### Portal View 
 
@@ -39,7 +30,6 @@ Most services for portal can be found in the [light-portal][] repository on gith
 
 
 [light-portal]: https://github.com/networknt/light-portal
-[api-certification]: /tutorial/portal/api-certification/
 [user-management]: /tutorial/portal/user-management/
 [light-bot portal build]: /tutorial/bot/light-portal-local/
 [start portal service]: /tutorial/portal/start-portal-service/

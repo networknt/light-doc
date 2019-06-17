@@ -4,11 +4,6 @@ date: 2017-12-07T20:05:42-05:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 70
-weight: 70
 aliases: []
 toc: false
 draft: false
@@ -24,6 +19,7 @@ Once you have your environment set up, the first tutorial is [todo-list][] which
 
 Todo-list is a simple application that demonstrates the features of light-eventuate-4j with Event Sourcing and CQRS. Although it is very simple, it is utilizing all the parts of the eventuate framework. It helps the developer to focus on the flow of the eventuate framework instead of complex business logic. If you want to see a full-blown business application, then you can refer to [account management tutorial][].
 
+* [getting started](/tutorial/eventuate/getting-started/)
 * [todo-list][]
 * [account management tutorial][]
 
@@ -32,6 +28,7 @@ To help users to grasp other parts of the framework we have the following tutori
 * [Kafka Tutorial][] helps to work with Kafka in Docker container.
 * [Test Tutorial][] helps users to write unit tests, integration tests, and end-to-end tests.
 * [Developer's Tutorial][] guidelines for developers who are working on the framework or services
+* [Docker Tutorial][] helps users to work with Docker and Eventuate
 
 [account management tutorial]: /tutorial/eventuate/account-management/
 [getting started light-eventuate-4j]: /tutorial/eventuate/getting-started/
@@ -39,3 +36,4 @@ To help users to grasp other parts of the framework we have the following tutori
 [Kafka Tutorial]: /tutorial/eventuate/kafka/
 [Test Tutorial]: /tutorial/eventuate/test/
 [Developer's Tutorial]: /tutorial/eventuate/developer/
+[Docker Tutorial]: /tutorial/eventuate/docker/

@@ -14,10 +14,9 @@ This section contains tutorials based on the OpenAPI 3.0 specifications. As most
 
 * [OpenAPI 3.0](/tutorial/rest/openapi/)
    + [OpenAPI 3.0 Petstore](/tutorial/rest/openapi/petstore/)
-   + [JSON Query Parameter](/tutorial/rest/openapi/parameter-serialization/json-query-param/)
    + [Restful Database Access](/tutorial/rest/openapi/database/)
    + [Microservices Aggregate Pattern](/tutorial/rest/openapi/ms-aggregate/)
    + [Microservices Branch Pattern](/tutorial/rest/openapi/ms-branch/)
+   + [Parameter Serialization](/tutorial/rest/openapi/parameter-serialization/)
+   + [ServiceMesher](/tutorial/rest/openapi/servicemesher/)
 
-
-[Swagger 2.0]: /tutorial/rest/swagger/

@@ -52,22 +52,45 @@ section, some of the most important tutorials are listed here and more will be a
      + [External Config](/tutorial/common/discovery/external-config/)
      + [Consul HTTP Health Check](/tutorial/common/discovery/http-health/)
      + [Docker-compose and Consul Production](/tutorial/common/discovery/compose-consul/)
-  * [Tracing](/tutorial/tracing)
+  * [Tracing](/tutorial/tracing/)
      + [Jaeger OpenTracing](/tutorial/tracing/jaeger/)
+  * [Routing](/tutorial/routing/)
+     + [Multi Static Handler Chains](/tutorial/routing/handler/)
   * [Client](/tutorial/client/)
      + [Connect to public HTTPS site](/tutorial/client/public-https/)
-       
+     + [Standalone Consul Discovery](/tutorial/client/consul-discovery/)
+     + [Client Dependencies](/tutorial/client/dependencies/)
+     + [Client Configuration](/tutorial/client/configuration/)
+     + [Client Usage](/tutorial/client/code/)
+  * [Security](/tutorial/security/)     
+     + It is essential to understand the [basic terminologies and formats of certs and keys][] before proceeding other tutorials.
+     + How to set up your service to [bootstrap from light-oauth2 key service][] for JWT signature verification public key certificate distribution.
+     + How to [encrypt and decrypt sensitive info][] from secret.yml or other config files. 
+     + How to use [keystore and truststore][] for one-way and two-way TLS.
+     + A real example on [adding server public key certificate to client.truststore][] to access public service on the Internet with HTTPS.
+     + How to [install a self-signed or commercial CA-signed server certificate][] to light-4j service
+     + How to get free [Let's Encrypt certificate][] for public-facing light-4j secd rvice
+     + How to [convert CA-signed certificate to server.keystore][] that can be used by light-4j service
+     + Running [light-4j service on port 443][] using iptables
+
 ### API Styles
 
 - [Light-rest-4j](/tutorial/rest/)
   * [Swagger 2.0](/tutorial/rest/swagger/)
      + [Swagger 2.0 Petstore](/tutorial/rest/swagger/petstore/)
-     + [Restful Database Access](/tutorial/rest/swagger/database/)
      + [Microservices Chain Pattern](/tutorial/rest/swagger/ms-chain/)
   * [OpenAPI 3.0](/tutorial/rest/openapi/)
      + [OpenAPI 3.0 Petstore](/tutorial/rest/openapi/petstore/)
+     + [Restful Database Access](/tutorial/rest/openapi/database/)
      + [Microservices Aggregate Pattern](/tutorial/rest/openapi/ms-aggregate/)
      + [Microservices Branch Pattern](/tutorial/rest/openapi/ms-branch/)
+     + [Parameter Serialization](/tutorial/rest/openapi/parameter-serialization/)
+     + [ServiceMesher](/tutorial/rest/openapi/servicemesher/)
+  * [Spring Boot](/tutorial/springboot/)   
+     + [Spring Boot Servlet](/tutorial/springboot/servlet/)
+  * [Kotlin](/tutorial/kotlin/)
+     + [Kotlin OpenAPI](/tutorial/kotlin/openapi/)
+
 - [Light-graphql-4j](/tutorial/graphql/)
   * [Hello World](/tutorial/graphql/helloworld/)
   * [Star Wars](/tutorial/graphql/starwars/)
@@ -76,13 +99,22 @@ section, some of the most important tutorials are listed here and more will be a
   * [Relay Todo](/tutorial/graphql/relay-todo/)
   * [Subscription](/tutorial/graphql/subscription/)
 - [Light-hybrid-4j](/tutorial/hybrid/)
-  * [Portal Hybrid Query with Codegen Web](/tutorial/hybrid/codegen-web-portal/)
+  * [Merge two services with one server](/tutorial/hybrid/merge-services/)
+  * [Hello World Hybrid Server and Services](/tutorial/hybrid/hello-world/)
+  * [Eventuate Todo-list Hybrid Implementation](/tutorial/hybrid/todo-list/)
+  * [Portal Hybrid Service initialization](/tutorial/hybrid/hybrid-service-initial/)
+  * [Portal Hybrid Query with Light Codegen Web](/tutorial/hybrid/codegen-web-portal/)
   * [Portal Hybrid Query with API Certification](/tutorial/hybrid/certification-portal/)
-  * [Portal Hybrid Command with Host Menu](/tutorial/hybrid/host-menu-command-portal/)  
-  * [Portal Hybrid Query with Host Menu](/tutorial/hybrid/host-menu-query-portal/)  
-  * [Portal Hybrid Command with Schema Form](/tutorial/hybrid/schema-form-command-portal/)  
+  * [Portal Hybrid Command with Host Menu](/tutorial/hybrid/host-menu-command-portal/)
+  * [Portal Hybrid Query with Host Menu](/tutorial/hybrid/host-menu-query-portal/)
+  * [Portal Hybrid Command with Schema Form](/tutorial/hybrid/schema-form-command-portal/)
   * [Portal Hybrid Query with Schema Form](/tutorial/hybrid/schema-form-query-portal/)
+  * [Portal Hybrid Service with User Management](/tutorial/hybrid/user-management-portal/)
+  * [Taiji Blockchain Web Client Server SPA with handler.yml](/tutorial/hybrid/web-client-spa/)
+  * [Register individual handlers to Consul for discovery](/tutorial/hybrid/register-handler/)
+
 - [Light-eventuate-4j](/tutorial/eventuate/)
+  * [Getting Started](/tutorial/eventuate/getting-started/)
   * [Todo-list Tutorial](/tutorial/eventuate/todo-list/)
      + [Prepare Envionment](/tutorial/eventuate/todo-list/prepare/)    
      + [Create Project](/tutorial/eventuate/todo-list/project/)    
@@ -94,7 +126,12 @@ section, some of the most important tutorials are listed here and more will be a
      + [Hybrid Test](/tutorial/eventuate/todo-list/hybrid-test/)    
      + [Rest Docker](/tutorial/eventuate/todo-list/rest-docker/)    
      + [Hybrid Docker](/tutorial/eventuate-4j/todol-list/hybrid-docker/)    
-  * [Account Management Tutorial](/tutorial/eventuate/account-management/)    
+  * [Account Management Tutorial](/tutorial/eventuate/account-management/)  
+  * [Kafka Tutorial][] helps to work with Kafka in Docker container.
+  * [Test Tutorial][] helps users to write unit tests, integration tests, and end-to-end tests.
+  * [Developer's Tutorial][] guidelines for developers who are working on the framework or services
+  * [Docker Tutorial][] helps users to work with Docker and Eventuate
+
 - [Light-tram-4j](/tutorial/tram/)
   * [Todo list tutorial](/tutorial/tram/todo-list/)    
   * [Development API with light-tram-4j](/tutorial/tram/develop/)    
@@ -111,10 +148,18 @@ section, some of the most important tutorials are listed here and more will be a
   * [User Management](/tutorial/oauth/user/)
   * [Key Distribution](/tutorial/oauth/key/)
   * [Client Authenticated User](/tutorial/oauth/custom/)
+  * [Provider Service](/tutorial/oauth/provider/)
+  * [Deploy to Kubernetes Cluster](/tutorial/oauth/kubernetes/)
+  * [Deploy to Openshift Cluster](/tutorial/oauth/openshift/)
+  * [Integrate Kerberos/SPNEGO on Mac](/tutorial/oauth/kerberos/)
+
 - [Light-portal](/tutorial/portal/)
-  * [Command Service](/consumer/local-first/)
-  * [Query Service](/consumer/local-first/)
+  * [Light Portal Local Build](/tutorial/bot/light-portal-local/)
+  * [Start Portal Service](/tutorial/portal/start-portal-service/)
+  * [Start Local Portal Light-Router](/tutorial/portal/local-router/)
   * [Portal View](/consumer/local-first/)
+  * Portal Services
+     + [user-management](/tutorial/portal/user-management/) 
 - [Light-proxy](/tutorial/proxy/)
   * Swagger 2.0 Backend
      + [Swagger backend service](/tutorial/proxy/swagger-backend/)
@@ -123,17 +168,29 @@ section, some of the most important tutorials are listed here and more will be a
      + [OpenAPI backend service](/tutorial/proxy/openapi-backend/)
      + [OpenAPI Proxy](/tutorial/proxy/openapi-proxy/)
   * [Proxy Docker](/tutorial/proxy/docker/)
+  * [Confluent Schema Registry](/tutorial/proxy/schema-registry/)
 - [Light-router](/tutorial/router/)
   * [Router Assisted Service Discovery](/tutorial/common/discovery/router/)
+  * [Deploy light-router for taiji-faucet service](/tutorial/router/taiji-faucet/)
+  * [Add a react single page application to taiji-faucet router](/tutorial/router/router-spa/)
+  * [Virtual hosts on taiji-faucet router](/tutorial/router/virtual-host/)
+  * [Virtual hosts on light-portal](/tutorial/router/light-portal/)
 
 ### Tool Chain
 
 - [Light-codegen](/tutorial/generator/)
   * [Generate Restful API with Swagger 2.0 Specification](/tutorial/generator/swagger/)
   * [Generate Restful API with OpenAPI 3.0 Specification](/tutorial/generator/openapi/)
+  * [Generate Restful API in Kotlin with OpenAPI 3.0 Specification](/tutorial/generator/openapikotlin/)
   * [Generate GraphQL API with GraphQL IDL](/tutorial/generator/graphql/)
   * [Generate Hybrid Service with Schema](/tutorial/generator/hybridservice/)
   * [Generate Hybrid Server Hosts Hybrid services](/tutorial/generator/hybridserver/)
+  * [Generate CQRS Eventuate based Restful API with OpenAPI 3.0 Specification](/tutorial/generator/eventuate/)
+  * [Generate Swagger 2.0 Mock API with Examples](/tutorial/generator/swagger-mock/)
+  * [Generate OpenAPI 3.0 Mock API with Examples](/tutorial/generator/openapi-mock/)
+  * [Integrate Code generation with maven build process with Examples](/tutorial/generator/codegen-maven/)
+  * [Start codegen-web to support multiple versions](/tutorial/generator/multi-version-web/)
+
 - [Light-bot](/tutorial/bot/)
   * Clone and [build light-bot](/tutorial/bot/build-light-bot/) project and command line tool with Gradle
   * Clone and build [dependency](/tutorial/bot/dependency/) in develop branches for light platform developers
@@ -154,3 +211,29 @@ section, some of the most important tutorials are listed here and more will be a
   * [Running Light-4J Application as Linux Service](/deployment/linux_service/)
   * [Running Light-4J Application as Windows Service](/deployment/windows_service/)
   * [Install Eventuate on Windows](/deployment/windows-eventuate/)
+
+- [Test](/tutorial/common/test/)
+  * [Unit Test](/tutorial/common/test/unit-test/)
+  * [Integration Test](/tutorial/common/test/integration-test/)
+  * [End-to-End Test](/tutorial/common/test/end-to-end-test/)
+  * [Consumer Driven Contract](/tutorial/common/test/consumer-driven-contract/)
+
+- [Debug](/tutorial/common/debug/)
+  * [IntelliJ IDEA](/tutorial/common/debug/idea/)
+  * [Eclipse](/tutorial/common/debug/eclipse/)
+
+
+[Kafka Tutorial]: /tutorial/eventuate/kafka/
+[Test Tutorial]: /tutorial/eventuate/test/
+[Developer's Tutorial]: /tutorial/eventuate/developer/
+[Docker Tutorial]: /tutorial/eventuate/docker/
+[bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
+[encrypt and decrypt sensitive info]: /tutorial/security/encrypt-decrypt/
+[keystore and truststore]: /tutorial/security/keystore-truststore/
+[adding server public key certificate to client.truststore]: /tutorial/security/publickey-truststore/
+[Install a self-signed or commercial CA-signed server certificate]: /tutorial/security/install-certificate/
+[Let's Encrypt certificate]: /tutorial/security/lets-encrypt/
+[convert CA-signed certificate to server.keystore]: /tutorial/security/ca-certificate/
+[basic terminologies and formats of certs and keys]: /tutorial/security/term-format/
+[light-4j service on port 443]: /tutorial/security/port443/
+

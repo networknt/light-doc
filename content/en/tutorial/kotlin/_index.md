@@ -4,11 +4,6 @@ date: 2019-03-11T21:49:22-04:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 56
-weight: 56
 aliases: []
 toc: false
 draft: false

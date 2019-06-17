@@ -22,7 +22,7 @@ This dependency will include the submodules required to support client consumpti
 <dependency>
     <groupId>com.networknt</groupId>
     <artifactId>light-consumer-4j</artifactId>
-    <version>1.5.20</version>
+    <version>${version.light-4j}</version>
 </dependency>
 ```
 

@@ -2,11 +2,6 @@
 title: "Handler Routing Tutorial"
 date: 2018-07-08T17:45:44-05:00
 lastmod: 2018-07-08
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 50
-keywords: []
 toc: true
 draft: false
 ---

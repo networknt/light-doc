@@ -2,10 +2,6 @@
 title: "Registry and Discovery"
 date: 2017-11-06T17:45:44-05:00
 lastmod: 2018-05-15
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 10
 keywords: []
 toc: false
 draft: false
@@ -39,6 +35,8 @@ This tutorial shows how to use the service registry and discovery feature of the
 
 * [Consul Production with TLS][]
 
+* [External Config][]
+
 * [Consul HTTP Health Check][]
 
 * [External Config][]
@@ -59,4 +57,4 @@ This tutorial shows how to use the service registry and discovery feature of the
 [External Config]: /tutorial/common/discovery/external-config/
 [Consul HTTP Health Check]: /tutorial/common/discovery/http-health/
 [Docker-compose and Consul Production]: /tutorial/common/discovery/compose-consul/
-
+[External Config]: /tutorial/common/discovery/external-config/

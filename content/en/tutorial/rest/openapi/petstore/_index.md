@@ -4,11 +4,6 @@ date: 2017-11-21T09:59:35-05:00
 description: "How to build petstore API from OpenAPI 3.0 specification"
 categories: []
 keywords: [tutorial]
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 20
-weight: 20
 aliases: []
 toc: false
 draft: false

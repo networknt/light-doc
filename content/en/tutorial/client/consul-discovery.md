@@ -11,13 +11,13 @@ draft: false
 reviewed: true
 ---
 
-We have an issue opened by one of our users who is using Weblogic 12c in Java 8 to call microservices built top of light-rest-4j framework in Openshift cluster. The services are deployed with host networking and IPs and port numbers are registered to the Consul cluster running outside of the Openshift cluster. 
+We have an issue opened by one of our users who is using Weblogic 12c in Java 8 to call microservices built top of the light-rest-4j framework in OpenShift cluster. The services are deployed with host networking, and IPs and port numbers are registered to the Consul cluster running outside of the OpenShift cluster. 
 
-This is a typical deployment and we have a lot of similar configurations with other users. The issue they were facing is that the first time lookup takes up to 10 minutes sometimes. The details can be found in this [issue][]
+It is a typical deployment, and we have a lot of similar configurations with other users. The issue they were facing is that the first time lookup takes up to 10 minutes sometimes. The details can be found in this [issue][]
 
 In order to reproduce the issue in my Kubernetes cluster, I am going to deploy the [service discovery tutorial][] to my cluster and build a client application to do the lookup periodically. I thought this is a very good tutorial for others to learn how to use Consul discovery in a standalone client, so I have written down the steps below. 
 
-Here is services registered on the Consul. We have 4 services that form a chain pattern and each service has 6 replicas. 
+Here are services registered on the Consul. We have 4 services that form a chain pattern, and each service has 6 replicas. 
 
 ![consul services](/images/consul-services.png)
 
@@ -37,7 +37,7 @@ Result
 ["API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API C: Message 1","API C: Message 2","API A: Message 1","API A: Message 2"]
 ```
 
-Now we can confirm that all services are working together. The next step, we are going to create a standalone Java client which calls apia using consul discovery. 
+Now we can confirm that all the services are working together. The next step, we are going to create a standalone Java client which calls the apia using consul discovery. 
 
 As we are going to use real Consul cluster for service discovery, we are going to copy the standalone client project to consul folder in light-example-4j/client. 
 
@@ -127,11 +127,11 @@ public class Http2ClientConsul {
 
 ```
 
-As you can see that we just do the lookup once and call the service apia once. This is to test the water to ensure that your application is working. Then we can loop it periodically. 
+As you can see, we do the lookup once and call the service apia once. This is to test the water to ensure that your application is working. Then we can loop it periodically. 
 
 The following config files need to be updated to make the client work. But first thing first, we need to replace the default client.truststore with the one in light-example-4j/discovery/api_a/http-health/src/main/resources/config folder. That file contains the certificate from Consul server. Please refer to the [discovery tutorial][] for more info on prepare the client.truststore.
 
-consul.yml is needed to specify the consulUrl which is point to one of the nodes on our Consul cluster. As we are not register the client as a serivce, other properties in this file are not used. 
+consul.yml is needed to specify the consulUrl which is pointing to one of the nodes on our Consul cluster. As we do not register the client as a service, other properties in this file are not used. 
 
 ```
 # Consul URL for accessing APIs

@@ -4,11 +4,6 @@ date: 2017-11-06T17:45:44-05:00
 description: ""
 categories: []
 keywords: [tutorial]
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 20
-weight: 20
 aliases: []
 toc: false
 draft: false
@@ -21,3 +16,7 @@ up and running at the same time to test the interaction of these services. There
 type of tests we need to perform before release the service to production - unit test, 
 integration test, consumer contract test and end-to-end test. 
 
+* [Unit Test](/tutorial/common/test/unit-test/)
+* [Integration Test](/tutorial/common/test/integration-test/)
+* [End-to-End Test](/tutorial/common/test/end-to-end-test/)
+* [Consumer Driven Contract](/tutorial/common/test/consumer-driven-contract/)

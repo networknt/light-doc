@@ -4,10 +4,6 @@ date: 2018-06-06T23:03:56-04:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tutorial"
-    weight: 10
 aliases: []
 toc: false
 draft: false
@@ -22,6 +18,9 @@ When communicating with public websites or API servers, it would be great to get
 
 - [Access Public HTTPS Site](/tutorial/client/public-https/)
 - [Standalone Consul Discovery](/tutorial/client/consul-discovery/)
+- [Client Dependencies](/tutorial/client/dependencies/)
+- [Client Configuration](/tutorial/client/configuration/)
+- [Client Usage](/tutorial/client/code/)
 
 
 [keystore vs. truststore]: /tutorial/security/keystore-truststore/
