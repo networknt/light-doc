@@ -38,15 +38,22 @@ section, some of the most important tutorials are listed here and more will be a
      + [Inject Manually for debugging](/tutorial/common/service/manual-injection/)
      + [Summary](/tutorial/common/service/summary/)
   * [Service Registry and Discovery](/tutorial/common/discovery/)
-     + [Introduction and code generation](Introduction and code generation)
-     + [Static Configuration](Static Configuration)
-     + [Dynamic service discovery with direct registry](Dynamic service discovery with direct registry)
-     + [Multiple API D Instances](Multiple API D Instances)
-     + [Consul service registry and discovery](Consul service registry and discovery)
+     + [Introduction and code generation](/tutorial/common/discovery/generated/)
+     + [Static Configuration](/tutorial/common/discovery/static/)
+     + [Dynamic service discovery with direct registry](/tutorial/common/discovery/dynamic/)
+     + [Multiple API D Instances](/tutorial/common/discovery/multiple/)
+     + [Consul service registry and discovery](/tutorial/common/discovery/consul/)
      + [Multiple instances with tags per environment](/tutorial/common/discovery/tag/)
      + [Access consul with acl_token for security](/tutorial/common/discovery/token/)
      + [Service discovery for Docker container](/tutorial/common/discovery/docker/)
      + [Service discovery for Kubernetes](/tutorial/common/discovery/kubernetes/)
+     + [Router Assisted Service Discovery](/tutorial/common/discovery/router/)
+     + [Consul Production with TLS](/tutorial/common/discovery/consul-tls/)
+     + [External Config](/tutorial/common/discovery/external-config/)
+     + [Consul HTTP Health Check](/tutorial/common/discovery/http-health/)
+     + [Docker-compose and Consul Production](/tutorial/common/discovery/compose-consul/)
+  * [Tracing](/tutorial/tracing)
+     + [Jaeger OpenTracing](/tutorial/tracing/jaeger/)
   * [Client](/tutorial/client/)
      + [Connect to public HTTPS site](/tutorial/client/public-https/)
        
@@ -128,8 +135,12 @@ section, some of the most important tutorials are listed here and more will be a
   * [Generate Hybrid Service with Schema](/tutorial/generator/hybridservice/)
   * [Generate Hybrid Server Hosts Hybrid services](/tutorial/generator/hybridserver/)
 - [Light-bot](/tutorial/bot/)
-  * [Devops Develop](/tutorial/bot/devops-develop/)
-  * [Set up develop branch build and test locally](/tutorial/bot/local-develop/)
+  * Clone and [build light-bot](/tutorial/bot/build-light-bot/) project and command line tool with Gradle
+  * Clone and build [dependency](/tutorial/bot/dependency/) in develop branches for light platform developers
+  * Set up [develop](/tutorial/bot/local-develop/) branch build and test on your local computer
+  * Set up [devops](/tutorial/bot/devops-develop/) sever for develop branch build automatically
+  * Build [light-portal local](/tutorial/bot/light-portal-local/) develop branch using cloud eventuate services
+  * How to use [regex-replace](/tutorial/bot/regex-replace/) to replace repeated string/text across all repositories
 - [Development](/consumer/light-router/)
   * [Test](/tutorial/common/test/)
      + [Unit Test](/tutorial/common/test/unit-test/)
