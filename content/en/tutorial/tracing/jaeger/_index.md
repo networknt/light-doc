@@ -21,4 +21,5 @@ In light-4j, we have a new module called jaeger-tracing added with a JaegerStart
 The client module is also modified to add two more public method to inject the tracing context to the next service in the request. 
 
 * [Start Jaeger Tracer](/tutorial/tracing/jaeger/all-in-one/)
-* 
+* [Petstore Jaeger](/tutorial/tracing/jaeger/petstore-jaeger/)
+

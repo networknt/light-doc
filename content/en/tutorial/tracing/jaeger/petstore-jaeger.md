@@ -274,10 +274,10 @@ You got the trace like this.
 
 ### Async Call
 
-Sometimes, we call another function in another thread and the activeSpan in the ThreadLocal won't work anymore. The best way is to set the active Span in Trace and then in the thread, create a child span based on it. 
+Sometimes, we call another function in another thread, and the activeSpan in the ThreadLocal won't work anymore. The best way is to set the active Span in Trace and then in the thread, create a child span based on it. 
 
 
-The other options is to just use the Tracer in the JaegerStartupHookProvider to create new span as it is available all the time in the light-4j application. 
+The other option is to use the Tracer in the JaegerStartupHookProvider to create new span as it is available all the time in the light-4j application. 
 
 
 [all-in-one]: /tutorial/tracing/jaeger/all-in-one/
