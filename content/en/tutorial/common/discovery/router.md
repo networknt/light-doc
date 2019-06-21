@@ -96,7 +96,10 @@ And the result is:
 
 Light-router is an infrastructure service that can assist internal client which is not built on top of Java 8 for service discovery and security. It also can act as an external access point for external client to access internal service. In this case, it is playing a role of distributed API gateway.  
 
+All previous steps with Consul discovery are based on a dockerized consul instance with http connections. In production, we need to have a consul cluster and https needs to be enabled. In the next step, we are going to explore the [Consul cluster with TLS] connection. 
+
 
 [Light-router]: /service/router/
 [client]: /concern/client/
 [deploy light-router]: /service/router/location-ownership/
+[Consul cluster with TLS]: /tutorial/common/discovery/consul-tls/

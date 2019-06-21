@@ -14,7 +14,7 @@ reviewed: true
 
 ### Introduction
 
-This is a tutorial to show you how to use service registry and discovery for microservices. The example services are implemented in a RESTful style but can be implemented in graphql or hybrid as well. We are going to use api_a, api_b, api_c, and api_d as our examples, with security disabled for simplicity. There are some details might not be shown in this tutorial,  for example, walking through light-codegen config files, etc. It is recommended to go through [ms-chain][] before this tutorial. 
+This is a tutorial to show you how to use service registry and discovery for microservices. The example services are implemented in a RESTful style but can be implemented in GraphQL or Hybrid as well. We are going to use api_a, api_b, api_c, and api_d as our examples, with security disabled for simplicity. There are some details might not be shown in this tutorial,  for example, walking through light-codegen config files, etc. It is recommended to go through [ms-chain][] before this tutorial. 
 
 ### Preparation
 
@@ -37,8 +37,7 @@ git clone https://github.com/networknt/model-config.git
 
 ### Code generation
 
-In order to generate the four projects, let's clone and build the light-codegen 
-into the workspace. We are going to use command line utility instead of Docker container.
+In order to generate the four projects, let's clone and build the light-codegen in the workspace. We are going to use the command line utility instead of the Docker container.
 
 ```bash
 cd ~/networknt
@@ -47,18 +46,27 @@ cd light-codegen
 mvn clean install
 ```
 
+We are going to generate these preject into the light-example-4j repository. Let's clone it and move the discovery folder to discovery.bak so that you can compare your work with the checked in copy. 
+
+```
+cd ~/networknt
+git clone https://github.com/networknt/light-example-4j.git
+cd light-example-4j
+mv discovery dicovery.bak
+```
+
 Now let's generate the four APIs.
 
 ```bash
-cd ~/networknt/light-codegen
-java -jar codegen-cli/target/codegen-cli.jar -f swagger -o ../discovery/api_a/generated -m ../model-config/rest/swagger/api_a/1.0.0/swagger.json -c ../model-config/rest/swagger/api_a/1.0.0/config.json
-java -jar codegen-cli/target/codegen-cli.jar -f swagger -o ../discovery/api_b/generated -m ../model-config/rest/swagger/api_b/1.0.0/swagger.json -c ../model-config/rest/swagger/api_b/1.0.0/config.json
-java -jar codegen-cli/target/codegen-cli.jar -f swagger -o ../discovery/api_c/generated -m ../model-config/rest/swagger/api_c/1.0.0/swagger.json -c ../model-config/rest/swagger/api_c/1.0.0/config.json
-java -jar codegen-cli/target/codegen-cli.jar -f swagger -o ../discovery/api_d/generated -m ../model-config/rest/swagger/api_d/1.0.0/swagger.json -c ../model-config/rest/swagger/api_d/1.0.0/config.json
+cd ~/networknt
+java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o light-example-4j/discovery/api_a/generated -m model-config/rest/openapi/aa/1.0.0/openapi.yaml -c model-config/rest/openapi/aa/1.0.0/config.json
+java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o light-example-4j/discovery/api_b/generated -m model-config/rest/openapi/ab/1.0.0/openapi.yaml -c model-config/rest/openapi/ab/1.0.0/config.json
+java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o light-example-4j/discovery/api_c/generated -m model-config/rest/openapi/ac/1.0.0/openapi.yaml -c model-config/rest/openapi/ac/1.0.0/config.json
+java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o light-example-4j/discovery/api_d/generated -m model-config/rest/openapi/ad/1.0.0/openapi.yaml -c model-config/rest/openapi/ad/1.0.0/config.json
 
 ```
 
-We have four projects generated in `~/networknt` within the discovery folder. 
+We have four projects generated in `~/networknt/light-example-4j` within the discovery folder. 
 
 ### Test generated code
 

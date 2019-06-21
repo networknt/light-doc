@@ -22,4 +22,5 @@ The client module is also modified to add two more public method to inject the t
 
 * [Start Jaeger Tracer](/tutorial/tracing/jaeger/all-in-one/)
 * [Petstore Jaeger](/tutorial/tracing/jaeger/petstore-jaeger/)
+* [Service Discovery](/tutorial/tracing/jaeger/service-discovery/)
 

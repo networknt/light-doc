@@ -9,9 +9,9 @@ reviewed: true
 ---
 
 
-Services typically need to call one another. In monolithic applications, services invoke one another through language-level method or procedure calls. In a traditionally distributed system deployment, services run at fixed, well-known locations (hosts and ports) and so can easily call one another using HTTP/REST or some RPC mechanism. However, a modern microservice-based application typically runs in a virtualized or containerized environments where the number of instances of a service and their locations (IP and port) changes dynamically.
+Services typically need to call one another. In monolithic applications, services invoke one another through language-level methods or procedure calls. In a traditionally distributed system deployment, services run at fixed, well-known locations (hosts and ports), so they can easily call one another using HTTP/REST or some RPC mechanism. However, a modern microservice-based application typically runs in a virtualized or containerized environments where the number of instances of a service and their locations (IP and port) changes dynamically.
 
-This tutorial shows how to use the service registry and discovery feature of the light platform to discover services and invoke it with the client module.
+This tutorial shows how to use the service registry and discovery feature of the light platform to discover services and invoke them with the client module.
 
 * [Introduction and Code Generation][]
 
@@ -31,6 +31,8 @@ This tutorial shows how to use the service registry and discovery feature of the
 
 * [Kubernetes][]
 
+* [OpenShift][]
+
 * [Router Assisted Service Discovery][]
 
 * [Consul Production with TLS][]
@@ -39,9 +41,13 @@ This tutorial shows how to use the service registry and discovery feature of the
 
 * [Consul HTTP Health Check][]
 
+* [Enable Security][]
+
 * [External Config][]
 
 * [Docker-compose and Consul Production]
+
+* [OpenTracing with Jaeger][]
 
 [Introduction and Code Generation]: /tutorial/common/discovery/generated/
 [Static Configuration]: /tutorial/common/discovery/static/
@@ -58,3 +64,6 @@ This tutorial shows how to use the service registry and discovery feature of the
 [Consul HTTP Health Check]: /tutorial/common/discovery/http-health/
 [Docker-compose and Consul Production]: /tutorial/common/discovery/compose-consul/
 [External Config]: /tutorial/common/discovery/external-config/
+[Enable Security]: /tutorial/common/discovery/security/
+[OpenShift]: /tutorial/common/discovery/openshift/
+[OpenTracing with Jaeger]: /tutorial/tracing/jaeger/service-discovery/

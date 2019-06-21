@@ -56,92 +56,42 @@ If you are not familiar with the [keytool][] command line or want to learn more 
 
 ### Update ACL token
 
-ACL token for the consul is configured in the secret.yml file. Update all four files in api_a, api_b, api_c and api_d consul-tls folders. You can get the agent ACL token from Consul admin. 
+ACL token for the consul is configured in the consul.yml file. Update all four files in api_a, api_b, api_c and api_d consul-tls folders. You can get the agent ACL token from Consul admin. 
 
 Here is the one from our consul cluster. 
 
 ```
 # Consul Token for service registry and discovery
-consulToken: 3f5f1cef-2966-4964-73c5-7ebeb21ba337
+consulToken: d08744e7-bb1e-dfbd-7156-07c2d57a0527
 ```
 
 ### Switch to HTTPS for Consul Registry
 
 Update the consul.yml file to switch Consul connection to HTTPS from HTTP. Please update four files from consul-tls in api_a, api_b, api_c and api_d folders. We also need to update the consul IP address in the same file. As we don't have DNS set up yet, we can use the IP address now. To simulate the dynamic nature of connections, we are going to setup api_a and api_d to connect to 198.55.49.188, api_b to connect to 198.55.49.187 and api_c to connect to 198.55.49.186. 
 
-Here is the consul.yml for api_a and api_d
+Here is the url in consul.yml for api_a and api_d
 
 ```
 # Consul URL for accessing APIs
 consulUrl: https://198.55.49.188:8500
-# deregister the service after the amount of time after health check failed.
-deregisterAfter: 2m
-# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
-# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
-# then mark the service is critical.
-checkInterval: 10s
-# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
-# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
-# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
-tcpCheck: true
-# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
-# coming back. This is suitable for service that depending on database or other infrastructure services. You should
-# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
-httpCheck: false
-# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
-# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
-# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
-ttlCheck: false
 ```
 
-Here is the consul.yml for api_b
+Here is the url and token in consul.yml for api_b
 
 ```
 # Consul URL for accessing APIs
 consulUrl: https://198.55.49.187:8500
-# deregister the service after the amount of time after health check failed.
-deregisterAfter: 2m
-# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
-# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
-# then mark the service is critical.
-checkInterval: 10s
-# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
-# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
-# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
-tcpCheck: true
-# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
-# coming back. This is suitable for service that depending on database or other infrastructure services. You should
-# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
-httpCheck: false
-# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
-# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
-# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
-ttlCheck: false
+# Consul Token for service registry and discovery
+consulToken: d08744e7-bb1e-dfbd-7156-07c2d57a0527
 ```
 
-Here is the consul.yml for api_c
+Here is the url and token in consul.yml for api_c
 
 ```
 # Consul URL for accessing APIs
 consulUrl: https://198.55.49.186:8500
-# deregister the service after the amount of time after health check failed.
-deregisterAfter: 2m
-# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
-# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
-# then mark the service is critical.
-checkInterval: 10s
-# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
-# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
-# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
-tcpCheck: true
-# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
-# coming back. This is suitable for service that depending on database or other infrastructure services. You should
-# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
-httpCheck: false
-# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
-# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
-# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
-ttlCheck: false
+# Consul Token for service registry and discovery
+consulToken: d08744e7-bb1e-dfbd-7156-07c2d57a0527
 ```
 
 ### Build Docker Images
@@ -153,10 +103,10 @@ Now let's build and publish the image for api_d.
 ```
 cd ~/networknt/light-example-4j/discovery/api_d/consul-tls
 mvn clean install
-./build.sh 1.5.18-ct
+./build.sh 2.0.2-ct
 ```
 
-We are using 1.5.18-ct to ensure that the image won't replace the normal 1.5.18 image. 
+We are using 2.0.2-ct to ensure that the image won't replace the normal 2.0.2 image. 
 
 Let's do the above steps for api_c, api_b and api_a. 
 
@@ -168,7 +118,7 @@ For example, the apid-deployment.yaml will be using the image like below.
 
 
 ```
-image: networknt/com.networknt.apid-1.0.0:1.5.18-ct
+image: networknt/com.networknt.ad-1.0.0:2.0.2-ct
 ```
 
 If you followed the tutorial and completed the step [Kubernetes][], you will have the docker image pulled to your Kubernetes master node. In this case, you want to force the Kubernetes to pull the new image. 
@@ -195,7 +145,7 @@ spec:
       hostNetwork: true
       containers:
       - name: apid
-        image: networknt/com.networknt.apid-1.0.0:1.5.18-ct
+        image: networknt/com.networknt.ad-1.0.0:2.0.2-ct
         imagePullPolicy: Always
         env:
         - name: STATUS_HOST_IP
@@ -228,7 +178,7 @@ kubectl create -f apia-deployment.yaml
 Now let's go to the consul UI to find an instance of api_a. 
 
 ```
-https://198.55.49.188:8500/ui/dc1/services/com.networknt.apia-1.0.0
+https://198.55.49.188:8500/ui/dc1/services/com.networknt.aa-1.0.0
 ```
 
 Click the instance and find out the IP and port number. Now, let's construct a curl command to test the service chain. 

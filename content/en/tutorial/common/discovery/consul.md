@@ -17,10 +17,11 @@ In this step, we are going to use Consul for registry to enable cluster scaling 
 First, let's copy our current state from last step into the `consul` directory.
 
 ```bash
-cp -r ~/networknt/discovery/api_a/multiple ~/networknt/discovery/api_a/consul
-cp -r ~/networknt/discovery/api_b/multiple ~/networknt/discovery/api_b/consul
-cp -r ~/networknt/discovery/api_c/multiple ~/networknt/discovery/api_c/consul
-cp -r ~/networknt/discovery/api_d/multiple ~/networknt/discovery/api_d/consul
+cd ~/networknt
+cp -r light-example-4j/discovery/api_a/multiple light-example-4j/discovery/api_a/consul
+cp -r light-example-4j/discovery/api_b/multiple light-example-4j/discovery/api_b/consul
+cp -r light-example-4j/discovery/api_c/multiple light-example-4j/discovery/api_c/consul
+cp -r light-example-4j/discovery/api_d/multiple light-example-4j/discovery/api_d/consul
 ```
 
 ## Configuring the APIs
@@ -33,14 +34,23 @@ To switch from direct registry to consul registry, we need to update `service.ym
 Let's make the following change in `service.yml`:
 
 ```yaml
+singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
+      protocol: light
+      host: localhost
+      port: 8080
+      path: consul
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
   - com.networknt.consul.client.ConsulClientImpl
 - com.networknt.registry.Registry:
   - com.networknt.consul.ConsulRegistry
+- com.networknt.balance.LoadBalance:
+  - com.networknt.balance.RoundRobinLoadBalance
+- com.networknt.cluster.Cluster:
+  - com.networknt.cluster.LightCluster
 ```
 
 Although in our case, there is no caller service for `API A`, we still need to register it to consul by enabling it in `server.yml`. 
@@ -56,6 +66,10 @@ We also need to create a new consul.yml file that defines the parameters for Con
 ```yaml
 # Consul URL for accessing APIs
 consulUrl: http://localhost:8500
+# access token to the consul server
+consulToken: the_one_ring
+# number of requests before reset the shared connection.
+maxReqPerConn: 1000000
 # deregister the service after the amount of time after health check failed.
 deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
@@ -74,6 +88,12 @@ httpCheck: false
 # but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
 # is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
 ttlCheck: true
+# endpoints that support blocking will also honor a wait parameter specifying a maximum duration for the blocking request.
+# This is limited to 10 minutes.This value can be specified in the form of "10s" or "5m" (i.e., 10 seconds or 5 minutes,
+# respectively).
+wait: 600s
+# enable HTTP/2, HTTP/2 used to be default but some users said that newer version of Consul doesn't support HTTP/2 anymore.
+enableHttp2: false
 ```
 
 ### API B
@@ -83,15 +103,23 @@ Let's update `service.yml` to inject the consul registry instead of the direct r
 service.yml
 
 ```yaml
-# Singleton service factory configuration/IoC injection
+singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
+      protocol: light
+      host: localhost
+      port: 8080
+      path: consul
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
   - com.networknt.consul.client.ConsulClientImpl
 - com.networknt.registry.Registry:
   - com.networknt.consul.ConsulRegistry
+- com.networknt.balance.LoadBalance:
+  - com.networknt.balance.RoundRobinLoadBalance
+- com.networknt.cluster.Cluster:
+  - com.networknt.cluster.LightCluster
 ```
 
 As `API B` will be called by `API A`, it needs to register itself to consul registry so that `API A` can discover it through the same consul registry. To do that you only need to enable server registry in the server.yml config file and disable HTTP connection.
@@ -107,6 +135,10 @@ We also need to create a new consul.yml file that defines the parameters for Con
 ```yaml
 # Consul URL for accessing APIs
 consulUrl: http://localhost:8500
+# access token to the consul server
+consulToken: the_one_ring
+# number of requests before reset the shared connection.
+maxReqPerConn: 1000000
 # deregister the service after the amount of time after health check failed.
 deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
@@ -125,6 +157,12 @@ httpCheck: false
 # but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
 # is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
 ttlCheck: true
+# endpoints that support blocking will also honor a wait parameter specifying a maximum duration for the blocking request.
+# This is limited to 10 minutes.This value can be specified in the form of "10s" or "5m" (i.e., 10 seconds or 5 minutes,
+# respectively).
+wait: 600s
+# enable HTTP/2, HTTP/2 used to be default but some users said that newer version of Consul doesn't support HTTP/2 anymore.
+enableHttp2: false
 ```
 
 ### API C
@@ -134,14 +172,23 @@ Although `API C` is not calling any other APIs, it needs to register itself to c
 `service.yml`
 
 ```yaml
+singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
+      protocol: light
+      host: localhost
+      port: 8080
+      path: consul
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
   - com.networknt.consul.client.ConsulClientImpl
 - com.networknt.registry.Registry:
   - com.networknt.consul.ConsulRegistry
+- com.networknt.balance.LoadBalance:
+  - com.networknt.balance.RoundRobinLoadBalance
+- com.networknt.cluster.Cluster:
+  - com.networknt.cluster.LightCluster
 ```
 
 `server.yml`
@@ -155,6 +202,10 @@ We also need to create a new consul.yml file that defines the parameters for Con
 ```yaml
 # Consul URL for accessing APIs
 consulUrl: http://localhost:8500
+# access token to the consul server
+consulToken: the_one_ring
+# number of requests before reset the shared connection.
+maxReqPerConn: 1000000
 # deregister the service after the amount of time after health check failed.
 deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
@@ -173,6 +224,12 @@ httpCheck: false
 # but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
 # is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
 ttlCheck: true
+# endpoints that support blocking will also honor a wait parameter specifying a maximum duration for the blocking request.
+# This is limited to 10 minutes.This value can be specified in the form of "10s" or "5m" (i.e., 10 seconds or 5 minutes,
+# respectively).
+wait: 600s
+# enable HTTP/2, HTTP/2 used to be default but some users said that newer version of Consul doesn't support HTTP/2 anymore.
+enableHttp2: false
 ```
 
 
@@ -181,14 +238,23 @@ ttlCheck: true
 `service.yml`
 
 ```yaml
+singletons:
 - com.networknt.registry.URL:
   - com.networknt.registry.URLImpl:
+      protocol: light
+      host: localhost
+      port: 8080
+      path: consul
       parameters:
         registryRetryPeriod: '30000'
 - com.networknt.consul.client.ConsulClient:
   - com.networknt.consul.client.ConsulClientImpl
 - com.networknt.registry.Registry:
   - com.networknt.consul.ConsulRegistry
+- com.networknt.balance.LoadBalance:
+  - com.networknt.balance.RoundRobinLoadBalance
+- com.networknt.cluster.Cluster:
+  - com.networknt.cluster.LightCluster
 ```
 
 `server.yml`
@@ -202,6 +268,10 @@ enableRegistry: true
 ```yaml
 # Consul URL for accessing APIs
 consulUrl: http://localhost:8500
+# access token to the consul server
+consulToken: the_one_ring
+# number of requests before reset the shared connection.
+maxReqPerConn: 1000000
 # deregister the service after the amount of time after health check failed.
 deregisterAfter: 2m
 # health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
@@ -220,6 +290,12 @@ httpCheck: false
 # but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
 # is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
 ttlCheck: true
+# endpoints that support blocking will also honor a wait parameter specifying a maximum duration for the blocking request.
+# This is limited to 10 minutes.This value can be specified in the form of "10s" or "5m" (i.e., 10 seconds or 5 minutes,
+# respectively).
+wait: 600s
+# enable HTTP/2, HTTP/2 used to be default but some users said that newer version of Consul doesn't support HTTP/2 anymore.
+enableHttp2: false
 ```
 
 ## Start Consul
@@ -237,22 +313,25 @@ Now let's start four terminals to start servers.
 **API A**
 
 ```bash
-cd ~/networknt/discovery/api_a/consul
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_a/consul
+mvn clean install -Prelease
+java -jar target/aa-1.0.0.jar
 ```
 
 **API B**
 
 ```bash
-cd ~/networknt/discovery/api_b/consul
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_b/consul
+mvn clean install -Prelease
+java -jar target/ab-1.0.0.jar
 ```
 
 **API C**
 
 ```bash
-cd ~/networknt/discovery/api_c/consul
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_c/consul
+mvn clean install -Prelease
+java -jar target/ac-1.0.0.jar
 ```
 
 **API D**
@@ -260,8 +339,9 @@ mvn clean install exec:exec
 And start the first instance that listen to 7445 as default
 
 ```bash
-cd ~/networknt/discovery/api_d/consul
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_d/consul
+mvn clean install -Prelease
+java -jar target/ad-1.0.0.jar
 ```
 
 Now you can see the registered service from Consul UI.
@@ -269,6 +349,9 @@ Now you can see the registered service from Consul UI.
 ```bash
 http://localhost:8500/ui
 ```
+
+![discovery-consul-ui](/images/discovery-consul-ui.png)
+
 
 ## Testing the servers
 
@@ -279,7 +362,7 @@ curl -k https://localhost:7441/v1/data
 And the result will be
 
 ```bash
-["API D: Message 1 from port 7445","API D: Message 2 from port 7445","API B: Message 1","API B: Message 2","API C: Message 1","API C: Message 2","API A: Message 1","API A: Message 2"]
+["API D: Message 1 from port 7444","API D: Message 2 from port 7444","API B: Message 1","API B: Message 2","API C: Message 1","API C: Message 2","API A: Message 1","API A: Message 2"]
 ```
  
 ## Adding another API D
@@ -287,14 +370,15 @@ And the result will be
 Now let's start the second instance of API D. Before starting the server, let's update `server.yml` with port 7444.
 
 ```yaml
-httpsPort:  7444
+httpsPort:  7445
 ```
 
 And start the second instance.
 
 ```bash
-cd ~/networknt/discovery/api_d/consul
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_d/consul
+mvn clean install -Prelease
+java -jar target/ad-1.0.0.jar
 ```
 
 After you start the second instance of API D, you can go to the Web UI of consul to check if there are two instances for the API D. 

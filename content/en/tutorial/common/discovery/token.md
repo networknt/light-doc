@@ -18,10 +18,11 @@ In previous steps, we have set up Consul with acl_default_policy=allow so that a
 Now let's copy our previous state from `tag` to `token` for each API:
  
 ```bash
-cp -r ~/networknt/discovery/api_a/tag ~/networknt/discovery/api_a/token
-cp -r ~/networknt/discovery/api_b/tag ~/networknt/discovery/api_b/token
-cp -r ~/networknt/discovery/api_c/tag ~/networknt/discovery/api_c/token
-cp -r ~/networknt/discovery/api_d/tag ~/networknt/discovery/api_d/token
+cd ~/networknt
+cp -r light-example-4j/discovery/api_a/tag light-example-4j/discovery/api_a/token
+cp -r light-example-4j/discovery/api_b/tag light-example-4j/discovery/api_b/token
+cp -r light-example-4j/discovery/api_c/tag light-example-4j/discovery/api_c/token
+cp -r light-example-4j/discovery/api_d/tag light-example-4j/discovery/api_d/token
 ```
 
 ## Starting Consul
@@ -90,9 +91,9 @@ It should return something like this:
 
 ## Configuring the Servers
 
-The next step we are going to update `secret.yml` to add consul-token in order to access the Consul for service registry and discovery.
+The next step we are going to update `consul.yml` to add consulToken in order to access the Consul for service registry and discovery.
 
-For each server, go ahead and update `secret.yml` to add consulToken: `the_one_ring`
+For each server, go ahead and update `secret.yml` to add consulToken: `the_one_ring`. Please be aware that the consul.yml copied from light-4j consul module has the `consulToken: the_one_ring` already. In case it is not available, you can add the following line into the consul.yml
 
 ```yaml
 consulToken: the_one_ring
@@ -105,22 +106,25 @@ Now let's start four terminals to start servers.
 **API A**
 
 ```bash
-cd ~/networknt/discovery/api_a/token
-mvn clean install -DskipTests exec:exec
+cd ~/networknt/light-example-4j/discovery/api_a/token
+mvn clean install -Prelease
+java -jar target/aa-1.0.0.jar
 ```
 
 **API B**
 
 ```bash
-cd ~/networknt/discovery/api_b/token
-mvn clean install -DskipTests exec:exec
+cd ~/networknt/light-example-4j/discovery/api_b/token
+mvn clean install -Prelease
+java -jar target/ab-1.0.0.jar
 ```
 
 **API C**
 
 ```bash
-cd ~/networknt/discovery/api_c/token
-mvn clean install -DskipTests exec:exec
+cd ~/networknt/light-example-4j/discovery/api_c/token
+mvn clean install -Prelease
+java -jar target/ac-1.0.0.jar
 ```
 
 **API D**
@@ -128,8 +132,9 @@ mvn clean install -DskipTests exec:exec
 And start the first instance that listen to `7444` as default
 
 ```bash
-cd ~/networknt/discovery/api_d/token
-mvn clean install -DskipTests exec:exec
+cd ~/networknt/light-example-4j/discovery/api_d/token
+mvn clean install -Prelease
+java -jar target/ad-1.0.0.jar
 ```
 
 Now you should be able to see the registered service from the Consul UI.

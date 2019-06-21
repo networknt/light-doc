@@ -31,10 +31,10 @@ https://doc.networknt.com/tutorial/common/discovery/http-health/
 
 Docker images used for the demo
 
-https://hub.docker.com/r/networknt/com.networknt.apia-1.0.0/tags/
-https://hub.docker.com/r/networknt/com.networknt.apib-1.0.0/tags/
-https://hub.docker.com/r/networknt/com.networknt.apic-1.0.0/tags/
-https://hub.docker.com/r/networknt/com.networknt.apid-1.0.0/tags/
+https://hub.docker.com/r/networknt/com.networknt.aa-1.0.0/tags/
+https://hub.docker.com/r/networknt/com.networknt.ab-1.0.0/tags/
+https://hub.docker.com/r/networknt/com.networknt.ac-1.0.0/tags/
+https://hub.docker.com/r/networknt/com.networknt.ad-1.0.0/tags/
 
 #### Steps to deploy
 
@@ -52,10 +52,10 @@ https://hub.docker.com/r/networknt/com.networknt.apid-1.0.0/tags/
 
 * Push the api container images to the above openshift registry
 
-    docker push docker-registry-default.apps-np.caas.example.com/lightdemo/com.networknt.apia-1.0.0:1.5.18-redhat<br/>
-    docker push docker-registry-default.apps-np.caas.example.com/lightdemo/com.networknt.apib-1.0.0:1.5.18-redhat<br/>
-    docker push docker-registry-default.apps-np.caas.example.com/lightdemo/com.networknt.apic-1.0.0:1.5.18-redhat<br/>
-    docker push docker-registry-default.apps-np.caas.example.com/lightdemo/com.networknt.apid-1.0.0:1.5.18-redhat<br/>
+    docker push docker-registry-default.apps-np.caas.example.com/lightdemo/com.networknt.aa-1.0.0:2.0.2-redhat<br/>
+    docker push docker-registry-default.apps-np.caas.example.com/lightdemo/com.networknt.ab-1.0.0:2.0.2-redhat<br/>
+    docker push docker-registry-default.apps-np.caas.example.com/lightdemo/com.networknt.ac-1.0.0:2.0.2-redhat<br/>
+    docker push docker-registry-default.apps-np.caas.example.com/lightdemo/com.networknt.ad-1.0.0:2.0.2-redhat<br/>
 
 * Login to openshift and set project (namespace) <br/>
 

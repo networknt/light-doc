@@ -8,6 +8,7 @@ weight: 60
 sections_weight: 60
 draft: false
 toc: true
+reviewed: true
 ---
 
 ## Introduction
@@ -24,15 +25,16 @@ In this step, we are going to use an environment tag to separate multiple instan
 First, let's copy our current state from the last step into the `tag` directory.
 
 ```bash
-cp -r ~/networknt/discovery/api_a/consul ~/networknt/discovery/api_a/tag
-cp -r ~/networknt/discovery/api_b/consul ~/networknt/discovery/api_b/tag
-cp -r ~/networknt/discovery/api_c/consul ~/networknt/discovery/api_c/tag
-cp -r ~/networknt/discovery/api_d/consul ~/networknt/discovery/api_d/tag
+cd ~/networknt
+cp -r light-example-4j/discovery/api_a/consul light-example-4j/discovery/api_a/tag
+cp -r light-example-4j/discovery/api_b/consul light-example-4j/discovery/api_b/tag
+cp -r light-example-4j/discovery/api_c/consul light-example-4j/discovery/api_c/tag
+cp -r light-example-4j/discovery/api_d/consul light-example-4j/discovery/api_d/tag
 ```
 
 ### API A
 
-In order to register the service with a tag to indicate a separate environment. We need to update `server.yml` with an environment tag. Here we are using `test1` as our tag.
+In order to register the service with a tag to indicate a separate environment, We need to update `server.yml` with an environment tag. Here we are using `test1` as our tag.
 
 ```yaml
 environment: test1
@@ -77,31 +79,35 @@ Now let's start four terminals to start servers.
 **API A**
 
 ```bash
-cd ~/networknt/discovery/api_a/tag
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_a/tag
+mvn clean install -Prelease
+java -jar target/aa-1.0.0.jar
 ```
 
 **API B**
 
 ```bash
-cd ~/networknt/discovery/api_b/tag
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_b/tag
+mvn clean install -Prelease
+java -jar target/ab-1.0.0.jar
 ```
 
 **API C**
 
 ```bash
-cd ~/networknt/discovery/api_c/tag
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_c/tag
+mvn clean install -Prelease
+java -jar target/ac-1.0.0.jar
 ```
 
 **API D**
 
-And start the first instance that listen to `7445` as default
+And start the first instance that listen to `7444` as default
 
 ```bash
-cd ~/networknt/discovery/api_d/tag
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_d/tag
+mvn clean install -Prelease
+java -jar target/ad-1.0.0.jar
 ```
 
 Now you can see the registered services from Consul UI.
@@ -137,8 +143,9 @@ environment: test2
 And start the second instance:
 
 ```bash
-cd ~/networknt/discovery/api_d/tag
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_d/tag
+mvn clean install -Prelease
+java -jar target/ad-1.0.0.jar
 ```
 
 Take a look at the Consul UI, you can see the tag `test2` for `API D`.
@@ -146,8 +153,8 @@ Take a look at the Consul UI, you can see the tag `test2` for `API D`.
 You can use the following command line to lookup API with `test1` or `test2` and you will see one instance returns for each query.
 
 ```bash
-curl http://localhost:8500/v1/health/service/com.networknt.apid-1.0.0?passing&wait=600s&index=0&tag=test1
-curl http://localhost:8500/v1/health/service/com.networknt.apid-1.0.0?passing&wait=600s&index=0&tag=test2
+curl http://localhost:8500/v1/health/service/com.networknt.ad-1.0.0?passing&wait=600s&index=0&tag=test1
+curl http://localhost:8500/v1/health/service/com.networknt.ad-1.0.0?passing&wait=600s&index=0&tag=test2
 ```
 
 Can you guess what will be returned if you don't have tag query parameter? The answer is all available instances will be returned. 

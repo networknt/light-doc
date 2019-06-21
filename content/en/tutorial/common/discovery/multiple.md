@@ -17,10 +17,11 @@ In this step, we're going to start two `API D` instances that will listen to `74
 Let's copy our current state from the last step into the `multiple` directory.
 
 ```bash
-cp -r ~/networknt/discovery/api_a/dynamic/ ~/networknt/discovery/api_a/multiple
-cp -r ~/networknt/discovery/api_b/dynamic/ ~/networknt/discovery/api_b/multiple
-cp -r ~/networknt/discovery/api_c/dynamic/ ~/networknt/discovery/api_c/multiple
-cp -r ~/networknt/discovery/api_d/dynamic/ ~/networknt/discovery/api_d/multiple
+cd ~/networknt
+cp -r light-example-4j/discovery/api_a/dynamic/ light-example-4j/discovery/api_a/multiple
+cp -r light-example-4j/discovery/api_b/dynamic/ light-example-4j/discovery/api_b/multiple
+cp -r light-example-4j/discovery/api_c/dynamic/ light-example-4j/discovery/api_c/multiple
+cp -r light-example-4j/discovery/api_d/dynamic/ light-example-4j/discovery/api_d/multiple
 ```
 
 ## Configuring the Servers
@@ -30,10 +31,17 @@ cp -r ~/networknt/discovery/api_d/dynamic/ ~/networknt/discovery/api_d/multiple
 Let's modify API B service.yml to have two API D instances that listen to 7444 and 7445.
 
 ```yaml
-- com.networknt.registry.URL:
-  - com.networknt.registry.URLImpl:
-      parameters:
-        com.networknt.apid-1.0.0: https://localhost:7444,https://localhost:7445
+singletons:
+  - com.networknt.registry.URL:
+      - com.networknt.registry.URLImpl:
+          parameters:
+            com.networknt.ad-1.0.0: https://localhost:7444,https://localhost:7445
+  - com.networknt.registry.Registry:
+      - com.networknt.registry.support.DirectRegistry
+  - com.networknt.balance.LoadBalance:
+      - com.networknt.balance.RoundRobinLoadBalance
+  - com.networknt.cluster.Cluster:
+      - com.networknt.cluster.LightCluster
 ```
 
 Also, to see different endpoints being hit, let's disable the connection caching in the request to `API D`.
@@ -41,15 +49,87 @@ Also, to see different endpoints being hit, let's disable the connection caching
 Change the following section in `DataGetHandler.java`:
 
 ```java
-if(connection == null || !connection.isOpen()) {
-    connection = getConnectionD();
+package com.networknt.ab.handler;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.networknt.client.Http2Client;
+import com.networknt.cluster.Cluster;
+import com.networknt.config.Config;
+import com.networknt.exception.ClientException;
+import com.networknt.handler.LightHttpHandler;
+import com.networknt.security.JwtHelper;
+import com.networknt.server.Server;
+import com.networknt.service.SingletonServiceFactory;
+import io.undertow.UndertowOptions;
+import io.undertow.client.ClientConnection;
+import io.undertow.client.ClientRequest;
+import io.undertow.client.ClientResponse;
+import io.undertow.server.HttpServerExchange;
+import io.undertow.util.HttpString;
+import io.undertow.util.Methods;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xnio.OptionMap;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicReference;
+
+public class DataGetHandler implements LightHttpHandler {
+    static Logger logger = LoggerFactory.getLogger(DataGetHandler.class);
+    static Cluster cluster = SingletonServiceFactory.getBean(Cluster.class);
+    static String apidHost;
+    static String path = "/v1/data";
+    static Map<String, Object> securityConfig = (Map)Config.getInstance().getJsonMapConfig(JwtHelper.SECURITY_CONFIG);
+    static boolean securityEnabled = (Boolean)securityConfig.get(JwtHelper.ENABLE_VERIFY_JWT);
+    static String tag = Server.getServerConfig().getEnvironment();
+
+    static Http2Client client = Http2Client.getInstance();
+
+    public DataGetHandler() {
+    }
+
+    @Override
+    public void handleRequest(HttpServerExchange exchange) throws Exception {
+        List<String> list = new ArrayList<>();
+        final CountDownLatch latch = new CountDownLatch(1);
+        ClientConnection connection = null;
+        try {
+            apidHost = cluster.serviceToUrl("https", "com.networknt.ad-1.0.0", tag, null);
+            connection = client.connect(new URI(apidHost), Http2Client.WORKER, Http2Client.SSL, Http2Client.BUFFER_POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true)).get();
+        } catch (Exception e) {
+            logger.error("Exeption:", e);
+            throw new ClientException(e);
+        }
+        final AtomicReference<ClientResponse> reference = new AtomicReference<>();
+        try {
+            ClientRequest request = new ClientRequest().setMethod(Methods.GET).setPath(path);
+            // this is to ask client module to pass through correlationId and traceabilityId as well as
+            // getting access token from oauth2 server automatically and attatch authorization headers.
+            if(securityEnabled) client.propagateHeaders(request, exchange);
+            connection.sendRequest(request, client.createClientCallback(reference, latch));
+            latch.await();
+            int statusCode = reference.get().getResponseCode();
+            if(statusCode >= 300){
+                throw new Exception("Failed to call API D: " + statusCode);
+            }
+            List<String> apidList = Config.getInstance().getMapper().readValue(reference.get().getAttachment(Http2Client.RESPONSE_BODY),
+                    new TypeReference<List<String>>(){});
+            list.addAll(apidList);
+        } catch (Exception e) {
+            logger.error("Exception:", e);
+            throw new ClientException(e);
+        }
+        list.add("API B: Message 1");
+        list.add("API B: Message 2");
+        exchange.getResponseSender().send(Config.getInstance().getMapper().writeValueAsString(list));
+    }
 }
-```
 
-to:
-
-```java
-connection = getConnectionD();
 ```
 
 ### API D
@@ -61,20 +141,24 @@ Also, let's update the handler so that we know which port serves the request.
 `DataGetHandler.java`
 
 ```java
-package com.networknt.apid.handler;
+package com.networknt.ad.handler;
 
 import com.networknt.config.Config;
+import com.networknt.handler.LightHttpHandler;
 import com.networknt.server.Server;
-import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
+import io.undertow.util.HttpString;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class DataGetHandler implements HttpHandler {
+public class DataGetHandler implements LightHttpHandler {
+    
     @Override
     public void handleRequest(HttpServerExchange exchange) throws Exception {
-        int port = Server.config.getHttpsPort();
+        int port = Server.getServerConfig().getHttpsPort();
         List<String> messages = new ArrayList<>();
         messages.add("API D: Message 1 from port " + port);
         messages.add("API D: Message 2 from port " + port);
@@ -91,24 +175,25 @@ Now let's start all five servers from five terminals. API D has two instances.
 **API A**
 
 ```
-cd ~/networknt/discovery/api_a/multiple
-mvn clean install exec:exec
+cd ~/networknt/light-example-4j/discovery/api_a/multiple
+mvn clean install -Prelease
+java -jar target/aa-1.0.0.jar
 ```
 
 **API B**
 
 ```
-cd ~/networknt/discovery/api_b/multiple
-mvn clean install exec:exec
-
+cd ~/networknt/light-example-4j/discovery/api_b/multiple
+mvn clean install -Prelease
+java -jar target/ab-1.0.0.jar
 ```
 
 **API C**
 
 ```
-cd ~/networknt/discovery/api_c/multiple
-mvn clean install exec:exec
-
+cd ~/networknt/light-example-4j/discovery/api_c/multiple
+mvn clean install -Prelease
+java -jar target/ac-1.0.0.jar
 ```
 
 **API D**
@@ -117,12 +202,12 @@ mvn clean install exec:exec
 And start the first instance that listen to 7444.
 
 ```
-cd ~/networknt/discovery/api_d/multiple
-mvn clean install exec:exec
-
+cd ~/networknt/light-example-4j/discovery/api_d/multiple
+mvn clean install -Prelease
+java -jar target/ad-1.0.0.jar
 ```
  
-Now let's start the second instance of `API D`. Before starting the server, let's update server.yml with https port 7445 and disable HTTP.
+Now let's start the second instance of `API D`. Before starting the server, let's update server.yml with https port 7445.
 
 ```yaml
 httpsPort: 7445
@@ -131,9 +216,9 @@ httpsPort: 7445
 And start the second instance
 
 ```
-cd ~/networknt/discovery/api_d/multiple
-mvn clean install exec:exec
-
+cd ~/networknt/light-example-4j/discovery/api_d/multiple
+mvn clean install -Prelease
+java -jar target/ad-1.0.0.jar
 ```
 
 ## Testing the Servers

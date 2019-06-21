@@ -17,61 +17,43 @@ In this step, we're going to dockerize all the APIs and then use Consul for serv
 First, let's copy from consul to consuldocker for each API.
  
 ```bash
-cp -r ~/networknt/discovery/api_a/consul ~/networknt/discovery/api_a/consuldocker
-cp -r ~/networknt/discovery/api_b/consul ~/networknt/discovery/api_b/consuldocker
-cp -r ~/networknt/discovery/api_c/consul ~/networknt/discovery/api_c/consuldocker
-cp -r ~/networknt/discovery/api_d/consul ~/networknt/discovery/api_d/consuldocker
+cd ~/networknt
+cp -r light-example-4j/discovery/api_a/consul light-example-4j/discovery/api_a/consuldocker
+cp -r light-example-4j/discovery/api_b/consul light-example-4j/discovery/api_b/consuldocker
+cp -r light-example-4j/discovery/api_c/consul light-example-4j/discovery/api_c/consuldocker
+cp -r light-example-4j/discovery/api_d/consul light-example-4j/discovery/api_d/consuldocker
 ```
 
 ## Configuring the APIs 
 
 ### API A
 
-We will be running in a dockerized environment, so having consul configured at "localhost" is no longer valid. We will be using the DOCKER_HOST_IP in the consul.yml file. On my local computer, the IP is 192.168.1.120. You can use ifconfig on Linux to find out your local IP. 
+We will be running in a dockerized environment, so having consul configured at "localhost" is no longer valid. We will be using the DOCKER_HOST_IP in the consul.yml file. On my local computer, the IP is 192.168.1.144. You can use `ifconfig` on Linux to find out your local IP. 
 
-When starting the docker-compose for services, we need to set up the DOCKER_HOST_IP as environment variable to pass it into the container. For more info on how to setup the DOCKER_HOST_IP, please refer to [docker host ip][]. 
+When starting the docker-compose for services, we need to set up the DOCKER_HOST_IP as an environment variable to pass it into the container. For more info on how to set up the DOCKER_HOST_IP, please refer to [docker host ip][]. 
 
-`consul.yml`
+In `consul.yml`, change the consulUrl to use the host IP instead of localhost as localhost inside a container is the container loopback address and it cannot go outside of the container. 
 
 ```yaml
-# Consul URL for accessing APIs
-consulUrl: http://192.168.1.120:8500
-# deregister the service after the amount of time after health check failed.
-deregisterAfter: 2m
-# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
-# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
-# then mark the service is critical.
-checkInterval: 10s
-# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
-# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
-# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
-tcpCheck: false
-# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
-# coming back. This is suitable for service that depending on database or other infrastructure services. You should
-# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
-httpCheck: false
-# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
-# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
-# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
-ttlCheck: true
+consulUrl: http://192.168.1.144:8500
 ```
 
-The Dockerfile generated from light-codegen should be available as following.
+The Dockerfile generated from light-codegen should be available like this.
 
 `docker/Dockerfile`
 
 ```dockerfile
-FROM openjdk:8-jre-alpine
-ADD /target/apia-1.0.0.jar server.jar
+FROM openjdk:11.0.3-slim
+ADD /target/aa-1.0.0.jar server.jar
 CMD ["/bin/sh","-c","java -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
 ```
 
 Let's build and tag a docker image for this service: 
 
 ```bash
-cd ~/networknt/discovery/api_a/consuldocker
-mvn clean install -DskipTests
-docker build -t networknt/com.networknt.apia-1.0.0 -f docker/Dockerfile .
+cd ~/networknt/light-example-4j/discovery/api_a/consuldocker
+mvn clean install -Prelease
+docker build -t networknt/com.networknt.aa-1.0.0 -f docker/Dockerfile .
 ```
 
 ### API B
@@ -79,26 +61,7 @@ docker build -t networknt/com.networknt.apia-1.0.0 -f docker/Dockerfile .
 `consul.yml`
 
 ```yaml
-# Consul URL for accessing APIs
-consulUrl: http://192.168.1.120:8500
-# deregister the service after the amount of time after health check failed.
-deregisterAfter: 2m
-# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
-# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
-# then mark the service is critical.
-checkInterval: 10s
-# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
-# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
-# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
-tcpCheck: false
-# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
-# coming back. This is suitable for service that depending on database or other infrastructure services. You should
-# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
-httpCheck: false
-# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
-# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
-# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
-ttlCheck: true
+consulUrl: http://192.168.1.144:8500
 ```
 
 The Dockerfile generated from light-codegen should be available as following.
@@ -106,17 +69,17 @@ The Dockerfile generated from light-codegen should be available as following.
 `docker/Dockerfile`
 
 ```dockerfile
-FROM openjdk:8-jre-alpine
-ADD /target/apib-1.0.0.jar server.jar
+FROM openjdk:11.0.3-slim
+ADD /target/ab-1.0.0.jar server.jar
 CMD ["/bin/sh","-c","java -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
 ```
 
 Let's build and tag the docker image for this service:
 
 ```bash
-cd ~/networknt/discovery/api_b/consuldocker
-mvn clean install -DskipTests
-docker build -t networknt/com.networknt.apib-1.0.0 -f docker/Dockerfile .
+cd ~/networknt/light-example-4j/discovery/api_b/consuldocker
+mvn clean install -Prelease
+docker build -t networknt/com.networknt.ab-1.0.0 -f docker/Dockerfile .
 ```
 
 ### API C
@@ -124,26 +87,7 @@ docker build -t networknt/com.networknt.apib-1.0.0 -f docker/Dockerfile .
 `consul.yml`
 
 ```yaml
-# Consul URL for accessing APIs
-consulUrl: http://192.168.1.120:8500
-# deregister the service after the amount of time after health check failed.
-deregisterAfter: 2m
-# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
-# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
-# then mark the service is critical.
-checkInterval: 10s
-# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
-# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
-# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
-tcpCheck: false
-# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
-# coming back. This is suitable for service that depending on database or other infrastructure services. You should
-# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
-httpCheck: false
-# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
-# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
-# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
-ttlCheck: true
+consulUrl: http://192.168.1.144:8500
 ```
 
 The Dockerfile generated from light-codegen should be available as following.
@@ -151,17 +95,17 @@ The Dockerfile generated from light-codegen should be available as following.
 `docker/Dockerfile`
 
 ```dockerfile
-FROM openjdk:8-jre-alpine
-ADD /target/apic-1.0.0.jar server.jar
+FROM openjdk:11.0.3-slim
+ADD /target/ac-1.0.0.jar server.jar
 CMD ["/bin/sh","-c","java -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
 ```
 
 Let's build and tag the docker image for this service:
 
 ```bash
-cd ~/networknt/discovery/api_c/consuldocker
-mvn clean install
-docker build -t networknt/com.networknt.apic-1.0.0 -f docker/Dockerfile .
+cd ~/networknt/light-example-4j/discovery/api_c/consuldocker
+mvn clean install -Prelease
+docker build -t networknt/com.networknt.ac-1.0.0 -f docker/Dockerfile .
 ```
 
 ### API D
@@ -169,26 +113,7 @@ docker build -t networknt/com.networknt.apic-1.0.0 -f docker/Dockerfile .
 `consul.yml`
 
 ```yaml
-# Consul URL for accessing APIs
-consulUrl: http://192.168.1.120:8500
-# deregister the service after the amount of time after health check failed.
-deregisterAfter: 2m
-# health check interval for TCP or HTTP check. Or it will be the TTL for TTL check. Every 10 seconds,
-# TCP or HTTP check request will be sent. Or if there is no heart beat request from service after 10 seconds,
-# then mark the service is critical.
-checkInterval: 10s
-# One of the following health check approach will be selected. Two passive (TCP and HTTP) and one active (TTL)
-# enable health check TCP. Ping the IP/port to ensure that the service is up. This should be used for most of
-# the services with simple dependencies. If the port is open on the address, it indicates that the service is up.
-tcpCheck: false
-# enable health check HTTP. A http get request will be sent to the service to ensure that 200 response status is
-# coming back. This is suitable for service that depending on database or other infrastructure services. You should
-# implement a customized health check handler that checks dependencies. i.e. if db is down, return status 400.
-httpCheck: false
-# enable health check TTL. When this is enabled, Consul won't actively check your service to ensure it is healthy,
-# but your service will call check endpoint with heart beat to indicate it is alive. This requires that the service
-# is built on top of light-4j and the above options are not available. For example, your service is behind NAT.
-ttlCheck: true
+consulUrl: http://192.168.1.144:8500
 ```
 
 The Dockerfile generated from light-codegen should be available as following.
@@ -196,17 +121,17 @@ The Dockerfile generated from light-codegen should be available as following.
 `docker/Dockerfile`
 
 ```dockerfile
-FROM openjdk:8-jre-alpine
-ADD /target/apid-1.0.0.jar server.jar
+FROM openjdk:11.0.3-slim
+ADD /target/ad-1.0.0.jar server.jar
 CMD ["/bin/sh","-c","java -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
 ```
 
 Let's build and tag the docker image for this service:
 
 ```bash
-cd ~/networknt/discovery/api_d/consuldocker
-mvn clean install
-docker build -t networknt/com.networknt.apid-1.0.0 -f docker/Dockerfile .
+cd ~/networknt/light-example-4j/discovery/api_d/consuldocker
+mvn clean install -Prelease
+docker build -t networknt/com.networknt.ad-1.0.0 -f docker/Dockerfile .
 ```
 
 ## Start Services
@@ -226,7 +151,7 @@ cd light-docker
 docker-compose -f docker-compose-consul.yml up -d
 ```
 
-Start APIs once Consul is ready. 
+Start APIs once Consul is ready from the light-docker folder.
 
 ```bash
 docker-compose -f docker-compose-discovery.yml up -d
