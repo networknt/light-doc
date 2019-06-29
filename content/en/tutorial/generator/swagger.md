@@ -16,6 +16,6 @@ For examples of usage for this generator, please refer to https://github.com/net
 
 For detailed usage, please refer to [reference document][].
 
-[reference document]: /references/light-codegen/swagger-generator/
+[reference document]: /reference/light-codegen/swagger-generator/
 [OpenAPI specification]: https://swagger.io/docs/specification/about/
-[code generation]: /references/light-codegen/openapi-generator/
+[code generation]: /reference/light-codegen/openapi-generator/

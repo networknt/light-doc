@@ -225,11 +225,11 @@ params = ["categories", "tags"]
   url = "/troubleshooting/"
 
 [[menu.docs]]
-name = "References"
+name = "Reference"
 weight = 65
-identifier = "references"
+identifier = "reference"
 post = "break"
-url = "/references/"
+url = "/reference/"
 
 [[menu.docs]]
   name = "FAQ"

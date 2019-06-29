@@ -14,4 +14,4 @@ For examples of usage for this generator, please refer to https://github.com/net
 
 For detailed usage, please refer to [reference document][].
 
-[reference document]: /references/light-codegen/hybrid-service/
+[reference document]: /reference/light-codegen/hybrid-service/

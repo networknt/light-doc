@@ -67,6 +67,6 @@ you are using OpenAPI 3.0, please refer to [OpenAPI 3.0 Mock][] tutorial for det
 
 
 [Swagger 2.0 petstore specification]: https://github.com/networknt/model-config/blob/master/rest/swagger/petstore/2.0.0/swagger.yaml
-[light-codegen]: /references/light-codegen/
+[light-codegen]: /reference/light-codegen/
 [petstore tutorial]: /tutorial/rest/swagger/petstore/test/
 [OpenAPI 3.0 Mock]: /tutorial/generator/openapi-mock/
