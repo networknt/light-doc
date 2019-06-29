@@ -6,7 +6,7 @@ categories: []
 keywords: []
 menu:
   docs:
-    parent: "references"
+    parent: "reference"
     weight: 80
 slug: ""
 aliases: []
