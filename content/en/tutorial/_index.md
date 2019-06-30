@@ -223,7 +223,7 @@ section, some of the most important tutorials are listed here and more will be a
 - [Debug](/tutorial/common/debug/)
   * [IntelliJ IDEA](/tutorial/common/debug/idea/)
   * [Eclipse](/tutorial/common/debug/eclipse/)
-
+  * [Remote Debug with Docker Container](/tutorial/common/debug/docker-remote/)
 
 [Kafka Tutorial]: /tutorial/eventuate/kafka/
 [Test Tutorial]: /tutorial/eventuate/test/

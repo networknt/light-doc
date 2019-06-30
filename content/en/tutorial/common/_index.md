@@ -31,6 +31,7 @@ built on top of the light platform.
 
 * [Debug service with Eclipse][]
 
+* [Remote Debug with Docker Container][]
 
 ### Service Registry and Discovery
 
@@ -50,3 +51,4 @@ built on top of the light platform.
 [Debug service with Eclipse]: /tutorial/common/debug/eclipse/
 [Serivce Regristry and Discovery]: /tutorial/common/discovery/
 [Singleton Service Injection]: /tutorial/common/service/
+[Remote Debug with Docker Container]: /tutorial/common/debug/docker-remote/

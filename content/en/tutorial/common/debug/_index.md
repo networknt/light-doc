@@ -17,6 +17,8 @@ is very easy to debug your API application within your IDE.
 
 * [Debug with Eclipse][]
 
+* [Remote Debug with Docker Container][]
 
 [Debug with IntelliJ Idea]: /tutorial/common/debug/idea/
 [Debug with Eclipse]: /tutorial/common/debug/eclipse/
+[Remote Debug with Docker Container]: /tutorial/common/debug/docker-remote/
