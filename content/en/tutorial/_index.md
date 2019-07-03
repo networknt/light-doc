@@ -159,7 +159,7 @@ section, some of the most important tutorials are listed here and more will be a
   * [Light Portal Local Build](/tutorial/bot/light-portal-local/)
   * [Start Portal Service](/tutorial/portal/start-portal-service/)
   * [Start Local Portal Light-Router](/tutorial/portal/local-router/)
-  * [Portal View](/consumer/local-first/)
+  * [Portal View](/tutorial/portal/view/)
   * Portal Services
      + [user-management](/tutorial/portal/user-management/) 
 - [Light-proxy](/tutorial/proxy/)
