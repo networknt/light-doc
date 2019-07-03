@@ -60,7 +60,7 @@ Note: currently, we support both OpenAPI 3.0 specification and Swagger 2.0 speci
 | **skipHealthCheck** | decides whether to enable the health check in the handler chain and expose the health check endpoint. Set to `true` to skip the wiring of the health check <br><br>*Optionality*: optional <br>Default: `false` |
 | **skipServerInfo** | decides whether to wire the server info in the handler chain and expose the server info endpoint. Set to `true` to skip the wiring of the server info retrieval <br><br><br>*Optionality*: optional <br>Default: `false` |
 | **prometheusMetrics** | decides whether to wire the Prometheus metrics collection handler in the handler chain. Set to `true` to skip the wiring of the Prometheus metrics collection handler <br><br>*Optionality*: optional <br>Default: `false` |
-| **generateEnvVars** | how environment-based variables should be generated <ul><li>generatedgenerateEnvVars.generate:boolean whether the environment based variables should be generated.</li> Default: `false`.<ul> <li>If set to `false`, config files are copied to target folder (if different from source folder)</li><li>If set to `true`, config values are re-written to environment based</li> </ul><li>valuesgenerateEnvVars.skipArray: boolean whether Arrays in the config files should be re-written or not. This is considered `false` if not set.</li><li>generateEnvVars.skipMap: boolean whether Maps in the config files should be re-written or not. This is considered `false` if not set.</li><li>generateEnvVars.exclude: Array a list of files that should not be re-written </li></ul> |
+| **generateEnvVars** | how environment-based variables should be generated <ul><li>generatedgenerateEnvVars.generate:boolean whether the environment based variables should be generated.</li> Default: `false`.<ul> <li>If set to `false`, config files are copied to target folder (if different from source folder)</li><li>If set to `true`, config values are re-written to environment based</li> </ul><li>valuesgenerateEnvVars.skipArray: boolean whether Arrays in the config files should be re-written or not. This is considered `false` if not set.</li><li>generateEnvVars.skipMap: boolean whether Maps in the config files should be re-written or not. This is considered `false` if not set.</li><li>generateEnvVars.exclude: Array a list of files that should not be re-written </li></ul> Note: This configuration option has been deprecated at 1.6.5 as it is not backward compatible. |
 | **specGeneration** | specifies information required for generating openapi specifications from source code.<ul><li>modelPackages: string the codegen tool can only generate specfication for models now. This config item specifies the package names of models in the class path. Mutliple package names are delimited by comma.</li><li>mergeTo: string If there is an existing openapi specification and users wants to merge the generated model sepcifications to it, this config item can be used to specify the location of the existing specification.</li><li>outputFormat: string Specifies the expected output format of the specification. Value can be yaml, json, or both </li><li>outputFilename: string the name of the generated openapi file. If not specified, the output file name is default to openapi_generated.</ul> |
 
 
@@ -223,6 +223,16 @@ Please note that the configuration item `specGeneration` is required to generate
 cd ~/networknt/light-codegen/code-cli/target
 java -cp .:./codegen-cli.jar:/path/to/project/target/classes com.networknt.codegen.Cli -f openapi-spec -o /path/to/config/config.json
 ```
+
+#### Config Parameterization
+To support generating parameterized config file, we provide additional commend `-p`, `--parameterize` for codegen-cli
+```
+cd ~/networknt/light-codegen
+java -jar codegen-cli/target/codegen-cli.jar -p examplePath/paramsCondig -f openapi -o /tmp/openapi-json -m light-rest-4j/src/test/resources/openapi.json -c light-rest-4j/src/test/resources/config.json
+```
+By executing the above command, a project containing custom parameterized configuration files will be generated. Each configuration file that exists on the specified path `examplePath/paramsCondig` will be parameterized and added to the target configuration file path.
+
+For more details of config parameterization, please see [Config](#config).
 
 #### Docker Command Line
 
