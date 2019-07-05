@@ -17,3 +17,4 @@ The most popular one is to deploy all services to a Kubernetes cluster or Opensh
 
 
 - [Deploy to Kubernetes](/service/oauth/deployment/kubernetes/)
+- [Secure HazelCast](/service/oauth/deployment/hazelcast/)

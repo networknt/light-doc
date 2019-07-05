@@ -36,9 +36,11 @@ The light-oauth2 is not just an OAuth 2.0 provider. Some of the services impleme
   * [Provider Registration][] - Oauth provider server service
   * [Custom grant type][] - Client authenticated user grant type
   * [PKCE][] PKCE implementation
-* [OpenID Connect][] OpenID Connect implementation
+- [OpenID Connect][] OpenID Connect implementation
 - [Authenticator](/service/oauth/authenticator/)
 - [Deployment](/service/oauth/deployment/)
+  * [Deploy to Kubernetes](/service/oauth/deployment/kubernetes/)
+  * [Secure HazelCast](/service/oauth/deployment/hazelcast/)
 - [Tutorial](/tutorial/oauth/)
 - [Reference](/service/oauth/reference/)
 
@@ -83,9 +85,9 @@ There is a vast amount of information about OAuth 2.0 specifications and impleme
 [why this OAuth 2.0 provider]: /service/oauth/why-this-oauth/
 [light-docker]: https://github.com/networknt/light-docker
 [OpenID Connect]: /service/oauth/serivce/openid/
+[tutorial]: /tutorial/oauth/
 [PKCE]: /service/oauth/service/pkce/
 [Custom grant type]: /service/oauth/service/custom/
-[tutorial]: /tutorial/oauth/
 [Authorization Code]: /service/oauth/service/code/
 [Token Endpoint]: /service/oauth/service/token/
 [Service Registration]: /service/oauth/service/service/
