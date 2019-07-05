@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Since we have introduced handler.yml for multi-chain support in the light-4j platform, there are a lot of enhancements added to these frameworks. One of the most important features is to support Single Page Application with path-resource and virtual-host. 
+Since we have introduced handler.yml for multi-chain support in the light-4j platform, there are a lot of enhancements added to these frameworks. One of the most important features is to support the Single Page Application with path-resource and virtual-host. 
 
-In this tutorial, we are going to reconfigure the generated light-hybrid-4j server to serve SPA with handler.yml file. The project is the web-client for taiji-blockchain and all source code can be accessed from the [github repo](https://github.com/taiji-chain/web-client). The sub-project we are going to modify is the server. 
+In this tutorial, we are going to reconfigure the generated light-hybrid-4j server to serve the SPA with `handler.yml` config file. The project is the web-client for taiji-blockchain, and all source code can be accessed from the [github repo](https://github.com/taiji-chain/web-client). The sub-project we are going to modify is the server. 
 
 As of release 1.5.23, the light-hybrid-4j codegen still using PathHandlerProvider to define the handlers chain. To support path-resource handler, we are going to make some configuration change to enable handler.yml
 
