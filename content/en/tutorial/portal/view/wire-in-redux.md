@@ -112,8 +112,8 @@ Now, let's update the index.js in the src folder to wire in the Proivider tag. O
 
 ```
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducers from './reducers';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 ```
@@ -163,7 +163,7 @@ Now, double check the application still running without any error from the conso
 
 At this stage, we have wired in Redux to our application. We still need to update the components later to connect them with Redux store for states and actions. 
 
-Let's check in the code to branch `ui-wire-in-redux` for this tutorial and in the next tutorial, we are going to [add masterial-ui][] to our application. 
+Let's check in the code to branch `ui-wire-in-redux` for this tutorial and in the next tutorial, we are going to [add material-ui][] to our application. 
 
 ```
 git checkout -b ui-wire-in-redux
@@ -174,4 +174,4 @@ git push origin ui-wire-in-redux
 
 
 [Jest Test Runner]: /tutorial/portal/view/jest-test-runner/
-[add masterial-ui]: /tutorial/portal/view/add-masterial-ui/
+[add material-ui]: /tutorial/portal/view/add-material-ui/
