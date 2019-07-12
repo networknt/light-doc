@@ -356,3 +356,120 @@ The client-side service will call all four server-side services parallel and get
      }
 
 ```
+
+
+
+
+ ## Prometheus metrics
+
+ Prometheus is an open-source systems monitoring and alerting toolkit originally built at SoundCloud.
+
+
+
+ The ServiceMesher sample implemented with Prometheus metrics middleware handler.
+
+
+ Enable Prometheus metrics middleware handler by prometheus.yml config file:
+
+ - [sample config ](https://github.com/networknt/light-example-4j/blob/master/servicemesher/services/configuration/bookstore/prometheus.yml)
+
+
+   ```
+   ---
+   # Prometheus Metrics handler configuration
+
+   enabled: true
+
+   enableHotspot: true
+
+   ```
+
+
+  In the handler.yml config file for each services, we need add Prometheus middleware handler
+
+  ```
+     - com.networknt.metrics.prometheus.PrometheusHandler@prometheus
+     - com.networknt.metrics.prometheus.PrometheusGetHandler@getprometheus
+
+  ```
+
+  And add endpoint for Prometheus to pull the metrics data:
+
+  ```
+  - path: '/v1/prometheus'
+    method: 'get'
+    exec:
+      - getprometheus
+
+ ```
+
+ To Verify, please following the below steps:
+
+
+  ```
+  cd ~/networknt
+  git clone git@github.com:networknt/light-example-4j.git
+  cd ~/networknt/light-docker
+
+   docker-compose -f docker-compose-prometheus.yml up
+
+  ```
+
+
+
+  Then you can open Prometheus admin console by:
+
+  http://localhost:9090/
+
+  Light-4j framework middleware handler provide application defined monitor which include:
+
+  ```
+    public static final String REQUEST_TOTAL = "requests_total";
+    public static final String SUCCESS_TOTAL = "success_total";
+    public static final String AUTO_ERROR_TOTAL = "auth_error_total";
+    public static final String REQUEST_ERROR_TOTAL = "request_error_total";
+    public static final String SERVER_ERROR_TOTAL = "server_error_total";
+    public static final String RESPONSE_TIME_SECOND = "response_time_seconds";
+  ```
+
+ And for the mBeans based JVM hotspot monitor, it includes:
+
+CPU and JVM process:
+
+```
+process_cpu_seconds_total
+process_open_fds
+```
+
+JVM memory usage:
+
+```
+jvm_memory_pool_allocated_bytes_total
+jvm_memory_pool_bytes_init
+jvm_memory_pool_bytes_max
+jvm_memory_pool_bytes_used
+```
+
+metrics about JVM thread areas
+
+```
+jvm_threads_peak
+jvm_threads_daemon
+jvm_threads_started_total
+jvm_threads_deadlocked
+jvm_threads_state
+```
+
+JVM garbage collectors:
+
+```
+jvm_gc_collection_seconds
+```
+
+Buffer:
+
+```
+jvm_buffer_pool_used_bytes
+jvm_buffer_pool_capacity_bytes
+jvm_buffer_pool_used_buffers
+```
