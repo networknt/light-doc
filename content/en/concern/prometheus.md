@@ -46,15 +46,86 @@ In prometheus, we need to configure it use consul_sd_targets. Prometheus will th
 #### Configuration file (prometheus.yml) for the MiddlewareHandler (com.networknt.metrics.prometheus.PrometheusHandler)
 
 
-```
-# Metrics handler configuration
 
-# If prometheus metrics handler is enabled or not
+# Prometheus Metrics handler configuration
+
+# If metrics handler is enabled or not
 enabled: false
+
+# If the Prometheus hotspot is enabled or not.
+# hotspot include thread, memory, classloader,...
+enableHotspot: false
+
 
 ```
 
 Change the enabled value to true to enable the prometheus metrics handler;
+
+In the light-4j, the following Prometheus Metric are defined in the Prometheus MiddlewareHandler
+
+
+```java
+
+    public static final String REQUEST_TOTAL = "requests_total";
+    public static final String SUCCESS_TOTAL = "success_total";
+    public static final String AUTO_ERROR_TOTAL = "auth_error_total";
+    public static final String REQUEST_ERROR_TOTAL = "request_error_total";
+    public static final String SERVER_ERROR_TOTAL = "server_error_total";
+    public static final String RERSPONSE_TIME_SECOND = "response_time_seconds";
+
+```
+
+And prometheus provides a collector that can scrape and expose the mBeans of a JMX target.
+It runs as a JavaAgent, exposing an HTTP server and serving metrics of the local JVM.
+
+If user want to have enable hotspot monitor for JVM, change the enableHotspot value to true:
+
+```
+enableHotspot: true
+```
+
+The Hotspot monitor metrics include:
+
+CPU and JVM process:
+
+```
+process_cpu_seconds_total
+process_open_fds
+```
+
+JVM memory usage:
+
+```
+jvm_memory_pool_allocated_bytes_total
+jvm_memory_pool_bytes_init
+jvm_memory_pool_bytes_max
+jvm_memory_pool_bytes_used
+```
+
+metrics about JVM thread areas
+
+```
+jvm_threads_peak
+jvm_threads_daemon
+jvm_threads_started_total
+jvm_threads_deadlocked
+jvm_threads_state
+```
+
+JVM garbage collectors:
+
+```
+jvm_gc_collection_seconds
+```
+
+Buffer:
+
+```
+jvm_buffer_pool_used_bytes
+jvm_buffer_pool_capacity_bytes
+jvm_buffer_pool_used_buffers
+```
+
 
 
 ## Configuration for Prometheus
@@ -67,6 +138,28 @@ Here is the sample config file. It can be found from link:
 
 
 ```
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      # - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'services'
     scrape_interval: 15s
     consul_sd_configs:
@@ -74,6 +167,16 @@ Here is the sample config file. It can be found from link:
         services:
           - 'multimodule_tram-todolist-command-service'
           - 'multimodule_tram-todolist-view-service'
+          - 'com.networknt.bookstore-service-api-3.0.1'
+          - 'com.networknt.computerstore-service-api-3.0.1'
+          - 'com.networknt.foodstore-service-api-3.0.1'
+          - 'com.networknt.petstore-service-api-3.0.1'
+          - 'com.networknt.marketsample-service-3.0.1'
+
+    tls_config:
+      # Skip verification until we have resolved why the certificate validation
+      # for the kubelet on API server nodes fail.
+      insecure_skip_verify: true
 
     relabel_configs:
       - source_labels: ['__meta_consul_service']
@@ -89,12 +192,28 @@ Here is the sample config file. It can be found from link:
         regex: '.*public_hostname=([^,]*).*'
         replacement: '${1}'
 
+
     metrics_path: /v1/prometheus
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
+    scheme: https
 
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+    metrics_path: /metrics
 
 ```
+
+Currently all we are using https protocol:
+
+     scheme: https
+
+ for local environment, we ignore ssl check by setting in config file:
+
+       insecure_skip_verify: true
+
 
 
 ## Customization
@@ -112,19 +231,6 @@ Labels enable Prometheus's dimensional data model: any given combination of labe
 
 
 
-In the light-4j, the following Prometheus Metric are defined in the Prometheus MiddlewareHandler
-
-
-```java
-
-    public static final String REQUEST_TOTAL = "requests_total";
-    public static final String SUCCESS_TOTAL = "success_total";
-    public static final String AUTO_ERROR_TOTAL = "auth_error_total";
-    public static final String REQUEST_ERROR_TOTAL = "request_error_total";
-    public static final String SERVER_ERROR_TOTAL = "server_error_total";
-    public static final String RERSPONSE_TIME_SECOND = "response_time_seconds";
-
-```
 
 And the service "endpoint" and "clientId" are been added as Labels for Prometheus's dimensional data model.
 
