@@ -607,6 +607,6 @@ git push origin ui-tree-view-menu
 In the next section, we are going to add [react-schema-form][] component to have a generic form generation and handling for the majority of the pages. 
 
 
-[added react-router]: /tutorial/portal/add-react-router/
-[react-schema-form]: /tutorial/portal/react-schema-form/
+[added react-router]: /tutorial/portal/view/add-react-router/
+[react-schema-form]: /tutorial/portal/view/react-schema-form/
 
