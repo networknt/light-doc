@@ -8,11 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The light-proxy is a RESTful proxy server that provides a lot of features other
-proxy servers cannot provide. This document will explain all user cases and map
-to certain configurations to deploy the proxy server based on the requirements.
+The light-proxy is a RESTful proxy server that provides a lot of features other proxy servers cannot offer. This document will explain all use cases and map to certain configurations to deploy the proxy server based on the requirements.
 
 ##  proxy.yml
 
