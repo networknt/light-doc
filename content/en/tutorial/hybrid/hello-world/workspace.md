@@ -13,9 +13,9 @@ reviewed: true
 
 In this section, we are going to prepare the local environment and workspace for the rest of the tutorial. 
 
-### JDK8
+### JDK 11
 
-We are going to use the master branch of each repository for the tutorial, so JDK 8 is required to be installed on your computer. If you have another version of JDK installed already, the [SDKMAN][] is a great tool to allow you to install multiple versions of JDK and switch between them. 
+We are going to use the master branch of each repository for the tutorial, so JDK 11 is required to be installed on your computer. If you have another version of JDK installed already, the [SDKMAN][] is a great tool to allow you to install multiple versions of JDK and switch between them. 
 
 ### Workspace
 

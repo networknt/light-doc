@@ -15,7 +15,7 @@ draft: false
 
 You will need the following dependencies before starting this tutorial:
 
-- Java JDK 8 (I prefer OpenJDK but Oracle JDK will do)
+- Java JDK 11 (I prefer OpenJDK but Oracle JDK will do)
 - Maven
 - Git
 - Docker

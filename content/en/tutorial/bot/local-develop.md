@@ -18,8 +18,8 @@ In this tutorial, we are going to setup the develop branch build and test for ne
 
 To build all projects we need to have the following installed on your local.
 
-* Java JDK 1.8 - JDK to compile Java source code
-* Maven 3.3.X - light-4j frameworks are built with Maven
+* Java JDK 11 - JDK to compile Java source code
+* Maven 3.5.X - light-4j frameworks are built with Maven
 * Git - Clone source code from github.com
 * Docker - Running some of the dependencies for end-to-end testing
 

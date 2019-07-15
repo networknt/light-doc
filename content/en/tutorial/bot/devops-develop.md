@@ -21,7 +21,7 @@ First let's follow the [ssh] tool tutorial to upload public key to the devops se
 We need to ensure that the following software packages are installed on the server.
 
 * Docker
-* JDK
+* JDK 11
 * [Maven][]
 * Git
 

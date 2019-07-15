@@ -42,7 +42,7 @@ an ElasticSearch-based CQRS view.
 
 The Todo List application is built using
 
-Java JDK 8
+Java JDK 11
 
 light-4j
 

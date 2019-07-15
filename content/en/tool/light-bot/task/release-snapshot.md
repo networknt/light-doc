@@ -13,10 +13,8 @@ reviewed: true
 
 It has been a long time that our developers are working on the develop branch in each repository in the networknt organization. Recently, we have to change the release process to release from three release branches to meet the requirement from our users. 
 
-* The 1.5.x branch is the stable branch for production upgrade as only defect fixes backport to this branch. 
-* The master branch is our main development branch with new features added daily and release under 1.6.x tag.
-* The jdk11 branch contains the code for jdk11, and only several users are using it with 2.0.x release tag.
-
+* The 1.5.x and 1.6.x branches for JDK 8 are the stable for production upgrade as only defect fixes backport to these branch. 
+* The master branch for JDK 11 is our main development branch with new features added daily and release under 2.0.x tag.
 
 Now, our user's requirement is satisfied. What about our contributor? As you know, we have too many repositories, and the dependencies between repositories are complicated. For most of our platform developers, we are relying on the light-bot [develop-build][] to prepare the local environment and build all dependencies. It has been working perfectly, but it takes a lot of developers' time to build everything locally. With the contributor's team getting bigger and bigger, team members are looking into the snapshot releases. 
 

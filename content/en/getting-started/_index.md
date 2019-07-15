@@ -23,7 +23,7 @@ Light-4j frameworks provide [middleware handlers][] to address cross-cutting con
 
 ### Local Development Environment
 
-If you don't have JDK 8 and Git installed, please prepare your [environment][]. 
+If you don't have JDK 11 and Git installed, please prepare your [environment][]. 
 
 ### Choose a framework
 

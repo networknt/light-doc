@@ -19,7 +19,7 @@ draft: false
 
 * [Extremely fast][] Up to 3 million requests per second on commodity hardware
 * Support or encourage [design first][] and [test driven][] development
-* [Easy to deploy][] Support all platforms with JDK 8 and up installed or Docker containers
+* [Easy to deploy][] Support all platforms with JDK 8(branch 1.5.x and 1.6.x) and JDK 11 (branch master and 2.0.x) installed or Docker containers
 * [Powerful plugins][] Allow users to choose built-in plugins or customized plugins
 
 See what's coming next in the [roadmap][].

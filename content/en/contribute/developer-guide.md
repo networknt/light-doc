@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The light platform consists dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][], and we need your help to make Light even brighter. You do not need to be a Java/Kotlin/Javascript guru to contribute to the projects.
+The light platform consists of dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][], and we need your help to make Light even brighter. You do not need to be a Java/Kotlin/Javascript guru to contribute to the projects.
 
 ### Assumptions
 
@@ -25,7 +26,7 @@ If you are struggling at any point in this contribution guide, reach out to the 
 
 ### Install Java
 
-The installation of Java should take only a few minutes. You have more than one option to get Java up and running on your machine. The current master branch is built for JDK 8, and a separate jdk11 branch is built for JDK 11. 
+The installation of Java should take only a few minutes. You have more than one option to get Java up and running on your machine. The current master branch is built for JDK 11, and the separate 1.5.x and 1.6.x branches are built for JDK 8 in maintenance mode. 
 
 https://www.java.com/en/download/help/download_options.xml
 
@@ -42,7 +43,7 @@ If you are going to contribute code, you need to have an account on GitHub. Go t
 
 ### Install Git
 
-You need to have Git installed on your computer to contribute to Light development. Teaching git is outside the scope of this document, but if you are looking for an excellent reference to learn the basics of Git, we recommend the [Git book][gitbook] if you are not sure where to begin. 
+You need to have Git installed on your computer to contribute to Light development. Teaching Git is outside the scope of this document, but if you are looking for an excellent reference to learn the basics of Git, we recommend the [Git book][gitbook] if you are not sure where to begin. 
 
 Git is a [version control system](https://en.wikipedia.org/wiki/Version_control) to track the changes of source code. 
 
@@ -50,7 +51,7 @@ Move back to the terminal and check if Git is already installed. Type in `git ve
 
 Finally, check again with `git version` if Git was installed successfully.
 
-### Set up workspace
+### Set up the workspace
 
 The working copy is set up locally on your computer in a workspace. It's what you'll edit, compile, and end up pushing back to GitHub. The main steps are forking a repository and cloning the repository to your workspace. To make it simpler, we recommend using networknt under your user home directory as your workspace. 
 
@@ -58,15 +59,15 @@ The working copy is set up locally on your computer in a workspace. It's what yo
 
 If you are not familiar with this term, GitHub's [help pages](https://help.github.com/articles/fork-a-repo/) provide a simple explanation:
 
-> A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.
+> A fork is a copy of a repository. Forking a repository allows you to experiment with changes without affecting the original project freely.
 
 Open a GitHub repository and click on the "Fork" button in the top right.
 
-Now open your fork repository on GitHub and copy the remote url of your fork. You can choose between HTTPS and SSH as the protocol that Git should use for the following operations. HTTPS always works [if you are not sure](https://help.github.com/articles/which-remote-url-should-i-use/).
+Now open your fork repository on GitHub and copy the remote URL of your fork. You can choose between HTTPS and SSH as the protocol that Git should use for the following operations. HTTPS always works [if you are not sure](https://help.github.com/articles/which-remote-url-should-i-use/).
 
 ### Clone the repository
 
-We assume that you have set up your local development environment (see the section above if you are unsure about this). You should now copy one of the repositories you want to contribute down to your computer. You will hear this called "clone the repo". GitHub's [help pages](https://help.github.com/articles/cloning-a-repository/) give us a short explanation:
+We assume that you have set up your local development environment (see the section above if you are unsure about this). You should now copy one of the repositories you want to contribute down to your computer. You will hear this called "clone the repo." GitHub's [help pages](https://help.github.com/articles/cloning-a-repository/) give us a short explanation:
 
 > When you create a repository on GitHub, it exists as a remote repository. You can create a local clone of your repository on your computer and sync between the two locations.
 
@@ -82,7 +83,7 @@ git clone git@github.com:networknt/light-4j.git
 
 ### Contribute to master
 
-For each repository, the master branch is the main branch for contribution. The development team will not accept a pull request against other release branches. If you have permission to access networknt repositories, create a descriptive named branch from master branch and work on it. Alternatively, work directly on master branch in your forked repository. 
+For each repository, the master branch is the main branch for contribution. The development team will not accept a pull request against other release branches. If you have permission to access networknt repositories, create a descriptively named branch from the master branch, and work on it. Alternatively, work directly on the master branch in your forked repository. 
 
 First, you should always pull the latest changes from the master branch:
 
@@ -97,7 +98,7 @@ Now we can create a new branch for your additions:
 git checkout -b <BRANCH-NAME>
 ```
 
-You can check on which branch you are with `git branch`. You should see a list of all local branches. The current branch is indicated with a little asterisk.
+You can check on which branch you are with `git branch.` You should see a list of all local branches. The current branch is indicated with a little asterisk.
 
 ### Build Project
 
@@ -154,7 +155,7 @@ git commit --amend
 
 ### Push commits
 
-To push our commits to the fork on GitHub we need to specify a destination. A destination is defined by the remote and a branch name. When you fork to your personal account, the remote url of our fork is the same as our GitHub handle, in my case `stevehu`. The branch should have the same as our local one. This makes it easy to identify corresponding branches.
+To push our commits to the fork on GitHub we need to specify a destination. A destination is defined by the remote and a branch name. When you fork to your personal account, the remote URL of our fork is the same as our GitHub handle, in my case `stevehu`. The branch should have the same as our local one. This makes it easy to identify corresponding branches.
 
 ```
 git push --set-upstream <YOUR-GITHUB-USERNAME> <BRANCHNAME>
@@ -195,7 +196,7 @@ For core developers who have write permission to networknt repositories are requ
 
 Perhaps you only want to start contributing to the documents. If so, you can ignore most of the above steps and focus on the `light-doc` repository. 
 
-You can start Hugo's built-in server via `hugo server`. Browse the documentation by entering [http://localhost:1313](http://localhost:1313) in the address bar of your browser. The server automatically updates the page whenever you change content.
+You can start Hugo's built-in server via `hugo server`. Browse the documentation by entering [http://localhost:1313](http://localhost:1313) in the address bar of your browser. The server automatically updates the page whenever you change the content.
 
 We have developed a [separate documentation contribution guide][docscontrib] for more information on how the Hugo docs are built, organized, and improved by the generosity of people like you.
 

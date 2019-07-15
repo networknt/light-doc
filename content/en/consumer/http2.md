@@ -8,17 +8,14 @@ weight: 30
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-By default, the services built on top of light platform have HTTP 2.0 enabled automatically
-right of the light-codegen. The server also support HTTP 1.1 connection if the client cannot
-negotiate HTTP 2.0 with the server. 
+By default, the services built on top of the light platform have HTTP 2.0 enabled automatically right of the light-codegen. The server also supports HTTP 1.1 connection if the client cannot negotiate HTTP 2.0 with the server. 
 
-There are a lot of benefits with HTTP 2.0 but JDK 8 and below doesn't support natively. Though
-there are some workarounds, none of them is a practical solution. Given the situation, we have
-built client module based on Undertow core for HTTP 2.0 support. 
+There are a lot of benefits with HTTP 2.0, but JDK 8 and below don't support it natively. Though there are some workarounds, none of them is a practical solution. Given the situation, we have built a client module based on Undertow core for HTTP 2.0 support. 
 
-Here are some links regarding to HTTP 2.0 and HTTP 1.1
+Here are some links regarding HTTP 2.0 and HTTP 1.1
 
 https://www.pacwebhosting.co.uk/insight/News/NewsItem/View/31/http11-vs-http2-whats-the-difference
 
@@ -34,10 +31,9 @@ Please refer to [server module] and server.yml configuration for more info.
 
 ### Client Module
 
-When using the light-4j client module to make HTTP request to the server, the HTTP 2.0 is not enabled
-by default. You have to explicitly specify you want to establish an HTTP 2.0 connection. 
+When using the light-4j client module to make an HTTP request to the server, the HTTP 2.0 is not enabled by default. You have to specify you want to establish an HTTP 2.0 connection explicitly. 
 
-Here is the code example to create connection. 
+Here is the code example that creates a connection. 
 
 ```java
         if(connection == null || !connection.isOpen()) {
@@ -58,13 +54,10 @@ OptionMap.create(UndertowOptions.ENABLE_HTTP2, true)
 
 ```
 
-If you are sure that the service is built on light-4j and HTTP 2.0 is not disabled. Then you should
-use HTTP 2.0 from consumer side to enjoy the fast speed and single connection multiplexing. 
+If you are sure that the service is built on light-4j and HTTP 2.0 is not disabled. Then you should use HTTP 2.0 from the consumer side to enjoy the fast speed and single connection multiplexing. 
 
 ### Other Java HTTP Client
 
-Most Java HTTP Client don't support HTTP 2.0 or you have to find a workaround to do that with
-bootclasspath jar file per version of JDK on Java 8. If you are using Java 9, then it has native
-support for HTTP 2.0; however, it is never been tested with the foundation framework. 
+Most Java HTTP Client doesn't support HTTP 2.0, or you have to find a workaround to do that with bootclasspath jar file per version of JDK on Java 8. If you are using Java 11, then it has native support for HTTP 2.0; however, it is never been tested with the foundation framework. 
 
 [server module]: /concern/server/

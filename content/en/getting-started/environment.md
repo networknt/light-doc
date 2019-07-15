@@ -17,13 +17,13 @@ reviewed: true
 
 * JDK 8 or JDK 11 (Mandatory)
 
-Currently, the majority of the components in the light platform 1.5.x is based on Java 8, and 2.0.x is based on Java 11. Before starting your first project, we need to install the following software packages on your system. 
+Currently, the majority of the components in the light platform 1.5.x or 1.6.x is based on Java 8, and master 2.0.x is based on Java 11. Before starting your first project, we need to install the following software packages on your system. 
 
-Most of our customers are working on light-4j production ready 1.5.x version which is depending on Java 8. We have Beta release 2.0.x on JDK 11, but some of our customers are waiting for Redhat certified JDK 11 docker image on the Openshift environment. Once the image is available, we will be moving our development to the release 2.x and switch the 1.x version in maintenance mode. 
+Most of our customers are working on light-4j production ready 1.5.x and 1.6.x version which is depending on Java 8. We have release 2.0.x on JDK 11 and the main development is moved to the JDK 11 already, but some of our customers are waiting for Redhat certified JDK 11 docker image on the Openshift environment. 
 
-If you are building services that will be released to production very soon, then it is recommended choosing 1.5.x which the production release. 
+If you are building services that will be released to production very soon, then it is recommended choosing 1.6.x which the production release. 
 
-If you want to leverage some of the features in Java 11 and your company's policy allow you to use Docker official image to deploy your application, then you can choose 2.0.x release to build your application. Please be aware that supporting tools are still in a process to migrate to JDK 11 so the road might be a little bit bumpy. 
+If you want to leverage some of the features in Java 11 and your company's policy allow you to use Docker official image to deploy your application, then you can choose 2.0.x release to build your application. 
 
 If you want to try out both 1.x and 2.x releases, you can install [SKDMAN][] on your computer to switch JDK with a command line. 
 
@@ -56,7 +56,7 @@ Otherwise, you can use the packaged `mvnw` to build.
 
 By default, some of the generators scaffold project with Gradle (Kotlin DSL) build system. As `gradle wrapper` is packaged inside the generated project, you don't need to install Gradle locally. 
 
-To build the genreated project:
+To build the generated project:
 
 ```
 ./gradlew clean build
