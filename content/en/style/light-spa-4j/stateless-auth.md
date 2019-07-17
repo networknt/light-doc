@@ -11,9 +11,9 @@ draft: false
 reviewed: true
 ---
 
-This is the handler that is responsible for handling redirected authorization code from light-oauth2 code service after SPNEGO/Kerberos or Basic authentication.  It is also responsible for verifying the subsequent requests, prevent XSS and CSRF attacks, renew JWT tokens with the refresh token when the previous JWT token is expired. 
+This is the handler that is responsible for handling redirected authorization code from light-oauth2 code service after SPNEGO/Kerberos or Basic authentication or Form authentication.  It is also responsible for verifying the subsequent requests, prevent XSS and CSRF attacks, renew JWT tokens with the refresh token when the previous JWT token is expired. 
 
-It is called stateless auth handler because it doesn't need any stateful session on the BFF server so that the BFF can be scaled freely. The JWT access token and refresh token are sent to the browser with httpOnly and secure cookies. It ensures that Single Page App cannot access the cookies and the cookies can only be sent when HTTPS is enabled. 
+It is called stateless auth handler because it doesn't need any stateful session on the BFF server so that the BFF can be scaled freely. The JWT access token and refresh token are sent to the browser with httpOnly and secure cookies. It ensures that the Single Page Application cannot access the cookies, and the cookies can only be sent when HTTPS is enabled. 
 
 ### Authorization
 

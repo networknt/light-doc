@@ -137,3 +137,13 @@ If you are unsure how the rules are working or what is blocking your request, yo
 sudo tail -f /var/log/syslog
 ```
 
+### Local access
+
+The above setup is working on a remote server which is accessed from the Internet. However, if you want to access the 443 port on the same host which is expecting to be forwarded to the 8443, then you need to add the following command line. 
+
+```
+sudo iptables -t nat -A OUTPUT -p tcp --dport 443 -o lo -j REDIRECT --to-port 8443
+```
+
+The rule adds a similar rule to the OUTPUT table that redirects packets outgoing to port 443 on the loopback interface (-o lo).
+
