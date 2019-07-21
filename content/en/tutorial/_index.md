@@ -154,6 +154,7 @@ section, some of the most important tutorials are listed here and more will be a
   * [Deploy to Kubernetes Cluster](/tutorial/oauth/kubernetes/)
   * [Deploy to Openshift Cluster](/tutorial/oauth/openshift/)
   * [Integrate Kerberos/SPNEGO on Mac](/tutorial/oauth/kerberos/)
+  * [Local Form Authentication](/tutorial/oauth/form-auth-local/)
 
 - [Light-portal](/tutorial/portal/)
   * [Light Portal Local Build](/tutorial/bot/light-portal-local/)

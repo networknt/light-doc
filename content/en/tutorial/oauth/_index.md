@@ -38,6 +38,8 @@ This document will give you step-by-step guidelines on how to use light-oauth2. 
 
 * [Integrate Kerberos/SPNEGO on Mac][]
 
+* [Local Form Authentication](/tutorial/oauth/form-auth-local/)
+
 [How to generate long lived access token]: /tutorial/oauth/longlive/
 [How to start services]: /tutorial/oauth/start/
 [Authorization Code]: /tutorial/oauth/code/
