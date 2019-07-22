@@ -58,6 +58,44 @@ enableHotspot: false
 
 ```
 
+And for each service API which you want to use Prometheus, there are several config change need to be made on handler.yml:
+
+1.  we need add Prometheus middleware handler
+
+  ```
+     - com.networknt.metrics.prometheus.PrometheusHandler@prometheus
+     - com.networknt.metrics.prometheus.PrometheusGetHandler@getprometheus
+
+  ```
+
+2. Add prometheus middleware handler to the chains
+
+ ```
+chains:
+  default:
+    - exception
+    - prometheus
+    - traceability
+    - correlation
+    - specification
+    - security
+    - body
+    - audit
+    - sanitizer
+    - validator
+
+ ```
+
+3.And add endpoint for Prometheus to pull the metrics data:
+
+  ```
+  - path: '/v1/prometheus'
+    method: 'get'
+    exec:
+      - getprometheus
+
+ ```
+
 Change the enabled value to true to enable the prometheus metrics handler;
 
 In the light-4j, the following Prometheus Metric are defined in the Prometheus MiddlewareHandler
