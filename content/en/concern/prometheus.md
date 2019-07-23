@@ -46,18 +46,55 @@ In prometheus, we need to configure it use consul_sd_targets. Prometheus will th
 #### Configuration file (prometheus.yml) for the MiddlewareHandler (com.networknt.metrics.prometheus.PrometheusHandler)
 
 
+```
 
-# Prometheus Metrics handler configuration
-
-# If metrics handler is enabled or not
+// If metrics handler is enabled or not
 enabled: false
 
-# If the Prometheus hotspot is enabled or not.
-# hotspot include thread, memory, classloader,...
+ // If the Prometheus hotspot is enabled or not.
+// hotspot include thread, memory, classloader,...
 enableHotspot: false
 
 
 ```
+
+And for each service API which you want to use Prometheus, there are several config change need to be made on handler.yml:
+
+1.  we need add Prometheus middleware handler
+
+  ```
+     - com.networknt.metrics.prometheus.PrometheusHandler@prometheus
+     - com.networknt.metrics.prometheus.PrometheusGetHandler@getprometheus
+
+  ```
+
+2. Add prometheus middleware handler to the chains
+
+ ```
+chains:
+  default:
+    - exception
+    - prometheus
+    - traceability
+    - correlation
+    - specification
+    - security
+    - body
+    - audit
+    - sanitizer
+    - validator
+
+ ```
+
+3.And add endpoint for Prometheus to pull the metrics data:
+
+  ```
+  - path: '/v1/prometheus'
+    method: 'get'
+    exec:
+      - getprometheus
+
+ ```
 
 Change the enabled value to true to enable the prometheus metrics handler;
 
@@ -76,9 +113,12 @@ In the light-4j, the following Prometheus Metric are defined in the Prometheus M
 ```
 
 And prometheus provides a collector that can scrape and expose the mBeans of a JMX target.
+
 It runs as a JavaAgent, exposing an HTTP server and serving metrics of the local JVM.
 
 If user want to have enable hotspot monitor for JVM, change the enableHotspot value to true:
+
+
 
 ```
 enableHotspot: true
