@@ -40,6 +40,8 @@ This document will give you step-by-step guidelines on how to use light-oauth2. 
 
 * [Local Form Authentication](/tutorial/oauth/form-auth-local/)
 
+* [Test Cloud Deployment and Access](/tutorial/oauth/test-cloud/)
+
 [How to generate long lived access token]: /tutorial/oauth/longlive/
 [How to start services]: /tutorial/oauth/start/
 [Authorization Code]: /tutorial/oauth/code/

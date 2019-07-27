@@ -197,6 +197,10 @@ test3                Ready     <none>    49m       v1.9.3
 ```
 
 
+### Uninstall
+
+https://medium.com/@meysam1369/kubernetes-completely-uninstall-3f2a83dd985d
+
 ### references
 
 https://blog.alexellis.io/kubernetes-in-10-minutes/
