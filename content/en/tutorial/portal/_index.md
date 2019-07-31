@@ -7,12 +7,16 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When light-portal is deployed, there might not be a lot of volume in the beginning. We will be using only one hybrid-command server to host all the services that update the portal and one hybrid-query server to host all the services that only read info from the portal. Each server can be scaled to multiple instances based on the read-only load or write-only load. Also, we have an option to move one or two hot services to a separate server instance and scale it accordingly later on.
+Light-portal is the central point that provides entries for all light-platform supporting services. It is a website that integrates all services with a standard UI for users to utilize and manage these services. 
 
-Most services for portal can be found in the [light-portal][] repository on github.com/networknt. The UI can be found in [view][] folder and the UI final version is deployed to the [light-config-test][] repository on github.com/networknt.
+Most light-portal services are built on top of the light-hybrid-4j framework with Event Sourcing and CQRS. Some of the portal services like the light-oauth2 are built on top of the light-rest-4j framework. 
 
+When light-portal services are deployed with the light-hybrid-4j, there might not be a lot of volume in the beginning. We use one hybrid-command server to host all the services that update the portal and one hybrid-query server to host all the services that only read info from the portal. Each server can be scaled to multiple instances based on the read-only load or write-only load. Also, we have an option to move one or two hot services to a separate server instance and scale it accordingly later on.
+
+Most services for the portal can be found in the [light-portal][] repository on github.com/networknt. The UI can be found in [view][] folder, and the UI final version is deployed to the [light-config-test][] repository on github.com/networknt.
 
 ### Build and Start Portal Service
 
@@ -26,6 +30,7 @@ Most services for portal can be found in the [light-portal][] repository on gith
 
 ### Portal View 
 
+* [setup view dev environment](/tutorial/portal/view-dev-env/)
 * [portal view][] - React Portal View
 
 
