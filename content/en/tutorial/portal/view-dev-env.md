@@ -22,6 +22,9 @@ Please note that we have HTTPS=true before the `npm start` so that we can start 
 
 For details about the HTTPS=true environment variable, please visit https://facebook.github.io/create-react-app/docs/using-https-in-development
 
+Another way to do that is to modify the package.json as documented in https://medium.com/@danielgwilson/https-and-create-react-app-3a30ed31c904
+
+
 ### light-oauth2
 
 As part of the portal, light-oauth2 is responsible for securing the portal services. There is no need to start another instance of light-oauth2 services. We are going to reuse the instance on the test1 server for the [test cloud][] deployment in the previous tutorial.
