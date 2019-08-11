@@ -291,5 +291,5 @@ You can generate single project or multiple projects from the site https://codeg
 [Swagger Editor]: /tool/swagger-editor/
 [Swagger CLI]: /tool/swagger-cli/
 [database tutorial]: /tutorial/rest/swagger/database/
-[download or build]: /reference/light-codegen/download-build/
+[download or build]: /tool/light-codegen/download-build/
 

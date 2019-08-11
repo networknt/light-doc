@@ -1,12 +1,12 @@
 ---
-title: "Light Codegen Reference"
+title: "Light Codegen"
 date: 2019-01-05T10:47:59-05:00
 description: ""
 categories: []
 keywords: []
 menu:
   docs:
-    parent: "reference"
+    parent: "tool"
     weight: 80
 slug: ""
 aliases: []
@@ -27,18 +27,19 @@ In the earlier days of light-platform, we only have a Restful framework, and we 
  
 Given all the drawbacks, we have decided to build our generator. light-codegen is built with Java 8/11 and using rocker template engine which compiles the templates to Java class to speed it up. It also uses our IoC service module to enable new generators to be added without touch the source code. 
 
-- [Specification Best Practices](/reference/light-codegen/best-practice/)
-- [Download or build light-codegen](/reference/light-codegen/download-build/)
-- [Swagger 2.0 Generator](/reference/light-codegen/swagger-generator/)
-- [OpenAPI 3.0 Generator](/reference/light-codegen/openapi-generator/)
-- [OpenAPI 3.0 Kotlin Generator](/reference/light-codegen/openapi-kotlin-generator/)
-- [GraphQL Generator](/reference/light-codegen/graphql-generator/)
-- [Hybrid Generator](/reference/light-codegen/hybrid-generator/)
-- [Eventuate Generator](/reference/light-codegen/eventuate-generator/)
-- [DevOps Integration](/reference/light-codegen/integration/)
-- [Customization](/reference/light-codegen/customization/)
-- [Rocker Hot Reloading](/reference/light-codegen/rocker-hot-reloading/)
-- [Different Dockerfile](/reference/light-codegen/dockerfile/)
+- [Specification Best Practices](/tool/light-codegen/best-practice/)
+- [Download or build light-codegen](/tool/light-codegen/download-build/)
+- [Swagger 2.0 Generator](/tool/light-codegen/swagger-generator/)
+- [OpenAPI 3.0 Generator](/tool/light-codegen/openapi-generator/)
+- [OpenAPI 3.0 Kotlin Generator](/tool/light-codegen/openapi-kotlin-generator/)
+- [GraphQL Generator](/tool/light-codegen/graphql-generator/)
+- [Hybrid Server Generator](/tool/light-codegen/hybrid-server/)
+- [Hybrid Service Generator](/tool/light-codegen/hybrid-service/)
+- [Eventuate Generator](/tool/light-codegen/eventuate-generator/)
+- [DevOps Integration](/tool/light-codegen/integration/)
+- [Customization](/tool/light-codegen/customization/)
+- [Rocker Hot Reloading](/tool/light-codegen/rocker-hot-reloading/)
+- [Different Dockerfile](/tool/light-codegen/dockerfile/)
 - [Tutorials](/tutorial/generator/)
 
 

@@ -172,4 +172,4 @@ Now you should have a project generated in /tmp/graphql/generated
 The service API is ready. We are working on the UI with a generation wizard.
  
 
-[download or build]: /reference/light-codegen/download-build/
+[download or build]: /tool/light-codegen/download-build/

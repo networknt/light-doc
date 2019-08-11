@@ -270,4 +270,4 @@ You can generate single project or multiple projects from the site https://codeg
 [Swagger CLI]: /tool/swagger-cli/
 [database tutorial]: /tutorial/rest/swagger/database/
 [model-config]: https://github.com/networknt/model-config
-[download or build]: /reference/light-codegen/download-build/
+[download or build]: /tool/light-codegen/download-build/

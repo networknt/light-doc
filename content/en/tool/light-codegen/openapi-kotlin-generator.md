@@ -220,4 +220,4 @@ You can generate single project or multiple projects from the site https://codeg
 [OpenAPI Bundler]: https://github.com/networknt/openapi-bundler
 [database tutorial]: /tutorial/rest/swagger/database/
 [model-config]: https://github.com/networknt/model-config
-[download or build]: /reference/light-codegen/download-build/
+[download or build]: /tool/light-codegen/download-build/

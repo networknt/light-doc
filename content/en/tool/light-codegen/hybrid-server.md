@@ -139,6 +139,6 @@ Now you should have a project generated in /tmp/hybridserver/generated
 
 The light-codegen service API is ready. We are working on the UI with a generation wizard.
  
-[documentation]: http://localhost:1313/style/light-hybrid-4j/
+[documentation]: /style/light-hybrid-4j/
 [project]: https://github.com/networknt/light-hybrid-4j
-[download or build]: /reference/light-codegen/download-build/
+[download or build]: /tool/light-codegen/download-build/

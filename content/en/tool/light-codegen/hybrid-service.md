@@ -286,4 +286,4 @@ Now you should have a project generated in /tmp/hybridservice/generated
 
 You can generate single project or multiple projects from the site https://codegen.lightapi.net with your model and config files. 
  
-[download or build]: /reference/light-codegen/download-build/
+[download or build]: /tool/light-codegen/download-build/

@@ -67,7 +67,7 @@ Inside the services folder, we build four simple server-side mock service APIs:
 
 Second type: one project for a single service API.
 
-User can use command line to run [light-codegen] /reference/light-codegen/openapi-generator/
+User can use command line to run [light-codegen](/tool/light-codegen/openapi-generator/)
 
 Or use [light-api-template] (https://github.com/mservicetech/light-api-template) to start building the service API project
 

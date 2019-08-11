@@ -22,7 +22,7 @@ Tools we build.
   * [Why Not Jenkins](/tool/light-bot/jenkins/)
 - [Light Codegen](/tool/light-codegen/)
   * [Light Codegen Getting Started](/getting-started/light-codegen/)
-  * [Light Codegen Reference](/reference/light-codegen/)
+  * [Light Codegen Reference](/tool/light-codegen/)
   * [Light Codegen Tutorials](/tutorial/generator/)
 - [OpenAPI Parser](/tool/openapi-parser/)
 - [Swagger Bundler](https://github.com/networknt/swagger-bundler)

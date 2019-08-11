@@ -178,4 +178,4 @@ You can generate single project or multiple projects from the site https://codeg
 [todo-list spec & config for light-codegen]: https://github.com/networknt/model-config/tree/develop/rest/openapi/eventuate/todo-list
 [todo-list example]: https://github.com/networknt/light-example-4j/tree/master/eventuate/todo-list
 [account-transfer example]: https://github.com/networknt/light-example-4j/tree/master/eventuate/account-management
-[download or build]: /reference/light-codegen/download-build/
+[download or build]: /tool/light-codegen/download-build/
