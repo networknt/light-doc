@@ -125,14 +125,7 @@ git clone https://github.com/networknt/model-config.git
 
 #### Java Command line
 
-Before using the command line to generate the code, you need to check out the light-codegen repo and build it. I am using `~/networknt` as the workspace, but it can be anywhere in your home directory.  
-
-```
-cd ~/networknt
-git clone https://github.com/networknt/light-codegen.git
-cd light-codegen
-mvn clean install
-```
+You can [download or build][] the codegen-cli command line jar. 
 
 * YAML Model
 
@@ -218,7 +211,7 @@ Now you should have a project generated in /tmp/petstore/genereted
 
 #### Codegen Site
 
-The service API is ready. We are working on the UI with a generation wizard.
+You can generate single project or multiple projects from the site https://codegen.lightapi.net with your model and config files. 
 
 
 [openapi-parser]: https://github.com/networknt/openapi-parser
@@ -227,4 +220,4 @@ The service API is ready. We are working on the UI with a generation wizard.
 [OpenAPI Bundler]: https://github.com/networknt/openapi-bundler
 [database tutorial]: /tutorial/rest/swagger/database/
 [model-config]: https://github.com/networknt/model-config
-
+[download or build]: /reference/light-codegen/download-build/

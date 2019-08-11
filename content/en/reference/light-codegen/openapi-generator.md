@@ -8,17 +8,16 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-
-This generator is based on OpenAPI 3.0 specification, and it is a very new specification that is supposed to replace Swagger 2.0 specification. It has some significant changes to enhance the spec definition and simply the validate with only JSON schema. In my opinion, it is much easier to use, and the implementation is much simpler than Swagger 2.0.
-OpenAPI adds a number of features; the only issue I can see is the entire toolchains around Swagger 2.0 are not migrated to OpenAPI 3.0 yet, and we have to build our own [openapi-parser][] for parsing and validation.
+This generator is based on the OpenAPI 3.0 specification, and it is a very new specification that is supposed to replace Swagger 2.0 specification. It has some significant changes to enhance the spec definition and simply the validate with only JSON schema. In my opinion, it is much easier to use, and the implementation is much simpler than Swagger 2.0.
 
 ## Input
 
 #### Model
 
-In light-rest-4j framework generator, the model that drives code generation is the OpenAPI 3.0 specification previously named Swagger specification. When editing it, it usually will be in YAML format with separate files for readability and flexibility. Before leverage it in the light-rest-4j framework, all YAML files need to be bundled to a single file in YAML or JSON format to be consumed by the framework and generator. Also, validation needs to be done to make sure that the openapi.yaml or openapi.json is valid against JSON schema of OpenAPI 3.0 specification.
+In light-rest-4j framework generator, the model that drives code generation is the OpenAPI 3.0 specification previously named Swagger specification. When editing it, it usually will be in YAML format with separate files for readability and flexibility. Before leverage it in the light-rest-4j framework, all YAML files need to be bundled to a single file in YAML or JSON format to be consumed by the framework and generator. Also, validation needs to be done to make sure that the openapi.yaml or openapi.json is valid against JSON schema of the OpenAPI 3.0 specification.
 
 Note: currently, we support both OpenAPI 3.0 specification and Swagger 2.0 specification. There is a similar [Swagger 2.0 generator tutorial][] available.
 
@@ -136,17 +135,9 @@ git clone https://github.com/networknt/model-config.git
 
 #### Java Command line
 
-Before using the command line to generate the code, you need to check out the light-codegen repo and build it. I am using ~/networknt as the workspace, but it can be anywhere in your home directory.  
+You can [download or build][] the codegen-cli command line jar. 
 
-```
-cd ~/networknt
-git clone https://github.com/networknt/light-codegen.git
-cd light-codegen
-mvn clean install
-```
-
-
-### JSON Model
+* JSON Model
 
 Given we have test openapi.json and config.json in light-rest-4j/src/test/resources folder, the following command line will generate a RESTful  API at /tmp/openapi-json folder.
 
@@ -168,7 +159,7 @@ To test the service from another terminal:
 curl http://localhost:8080/server/info
 ```
 
-### YAML Model
+* YAML Model
 
 Given we have test openapi.yaml and config.json in light-rest-4j/src/test/resources folder, the following command line will generate a RESTful  API at /tmp/openapi-yaml folder.
 
@@ -271,8 +262,7 @@ Now you should have a project generated in /tmp/petstore/genereted
 
 #### Codegen Site
 
-The service API is ready. We are working on the UI with a generation wizard.
-
+You can generate single project or multiple projects from the site https://codegen.lightapi.net with your model and config files. 
 
 [openapi-parser]: https://github.com/networknt/openapi-parser
 [Swagger 2.0 generator tutorial]: /tutorial/generator/swagger/
@@ -280,3 +270,4 @@ The service API is ready. We are working on the UI with a generation wizard.
 [Swagger CLI]: /tool/swagger-cli/
 [database tutorial]: /tutorial/rest/swagger/database/
 [model-config]: https://github.com/networknt/model-config
+[download or build]: /reference/light-codegen/download-build/

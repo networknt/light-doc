@@ -145,14 +145,7 @@ git clone git@github.com:networknt/model-config.git
 
 #### Java Command line
 
-Before using the command line to generate the code, you need to check out the repo and build it.
-
-```
-cd ~/networknt
-git clone git@github.com:networknt/light-codegen.git
-cd light-codegen
-mvn clean install
-```
+You can [download or build][] the codegen-cli command line jar. 
 
 Using the example spec and config in model-config repo, generate eventuate based API todo-list.
 
@@ -175,14 +168,9 @@ Then user can start API developing the detail services from the generated projec
 The [eventuate tutorial][] document includes the detail information about light-eventuate-4j framework and how to use it for eventuate based service API.
 
 
-
-
 #### Codegen Site
 
-
-The service API is ready. We are working on the UI with a generation wizard.
-
-
+You can generate single project or multiple projects from the site https://codegen.lightapi.net with your model and config files. 
 
 [todo-list example spec]: https://github.com/networknt/model-config/blob/develop/rest/openapi/eventuate/todo-list/schema.json
 [Light-codegen]: https://github.com/networknt/light-codegen
@@ -190,3 +178,4 @@ The service API is ready. We are working on the UI with a generation wizard.
 [todo-list spec & config for light-codegen]: https://github.com/networknt/model-config/tree/develop/rest/openapi/eventuate/todo-list
 [todo-list example]: https://github.com/networknt/light-example-4j/tree/master/eventuate/todo-list
 [account-transfer example]: https://github.com/networknt/light-example-4j/tree/master/eventuate/account-management
+[download or build]: /reference/light-codegen/download-build/

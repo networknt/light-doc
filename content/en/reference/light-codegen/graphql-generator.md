@@ -93,15 +93,7 @@ In most of the cases, developers will only update schema class and other dependi
 
 #### Java Command line
 
-Before using the command line to generate the code, you need to check out the repo and build it.
-I am using ~/networknt as workspace but it can be anywhere in your home directory.  
-
-```
-cd ~/networknt
-git clone git@github.com:networknt/light-codegen.git
-cd light-codegen
-mvn clean install -DskipTests
-```
+You can [download or build][] the codegen-cli command line jar. 
 
 ##### Without IDL
 
@@ -180,3 +172,4 @@ Now you should have a project generated in /tmp/graphql/generated
 The service API is ready. We are working on the UI with a generation wizard.
  
 
+[download or build]: /reference/light-codegen/download-build/

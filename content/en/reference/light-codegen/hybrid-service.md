@@ -199,15 +199,7 @@ Here is an exmaple of config.json for light-hybrid-4j generator.
 
 #### Java Command line
 
-Before using the command line to generate the code, you need to check out the repo and build it.
-I am using ~/networknt as workspace but it can be anywhere in your home.  
-
-```
-cd ~/networknt
-git clone git@github.com:networknt/light-codegen.git
-cd light-codegen
-mvn clean install
-```
+You can [download or build][] the codegen-cli command line jar. 
 
 This is a generator that scaffolds a service module that will be hosted on a light-hybrid-4j server
 platform as a jar file. Multiple modules can be hosted on the same server if needed and they can
@@ -292,5 +284,6 @@ Now you should have a project generated in /tmp/hybridservice/generated
 
 #### Codegen Site
 
-The service API is ready. We are working on the UI with a generation wizard.
+You can generate single project or multiple projects from the site https://codegen.lightapi.net with your model and config files. 
  
+[download or build]: /reference/light-codegen/download-build/

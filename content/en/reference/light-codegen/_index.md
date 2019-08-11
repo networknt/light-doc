@@ -12,6 +12,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ### Why this generator
@@ -27,6 +28,7 @@ In the earlier days of light-platform, we only have a Restful framework, and we 
 Given all the drawbacks, we have decided to build our generator. light-codegen is built with Java 8/11 and using rocker template engine which compiles the templates to Java class to speed it up. It also uses our IoC service module to enable new generators to be added without touch the source code. 
 
 - [Specification Best Practices](/reference/light-codegen/best-practice/)
+- [Download or build light-codegen](/reference/light-codegen/download-build/)
 - [Swagger 2.0 Generator](/reference/light-codegen/swagger-generator/)
 - [OpenAPI 3.0 Generator](/reference/light-codegen/openapi-generator/)
 - [OpenAPI 3.0 Kotlin Generator](/reference/light-codegen/openapi-kotlin-generator/)

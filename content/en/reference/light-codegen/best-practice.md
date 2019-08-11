@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Before using light-codegen to scaffold a new project, a specification file must be designed and passed to light-codegen along with a config.json file. 

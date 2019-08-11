@@ -117,14 +117,7 @@ git clone git@github.com:networknt/model-config.git
 
 #### Java Command line
 
-Before using the command line to generate the code, you need to check out the repo and build it.
-
-```
-cd ~/networknt
-git clone git@github.com:networknt/light-codegen.git
-cd light-codegen
-mvn clean install
-```
+You can [download or build][] the codegen-cli command line jar. 
 
 Given we have test swagger.json and config.json in light-rest-4j/src/test/resources folder,
 the following command line will generate a RESTful petstore API at /tmp/swagger-petstore folder. 
@@ -291,11 +284,12 @@ Now you should have a project generated in /tmp/petstore/genereted
 
 #### Codegen Site
 
-The service API is ready. We are working on the UI with a generation wizard.
+You can generate single project or multiple projects from the site https://codegen.lightapi.net with your model and config files. 
  
 
 [tutorial for OpenAPI 3.0 generator]: /tutorial/generator/openapi/
 [Swagger Editor]: /tool/swagger-editor/
 [Swagger CLI]: /tool/swagger-cli/
 [database tutorial]: /tutorial/rest/swagger/database/
+[download or build]: /reference/light-codegen/download-build/
 
