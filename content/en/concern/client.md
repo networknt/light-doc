@@ -106,7 +106,88 @@ Once you have the SignRequest object created, you can call the OauthHelper class
 
 If there is no error, then the response will be in the TokenResponse. 
 
-### Examples
+### Connection Pool of Http2Client Feature
+This feature is implemented by embedding the connection pool into an existing method:
+
+```java
+CompletableFuture<ClientResponse> callService(URI uri, ClientRequest request, Optional<String> requestBody)
+```
+
+The user can call this method or `getRequestService(URI uri, ClientRequest request, Optional<String> requestBody)` which combine the `callService()` with a circuit breaker to cache the established connections and reuse them without considering the type of connection.
+
+##### HTTP/1.1 Connection
+* **Multiple connections** will be added to connection pool for the same host.
+  * This workflow is to monitor whether there are connections that are not yet occupied by other requests and are not waiting for a reponse when a request is sent. If this is the case, reuse the connection until the connection is closed or the maximum number of requests is reached. Otherwise, a new connection is established and cached into the connection pool for this host.
+
+##### HTTP/2 Connection
+* **Only one connection** will be added to the connection pool for the same host.
+  * When sending a request, reuse it until the connection is closed or the maximum number of requests is reached.
+
+
+#### Configuration
+Users can configure the size of the connection pool; the maximum number of requests per connection, and whether HTTP/2 is enabled through configuring the client.yml
+
+>Or the user can clean up the connection pool manually by calling `Http2ClientConnectionPool.getInstance().clear()`
+
+*For example:*
+```yml
+request:
+ errorThreshold: 2
+ timeout: 3000
+ resetTimeout: 7000
+ # the flag to indicate whether http/2 is enabled when calling client.callService()
+ enableHttp2: true
+ # the maximum host capacity of connection pool
+ connectionPoolSize: 1000
+ # the maximum request limitation for each connection
+ maxReqPerConn: 1000000
+ # maximum quantity of connection in connection pool for each host
+ maxConnectionNumPerHost: 1000
+ # minimum quantity of connection in connection pool for each host. The corresponding connection number will shrink to minConnectionNumPerHost
+ # by remove least recently used connections when the connection number of a host reach 0.75 * maxConnectionNumPerHost.
+ minConnectionNumPerHost: 250
+```
+
+#### Example for Fixed URI
+```java
+try {
+    ClientRequest requestB = new ClientRequest().setMethod(Methods.GET).setPath(apibPath);
+    
+    CompletableFuture<ClientResponse> response = client.callService(new URI(apibHost), requestB, Optional.empty());
+    
+    int statusCodeB = response.join().getResponseCode();
+    if (statusCodeB >= 300) {
+        throw new Exception("Failed to call API B: " + statusCodeB);
+    }
+    String apibList = response.join().getAttachment(Http2Client.RESPONSE_BODY);
+} catch (Exception e) {
+    logger.error("Exception:", e);
+    throw new ClientException(e);
+}
+```
+
+#### Example for Service ID
+
+> Provides an overloading method for callservice() to embedded service discovery and load balancing
+
+```java
+try {
+    ClientRequest requestB = new ClientRequest().setMethod(Methods.GET).setPath(apibPath);
+    
+    CompletableFuture<ClientResponse> response = client.callService("http", "com.networknt.petstore-3.0.1", "", requestB, Optional.empty());
+    
+    int statusCodeB = response.join().getResponseCode();
+    if (statusCodeB >= 300) {
+        throw new Exception("Failed to call API B: " + statusCodeB);
+    }
+    String apibList = response.join().getAttachment(Http2Client.RESPONSE_BODY);
+} catch (Exception e) {
+    logger.error("Exception:", e);
+    throw new ClientException(e);
+}
+```
+
+### <span style="color:#0096c8"> Examples </span>
 
 #### Get a client instance
 
@@ -249,7 +330,7 @@ For the full example, please refer to https://github.com/networknt/light-example
 
 If you send multiple request through one connection, here is an example. 
 
-```
+```java
     public void testRouterHttps48k() throws Exception {
         ClientConnection connection = null;
         try {
