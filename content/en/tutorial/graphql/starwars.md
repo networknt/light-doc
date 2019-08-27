@@ -219,7 +219,7 @@ singletons:
 
 ``` 
 
-In the above-generated file, the StarWarsSchema is injected to SchemaProvider interface. And there are several light-graphql-4j, and light-4j middleware handlers are wired into the request/response chain.
+In the above-generated file, the StarWarsSchema is injected to SchemaProvider interface. And there are several light-graphql-4j, and light-4j middleware handlers are wired into the request/response chain. However, the generated project cannot be started as the detailed business logic is not completed. 
 
 
 [Hello World]: /tutorial/graphql/helloworld/
