@@ -7,33 +7,28 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-GraphQL is gain traction these day as a RESTful replacement for Mobile native applications
-and Single Page Applications built on top of React, Vue and Angular. It is designed to resolve
-common issues with RESTful API and has a lot of wonderful features; however, for most developers
-it is very hard to learn in the first place. In this section, we are going to walk through several
-light-graphql-4j examples and show you how to build your own GraphQL server. 
+GraphQL is gaining traction these days as a RESTful replacement for Mobile native applications and Single Page Applications built on top of React, Vue, and Angular. It is designed to resolve common issues with RESTful API, and has a lot of wonderful features; however, for most developers it is very hard to learn in the first place. In this section, we are going to walk through several light-graphql-4j examples and show you how to build your own GraphQL server. 
 
-There are several tutorials and source code can be found at light-example-4j [graphql folder][].
+There are several tutorials, and source code can be found at light-example-4j [graphql folder][].
  
 ### [Hello World][]
 
-This is a very simple Hello World query to show you how to get GraphQL up and running with
-light-codegen without using GraphQL IDL.
+This is a very simple Hello World query to show you how to get GraphQL up and running with light-codegen without using GraphQL IDL.
 
 ### [Star Wars][]
 
-This is a similar example as Hello World with IDL to trigger the generation. It is utilize the
-star wars GraphQL IDL downloaded from the Internet.
- 
+This is a similar example to Hello World with IDL to trigger the generation. It utilizes the star wars GraphQL IDL downloaded from the Internet.
+
 ### [Mutation][]
 
-This example shows you how to create a full blown GraphQL service with both query and mutation.
+This example shows you how to create a full-blown GraphQL service with both query and mutation.
 
 ### [Mutation IDL][]
 
-This is the same example like the mutation but is generated from a schema. 
+This is the same example as the mutation but is generated from a schema. 
 
 ### [Relay Todo][]
 
@@ -41,7 +36,7 @@ This is to show you how to build a GraphQL service that is working with Relayjs.
 
 ### [Subscription][]
 
-This is to show you how to build a GraphQL service with subscription. 
+This is to show you how to build a GraphQL service with subscriptions. 
 
 [graphql folder]: https://github.com/networknt/light-example-4j/tree/master/graphql
 [Hello World]: /tutorial/graphql/helloworld/

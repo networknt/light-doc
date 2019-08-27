@@ -8,18 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In the [mutation tutorial][], we have create a new project by copying and modifying [hello world tutorial][].
-In this tutorial, we are going to generate the project from IDL and modify it to build the same project. Users
-can compare between these two implementation and see the difference. Also, this might help users to realize that
-in which situation, you should just copy existing project and create the schema on your own or create the schema
-first and generate the project from it. 
+In the [mutation tutorial][], we have created a new project by copying and modifying [hello world tutorial][]. In this tutorial, we are going to generate the project from IDL and change it accordingly. Users can compare between these two implementations and see the difference. It helps users to understand that in which case to copy an existing project and create the schema or create the schema first and generate the project from it. 
 
 ### Prepare environment
 
-First we need to clone light-codegen, model-config and light-example-4j into your workspace. 
-I am using networknt as workspace in my home directory.
+First, we need to clone light-codegen, model-config, and light-example-4j into your workspace. I am using networknt as workspace in my home directory.
 
 ```
 cd ~/networknt
@@ -37,21 +33,22 @@ mvn clean install -DskipTests
 
 ### Config and Schema
 
-In order to make the two mutation project comparable, we are going to use the same config.json file.
+Here is the config.json file to control the light-codegen.
 
 ```json
 {
-  "name": "starwars",
+  "name": "mutation-example",
   "version": "1.0.1",
   "groupId": "com.networknt",
-  "artifactId": "starwars",
-  "schemaPackage": "com.networknt.starwars.schema",
-  "schemaClass": "StarWarsSchema",
+  "artifactId": "mutation-example",
+  "schemaPackage": "com.networknt.example.mutation",
+  "schemaClass": "MutationSchema",
   "overwriteSchemaClass": true,
   "httpPort": 8080,
-  "enableHttp": true,
+  "enableHttp": false,
   "httpsPort": 8443,
-  "enableHttps": false,
+  "enableHttps": true,
+  "enableHttp2": true,
   "enableRegistry": false,
   "supportDb": true,
   "dbInfo": {
@@ -64,7 +61,6 @@ In order to make the two mutation project comparable, we are going to use the sa
   "supportH2ForTest": false,
   "supportClient": false
 }
-
 ```
 
 The schema file mutation-schema.graphqls can be found at model-config/graphql/mutation-idl folder.
@@ -92,18 +88,16 @@ type Mutation {
 
 ### Generate
 
-Given the light-codegen is built, let's generate the project from the config file and IDL. For
-more detail about the light-codegen please refer to [light-codegen graphql][].
+Given the light-codegen is built, let's generate the project from the config file and IDL. For more detail about the light-codegen please refer to [light-codegen graphql][].
 
-We are going to generate the code to the same folder on light-example-4j/graphql/mutation-idl, let's rename 
-the existing folder so that you can compare after you follow the tutorial. 
+We are going to generate the code to the same folder on light-example-4j/graphql/mutation-idl, let's rename the existing folder so that you can compare after you follow the tutorial. 
 
 ```
 cd ~/networknt/light-example-4j/graphql
 mv mutation-idl mutation-idl.bak
 ```
 
-Now let's run the command line in ~/networknt folder.
+Now let's run the command line in `~/networknt` folder.
 
 ```
 cd ~/networknt
@@ -117,7 +111,7 @@ java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f light-graphql-4j -
 After the light-codegen, we have the following StarWarsSchema generated.  
 
 ```java
-package com.networknt.starwars.schema;
+package com.networknt.example.mutation;
 
 import com.networknt.graphql.router.SchemaProvider;
 import graphql.schema.GraphQLSchema;
@@ -135,7 +129,7 @@ import java.io.InputStreamReader;
 /**
  * Created by steve on 25/03/17.
  */
-public class StarWarsSchema implements SchemaProvider {
+public class MutationSchema implements SchemaProvider {
     private static Logger logger = LoggerFactory.getLogger(SchemaProvider.class);
     private static String schemaName = "schema.graphqls";
     @Override
@@ -159,12 +153,10 @@ public class StarWarsSchema implements SchemaProvider {
 
 ```
 
-Let's create a model and wire in the logic to make the generated code works. 
-
-First let's create a model class for NumberHolder
+Let's create a model and wire in the logic to make the generated code works. First, let's create a model class for NumberHolder.
 
 ```java
-package com.networknt.starwars.schema;
+package com.networknt.example.mutation;
 
 /**
  * Created by Nicholas Azar on October 16, 2017.
@@ -187,10 +179,10 @@ public class NumberHolder {
 
 ```
 
-Next let's create a class that wire the business logic.
+Next, let's create a class that wires the business logic.
 
 ```java
-package com.networknt.starwars.schema;
+package com.networknt.example.mutation;
 
 import graphql.schema.DataFetcher;
 
@@ -230,10 +222,11 @@ public class MutationWiring {
 
 ```
 
-With above two classes, let's modify the generated code to wire the logic in.
+With the above two classes, let's modify the generated code to wire the logic in.
 
 ```java
-package com.networknt.starwars.schema;
+
+package com.networknt.example.mutation;
 
 import com.networknt.graphql.router.SchemaProvider;
 import graphql.schema.GraphQLSchema;
@@ -248,7 +241,7 @@ import java.io.InputStreamReader;
 /**
  * Created by Nicholas Azar on October 16, 2017.
  */
-public class StarWarsSchema implements SchemaProvider {
+public class MutationSchema implements SchemaProvider {
     private static Logger logger = LoggerFactory.getLogger(SchemaProvider.class);
     private static String schemaName = "schema.graphqls";
     @Override
@@ -300,7 +293,7 @@ Now we can test it with GraphiQL web interface.
 Open your browser and point to 
 
 ```
-http://localhost:8080/graphql
+https://localhost:8443/graphql
 ```
 
 Now you can explore the schema on Documentation Explorer. There should be a query and a mutation.
@@ -402,7 +395,6 @@ And the result should be:
   }
 }
 ```
-
 
 
 [mutation tutorial]: /tutorial/graphql/mutation/

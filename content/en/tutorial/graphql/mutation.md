@@ -8,16 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Mutation is modified from [hello world][] example and some of the files are updated. The first step
-is to make a copy of helloworld example in light-example-4j and then we can update several files to
-have a new schema and wired in. 
+The Mutation is modified from [hello world][] example, and some of the files are updated. The first step is to make a copy of the helloworld example in light-example-4j, and then we can update several files to have a new schema and wired in the business logic. 
 
 ### Prepare environment
 
-First we need to clone light-codegen, model-config and light-example-4j into your workspace. 
-I am using networknt as workspace in my home directory.
+First, we need to clone light-codegen, model-config, and light-example-4j into your workspace. I am using networknt as workspace in my home directory.
 
 ```
 cd ~/networknt
@@ -35,7 +33,8 @@ mvn clean install -DskipTests
 
 ### Copy from helloworld
 
-First let's backup the existing mutation project in light-example-4j/graphql folder.  
+First, let's back up the existing mutation project in light-example-4j/graphql folder.  
+
 
 ```
 cd ~/networknt/light-example-4j/graphql
@@ -51,15 +50,12 @@ cp -r helloworld mutation
 
 ### Update
 
-Now let's open the light-example-4j/graphql/mutation project and update some files. You can update 
-pom.xml to change the project group and artifact but here we will just leave it as it is. 
+Now let's open the light-example-4j/graphql/mutation project and update some files. You can update pom.xml to change the project group and artifact but here we will just leave it as it is. 
 
 
 ##### MutationSchema.java
 
-Now let's create a new MutationSchema class as following in com.networknt.starwars.schema folder and
-remove the existing StarWarsSchema.java 
-
+This is the schema provider with all the business logic. Let's use this file to replace the StarWarsSchema.java
 
 ```
 package com.networknt.starwars.schema;
@@ -177,39 +173,24 @@ public class MutationSchema  implements SchemaProvider {
 
 ##### service.yml
 
-Now let's update service.yml to replace StarWarsSchema with MutationSchema for the SchemaProvider
-interface. 
+Now let's update service.yml to replace StarWarsSchema with MutationSchema for the SchemaProvider interface. 
 
 ```yaml
 
 # Singleton service factory configuration/IoC injection
 singletons:
 # HandlerProvider implementation
-- com.networknt.handler.HandlerProvider:
-  - com.networknt.graphql.router.GraphqlRouter
+#- com.networknt.handler.HandlerProvider:
+#  - com.networknt.graphql.router.GraphqlRouter
 # StartupHookProvider implementations, there are one to many and they are called in the same sequence defined.
 # - com.networknt.server.StartupHookProvider:
+  # If you are using mask module to remove sensitive info before logging, uncomment the following line.
+  # - com.networknt.server.JsonPathStartupHookProvider
   # - com.networknt.server.Test1StartupHook
   # - com.networknt.server.Test1StartupHook
 # ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
 # - com.networknt.server.ShutdownHookProvider:
   # - com.networknt.server.Test1ShutdownHook
-# MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
-- com.networknt.handler.MiddlewareHandler:
-  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
-  - com.networknt.exception.ExceptionHandler
-  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
-  - com.networknt.metrics.MetricsHandler
-  # Traceability Put traceabilityId into response header from request header if it exists
-  - com.networknt.traceability.TraceabilityHandler
-  # Correlation Create correlationId if it doesn't exist in the request header and put it into the request header
-  - com.networknt.correlation.CorrelationHandler
-  # Security JWT token verification and scope verification for GraphQL
-  - com.networknt.graphql.security.JwtVerifyHandler
-  # SimpleAudit Log important info about the request into audit log
-  - com.networknt.audit.AuditHandler
-  # Validator Validate request based on graphql schema
-  - com.networknt.graphql.validator.ValidatorHandler
 # GraphQL schema provider interface implementation
 - com.networknt.graphql.router.SchemaProvider:
   - com.networknt.starwars.schema.MutationSchema
@@ -222,13 +203,12 @@ singletons:
       username: root
       password: my-secret-pw
       maximumPoolSize: 10
-      useServerPrepStmts: true,
-      cachePrepStmts: true,
-      cacheCallableStmts: true,
-      prepStmtCacheSize: 10,
-      prepStmtCacheSqlLimit: 2048,
+      useServerPrepStmts: true
+      cachePrepStmts: true
+      cacheCallableStmts: true
+      prepStmtCacheSize: 10
+      prepStmtCacheSqlLimit: 2048
       connectionTimeout: 2000
-
 
 ```
 
@@ -245,7 +225,7 @@ mvn clean install exec:exec
 Open your browser and point to 
 
 ```
-http://localhost:8080/graphql
+https://localhost:8443/graphql
 ```
 
 Now you can explore the schema on Documentation Explorer. There should be a query and a mutation.
@@ -351,9 +331,9 @@ And the result should be:
 You can also use the following curl command to test.
 
 ```
-curl -H 'Content-Type:application/json' -XPOST http://localhost:8080/graphql -d '{"query":"{ numberHolder { theNumber }}"}'
-curl -H 'Content-Type:application/json' -XPOST http://localhost:8080/graphql -d '{"query":"mutation { changeTheNumber(newNumber: 4) { theNumber }}"}'
-curl -H 'Content-Type:application/json' -XPOST http://localhost:8080/graphql -d '{"query":"{ numberHolder { theNumber }}"}'
+curl -k -H 'Content-Type:application/json' -XPOST https://localhost:8443/graphql -d '{"query":"{ numberHolder { theNumber }}"}'
+curl -k -H 'Content-Type:application/json' -XPOST https://localhost:8443/graphql -d '{"query":"mutation { changeTheNumber(newNumber: 4) { theNumber }}"}'
+curl -k -H 'Content-Type:application/json' -XPOST https://localhost:8443/graphql -d '{"query":"{ numberHolder { theNumber }}"}'
 
 ```
 
