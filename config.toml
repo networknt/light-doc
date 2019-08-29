@@ -200,12 +200,6 @@ params = ["categories", "tags"]
 # LOW LEVEL ITEMS
 
 [[menu.docs]]
-  name = "Examples"
-  weight = 50
-  identifier = "example"
-  url = "/example/"
-
-[[menu.docs]]
   name = "Tutorial"
   weight = 55
   identifier = "tutorial"
@@ -419,12 +413,6 @@ params = ["categories", "tags"]
 # LOW LEVEL ITEMS
 
 [[languages.zh.menu.docs]]
-  name = "例子"
-  weight = 40
-  identifier = "example"
-  url = "/zh/example/"
-
-[[languages.zh.menu.docs]]
   name = "教程"
   weight = 45
   identifier = "tutorial"
@@ -581,12 +569,6 @@ params = ["categories", "tags"]
 
 
 # LOW LEVEL ITEMS
-
-[[languages.ptbr.menu.docs]]
-  name = "Exemplo"
-  weight = 40
-  identifier = "example"
-  url = "/ptbr/example/"
 
 [[languages.ptbr.menu.docs]]
   name = "Tutorial"

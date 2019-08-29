@@ -58,6 +58,7 @@ section, some of the most important tutorials are listed here and more will be a
      + [Jaeger OpenTracing](/tutorial/tracing/jaeger/)
   * [Routing](/tutorial/routing/)
      + [Multi Static Handler Chains](/tutorial/routing/handler/)
+     + [Manually route requests to a handler](/tutorial/routing/manual/)
   * [Client](/tutorial/client/)
      + [Connect to public HTTPS site](/tutorial/client/public-https/)
      + [Standalone Consul Discovery](/tutorial/client/consul-discovery/)

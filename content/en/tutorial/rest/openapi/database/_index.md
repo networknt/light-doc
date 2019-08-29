@@ -14,14 +14,16 @@ There are numeric options to connect to databases in the light platform, and thi
 
 Also, for large-scale microservices deployment, it is seldom dealing with the database directly from your service. Chances are your service is working with in-memory cache or in-memory data grid or some No-SQL database directly. For service to service orchestration, you might take a look at the [light-eventuate-4j][] to adopt Event Sourcing and CQRS as your architecture pattern. 
 
-In this tutorial, we will walk through the following steps with Oracle/Postgres/Mysql for light-rest-4j framework. If you use light-graphql-4j or light-hybrid-4j frameworks, the steps will be somewhat different, but the concept is the same. Please note, the specification we use in this tutorial is based on OpenAPI 3.0 which is migrated from the Swagger 2.0. 
+In this tutorial, we will walk through the following steps with Oracle/Postgres/Mysql for light-rest-4j framework. If you use light-graphql-4j or light-hybrid-4j frameworks, the steps will be somewhat different, but the concept is the same. Please note, the specification we use in this tutorial is based on OpenAPI 3.0, which is migrated from the Swagger 2.0. 
 
-* How to set up the database connection pool
-* How to connect to the database instance
-* How to do query database tables
-* How to update database tables
+* How to use [HikariCP](https://github.com/brettwooldridge/HikariCP) for JDBC connection pool.
+* How to initialize database connection pool and plug it into light-4j startup hooks.
+* How to connect to the database instance.
+* How to do query database tables.
+* How to update database tables.
+* How to performance test API application with wrk.
 
-This tutorial shows how to use the SQL database in your microservices based on light-4j frameworks. 
+This tutorial shows how to use the SQL database in your microservices-based on light-4j frameworks. 
 
 * [Environment preparation][]
 
