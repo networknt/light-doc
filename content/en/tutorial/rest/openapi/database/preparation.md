@@ -12,14 +12,14 @@ draft: false
 reviewed: true
 ---
 
-In order to follow the steps below, please make sure you have the same working environment. As this tutorial is targeted to Java developers and I assume you have the knowledge to work on a Java project on your personal computer. For people who are not Java developers, you can have Docker installed and pull the running image from Docker Hub to try the service created in this tutorial. 
+To follow the steps below, please make sure you have the same working environment. As this tutorial is targeted to Java developers and I assume you have the knowledge to work on a Java project on your personal computer. For people who are not Java developers, you can have Docker installed and pull the running image from Docker Hub to try the service created in this tutorial. 
 
-* A computer with MacOS or Linux (Windows should work, but I never tried)
+* A computer with macOS or Linux (Windows should work, but I never tried)
 * Install git
 * Install Docker
 * Install JDK 11 and Maven
 * Install Java IDE (IntelliJ IDEA Community Edition is recommended, and it is free)
-* Create a working directory under your user directory called networknt.
+* Create a working directory under your user home directory called networknt.
 
 ```
 cd ~

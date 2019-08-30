@@ -16,13 +16,14 @@ With the specification in place, we can generate the code with [light-codegen][]
 
 There are three different ways to generate the code with light-codegen:
 
-* Local build
+* Local build or [download the released jar][]
 * Docker container
 * Script with docker container
 
 To learn how to use the tool, please refer to the [light-codegen tutorial][]
 
-### Generate code with local build
+
+### Generate code with a local build
 
 Clone and build light-codegen
 
@@ -130,9 +131,10 @@ cd ~/networknt/light-example-4j/rest/openapi/database/generated
 mvn clean install exec:exec
 ```
 
-Now you can access the service with curl following the [next step][].
+Now you can access the service with curl following the [test step][].
 
 [light-codegen]: /tool/light-codegen/
 [light-codegen tutorial]: /tutorial/generator/
-[next step]: /tutorial/rest/openapi/database/test/
+[test step]: /tutorial/rest/openapi/database/test/
+[download the released jar]: https://github.com/networknt/light-codegen/releases
 

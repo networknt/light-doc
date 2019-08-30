@@ -14,9 +14,9 @@ reviewed: true
 
 In the previous step, we've already prepared the scripts for Oracle, MySQL, and Postgres databases and put these script files under light-example-4j/rest/openapi/database. At this moment, you should have two sub-folders under the database directory: generated and dbscript.
 
-In order to work on our service, we need to start database standalone for now. Depending on which database you are working on, you can choose one of them below. For this demo we use MySQL, and later on, we can switch to Postgres and Oracle. If your organization is not forced to use Oracle, you don't need to try Oracle, the image is too big to download. 
+To work on our service, we need to start database standalone for now. Depending on which database you are working on, you can choose one of them below. For this demo, we use MySQL, and later on, we can switch to Postgres and Oracle. If your organization is not forced to use Oracle, you don't need to try Oracle; the image is too big to download. 
 
- 
+
 MySQL Database
 
 ```

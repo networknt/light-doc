@@ -19,7 +19,7 @@ In this tutorial, we will walk through the following steps with Oracle/Postgres/
 * How to use [HikariCP](https://github.com/brettwooldridge/HikariCP) for JDBC connection pool.
 * How to initialize database connection pool and plug it into light-4j startup hooks.
 * How to connect to the database instance.
-* How to do query database tables.
+* How to query database tables.
 * How to update database tables.
 * How to performance test API application with wrk.
 

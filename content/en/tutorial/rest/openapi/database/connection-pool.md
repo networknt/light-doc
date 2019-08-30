@@ -85,7 +85,7 @@ Here is the updated DataSource.
       connectionTimeout: 2000
 ```
 
-In the config.json for light-codegen, we've enabled MySQL databases support so that pom.xml should have all the dependencies included. 
+In the config.json for light-codegen, we've enabled MySQL database support so that pom.xml should have all the dependencies included. 
 
 Now you can add a line in each handler to get the DataSource as a static variable.
 
@@ -95,7 +95,8 @@ Now you can add a line in each handler to get the DataSource as a static variabl
 
 ```
 
-If you are using IDE, it will help you to add imports, otherwise, you have to add the following imports.
+If you are using IDE, it will help you to add imports. Otherwise, you have to add the following imports.
+
 
 ```
 import com.networknt.service.SingletonServiceFactory;
