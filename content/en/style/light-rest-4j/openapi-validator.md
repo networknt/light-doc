@@ -40,7 +40,8 @@ enabled: true
 logError: true
 # Skip body validation set to true if used in light-router, light-proxy and light-spring-boot.
 skipBodyValidation: false
-
+# Enable response validation.
+validateResponse: false
 ```
 
 As we know the `openapi-validator` can validate the request body if the body is parsed by the body handler. For put, post and patch request, if the body is missing from the exchange attachment, an error message that indicates the body is missing will be returned. There are two different situations that we cannot use the body parser in the request chain as once the body stream is consumed, it won't be available for the downstream handlers anymore.
@@ -72,6 +73,15 @@ ResponseValidator should be able to validate:
 * Response Header (not support yet)
 * Response Body
 
+To enable response validator:
+add the following to the handler chain in handler.yml
+````
+com.networknt.validator.ValidatorHandler@validator
+````
+set the following value in openapi-validator config
+````
+validateResponse: true
+````
 To validate response content:  
 ResponseValidator can validate a given response content object with schema coordinate (uri, httpMethod, statusCode, mediaTypeName)  
 Based on OpenAPI specification, the [Response Object][] is located in Path Object -> Operation Object -> Responses-> Response Object. For example:
