@@ -7,15 +7,13 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Light-proxy is a very important service component that can glue all other alien APIs into the
-light platform ecosystem without re-writting. Once putting light-proxy in front of legacy APIs
-these API can enjoy all the cross-cutting concerns provided by the light-platform, such as security,
-metrics, auditing, traceability, validation, service registry/discovery etc. 
+Light-proxy is a critical service component that can glue all other alien APIs into the light platform ecosystem without re-writing. Once putting light-proxy in front of legacy APIs these API can enjoy all the cross-cutting concerns provided by the light-platform, such as security,
+metrics, auditing, traceability, validation, service registry/discovery, etc. 
 
-There are two separate tutorials here to leverage either Swagger 2.0 specification or OpenAPI 3.0
-specification.  
+There are two separate tutorials here to leverage either Swagger 2.0 specification or OpenAPI 3.0 specification.  
 
 ### Swagger 2.0 Backend
 
@@ -35,7 +33,7 @@ specification.
 
 ### Confluent Schema Registry
 
-* [Schema Registry][] shows how to give read-only access to the Internet applications and give write access to internal applications 
+* [Schema Registry][] shows how to give read-only access to Internet applications and give write access to internal applications 
 
 [Swagger backend service]: /tutorial/proxy/swagger-backend/
 [Swagger proxy]: /tutorial/proxy/swagger-proxy/
