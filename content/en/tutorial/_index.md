@@ -70,6 +70,7 @@ section, some of the most important tutorials are listed here and more will be a
      + How to set up your service to [bootstrap from light-oauth2 key service][] for JWT signature verification public key certificate distribution.
      + How to [encrypt and decrypt sensitive info][] from secret.yml or other config files. 
      + How to use [keystore and truststore][] for one-way and two-way TLS.
+     + How to create keystore for the [light-config-server TLS][] and bootstrap.truststore for light-4j service.
      + A real example on [adding server public key certificate to client.truststore][] to access public service on the Internet with HTTPS.
      + How to [install a self-signed or commercial CA-signed server certificate][] to light-4j service
      + How to get free [Let's Encrypt certificate][] for public-facing light-4j secd rvice
@@ -242,4 +243,4 @@ section, some of the most important tutorials are listed here and more will be a
 [convert CA-signed certificate to server.keystore]: /tutorial/security/ca-certificate/
 [basic terminologies and formats of certs and keys]: /tutorial/security/term-format/
 [light-4j service on port 443]: /tutorial/security/port443/
-
+[light-config-server TLS]: /tutorial/security/config-server-cert/

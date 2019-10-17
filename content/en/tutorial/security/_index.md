@@ -24,6 +24,8 @@ In this section, we have several tutorials related to security configurations an
 
 * How to use [keystore and truststore][] for one-way and two-way TLS.
 
+* How to create keystore for the [light-config-server TLS][] and bootstrap.truststore for light-4j service.
+
 * A real example on [adding server public key certificate to client.truststore][] to access public service on the Internet with HTTPS.
 
 * How to [install a self-signed or commercial CA-signed server certificate][] to light-4j service
@@ -43,4 +45,4 @@ In this section, we have several tutorials related to security configurations an
 [convert CA-signed certificate to server.keystore]: /tutorial/security/ca-certificate/
 [basic terminologies and formats of certs and keys]: /tutorial/security/term-format/
 [light-4j service on port 443]: /tutorial/security/port443/
-
+[light-config-server TLS]: /tutorial/security/config-server-cert/
