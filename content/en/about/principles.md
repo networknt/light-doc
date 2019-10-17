@@ -13,10 +13,11 @@ sections_weight: 3
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-### Prefer container and cloud native
+### Prefer container and cloud-native
 
 ### Prefer microservice over monolith
 
