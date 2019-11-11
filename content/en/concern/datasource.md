@@ -192,6 +192,22 @@ sqlServerPassword: StrongPassw0rd
 oraclePassword: oracle
 ```
 
+From release 1.6.0, light-4j handler encrypt/decrypt  in every config file, user can define encrypted password in the datasource.yml directly with datasource definition:
+
+```
+SqlServerDataSource:
+  DriverClassName: com.microsoft.sqlserver.jdbc.SQLServerDataSource
+  jdbcUrl: jdbc:sqlserver://sqlserver:1433;databaseName=oauth2
+  username: admin
+  password: CRYPT:MHLp4zqPgyPTQPMU1mBWihFFzoDXimsCXF9GlO55BMo=
+  maximumPoolSize: 2
+  connectionTimeout: 500
+
+```
+
+System will check the if there is password field defined in the datasource or not (use field name 'password'). If there is not 'password' define, system will check the secret.yml.
+
+
 The mapping can be found in the service.yml file so that each datasource instance can be loaded from SingletonServiceFactory. 
 
 service.yml
@@ -231,6 +247,48 @@ singletons:
 - com.networknt.db.H2DataSource:
   - com.networknt.db.H2DataSource:
     - java.lang.String: H2DataSource
+
+```
+
+To define multiple datasources with same database type, user can define multiple datasources with different dsname:
+
+datasource.yml
+
+```
+OauthSqlServerDataSource:
+  DriverClassName: com.microsoft.sqlserver.jdbc.SQLServerDataSource
+  jdbcUrl: jdbc:sqlserver://sqlserver:1433;databaseName=oauth2
+  username: oauth
+  password: CRYPT:MHLp4zqPgyPTQPMU1mBWihFFzoDXimsCXF9GlO55BMo=
+  maximumPoolSize: 2
+  connectionTimeout: 500
+
+EventSqlServerDataSource:
+  DriverClassName: com.microsoft.sqlserver.jdbc.SQLServerDataSource
+  jdbcUrl: jdbc:sqlserver://sqlserver:1433;databaseName=oauth2
+  username: event
+  password: CRYPT:MHLp4zqPgyPTQPMU1mBWihFFzoDXimsCXF9GlO55BMo=
+  maximumPoolSize: 2
+  connectionTimeout: 500
+
+```
+
+Define the mapping in the service.yml:
+
+```
+- com.networknt.db.SqlServerDataSource:
+  - com.networknt.db.SqlServerDataSource:
+    - java.lang.String: OauthSqlServerDataSource
+    - java.lang.String: EventSqlServerDataSource
+
+```
+
+And then in the application code, user can get the datasource list with defined in the service.yml:
+
+```
+
+SqlServerDataSource[] datasources = SingletonServiceFactory.getBeans(SqlServerDataSource.class);
+
 
 ```
 
