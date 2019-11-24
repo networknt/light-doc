@@ -56,6 +56,7 @@ section, some of the most important tutorials are listed here and more will be a
      + [OpenTracing with Jaeger](/tutorial/tracing/jaeger/service-discovery/)
   * [Tracing](/tutorial/tracing/)
      + [Jaeger OpenTracing](/tutorial/tracing/jaeger/)
+     + [Skywalking](/tutorial/tracing/skywalking/)
   * [Routing](/tutorial/routing/)
      + [Multi Static Handler Chains](/tutorial/routing/handler/)
      + [Manually route requests to a handler](/tutorial/routing/manual/)
