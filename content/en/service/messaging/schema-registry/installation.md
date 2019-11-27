@@ -23,7 +23,7 @@ docker run -d \
 -e SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=38.113.162.53:2181 \
 -e SCHEMA_REGISTRY_HOST_NAME=schema-registry \
 -e SCHEMA_REGISTRY_LISTENERS=http://0.0.0.0:8081 \
-confluentinc/cp-schema-registry:5.0.1
+confluentinc/cp-schema-registry:5.3.1
 ```
 
 In a test environment, we only need one instance of the schema registry. 
