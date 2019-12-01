@@ -69,5 +69,7 @@ The following contains architecture, design and best practices.
 - [Single Page Application](/consumer/spa/)
   * [React](/consumer/react/)
   * [React-schema-form](/consumer/react-schema-form/)
+  * [React-schema-form-rc-select](/consumer/react-schema-form-rc-select/)
+     + [Developer Guide](/consumer/react-schema-form-rc-select/developer-guide/)
   * [Vue](/consumer/vue/)
   * [Angular](/consumer/angular/)
