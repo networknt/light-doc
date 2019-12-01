@@ -2,13 +2,8 @@
 title: Hugo Docs
 date: 2017-11-04T22:12:19-04:00
 description: "Hugo for project documentation on github"
-categories: [tool]
+categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tool"
-    weight: 10
-weight: 10	#rem
 aliases: []
 toc: false
 draft: false

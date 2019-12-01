@@ -2,13 +2,8 @@
 title: Minikube
 date: 2017-11-04T22:12:19-04:00
 description: "Using Minikube to mimic Kubernetes cluster locally"
-categories: [tool]
+categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tool"
-    weight: 40
-weight: 40	#rem
 aliases: []
 toc: false
 draft: false

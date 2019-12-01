@@ -2,13 +2,8 @@
 title: Java keytool
 date: 2017-11-04T22:12:19-04:00
 description: "Java keytool is used to generate key pairs for TLS and JWT"
-categories: [tool]
+categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tool"
-    weight: 20
-weight: 20	
 aliases: []
 toc: false
 draft: false

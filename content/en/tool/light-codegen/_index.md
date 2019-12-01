@@ -4,10 +4,6 @@ date: 2019-01-05T10:47:59-05:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tool"
-    weight: 80
 slug: ""
 aliases: []
 toc: false

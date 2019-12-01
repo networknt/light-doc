@@ -2,13 +2,8 @@
 title: Wrk
 date: 2017-11-04T22:12:19-04:00
 description: "Using wrk for performance test"
-categories: [tool]
+categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tool"
-    weight: 50
-weight: 50	#rem
 aliases: []
 toc: false
 draft: false

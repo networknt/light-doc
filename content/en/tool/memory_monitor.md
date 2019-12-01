@@ -2,13 +2,8 @@
 title: Memory Monitoring
 date: 2017-11-04T22:12:19-04:00
 description: "Memory Monitoring on Mac"
-categories: [tool]
+categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tool"
-    weight: 20
-weight: 20	#rem
 aliases: []
 toc: false
 draft: false

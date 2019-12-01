@@ -4,11 +4,6 @@ date: 2017-12-30T07:15:31-05:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "tool"
-    weight: 80
-weight: 80	#rem
 aliases: []
 toc: false
 draft: false
