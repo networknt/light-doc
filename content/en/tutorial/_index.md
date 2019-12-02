@@ -91,6 +91,7 @@ section, some of the most important tutorials are listed here and more will be a
      + [Microservices Branch Pattern](/tutorial/rest/openapi/ms-branch/)
      + [Parameter Serialization](/tutorial/rest/openapi/parameter-serialization/)
      + [ServiceMesher](/tutorial/rest/openapi/servicemesher/)
+     + [Light Reference](/tutorial/rest/openapi/light-reference/)
   * [Spring Boot](/tutorial/springboot/)   
      + [Spring Boot Servlet](/tutorial/springboot/servlet/)
   * [Kotlin](/tutorial/kotlin/)

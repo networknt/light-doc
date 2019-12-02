@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-OpenAPI 3.0 specification was released in late 2017, and it resolved several major issues or limitations of Swagger 2.0 specification. The community is cheered about the release; however, it is very hard to developers to adopt it at the moment even after several months since the release. Given the new specification is not backward compatible, all tools around Swagger 2.0 need to be rewritten, and it takes time. 
+OpenAPI 3.0 specification was released in late 2017, and it resolved several major issues or limitations of Swagger 2.0 specification. The community is cheered about the release; however, it is very hard for developers to adopt it at the moment, even after several months since the release. Given the new specification is not backward compatible, all tools around Swagger 2.0 need to be rewritten, and it takes a lot of time. 
 
 In our example, we have added OpenAPI 3.0 support in [light-rest-4j][] framework in late 2017 and we have to build our own [openapi-parser][] to do the runtime validation again the spec. 
 
