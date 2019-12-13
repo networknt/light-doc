@@ -25,3 +25,4 @@ Swagger 2.0 is an older specification, and OpenAPI 3.0 is a newer specification.
   + [Microservices Branch Pattern](/tutorial/rest/openapi/ms-branch/)
   + [Parameter Serialization](/tutorial/rest/openapi/parameter-serialization/)
   + [ServiceMesher](/tutorial/rest/openapi/servicemesher/)
+  + [Open Banking](/tutorial/open-banking/)

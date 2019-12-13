@@ -92,6 +92,7 @@ section, some of the most important tutorials are listed here and more will be a
      + [Parameter Serialization](/tutorial/rest/openapi/parameter-serialization/)
      + [ServiceMesher](/tutorial/rest/openapi/servicemesher/)
      + [Light Reference](/tutorial/rest/openapi/light-reference/)
+     + [Open Banking](/tutorial/open-banking/)
   * [Spring Boot](/tutorial/springboot/)   
      + [Spring Boot Servlet](/tutorial/springboot/servlet/)
   * [Kotlin](/tutorial/kotlin/)
