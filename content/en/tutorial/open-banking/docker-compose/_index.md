@@ -90,6 +90,8 @@ client.verifyHostname: false
 
 To connect to the test cloud Consul cluster, we need to copy the client.truststore that contains Consul certificate. We also need to copy the service.yml and consul.yml to Consul connectivity from https://github.com/networknt/light-config-test/tree/master/light-router/test-portal/config
 
+We also need to copy the logback.xml to the config folder so that it gives us a chance to overwrite the default logging level if necessary. 
+
 Checkin the light-config-test and clone it into the test2 server to start the compose.
 
 ```
