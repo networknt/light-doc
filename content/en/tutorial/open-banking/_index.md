@@ -17,5 +17,11 @@ In this tutorial, we are going to develop an open banking application and deploy
 
 * [Specification](/tutorial/open-banking/spec/)
 * [Generation](/tutorial/open-banking/generation/)
+* [Hard Coded](/tutorial/open-banking/hardcoded/)
+* [Security](/tutorial/open-banking/security/)
+* [Docker Compose](/tutorial/open-banking/docker-compose/)
+* [Router](/tutorial/open-banking/router/)
+* [Proxy](/tutorial/open-banking/proxy/)
+
 
 

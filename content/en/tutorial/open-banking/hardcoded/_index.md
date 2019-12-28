@@ -10,7 +10,7 @@ toc: false
 draft: false
 ---
 
-The first step to demo the services is to implement with some hard-coded logic. In the future, we can hook the service with a database or in-memory data grid or make the service an event consumer to update local no-sql database. 
+The first step to demo the services is to implement with some hard-coded logic on top of the [generated][] project. In the future, we can hook the service with a database or in-memory data grid or make the service an event consumer to update local no-sql database. 
 
 ### accounts
 
@@ -90,3 +90,7 @@ curl -k https://localhost:8443/transactions/accounts/22289 \
 
 ```
 
+In the next step, we are going to enable the [security][] so that the handler can get the userId from the JWT token to decide which user's account info is retrieved. 
+
+[generated]: /tutorial/open-banking/generated/
+[security]: /tutorial/open-banking/security/
