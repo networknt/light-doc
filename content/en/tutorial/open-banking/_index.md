@@ -22,6 +22,7 @@ In this tutorial, we are going to develop an open banking application and deploy
 * [Docker Compose](/tutorial/open-banking/docker-compose/)
 * [Router](/tutorial/open-banking/router/)
 * [Proxy](/tutorial/open-banking/proxy/)
+* [Tracing](/tutorial/open-banking/tracing/)
 
 
 
