@@ -17,6 +17,8 @@ draft: false
 
 The following is a list of articles that mention light platform. 
 
+### English
+
 * [Light Java- a Next Generation Container Chassis for APIs and Microservices](https://it.toolbox.com/blogs/craigborysowich/light-java-a-next-generation-container-chassis-for-apis-and-microservices-040417)
 
 * [Light Java Project becomes Light-4j on Github](https://it.toolbox.com/blogs/craigborysowich/light-java-project-becomes-light-4j-on-github-052417)
@@ -41,3 +43,6 @@ The following is a list of articles that mention light platform.
 
 * [Light4j Cookbook - Rest API, CORS and RDBMS](https://www.findbestopensource.com/article-detail/light4j-cookbook-part1)
 
+### Chinese
+
+* [light4j一个轻量级的低延时、高吞吐量、内存占用量小的API平台](https://www.cnblogs.com/passedbylove/p/12080845.html)
