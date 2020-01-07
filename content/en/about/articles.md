@@ -46,3 +46,16 @@ The following is a list of articles that mention light platform.
 ### Chinese
 
 * [light4j一个轻量级的低延时、高吞吐量、内存占用量小的API平台](https://www.cnblogs.com/passedbylove/p/12080845.html)
+
+* [openapi and light-4j](https://xlongwei.com/detail/19082323)
+
+* [aliyun 自定义监控](https://xlongwei.com/detail/19122523)
+
+* [light-4j真的比springboot快44倍吗？](https://blog.csdn.net/luoyang_java/article/details/90245123)
+
+* [Networknt Light 4J分析报告](https://blog.csdn.net/chengjia4228/article/details/100780647)
+
+* [轻量级java框架 light-4j](https://blog.csdn.net/qq_16055867/article/details/88819987)
+
+
+
