@@ -108,5 +108,14 @@ To serve this purpose a new way is introduced here which could integrate the lig
   For example, data model, endpoint, handler.yml...
 
 
-[petstore maven codegen example]: https://github.com/networknt/light-example-4j/tree/develop/rest/perstore-with-codegen
-[pom example in the petstore project]: https://github.com/networknt/light-example-4j/blob/develop/rest/perstore-with-codegen/petstore-spec/pom.xml
+Light-example-4j has [servicemesher example][] servicemesher example which  build with maven build process. The servicemesher example includes tow parts:
+
+-- [server side service][]  which includes multiple services in  project module
+
+-- [client side service][] which has one service in the  project module
+
+[petstore maven codegen example]: https://github.com/networknt/light-example-4j/tree/master/rest/perstore-with-codegen
+[pom example in the petstore project]: https://github.com/networknt/light-example-4j/blob/master/rest/perstore-with-codegen/petstore-spec/pom.xml
+[servicemesher example]: https://github.com/networknt/light-example-4j/tree/master/servicemesher
+[server side service]: https://github.com/networknt/light-example-4j/tree/master/servicemesher/services
+[server side service]: https://github.com/networknt/light-example-4j/tree/master/servicemesher/client
