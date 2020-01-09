@@ -57,5 +57,7 @@ The following is a list of articles that mention light platform.
 
 * [轻量级java框架 light-4j](https://blog.csdn.net/qq_16055867/article/details/88819987)
 
+* [一站式生成light4j工程初始化代码（基于petstore示例）](https://www.cnblogs.com/passedbylove/p/12092090.html)
+
 
 
