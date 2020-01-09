@@ -8,41 +8,27 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In this second par of the tutorial, we are going to use OpenAPI 3.0 RESTful 
-API as an example to show how to deployed the light-proxy and enable all sorts 
-of middleware handlers through configurations. We also explore standalone deployment 
-and Docker deployment. 
+In this second part of the tutorial, we are going to use OpenAPI 3.0 RESTful API as an example to show how to deploy the light-proxy and enable all sorts of middleware handlers through configurations. We also explore standalone deployment and Docker deployment. 
 
-With specification handler, security handler and validation handler change, you
-can easily update the configuration to make the same instance of light-proxy
-server work with OpenAPI 3.0 or GraphQL backend. The default configuration is for 
-RESTful Swagger 2.0 or OpenAPI 3.0 backend as light-rest-4j middleware handlers are 
-included in the package.
+With the specification handler, security handler, and validation handler change, you can easily update the configuration to make the same instance of light-proxy server work with OpenAPI 3.0 or GraphQL backend. The default configuration is for RESTful Swagger 2.0 or OpenAPI 3.0 backend as light-rest-4j middleware handlers are included in the package.
 
-To make it simple, we will build a backend service with light-rest-4j with a
-OpenAPI 3.0 specification file defined in [model-config][] 
-repo. In real production environment, the backend service can be built with other 
-Java framework or other languages like Nodejs, Go etc.
+To make it simple, we will build backend service with light-rest-4j with an OpenAPI 3.0 specification file defined in [model-config][] repo. In a real production environment, the backend service can be built with other Java frameworks or other languages like Nodejs, Go, etc.
 
-If you have an existing API backend up and running already, then you can continue.
-Otherwise, follow this [backend tutorial][]
-to create a backend service and start multiple instances.
+If you have an existing API backend up and running already, then you can continue. Otherwise, follow this [backend tutorial][] to create a backend service and start multiple instances.
 
 ## light-proxy configuration
 
-With the backend services ready, let's clone the light-proxy and make some configuration
-changes. 
+With the backend services ready, let's clone the light-proxy and make some configuration changes. 
 
 ```
 cd ~/networknt
 git clone https://github.com/networknt/light-proxy.git
 ```
 
-By default, the light-proxy doesn't have any config files packaged into the src/main/resources/config
-folder as production deployment will have all the config files externalized. Now, let's
-copy the config files from src/test/resources/config and make some modifications.
+By default, the light-proxy doesn't have any config files packaged into the src/main/resources/config folder, as production deployment will have all the config files externalized. Now, let's copy the config files from src/test/resources/config and make some modifications. 
 
 ```
 cd ~/networknt/light-proxy/src/main/resources
@@ -71,19 +57,16 @@ connectionsPerThread: 20
 maxRequestTime: 10000
 ``` 
 
-As we are going to enable Security and Validator based on swagger.json from backend server,
-let's copy the swagger.json from light-example-4j/rest/swagger/proxy-backend/src/main/resources/config folder.
+As we are going to enable Security and Validator based on openapi.yaml from the backend server, let's copy the openapi.yaml from light-example-4j/rest/openapi/proxy-backend/src/main/resources/config folder.
 
 ```
 cd ~/networknt
-cp light-example-4j/rest/openapi/proxy-backend/src/main/resources/config/openapi.json light-proxy/src/main/resources/config/
+cp light-example-4j/rest/openapi/proxy-backend/src/main/resources/config/openapi.yaml light-proxy/src/main/resources/config/
 ```
 
 ## Update service.yml
 
-Now we have copied the openapi.json into the config folder of the proxy. The next step, we need to
-update service.yml to replace all the Swagger 2.0 handlers with OpenAPI 3.0 handlers in middleware
-chain. 
+Now we have copied the openapi.yaml into the config folder of the proxy. In the next step, we need to create handler.yml to define the handler chain and all the endpoints the backend services provided. 
 
 Here is the default service.yml that is copied from test folder to main folder.
 
@@ -128,8 +111,7 @@ singletons:
 
 ```
 
-Here is the updated version with com.networknt.swagger.SwaggerHandler and com.networknt.security.JwtVerifyHandler
-replaced. Also, we need add the section to that inject openapi-parser validators. 
+Here is the updated version with com.networknt.swagger.SwaggerHandler and com.networknt.security.JwtVerifyHandler replaced. Also, we need add the section to that inject openapi-parser validators. 
 
 ```yaml
 # Singleton service factory configuration/IoC injection
@@ -227,8 +209,7 @@ mvn clean install -DskipTests
 mvn exec:exec
 ```
 
-Given the light-proxy server.yml only have https enabled and listening to port 8080, let's
-use curl to test it.
+Given the light-proxy server.yml only have https enabled and listening to port 8080, let's use curl to test it.
 
 ```
 curl -k https://localhost:8080/v1/getData
@@ -247,8 +228,7 @@ curl -k https://localhost:8080/v1/getData
 {"enableHttp2":true,"httpPort":8080,"enableHttps":true,"value":"value1","httpsPort":8082,"key":"key1"}
 ```
 
-As you can see the proxy server is working on https connection to the backend services. And 
-the response is from different instances for each request due to load balance. You can stop 
+As you can see the proxy server is working on https connection to the backend services. And the response is from different instances for each request due to load balance. You can stop 
 one of the three instances and the proxy will automatically failover to working instances.
 
 Also, you can test the post request with the following command line.
@@ -266,25 +246,19 @@ Result:
 {"enableHttps":true,"value":"value1","httpsPort":8083,"key":"key1","enableHttp2":true,"httpPort":8080}
 ```
 
-Above steps shows how to start the backend services and to config the light-proxy so that it
-can pass through the requests to the backend instances in a round robin fashion. 
+Above steps shows how to start the backend services and to config the light-proxy so that it can pass through the requests to the backend instances in a round robin fashion. 
 
-For light-proxy configuration, we just updated it in the app config folder to add a proxy.yml 
-and copy over the swagger.json from proxy-backend service. This will enable the proxy 
+For light-proxy configuration, we just updated it in the app config folder to add a proxy.yml and copy over the swagger.json from proxy-backend service. This will enable the proxy 
 server to do security verification (disabled by default) based on JWT token and scopes. 
 
-The reason we do in app configuration is to show you how this has been done within the application
-context. In the normal way, you should have light-proxy jar file or Docker image as deliver
+The reason we do in app configuration is to show you how this has been done within the application context. In the normal way, you should have light-proxy jar file or Docker image as deliver
 package and all configuration should be done externally. 
 
-For information on how to pass the configuration files into a standalone service please refer
-to this [config module][]
+For information on how to pass the configuration files into a standalone service please refer to this [config module][]
 
-For information on how to pass the configuration files into a Docker container please refer
-to this [config module][]
+For information on how to pass the configuration files into a Docker container please refer to this [config module][]
 
-For information on how to enable features of light-proxy with config files, please refer to
-light-proxy [configuration][] 
+For information on how to enable features of light-proxy with config files, please refer to light-proxy [configuration][] 
 
 [model-config]: https://github.com/networknt/model-config/tree/master/rest/openapi/proxy-backend
 [backend tutorial]: /tutorial/proxy/openapi-backend/
