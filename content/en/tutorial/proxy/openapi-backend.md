@@ -246,6 +246,11 @@ curl -k https://localhost:8083/v1/getData
 
 At this moment, we have three backend service instances running, and they are listening to 8081, 8082, and 8083 on the https/http2 protocol.
 
+A video walkthrough in English can be found [here](https://www.youtube.com/watch?v=MbDNd84TpuQ)
+
+A video walkthrough in Chinese can be found [here](https://v.youku.com/v_show/id_XNDUwMjgwNDM3Ng==.html)
+
+
 [light-proxy]: https://github.com/networknt/light-proxy
 [backend service]: /tutorial/proxy/swagger-backend/
 [model-config]: https://github.com/networknt/model-config/tree/master/rest/openapi/proxy-backend

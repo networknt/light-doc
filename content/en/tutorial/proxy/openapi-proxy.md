@@ -495,6 +495,11 @@ For information on how to pass the configuration files into a Docker container, 
 
 For information on how to enable features of light-proxy with config files, please refer to light-proxy [configuration][] 
 
+A video walkthrough in English can be found [here](https://www.youtube.com/watch?v=NCZYLb7toow)
+
+A video walkthrough in Chinese can be found [here](https://v.youku.com/v_show/id_XNDUwMjgwODQzMg==.html)
+
+
 [model-config]: https://github.com/networknt/model-config/tree/master/rest/openapi/proxy-backend
 [backend tutorial]: /tutorial/proxy/openapi-backend/
 [config module]: /concern/config/

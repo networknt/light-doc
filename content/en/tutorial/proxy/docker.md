@@ -8,26 +8,22 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In this tutorial, we are going to walk through the dockerized light-proxy in light-docker. There
-are two docker-compose files and separate config files for Swagger 2.0 and OpenAPI 3.0 specification.
+In this tutorial, we are going to walk through the dockerized light-proxy in light-docker. There are two docker-compose files and separate config files for Swagger 2.0 and OpenAPI 3.0 specification.
 
-We are going to use OpenAPI 3.0 compose file and the Swagger 2.0 is very similar with only config
-file difference. 
+We are going to use OpenAPI 3.0 compose file, and Swagger 2.0 is very similar to the OpenAPI 3.0 one with only config file difference. 
 
 ### Start backend services
 
-Before we start the proxy compose, we need to start three instances of OpenAPI proxy-backend services.
-The steps are described in [OpenAPI proxy backend][]. Please follow it to start all three instances
-and make sure they are working individually. 
+Before we start the proxy compose, we need to start three instances of OpenAPI proxy-backend services. The steps are described in [OpenAPI proxy backend][]. Please follow it to start all three instances and make sure they are working individually. 
 
-
-[OpenAPI proxy backend]: /tutorial/proxy/openapi-backend/
 
 ### Start light-proxy
 
-Now let's clone the light-docker repo from networknt on github.com
+Now let's clone the light-docker repo from networknt on github.com site.
+
 
 ```
 cd ~/networknt
@@ -50,10 +46,9 @@ And the result should be something like this.
 
 ### proxy.yml
 
-If you want to run this tutorial on your computer, you have to update the proxy.yml in
-light-docker/light-proxy/openapi/config folder.
+If you want to run this tutorial on your computer, you have to update the proxy.yml in light-docker/light-proxy/openapi/config folder.
 
-Here is the config file for my computer which is named joy.
+Here is the config file for my computer, which is named freedom.
 
 ```yaml
 # Reverse Proxy Handler Configuration
@@ -74,14 +69,12 @@ connectionsPerThread: 20
 maxRequestTime: 10000
 ```
 
-You need to change the hostname joy to your computer name or your ip address. If
-you are using hostname, you need to ensure that you can ping that hostname on your
-computer. Otherwise, it is safe to use IP address with 192.xxx.xxx.xxx or 10.xxx.xxx.xxx
+You need to change the hostname freedom to your computer name or your IP address. If you are using a hostname, you need to ensure that you can ping the hostname on your computer. Otherwise, it is safe to use IP address with 192.xxx.xxx.xxx or 10.xxx.xxx.xxx
 
 ### Other config files
 
-There are other config files in the config folder for the docker-compose and you can
-modify them to test different behaviour of the light-proxy.
+There are other config files in the config folder for the docker-compose, and you can modify them to test different behavior of the light-proxy.
 
-For example, you can enable the security, metrics etc.
+For example, you can enable security, metrics, etc.
 
+[OpenAPI proxy backend]: /tutorial/proxy/openapi-backend/
