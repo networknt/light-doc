@@ -37,7 +37,7 @@ cd light-codegen
 mvn clean install -DskipTests
 cd ~/networknt
 rm -rf light-example-4j/rest/openapi/proxy-backend
-java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o light-example-4j/rest/openapi/proxy-backend -m model-config/rest/openapi/proxy-backend/openapi.json -c model-config/rest/openapi/proxy-backend/config.json
+java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapi -o light-example-4j/rest/openapi/proxy-backend -m model-config/rest/openapi/proxy-backend/openapi.yaml -c model-config/rest/openapi/proxy-backend/config.json
 ```
 
 The newly generated project can be found in [light-example-4j][], and you can compare it with your own generated code.
@@ -187,6 +187,8 @@ mvn clean install -Prelease
 java -Dlight-4j-config-dir=/home/steve/networknt/light-config-test/light-example-4j/rest/openapi/proxy-backend/8081 -jar target/backend-1.0.0.jar
 ```
 
+Please note that the configuration folder might be different on your computer. 
+
 Now from another terminal, you can issue a curl command to ensure the server is running and listening on 8081 on https/http2.
 
 
@@ -219,6 +221,8 @@ cd ~/networknt/light-example-4j/rest/openapi/proxy-backend
 java -Dlight-4j-config-dir=/home/steve/networknt/light-config-test/light-example-4j/rest/openapi/proxy-backend/8082 -jar target/backend-1.0.0.jar
 ```
 
+Please note that the configuration folder might be different on your computer. 
+
 Test the second instance with command:
 
 ```
@@ -229,8 +233,10 @@ Now let's start the third instance with port number 8083.
 
 ```
 cd ~/networknt/light-example-4j/rest/openapi/proxy-backend
-java -Dlight-4j-config-dir=/home/steve/networknt/light-config-test/light-example-4j/rest/openapi/proxy-backend/8082 -jar target/backend-1.0.0.jar
+java -Dlight-4j-config-dir=/home/steve/networknt/light-config-test/light-example-4j/rest/openapi/proxy-backend/8083 -jar target/backend-1.0.0.jar
 ```
+
+Please note that the configuration folder might be different on your computer. 
 
 Test the third instance with command:
 
