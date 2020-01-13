@@ -87,4 +87,8 @@ There are other config files in the config folder for the docker-compose, and yo
 
 For example, you can enable security, metrics, etc.
 
+A video walkthrough in English can be found [here](https://www.youtube.com/watch?v=Ope5Oha1UJc)
+
+A video walkthrough in Chinese can be found [here](https://v.youku.com/v_show/id_XNDUwNDk3NzcyOA==.html)
+
 [OpenAPI proxy backend]: /tutorial/proxy/openapi-backend/
