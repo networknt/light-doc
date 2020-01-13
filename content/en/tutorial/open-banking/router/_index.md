@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous step, we have created a [docker-compose][] to start all the services on the test2 server in the test cloud. In this step, we are going to add configuration to the light-portal router instance to enable routing requests to these services from the Internet. 
@@ -119,8 +120,7 @@ You can see the result contains the balance from the balances service and the la
 
 At this moment, our services are exposed to the Internet with HTTPS/HTTP2 enabled, and OAuth2 protected. To access it, use the subdomain ob.lightapi.net with the default HTTPS port. 
 
-In the next step, we are going to build a single page application [client][] to access the APIs and deploy it on the router instance on the portal server as a virtual host. In this setup, there is no need to enable CORS to access the APIs from the SPA. 
-
+So far, we have four microservices implemented in light-4j. In an enterprise, there might be some other services that are implemented in other languages. To bring these services to the light ecosystem, we can put an instance of [light-proxy][] in front of a legacy service. 
 
 [docker-compose]: /tutorial/open-banking/docker-compose/
-[client]: /tutorial/open-banking/client/
+[lihgt-proxy]: /tutorial/open-banking/proxy/

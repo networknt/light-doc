@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 For the real open-banking application, each user should only be allowed to access his/her own account information. This is controlled by the access token he/she can get from the OAuth 2.0 authorization code grant flow. 
@@ -72,7 +73,7 @@ From the jwt.io site, here is the decoded payload.
 
 Now, let's create security folders and copy the code from hardcoded to them in four projects. Also, we are going to add values.yml in each project resources/config folder to overwrite some default configuration values. 
 
-Here is the file that enable the security for JWT token verification. Create the file under src/main/resources/config folder. In the real production deployment, it can be externalized. 
+Here is the file that enables the security for JWT token verification. Create the file under src/main/resources/config folder. In the real production deployment, it can be externalized. 
 
 values.yml
 
@@ -92,14 +93,14 @@ curl -k https://localhost:8443/accounts \
 
 ```
 
-We got the following response because the token doesn't have the accounts scope defined in the specification. 
+We got the following response because the token doesn't have the `accounts` scope defined in the specification. 
+
 
 ```
 {"statusCode":403,"code":"ERR10005","message":"AUTH_TOKEN_SCOPE_MISMATCH","description":"Scopes [write:pets, read:pets] in authorization token and specification scopes [accounts] are not matched","severity":"ERROR"}
 ```
 
-
-Let's switch to the token for stevehu above and we got the right response. 
+Let's switch to the token for `stevehu` above, and we got the right response. 
 
 ```
 curl -k https://localhost:8443/accounts \
@@ -108,7 +109,7 @@ curl -k https://localhost:8443/accounts \
 
 ```
 
-The returned response is still hard-coded and we need to change the handlers to retrieve the userId from the JWT token. 
+The returned response is still hard-coded, and we need to change the handlers to retrieve the userId from the JWT token. 
 
 ```
         Map<String, Object> auditInfo = exchange.getAttachment(AttachmentConstants.AUDIT_INFO);
@@ -125,9 +126,7 @@ curl -k https://localhost:8443/accounts/22289 \
 
 ```
 
-
-
-Let's use the token for ericbroda for another test. 
+Let's use the token for `ericbroda` for another test. 
 
 ```
 curl -k https://localhost:8443/accounts \
@@ -151,10 +150,9 @@ You can see that the account returned is Eric's Saving and Checking.
 {"Data":{"Account":[{"AccountId":"42281","Status":"Enabled","StatusUpdateDateTime":"2019-01-01T06:06:06+00:00","Currency":"GBP","AccountType":"Personal","AccountSubType":"CurrentAccount","Nickname":"Eric's Saving"},{"AccountId":"41221","Status":"Enabled","StatusUpdateDateTime":"2018-01-01T06:06:06+00:00","Currency":"GBP","AccountType":"Personal","AccountSubType":"CurrentAccount","Nickname":"Eric's Checking"}]},"Links":{"Self":"https://api.alphabank.com/open-banking/v3.1/aisp/accounts/"},"Meta":{"TotalPages":1}}
 ```
 
+Let's make the same change in all handlers for accounts, balances, parties, and transactions. You can test it with the two tokens above for other services after that. 
 
-Let's make the same change in all handlers for accounts, balances, parties and transactions. You can test it with the two tokens above for other services after that. 
-
-To access balances for example.
+To access balances, for example.
 
 ```
 curl -k https://localhost:8443/balances/accounts/22289 \
@@ -163,11 +161,9 @@ curl -k https://localhost:8443/balances/accounts/22289 \
 
 ```
 
-
 Now, let's check in the security folder for all four projects.
 
-
-At this moment, all four services are functioning. Let's build docker images and publish them to the docker hub. 
+At this moment, all four services are functioning. Let's build Docker images and publish them to the docker hub. 
 
 ```
 cd ~/open-banking/accounts/security
@@ -175,8 +171,9 @@ chmod +x build.sh
 ./build.sh 1.0.0
 ```
 
-In next step, we are going to create a [docker-compose][] to start all services on the test cloud together. 
+Follow the above command lines to build and publish the other three services. 
 
+In the next step, we are going to create a [docker-compose][] to start all services on the test cloud together. 
 
 [hardcoded]: /tutorial/open-banking/hardcoded/
 [docker-compose]: /tutorial/open-banking/docker-compose/

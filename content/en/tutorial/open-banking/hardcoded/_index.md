@@ -8,13 +8,18 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The first step to demo the services is to implement with some hard-coded logic on top of the [generated][] project. In the future, we can hook the service with a database or in-memory data grid or make the service an event consumer to update local no-sql database. 
+The first step to demo the services is to implement with some hard-coded logic on the [generated][] project. In the future, we can hook the service with a database or in-memory data grid or make the service an event consumer to update the local no-SQL database. 
+
+In this step, we have updated the handler logic to have a hard-coded userId `stevehu` and use it to retrieve the data. 
 
 ### accounts
 
-The updated code is located in the hardcoded folder. To access the server. 
+The updated code is located in the [hardcoded folder](https://github.com/open-banking/accounts/tree/master/hardcoded). 
+
+To access the server. 
 
 For /accounts endpoint.
 
@@ -35,7 +40,9 @@ curl -k https://localhost:8443/accounts/22289 \
 
 ### balances
 
-The updated code is located in the hardcoded folder. To access the server.
+The updated code is located in the [hardcoded folder](https://github.com/open-banking/balances/tree/master/hardcoded). 
+
+To access the server.
 
 For /balances endpoint.
 
@@ -57,7 +64,9 @@ curl -k https://localhost:8443/balances/accounts/22289 \
 
 ### parties
 
-The updated code is located in the hardcoded folder. To access the server.
+The updated code is located in the [hardcoded folder](https://github.com/open-banking/parties/tree/master/hardcoded). 
+
+To access the server.
 
 For /parties endpoint
 
@@ -70,7 +79,9 @@ curl -k https://localhost:8443/parties \
 
 ### transactions
 
-The updated code is located in the hardcoded folder. To access the server.
+The updated code is located in the [hardcoded folder](https://github.com/open-banking/transactions/tree/master/hardcoded). 
+
+To access the server.
 
 For /transactions endpoint.
 
@@ -89,6 +100,8 @@ curl -k https://localhost:8443/transactions/accounts/22289 \
   -H 'x-fapi-financial-id: OB'
 
 ```
+
+All the curl commands above have two headers that are required by the specifications. The first header Authorization is the standard header for the OAuth 2.0 authorization code access token. The second one is to identify which financial institution the request is coming.
 
 In the next step, we are going to enable the [security][] so that the handler can get the userId from the JWT token to decide which user's account info is retrieved. 
 

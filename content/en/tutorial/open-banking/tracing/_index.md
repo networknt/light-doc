@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous [proxy][] step, we have set up a light-proxy instance to mimic the transactions service in case transactions service is not built on top of light-4j and doesn't have any cross-cutting concerns addressed. 
@@ -37,7 +38,7 @@ With the above addition, the jaeger server will be started in the docker-compose
 
 The jaeger module from light-4j is not included in the pom.xml in the generated projects. For all the projects, we need to add this dependency to the pom.xml file. Let's create a folder called tracing and copy the code from security.
 
-First for each services in the tracing folder, add the following to the pom.xml
+First for each service in the tracing folder, add the following to the pom.xml
 
 ```
         <dependency>
@@ -47,7 +48,7 @@ First for each services in the tracing folder, add the following to the pom.xml
         </dependency>
 ```
 
-After make the change for pom.xml for accounts, balances, parties and transactions. Rebuild the docker images with the following commands for each. 
+After making the change for pom.xml for accounts, balances, parties, and transactions, rebuild the docker images with the following commands for each. 
 
 ```
 cd ~/open-banking/accounts/tracing
@@ -58,7 +59,8 @@ build.sh 1.0.0
 
 Let's update the configurations for these services in the light-config-test repository. 
 
-First, we need to add jaeger middleware handler to the handler.yml file in the handler chain. We also comment out the traceability and correlation handlers in the chain. As handler.yml wasn't externalized before, we need to copy it from each project to the corresponding folder. 
+First, we need to add the jaeger middleware handler to the handler.yml file in the handler chain. We also comment out the traceability and correlation handlers in the chain. As handler.yml wasn't externalized before, we need to copy it from each project to the corresponding folder. 
+
 
 ```
   # - com.networknt.traceability.TraceabilityHandler@traceability
@@ -102,13 +104,13 @@ param: 1 # can either be an integer, a double, or an integer
 Checking the config files and go to the test2 server to restart the docker-compose. As we have updated the docker images, we need to remove the images in order to download the latest. 
 
 
-To access the UI of Jaeger on test2 server, we need to enable the port with the firewall. 
+To access the UI of Jaeger on the test2 server, we need to enable the port with the firewall. 
 
 ```
 sudo ufw allow 16686
 ```
 
-As accoutns is calling the balances and transactions, we need to ensure that the client.yml is updated with `injectOpenTracing: true`. Let's upgrade the values.yml with the following. 
+As accounts service is calling the balances and transactions, we need to ensure that the client.yml is updated with `injectOpenTracing: true`. Let's upgrade the values.yml with the following. 
 
 ```
 openapi-security.enableVerifyJwt: true
@@ -118,6 +120,24 @@ client.verifyHostname: false
 client.injectOpenTracing: true
 ```
 
+Now, let's issue a request from the command line. 
+
+```
+curl -k https://ob.lightapi.net/accounts/22289 \
+  -H 'Authorization: Bearer eyJraWQiOiIxMDAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ1cm46Y29tOm5ldHdvcmtudDpvYXV0aDI6djEiLCJhdWQiOiJ1cm46Y29tLm5ldHdvcmtudCIsImV4cCI6MTg5MTcwNDgyNiwianRpIjoiUWttZHRFeE53dDNqemlGSlBtWmFQQSIsImlhdCI6MTU3NjM0NDgyNiwibmJmIjoxNTc2MzQ0NzA2LCJ2ZXJzaW9uIjoiMS4wIiwidXNlcl9pZCI6InN0ZXZlaHUiLCJ1c2VyX3R5cGUiOiJDVVNUT01FUiIsImNsaWVudF9pZCI6ImY3ZDQyMzQ4LWM2NDctNGVmYi1hNTJkLTRjNTc4NzQyMWU3MiIsInNjb3BlIjpbImFjY291bnRzIl19.nqtuQSeeiltEWjXWrdzNrRkKtnqxlO7SUhCMVKzf9zRC0QU4SbdUR99Vbl4MiiTAQR0MxkE5s-BS7KONIyeD4Z2j__6MlcAwx3jCv65HQMCnE8_yMZ5Ut1IoVbNdwcLpDQzWZKbAUpgoUrtw9l_y7zPcyFIHIn0pxo8IiE84ctgfRa1lVU6yjQ8YuTwk5lJmojUToJNeRqXGx73xslrTlXXqF7lLEcCe52cJjbl1oTwzhXIOFllQ85sjbRHWILHpqOKBgpDoQgLqj6Q6aTShlgIjVifbeCZiECamGDUwjXcvFK1mPYy7DWo0PuLJZ0Hy6KaLMP9yr-mpBOSW8Za1pQ' \
+  -H 'x-fapi-financial-id: OB'
+```
+
+After you receive the response, you can go to the Jaeger UI to check how many services are involved in the request and how much time each service spent. 
+
+For the test cloud, the Jaeger server can be access from your browser with the following address. 
+
+```
+http://test2:16686/
+```
+
+In the next step, we are going to build a single page application [client][] to access the APIs and deploy it on the router instance on the portal server as a virtual host. In this setup, there is no need to enable CORS to access the APIs from the SPA. 
 
 [proxy]: /tutorial/open-banking/proxy/
 [Jaeger Tutorial]: /tutorial/tracing/jaeger/
+[client]: /tutorial/open-banking/client/

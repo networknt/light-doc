@@ -48,9 +48,11 @@ And the result should be something like this.
 
 If you want to run this tutorial on your computer, you have to update the proxy.yml in light-docker/light-proxy/openapi/config folder.
 
-Here is the config file for my computer, which is named freedom.
+Here is the config file for my computer, which is named freedom. You cannot use the localhost anymore as the localhost within the docker container means the docker OS itself. Except for this change, the configuration for the dockerized light-proxy is the same as you are running the standalone light-proxy server. You need to change the hostname freedom to your computer name or your IP address. If you are using a hostname, you need to ensure that you can ping the hostname on your computer. Otherwise, it is safe to use IP address with 192.xxx.xxx.xxx or 10.xxx.xxx.xxx
+
 
 ```yaml
+---
 # Reverse Proxy Handler Configuration
 
 # If HTTP 2.0 protocol will be used to connect to target servers
@@ -60,16 +62,24 @@ http2Enabled: true
 httpsEnabled: true
 
 # Target URIs
-hosts: https://joy:8081,https://joy:8082,https://joy:8083
+hosts: https://freedom:8081,https://freedom:8082,https://freedom:8083
 
 # Connections per thread to the target servers
 connectionsPerThread: 20
 
 # Max request time in milliseconds before timeout
-maxRequestTime: 10000
+maxRequestTime: 1000
+
+# Rewrite Host Header with the target host and port and write X_FORWARDED_HOST with original host
+rewriteHostHeader: true
+
+# Reuse XForwarded for the target XForwarded header
+reuseXForwarded: false
+
+# Max Connection Retries
+maxConnectionRetries: 3
 ```
 
-You need to change the hostname freedom to your computer name or your IP address. If you are using a hostname, you need to ensure that you can ping the hostname on your computer. Otherwise, it is safe to use IP address with 192.xxx.xxx.xxx or 10.xxx.xxx.xxx
 
 ### Other config files
 

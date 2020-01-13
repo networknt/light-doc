@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In the previous step, we have enabled [security][] and dockerize the services. In this section, we are going to create a docker-compose to start all services togehter with extenalized configuration. We also register the services to the Consul cluster in the test cloud so that the client can discover them. 
+In the previous step, we have enabled [security][] and dockerize the services. In this section, we are going to create a docker-compose to start all services together with externalized configuration. We also register the services to the Consul cluster in the test cloud so that the client can discover them. 
 
-We are going to use another repository for the deployment configuration and it can be accessed at https://github.com/open-banking/light-config-test
+We are going to use another repository for the deployment configuration, and it can be accessed at https://github.com/open-banking/light-config-test
 
 First, let's create a service folder and a docker-compose.yml file.
 
@@ -73,11 +74,11 @@ First, let's create a service folder and a docker-compose.yml file.
       #    env: "dev"
 ```
 
-As you can see, the each service has its config folder named as the service. 
+As you can see, each service has its config folder named as the service. 
 
 Create these folders and copy the values.yml from accounts/security/src/main/resources/config. 
 
-We also need to update overwrite some of the values in the server.yml to enable registry and dynamic port. 
+We also need to update/overwrite some of the values in the server.yml to enable registry and dynamic port. 
 
 Let's update the values.yml as following. 
 
@@ -88,7 +89,7 @@ server.enableRegistry: true
 client.verifyHostname: false
 ```
 
-To connect to the test cloud Consul cluster, we need to copy the client.truststore that contains Consul certificate. We also need to copy the service.yml and consul.yml to Consul connectivity from https://github.com/networknt/light-config-test/tree/master/light-router/test-portal/config
+To connect to the test cloud Consul cluster, we need to copy the `client.truststore` that contains the Consul certificate. We also need to copy the service.yml and consul.yml for Consul connectivity from https://github.com/networknt/light-config-test/tree/master/light-router/test-portal/config
 
 We also need to copy the logback.xml to the config folder so that it gives us a chance to overwrite the default logging level if necessary. 
 
@@ -119,11 +120,9 @@ transactions_1  | Https Server started on ip:0.0.0.0 Port:2431
 
 If you go to the Consul UI, you can find these services registered. You need the consul token in the consul.yml to access the consul UI at https://198.55.49.188:8500
 
-Although the services are up and running with these ports, but you cannot access them from the Internet as these ports are not opened in the firewall. Also, we don't want end users to access these services with these dyanmic ports. 
+Although the services are up and running with these ports, you cannot access them from the Internet as these ports are not opened in the firewall. Also, we don't want end-users to access these services with these dynamic ports. 
 
-In the next step, we are going to set up a [router][] instance on portal server to route all the reqeusts to these services. 
-
-
+In the next step, we are going to set up a [router][] instance on the portal server to route all the requests to these services. 
 
 [security]: /tutorial/open-banking/security/
 [router]: /tutorial/open-banking/router/
