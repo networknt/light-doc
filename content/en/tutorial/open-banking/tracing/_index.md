@@ -153,6 +153,8 @@ http://38.113.162.52:16686/
 
 In the next step, we are going to build a single page application [client][] to access the APIs and deploy it on the router instance on the portal server as a virtual host. In this setup, there is no need to enable CORS to access the APIs from the SPA. 
 
+{{< youtube yWF3QIc69XU >}}
+
 [proxy]: /tutorial/open-banking/proxy/
 [Jaeger Tutorial]: /tutorial/tracing/jaeger/
 [client]: /tutorial/open-banking/client/
