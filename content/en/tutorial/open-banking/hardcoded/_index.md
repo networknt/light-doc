@@ -105,5 +105,7 @@ All the curl commands above have two headers that are required by the specificat
 
 In the next step, we are going to enable the [security][] so that the handler can get the userId from the JWT token to decide which user's account info is retrieved. 
 
+{{< youtube vAq9q2X8tXo >}}
+
 [generated]: /tutorial/open-banking/generated/
 [security]: /tutorial/open-banking/security/

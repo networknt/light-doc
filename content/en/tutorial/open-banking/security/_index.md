@@ -175,5 +175,7 @@ Follow the above command lines to build and publish the other three services.
 
 In the next step, we are going to create a [docker-compose][] to start all services on the test cloud together. 
 
+{{< youtube wHlG7oVE0fQ >}}
+
 [hardcoded]: /tutorial/open-banking/hardcoded/
 [docker-compose]: /tutorial/open-banking/docker-compose/

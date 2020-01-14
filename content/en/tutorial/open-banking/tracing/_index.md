@@ -34,6 +34,21 @@ Add the following service to the docker-compose.
 
 With the above addition, the jaeger server will be started in the docker-compose. 
 
+The other way is to start the Jaeger with a standalone docker container. 
+
+```
+docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
+  -p 5775:5775/udp \
+  -p 6831:6831/udp \
+  -p 6832:6832/udp \
+  -p 5778:5778 \
+  -p 16686:16686 \
+  -p 14268:14268 \
+  -p 9411:9411 \
+  jaegertracing/all-in-one:1.9
+```
+
 ### Update services
 
 The jaeger module from light-4j is not included in the pom.xml in the generated projects. For all the projects, we need to add this dependency to the pom.xml file. Let's create a folder called tracing and copy the code from security.
@@ -52,7 +67,7 @@ After making the change for pom.xml for accounts, balances, parties, and transac
 
 ```
 cd ~/open-banking/accounts/tracing
-build.sh 1.0.0
+./build.sh 1.0.0
 ```
 
 ### Update Configurations
@@ -133,7 +148,7 @@ After you receive the response, you can go to the Jaeger UI to check how many se
 For the test cloud, the Jaeger server can be access from your browser with the following address. 
 
 ```
-http://test2:16686/
+http://38.113.162.52:16686/
 ```
 
 In the next step, we are going to build a single page application [client][] to access the APIs and deploy it on the router instance on the portal server as a virtual host. In this setup, there is no need to enable CORS to access the APIs from the SPA. 

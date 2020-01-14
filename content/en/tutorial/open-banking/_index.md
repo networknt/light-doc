@@ -15,6 +15,7 @@ We have a lot of tutorials that demonstrate different features of the light plat
 
 In this tutorial, we are going to develop an open banking application and deploy it to the cloud. This application has four microservices and a single page application built with React. 
 
+{{< youtube r6C1rRFgUEo >}}
 
 * [Specification](/tutorial/open-banking/spec/)
 * [Generation](/tutorial/open-banking/generation/)

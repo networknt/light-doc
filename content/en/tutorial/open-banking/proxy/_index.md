@@ -204,6 +204,7 @@ curl -k https://ob.lightapi.net/accounts/22289 \
 
 In the next step, we are going to enable distributed [tracing][] so that the operation team has a view on how these services interact during the runtime. 
 
+{{< youtube OORLH49eda0 >}}
 
 [route]: /tutorial/open-banking/router/
 [tracing]: /tutorial/open-banking/tracing/

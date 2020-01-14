@@ -122,5 +122,7 @@ At this moment, our services are exposed to the Internet with HTTPS/HTTP2 enable
 
 So far, we have four microservices implemented in light-4j. In an enterprise, there might be some other services that are implemented in other languages. To bring these services to the light ecosystem, we can put an instance of [light-proxy][] in front of a legacy service. 
 
+{{< youtube 5osz4GrRWNo >}}
+
 [docker-compose]: /tutorial/open-banking/docker-compose/
 [lihgt-proxy]: /tutorial/open-banking/proxy/

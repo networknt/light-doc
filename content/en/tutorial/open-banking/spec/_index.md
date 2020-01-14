@@ -44,3 +44,4 @@ In order to simulate the microservices calling each other, the accounts service 
 
 When light-proxy is introduced, we are going to put a proxy in front of the transactions service to simulate that transactions API is built with another language/framework other than Java/Light-4j. 
 
+{{< youtube DTRIhFxHsMk >}}

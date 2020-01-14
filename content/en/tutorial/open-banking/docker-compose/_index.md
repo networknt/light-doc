@@ -124,5 +124,7 @@ Although the services are up and running with these ports, you cannot access the
 
 In the next step, we are going to set up a [router][] instance on the portal server to route all the requests to these services. 
 
+{{< youtube OSpd85Y78_I >}}
+
 [security]: /tutorial/open-banking/security/
 [router]: /tutorial/open-banking/router/
