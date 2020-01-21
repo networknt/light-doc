@@ -141,3 +141,4 @@ The result should be.
 
 You can send more messages to the queue or the topic through the producer service; however, only the last ten messages will be kept in the consumer service to avoid extensive memory usage. In a real application, the consumer might process the data and persist the result into a database or invoke another service based on the processed result. It is always up to your business and developers' imagination.
 
+{{< youtube H1IWjyg-fUY >}}
