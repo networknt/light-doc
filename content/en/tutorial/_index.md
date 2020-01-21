@@ -143,6 +143,8 @@ section, some of the most important tutorials are listed here and more will be a
   * [Todo list tutorial](/tutorial/tram/todo-list/)    
   * [Development API with light-tram-4j](/tutorial/tram/develop/)    
 
+- [Light-mq](/tutorial/mq/)
+
 ### Infrastructure Service
 
 - [Light-oauth2](/tutorial/oauth/)
