@@ -21,10 +21,10 @@ Unless your service is running in a dedicated locked down VM, we don't recommend
 In order to forward traffic from 443 to 8443, first you must ensure that iptables has allowed traffic on all 2 of these ports. Use the following command to list the current iptables configuration:
 
 ```
-iptables -L -n
+sudo iptables -L -n
 ```
 
-You should should see in the output entries for 443 and 8443. 
+You should see in the output entries for 443 and 8443. 
 
 If you don't see entries for these ports, then you need to run commands (as root or with sudo) to add those ports. For example, if you see none of these and need to add them all, you would need to issue the following commands:
 
@@ -35,7 +35,7 @@ sudo iptables -I INPUT 1 -p tcp --dport 443 -j ACCEPT
 
 Note that I used -I INPUT 1. In a lot of iptables documentation/examples, you will see -A INPUT. The difference is that -A appends to the list of rules, while -I INPUT 1 inserts before the first entry. Usually when adding new accept ports to iptables configuration, you want to put them at the beginning of the ruleset, not the end. Run iptables -L -n again and you should now see entries for these 2 ports.
 
-If uwf is enabled on your VM, you can issue the following command instead of iptables. 
+If ufw is enabled on your VM, you can issue the following command instead of iptables. 
 
 ```
 sudo ufw allow 443/tcp

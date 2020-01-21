@@ -35,11 +35,15 @@ As we are trying to mimic the production environment on the local desktop, we wa
 ```
 192.168.1.144   lightapi.net signin.lightapi.net
 ```
-You must change the IP address if you want to try it on your local. You can find your IP with `ifconfig` command.
+You must change the IP address if you want to try it on your local. You can find your IP with `ifconfig` command. If you are using a home network, it might be 192.168.xxx.xxx, and it might be 10.xxx.xxx.xxx if you are on a corporate network. 
 
 When we start the router, we are using 8443 as the port number in docker-compose or start it standalone in the IDE for debugging. However, we don't want to see the port number on the browser. So we need to map the default https port 443 to 8443 on my local. Please follow this [tutorial](/tutorial/security/port443/) to set up the `iptables`. 
 
-All the light-oauth2 services will be registered to the consul server running locally, to start it. 
+All the light-oauth2 services will be registered to the consul server running locally. Before starting it, we need to update the docker-compose-consul.yml in the light-docker repository to change the extra_hosts IP address to your host IP address found above. 
+
+The lines that need to be changed are located at https://github.com/networknt/light-docker/blob/master/docker-compose-consul.yml#L14
+
+To start it. 
 
 ```
 cd ~/networknt/light-docker
@@ -218,9 +222,9 @@ docker-compose up -d
 
 ### Light-router
 
-The light-oauth2 consists of eight microservices which are listening to different ports when they are started with a docker-compose. To make sure that these services can be accessed as static IP and standard HTTPS port 443, we are going to deploy a light-router instance in front of light-oauth2 instances. 
+The light-oauth2 consists of eight microservices that are listening to different ports when they are started with a docker-compose. To make sure that these services can be accessed as static IP and standard HTTPS port 443, we are going to deploy a light-router instance in front of light-oauth2 instances. 
 
-The light-oauth2 is part of the light-portal, so we don't need to create a separate configuration folder. We can reuse the light-config-test/light-router/local-portal configuration folder for the exact purpose. Of course, the folder contains configuration files and virtual hosts for other portal services and sites. 
+The light-router is part of the light-portal, so we don't need to create a separate configuration folder. We can reuse the light-config-test/light-router/local-portal configuration folder for the exact purpose. Of course, the folder contains configuration files and virtual hosts for other portal services and sites. 
 
 We first need to add a brand new virtual host called `signin` for the form authentication of the light-oauth2 authorization code flow. 
 
@@ -234,7 +238,7 @@ To build the React SPA, go to the light-oauth2/login-view folder, and run.
 npm run build
 ```
 
-We need to add a volume mapping in the docker-compose.yml for the light-router. 
+We need to add a volume mapping in the docker-compose.yml for the light-router. Also, we need to add the extra_hosts to map the lightapi.net and signin.lightapi.net to the host IP address we found above with `ifconfig`. On my desktop, the IP is 192.168.1.144 and you need to change it to your host IP address. 
 
 ```
 version: '2'
@@ -247,6 +251,9 @@ services:
     - localnet
     ports:
     - 8443:8443
+    extra_hosts:
+    - "lightapi.net:192.168.1.144"
+    - "signin.lightapi.net:192.168.1.144"
     volumes:
     - ./config:/config
     - ./faucet/build:/faucet/build
