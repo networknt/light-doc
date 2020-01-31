@@ -30,6 +30,9 @@ Here is an example of configuration.
 # If metrics handler is enabled or not
 enabled: false
 
+# If metrics handler is enable for JVM MBean or not
+enableJVMMonitor: false
+
 # influxdb protocal can be http, https
 influxdbProtocol: http
 # influxdb hostname
