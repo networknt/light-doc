@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-We now have some users who want to work on the light-portal to add more services and customize the UI to meet their requirements. In this tutorial, we are going to explore how to get the light-portal services started and exposed from light-router. With all the services available locally, we are going to demo how to use the proxy in React SPA to build UI with hot reload. In addition, we are going to show how to build and deploy the developed SPA to the router instance so that CORS can be avoided and maximize the performance. 
+We now have some users who want to work on the light-portal to add more services and customize the UI to meet their requirements. In this tutorial, we are going to explore how to get the light-portal services started and exposed from light-router. With all the services available locally, we are going to demo how to use the proxy in React SPA to build UI with the hot reloader. In addition, we are going to show how to build and deploy the developed SPA to the router instance so that CORS can be avoided and maximize the performance. 
 
 This tutorial helps users to learn how to set up production like environment locally and how each component interact with each other to form an ecosystem. It provides an option for you to deploy these open source services on the cloud if you want to leverage them for your organization. 
 

@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous step, we have [started the light-oauth2][] services locally. Now let's start the light-router instance to be responsible for service discovery and serving the resources later. 
+In the previous step, we have [started the light-oauth2][] services locally. Now let's start the light-router instance to be responsible for service discovery and to serve the resources later. 
 
 For development, we are going to use the proxy from the create-react-app to connect to the light-router for all API accesses. Once the development is done, the SPA application will be built and copied to a folder named lightapi which match the domain lightapi.net
 
@@ -84,16 +84,22 @@ Calling the client service directly.
 curl -k https://lightapi.net:6884/oauth2/client?page=1
 ```
 
+The response should be something like following.
+
+```
+[{"clientId":"f7d42348-c647-4efb-a52d-4c5787421e72","clientSecret":null,"clientType":"public","clientProfile":"mobile","clientName":"PetStore Web Server","clientDesc":"PetStore Web Server that calls PetStore API","ownerId":"admin","scope":"petstore.r petstore.w","customClaim":"{\"c1\": \"361\", \"c2\": \"67\"}","redirectUri":"http://localhost:8080/authorization","authenticateClass":null,"derefClientId":null}]
+```
+
 Calling the client service through light-router.
 
 ```
 curl -k https://lightapi.net/oauth2/client?page=1
 ```
 
-Both above commands should have the same response. 
+You will receive nothing but a browser redirect 302 status code to ask you to authenticate yourself. To see the exact redirect status code, use the following command.
 
 ```
-[{"clientId":"f7d42348-c647-4efb-a52d-4c5787421e72","clientSecret":null,"clientType":"public","clientProfile":"mobile","clientName":"PetStore Web Server","clientDesc":"PetStore Web Server that calls PetStore API","ownerId":"admin","scope":"petstore.r petstore.w","customClaim":"{\"c1\": \"361\", \"c2\": \"67\"}","redirectUri":"http://localhost:8080/authorization","authenticateClass":null,"derefClientId":null}]
+curl -k -v ttps://lightapi.net/oauth2/client?page=1
 ```
 
 At this moment, all backend services are up and running. Let's [start portal view][] SPA from the light-portal repository in the next step. 

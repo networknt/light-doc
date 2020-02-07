@@ -13,7 +13,7 @@ reviewed: true
 
 In the previous step, we have [started the consul][] server locally, now let's start the light-oauth2 services as they are part of the portal. We will start more services later on, but here we use the light-oauth2 services to demo the process. 
 
-We cannot use the docker-compose-oauth2-mysql.yml in light-docker as the configuration there are not using consul registry. To use the consul registry and discovery, all services should be bound to the host network instead of docker network.  
+We cannot use the docker-compose-oauth2-mysql.yml in light-docker as the configuration there is not using the consul registry. In order to use the consul registry and discovery, all services should be bound to the host network instead of the docker network.  
 
 To use the consul registry, I have created another folder in the light-config-test repository. The docker-compose file and configuration files are copied from the light-docker. 
 
@@ -29,23 +29,25 @@ If this is the first time you start the docker-compose, it will take a while to 
 http://lightapi.net:8500/ui/dc1/services?status=passing
 ```
 
-You should find 7 services registered on the consul, and they are all healthy. 
+You should find seven services registered on the consul, and they are all healthy. 
 
-The light-oauth/local-consul config files are copied from the light-docker/light-oauth2/mysql with the following modifications. 
+The light-oauth2/local-consul config files are copied from the light-docker/light-oauth2/mysql with the following modifications. 
 
 ### client.yml
 
 Add client.yml, client.keystore, and client.truststore to the config folder so that the client module can be used to connect to the local consul server. 
 
-There is no need to add these files as we are not using TLS to connect to consul; however, it is always a good idea to add these files in case we move to the official test environment with a Consul cluster only offer HTTP/S connection. 
+There is no need to add these files as we are not using TLS to connect to consul; however, it is always a good idea to add these files just in case we move to the official test environment with a Consul cluster only offer HTTP/S connection. 
 
 ### secret.yml
 
-In this file, we need to add the consulToken that match the master token used in the consul contain. 
+If you are using light-4j version 1.6.x with Java 8, then we need to add the consulToken that matches the master token used in the consul container. 
 
 ```
 consulToken: the_one_ring
 ```
+
+If you are using light-4j version 2.0.x and above with Java 11, then you need to add this line to the consul.yml file below. 
 
 ### server.yml
 
