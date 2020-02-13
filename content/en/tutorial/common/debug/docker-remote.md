@@ -30,7 +30,7 @@ Let's create a Dockerfile-Debug with the following modifications. If necessary, 
 ```
 FROM openjdk:11.0.3-slim
 ADD /target/light-router.jar server.jar
-CMD ["/bin/sh","-c","java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
+CMD ["/bin/sh","-c","java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005 -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
 ```
 
 Once the Dockerfile-Debug is created, let's build an alternative image with it locally without publishing it to Docker Hub. 
