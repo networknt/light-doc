@@ -11,9 +11,9 @@ draft: false
 reviewed: true
 ---
 
-Note: the following steps use MySQL database as an example. MariaDB, SQL Server and Postgres should be the same by choosing docker-compose-oauth2-mariadb.yml, docker-compose-oauth2-sqlserver or docker-compose-oauth2-postgres.yml when starting docker-compose.
+Note: the following steps use MySQL database as an example. MariaDB, SQL Server and Postgres should be the same by choosing docker-compose-oauth2-mariadb.yml, docker-compose-oauth2-sqlserver.yml or docker-compose-oauth2-postgres.yml when starting docker-compose.
 
-The current release supports four built-in databases: Mysql, MariaDB, SQLServer and Postgres. If you want to use other databases, you need include the JDBC driver into the classpath and create a datasource config in service.yml file. 
+The current release supports four built-in databases: MySQL, MariaDB, SQLServer and Postgres. If you want to use other databases, you need include the JDBC driver into the classpath and create a datasource config in service.yml file. 
 
 In production mode, all services will have docker images downloaded from hub.docker.com or a private docker hub within your organization. And Kubernetes or other docker orchestration tools will be used to manage containers. 
 
@@ -50,6 +50,18 @@ If you have modified docker container config files or want to clean up, please f
 ```
 docker-compose -f docker-compose-oauth2-mysql.yml down
 docker-compose -f docker-compose-oauth2-mysql.yml up
+```
+
+If this is the very first time you start the docker-compose, you might encounter an error as below. 
+
+```
+ERROR: Network localnet declared as external, but could not be found. Please create the network manually using `docker network create localnet` and try again.
+```
+
+It is because we are using a docker network called `localnet` in the docker-compose. As the error message indicates, we need to run the following command to create the network and then rerun the docker-compose. 
+
+```
+docker network create localnet
 ```
 
 ### MariaDB

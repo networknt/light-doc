@@ -20,7 +20,7 @@ In the previous [router][] step, we have exposed the services to the Internet th
 * [Light-OAuth2 Config and Start](/tutorial/open-banking/client/oauth-config/)
 * [Light-router proxy and virtual host](/tutorial/open-banking/client/local-router/)
 * [Debug light-router](/tutorial/open-banking/client/debug-router/)
-
+* [Test Cloud Deployment](/tutorial/open-banking/client/test-cloud/)
 
 
 [router]: /tutorial/open-banking/router/
