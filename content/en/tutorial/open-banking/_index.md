@@ -25,3 +25,4 @@ In this tutorial, we are going to develop an open banking application and deploy
 * [Router](/tutorial/open-banking/router/)
 * [Proxy](/tutorial/open-banking/proxy/)
 * [Tracing](/tutorial/open-banking/tracing/)
+* [Client](/tutorial/open-banking/client/)
