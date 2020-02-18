@@ -42,6 +42,7 @@ hosts:
 
 Notice that we are using the absolute path for the base to load the two single-page applications. 
 
+{{< youtube BUNjrHRbHZ8 >}}
 
 ### Remote Docker Container
 
@@ -83,7 +84,7 @@ docker build -t networknt/light-router:debug -f ./docker/Dockerfile-Debug .
 
 Once the local-openbanking works, we need to deploy everything to the [test cloud][] so that the demo application can be accessed from the Internet. 
 
-
+{{< youtube QuG87ByBNaY >}}
 
 [login-view]: /tutorial/open-banking/client/login-view/
 [debug locally]: /tutorial/common/debug/idea/
