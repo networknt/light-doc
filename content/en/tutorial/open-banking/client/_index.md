@@ -22,6 +22,7 @@ In the previous [router][] step, we have exposed the services to the Internet th
 * [Debug light-router](/tutorial/open-banking/client/debug-router/)
 * [Test Cloud Deployment](/tutorial/open-banking/client/test-cloud/)
 
+{{< youtube HCcfC7kcH1Q >}}
 
 [router]: /tutorial/open-banking/router/
 [local portal]: /tutorial/portal/local-router/
