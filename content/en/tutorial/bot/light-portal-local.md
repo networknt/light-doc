@@ -17,7 +17,7 @@ Before using light-bot, you need to build it locally by following [build light-b
 
 Once you have light-bot built inside `~/networknt` workspace, the next step is to build light-portal with the command line tool provided by light-bot. 
 
-First, let's check out the light-config-test repository which contains vary configuration folders for different builds used by light-bot.
+First, let's check out the light-config-test repository, which contains various configuration folders for different builds used by light-bot.
 
 ```
 cd ~/networknt
@@ -27,7 +27,7 @@ cd light-config-test/light-bot/develop-build/build-portal
 ```
 
 
-Above command line uses the following develop-build.yml configuration and you can customize it as you wish.
+The above command line uses the following develop-build.yml configuration, and you can customize it as you wish.
 
 ```
 workspace: networknt
@@ -137,14 +137,13 @@ copyFile:
 ```
 
 
-The above config file triggers the light-bot develop-build task to check out related repositories into the networknt workspace and switch to develop branch. If these repositories are already in the workspace, the light-bot tries to pull from remote git server to ensure that only the latest code is rebuilt. If nothing is changed after pulling from remote git server and skip_checkout is false, light-bot quits immediately. 
+The above config file triggers the light-bot develop-build task to check out related repositories into the networknt workspace and switch to develop branch. If these repositories are already in the workspace, the light-bot tries to pull from the remote GitHub server to ensure that only the latest code is rebuilt. If nothing is changed after pulling from remote git server and skip_checkout is false, light-bot quits immediately. 
 
-If you want to rebuild all repositories even there is no change, skip_checkout flag can be set as true to skip this step. 
+If you want to rebuild all repositories even there is no change, the skip_checkout flag can be set as true to skip this step. 
 
 After the build is done, all artifacts are copied to ~/networknt/light-config-test/light-portal/hybrid-query/service or ~/networknt/light-config-test/light-portal/hybrid-command/service folder depending on if the service is command side or query side. 
 
 Now you have light-portal built in your `~/networknt` workspace. To start the light-portal services, you can follow [start light-portal service][] tutorial. 
-
 
 [build light-bot]: /tutorial/bot/build-light-bot/
 [start light-portal service]: /tutorial/portal/start-portal-service/
