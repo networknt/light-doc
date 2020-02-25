@@ -21,6 +21,8 @@ In the previous [router][] step, we have exposed the services to the Internet th
 * [Light-router proxy and virtual host](/tutorial/open-banking/client/local-router/)
 * [Debug light-router](/tutorial/open-banking/client/debug-router/)
 * [Test Cloud Deployment](/tutorial/open-banking/client/test-cloud/)
+* [Localhost Hot Reload](/tutorial/open-banking/client/localhost/)
+
 
 {{< youtube HCcfC7kcH1Q >}}
 
