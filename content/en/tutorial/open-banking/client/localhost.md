@@ -223,3 +223,4 @@ Here is the login function without redirect URL in ResponsiveDrawer.js
 If you checked the database script in the [oauth-config](/tutorial/open-banking/client/oauth-config/), you can see the above client_id has a redirect_uri as https://localhost:3000
 
 
+{{< youtube xeG0Va1UxVY >}}
