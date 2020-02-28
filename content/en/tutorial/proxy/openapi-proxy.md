@@ -146,11 +146,11 @@ chains:
     - validator
 
 paths:
-  - path: '/getData'
+  - path: '/v1/getData'
     method: 'GET'
     exec:
       - default
-  - path: '/postData'
+  - path: '/v1/postData'
     method: 'GET'
     exec:
       - default
@@ -258,7 +258,7 @@ As we are using localhost with the self-signed certificate, we need to set the v
 tls:
   # if the server is using self-signed certificate, this need to be false. If true, you have to use CA signed certificate
   # or load truststore that contains the self-signed cretificate.
-  verifyHostname: true
+  verifyHostname: false
   # The default trustedNames group used to created default SSL context. This is used to create Http2Client.SSL if set.
   defaultGroupKey: trustedNames.local
   # trusted hostnames, service names, service Ids, and so on.
