@@ -161,6 +161,7 @@ section, some of the most important tutorials are listed here and more will be a
   * [Deploy to Kubernetes Cluster](/tutorial/oauth/kubernetes/)
   * [Deploy to Openshift Cluster](/tutorial/oauth/openshift/)
   * [Integrate Kerberos/SPNEGO on Mac](/tutorial/oauth/kerberos/)
+  * [React Login View](/tutorial/oauth/login-view/)
   * [Local Form Authentication](/tutorial/oauth/form-auth-local/)
   * [Test Cloud Deployment and Access](/tutorial/oauth/test-cloud/)
 

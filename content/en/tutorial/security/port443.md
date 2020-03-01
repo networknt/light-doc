@@ -147,3 +147,32 @@ sudo iptables -t nat -A OUTPUT -p tcp --dport 443 -o lo -j REDIRECT --to-port 84
 
 The rule adds a similar rule to the OUTPUT table that redirects packets outgoing to port 443 on the loopback interface (-o lo).
 
+We don't save this rule, so it will be removed after the computer is restarted. If you want to remove the rule without restarting the computer for local testing, follow the steps below.
+
+Find the line number of the rule with the following command. 
+
+```
+sudo iptables -t nat --line-numbers -L
+```
+
+You will have something like below for Chain OUTPUT. 
+
+```
+Chain OUTPUT (policy ACCEPT)
+num  target     prot opt source               destination         
+1    DOCKER     all  --  anywhere            !localhost/8          ADDRTYPE match dst-type LOCAL
+2    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 8443
+```
+
+You OUTPUT REDIRECT might have different line numbers other than 2. The following command can remove the rule given the line number is 2 on my computer. 
+
+```
+sudo iptables -t nat -D OUTPUT 2
+
+```
+
+You can confirm the rule is removed by issue the query again. The above OUTPUT REDIRECT should be removed already. 
+
+```
+sudo iptables -t nat --line-numbers -L
+```

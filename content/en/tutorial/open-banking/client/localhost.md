@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous steps, we are using virtual host ob.lightapi.net to test the react-client for the Open Banking services. For a simple React application development, it is OK; however, if there are too many components that need to be modified and tested. By building the react application into the build folder, copy to the light-rest-config folder and restart the light-router instance, it is not efficient. 
