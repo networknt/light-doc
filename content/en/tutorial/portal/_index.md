@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-Light-portal is the central point that provides entries for all light-platform supporting services. It is a website that integrates all services with a standard UI for users to utilize and manage these services. 
+Light-portal is the central point that provides entries for all light-platform supporting services. It is a website that integrates all services with a standard UI for users to utilize and manage these services. Behind the single-page application is a light-router instance that hosts all the virtual domains and proxy API requests to the backend services. 
 
 Most light-portal services are built on top of the light-hybrid-4j framework with Event Sourcing and CQRS. Some of the portal services like the light-oauth2 are built on top of the light-rest-4j framework. 
 
@@ -30,8 +30,12 @@ Most services for the portal can be found in the [light-portal][] repository on 
 
 ### Portal View 
 
-* [setup view dev environment](/tutorial/portal/view-dev-env/)
 * [portal view][] - React Portal View
+
+### Developer
+
+* [React View Developer][]
+* [Full Stack Developer][]
 
 
 [light-portal]: https://github.com/networknt/light-portal
@@ -42,3 +46,6 @@ Most services for the portal can be found in the [light-portal][] repository on 
 [light-config-test]: https://github.com/networknt/light-config-test/tree/master/light-router/light-portal/lightapi
 [portal view]: /tutorial/portal/view/
 [start local light-router]: /tutorial/portal/local-router/
+[setup view dev environment]: /tutorial/portal/view-dev-env/
+[React View Developer]: /tutorial/portal/developer/react-ui/
+[Full Stack Developer]: /tutorial/portal/developer/full-stack/
