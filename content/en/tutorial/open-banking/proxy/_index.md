@@ -93,7 +93,7 @@ maxConnectionRetries: 3
 
 To enable the validation and security, we need to copy the specification for the transactions to the config folder.
 
-In the handler.yml file, we need to add the paths for the transactions service.
+In the handler.yml file, we need to add the paths for the transactions service. 
 
 ```
 # Handler middleware chain configuration
@@ -162,13 +162,13 @@ chains:
     # - cors
     - header
     # - path
-    - proxy
     - specification
     - security
     #- body
     #- audit
     #- sanitizer
     - validator
+    - proxy
 
 paths:
   - path: '/transactions/accounts/{AccountId}'
@@ -191,6 +191,34 @@ paths:
       - info
 
 ```
+
+For light-proxy to work as a reverse proxy, we need to wire in the LightProxyHandler to the request/response chain for the downstream API endpoints. First, we need to add the following handler to the handler registration. We also need to disable the body handler as we cannot parse the body on the proxy. 
+
+```
+- com.networknt.proxy.LightProxyHandler@proxy
+```
+
+Second, we add the proxy to the end of the default chain that is used by the transactions endpoints. We want the light-proxy to handle the security and validation before forwarding requests to the downstream API, so it is added to the end of the chain after the validator. 
+
+```
+chains:
+  default:
+    - exception
+    # - metrics
+    - traceability
+    - correlation
+    # - cors
+    - header
+    # - path
+    - specification
+    - security
+    #- body
+    #- audit
+    #- sanitizer
+    - validator
+    - proxy
+```
+
 
 At this moment, we can issue the same request to the accounts service with a specific account number. The result should be the same as the previous step, but the transactions service is accessed through the light-proxy this time. 
 
