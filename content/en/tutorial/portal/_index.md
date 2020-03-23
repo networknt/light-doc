@@ -36,7 +36,8 @@ Most services for the portal can be found in the [light-portal][] repository on 
 
 * [React View Developer][]
 * [Full Stack Developer][]
-
+* [Debug with JUnit Test][]
+* [Debug with Hybrid Server][]
 
 [light-portal]: https://github.com/networknt/light-portal
 [user-management]: /tutorial/portal/user-management/
@@ -49,3 +50,5 @@ Most services for the portal can be found in the [light-portal][] repository on 
 [setup view dev environment]: /tutorial/portal/view-dev-env/
 [React View Developer]: /tutorial/portal/developer/react-ui/
 [Full Stack Developer]: /tutorial/portal/developer/full-stack/
+[Debug with JUnit Test]: /tutorial/portal/developer/debug-unit-test/
+[Debug with Hybrid Server]: /tutorial/portal/developer/debug-hybrid-server/

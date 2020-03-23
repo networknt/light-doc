@@ -173,6 +173,12 @@ section, some of the most important tutorials are listed here and more will be a
   * [Portal View](/tutorial/portal/view/)
   * Portal Services
      + [user-management](/tutorial/portal/user-management/) 
+  * Developer
+     + [React View Developer][]
+     + [Full Stack Developer][]
+     + [Debug with JUnit Test][]
+     + [Debug with Hybrid Server][]
+        
 - [Light-proxy](/tutorial/proxy/)
   * Swagger 2.0 Backend
      + [Swagger backend service](/tutorial/proxy/swagger-backend/)
@@ -250,3 +256,7 @@ section, some of the most important tutorials are listed here and more will be a
 [basic terminologies and formats of certs and keys]: /tutorial/security/term-format/
 [light-4j service on port 443]: /tutorial/security/port443/
 [light-config-server TLS]: /tutorial/security/config-server-cert/
+[React View Developer]: /tutorial/portal/developer/react-ui/
+[Full Stack Developer]: /tutorial/portal/developer/full-stack/
+[Debug with JUnit Test]: /tutorial/portal/developer/debug-unit-test/
+[Debug with Hybrid Server]: /tutorial/portal/developer/debug-hybrid-server/
