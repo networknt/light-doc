@@ -13,7 +13,6 @@ menu:
 weight: 1
 sections_weight: 1
 draft: false
-aliases: [/overview/introduction/,/about/why-i-built-light/]
 toc: true
 ---
 
