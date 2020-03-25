@@ -164,6 +164,7 @@ section, some of the most important tutorials are listed here and more will be a
   * [React Login View](/tutorial/oauth/login-view/)
   * [Local Form Authentication](/tutorial/oauth/form-auth-local/)
   * [Test Cloud Deployment and Access](/tutorial/oauth/test-cloud/)
+  * [Light-Portal Authenticator](/tutorial/oauth/light-portal-authenticator/)
 
 - [Light-portal](/tutorial/portal/)
   * [Light Portal Local Build](/tutorial/bot/light-portal-local/)

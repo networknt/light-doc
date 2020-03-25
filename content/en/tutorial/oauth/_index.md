@@ -44,6 +44,8 @@ This document will give you step-by-step guidelines on how to use light-oauth2. 
 
 * [Test Cloud Deployment and Access](/tutorial/oauth/test-cloud/)
 
+* [Light-Portal Authenticator](/tutorial/oauth/light-portal-authenticator/)
+
 [How to generate long lived access token]: /tutorial/oauth/longlive/
 [How to start services]: /tutorial/oauth/start/
 [Authorization Code]: /tutorial/oauth/code/
