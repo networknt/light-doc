@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When debugging a portal service, you can use a JUnit test case from the IDE if the service endpoint is working independently. However, if the endpoint needs to access the query side for additional information, you need to run the query side in a hybrid server to support the command side debugging in IDE. Of course, you can still debug the query side service in a hybrid server to see the interaction between services. 

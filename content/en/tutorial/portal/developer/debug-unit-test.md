@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When developing light-portal services, it is crucial to ensure that each endpoint works before loading them from the hybrid server. The best approach is to debug and test with JUnit tests within each service. In this tutorial, we are going to walk through the process with light-portal user-command and user-query services. 
