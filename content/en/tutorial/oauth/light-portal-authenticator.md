@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 One of the essential features of light-oauth2 is its extensibility. When a bank is using an OAuth 2.0 server to authenticate users, it needs to integrate with several user management databases or services. For example, employees will be authenticated with Active Directory via LDAP or SPENGO single sign-on. For retail customers, they will be authenticated with a customer profile database in a mainframe. 
