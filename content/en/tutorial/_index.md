@@ -77,6 +77,7 @@ section, some of the most important tutorials are listed here and more will be a
      + How to get free [Let's Encrypt certificate][] for public-facing light-4j secd rvice
      + How to [convert CA-signed certificate to server.keystore][] that can be used by light-4j service
      + Running [light-4j service on port 443][] using iptables
+     + How to use [environment variables][] for config values
 
 ### API Styles
 
@@ -261,3 +262,4 @@ section, some of the most important tutorials are listed here and more will be a
 [Full Stack Developer]: /tutorial/portal/developer/full-stack/
 [Debug with JUnit Test]: /tutorial/portal/developer/debug-unit-test/
 [Debug with Hybrid Server]: /tutorial/portal/developer/debug-hybrid-server/
+[environment variables]: /tutorial/security/env-var-config/

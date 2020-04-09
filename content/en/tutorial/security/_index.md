@@ -36,6 +36,8 @@ In this section, we have several tutorials related to security configurations an
 
 * Running [light-4j service on port 443][] using iptables
 
+* How to use [environment variables][] for config values
+
 [bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
 [encrypt and decrypt sensitive info]: /tutorial/security/encrypt-decrypt/
 [keystore and truststore]: /tutorial/security/keystore-truststore/
@@ -46,3 +48,4 @@ In this section, we have several tutorials related to security configurations an
 [basic terminologies and formats of certs and keys]: /tutorial/security/term-format/
 [light-4j service on port 443]: /tutorial/security/port443/
 [light-config-server TLS]: /tutorial/security/config-server-cert/
+[environment variables]: /tutorial/security/env-var-config/
