@@ -237,6 +237,8 @@ Here is the [issue](https://github.com/networknt/light-portal/issues/145) that i
 
 As you can see, changing the data structure in the light-portal is not an easy job. There are so many places that need to be touched; however, the changes are relatively easy to understand. 
 
+If you need another example, please take a look at this [issue](https://github.com/networknt/model-config/issues/67). 
+
 To ease the pain to change the JSON schema in model-config, user-command, and view, we are going to develop a JSON schema market place in the light-portal so that we can only change one location and all three are using a remote reference. 
 
 
