@@ -4,11 +4,6 @@ date: 2017-11-10T14:01:19-05:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "service"
-    weight: 30
-weight: 30
 aliases: []
 toc: false
 draft: false
