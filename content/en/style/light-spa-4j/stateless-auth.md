@@ -39,7 +39,7 @@ The cookies are subject to cross-site request forgery attack so we have sent a C
 
 If the incoming request path is not authPath, then the JWT token and CSRF token verification process are started. 
 
-* First the access token is retrieved from the cookie. If there is no access token, the SPA will be redirected to the login page which is defined in the statelessAuth.yml as cookieTimeoutUri. When this happens most likely, the cookies are timed out. The timeouts for the cookies are set in statelessAuth.yml as cookieMaxAge.
+* First, the access token is retrieved from the cookie. If there is no access token, the refresh token will be tried to renew the token. If there is no refresh token neither, the SPA will be redirected to the login page which is defined in the statelessAuth.yml as cookieTimeoutUri. When this happens most likely, the cookies are timed out. 
 
 * If access token exists, the signature is verified and expiration time is verified as well. 
 
@@ -60,9 +60,7 @@ If the access token is expired, then a token renew process is triggered.
 
 ### Session Control
 
-As you can see, we don't have a session object on the server side for each user, but we can maintain the user session with the access token and refresh token cookies. The cookieMaxAge is used to control how long the session should be kept. It is usually won't exceed 8 hours. 
-
-The access token expires about 10 to 15 minutes configuration on the light-oauth2 server. However, the refresh token is issued along with the access token so that the BFF can always renew the access token with the refresh token. On the light-oauth2 server, the refresh token is not persisted into a database but only in memory. It will expire after 24 hours. There is a ticket opened to make this into a database table so that we can support longer expiration time for the refresh token. 
+As you can see, we don't have a session object on the server side for each user, but we can maintain the user session with the access token and refresh token cookies. The expiration time of the access token is used to control how long the session should be kept. It is usually won't exceed 15 minutes. If you checked remember on the login page, then the refresh token will be kept in cookie for 90 days and it will be used to renew access token until it is expired. 
 
 ### Reference App
 

@@ -126,8 +126,6 @@ logoutPath: /logout
 cookieDomain: localhost
 # Cookie path
 cookiePath: /
-# Cookie maxAge
-cookieMaxAge: 600
 # Login uri, redirect to it once session is expired
 cookieTimeoutUri: /
 # Cookie secured
