@@ -46,6 +46,7 @@ The following are some of the important services recommended by the Light platfo
   * [Secure HazelCast](/service/oauth/deployment/hazelcast/)
 - [Tutorial](/tutorial/oauth/)
 - [Reference](/service/oauth/reference/)
+- [COVID-19](/service/covid-19/)
 
 [light-portal][] is an API runtime management and marketplace. In the service mesh context, it is the control plane. 
 
