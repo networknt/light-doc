@@ -14,21 +14,25 @@ menu:
 weight: 10
 sections_weight: 10
 toc: true
+reviewed: true
 ---
 
-Most of the repositories in networknt organization are released under the Apache 2.0 license or MIT license except json-overlay and openapi-parser which are released under EPL 2.0 and EPL 1.0 license. 
+### Open Source License
 
-To provide IP Infringement Indemnity to our customers, we have thoroughly reviewed licenses and update all license/copyright headers in each source file for our core repositories. 
+Most of the open-source repositories in networknt GitHub organization are released under the Apache 2.0 license or MIT license except json-overlay and openapi-parser, which are released under EPL 2.0 and EPL 1.0 license. 
+
+To provide IP Infringement Indemnity to our customers, we have thoroughly reviewed licenses and update all license/copyright headers in each source file for our open-source repositories. 
 
 Here is a list of actions we have done in general. 
 
-* Make sure we have LICENSE file in each repository to clearly state the open source license.
+* Make sure we have a LICENSE file in each repository to state the open source license clearly.
 * Add NOTICE file in each repository to clearly state the license and copyright of dependencies.
 * Update source code to add license/copyright in the header. 
-* For redistributed source code from third-party open source project, make sure that the correct license and copyright header is in each file. Correct the license based on the parent project if necessary.  
+* For redistributed source code from the third-party open-source project, make sure that the correct license and copyright header is in each file. Correct the license based on the parent project if necessary.  
 * Update the contribution guideline to ensure that license, copyright and author are in each source file. 
 
-Here are all the related commits in each repository for auditing purpose. 
+
+Here are all the related commits in each repository for auditing purposes. 
 
 light-4j
 
@@ -74,4 +78,8 @@ light-consumer-4j
 
 https://github.com/networknt/light-consumer-4j/commit/1498a9a56b1e9bbc6872b1fdb16b09a00a766a4b
 
+
+### Commerical License
+
+Some of the private commercial components have dependencies on proprietary libraries; however, customers who are using these commercial components already have the proper licenses. For example, we have a private project light-mq for IBM MQ integration, which depends on the MQ java client.  We assume that customers who are using light-mq have the proper license from IBM. 
 
