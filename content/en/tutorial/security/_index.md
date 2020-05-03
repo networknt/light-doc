@@ -38,6 +38,11 @@ In this section, we have several tutorials related to security configurations an
 
 * How to use [environment variables][] for config values
 
+* How to create [self-signed client and server keystore] for light-4j server
+
+* How to create [self-signed JWT key and cert] for light-oauth2 and light-4j service
+
+
 [bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
 [encrypt and decrypt sensitive info]: /tutorial/security/encrypt-decrypt/
 [keystore and truststore]: /tutorial/security/keystore-truststore/
@@ -49,3 +54,5 @@ In this section, we have several tutorials related to security configurations an
 [light-4j service on port 443]: /tutorial/security/port443/
 [light-config-server TLS]: /tutorial/security/config-server-cert/
 [environment variables]: /tutorial/security/env-var-config/
+[self-signed client and server keystore]: /tutorial/security/self-signed-certificate/
+[self-signed JWT key and cert]: /tutorial/security/self-signed-jwt-key/

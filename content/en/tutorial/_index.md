@@ -78,6 +78,9 @@ section, some of the most important tutorials are listed here and more will be a
      + How to [convert CA-signed certificate to server.keystore][] that can be used by light-4j service
      + Running [light-4j service on port 443][] using iptables
      + How to use [environment variables][] for config values
+     + How to create [self-signed client and server keystore] for light-4j server
+     + How to create [self-signed JWT key and cert] for light-oauth2 and light-4j service
+
 
 ### API Styles
 
@@ -263,3 +266,5 @@ section, some of the most important tutorials are listed here and more will be a
 [Debug with JUnit Test]: /tutorial/portal/developer/debug-unit-test/
 [Debug with Hybrid Server]: /tutorial/portal/developer/debug-hybrid-server/
 [environment variables]: /tutorial/security/env-var-config/
+[self-signed client and server keystore]: /tutorial/security/self-signed-certificate/
+[self-signed JWT key and cert]: /tutorial/security/self-signed-jwt-key/
