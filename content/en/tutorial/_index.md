@@ -199,7 +199,9 @@ section, some of the most important tutorials are listed here and more will be a
   * [Add a react single page application to taiji-faucet router](/tutorial/router/router-spa/)
   * [Virtual hosts on taiji-faucet router](/tutorial/router/virtual-host/)
   * [Virtual hosts on light-portal](/tutorial/router/light-portal/)
-
+- [Light-reference](/tutorial/reference/)
+  * [Update Reference Table](/tutorial/reference/sql-update/)
+  
 ### Tool Chain
 
 - [Light-codegen](/tutorial/generator/)

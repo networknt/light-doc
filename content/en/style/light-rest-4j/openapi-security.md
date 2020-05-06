@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-This handler is part of the [light-rest-4j][] which is built on top of light-4j but focused on RESTful API only. Also, it only works with OpenAPI 3.0 specification. There are another set of middleware handlers that work with Swagger 2.0 specification. 
+This handler is part of the [light-rest-4j][], which is built on top of light-4j but focused on RESTful API only. Also, it only works with the OpenAPI 3.0 specification. There is another set of middleware handlers that work with Swagger 2.0 specification. 
 
 It supports OAuth2 with JWT token distributed verification and can be extended to other authentication and authorization approaches. 
 
@@ -19,7 +19,7 @@ It supports OAuth2 with JWT token distributed verification and can be extended t
 
 This is the handler that is injected during server startup if security.yml enableVerifyJwt is true. It does further scope verification if enableVerifyScope is true against OpenAPI specification.
 
-From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a security configuration file for different frameworks, a new openapi-security.yml with the same content has been introduced. The security.yml is still loaded if openapi-security.yml doesn't exist for backward compatibility. 
+From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. In order to have a security configuration file for each framework, a new openapi-security.yml with the same content has been introduced. The security.yml is still loaded if openapi-security.yml doesn't exist for backward compatibility. 
 
 Here is an example of openapi-security.yml
 
@@ -44,6 +44,8 @@ jwt:
     '100': primary.crt
     '101': secondary.crt
   clockSkewInSeconds: 60
+  # Key distribution server standard: JsonWebKeySet for other OAuth 2.0 provider | X509Certificate for light-oauth2
+  keyResolver: X509Certificate
 
 # Enable or disable JWT token logging
 logJwtToken: true
@@ -63,11 +65,15 @@ bootstrapFromKeyService: false
 
 ```
 
+For detailed information about the properties in the above configuration file, please refer to the light-4j [security][] module.
+
+
 ### Distributed JWT verification
 
-Unlike simple web token that the resource server has to contact Authorization server to validate the bearer token. JWT can be verified by the resource server as long as the token signing certificate is available at resource server. 
+Unlike the simple web token that the resource server has to contact the Authorization server to validate, JWT can be verified by the resource server as long as the token signing certificate is available at the resource server. 
 
 
 [light-rest-4j]: https://github.com/networknt/light-rest-4j
+[security]: /concern/security/
 
 
