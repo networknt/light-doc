@@ -7,21 +7,18 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Although our framework can handle potential millions requests per second, for 
-some public facing APIs, it might be a good idea to enable this handler to 
-limit the concurrent request to certain level in order to avoid DDOS attacks.
+Although our framework can potentially handle millions of requests per second, some public-facing APIs might be a good idea to enable this handler to limit the concurrent requests to a certain level to avoid DDOS attacks.
 
-As this handler will impact the overall performance a little bit, it is not
-configured as default in the [light-codegen](https://github.com/networknt/light-codegen). 
-You must select the feature to true in your light-codegen config.
+As this handler will impact the overall performance a little bit, it is not configured as default in the [light-codegen](https://github.com/networknt/light-codegen). You must config the feature as true in your light-codegen config.json or update the config later in the deployment phase.
 
 ## Dependency
 
-In order to use this handler, the following dependency need to be added to
-pom.xml in your project.
+The following dependency needs to be added to pom.xml in your project to use the handler.
 
+1.6.x release with JDK8
 ```
             <dependency>
                 <groupId>com.networknt</groupId>
@@ -29,17 +26,22 @@ pom.xml in your project.
                 <version>${version.light-4j}</version>
             </dependency>
 ```
-Once it is enabled in the light-codegen config.json, this dependency will be added
-automatically by the generator.
+
+2.0.x release with JDK11
+
+```
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>rate-limit</artifactId>
+                <version>${version.light-4j}</version>
+            </dependency>
+```
+
 
 ## Service
 
-As this middleware is not plugged in by default, we need to add it into
-com.networknt.handler.MiddlewareHandler in src/main/resources/META-INF/services
-folder. As this rate limiting handler needs to be failed fast, it need to be
-put right after ExceptionHandler and MetricsHandler. The reason it is after
-MetricsHandler is to capture 513 error code in InfluxDB and Grafana for
-monitoring on production.
+As this middleware is not plugged in by default, we need to add it to the handler.yml in the config folder. As this rate-limiting handler needs to be failed fast, it needs to be put right after ExceptionHandler and MetricsHandler. The reason it is after MetricsHandler is to capture 513 error codes in InfluxDB and Grafana for monitoring on production.
+
 
 ```
 #Traceability Put traceabilityId into response header from request header if it exists
@@ -71,6 +73,6 @@ queueSize: -1
 
 ```
 
-- enabled true to enable it and false to disable it.
-- concurrentRequest number of concurrent request to be limited.
-- queueSize -1 unlimited queue size which might use a lot of memory. > 1 integer will limit the requests to be queued and once queue is full, 513 will be returned for new requests. 
+- Update enabled to true to enable it and false to disable it.
+- concurrentRequest number of concurrent requests to be limited.
+- queueSize -1 unlimited queue size, which might use a lot of memory. > 1 integer will limit the requests to be queued, and once the queue is full, 513 will be returned for new requests. 
