@@ -36,4 +36,11 @@ kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partiti
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t user-query-user-password-store-changelog
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t user-query-user-token-store-changelog
 
+kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t user-query-user-payment-store-changelog
+
+kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t user-query-customer-order-store-changelog
+
+kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t user-query-merchant-order-store-changelog
+
+
 ```
