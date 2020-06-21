@@ -55,7 +55,8 @@ The following firewall rules need to be added to the test1 server.
 
 The following firewall rules need to be added to the three nodes of the consul cluster.
 
-* allow access from test1 server
+* allow access from test1 server (This is test1 server to test1 server rule to allow multi-cast and it is the only rule that is needed if host network is used for docker-compose)
+
 * allow access from the portal server
 
 The following firewall rules need to be added to the portal server.
