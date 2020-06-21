@@ -169,6 +169,7 @@ section, some of the most important tutorials are listed here and more will be a
   * [Local Form Authentication](/tutorial/oauth/form-auth-local/)
   * [Test Cloud Deployment and Access](/tutorial/oauth/test-cloud/)
   * [Light-Portal Authenticator](/tutorial/oauth/light-portal-authenticator/)
+  * [Update MySQL tables in Docker](/tutorial/oauth/update-mysql/)
 
 - [Light-portal](/tutorial/portal/)
   * [Light Portal Local Build](/tutorial/bot/light-portal-local/)
