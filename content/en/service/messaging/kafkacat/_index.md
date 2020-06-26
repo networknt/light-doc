@@ -30,6 +30,7 @@ kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partiti
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t portal-notification
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t portal-taiji
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t portal-userid
+kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t portal-reference
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t user-query-password-token-store-changelog
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t user-query-user-email-store-changelog
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t user-query-user-message-store-changelog
