@@ -362,7 +362,7 @@ If you send multiple request through one connection, here is an example.
 Setting GET parameters via URL string.
 
 ```
-ClientRequest request = new ClientRequest().setMethod(Methods.GET).setPath("/oauth2/client?page=1&api_key=asdfsomthingelse");
+ClientRequest request = new ClientRequest().setMethod(Methods.GET).setPath("/oauth2/client?page=0&api_key=asdfsomthingelse");
 ```
 
 You might need to set some headers. 

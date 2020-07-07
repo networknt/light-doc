@@ -31,7 +31,7 @@ curl -k -H "Content-Type: application/json" -X POST -d '{"serviceId":"AACT0003",
 To query all services.
 
 ```
-curl -k https://localhost:6883/oauth2/service?page=1
+curl -k https://localhost:6883/oauth2/service?page=0
 
 ```
 And here is the result.

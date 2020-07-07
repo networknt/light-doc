@@ -44,7 +44,7 @@ It will take about 30 seconds to have all services up and running.
 To confirm it is running properly, let's issue a curl command to the client service.
 
 ```
-curl -k https://localhost:6884/oauth2/client?page=1
+curl -k https://localhost:6884/oauth2/client?page=0
 ```
 
 And you can see that there is a petstore client define in the light-oauth2 for testing. Here is the

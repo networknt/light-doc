@@ -81,7 +81,7 @@ To ensure that the light-oauth2 APIs can be accessed from the router, let's test
 Calling the client service directly. 
 
 ```
-curl -k https://lightapi.net:6884/oauth2/client?page=1
+curl -k https://lightapi.net:6884/oauth2/client?page=0
 ```
 
 The response should be something like following.
@@ -93,13 +93,13 @@ The response should be something like following.
 Calling the client service through light-router.
 
 ```
-curl -k https://lightapi.net/oauth2/client?page=1
+curl -k https://lightapi.net/oauth2/client?page=0
 ```
 
 You will receive nothing but a browser redirect 302 status code to ask you to authenticate yourself. To see the exact redirect status code, use the following command.
 
 ```
-curl -k -v ttps://lightapi.net/oauth2/client?page=1
+curl -k -v ttps://lightapi.net/oauth2/client?page=0
 ```
 
 At this moment, all backend services are up and running. Let's [start portal view][] SPA from the light-portal repository in the next step. 
