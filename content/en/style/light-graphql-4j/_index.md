@@ -15,9 +15,9 @@ draft: false
 reviewed: true
 ---
 
-GraphQL is a new style of protocol open sourced by Facebook, and it is getting popular especially in Mobile and Single Page Application as the front end. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
+GraphQL is a new style of protocol open-sourced by Facebook, and it is getting popular, especially in Mobile and Single Page Application as the front end. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
 
-Light-graphql-4j is a framework that is designed to work with GraphQL. Similar to other Light frameworks it provides components and middleware handlers to handle specific use cases for GraphQL.
+Light-graphql-4j is a framework that is designed to work with GraphQL. Similar to other Light frameworks, it provides components and middleware handlers to handle specific use cases for GraphQL.
 
 ### GraphQL Specific Components
 

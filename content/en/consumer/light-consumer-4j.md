@@ -8,14 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-# Light Consumer 4j
+Light Consumer 4j is a module that helps consumers to integrate with light-4j APIs easily. It is built on top of Http2Client & java8 completable future for multiple downstream API invocations. It also has a lot of extra features like connection pooling, circuit breaker, etc. Like Http2Client in light-4j, it supports direct URL and service discovery (Consul) to call the APIs.
 
-Light Consumer 4j is module which helps for consumers to easily integrate with light-4j apis.
-It is built on top of Http2Client & java8,it has a lot of extra features like connection pooling etc.
-it supports both direct URL and service discover (Consul) to call the apis.
+
 ### Usage
+
 Add dependency in your project.
 
 ```xml

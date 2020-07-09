@@ -12,6 +12,7 @@ weight: 70
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When working with microservices, the chances are that sensitive data need to be passed through several services before reaching the target service. For example, credit card number is collected in the shopping cart service and needs to pass through order service to reach the payment service. To make your application [PCI compliant][], the credit card number should be encrypted or tokenized at the shopping cart service and only payment service can decrypt or detokenize it. 

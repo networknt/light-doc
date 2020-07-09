@@ -15,7 +15,9 @@ draft: false
 reviewed: true
 ---
 
-When building APIs that are consumed by Single Page Applications running on browsers, the security control is different from service to service calls. This repository contains all the middleware handlers designed for SPA only. 
+When building APIs that are consumed by Single Page Applications running on browsers, security control is different from service to service calls. This repository contains all the middleware handlers designed for SPA only. It automatically renews the JWT token from the OAuth 2.0 provider before the token is expired and handles the CSRF token to prevent cross-site request forgery attack.  
+
+The embedded handler also handles the login and logout from the UI and manages the session with cookies. 
 
 * [Stateless Auth](/style/light-spa-4j/stateless-auth/)
 
