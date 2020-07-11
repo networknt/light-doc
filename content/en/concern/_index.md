@@ -42,6 +42,7 @@ Here is a list of cross-cutting concerns provided by the light platform.
 * [Encode Decode](/concern/encode-decode/)
 * [Exception Handling](/concern/exception/)
 * [Handler Interface](/concern/handler/)
+* [Business Handler](/concern/business-handler/)
 * [Header Handler](/concern/header/)
 * [Health Check](/concern/health/)
 * [Server Info](/concern/info/)
