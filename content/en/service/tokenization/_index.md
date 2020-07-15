@@ -15,17 +15,17 @@ draft: false
 reviewed: true
 ---
 
-When working with microservices, the chances are that sensitive data need to be passed through several services before reaching the target service. For example, credit card number is collected in the shopping cart service and needs to pass through order service to reach the payment service. To make your application [PCI compliant][], the credit card number should be encrypted or tokenized at the shopping cart service and only payment service can decrypt or detokenize it. 
+When working with microservices, the chances are that sensitive data must be passed through several services before reaching the target service. For example, a credit card number is collected in the shopping cart service and needs to pass through order service to reach the payment service. To make the application [PCI compliant][], the credit card number should be encrypted or tokenized at the shopping cart service and only payment service can decrypt or detokenize it. 
 
-Another business scenario is that when information passed to the Internet, sensitive info needs to be protected for confidentiality. For example, the account number in the URL needs to be hidden so that nobody can dig it from log files. Again, there are two approaches for it: encryption and tokenization. 
+Another business scenario is that when information is passed to the Internet, sensitive information needs to be protected for confidentiality. For example, the account number in the URL needs to be hidden so that nobody can dig it from log files. Again, there are two approaches for it: encryption and tokenization. 
 
 The light platform has [encryptor and decryptor][] for data encryption as plugins that support custom implementations. It covers some use cases for data confidentiality, and tokenization covers the rest. 
 
-Tokenization is a reversible security method that replaces sensitive data with fake data that looks and feels just like the real thing while making it worthless to potential thieves. Tokenization can provide equal or better security than encryption, while retaining the vital usability of data for analytics and other business processes.
+Tokenization is a reversible security method that replaces sensitive data with fake data that looks and feels just like real things while making it worthless to potential thieves. Tokenization can provide equal or better security than encryption while retaining the vital usability of data for analytics and other business processes.
 
 Flexible, format-preserving token types, including numeric, alphanumeric, date, time, address, and other structured tokens can be created with “bleed through” with parts of the original data exposed for business purposes, preserving privacy when applications require only part of the sensitive data for processing.
 
-In the light platform, tokenization service is provided as part of the enterprise package and hosting service. It is built on top of light-4j, and light-rest-4j frameworks with very high throughput and very low latency as most operations are done in the cache. It also supports multi-tenancy based on the client_id in JWT token. A group of clients can share the same token vault, or each client can have its vault. 
+In the light platform, tokenization service is provided as part of the enterprise package and hosting service. It is built on top of light-4j and light-rest-4j frameworks with very high throughput and very low latency as most operations are done in the cache. It also supports multi-tenancy based on the client_id in JWT token. A group of clients can share the same token vault, or each client can have its vault. 
 
 If you are interested in deploy this service in your data center or sign up our hosting service, please contact sales@lightapi.net for details. 
 
