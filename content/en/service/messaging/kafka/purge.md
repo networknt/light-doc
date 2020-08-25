@@ -1,5 +1,5 @@
 ---
-title: "Purge Kafka Topic"
+title: "Purge Portal Kafka on Test Cloud"
 date: 2018-11-10T06:29:00-05:00
 description: ""
 categories: []
@@ -8,32 +8,33 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-During the development cycle, chances are you want to reset the entire Kafka cluster to the original state just like a referesh installation. Here are the steps to archive that. 
+During the development cycle, chances are you want to reset the entire Kafka cluster to the original state like a refreshed installation. Here are the steps to archive that. 
 
 ### Stop Applications
 
-If there are consumers or producers that are connecting to your Kafka cluster, you need to stop them. For Taiji-chain cluster, we need to stop the chain-writer, chain-reader and token-reader on each Kafka node. 
+If consumers or producers are connecting to your Kafka cluster, you need to stop them. For Taiji-chain cluster, we need to stop the chain-writer, chain-reader and token-reader on each Kafka node. 
 
+For the light-portal cluster, we need to stop test1, test2, test3 and test4 docker-compose.
 
 ```
 ssh test1
-cd light-chain/light-docker
-docker-compose -f docker-compose-test1.yaml down
+cd light-chain/light-config-test/test1
+docker-compose down
 ```
 
-repeat the above for test2 and test3
+repeat the above for test2, test3 and test4.
 
 
-Stop the schema-registry server on the sandbox. If this server is left running, the old schema are still cached and will saved back to the new Kafka topic. 
+Stop the schema-registry server on the sandbox. If this server is left running, the old schemas are still cached and saved back to the new Kafka topic. 
 
 ```
 ssh sandbox
 cd networknt/light-docker
 docker-compose -f docker-compose-schema-registry.yml down
 ```
-
 
 ### Stop Kafka
 

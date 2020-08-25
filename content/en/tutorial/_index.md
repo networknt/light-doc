@@ -171,6 +171,9 @@ section, some of the most important tutorials are listed here and more will be a
   * [Light-Portal Authenticator](/tutorial/oauth/light-portal-authenticator/)
   * [Update MySQL tables in Docker](/tutorial/oauth/update-mysql/)
 
+- [OAuth-Kafka](/tutorial/oauth-kafka/)
+  * [Local Dev](/tutorial/oauth-kafka/local-dev/)
+
 - [Light-portal](/tutorial/portal/)
   * [Light Portal Local Build](/tutorial/bot/light-portal-local/)
   * [Start Portal Service](/tutorial/portal/start-portal-service/)

@@ -48,6 +48,9 @@ The following are some of the important services recommended by the Light platfo
 - [Reference](/service/oauth/reference/)
 - [COVID-19](/service/covid-19/)
 
+
+[oauth-kafka][] is our enterprise OAuth 2.0 provider build on top of light-kafka and kafka streams for event sourcing and CQRS. It is scalalbe and integrated with light-portal. The light-oauth2 will be still available for users who want to put everything together on a destop or a laptop. The API interface is the same and serviceIds are slightly different. This component is available for enterprise customers and subscription services will be availabe from light-portal site. 
+
 [light-portal][] is an API runtime management and marketplace. In the service mesh context, it is the control plane. 
 
 
@@ -75,6 +78,7 @@ The following are some of the important services recommended by the Light platfo
 
 
 [light-oauth2]: /service/oauth/
+[oauth-kafka]: /service/oauth-kafka/
 [light-proxy]: /service/proxy/
 [light-portal]: /service/portal/
 [Messaging service]: /service/messaging/
