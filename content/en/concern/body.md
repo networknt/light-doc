@@ -7,29 +7,16 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
-
-Body parser is a middleware handler designed for [light-rest-4j][]only. It will parse 
-the body to a list or map according to the content-type in the HTTP header for POST, 
-PUT and PATCH HTTP methods. The content-type can be parsed includes application/json,
-multipart/form-data and application/x-www-form-urlencoded. The application/json type is 
-parsed into list or map depending on the first character of the body while the others 
-is parsed into map by using FormParserFactory provided by io.undertow. After the body 
-is parsed, it will be attached to the exchange so that subsequent handlers can use it 
-directly. 
 
 ### Introduction
 
-In order for this handler to work, the content-type in header must be started with 
-"application/json", "multipart/form-data" or "application/x-www-form-urlencoded". 
-If the content type is correct, it will parse it to List or Map and put it into 
-REQUEST_BODY exchange attachment.
+Body parser is a middleware handler designed for [light-rest-4j][]only. It will parse the body to a list or map according to the content-type in the HTTP header for POST, PUT and PATCH HTTP methods. The content-type can be parsed includes "application/json", "text/plain", "multipart/form-data" and "application/x-www-form-urlencoded". The "application/json" type is parsed into a list or map depending on the first character of the body. The "text/plain" will be parsed into a String object. The multipart/form-data" and "application/x-www-form-urlencoded" will be parsed to a map of fields. Other content-types will be handled as an input stream, including content-type is missing from the HTTP header. 
 
-If content type is missing or if it is not started as "application/json", "multipart/form-data" 
-or "application/x-www-form-urlencoded". the bodywon't be parsed and this handler will 
-just call next handler in the chain. 
+After the body is parsed, it will be attached to the exchange so that subsequent handlers can use it directly from the exchange attachment.
 
-[Sanitizer][], [Openapi Validator][] and [Swagger Validator][] depend on this middleware.
+[Sanitizer][] and [OpenApi Validator][] depend on this middleware.
 
 ### Configuration
 
@@ -45,58 +32,38 @@ enabled: true
 Here is the parsing logic. 
 
 ```java
-                    if (contentType != null && contentType.startsWith("application/json")) {
-                        if (exchange.isInIoThread()) {
-                            exchange.dispatch(this);
-                            return;
-                        }
-                        exchange.startBlocking();
-                        InputStream is = exchange.getInputStream();
-                        try {
-                            Object body;
-                            String s = StringUtils.inputStreamToString(is, StandardCharsets.UTF_8);
-                            if (s != null) {
-                                s = s.trim();
-                                if (s.startsWith("{")) {
-                                    body = Config.getInstance().getMapper().readValue(s, new TypeReference<HashMap<String, Object>>() {});
-                                } else if (s.startsWith("[")) {
-                                    body = Config.getInstance().getMapper().readValue(s, new TypeReference<List<Object>>() {});
-                                } else {
-                                    // error here. The content type in head doesn't match the body.
-                                    setExchangeStatus(exchange, CONTENT_TYPE_MISMATCH, contentType);
-                                    return;
-                                }
-                                exchange.putAttachment(REQUEST_BODY, body);
-                            }
-                        } catch (IOException e) {
-                            logger.error("IOException: ", e);
-                            setExchangeStatus(exchange, CONTENT_TYPE_MISMATCH, contentType);
-                            return;
-                        }
-                        // parse the body to form-data if content type is multipart/form-data or application/x-www-form-urlencoded
-                    } else if (contentType != null &&
-                            (contentType.startsWith("multipart/form-data") || contentType.startsWith("application/x-www-form-urlencoded"))) {
-                        if (exchange.isInIoThread()) {
-                            exchange.dispatch(this);
-                            return;
-                        }
-                        exchange.startBlocking();
-                        try {
-                            Object data;
-                            FormParserFactory formParserFactory = FormParserFactory.builder().build();
-                            FormDataParser parser = formParserFactory.createParser(exchange);
-                            if (parser != null) {
-                                FormData formData = parser.parseBlocking();
-                                data = BodyConverter.convert(formData);
-                                exchange.putAttachment(REQUEST_BODY, data);
-                            }
-                        } catch (Exception e) {
-                            logger.error("IOException: ", e);
-                            setExchangeStatus(exchange, CONTENT_TYPE_MISMATCH, contentType);
-                            return;
-                        }
+        if (contentType != null) {
+            try {
+                if (contentType.startsWith("application/json")) {
+                    InputStream inputStream = exchange.getInputStream();
+                    String unparsedRequestBody = StringUtils.inputStreamToString(inputStream, StandardCharsets.UTF_8);
+                    // attach the unparsed request body into exchange if the cacheRequestBody is enabled in body.yml
+                    if (config.isCacheRequestBody()) {
+                        exchange.putAttachment(REQUEST_BODY_STRING, unparsedRequestBody);
                     }
-
+                    // attach the parsed request body into exchange if the body parser is enabled
+                    attachJsonBody(exchange, unparsedRequestBody);
+                } else if (contentType.startsWith("text/plain")) {
+                    InputStream inputStream = exchange.getInputStream();
+                    String unparsedRequestBody = StringUtils.inputStreamToString(inputStream, StandardCharsets.UTF_8);
+                    exchange.putAttachment(REQUEST_BODY, unparsedRequestBody);
+                } else if (contentType.startsWith("multipart/form-data") || contentType.startsWith("application/x-www-form-urlencoded")) {
+                    // attach the parsed request body into exchange if the body parser is enabled
+                    attachFormDataBody(exchange);
+                } else {
+                    InputStream inputStream = exchange.getInputStream();
+                    exchange.putAttachment(REQUEST_BODY, inputStream);
+                }
+            } catch (IOException e) {
+                logger.error("IOException: ", e);
+                setExchangeStatus(exchange, CONTENT_TYPE_MISMATCH, contentType);
+                return;
+            }
+        } else {
+            // attach the stream to the exchange if the content type is missing.
+            InputStream inputStream = exchange.getInputStream();
+            exchange.putAttachment(REQUEST_BODY, inputStream);
+        }
 ```
 ### Example
 
@@ -118,5 +85,4 @@ Here is the code example that get the boby object(Map or List) from exchange.
 
 [light-rest-4j]: /style/light-rest-4j/
 [Sanitizer]: /concern/sanitizer/
-[Openapi Validator]: /style/light-rest-4j/openapi-validator/
-[Swagger Validator]: /style/light-rest-4j/swagger-validator/
+[OpenApi Validator]: /style/light-rest-4j/openapi-validator/
