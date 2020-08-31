@@ -4,11 +4,6 @@ date: 2018-03-17T05:35:36-04:00
 description: ""
 categories: []
 keywords: []
-menu:
-  docs:
-    parent: "development"
-    weight: 10
-weight: 10
 aliases: []
 toc: false
 draft: false
