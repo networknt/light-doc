@@ -1,6 +1,6 @@
 ---
-title: "Business Handler"
-date: 2020-07-11T09:32:48-04:00
+title: "Get Request Info"
+date: 2020-08-30T23:28:43-04:00
 description: ""
 categories: []
 keywords: []
@@ -9,12 +9,6 @@ toc: false
 draft: false
 reviewed: true
 ---
-
-The business handler is the last handler in the request/response chain after all the [middleware handlers][]. There are two types of middleware handlers: Technical and Business. 
-
-The Light-Platform is dedicated to providing all the technical middleware handlers to address technical [cross-cutting concerns][] so that users can focus on their business logic to increase productivity and maintainability.
-
-Big organizations will leverage the plugin architecture of the light platform to add another layer of business middleware handlers after the technical middleware handlers in the request/response chain. These handlers are industry-specific, and they usually call them together as their API platform. For example, one of the banking customers built their platform on top of light-4j to address Auditing, Fine-Grained Authorization, Result Filtering and Compliance to share these across all the APIs and applications.
 
 Most developers who are working on the light-platform are building the final business handlers. Their job is to get the HTTP query parameters, path parameters and request body in the generated request handlers and create the corresponding response based on the input above. When users choose different HTTP frameworks, they need to know how to get the details from the request and then send the response. This document will be focusing on the request details. 
 
@@ -160,8 +154,6 @@ exchange.putAttachment(REQUEST_BODY, inputStream);
 
 For details, please take a look at the [pdf example][] in the light-example-4j. 
 
-[middleware handlers]: /architecture/middleware-handler/
-[cross-cutting concerns]: /concern/
 [pdf example]: https://github.com/networknt/light-example-4j/tree/master/client/pdf
 [BodyHandler]: https://github.com/networknt/light-4j/blob/master/body/src/main/java/com/networknt/body/BodyHandler.java
 [HttpStringConstants]: https://github.com/networknt/light-4j/blob/master/http-string/src/main/java/com/networknt/httpstring/HttpStringConstants.java
