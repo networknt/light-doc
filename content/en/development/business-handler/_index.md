@@ -19,10 +19,10 @@ Big organizations will leverage the plugin architecture of the light platform to
 For most developers, they don't need to worry about [cross-cutting concerns][] during the development. What they need to do is to focus on the business handlers generated with the light-codegen.
 
 - [Get Request Info](/development/business-handler/get-request/)
-- [Send Response][]
-- [Rest][]
-  * [Rest Database][]
-  * [Rest Kafka][]
+- [Send Response](/development/business-handler/send-response/)
+- [Rest](/development/business-handler/rest/)
+  * [Rest Database](/development/business-handler/rest/database/)
+  * [Rest Kafka](/development/business-handler/rest/kafka/)
 - [Hybrid][]
   * [Hybrid Kafka][]
 - [GraphQL][]
