@@ -21,7 +21,6 @@ Another usage for the light-router is to act as a BFF(backend for frontend) for 
 
 The third use case for the light-router is to act as a distributed gateway for an external client. When exposing internal microservices to an external client on the Internet, we can deploy an instance of light-router per external client in the B2B scenario. The light-router will be responsible for security, load balance, service discovery and route traffic to the right services. We call this component as EAP (External Access Point).
 
-
 Along with service discovery and routing, light-router also provides other cross-cutting concerns like security, metrics, logging, validation and more.
 
 The light-router has the following features:
@@ -48,6 +47,7 @@ To learn how to use this router, please refer to
 * [Configuration][] for different configurations based on your situations
 * [Location and Ownership] for deployment and ownership decision
 * [Static Content][] render a single page application
+
 
 [Getting Started]: /getting-started/light-router/
 [Tutorial]: /tutorial/router/

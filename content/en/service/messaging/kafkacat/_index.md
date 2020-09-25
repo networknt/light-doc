@@ -52,6 +52,14 @@ kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partiti
 
 kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t market-query-market-category-store-changelog
 
+kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t market-query-market-blog-store-changelog
 
+
+kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t market-query-market-category-store-changelog
+
+
+kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t market-query-market-tag-store-changelog
+
+kafkacat -b localhost -f '\nKey (%K bytes): %k\t\nValue (%S bytes): %s\n\Partition: %p\tOffset: %o\n--\n' -t market-query-market-taxonomy-store-changelog
 
 ```
