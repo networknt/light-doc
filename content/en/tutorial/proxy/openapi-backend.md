@@ -11,11 +11,9 @@ draft: false
 reviewed: true
 ---
 
-In this tutorial, we are going to create a backend service and start three instances to demo the [light-proxy][] load balance between them. 
+This tutorial will create a backend service and start three instances to demo the [light-proxy][] load balance between them. 
 
-The backend service will have two endpoints: one get and one post to demo different scenarios in term of proxy functionality. This server is built on top of light-rest-4j with OpenAPI 3.0 specification.
-
-There is another [backend service][] that is built on top of Swagger 2.0 specification for users who are still working on Swagger 2.0 specification for some reason. 
+The backend service will have two endpoints: one get and one post to demo different proxy functionality scenarios. This server is built on top of light-rest-4j with OpenAPI 3.0 specification.
 
 ### Backend service specification and light-codegen config.json
 
@@ -25,7 +23,7 @@ Regarding how to create OpenAPI 3.0 Specification, please refer to [swagger edit
 
 ### Generate the backend service
 
-Given the OpenAPI specification and config.json, we are going to use light-codegen to generate the project and update the service with a meaningful response based on the specification.
+Given the OpenAPI specification and config.json, we will use light-codegen to generate the project and update the service with a meaningful response based on the specification.
 
 ```
 cd ~/networknt
@@ -121,9 +119,10 @@ As you can see, the output contains information on which port the response is co
 
 ### Start backend services
 
-If you have multiple computers, you can start multiple instances that listening on the same port on each computer. Otherwise, start multiple instances that listening to different ports on one computer. Here we are going to start three instances on the same computer and let them listen to 8081, 8082 and 8083 on https. Let's disable the HTTP for now as it is never used on production.
+If you have multiple computers, you can start multiple instances listening on the same port on each computer. Otherwise, start multiple instances that listening to different ports on one computer. Here we will start three instances on the same computer and let them listen to 8081, 8082 and 8083 on https. Let's disable the HTTP for now as it is never used on production.
 
-If you generate the proxy-backend service, you should have the project on your local light-example-4j/rest/openapi folder already. If not, let's clone the repo and compile it locally.
+If you generate the proxy-backend service, you should already have the project on your local light-example-4j/rest/openapi folder. If not, let's clone the repo and compile it locally.
+
 
 ```
 cd ~/networknt
