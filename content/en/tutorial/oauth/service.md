@@ -8,24 +8,25 @@ weight: 50
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-OAuth2 is used to protect services and each service must register itself with endpoints and 
-scopes in order to have fine-grained access control. This microservice provides endpoint to 
-add a new service, update an existing service, remove an existing service and query service(s).
+OAuth2 is used to protect services, and each service must register itself with endpoints and scopes to have fine-grained access control. OAuth 2.0 specification only mentioned client registration with scopes along with it. For a simple application or single monolithic web service, it is OK. However, if we have hundreds of services with thousands of scopes, the scope management will be a nightmare. 
 
-It also all you to optionally register service endpoints with scopes so that it can help with
-client registration and scope calculation.  
+It is easier for consumers and providers to use endpoints in discussion than meaningless scopes. To do that, we introduced service registration and service endpoint registration. Based on the endpoint access between client and service, we can calculate the client's scope during the token creation. 
 
-In this tutorial, we are using curl command to demo how these services are working. In
-reality, these endpoints are accessed from light-portal UI.
+This microservice provides endpoints for adding a new service, updating an existing service, removing an existing service and query service(s). 
+
+It also allows you to optionally register service endpoints with scopes to help with client registration and scope calculation.  
+
+In this tutorial, we are using the curl command to demo how these services are working. In reality, these endpoints are accessed from light-portal UI.
 
 
 To add a new service.
 
 ```
-curl -k -H "Content-Type: application/json" -X POST -d '{"serviceId":"AACT0003","serviceType":"openapi","serviceName":"Retail Account","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","ownerId":"admin"}' https://localhost:6883/oauth2/service
+curl -k -H "Content-Type: application/json" -X POST -d '{"host":"lightapi.net","serviceId":"AACT0003","serviceType":"openapi","serviceName":"Retail Account","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","ownerId":"admin"}' https://localhost:6883/oauth2/service
 ```
 
 To query all services.
@@ -37,7 +38,7 @@ curl -k https://localhost:6883/oauth2/service?page=0
 And here is the result.
 
 ```
-[{"serviceType":"openapi","serviceDesc":"A microservice that serves account information","scope":"a.r b.r","serviceId":"AACT0001","serviceName":"Account Service","ownerId":"admin","updateDt":null,"createDt":"2016-12-31"},{"serviceType":"ms","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin","updateDt":null,"createDt":"2016-12-31"}]
+[{"host":"lightapi.net","serviceType":"openapi","serviceDesc":"A microservice that serves account information","scope":"a.r b.r","serviceId":"AACT0001","serviceName":"Account Service","ownerId":"admin","updateDt":null,"createDt":"2016-12-31"},{"serviceType":"ms","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin","updateDt":null,"createDt":"2016-12-31"}]
 ```
 
 To query a service with service id.
@@ -54,7 +55,7 @@ And here is the result.
 To update above service type to "api".
 
 ```
-curl -k -H "Content-Type: application/json" -X PUT -d '{"serviceType":"swagger","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin"}' https://localhost:6883/oauth2/service
+curl -k -H "Content-Type: application/json" -X PUT -d '{"host":"lightapi.net","serviceType":"swagger","serviceDesc":"Microservices for Retail Account","scope":"act.r act.w","serviceId":"AACT0003","serviceName":"Retail Account","ownerId":"admin"}' https://localhost:6883/oauth2/service
 ```
 
 To delete above service with service id.
