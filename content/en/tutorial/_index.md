@@ -182,6 +182,7 @@ section, some of the most important tutorials are listed here and more will be a
   * [Portal View](/tutorial/portal/view/)
   * Portal Services
      + [user-management](/tutorial/portal/user-management/) 
+     + [market-place](/tutorial/portal/market-place/)
   * Developer
      + [React View Developer][]
      + [Full Stack Developer][]
