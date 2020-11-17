@@ -51,6 +51,7 @@ Here is a list of cross-cutting concerns provided by the light platform.
 * [Log Mask](/concern/mask/)
 * [Logger Config](/concern/logger-config/)
 * [InfluxDB Metrics](/concern/metrics/)
+* [Portal Registry](/concern/portal-registry/)
 * [Prometheus Metrics](/concern/prometheus/)
 * [Registry Discovery](/concern/registry/)
 * [XSS Sanitizer](/concern/sanitizer/)
