@@ -26,8 +26,14 @@ Light-proxy is a critical service component that can glue all other alien APIs i
 
 * [Schema Registry][] shows how to give read-only access to Internet applications and give write access to internal applications 
 
+### Enable Metrics on Proxy
+
+* [Proxy Metrics][] shows how to enable metrics on the proxy server with InfluxDB as the database. 
+
 [OpenAPI backend service]: /tutorial/proxy/openapi-backend/
 [OpenAPI proxy]: /tutorial/proxy/openapi-proxy/
 [Proxy Docker]: /tutorial/proxy/docker/
 [Schema Registry]: /tutorial/proxy/schema-registry/
+[Proxy Metrics]: /tutorial/proxy/proxy-metrics/
+
 

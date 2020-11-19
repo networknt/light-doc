@@ -1,5 +1,5 @@
 ---
-title: "Openapi Proxy"
+title: "OpenAPI Proxy"
 date: 2017-12-16T10:43:54-05:00
 description: ""
 categories: []

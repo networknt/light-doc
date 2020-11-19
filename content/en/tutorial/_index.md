@@ -198,6 +198,7 @@ section, some of the most important tutorials are listed here and more will be a
      + [OpenAPI Proxy](/tutorial/proxy/openapi-proxy/)
   * [Proxy Docker](/tutorial/proxy/docker/)
   * [Confluent Schema Registry](/tutorial/proxy/schema-registry/)
+  * [Enable Metris on Proxy Server](/tutorial/proxy/proxy-metrics/)
 - [Light-router](/tutorial/router/)
   * [Router Assisted Service Discovery](/tutorial/common/discovery/router/)
   * [Deploy light-router for taiji-faucet service](/tutorial/router/taiji-faucet/)

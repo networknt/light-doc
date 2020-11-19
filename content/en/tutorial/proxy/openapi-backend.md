@@ -1,5 +1,5 @@
 ---
-title: "Openapi Backend"
+title: "OpenAPI Backend"
 date: 2017-12-16T10:43:39-05:00
 description: ""
 categories: []
@@ -119,7 +119,7 @@ As you can see, the output contains information on which port the response is co
 
 ### Start backend services
 
-If you have multiple computers, you can start multiple instances listening on the same port on each computer. Otherwise, start multiple instances that listening to different ports on one computer. Here we will start three instances on the same computer and let them listen to 8081, 8082 and 8083 on https. Let's disable the HTTP for now as it is never used on production.
+If you have multiple computers, you can start multiple instances listening on the same port on each computer. Otherwise, start multiple instances that listening to different ports on one computer. Here we will start three instances on the same computer and let them listen to 8081, 8082 and 8083 on HTTPS. Let's disable the HTTP for now, as it is never used on production.
 
 If you generate the proxy-backend service, you should already have the project on your local light-example-4j/rest/openapi folder. If not, let's clone the repo and compile it locally.
 
@@ -128,7 +128,8 @@ If you generate the proxy-backend service, you should already have the project o
 cd ~/networknt
 git clone https://github.com/networknt/light-example-4j.git
 ```
-In order to start three instances with different https ports, we need to overwrite the `httpsPort` in server.yml, which is located at proxy-backend/src/main/resources/config folder with an external values.yml file. The following is the default one generated based on the config.json file. As you can see, HTTP is disabled, and https is enabled and listen to 8443 port. 
+
+To start three instances with different HTTPS ports, we need to overwrite the `httpsPort` in server.yml, which is located at proxy-backend/src/main/resources/config folder with an external values.yml file. The following is the default one generated based on the config.json file. As you can see, HTTP is disabled, and HTTPS is enabled and listen to port 8443. 
 
 ```yaml
 
@@ -188,7 +189,7 @@ java -Dlight-4j-config-dir=/home/steve/networknt/light-config-test/light-example
 
 Please note that the configuration folder might be different on your computer. 
 
-Now from another terminal, you can issue a curl command to ensure the server is running and listening on 8081 on https/http2.
+You can issue a curl command from another terminal to ensure the server runs and listens on 8081 on HTTPS/HTTP2.
 
 
 ```
@@ -207,13 +208,13 @@ You can also test the post request with the following command line.
 curl -k -X POST https://localhost:8081/v1/postData   -H 'content-type: application/json'   -d '{"key":"key1", "value": "value1"}'
 ```
 
-And the request should be something like this.
+And the response should be something like this.
 
 ```json
 {"enableHttps":true,"value":"value1","httpsPort":8081,"key":"key1","enableHttp2":true,"httpPort":8080}
 ```
 
-Now let's start another service in another terminal with 8082 config folder to overwrite the httpsPort to 8082.
+Let's start another service in another terminal with the 8082 config folder to overwrite the HTTPS port to 8082.
 
 ```
 cd ~/networknt/light-example-4j/rest/openapi/proxy-backend
@@ -222,7 +223,7 @@ java -Dlight-4j-config-dir=/home/steve/networknt/light-config-test/light-example
 
 Please note that the configuration folder might be different on your computer. 
 
-Test the second instance with command:
+Test the second instance with the command:
 
 ```
 curl -k https://localhost:8082/v1/getData
@@ -237,13 +238,13 @@ java -Dlight-4j-config-dir=/home/steve/networknt/light-config-test/light-example
 
 Please note that the configuration folder might be different on your computer. 
 
-Test the third instance with command:
+Test the third instance with the command:
 
 ```
 curl -k https://localhost:8083/v1/getData
 ```
 
-At this moment, we have three backend service instances running, and they are listening to 8081, 8082, and 8083 on the https/http2 protocol.
+At this moment, we have three backend service instances running, and they are listening to 8081, 8082, and 8083 on the HTTPS/HTTP2 protocol.
 
 A video walkthrough in English can be found [here](https://www.youtube.com/watch?v=MbDNd84TpuQ)
 
