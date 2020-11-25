@@ -22,11 +22,11 @@ Light services also embed a distributed gateway to address all the cross-cutting
 * [light-oauth2](https://github.com/networknt/light-oauth2) for security
 * [light-portal](https://github.com/networknt/light-portal) for API management and marketplace
 * [light-config-server](https://github.com/networknt/light-config-server) for centralized configuration management
-* [light-eventuate-4j](https://github.com/networknt/light-eventuate-4j) for eventual consistency based on event sourcing, CQRS and Kafka
+* [light-kafka](https://github.com/networknt/light-kafka) for eventual consistency based on event sourcing, CQRS and Kafka
 * [ELK](https://www.elastic.co/webinars/introduction-elk-stack) for centralized logging with traceabilityId and correlationId
 * [Prometheus](https://prometheus.io/), [InfluxDB](https://github.com/influxdata/influxdb) and [Grafana](https://github.com/grafana/grafana) for metrics
 * [OpenTracing](https://opentracing.io/) with [Jaeger](https://www.jaegertracing.io/) tracer for distributed tracing and observability
-* [Consul](https://github.com/hashicorp/consul) or [Zookeeper](http://zookeeper.apache.org/) for service registry
+* Light-Controller as part of the light-portal or [Consul](https://github.com/hashicorp/consul) for service registry
 * [Kubernetes](https://kubernetes.io/) for container orchestration
 
 Currently, we only support Java language; however, we are planning to support Nodejs, Rust, and Go in the future if there are enough customer's demands. Some of our customers have some existing RESTful APIs built on top of other Java frameworks or other languages. We have frequently been asked how to interact with these services to/from light services and enable security, metrics, logging, tracing, discovery, validation, sanitization, etc. on the existing services. 
@@ -46,7 +46,7 @@ The reverse proxy has the following features:
 * Centralized logging with ELK, TraceabilityId, and CorrelationId
 * OpenTracing with Jaeger tracer integration
 * Collect client and service metrics into InfluxDB or Prometheus and view the dashboard on Grafana
-* Service registry and discovery with Consul or Zookeeper
+* Service registry and discovery with Portal Registry or Consul
 * Manage configuration with light-config-server
 
 To learn how to use this proxy, please refer to 
@@ -57,7 +57,7 @@ To learn how to use this proxy, please refer to
 * [Configuration][] for different configurations based on your situations
 * [Body Validation][] skip the body validation on the proxy for better performance
 * [TableauAuthHandler][] to handle authentication and get token for Tableau server
-
+* [Proxy as a Sidecar][] to handle the cross-cutting concerns at network level
   
 [Getting Started]: /getting-started/light-proxy/
 [Tutorial]: /tutorial/proxy/
@@ -65,3 +65,4 @@ To learn how to use this proxy, please refer to
 [Artifact]: /service/proxy/artifact/
 [TableauAuthHandler]: /service/proxy/tableau/
 [Body Validation]: /service/proxy/body-validation/
+[Proxy as a Sidecar]: /service/proxy/sidecar/
