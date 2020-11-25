@@ -49,6 +49,8 @@ This tutorial shows how to use the service registry and discovery feature of the
 
 * [OpenTracing with Jaeger][]
 
+* [Portal Registry][]
+
 [Introduction and Code Generation]: /tutorial/common/discovery/generated/
 [Static Configuration]: /tutorial/common/discovery/static/
 [Dynamic Service Discovery with Direct Registry]: /tutorial/common/discovery/dynamic/
@@ -67,3 +69,4 @@ This tutorial shows how to use the service registry and discovery feature of the
 [Enable Security]: /tutorial/common/discovery/security/
 [OpenShift]: /tutorial/common/discovery/openshift/
 [OpenTracing with Jaeger]: /tutorial/tracing/jaeger/service-discovery/
+[Portal Registry]: /tutorial/common/discovery/portal-registry/
