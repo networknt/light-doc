@@ -36,6 +36,7 @@ The following are major components for light-portal:
 * [User Management](/service/portal/user-management/)
 * [OAuth 2.0 Provider](/service/portal/oauth2-admin/)
 * [API Certification](/service/portal/api-certification/)
+* [Light-Controller](/service/portal/light-controller/)
 
 
 [technology stack]: /service/portal/technology-stack/
