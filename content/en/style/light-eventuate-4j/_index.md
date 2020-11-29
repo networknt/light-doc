@@ -4,11 +4,6 @@ date: 2017-12-07T12:44:15-05:00
 description: ""
 categories: [style]
 keywords: []
-menu:
-  docs:
-    parent: "style"
-    weight: 05
-weight: 05	#rem
 aliases: []
 toc: false
 draft: false

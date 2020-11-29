@@ -124,28 +124,7 @@ section, some of the most important tutorials are listed here and more will be a
   * [Taiji Blockchain Web Client Server SPA with handler.yml](/tutorial/hybrid/web-client-spa/)
   * [Register individual handlers to Consul for discovery](/tutorial/hybrid/register-handler/)
 
-- [Light-eventuate-4j](/tutorial/eventuate/)
-  * [Getting Started](/tutorial/eventuate/getting-started/)
-  * [Todo-list Tutorial](/tutorial/eventuate/todo-list/)
-     + [Prepare Envionment](/tutorial/eventuate/todo-list/prepare/)    
-     + [Create Project](/tutorial/eventuate/todo-list/project/)    
-     + [Rest Command Side](/tutorial/eventuate/todo-list/rest-command/)    
-     + [Rest Query Side](/tutorial/eventuate/todo-list/rest-query/)    
-     + [Rest Test](/tutorial/eventuate/todo-list/rest-test/)    
-     + [Hybrid Command Side](/tutorial/eventuate/todo-list/hybrid-command/)    
-     + [Hybrid Query Side](/tutorial/eventuate/todo-list/hybrid-query/)    
-     + [Hybrid Test](/tutorial/eventuate/todo-list/hybrid-test/)    
-     + [Rest Docker](/tutorial/eventuate/todo-list/rest-docker/)    
-     + [Hybrid Docker](/tutorial/eventuate-4j/todol-list/hybrid-docker/)    
-  * [Account Management Tutorial](/tutorial/eventuate/account-management/)  
-  * [Kafka Tutorial][] helps to work with Kafka in Docker container.
-  * [Test Tutorial][] helps users to write unit tests, integration tests, and end-to-end tests.
-  * [Developer's Tutorial][] guidelines for developers who are working on the framework or services
-  * [Docker Tutorial][] helps users to work with Docker and Eventuate
-
-- [Light-tram-4j](/tutorial/tram/)
-  * [Todo list tutorial](/tutorial/tram/todo-list/)    
-  * [Development API with light-tram-4j](/tutorial/tram/develop/)    
+- [Light-kafka](/tutorial/light-kafka/)
 
 - [Light-mq](/tutorial/mq/)
 
