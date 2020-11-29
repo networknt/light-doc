@@ -71,7 +71,7 @@ ttlCheck: ${portalRegistry.ttlCheck:false}
 
 ```
 
-### Service.yml
+### Update service.yml
 
 Change the registry to PortalRegistry. 
 
@@ -96,6 +96,21 @@ singletons:
   - com.networknt.cluster.LightCluster
 
 ```
+
+### Update server.yml
+
+In the server.yml, update the enableRegistry to true. Or add an entry in the values.yml 
+
+```
+server.enableRegistry: true
+```
+
+### Add client.yml and client.truststore
+
+You need the light-4j Http2Client to connect to the light-controller.
+
+Add client.yml if it is missing and corresponding cleint.truststore that contains the certificate issued by the light-controller.
+
 
 ### Start the light-controller
 
@@ -247,5 +262,6 @@ curl -k https://localhost:2404/v1/data
 
 
 [Portal Registry]: /concern/portal-registry/
+
 
 
