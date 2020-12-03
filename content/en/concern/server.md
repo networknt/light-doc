@@ -327,7 +327,61 @@ To get the certificates, you have two options:
 * Buy certificates from a CA like VeriSign.
 * Setup a CA in your organization and use OpenSSL to generate certificates.
 
-For more information
+### startOnRegistryFailure
+
+```
+# Flag to enable self service registration. This should be turned on on official test and production. And
+# dyanmicPort should be enabled if any orchestration tool is used like Kubernetes.
+enableRegistry: ${server.enableRegistry:true}
+
+# When enableRegistry is true and the registry/discovery service is not reachable. Stop the server or continue
+# starting the server. When your global registry is not setup as high availability and only for monitoring, you
+# can set it true. If you are using it for global service discovery, leave it with false.
+startOnRegistryFailure: ${server.startOnRegistryFailure:true}
+```
+
+When we set the enableRegistry flag to true in the server.yml to register the service to the Light-controller or Consul for global registry/discovery, the server will stop if the registry is not reachable. 
+
+It is the desired behaviour if we are using the global registry for service discovery. However, in the following scenario, we might want the server to start even if it is failed to register. 
+
+In a development environment and the Light-control is deployed as a standalone service without the cluster configuration backed by Kafka Streams. The registration is done on a best-effort basis. The purpose of the registry is to monitor the runtime instances with the health check. And to leverage the additional features like server info access and changing the logging level on an individual instance in a cloud environment. 
+
+If the enable registry is true, startOnRegistryFailure is true, and Light-controller is down. You will see the following message during the server startup to warn you that the global registry is down; however, the server is up and running. 
+
+```
+Failed to register service, start the server without registry.
+java.lang.RuntimeException: Connection refused
+  at com.networknt.portal.registry.client.PortalRegistryClientImpl.registerService(PortalRegistryClientImpl.java:122)
+  at com.networknt.portal.registry.PortalRegistry.doRegister(PortalRegistry.java:66)
+  at com.networknt.registry.support.AbstractRegistry.register(AbstractRegistry.java:77)
+  at com.networknt.server.Server.register(Server.java:504)
+  at com.networknt.server.Server.bind(Server.java:302)
+  at com.networknt.server.Server.start(Server.java:199)
+  at com.networknt.server.Server.init(Server.java:121)
+  at com.networknt.server.Server.main(Server.java:103)
+Http port disabled.
+Https Server started on ip:0.0.0.0 Port:8443
+
+```
+
+If startOnRegistryFailure is false, you might have the following output from the console to indicate that the global registry is down and the server is not started. 
+
+```
+Failed to register service, the server stopped.
+java.lang.RuntimeException: Connection refused
+  at com.networknt.portal.registry.client.PortalRegistryClientImpl.registerService(PortalRegistryClientImpl.java:122)
+  at com.networknt.portal.registry.PortalRegistry.doRegister(PortalRegistry.java:66)
+  at com.networknt.registry.support.AbstractRegistry.register(AbstractRegistry.java:77)
+  at com.networknt.server.Server.register(Server.java:504)
+  at com.networknt.server.Server.bind(Server.java:302)
+  at com.networknt.server.Server.start(Server.java:199)
+  at com.networknt.server.Server.init(Server.java:121)
+  at com.networknt.server.Server.main(Server.java:103)
+Failed to start server:Connection refused
+Disconnected from the target VM, address: '127.0.0.1:34731', transport: 'socket'
+
+Process finished with exit code 1
+```
 
 http://stackoverflow.com/questions/29546834/trust-not-trusted-certificates-and-skip-hostname-verification/29547114#29547114
 https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning
