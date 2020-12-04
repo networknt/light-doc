@@ -4,6 +4,11 @@ date: 2020-11-13T19:55:55-05:00
 description: ""
 categories: []
 keywords: []
+menu:
+  docs:
+    parent: "service"
+    weight: 71
+weight: 71
 slug: ""
 toc: false
 draft: false
@@ -39,4 +44,13 @@ Here is a picture of the client discovery and synchronization with the controlle
 
 
 Please note that there is only one client in the picture to make the diagram simple and easy to understand. In a real environment, there would be hundreds or even thousands of clients in the picture. A service itself can be a client that calls several services, and several clients can call it. 
+
+Although the light-controller is not an open-source project, it is free to use in a docker container. We also provide a docker-comopse-controller.yml in the light-docker project with all the configuration files externalized to the controller folder for customization. 
+
+To start the light-controller
+
+```
+cd ~/networknt/light-docker
+docker-compose -f docker-compose-controller.yml up -d
+```
 

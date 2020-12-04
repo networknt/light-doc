@@ -53,6 +53,7 @@ The following are some of the important services recommended by the Light platfo
 
 [light-portal][] is an API runtime management and marketplace. In the service mesh context, it is the control plane. 
 
+[light-controller][] is a standard edition of global registry and discovery service with runtime monitoring. 
 
 [light-router][] is a proxy service that can help an external or a  legacy client to access cloud-native microservices by encapsulating consumer side cross-cutting concerns into a microservice as a distributed gateway. 
 
@@ -108,3 +109,4 @@ The following are some of the important services recommended by the Light platfo
 [Jaeger]: /service/tracing/jaeger/
 [SkyWalking]: /service/tracing/skywalking/
 [How to secure Hazelcast]: /service/oauth/deployment/hazelcast/
+[light-controller]: /service/controller/
