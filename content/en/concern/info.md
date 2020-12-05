@@ -7,65 +7,66 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
+### Introduction
 
-## Introduction
-
-Almost every module in light-4j has a configuration file that can be
-externalized with default can be in the module itself or the API implementation
-config folder. In order to give an overview of the server runtime, system
-properties, specification as well as configurations for each enabled modules,
-there is a special handler that is injected in your swagger specification.
-Once this handler endpoint is called, it will output all the server info in
-a JSON format. 
+Almost every module in light-4j has a configuration file externalized with default in the module itself or the API implementation config folder. A special handler injected in your hander.yml gives an overview of the server runtime, system properties, specification, and configurations for each enabled modules. Once this handler endpoint is called, it will output all the server info in a JSON format. 
 
 
-## Configuration
+### Configuration
 
 info.yml
 ```
 # Server info endpoint that can output environment and component along with configuration
 
 # Indicate if the server info is enable or not.
-enableServerInfo: true
+enableServerInfo: ${info.enableServerInfo:true}
 ```
 
-Unlike other modules, server info handler is not plugged in into the handler 
-chain during server start up. It should be part of the swagger specification 
-and route to this handler in the routing handler. If enableServerInfo is false,
-then an error message will returned with ERR10013 - SERVER_INFO_DISABLED.
+Unlike other modules, the server info handler is plugged into the handler chain in the handler.yml file. It should not be part of the OpenAPI specification or other specifications for other frameworks if the API is not Restful.  If enableServerInfo is false, then an error message will be returned with ERR10013 - SERVER_INFO_DISABLED.
 
-## Swagger
+handler.yml
 
-Along with other endpoints/paths defined in the swagger specification, an
-extra endpoint should be added with special oauth2 scope for this handler.
-It is recommended to use /basePath/server/info so that some automatic tool
-or API portal server can access to it in a standard way.
+```
+handlers:
+  - com.networknt.info.ServerInfoGetHandler@info
 
-## Extension
+.
+.
+.
 
-For other contributed modules or API application specific modules, please
-following the following guideline to register your module
-in /basePath/server/info endpoint.
+paths:
+  - path: '/server/info'
+    method: 'get'
+    exec:
+      - security
+      - info
 
-For handlers, it is registered when injecting into the handler chain during
-server start up.
-For other utilities, it should have a static block to register itself during
-server start up.
+```
 
-Here is the example code to register module and its config.
+The above path /server/info is the standard path that is used by the light-controller and light-portal for the runtime dashboard to access the server info after a service registers itself.  
+
+Unlike the health check endpoint, the server info endpoint returns a lot of information for the server instance. It should be protected by the security handler all the time. When the service is registered to the light-controller, either standard edition running in a docker container or an enterprise edition deployed with light-portal, this endpoint should only be accessed with a special bootstrap token provided by light-controller.
+
+### Extension
+
+For other contributed modules or API application-specific modules, please follow the following guideline to register your module in /server/info endpoint.
+
+For handlers, it is registered when injecting into the handler chain during server startup. For other utilities, it should have a static block to register itself during server startup.
+
+Here is the example code to register a module and its config.
 
 ```
 ModuleRegistry.registerModule(ValidatorHandler.class.getName(), Config.getInstance().getJsonMapConfigNoCache(ValidatorHandler.CONFIG_NAME), null);
 ```
 
-## Mask sensitive data in config
+Take a look at the handlers in light-4j for detailed implementation of middleware handlers. 
 
-When module registers itself, it provide the configuration in JSON format for
-the module. Some components have sensitive info in their configuration, for
-example, db password, client secret etc. The third parameter in registerModule
-is a list of keys in the configuration file that need to be masked.
+### Mask sensitive data in config
+
+When a module registers itself, it provides the configuration in JSON format for the module. Some components have sensitive info in their configuration, for example, DB password, client secret etc. The third parameter in the registerModule method is a list of keys in the configuration file that need to be masked.
 
 Here is an example.
 
@@ -77,9 +78,17 @@ ModuleRegistry.registerModule(Client.class.getName(), Config.getInstance().getJs
 
 ```
 
-## Output
+### Light Proxy
 
-Here is the output from undertow swagger-codegen petstore specification.
+When the info handler is enabled on the light-proxy instance in a sidecar in a Kubernetes cluster, there are two scenarios for the response. 
+
+If the backend API doesn't have the info implemented, then the proxy will return the response based on the proxy instance's collection. 
+
+If the backend API has an info endpoint /server/info implemented, then the proxy info endpoint should combine both the proxy instance and backend API instance info. This is a separate implementation in the light-proxy project. 
+
+### Output
+
+Here is the output from the petstore API generated with the petstore OpenAPI specification.
 
 ```
 {
