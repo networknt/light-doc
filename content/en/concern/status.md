@@ -111,9 +111,23 @@ teams, here is the rule
     exchange.getResponseSender().send(status.toString());
     # rstoreeturn; # return if there are other code below.
 ```
-
 The above code will terminate the exchange if this is the last line of code in the
 handler. Otherwise, you need to add a return statement. 
+
+Alternatively in a handler that implements LightHttpHandler, you can use the following to achieve the same result:
+```
+    setExchangeStatus(exchange, "ERR10059");
+```
+
+# Stack trace a status
+In some cases we need to track where the status has been set when there is not enough logging info provided in the code.
+To enable the feature, there are some conditions has to be met:
+1. must use the default method **setExchangeStatus(HttpServerExchange exchange, Status status)** which provided by LightHttpHandler  
+2. logging level for LightHttpHandler must be set to **TRACE** level
+
+Then whenever a response is sent by setExchangeStatus, the logger will trace the call stack no matter if there is actually an error or not.
+To change logging level dynamically, please also see [Light Portal](/getting-started/light-portal)
+
 
 # Merging status.yml
 
