@@ -126,7 +126,7 @@ To enable the feature, there are some conditions has to be met:
 2. logging level for LightHttpHandler must be set to **TRACE** level
 
 Then whenever a response is sent by setExchangeStatus, the logger will trace the call stack no matter if there is actually an error or not.
-To change logging level dynamically, please also see [Light Portal](../getting-started/light-portal.md)
+To change logging level dynamically, please also see [Light Portal](/getting-started/light-portal)
 
 
 # Merging status.yml
