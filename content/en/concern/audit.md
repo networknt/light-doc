@@ -57,11 +57,25 @@ The output fields are populated based on the config file audit.yml and here is a
 # Enable Audit
 enabled: true
 
+# Enable mask
+mask: true
+
 # Output response status code
 statusCode: true
 
 # Output response time
 responseTime: true
+
+# audit only on error responses; by default log for any return status code
+# if true, audit at error level if status code >= 400
+# log level is controlled by logLevel
+auditOnError: false
+
+# log level; by default set to info
+logLevelIsError: false
+
+# the format for outputting the timestamp, if the format is not specified or invalid, will use a long value.
+timestampFormat: yyyy-MM-dd'T'HH:mm:ss.SSSZ
 
 # Output header elements. You can add more if you want.
 headers:
@@ -78,10 +92,10 @@ audit:
 # Client Id
 - client_id
 
-# User Id
+# User Id in id token, this is optional
 - user_id
 
-# Client Id in scope/access token
+# Client Id in scope/access token, this is optional
 - scope_client_id
 
 # Request endpoint uri@method.
@@ -91,10 +105,22 @@ audit:
 - serviceId
 
 # Request Body, this is optional and must be set by the service in its implementation
-- request
+- requestBody
+
+# Request Cookies, this is optional and must be set by the service in its implementation
+- requestCookies
+
+# Request Query Parameters, this is optional and must be set by the service in its implementation
+- queryParameters
+
+# Request Path Parameters, this is optional and must be set by the service in its implementation
+- pathParameters
 
 # Response payload, this is optional and must be set by the service in its implementation
-- response
+- responseBody
+
+# Response error status payload
+- Status
 
 ```
 
