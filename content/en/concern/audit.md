@@ -48,6 +48,7 @@ By default, the following fields are included:
 The audit.log is in JSON format, and it is easy to be parsed and monitored. 
 
 ### Configuration
+need to define com.networknt.audit.AuditHandler@audit in handler.yml then add this "audit" handler to the handler chain.
  
 The output fields are populated based on the config file audit.yml and here is an example. 
 
@@ -151,12 +152,17 @@ The following is the appender defined in the logback.xml or logback-test.xml
 ```
 
 ### Logging example
+Below is the example with default configs:
 
 ```
 INFO  [XNIO-1 I/O-1] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {"timestamp":1494286353929,"X-Correlation-Id":"abS_cAyTT5SIrHayM-11pQ","X-Traceability-Id":null,"statusCode":200,"responseTime":16}
 INFO  [XNIO-1 I/O-3] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {"timestamp":1494286353960,"X-Correlation-Id":"FUD_bbFpRpSs2CmVjJYt-A","X-Traceability-Id":"tid","statusCode":200,"responseTime":1}
 ```
+With different timestamp format, request body, query parameters:
+```
+16:22:07.112 [XNIO-1 task-1]  KUgvy0fqQNGO_8mCnnj1Vw INFO  Audit lambda$handleRequest$0 - {"timestamp":"2020-12-14T16:22:02.719-0500","X-Correlation-Id":"KUgvy0fqQNGO_8mCnnj1Vw","X-Traceability-Id":"LZIaEFAipVQvSTTEz","requestBody":"{\"name\":\"pepper\",\"type\":\"doodle\"}","queryParameters":"{parm1=[v1]}","statusCode":200,"responseTime":4389}
 
+```
 
 ### Customized Handler
 
