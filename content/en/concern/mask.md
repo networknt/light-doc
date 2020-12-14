@@ -19,8 +19,11 @@ In the server module, we have provided a JsonPathStartupHookProvider class that 
 
 As we don't know if the mask module is used or not in your application, we will add this JsonPathStartupHookProvider to the generated service.ym in the light-codegen but comment it out. In this way, it would be easy for the end user to enable it if they want to leverage the mask module. 
 
+in service.yml
 ```
-
+singletons:
+- com.networknt.server.StartupHookProvider:
+    - com.networknt.server.JsonPathStartupHookProvider
 ```
 
 ### Configuration
