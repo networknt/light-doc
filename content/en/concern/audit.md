@@ -48,6 +48,7 @@ By default, the following fields are included:
 The audit.log is in JSON format, and it is easy to be parsed and monitored. 
 
 ### Configuration
+need to define com.networknt.audit.AuditHandler@audit in handler.yml then add this "audit" handler to the handler chain.
  
 The output fields are populated based on the config file audit.yml and here is an example. 
 
@@ -57,11 +58,25 @@ The output fields are populated based on the config file audit.yml and here is a
 # Enable Audit
 enabled: true
 
+# Enable mask
+mask: true
+
 # Output response status code
 statusCode: true
 
 # Output response time
 responseTime: true
+
+# audit only on error responses; by default log for any return status code
+# if true, audit at error level if status code >= 400
+# log level is controlled by logLevel
+auditOnError: false
+
+# log level; by default set to info
+logLevelIsError: false
+
+# the format for outputting the timestamp, if the format is not specified or invalid, will use a long value.
+timestampFormat: yyyy-MM-dd'T'HH:mm:ss.SSSZ
 
 # Output header elements. You can add more if you want.
 headers:
@@ -78,10 +93,10 @@ audit:
 # Client Id
 - client_id
 
-# User Id
+# User Id in id token, this is optional
 - user_id
 
-# Client Id in scope/access token
+# Client Id in scope/access token, this is optional
 - scope_client_id
 
 # Request endpoint uri@method.
@@ -91,10 +106,22 @@ audit:
 - serviceId
 
 # Request Body, this is optional and must be set by the service in its implementation
-- request
+- requestBody
+
+# Request Cookies, this is optional and must be set by the service in its implementation
+- requestCookies
+
+# Request Query Parameters, this is optional and must be set by the service in its implementation
+- queryParameters
+
+# Request Path Parameters, this is optional and must be set by the service in its implementation
+- pathParameters
 
 # Response payload, this is optional and must be set by the service in its implementation
-- response
+- responseBody
+
+# Response error status payload
+- Status
 
 ```
 
@@ -125,12 +152,17 @@ The following is the appender defined in the logback.xml or logback-test.xml
 ```
 
 ### Logging example
+Below is the example with default configs:
 
 ```
 INFO  [XNIO-1 I/O-1] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {"timestamp":1494286353929,"X-Correlation-Id":"abS_cAyTT5SIrHayM-11pQ","X-Traceability-Id":null,"statusCode":200,"responseTime":16}
 INFO  [XNIO-1 I/O-3] 2017-05-08 19:32:33,975 AuditHandler.java:141 - {"timestamp":1494286353960,"X-Correlation-Id":"FUD_bbFpRpSs2CmVjJYt-A","X-Traceability-Id":"tid","statusCode":200,"responseTime":1}
 ```
+With different timestamp format, request body, query parameters:
+```
+16:22:07.112 [XNIO-1 task-1]  KUgvy0fqQNGO_8mCnnj1Vw INFO  Audit lambda$handleRequest$0 - {"timestamp":"2020-12-14T16:22:02.719-0500","X-Correlation-Id":"KUgvy0fqQNGO_8mCnnj1Vw","X-Traceability-Id":"LZIaEFAipVQvSTTEz","requestBody":"{\"name\":\"pepper\",\"type\":\"doodle\"}","queryParameters":"{parm1=[v1]}","statusCode":200,"responseTime":4389}
 
+```
 
 ### Customized Handler
 
