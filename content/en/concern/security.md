@@ -71,20 +71,32 @@ In order to make the integration test easier, a long-lived token is provided by 
 
 ## Configuration
 
-Here is the default security.yml file. It is usually replaced by a framework-specific security configuration file like openapi-security.yml or graphql-security.yml to support multiple frameworks in a single light-4j instance with different security configurations. 
+Here is the default **security.yml** file. It is usually replaced by a **framework-specific** security configuration file like **openapi-security.yml** or **graphql-security.yml** to support multiple frameworks in a single light-4j instance with different security configurations. 
 
 
 ```yaml
 # Security configuration in light framework.
 ---
+# Security configuration for openapi-security in light-rest-4j. It is a specific config
+# for OpenAPI framework security. It is introduced to support multiple frameworks in the
+# same server instance. If this file cannot be found, the generic security.yml will be
+# loaded for backward compatibility.
+---
 # Enable JWT verification flag.
 enableVerifyJwt: true
 
-# Enable JWT scope verification. Only valid when enableVerifyJwt is true.
+# Extract JWT scope token from the X-Scope-Token header and validate the JWT token
+enableExtractScopeToken: true
+
+# Enable JWT scope verification. 
+# Only valid when (enableVerifyJwt is true) AND (enableVerifyJWTScopeToken is true)
 enableVerifyScope: true
 
 # User for test only. should be always be false on official environment.
 enableMockJwt: false
+
+# For test only, should be always be true on official environment.
+ignoreJwtExpiry: true
 
 # JWT signature public certificates. kid and certificate path mappings.
 jwt:
@@ -126,6 +138,9 @@ To enable security, just update enableVerifyJwt to true. If you want to verify t
 
 If you want to test with different payloads in JWT token or other parameters with JWT token generation, then you can set enableMockJwt to true; however, you'd better create a new security.yml and put it into src/test/resources/config folder so that it works only with your test cases. 
 
+### Ignore Token Expiry
+Set to true if you want to ignore the expiry when doing token validation.
+This should not be set to true in any producation environment.
 
 ### Public key certificates
 
