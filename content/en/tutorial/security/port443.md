@@ -139,7 +139,7 @@ sudo tail -f /var/log/syslog
 
 ### Local access
 
-The above setup is working on a remote server which is accessed from the Internet. However, if you want to access the 443 port on the same host which is expecting to be forwarded to the 8443, then you need to add the following command line. 
+The above setup is working on a remote server that is accessed from the Internet. However, if you want to access the 443 port on the same host expected to be forwarded to the 8443, you need to add the following command line. In most cases, it is your Linux desktop for development. 
 
 ```
 sudo iptables -t nat -A OUTPUT -p tcp --dport 443 -o lo -j REDIRECT --to-port 8443
@@ -176,3 +176,10 @@ You can confirm the rule is removed by issue the query again. The above OUTPUT R
 ```
 sudo iptables -t nat --line-numbers -L
 ```
+
+** Warning ** Please beware that the iptables rule can impact the docker container to access the Internet on your host. So please don't make this rule persistent on your local. 
+
+For more information, please visit this [issue](https://stackoverflow.com/questions/34319369/cannot-connect-to-https-443-from-a-docker-image)
+
+This rule will block your docker to access any HTTPS sites on the Internet. So if you encounter any problem with your docker build or docker run, you need to check your iptables rule.
+
