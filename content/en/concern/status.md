@@ -1,5 +1,5 @@
 ---
-title: "Status"
+title: "Error Status"
 date: 2017-11-05T10:24:06-05:00
 description: ""
 categories: [concerns]
@@ -7,7 +7,34 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
+
+## Introduction
+
+When deploying large-scale microservices in an organization, monitoring and alerting are very important for the operation team. The traditional way to monitor monolithic application logs to find potential error status is not feasible anymore. When all service logs are aggregated to the ELK or Splunk, we have a big melting pot of logging statements from different services. To dig useful information from it and identify problematic service instance is not an easy job. It is much simpler to monitor some severe error codes extracted from the logs, and most modern log aggregation tools support that. We need to design and allocate unique error code for each error status across all services in the organization. 
+
+
+## Features
+
+* Uniqueness across the entire organization. It allows us to identify the component or service with the error code only. 
+
+* Enough context info like message type and description in the dev environment to assist with testing and debugging.
+
+* Remove the message and description in the response on production via configuration to reduce the risk for hackers to figure out how the service works by trying different invalid requests. 
+
+* Log message and description on all environments, including production for support and diagnostic when receiving consumers' calls.
+
+* Support translation between the open-source status.yml error code to an organization-specific error code so that nobody can figure out the meaning from the service response. 
+
+* Customers can provide their implementations to add more context metadata in the status response. 
+
+* For small organizations, each service will have an error code range pre-allocated to ensure uniqueness. 
+
+* For medium or large organizations, light-portal provide error code registration and query with scenarios and resolutions. 
+
+
+## Design
 
 In the scenario that error happens on the server, a Status object is designed
 to encapsulate standard http response 4xx and 5xx as well as application specific
