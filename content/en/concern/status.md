@@ -33,20 +33,22 @@ When deploying large-scale microservices in an organization, monitoring and aler
 
 * For medium or large organizations, light-portal provide error code registration and query with scenarios and resolutions. 
 
+* Each service will have its app-status.yml file to define application-specific error status, and it will be merged to the status.yml provided in the platform during the server start.
+
 
 ## Design
 
-In the scenario that error happens on the server, a Status object is designed
-to encapsulate standard http response 4xx and 5xx as well as application specific
-error code ERRXXXXX (prefixed with ERR with another 5 digits) and error message.
-Additionally, an description of the error will be available for more info about
+In the scenario that an error happens on the server, a Status object is designed to encapsulate standard HTTP response 4xx and 5xx as well as application-specific error code ERRXXXXX (prefixed with ERR with another five digits) and error message.
+
+Additionally, a description of the error will be available for more info about
 the error.
 
-Note that the error code is prefixed with ERR is trying to ensure that there is
-no false alarm when monitoring tool process a stream of logs in searching for a
-list of important error code. 
+Note that the error code is prefixed with ERR is trying to ensure that there is no false alarm when the monitoring tool processes a stream of logs in searching for a list of significant error code. 
 
-# Data Elements
+Since we support customized error code per organization, it is good to use your company name acronym for the prefix and translate the light-platform error codes to it. For example, if your company is Example Inc., you can design your error code with EXP00001. The error code's length can be adjusted based on the company size or the number of services expecting to deploy.
+
+
+#### Data Elements
 
 Here are the four fields in the Status object.
 ```
@@ -56,7 +58,10 @@ Here are the four fields in the Status object.
     String description;
 ```
 
-# Construct the object from status.yml
+For users who want to add more context info in the development environment, a map of metadata can be added to support some key/value pairs. 
+
+#### Construct the object from status.yml
+
 status.yml is a configuration file that contains all the status error defined
 for the application and it has the structure like this.
 
@@ -71,9 +76,15 @@ ERR10001:
   code: ERR10001
   message: AUTH_TOKEN_EXPIRED
   description: Jwt token in authorization header expired
+ERR10005:
+  statusCode: 403
+  code: ERR10005
+  message: AUTH_TOKEN_SCOPE_MISMATCH
+  description: Scopes %s in authorization token and specification scopes %s are not matched
   .
   .
   .
+
 }
 ```
 
@@ -87,18 +98,18 @@ To construct the object from this config
     Status status = new Status(STATUS_METHOD_NOT_ALLOWED);
 
 ```
+
 To construct the object with arguments to have a description with context information.
 
 ```
    return new Status("ERR11000", queryParameter.getName(), swaggerOperation.getPathString().original());
-
 ```
 
-# Convert to JSON response
+Please note that you need to design your description to accept the argument if you want to pass some context info. Take a look at the description of ERR10005, for example. 
 
-There are several way to serialize the object to JSON in response. And string
-concat is almost 10 times faster than Jackson ObjectMapper. For one million
-objects:
+#### Convert to JSON response
+
+There are several ways to serialize the object to JSON in response. And string concatenation is almost ten times faster than Jackson ObjectMapper. For one million objects:
 
 ```
 Jackson Perf 503
@@ -106,13 +117,15 @@ ToString Perf 65
 
 ```
 
-# Customize Status JSON format
+
+
+#### Customize Status JSON format
 
 The default format is a flattened JSON that contains these properties in the status
 object. If you want to change the format or adding more fields into it, please refer
 to [customize status format][]
 
-# Error code range allocation
+#### Error code range allocation
 The error code prefixed with ERR with another 5 digits so that it can be easily
 scanned in log files. Also, certain error code can be used to trigger an alert
 such as email or pager notification on system wide issues.
@@ -130,7 +143,7 @@ teams, here is the rule
 20000-29999 common error codes within your business domain.
 90000-99999 customize error code that cannot be found in common range.
 
-# Send the JSON as response
+#### Send the JSON as response
 
 ```
     Status status = new Status(STATUS_METHOD_NOT_ALLOWED);
@@ -146,7 +159,7 @@ Alternatively in a handler that implements LightHttpHandler, you can use the fol
     setExchangeStatus(exchange, "ERR10059");
 ```
 
-# Stack trace a status
+#### Stack trace a status
 In some cases we need to track where the status has been set when there is not enough logging info provided in the code.
 To enable the feature, there are some conditions has to be met:
 1. must use the default method **setExchangeStatus(HttpServerExchange exchange, Status status)** which provided by LightHttpHandler  
@@ -156,7 +169,7 @@ Then whenever a response is sent by setExchangeStatus, the logger will trace the
 To change logging level dynamically, please also see [Light Portal](/getting-started/light-portal)
 
 
-# Merging status.yml
+#### Merging status.yml
 
 The framework has a status.yml defines all the errors within the framework. Once a
 company is using this framework, it might have a list of standard error within the
@@ -175,7 +188,6 @@ folder or externalized config folder.
 3. Using [light-config-server][] which can automatically merge status
 error codes from multiple levels.
 
- 
 
 [customize status format]: /faq/customize-status/
 [light-config-server]: https://github.com/networknt/light-config-server
