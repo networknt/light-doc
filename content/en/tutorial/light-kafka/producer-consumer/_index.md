@@ -424,3 +424,5 @@ curl -k 'https://localhost:8443/consumer/test'
 
 This example only touches the surface of the light-kafka capabilities. You can leverage many configuration combinations in the producer and consumer to build your handlers. However, the producer and consumer example is a good starting point if you are new to Kafka. 
 
+The final project can be found in the light-example-4j repository at [producer-consumer](https://github.com/networknt/light-example-4j/tree/master/kafka/producer-consumer)
+
