@@ -19,22 +19,21 @@ When deploying large-scale microservices in an organization, monitoring and aler
 
 * Uniqueness across the entire organization. It allows us to identify the component or service with the error code only. 
 
-* Enough context info like message type and description in the dev environment to assist with testing and debugging.
+* Define [application-specified](#status-for-business)  error.
 
-* Remove the message and description in the response on production via configuration to reduce the risk for hackers to figure out how the service works by trying different invalid requests. 
+* **Selectively** show "description", "message", "metadata" for different environment due to **security restriction**. please check [Status Configuration](#status-configuration)
+
+* Enough context info like message type and description in the dev environment to assist with testing and debugging.
 
 * Log message and description on all environments, including production for support and diagnostic when receiving consumers' calls.
 
-* Support translation between the open-source status.yml error code to an organization-specific error code so that nobody can figure out the meaning from the service response. 
+* Support translation between the open-source status.yml error code to an organization-specific error code to hide the real error code from user. please check [Customize Status](#customize-status)
 
-* Customers can provide their implementations to add more context metadata in the status response. 
+* Customers can provide their implementations to add more context **metadata** in the status response. 
 
 * For small organizations, each service will have an error code range pre-allocated to ensure uniqueness. 
 
-* For medium or large organizations, light-portal provide error code registration and query with scenarios and resolutions. 
-
-* Each service will have its app-status.yml file to define application-specific error status, and it will be merged to the status.yml provided in the platform during the server start.
-
+* For medium or large organizations, [Light Portal](/getting-started/light-portal) provide error code registration and query with scenarios and resolutions.
 
 ## Design
 
@@ -54,8 +53,25 @@ Here are the four fields in the Status object.
 ```
     int statusCode;
     String code;
+    String severity;
     String message;
     String description;
+    Map<String, Object> metadata;
+```
+The response will look like:
+```json
+{
+  "statusCode": 400,
+  "code": "ERR11000",
+  "message": "VALIDATOR_REQUEST_PARAMETER_QUERY_MISSING",
+  "description": "Query parameter parameter name is required on path original url but not found in request.",
+  "metadata": {
+    "metaKey": {
+      "nestedKey": "nestedValue"
+    }
+  },
+  "severity": "ERROR"
+}
 ```
 
 For users who want to add more context info in the development environment, a map of metadata can be added to support some key/value pairs. 
@@ -88,7 +104,7 @@ ERR10005:
 }
 ```
 
-To construct the object from this config
+##### To construct the object from this config
 
 ```
     static final String STATUS_METHOD_NOT_ALLOWED = "ERR10008";
@@ -99,14 +115,30 @@ To construct the object from this config
 
 ```
 
-To construct the object with arguments to have a description with context information.
+##### To construct the object with arguments to have a description with context information.
 
 ```
    return new Status("ERR11000", queryParameter.getName(), swaggerOperation.getPathString().original());
 ```
 
-Please note that you need to design your description to accept the argument if you want to pass some context info. Take a look at the description of ERR10005, for example. 
+Please note that you need to design your description to accept the argument if you want to pass some context info. Take a look at the description of ERR10005, for example.
 
+##### To add metadata
+With constructor.
+```java
+    return new Status("ERR11000", Map.of("key", "value"), queryParameter.getName(), swaggerOperation.getPathString().original());
+```
+With setter
+```java
+    Status status = new Status(STATUS_METHOD_NOT_ALLOWED);
+    Map<String, Object> metadata = Map.of("key", "value");
+    status.setMetadata(metadata);
+```
+With put method
+```java
+    Status status = new Status(STATUS_METHOD_NOT_ALLOWED);
+    status.put("key", "value");
+```
 #### Convert to JSON response
 
 There are several ways to serialize the object to JSON in response. And string concatenation is almost ten times faster than Jackson ObjectMapper. For one million objects:
@@ -116,8 +148,6 @@ Jackson Perf 503
 ToString Perf 65
 
 ```
-
-
 
 #### Customize Status JSON format
 
@@ -134,7 +164,7 @@ In order to make sure there is no conflict for error code allocation between
 teams, here is the rule
 
 10000-19999 reserved for the framework/system.
-   * 10000-10100 security
+   * 10000-10099 security
 
    * 11000-11999 validation
 
@@ -169,8 +199,7 @@ Then whenever a response is sent by setExchangeStatus, the logger will trace the
 To change logging level dynamically, please also see [Light Portal](/getting-started/light-portal)
 
 
-#### Merging status.yml
-
+#### Status for business
 The framework has a status.yml defines all the errors within the framework. Once a
 company is using this framework, it might have a list of standard error within the
 organization. Also, each line of business might have its own error code definitions.
@@ -188,6 +217,22 @@ folder or externalized config folder.
 3. Using [light-config-server][] which can automatically merge status
 error codes from multiple levels.
 
+#### Status Configuration 
+In app-status.yml you can add/change these configs to display metadata, description and message selectively. 
+```yaml
+showMetadata: false
+showDescription: true
+showMessage: true
+```
 
+#### Customize Status
+Create a custom StatusWrapper which implements StatusWrapper interface, and define it in service.yml.  
+In StatusWrapper.wrap() method, it wraps a com.networknt.status.Status in order to add customized info.  
+Whenever calling setExchangeStatus(), the StatusWrapper.wrap() will be called.  
+```yaml
+singletons:
+  - com.networknt.status.StatusWrapper:
+      - org.package.CustomStatusWrapper
+```
 [customize status format]: /faq/customize-status/
 [light-config-server]: https://github.com/networknt/light-config-server
