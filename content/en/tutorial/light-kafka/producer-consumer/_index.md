@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-This tutorial will build a microservice that produces a list of key-value pairs to a Kafka topic and consumes the list of records with another get endpoint.
+This tutorial will build a microservice that produces a list of users to a Kafka topic and consumes the list of users with another get endpoint.
 
 ### Codegen
 
@@ -32,7 +32,7 @@ mvn clean install exec:exec
 
 ### Producer
 
-First, let's implement the producer-handler. It accepts a list of Key/Value pairs and sends them to a Kafka topic specified by the path parameter. 
+First, let's implement the producer-handler. It accepts a list of users and sends them to a Kafka topic specified by the path parameter. 
 
 ##### pom.xml
 
@@ -143,12 +143,13 @@ transactionalIdExpirationMs: 2073600000
 
 ##### ProducerTopicPostHandler.java
 
-Update the generated handler to get the topic and a list of key/value pairs to send to Kafka. 
+Update the generated handler to get the topic and a list of users to send to Kafka. 
 
 ```
 package com.networknt.kafka.handler;
 
 import com.networknt.body.BodyHandler;
+import com.networknt.config.JsonMapper;
 import com.networknt.handler.LightHttpHandler;
 import com.networknt.kafka.producer.LightProducer;
 import com.networknt.service.SingletonServiceFactory;
@@ -176,16 +177,15 @@ public class ProducerTopicPostHandler implements LightHttpHandler {
         BlockingQueue<ProducerRecord<byte[], byte[]>> txQueue = producer.getTxQueue();
 
         for (int i = 0; i < list.size(); i++) {
-            Map<String, Object> itemMap = list.get(i);
-            String key = (String)itemMap.get("key");
-            String value = (String)itemMap.get("value");
-            ProducerRecord<byte[], byte[]> record = new ProducerRecord<>(topic, key.getBytes(StandardCharsets.UTF_8), value.getBytes(StandardCharsets.UTF_8));
+            Map<String, Object> userMap = list.get(i);
+            String userId = (String)userMap.get("userId");
+            ProducerRecord<byte[], byte[]> record = new ProducerRecord<>(topic, userId.getBytes(StandardCharsets.UTF_8), JsonMapper.toJson(userMap).getBytes(StandardCharsets.UTF_8));
             try {
                 txQueue.put(record);
             } catch (InterruptedException e) {
                 logger.error("Exception:", e);
             }
-            logger.debug("Send message with key = " + key + " value = " + value  + " to topic: " + topic);
+            logger.debug("Send message with userId = " + userId + " to topic: " + topic);
         }
         setExchangeStatus(exchange, STATUS_ACCEPTED);
     }
@@ -220,15 +220,15 @@ Send a request from curl and make sure application/json content-type is used.
 ```
 curl -k --location --request POST 'https://localhost:8443/producer/test' \
 --header 'Content-Type: application/json' \
---data-raw '[{"key":"key1","value":"value1"},{"key":"key2","value":"value2"}]'
-
+--data-raw '[{"userId":"stevehu","firstName":"Steve","lastName":"Hu","country":"CA"},{"userId":"joedoe","firstName":"Joe","lastName":"Doe","country":"US"},{"userId":"johnwalter","firstName":"John","lastName":"Walter","country":"CA"}]'
 ```
 
 From the consumer console, you should see the following lines. 
 
 ```
-key1-value1
-key2-value2
+stevehu-{"userId":"stevehu","firstName":"Steve","lastName":"Hu","country":"CA"}
+joedoe-{"userId":"joedoe","firstName":"Joe","lastName":"Doe","country":"US"}
+johnwalter-{"userId":"johnwalter","firstName":"John","lastName":"Walter","country":"CA"}
 ```
 
 ### Consumer
@@ -263,10 +263,10 @@ import com.networknt.server.StartupHookProvider;
 import com.networknt.service.SingletonServiceFactory;
 
 public class ConsumerStartupHook implements StartupHookProvider {
-    public static KeyValueConsumer consumer;
+    public static UserConsumer consumer;
     @Override
     public void onStartup() {
-        consumer = (KeyValueConsumer) SingletonServiceFactory.getBean(LightConsumer.class);
+        consumer = (UserConsumer) SingletonServiceFactory.getBean(LightConsumer.class);
         consumer.open();
     }
 }
@@ -293,13 +293,14 @@ public class ConsumerShutdownHook implements ShutdownHookProvider {
 
 ```
 
-##### KeyValueConsumer.java
+##### UserConsumer.java
 
 This is the consumer implementation that extends from the AbstractConsumer in the light-kafka. 
 
 ```
 package com.networknt.kafka;
 
+import com.networknt.config.JsonMapper;
 import com.networknt.kafka.consumer.AbstractConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -308,7 +309,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.*;
 
-public class KeyValueConsumer extends AbstractConsumer {
+public class UserConsumer extends AbstractConsumer {
     public void subscribe(String topic) {
         consumer.subscribe(Arrays.asList(topic));
     }
@@ -317,14 +318,11 @@ public class KeyValueConsumer extends AbstractConsumer {
         List<Map<String, Object>> list = new ArrayList<>();
         ConsumerRecords<byte[], byte[]> records = consumer.poll(Duration.ofMillis(100));
         for(ConsumerRecord<byte[], byte[]> record: records) {
-            String key = new String(record.key(), StandardCharsets.UTF_8);
             String value = new String(record.value(), StandardCharsets.UTF_8);
-            Map<String, Object> map = new HashMap<>();
-            map.put("key", key);
-            map.put("value", value);
-            map.put("partition", record.partition());
-            map.put("offset", record.offset());
-            list.add(map);
+            Map<String, Object> userMap = JsonMapper.string2Map(value);
+            userMap.put("partition", record.partition());
+            userMap.put("offset", record.offset());
+            list.add(userMap);
         }
         return list;
     }
@@ -350,7 +348,7 @@ singletons:
 - com.networknt.kafka.producer.LightProducer:
   - com.networknt.kafka.producer.TransactionalProducer
 - com.networknt.kafka.consumer.LightConsumer:
-  - com.networknt.kafka.KeyValueConsumer
+  - com.networknt.kafka.UserConsumer
 
 ```
 
@@ -418,6 +416,12 @@ After you have tested the producer, there should be some records in the Kafka te
 
 ```
 curl -k 'https://localhost:8443/consumer/test'
+```
+
+The result: 
+
+```
+[{"userId":"stevehu","firstName":"Steve","lastName":"Hu","country":"CA","partition":2,"offset":0},{"userId":"joedoe","firstName":"Joe","lastName":"Doe","country":"US","partition":2,"offset":1},{"userId":"johnwalter","firstName":"John","lastName":"Walter","country":"CA","partition":2,"offset":2}]
 ```
 
 ### Summary
