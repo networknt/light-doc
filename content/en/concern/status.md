@@ -226,13 +226,65 @@ showMessage: true
 ```
 
 #### Customize Status
-Create a custom StatusWrapper which implements StatusWrapper interface, and define it in service.yml.  
-In StatusWrapper.wrap() method, it wraps a com.networknt.status.Status in order to add customized info.  
-Whenever calling setExchangeStatus(), the StatusWrapper.wrap() will be called.  
-```yaml
-singletons:
-  - com.networknt.status.StatusWrapper:
-      - org.package.CustomStatusWrapper
-```
-[customize status format]: /faq/customize-status/
+In 1.6.30, the framework support user define their own customize status by creating a custom StatusWrapper which implements StatusWrapper interface, and define it in service.yml.  
+In StatusWrapper.wrap() method, it wraps a com.networknt.status.Status in order to add customized info. The wrapper takes HttpServerExchange as an argument, so the info contained by request can be used in customized status.  
+Whenever calling setExchangeStatus(), the StatusWrapper.wrap() will be called. 
+
+- sample implementation
+    ```java
+    package com.networknt.status;
+    
+    import io.undertow.server.HttpServerExchange;
+    
+    public class CustomStatusWrapper implements StatusWrapper {
+        @Override
+        public Status wrap(Status status, HttpServerExchange exchange) {
+            return new CustomStatus(status, exchange);
+        }
+    
+        private class CustomStatus extends Status {
+            private String customInfo;
+    
+            public CustomStatus(Status status, HttpServerExchange exchange) {
+                this.setStatusCode(status.getStatusCode());
+                this.setCode(status.getCode());
+                this.setDescription(status.getDescription());
+                this.setMessage(status.getMessage());
+                this.setSeverity(status.getSeverity());
+                this.setCustomInfo("custom_info");
+            }
+    
+            public String getCustomInfo() {
+                return customInfo;
+            }
+    
+            public void setCustomInfo(String customInfo) {
+                this.customInfo = customInfo;
+            }
+    
+            @Override
+            public String toString() {
+                String message = "{\"error\":" + "{\"statusCode\":" + getStatusCode()
+                        + ",\"code\":\"" + getCode()
+                        + "\",\"message\":\"" + getMessage()
+                        + "\",\"description\":\"" + getDescription()
+                        + "\",\"customInfo\":\"" + getCustomInfo()
+                        + "\",\"severity\":\"" + getSeverity() + "\"}" + "}";
+                return message;
+            }
+        }
+    }
+    ``` 
+ - Sample configuration
+    ```yaml
+    singletons:
+      - com.networknt.status.StatusWrapper:
+          - org.package.CustomStatusWrapper
+    ```
+ - Sample response
+    ```
+    {"error":{"statusCode":401,"code":"ERR10001","message":"AUTH_TOKEN_EXPIRED","description":"Jwt token in authorization header expired","customInfo":"custom_info","severity":"ERROR"}}
+    ```
+It should be noted that the feature is different from StatusSerializer. StatusSerializer only supports changes to the Status Json format. For more information about StatusSerializer, please check [customize status format](/faq/customize-status/).
+
 [light-config-server]: https://github.com/networknt/light-config-server
