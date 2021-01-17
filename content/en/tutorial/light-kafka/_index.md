@@ -15,3 +15,4 @@ We are using the light-kafka and light-hybrid-4j for the light-portal, light-blo
 * [Producer-Consumer](/tutorial/light-kafka/producer-consumer/)
 * [Stream-Query](/tutorial/light-kafka/stream-query/)
 * [Stream-Report](/tutorial/light-kafka/stream-report/)
+* [ksqldb-query](/tutorial/light-kafka/ksqldb-query/)
