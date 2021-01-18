@@ -1,6 +1,6 @@
 ---
-title: "Light Lambda Extension"
-date: 2020-12-08T16:48:56-05:00
+title: "AWS Lambda Framework"
+date: 2021-01-15T00:33:42-05:00
 description: ""
 categories: []
 keywords: []
@@ -10,13 +10,9 @@ draft: false
 reviewed: true
 ---
 
-In the light-platform, we are using the middleware handlers to address cross-cutting concerns for microservices in the request/response chain in the same service process or within a light-proxy/router at the network level. 
+### Lambda Framework
 
-With more and more serverless Lambda functions deployed to the AWS cloud, we need to find a way to address the cross-cutting concerns in the same fashion as the light-4j so that the Lambda functions can be integrated with the light ecosystem for security, logging, tracing, auditing and metrics. 
-
-
-There are different options to implement cross-cutting concerns for Lambda functions and they are all built one upon another.
-
+![lambda-framework](/images/lambda-framework.png)
 
 ### AWS Lambda layers
 

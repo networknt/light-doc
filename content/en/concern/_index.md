@@ -87,6 +87,14 @@ Here is a list of cross-cutting concerns provided by the light platform.
 * [RPC Router](/style/light-hybrid-4j/rpc-router/)
 * [RPC Security](/style/light-hybrid-4j/rpc-security/)
 
+#### light-aws-lambda
+
+With Lambda framework
+
+
+With Light-Proxy
+
+
 
 ## Business Cross-Cutting Concerns
 
