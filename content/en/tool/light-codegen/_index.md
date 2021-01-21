@@ -28,6 +28,7 @@ Given all the drawbacks, we have decided to build our generator. light-codegen i
 - [Swagger 2.0 Generator](/tool/light-codegen/swagger-generator/)
 - [OpenAPI 3.0 Generator](/tool/light-codegen/openapi-generator/)
 - [OpenAPI 3.0 Kotlin Generator](/tool/light-codegen/openapi-kotlin-generator/)
+- [OpenAPI 3.0 Lambda Generator](/tool/light-codegen/openapi-lambda-generator/)
 - [GraphQL Generator](/tool/light-codegen/graphql-generator/)
 - [Hybrid Server Generator](/tool/light-codegen/hybrid-server/)
 - [Hybrid Service Generator](/tool/light-codegen/hybrid-service/)

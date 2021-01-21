@@ -126,6 +126,10 @@ section, some of the most important tutorials are listed here and more will be a
 
 - [Light-kafka](/tutorial/light-kafka/)
 
+- [Light-aws-lambda](/tutorial/aws-lambda/)
+  * [Lambda Framework](/tutorial/aws-lambda/lambda-framework/)
+  * [Lambda Proxy](/tutorial/aws-lambda/lambda-proxy/)
+
 - [Light-mq](/tutorial/mq/)
 
 ### Infrastructure Service
