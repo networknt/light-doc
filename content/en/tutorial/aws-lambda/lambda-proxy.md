@@ -12,6 +12,8 @@ reviewed: true
 
 In this tutorial, we are going to use the light-proxy to address the cross-cutting concerns. We are going to scaffold a project with four Lambda functions based on the petstore OpenAPI 3.0 specification. 
 
+{{< youtube ozIHdQ6TdVQ >}}
+
 ### Specification
 
 The petstore specification [openapi.yaml][] and a [config-proxy.json][] can be found in [model-config][] repository in the networknt GitHub organization. 
@@ -24,6 +26,8 @@ To generate the project with local reference, we need to check out this repo.
 cd ~/networknt
 git clone https://github.com/networknt/model-config
 ```
+
+{{< youtube qFYRueJcUbs >}}
 
 ### Light-codegen
 
@@ -56,9 +60,29 @@ rm -rf light-example-4j/lambda/petstore-proxy
 java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapilambda -o light-example-4j/lambda/petstore-proxy -m model-config/lambda/petstore/openapi.yaml -c model-config/lambda/petstore/config-proxy.json
 ```
 
-### README.md
+{{< youtube hoUB2AXkOAM >}}
 
-In the generated petstore-proxy project, a README.md describes all the components and command lines to build and deploy these components. 
+### petstore-proxy
+
+Watch the video for the project walthrough.
+
+{{< youtube CSkAJhnTxzo >}}
+
+### Light-Proxy
+
+As the update for the [light-proxy][] is not released yet when we write this tutorial, we are using a locally build light-proxy.jar for the docker image. As a temporary solution, we will build the light-proxy locally. 
+
+```
+cd ~/networknt
+git clone git@github.com:networknt/light-proxy.git
+cd light-proxy
+mvn clean install
+```
+
+After the next release scheduled at the end of Jan 31, 2021, we don't need this step anymore, and the jar file will be downloaded from the GitHub release. 
+
+
+{{< youtube Ut1c0-e8kVg >}}
 
 
 ### Proxy Docker
@@ -77,6 +101,9 @@ chmod +x build.sh
 ./build.sh 1.0.0
 ```
 
+{{< youtube rfcYcg3Go2w >}}
+
+
 ### Deploy VPC
 
 To deploy the light-proxy containers, we need to create the VPC with 2 EC2 instances and two public subnets.
@@ -84,6 +111,9 @@ To deploy the light-proxy containers, we need to create the VPC with 2 EC2 insta
 ```
 aws cloudformation create-stack --stack-name petstore-vpc --template-body file://public-vpc.yaml --capabilities CAPABILITY_IAM
 ```
+
+{{< youtube 6uRUHD_rmBY >}}
+
 
 ### Deploy Lambda Functions
 
@@ -99,6 +129,8 @@ Deploy Lambda functions to the us-east-2
 ```
 sam deploy --guided
 ```
+
+{{< youtube W6b4S70QqBk >}}
 
 ### Deploy Light-Proxy
 
@@ -120,6 +152,8 @@ aws cloudformation create-stack \
 ```
 
 Replace the ImageUrl, AccessKeyId and SecretAccessKey in the above command.
+
+
 
 ### Test
 
@@ -151,9 +185,26 @@ curl -X GET http://petst-publi-1hvkn942lczba-1854182859.us-east-2.elb.amazonaws.
 
 This time you will have the result.
 
+{{< youtube XLoQUYhU93M >}}
+
+### Clean Up
+
+The command to delete a stack is in the README.md and we can use it to delete the stacks we just created. The VPC stack might be charge by AWS depending on your plan. 
+
+```
+aws cloudformation delete-stack --stack-name petstore-proxy
+aws cloudformation delete-stack --stack-name petstore-vpc
+aws cloudformation delete-stack --stack-name petstore
+```
+
+{{< youtube levJI7G9liw >}}
+
+
 [model-config]: https://github.com/networknt/model-config/tree/master/lambda/petstore
 [openapi.yaml]: https://github.com/networknt/model-config/blob/master/lambda/petstore/openapi.yaml
 [config-proxy.json]: https://github.com/networknt/model-config/blob/master/lambda/petstore/config-proxy.json
 [README.md]: https://github.com/networknt/model-config/tree/master/lambda/petstore
 [petstore-proxy]: https://github.com/networknt/light-example-4j/tree/master/lambda/petstore-proxy
+[light-proxy]: https://github.com/networknt/light-proxy
+
 
