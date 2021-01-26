@@ -28,6 +28,7 @@ git config --global user.name "Steve Hu"
 git config --global user.email stevehu@gmail.com
 ```
 
+To remove a sensitive file from the history, please refer to https://docs.github.com/en/github/authenticating-to-github/removing-sensitive-data-from-a-repository
 
 - [Remove Big Binary Files from Repo](/tool/git/remove-bigfile/)
  
