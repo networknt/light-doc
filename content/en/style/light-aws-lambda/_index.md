@@ -25,6 +25,21 @@ There are two different options to implement cross-cutting concerns for Lambda f
 
 * [Lambda-Framework][] - cross-cutting concerns with interceptors, extensions within Lambda functions.
 
+Most users want to focus on the business logic implementation for the Lambda functions instead of boilerplate code. Regardless of which approach to use, the light-codegen can scaffold the Lambda function project based on the OpenAPI specification. 
+
+* [Lambda Proxy Generation][] - scaffolding a project that leverages the light-proxy
+* [Lambda Framework Generation][] - scaffolding a project that leverages the Lambda framework
+
+When building Lambda functions in Java, the JVM runtime is prone to [code start latency](https://hackernoon.com/im-afraid-you-re-thinking-about-aws-lambda-cold-starts-all-wrong-7d907f278a4f).
+
+What if we create a native executable binary for Linux from our Java code. This is what GraalVM tooling enables us to do. All projects generated from the light-codegen will include a custom runtime, and the Gradle build script will call the graalvm docker to build the lambda functions to the native images.
+
+* [native-image][] Native image with custom runtime to avoid cold start latency
+
 
 [Lambda-Proxy]: /style/light-aws-lambda/lambda-proxy/
 [Lambda-Framework]: /style/light-aws-lambda/lambda-framework/
+[Lambda Proxy Generation]: /style/light-aws-lambda/codegen-proxy/
+[Lambda Framework Generation]: /style/light-aws-lambda/codegen-framework/
+[native-image]: /style/light-aws-lambda/native-image/
+
