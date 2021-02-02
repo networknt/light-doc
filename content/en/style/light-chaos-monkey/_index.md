@@ -72,6 +72,9 @@ Get all the configurations for assault handlers.
 
 Update one particular assault handler's configuration.
 
+### Tutorial
+
+To learn how to use these handlers, please visit the [petstore tutorial][].
 
 [Latency Assault]: /style/light-chaos-monkey/latency-assault/
 [Exception Assault]: /style/light-chaos-monkey/exception-assault/
@@ -79,3 +82,4 @@ Update one particular assault handler's configuration.
 [Memory Assault]: /style/light-chaos-monkey/memory-assault/
 [Get Config]: /style/light-chaos-monkey/getchaosmonkey/
 [Post Config]: /style/light-chaos-monkey/postchaosmonkey/
+[petstore tutorial]: /tutorial/chaos-monkey/petstore/
