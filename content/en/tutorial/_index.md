@@ -130,6 +130,10 @@ section, some of the most important tutorials are listed here and more will be a
   * [Lambda Framework](/tutorial/aws-lambda/lambda-framework/)
   * [Lambda Proxy](/tutorial/aws-lambda/lambda-proxy/)
 
+- [Light-chaos-monkey](/tutorial/chaos-monkey/)
+  * [Petstore Chaos Monkey](/tutorial/chaos-monkey/petstore/)
+
+
 - [Light-mq](/tutorial/mq/)
 
 ### Infrastructure Service

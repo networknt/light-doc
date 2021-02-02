@@ -4,6 +4,11 @@ date: 2021-01-28T12:01:21-05:00
 description: ""
 categories: []
 keywords: []
+menu:
+  docs:
+    parent: "style"
+    weight: 13
+weight: 13
 slug: ""
 toc: false
 draft: false
@@ -57,8 +62,20 @@ When the configured methods are called in the application, the Chaos Monkey will
 
 Memory Assaults attack the memory of the Java Virtual Machine.
 
+### Config Handlers
+
+* [Get Config][]
+
+Get all the configurations for assault handlers. 
+
+* [Post Config][]
+
+Update one particular assault handler's configuration.
+
 
 [Latency Assault]: /style/light-chaos-monkey/latency-assault/
 [Exception Assault]: /style/light-chaos-monkey/exception-assault/
 [KillApp Assault]: /style/light-chaos-monkey/killapp-assault/
 [Memory Assault]: /style/light-chaos-monkey/memory-assault/
+[Get Config]: /style/light-chaos-monkey/getchaosmonkey/
+[Post Config]: /style/light-chaos-monkey/postchaosmonkey/
