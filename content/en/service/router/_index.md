@@ -15,11 +15,11 @@ draft: false
 reviewed: true
 ---
 
-All the services developed on top of light-4j frameworks support [client side service discovery](http://microservices.io/patterns/client-side-discovery.html), load balance and cluster natively. However, for some clients that cannot leverage our client modules, we have provided light-router, which moves the client modules on the network to allow the original client to consume service as it is today without considering how dynamic these services are in the cloud.
+All the services developed on top of light-4j frameworks support [client side service discovery](http://microservices.io/patterns/client-side-discovery.html), load balance and cluster natively. However, for some clients who cannot leverage our client module, we have provided the light-router, which moves the client modules on the network to allow the original client to consume service as it is today without considering how dynamic these services are in the cloud.
 
-Another usage for the light-router is to act as a BFF(backend for frontend) for Single Page Applications or Mobile Native Applications. It is supposed to be used only for simple use cases that the client wants to access backend APIs built on top of the light platform. If there is additional logic in the business context, for example, transformation, orchestration, aggregation and integration, you need to create a microservice for the BFF using light-router as a template. 
+Another usage for the light-router is to act as a BFF(backend for frontend) for Single Page Applications or Mobile Native Applications. It is supposed to be used only for simple use cases that the client wants to access backend APIs built on top of the light platform. Suppose there is additional logic in the business context, for example, transformation, orchestration, aggregation and integration. In that case, you need to create a microservice for the BFF using light-router as a template. 
 
-The third use case for the light-router is to act as a distributed gateway for an external client. When exposing internal microservices to an external client on the Internet, we can deploy an instance of light-router per external client in the B2B scenario. The light-router will be responsible for security, load balance, service discovery and route traffic to the right services. We call this component as EAP (External Access Point).
+The third use case for the light-router is to act as a distributed gateway for an external client. When exposing internal microservices to an external client on the Internet, we can deploy an instance of light-router per external client in the B2B scenario. The light-router will be responsible for security, load balance, service discovery and route traffic to the right services. We call this component EAP (External Access Point).
 
 Along with service discovery and routing, light-router also provides other cross-cutting concerns like security, metrics, logging, validation and more.
 
@@ -39,6 +39,7 @@ The light-router has the following features:
 * Manage configuration with light-config-server
 
 To learn how to use this router, please refer to 
+
 
 * [Getting Started][] to learn why we have provided this router
 * [Tutorial][] with step by step guide for the RESTful router
