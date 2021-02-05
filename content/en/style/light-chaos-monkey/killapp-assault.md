@@ -10,7 +10,9 @@ draft: false
 reviewed: true
 ---
 
-With the following config file, one of the requests will trigger the handler and kill the application process. 
+When this middleware handler is enabled, it will kill the server during one of the requests. The level in the config file controls the chance of this attack. 
+
+### Config
 
 killapp-assault.yml
 
@@ -24,4 +26,21 @@ level: 5
 
 ```
 
+### Expectation
 
+When a particular request triggers the attack, the server instance will shut down. If you are running the server in a docker container, the scheduler should be set up to restart it automatically.
+ 
+For that particular request, no response will be returned. Depending on the client library is used, it might throw an IOException or something else. The client should try to look up another server instance in the cluster and retry the same request. 
+
+When client-side service discovery is used, the client should switch the connection to another instance for all subsequent requests.
+
+In the centralized log, the following info level log statement can be found. 
+
+```
+Chaos Monkey - I am killing the Server!
+```
+
+
+### Recovery
+
+If the server runs in a Kubernetes cluster, the scheduler should automatically restart the container.

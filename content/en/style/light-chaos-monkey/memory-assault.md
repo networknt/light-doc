@@ -12,6 +12,8 @@ reviewed: true
 
 It is a middleware handler that will eat free memory once it is triggered based on the config file below.
 
+### Config
+
 memory-assault.yml
 
 ```
@@ -37,3 +39,24 @@ memoryFillTargetFraction: 0.25
 ```
 
 This handler should only be used with a Docker container with memory limitation. If you run with your desktop, it would eat your memory and render your desktop very slow. 
+
+
+### Expectation
+
+When a request triggers this attack, the request will have no response, and the middleware handler will try to eat the free memory until out of memory. 
+
+If the server runs in a Docker container with limited memory allocated, the container will be shut down and restarted by the schedular. 
+
+In the centralized log, the following info level log statement can be found. 
+
+```
+Chaos Monkey - I am eating free memory!
+```
+
+### Recovery
+
+The current request will get time out or IOException depending on the timeout setup. And it should retry the same request with another server instance. 
+
+All subsequent requests should go to another instance. 
+
+The server instance should be restarted by the scheduler automatically.

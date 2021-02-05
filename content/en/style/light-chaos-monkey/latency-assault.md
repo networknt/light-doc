@@ -10,7 +10,9 @@ draft: false
 reviewed: true
 ---
 
-This middleware handler will generate a fixed or random delay in the request/response chain. 
+This middleware handler will generate a fixed or random delay in the request/response chain once it is enabled.
+
+### Config
 
 The following is the config file. 
 
@@ -29,3 +31,24 @@ latencyRangeStart: 10000
 latencyRangeEnd: 10000
 
 ```
+
+### Expectation
+
+Depending on the configuration, a random latency will be injected during the normal request flow. If one request is picked to trigger the assault, a random or fixed delay will be added before returning the response to the client.
+
+In the centralized log, you should find the following info level statement.
+
+```
+Chaos Monkey - I am sleeping for 1000 milliseconds!
+```
+
+The number of milliseconds is a variable in the statement.
+
+
+In the metrics, you should see the response time for the endpoint has a spike periodically.
+
+### Recovery
+
+For each client request, a timeout should be configured, and it should retry another server instance in the cluster. 
+
+If the timeout is not reached, then it is business as usual. 
