@@ -535,7 +535,7 @@ The throughput dropped from 93K to 82K as expected.
 ### Baseline Summary
 
 | Test Case                 | Max Throughput | Avg Latency | Transfer | 
-|---------------------------|----------------|-------------|----------|
+| ------------------------- | -------------- | ----------- | -------- |
 | Light-4j Standalone       | 2,422,353      | 1.63ms      | 445.86MB |
 | Spring Boot Standalone    | 93,439         | 34.45ms     | 19.00MB  |
 | Light-4j Docker           | 1,478,098      | 0.99ms      | 272.06MB |
