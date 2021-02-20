@@ -58,7 +58,7 @@ To learn how to use this proxy, please refer to
 * [Body Validation][] skip the body validation on the proxy for better performance
 * [TableauAuthHandler][] to handle authentication and get token for Tableau server
 * [Proxy as a Sidecar][] to handle the cross-cutting concerns at network level
-* [Proxy Benchmark][] to give confidence for users to leverage the proxy.
+* [Proxy Benchmark][] to give confidence for users to leverage the proxy for maximum throughput
 
 [Getting Started]: /getting-started/light-proxy/
 [Tutorial]: /tutorial/proxy/

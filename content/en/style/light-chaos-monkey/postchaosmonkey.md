@@ -50,7 +50,7 @@ As body parser handler is used in chain, we need to have the Content Type set as
 Here is a real request. 
 
 ```
-curl --location --request POST 'https://localhost:8443/chaosmonkey/com.networknt.chaos.LatencyAssaultHandler' \
+curl -k --location --request POST 'https://localhost:8443/chaosmonkey/com.networknt.chaos.LatencyAssaultHandler' \
 --header 'Content-Type: application/json' \
 --data-raw ' {
     "enabled": true,
