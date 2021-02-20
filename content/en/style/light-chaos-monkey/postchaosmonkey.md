@@ -54,6 +54,7 @@ curl -k --location --request POST 'https://localhost:8443/chaosmonkey/com.networ
 --header 'Content-Type: application/json' \
 --data-raw ' {
     "enabled": true,
+    "bypass": false,
     "level": 5,
     "latencyRangeStart": 1000,
     "latencyRangeEnd": 60000
@@ -61,6 +62,8 @@ curl -k --location --request POST 'https://localhost:8443/chaosmonkey/com.networ
 '
 
 ```
+
+Note that we changed the bypass to false in the above request body to allow the latency attacks triggered. 
 
 For the real request example, please visit the [chaos monkey tutorial][]. 
 

@@ -130,8 +130,10 @@ To simulate the latency assault, add the following config file to the config fol
 ```
 # Light Chaos Monkey Latency Assault Handler Configuration.
 
-# Enable the handler if set to true. Otherwise, the request will pass through.
+# Enable the handler if set to true so that it will be wired in the handler chain during the startup
 enabled: true
+# Bypass the current chaos monkey middleware handler so that attacks won't be triggered.
+bypass: false
 # How many requests are to be attacked. 1 each request, 5 each 5th request is attacked
 level: 3
 # Dynamic Latency range start in milliseconds. When start and end are equal, then fixed latency.
@@ -159,8 +161,10 @@ We can use this handler to simulate runtime exceptions within the normal request
 ```
 # Light Chaos Monkey Excpetion Assault Handler Configuration.
 
-# Enable the handler if set to true. Otherwise, the request will passthrough.
+# Enable the handler if set to true so that it will be wired in the handler chain during the startup
 enabled: true
+# Bypass the current chaos monkey middleware handler so that attacks won't be triggered.
+bypass: false
 # How many requests are to be attacked. 1 each request, 5 each 5th request is attacked
 level: 5
 ```
@@ -188,8 +192,10 @@ To simulate the server crash during the normal request flow, we can set up the k
 ```
 # Light Chaos Monkey Kill App Assault Handler Configuration.
 
-# Enable the handler if set to true. Otherwise, the request will pass through.
+# Enable the handler if set to true so that it will be wired in the handler chain during the startup
 enabled: true
+# Bypass the current chaos monkey middleware handler so that attacks won't be triggered.
+bypass: false
 # How many requests are to be attacked. 1 each request, 5 each 5th request is attacked
 level: 5
 
@@ -217,8 +223,10 @@ To enable it, add the following config file.
 ```
 # Light Chaos Monkey Memory Assault Handler Configuration.
 
-# Enable the handler if set to true. Otherwise, the request will passthrough.
-enabled: false
+# Enable the handler if set to true so that it will be wired in the handler chain during the startup
+enabled: true
+# Bypass the current chaos monkey middleware handler so that attacks won't be triggered.
+bypass: false
 # How many requests are to be attacked. 1 each request, 5 each 5th request is attacked
 level: 5
 # Duration to assault memory when requested fill amount is reached in ms.
@@ -250,7 +258,9 @@ curl -k https://localhost:8443/chaosmonkey
 And the result should be something like the following.
 
 ```
-{"com.networknt.chaos.LatencyAssaultHandler":{"enabled":false,"level":3,"latencyRangeStart":10000,"latencyRangeEnd":10000},"com.networknt.chaos.ExceptionAssaultHandler":{"enabled":false,"level":5},"com.networknt.chaos.KillappAssaultHandler":{"enabled":false,"level":5},"com.networknt.chaos.MemoryAssaultHandler":{"enabled":false,"level":5,"memoryMillisecondsHoldFilledMemory":90000,"memoryMillisecondsWaitNextIncrease":1000,"memoryFillIncrementFraction":0.15,"memoryFillTargetFraction":0.25}}
+[{"id":1,"name":"catten","tag":"cat"},{"id":2,"name":"doggy","tag":"dog"}]steve@freedom:~$ curl -k https://localhost:8443/chaosmonkey
+{"com.networknt.chaos.LatencyAssaultHandler":{"enabled":true,"bypass":false,"level":1,"latencyRangeStart":60000,"latencyRangeEnd":60000},"com.networknt.chaos.ExceptionAssaultHandler":{"enabled":true,"bypass":true,"level":5},"com.networknt.chaos.KillappAssaultHandler":{"enabled":true,"bypass":true,"level":5},"com.networknt.chaos.MemoryAssaultHandler":{"enabled":true,"bypass":true,"level":5,"memoryMillisecondsHoldFilledMemory":90000,"memoryMillisecondsWaitNextIncrease":1000,"memoryFillIncrementFraction":0.15,"memoryFillTargetFraction":0.25}}
+
 ```
 
 ### post chaosmonkey
@@ -260,10 +270,11 @@ To update the configuation for a particular assault handler, we need to use the 
 Send the following request from the terminal.
 
 ```
-curl --location --request POST 'https://localhost:8443/chaosmonkey/com.networknt.chaos.LatencyAssaultHandler' \
+curl -k --location --request POST 'https://localhost:8443/chaosmonkey/com.networknt.chaos.LatencyAssaultHandler' \
 --header 'Content-Type: application/json' \
 --data-raw ' {
     "enabled": true,
+    "bypass": false,
     "level": 5,
     "latencyRangeStart": 1000,
     "latencyRangeEnd": 60000
@@ -277,6 +288,7 @@ The response will be the updated config for this handler.
 ```
 {
     "enabled": true,
+    "bypass": false,
     "level": 5,
     "latencyRangeStart": 1000,
     "latencyRangeEnd": 60000

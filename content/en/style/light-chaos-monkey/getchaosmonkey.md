@@ -42,7 +42,8 @@ curl -k https://localhost:8443/chaosmonkey
 The result should be something like this.
 
 ```
-{"com.networknt.chaos.LatencyAssaultHandler":{"enabled":false,"level":3,"latencyRangeStart":10000,"latencyRangeEnd":10000},"com.networknt.chaos.ExceptionAssaultHandler":{"enabled":false,"level":5},"com.networknt.chaos.KillappAssaultHandler":{"enabled":false,"level":5},"com.networknt.chaos.MemoryAssaultHandler":{"enabled":false,"level":5,"memoryMillisecondsHoldFilledMemory":90000,"memoryMillisecondsWaitNextIncrease":1000,"memoryFillIncrementFraction":0.15,"memoryFillTargetFraction":0.25}}
+{"com.networknt.chaos.LatencyAssaultHandler":{"enabled":true,"bypass":true,"level":1,"latencyRangeStart":1000,"latencyRangeEnd":60000},"com.networknt.chaos.ExceptionAssaultHandler":{"enabled":true,"bypass":true,"level":5},"com.networknt.chaos.KillappAssaultHandler":{"enabled":true,"bypass":true,"level":5},"com.networknt.chaos.MemoryAssaultHandler":{"enabled":true,"bypass":true,"level":5,"memoryMillisecondsHoldFilledMemory":90000,"memoryMillisecondsWaitNextIncrease":1000,"memoryFillIncrementFraction":0.15,"memoryFillTargetFraction":0.25}}
+
 ```
 
 For the real request example, please visit the [chaos monkey tutorial][]. 
