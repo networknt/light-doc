@@ -14,6 +14,7 @@ menu:
 weight: 1
 draft: false
 toc: false
+reviewed: true
 ---
 
 Light is a fast, lightweight and cloud native microservices platform. The main design goal is highest throughput, lowest latency and smallest memory footprint. 
