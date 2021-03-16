@@ -1,4 +1,4 @@
 ---
 title: "Light News"
-aliases: [/news/]
+aliases: [/release-notes/]
 ---

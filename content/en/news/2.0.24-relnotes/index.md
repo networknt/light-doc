@@ -1,12 +1,9 @@
 ---
 title: "2.0.24 Light Platform Released"
-date: 2021-03-06T14:58:57-05:00
+date: 2021-03-06
 description: "A release with several defect fixes and enhancements"
-categories: []
-keywords: []
-slug: ""
-toc: false
-draft: false
+categories: ["Releases"]
+toc: true
 ---
 
 ## [2.0.24](https://github.com/networknt/light-4j/tree/2.0.24) (2021-02-24)

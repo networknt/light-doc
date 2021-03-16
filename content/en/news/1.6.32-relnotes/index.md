@@ -1,12 +1,9 @@
 ---
 title: "1.6.32 Light Platform Released"
-date: 2021-03-06T14:58:39-05:00
+date: 2021-03-07
 description: "A release with several defect fixes and enhancements"
 categories: ["Releases"]
-keywords: []
-slug: ""
-toc: false
-draft: false
+toc: true
 ---
 
 ## [1.6.32](https://github.com/networknt/light-4j/tree/1.6.32) (2021-02-24)
