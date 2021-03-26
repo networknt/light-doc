@@ -15,16 +15,15 @@ draft: false
 reviewed: true
 ---
 
-Documentation is an integral part of any open source project. The light-doc repository is as much a work in progress as the source it attempts to cover. For most open source projects, documentation is the weaker point especially for the light platform which consists of numeric cross-cutting concerns, frameworks, infrastructure services and tools. We have put a lot of effort on the documents but there are still a lot of materials need to be written. There are a lot of senior developers who can write beautiful code but cannot document their ideas, or they need other professional writers to help to review the document. For people who are reading the document, please help us to open issues if you see a syntax error or incorrect information. Let us know how we can improve the document site. Any small improvement will eventually make the platform a better product that benefits the entire community. 
+Documentation is an integral part of any open source project. The light-doc repository is as much a work in progress as the source it attempts to cover. For most open source projects, documentation is the weaker point especially for Light which consists of numerous cross-cutting concerns, frameworks, infrastructure services and tools. We have put a lot of effort on the documents but there is still a lot of material that needs to be written. There are a lot of senior developers who can write beautiful code but cannot document their ideas, or they need other professional writers to help review the document. For people who are reading the document, please help us to open issues if you see a syntax error or incorrect information. Let us know how we can improve the document site. Any small improvement will eventually make the platform a better product that benefits the entire community.
 
-If you want to contribute the document site directly, please follow the guidelines below. If you have questions, please contact us at [gitter][]and [reddit][] so that we can work together. 
+If you want to contribute to the document site directly, please follow the guidelines below. If you have questions, please contact us at gitter and Reddit so that we can work together. 
 
 ### Create Your Fork
 
 It is best to make changes to the light-doc on your local machine to check for consistent visual styling. Make sure you have created a fork of [light-doc](https://github.com/networknt/light-doc) on GitHub and cloned the repository locally on your machine. For more information, you can see [GitHub's documentation on "forking"][ghforking] or follow along with [developer guide][].
 
-You can then work on develop branch for your additions. 
-
+You can then work on developing branches for your additions.
 
 ### Add New Content
 
@@ -88,7 +87,7 @@ In the body of your function, expand the short description used in the front mat
 
 ### Add Code Blocks
 
-Code blocks are crucial for providing examples of the light platform new features to end users of the light-doc. Whenever possible, create examples that you think users will be able to implement in their own projects.
+Code blocks are crucial for providing examples of Light’s new features to end users of the light-doc. Whenever possible, create examples that you think users will be able to implement in their own projects.
 
 ### Standard Syntax
 

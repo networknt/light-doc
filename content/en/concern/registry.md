@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-This module contains all the interfaces needed in registry and discovery. It also implements a direct registry, which you can hard-code services into the service.yml to simulate consul or zookeeper during development. Although this is for local development, many users are still using it on production when they have allocated services to the exact IP and port on virtual machines. 
+This module contains all the interfaces needed in registry and discovery. It also implements a direct registry, which you can hard-code services into the service.yml to simulate Consul or Zookeeper during development. Although this is for local development, many users are still using it during production when they have allocated services to the exact IP and port on virtual machines.
 
 Currently, [Consul](/concern/consul/) and [ZooKeeper](/concern/zookeeper/) are supported for external service registry and discovery.
 

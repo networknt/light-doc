@@ -8,15 +8,16 @@ weight: 40
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Before initiating the protocol, the client registers with the authorization server. The means through which the client registers with the authorization server are not defined in OAuth 2.0 specification. 
+Before initiating the protocol, the client registers with the authorization server. The method through which the client registers with the authorization server is not defined in OAuth 2.0 specification.
 
-As an extension, we have implemented client registration/on-boarding as a micro service that exposes several endpoints. 
+As an extension, we have implemented client registration/on-boarding as a microservice that exposes several endpoints.
 
-Unlike other OAuth 2.0 providers, we have extend the client registration to define the relationship between client and service (service registers itself) and service's endpoints.
+Unlike other OAuth 2.0 providers, we have extended the client registration to define the relationship between client and service (service registers itself) and service’s endpoints.
 
-Before digging into the details of implementation, let's clarify some concepts about client. 
+Before digging into the details of implementation, let’s clarify some concepts about the client.
 
 ### Client Type
 
@@ -32,24 +33,23 @@ Clients incapable of maintaining the confidentiality of their credentials (e.g.,
 
 ### Extended Client Type
 
-Above are standard client types defined in the specification and we have added another two client types to control which client can issue resource owner password credentials grant request or customized grant types and which client will receive by-reference tokens or by-value tokens. 
+Above are standard client types defined in the specification. We have added another two client types to control which client can issue resource owner password credentials’ grant requests or customized grant types, and which client will receive by-reference tokens or by-value tokens. 
 
 * trusted
 
-These clients are marked as trusted and they are the only clients that can issue resource owner password credentials grant type. For API management team, please make sure that trusted client is also confidential and the client and resource must be deployed and managed by the same organization as this flow is not as secure as authorization code and client credentials flows.
+These clients are marked as trusted and they are the only clients that can issue the resource owner password credentials grant type. For the API management team, please make sure that trusted clients are also confidential. The client and resource must be deployed and managed by the same organization as this flow is not as secure as authorization code and client credentials flows.
 
-When using customized grant types, the client must be marked as trusted as these grant type normally makes a lot assumptions and might not be working at the same security level as authorization code and client credentials grant types. 
+When using customized grant types, the client must be marked as trusted as these grant types normally make a lot of assumptions and might not be working at the same security level as authorization code and client credentials grant types.
 
 * external
 
 For some of the organizations, it is not comfortable to send a JWT to a third party client, user's device or browser. In this case, the client can be registered as external client type and the token issued to the client will be just a UUID. Once the requests come back to the corporate network, a BFF can go to the AS to exchange the by-reference token to a JWT. A BFF client id can be registered as well optionally so that the AS can authorize only one client can send request to exchange the opaque token to a JWT. 
 
-
 The client type designation is based on the authorization server's definition of secure authentication and its acceptable exposure levels of client credentials. The authorization server does not make assumptions about the client type.
 
 A client may be implemented as a distributed set of components or services, each with a different client type and security context (e.g., a distributed client with both a confidential server-based component and a public browser-based component). In this case, the client should register each component or service as a separate client.
 
-In a microservices architecture, a service might call other services to fulfill its request, in this case, it should register itself as a service and a client. That means the owner needs to follow both service on-boarding and client on-boarding processes.
+In a microservices architecture, a service might call other services to fulfill its request; in this case, it should register itself as a service and a client. That means the owner needs to follow both service on-boarding and client on-boarding processes.
 
 ### Client Profile
 
@@ -101,13 +101,13 @@ For example (with extra line breaks for display purposes only):
    
 ### Other Authenticate Class
    
-When registering a client, you can specify which authenticate class will be used in the authenticate_class column. Your own authenticate class can be added as a plugin in the service.yml configuration file. In a typical organization, you might need to support vary authentication providers. For example, your API portal supports employee to be authenticated with SPNEGO/Kerberos SSO with AD and customers with a user table in a database.
+When registering a client, you can specify which authenticate class will be used in the authenticate_class column. Your own authenticate class can be added as a plugin in the service.yml configuration file. In a typical organization, you might need to support various authentication providers. For example, your API portal supports employees to be authenticated with SPNEGO/Kerberos SSO with AD and customers with a user table in a database.
 
 By default, we have implemented LDAP, SPNEGO/Kerberos, User table and GitHub repo for authentication and authorization. Other authentication method can be easily supported if there are requests from our users. 
 
 ### Unregistered Clients
 
-Due to security reasons, all client must be registered before authenticated on the server. Unregistered clients are not supported on this implementation.
+Due to security reasons, all clients must be registered before being authenticated on the server. Unregistered clients are not supported on this implementation.
 
 ### Client Micro Service
 
@@ -457,7 +457,7 @@ This endpoint is used to get a particular client with clientId. The following va
 
 #### /oauth2/client@get
 
-This endpoint gets all the clients from client service with filter and sorted on clientName. A page query parameter is mandatory and pageSize and clientName filter are optional.
+This endpoint gets all the clients from client service that were filtered and sorted on clientName. A page query parameter is mandatory and pageSize and clientName filters are optional.
 
 * page 
 
@@ -465,7 +465,7 @@ Page number which must be specified. It starts with 1 and an empty list will be 
 
 * pageSize
 
-Default pageSize is 10 and you can overwrite it with another number. Please don't use a big number due to performance reason. 
+Default pageSize is 10, and you can overwrite it with another number. Please don’t use a big number due to performance reason.
 
 * clientName
 
@@ -606,9 +606,9 @@ Here is an example of response body.
 
 #### /oauth2/client/{clientId}/service@delete
 
-This endpoint deletes all services and endpoints for a particular client. It is very dangerous API and must be careful in using it. It is supposed to be used only when a client is retired. 
+This endpoint deletes all services and endpoints for a particular client. It is a very dangerous API and you must be careful in using it. It is supposed to be used only when a client is retired.
 
-After the links are removed, the client's scope will be recalculated and normally means there is no scope for this client anymore. 
+After the links are removed, the client’s scope will be recalculated which normally means there is no scope for this client. 
 
 The response body will contains the old scope and new scope for the client. Here is an example.
 
@@ -632,7 +632,7 @@ The response body will contains the old scope and new scope for the client. Here
 
 This endpoint adds one or more endpoints of a service to a client. It removes all existing links and insert new ones. Once the insert is done, the client's scope is recalculated based on the updated info. 
 
-The response body will contains the old scope and new scope for the client. Here is an example.
+The response body will contain the old scope and new scope for the client. Here is an example.
 
 ```json
 {"old_scope":"petstore.r petstore.w","new_scope":"data.w data.r"}

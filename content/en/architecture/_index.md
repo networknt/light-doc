@@ -15,7 +15,7 @@ draft: false
 reviewed: true
 ---
 
-The light-4j is aiming microservices, and it has to be high throughput, low latency, light-weight and address a lot of cross-cutting concerns at the same time. It is based on Undertow Core Http server and depending on minimum third-party libraries.
+The light-4j is aimed towards microservices, and therefore has to achieve high throughput, low latency, light-weight and address a lot of cross-cutting concerns at the same time. It is based on Undertow Core Http server and depends on minimum third-party libraries.
 
 The topics here are architectural considerations. In a nutshell, architecture is a type of design where the focus is quality attributes and wide(er) scope whereas design focuses on functional requirements and more localized concerns. There is another [design][] section for detail-oriented decisions.
 
@@ -23,17 +23,17 @@ Here is a list of architecture decisions for the platform:
 
 * Designed for [microservices][] that can be dockerized and deployed within containers.
 
-* Base on pure HTTP without JavaEE as it has too many problems and is [declining][].
+* Based on pure HTTP without JavaEE as it has too many problems and is [declining][].
  
 * [Security][] first design with OAuth2 integration and distributed verification with the embedded distributed gateway.
 
 * The platform handles the [coarse-grained authorization with scopes and fine-grained authorization with custom claims][]. 
 
-* How to handler distributed [transaction][] in microservices.
+* How to handle distributed [transactions][] in microservices.
 
 * All components are designed as [plugins][] and the framework is easy to be extended and customized.
 
-* Can be [integrated][] with existing application to protect investment over the years for your organization.
+* Can be [integrated][] with existing applications to protect investment over the years for your organization.
 
 * Support client-side discovery without any [gateway][] and proxy between service to service calls as they add too much overhead. 
 
@@ -49,7 +49,7 @@ Here is a list of architecture decisions for the platform:
 
 * API [category][] and how to choose a framework to build your APIs.
 
-* What is [service mesh][] and why we need it? 
+* What is a [service mesh][] and why do we need it? 
 
 * We cannot rely on network security for microservices given the dynamic environment and encrypted data. [Firewall is killed by Cloud][] 
 

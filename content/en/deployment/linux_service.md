@@ -12,9 +12,10 @@ weight: 20
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The light-4j application can be easily started as Unix/Linux services using either init.d or systemd given it is packaged as a fatjar. 
+The light-4j application can be easily started as a Unix/Linux service using either init.d or systemd given it is packaged as a fatjar.
 
 ## Installation as an init.d service (System V)
 
@@ -46,7 +47,7 @@ update-rc.d myapp defaults <priority>
 
 ### Securing an init.d service
 
-When executed as root, as is the case when the root is being used to start an init.d service, the default executable script will run the application as the user which owns the jar file. You should never run a light-4j application as root so your application’s jar file should never be owned by root. Instead, create a specific user to run your application and use chown to make it the owner of the jar file. For example:
+When executed as a root, as is the case when the root is being used to start an init.d service, the default executable script will run the application as the user which owns the jar file. You should never run a light-4j application as a root, thus, your application’s jar file should never be owned by the root. Instead, create a specific user to run your application and use chown to make it the owner of the jar file. For example:
 
 ```
 chown bootapp:bootapp your-app.jar
@@ -54,7 +55,7 @@ chown bootapp:bootapp your-app.jar
 
 In this case, the default executable script will run the application as the bootapp user.
 
-To reduce the chances of the application’s user account is compromised, you should consider preventing it from using a login shell. Set the account’s shell to /usr/sbin/nologin, for example.
+To reduce the chances of the application’s user account being compromised, you should consider preventing it from using a login shell. Set the account’s shell to /usr/sbin/nologin, for example.
 
 You should also take steps to prevent the modification of your application’s jar file. Firstly, configure its permissions so that it cannot be written and can only be read or executed by its owner:
 
@@ -70,7 +71,7 @@ sudo chattr +i your-app.jar
 
 It will prevent any user, including root, from modifying the jar.
 
-User root is used to control the application’s service, and you use a .conf file to customize its startup, the .conf file will be read and evaluated by the root user. It should be secured accordingly. Use `chmod` so that only the owner can read the file and use `chown` to make root the owner:
+The user root is used to control the application’s service, and you use a .conf file to customize its startup, the .conf file will be read and evaluated by the root user. It should be secured accordingly. Use `chmod` so that only the owner can read the file and use `chown` to make the root the owner:
 
 ```
 chmod 400 your-app.conf
@@ -79,11 +80,11 @@ sudo chown root:root your-app.conf
 
 ### Externalize Configuration
 
-For production deployment, you need to externalized your configuration to a folder so that it can be easily updated. 
+For production deployment, you need to externalize your configuration to a folder so that it can be easily updated. 
 
 Update your command line to add -Dlight-4j-config-dir=/etc/yourappconfig
 
-Please follow [config][] module document for details on how config files are loaded. 
+Please follow the [config][] module document for details on how config files are loaded.
 
 ### Forward Port 443
 

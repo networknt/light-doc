@@ -8,11 +8,12 @@ weight: 30
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The service to support federated OAuth 2.0 providers.
 
-For example, external OAuth 2.0 provider for external clients and internal OAuth 2.0 provider for internal clients.
+For example, the external OAuth 2.0 provider is for external clients and the internal OAuth 2.0 provider for internal clients.
 
 
  It is a federation protocol aimed at simplifying authorization and access to protected data by giving access to data while protecting the owner’s account credentials.
@@ -179,9 +180,7 @@ components:
 
 ### /oauth2/provider@get
 
-This endpoint gets all the providers from service
-
-
+This endpoint gets all the providers from the service.
 
 
 ### /oauth2/provider@post
@@ -205,7 +204,7 @@ before a new provider is created.
 
 ### /oauth2/provider@put
 
-This is the endpoint to update existing provider. Before provider is updated, the
+This is the endpoint to update the existing provider. Before provider is updated, the
 following validation will be performed.
 
 * If providerId cannot be found in the service cache, then the following error will be
@@ -224,7 +223,7 @@ returned.
 
 ### /oauth2/provider/{providerId}@delete
 
-This endpoint is used to delete existing provider. Before the provider is deleted,
+This endpoint is used to delete the existing provider. Before the provider is deleted,
 the following validations will be performed.
 
 * If serviceId cannot be found in the service cache, then the following error will be

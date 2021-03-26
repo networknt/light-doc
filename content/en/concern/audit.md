@@ -10,25 +10,25 @@ draft: false
 reviewed: true
 ---
 
-Two built-in audit handlers write logs into audit.log which is set up in the logback appender. The end user can add more customized audit handlers if need. For example, some customers are writing audit info in a relational database, and others write it into a Kafka topic. 
+Two built-in audit handlers write logs into audit.log which is set up in the logback appender. The end user can add more customized audit handlers if needed. For example, some customers are writing audit info in a relational database, while others write it into a Kafka topic.
 
 In the audit module, there is AuditHandler which is generic and configurable with the audit.yml config file. 
 
-There is another audit provided by the light-4j framework called DumpHandler in [dump](/concern/dump/) module. 
+There is another audit provided by the light-4j framework called DumpHandler in the [dump](concern/dump/) module.
 
 ### Introduction 
 
-This handler only logs several fields from request header, and the fields are configurable. Optional, it can log response status and response time.
+This handler only logs several fields from the request header, while the fields are configurable. Optionally, it can log response status and response time.
 
-This is a generic audit handler that dumps the most important info per request basis. The following elements will be logged if it's available in the AuditInfo object attached to exchange. This object will be populated by other upstream handlers like swagger-meta and swagger-security for the light-rest-4j framework.
+This is a generic audit handler that dumps the most important info per request basis. The following elements will be logged if they are available in the AuditInfo object attached to exchange. This object will be populated by other upstream handlers like swagger-meta and swagger-security for the light-rest-4j framework.
 
-This handler can be used on production but be aware that it will impact the overall performance. Turning off statusCode and responseTime can make it faster as these have to be captured on the response chain instead of request chain.
+This handler can be used on production, but be aware that it will impact overall performance. Turning off statusCode and responseTime can make it faster, as these have to be captured on the response chain instead of request chain.
 
 For most business and majority of microservices, you don't need to enable this handler due to performance reasons. There are situations during troubleshooting or integration testing, where teams need to collect more information based on the success or failure of the execution or collect complete request and response payloads. Teams need to recognize that collecting this information will negatively impact performance and it is not recommended to use it on production environments.
 
 The default audit log will be audit.log config in the default logback.xml; however, it can be changed to syslog or Kafka with a customized appender.
 
-Majority of the fields in audit log are collected in request and response; however, to allow users to customize it, we have put an attachment into the exchange to allow other handlers to write important info into it. The audit.yml can control which fields should be included in the final log.
+The majority of the fields in the audit log are collected in request and response; however, to allow users to customize it, we have put an attachment into the exchange to allow other handlers to write important info into it. The audit.yml can control which fields should be included in the final log.
 
 By default, the following fields are included:
 
@@ -48,9 +48,9 @@ By default, the following fields are included:
 The audit.log is in JSON format, and it is easy to be parsed and monitored. 
 
 ### Configuration
-need to define com.networknt.audit.AuditHandler@audit in handler.yml then add this "audit" handler to the handler chain.
+You will need to define com.networknt.audit.AuditHandler@audit in handler.yml then add this “audit” handler to the handler chain.
  
-The output fields are populated based on the config file audit.yml and here is an example. 
+The output fields are populated based on the config file audit.yml. Here is an example:
 
 ```
 # AuditHandler will pick some important fields from headers and tokens and logs into a audit appender.

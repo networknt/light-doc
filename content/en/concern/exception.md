@@ -7,18 +7,12 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is a middleware handler that should be put in the beginning of request/response
-chain. It wraps the entire chain so that any un-handled exceptions will finally reach
-here and to be handled gracefully. It is encouraged to handle exceptions in business
-handler because the context is clear and the exchange will be terminated at the right
-place.
+This is a middleware handler that should be put in the beginning of the request/response chain. It wraps the entire chain so that any unhandled exceptions will finally reach here and to be handled gracefully. It is encouraged to handle exceptions in business handlers because the context is clear and the exchange will be terminated at the right place.
 
-This handler is plugged in by default from light-codegen and it should be enabled on
-production as the last defence line. It also dispatch the request to worker thread
-pool from IO thread pool. Only turn this off if you understand the impact and have a
-very good reason to do so.
+This handler is plugged in by default from light-codegen and it should be enabled on production as the last defence line. It also dispatches the request to the worker thread pool from the IO thread pool. Only turn this off if you understand the impact and have a very good reason to do so.
 
 If any handler throws an exception within the handler chain, that exception will 
 bubble up to the undertow server and eventually a 500 response will be sent to the 
@@ -27,13 +21,11 @@ handle ApiException and other uncaught exceptions.
 
 ## Runtime Exception
 
-Any runtime exception will be captured and return a standard 500 error with error 
-code ERR10010.
+Any runtime exception will be captured and returns a standard 500 error with the error code ERR10010.
 
 ## Uncaught Exception
 
-Any checked exception that is not handled by handlers in the handler chain is captured 
-and return a 400 error with error code ERR10011
+Any checked exception that is not handled by handlers in the handler chain is captured and returns a 400 error with the error code ERR10011.
 
 ## ApiException
 
@@ -47,13 +39,9 @@ Exception handler will log the exception with stacktrace.
 
 ## Undertow Logging
 
-As Undertow is using JBoss logger and we are using slf4j with logback. The Undertow logs
-are not shown up in our log files. In order to capture exception thrown in Undertow, there
-are some special handling need to be done. 
+As Undertow is using JBoss logger and we are using slf4j with logback. The Undertow logs are not shown in our log files. In order to capture exceptions thrown in Undertow, there are some special handling needs to be done.
 
-* In this exception handler, we need to dispatch the request from IO thread pool to worker
-thread pool so that all exceptions thrown from Undertow will be handled by handlers instead
-of Connectors class. 
+* In this exception handler, we need to dispatch the request from the IO thread pool to the worker thread pool so that all exceptions thrown from Undertow will be handled by handlers instead of the Connectors class.
 * In Server.java we have setup the property 
 'System.setProperty("org.jboss.logging.provider", "slf4j");'
 

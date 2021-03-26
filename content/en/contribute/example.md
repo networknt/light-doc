@@ -15,9 +15,9 @@ draft: false
 reviewed: true
 ---
 
-For most developers working with applications built on top of the light platform, it is easier to contribute examples than to enhance the platform. We have a repository [light-example-4j][] that contains all sorts of examples for other developers to learn how to use the platform. If you have some good ideas or you happen to create an application that is unique, please consider contributing to the light-example-4j repository to help others. If you are interested, you can also write a tutorial to show people how your example works. 
+For most developers working with applications built on top of Light, it is easier to contribute examples than to enhance the platform. We have a repository [light-example-4j][] that contains all sorts of examples for other developers to learn how to use the platform. If you have some good ideas or you happen to create an application that is unique, please consider contributing to the light-example-4j repository to help others. If you are interested, you can also write a tutorial to show people how your example works.
 
-The guideline for contributing example project is very similar to [development][]. The only difference is that we have so many examples located in one repository and you need to find the best location for your example. 
+The guideline for contributing example projects is very similar to [development][]. The only difference is that we have so many examples located in one repository, and that you need to find the best location for your example.
 
 The following outlines the major steps. 
 
@@ -33,11 +33,11 @@ The following outlines the major steps.
 
 * Push your changes to a topic branch in your light-example-4j fork of the repository.
 * Write a README.md in the folder of your example for other people to learn how to use your example.
-* Update example section in light-doc fork repository to explain your example in detail.
+* Update the example section in the light-doc fork repository to explain your example in detail.
 * Submit a pull request to the light-example-4j repository in the networknt organization.
 * Submit a pull request to the light-doc repository in the networknt organization.
 * The core team looks at Pull Requests on a regular basis and will merge the pull request. 
-* Sometimes, we might need to contact contributor understand the details of the pull request.
+* Sometimes, we might need to contact contributors to understand the details of the pull request.
 
 For more details, please refer to [developer guide][].
 

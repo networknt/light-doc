@@ -15,7 +15,7 @@ draft: false
 reviewed: true
 ---
 
-These days more and more organizations are moving their applications from private data center to the public cloud. In this process, they need to convert the existing monolithic application to microservices. Microservices architecture solves certain problems, but it has several drawbacks. When adopting this architecture, some issues must be addressed. Over the years, we have learned a lot of lessons and experiences while working with our customers. In this article, I will bring up several common patterns and provide reusable solutions. When adopting these patterns, we are following some [principles][] for microservices architecture. 
+These days, more and more organizations are moving their applications from private data centers to the public cloud. In this process, they need to convert the existing monolithic application to microservices. Microservices architecture solves certain problems, but it has several drawbacks. While adopting this architecture, some issues must be addressed. Over the years, we have learned a lot of lessons and gained a lot of experience while working with our customers. In this article, I will bring up several common patterns and provide reusable solutions. When adopting these patterns, we are following some [principles][] for microservices architecture.
 
 - [Decomposition Patterns](/desgin/decomposition/)
 - [Integration Patterns](/architecture/integration/)

@@ -7,18 +7,12 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When a request pass through a list of middleware handlers, chances are you want to update
-the request header or update response header as part of the cross-cutting concerns. The
-HeaderHandler is designed for this. The very first use case is for light-proxy to update
-the Authorization header from Bearer token to Basic Authorization when connecting to the
-down stream services. This allows light-proxy to verify the OAuth 2.0 JWT access token on
-the proxy and then change the same header to Basic so that the downstream services can be
-called from light-proxy. 
+When a request passes through a list of middleware handlers, chances are you want to update the request header or update response header as part of the cross-cutting concerns. The HeaderHandler is designed for this. The very first use case is for light-proxy to update the Authorization header from Bearer token to Basic Authorization when connecting to downstream services. This allows light-proxy to verify the OAuth 2.0 JWT access token on the proxy and then change the same header to Basic so that the downstream services can be called from light-proxy.
 
-The HeaderHandler manipulate both request header and response header based on a header.yml
-configuration file. 
+The HeaderHandler manipulates both the request header and response header based on a header.yml configuration file.
 
 Here is an example of header.yml
 
@@ -50,7 +44,7 @@ response:
     key2: value2
 ```
 
-The config file is self-explained. In order to use it, there are two step in setup.
+The config file is self-explained. In order to use it, there are two steps in its setup.
 
 ## Add HeaderHandler to com.networknt.handler.MiddlewareHandler config file
 

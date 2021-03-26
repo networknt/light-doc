@@ -18,11 +18,7 @@ draft: false
 light-tram-4j is a port from [eventuate-tram-core][] built by Chris Richardson. The client
 API is the same but implemented not in Spring framework but light-4j instead. 
 
-There are three frameworks in light-platform focus on event driven microservices and
-light-tram-4j is the most fundamental one. Tram stands for transactional messaging and
-it enables an application atomically update state and send a message or a domain event
-as part of an database transaction. Tram is a framework of ensuring data consistency
-within a microservices architecture.
+There are three frameworks in light-platform focused on event driven microservices and light-tram-4j is the most fundamental one. Tram stands for transactional messaging. Ir enables an application to automatically update state and send a message or a domain event as part of a database transaction. Tram is a framework of ensuring data consistency within a microservices architecture.
 
 light-tram-4j provides several messaging abstractions:
 

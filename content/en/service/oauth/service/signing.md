@@ -15,9 +15,9 @@ JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and s
 
 As JWTs can be signed you can be sure the senders are who they say they are. Additionally, as the signature is calculated using the header and the token payload, you can also ascertain that the content hasn't been tampered with. The JWT tokens can be shared in the request header, as well as the body of a request/response. It is recommended to share the JWT token in the header.
 
-Most of the times, JWT is used for authorization for service access. However, there is another usage of JWT within the business context for secure information exchange. It is a different use case as it is not related to service security but to address a business-related concern.
+Most of the time, JWT is used for authorization for service access. However, there is another usage of JWT within the business context for secure information exchange. It is a different use case as it is not related to service security but to address a business-related concern.
 
-In microservices architecture, information might pass through several services before reaching to the target service. Every service between the source service and the target service can modify the information, and there is no way for the target service to ensure that the received info is temper-proofed.
+In microservices architecture, information might pass through several services before reaching the target service. Every service between the source service and the target service can modify the information, and there is no way for the target service to ensure that the received info is temper-proofed.
 
 To provide the signing service to users, there are three components. 
 
@@ -27,7 +27,7 @@ To provide the signing service to users, there are three components.
 
 ### Signing Server
 
-For signed information exchange, it is simpler than the OAuth 2.0 security. Only three light-oauth2 microservices are needed to fulfill the requirement. 
+Signed information exchange is simpler than OAuth 2.0 security. Only three light-oauth2 microservices are needed to fulfill the requirement.
 
 * Client
 
@@ -35,12 +35,11 @@ For the issuer to access the signing server to get the signed JWT, the issuer mu
 
 * Token
 
-The signing endpoint is part of the token service which is responsible for issuing JWT token in the light-oauth2. Unlike JWT for security, the JWT for secure info exchange has a flexible structure to meet the different requirement from a different organization. It also removed some of the mandatory fields from the security JWT to make it simpler. 
+The signing endpoint is part of the token service which is responsible for issuing JWT tokens in the light-oauth2. Unlike JWT for security, the JWT for secure info exchange has a flexible structure to meet the different requirements from a different organization. It also removed some of the mandatory fields from the security JWT to make it simpler.
 
 * Key
 
-In a fully distributed microservices architecture, there is no way to copy the public key certificate to each service as there is static IP for the services. The only way is for the service to pull the certificate from the OAuth 2.0 provider the first time the service is started or the first time a new rotated key is received by the service. The key service provides an API for services to get public key certificates when it is necessary. 
-
+In a fully distributed microservices architecture, there is no way to copy the public key certificate to each service as there is a static IP for the services. The only way is for the service to pull the certificate from the OAuth 2.0 provider the first time the service is started or the first time a new rotated key is received by the service. The key service provides an API for services to get public key certificates when it is necessary.
 
 ### Specification
 
@@ -93,29 +92,28 @@ As you can see, the caller needs to provide an expiration in seconds, and the pa
 
 ### Signing Endpoint
 
-The Oauth2SigningPostHandler.java in the token service handles the signing endpoint. The logic is very similar to Oauth2TokenPostHandler.java which is for JWT access token. 
+The Oauth2SigningPostHandler.java in the token service handles the signing endpoint. The logic is very similar to Oauth2TokenPostHandler.java which is for JWT access tokens.
 
-The following is a list of steps in the handler.
-
+The following is a list of steps in the handler:
 
 * Verify the client_id and client_secret from the request.
-* If client_id/client_secret is authenticated, serialize the body into SignRequest object
-* Get the expires from the SignRequest for the JWT expiration
+* If client_id/client_secret is authenticated, serialize the body into a SignRequest object
+* Receive the expiries from the SignRequest for the JWT expiration
 * Add client_id to the claims as well
-* Generate a token with claims from SignRequest payload
+* Generate a token with claims from the SignRequest payload
 * Return the token to the caller
 
 ### Response
 
-The response is the same as JWT token post handler which is a map with the following keys. 
+The response is the same as the JWT token post handler which is a map with the following keys:
 
 * access_token - The signed token in JWT
 * token_type - "bearer"
-* expires_in - The seconds token expires
+* expires_in - The seconds until token expires
 
 ### Error Messages
 
-The following error messages might be returned if the handler detects an error in the logic. 
+The following error messages might be returned if the handler detects an error in the logic:
 
 * MISSING_AUTHORIZATION_HEADER = "ERR12002";
 * INVALID_AUTHORIZATION_HEADER = "ERR12003";

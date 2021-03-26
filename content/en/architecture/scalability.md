@@ -12,14 +12,13 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-One of the benefits utilizing microservices architecture is to make sure
-your application is easily scaling. When we talk about scalability, one 
-of the best books is [The Art of Scalability](http://theartofscalability.com/)
+One of the benefits of utilizing microservices architecture is to make sure your application scales easily. When we talk about scalability, one of the best books is [The Art of Scalability](http://theartofscalability.com/)
 
-It introduced the scale cube as following. 
+It introduces the scale cube as follows:
 
 ![scale_cube](/images/app_scale.png)
 
@@ -95,9 +94,4 @@ failure only makes part of the data in accessible.
 
 Z-axis scaling has some drawbacks.
 
-One drawback is increased application complexity. We need to implement a 
-partitioning scheme, which can be tricky especially if we ever need to 
-repartition the data. Another drawback of Z-axis scaling is that doesn’t 
-solve the problems of increasing development and application complexity. 
-To solve those problems we need to apply Y-axis scaling.
-
+One of the benefits of utilizing microservices architecture is to make sure your application scales easily. When we talk about scalability, one of the best books is The Art of Scalability.

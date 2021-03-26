@@ -10,11 +10,11 @@ draft: false
 reviewed: true
 ---
 
-Most of our users are using Consul for the service registry and discovery in large scale microservices deployment. However, we found several issues with the Consul and finally released our light-portal controller to replace the Consul as a centralized control panel. 
+Most of our users are using Consul for the service registry and discovery in large scale microservices deployment. However, we found several issues with Consul and finally released our light-portal controller to replace Consul as a centralized control panel.
 
 The first issue with Consul is the local agent resource utilization and extra setup. If all services can register themselves to a centralized cluster, it would be more efficient. 
 
-The second issue with Consul is the long poll or blocking query when API subscribes to the downstream API instance changes. It utilize a lot of threads that are very valuable in the cloud environment. We need a more efficient way like WebSocket for the subscription updates.
+The second issue with Consul is the long poll or blocking query when API subscribes to the downstream API instance changes. It utilizes a lot of threads that are very valuable in the cloud environment. We need a more efficient way like WebSocket for the subscription updates.
 
 The third issue is due to the software procurement cycle for our enterprise users. It takes our customers at least six months to one year to adopt the Consul, and it might be easier for them if we can provide something within the light-platform. 
 

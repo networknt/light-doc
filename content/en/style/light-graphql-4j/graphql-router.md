@@ -11,9 +11,9 @@ draft: false
 reviewed: true
 ---
 
-Graphql Router is responsible for handling GraphQL and GraphiQL requests and hooks schema provider. It provides RouteHandler and SchemaProvider interfaces and implements both GET and POST handlers for GraphQL.
+The Graphql Router is responsible for handling GraphQL and GraphiQL requests while hooking schema providers. It provides RouteHandler and SchemaProvider interfaces and implements both GET and POST handlers for GraphQL.
 
-The router is a HandlerProvider, and it needs to be put into the service.yml config file.
+The router is a HandlerProvider that needs to be put into the service.yml config file.
 
 This [link][] is an example.
 

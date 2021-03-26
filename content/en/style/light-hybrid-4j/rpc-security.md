@@ -8,9 +8,9 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
-
-This handler is part of the [light-hybrid-4j][] which is built on top of light-4j but focused on hybrid style of API only. 
+This handler is part of the [light-hybrid-4j][] which is built on top of light-4j but focused only on the hybrid style of API.
 
 It supports OAuth2 with JWT token distributed verification and can be extended to other authentication and authorization approaches. 
 
@@ -18,7 +18,7 @@ It supports OAuth2 with JWT token distributed verification and can be extended t
 
 This is the handler that is injected during server startup if security.yml enableVerifyJwt is true. It does further scope verification if enableVerifyScope is true against hybrid schema specification.
 
-From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a security configuration file for different frameworks, a new hybrid-security.yml with the same content has been introduced. The security.yml is still loaded if hybrid-security.yml doesn't exist for backward compatibility. 
+From release 1.5.18, Light supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a security configuration file for different frameworks, a new hybrid-security.yml with the same content has been introduced. The security.yml is still loaded if hybrid-security.yml doesn’t exist for backward compatibility.
 
 Here is an example of hybrid-security.yml
 
@@ -64,7 +64,7 @@ bootstrapFromKeyService: false
 
 ### Distributed JWT verification
 
-Unlike simple web token that the resource server has to contact Authorization server to validate the bearer token. JWT can be verified by resource server as long as the token signing certificate is available at resource server. 
+Unlike with simple web tokens, the resource server has to contact the Authorization server to validate the bearer token. JWT can be verified by the resource server as long as the token signing certificate is available at the resource server.
 
 [light-hybrid-4j]: /style/light-hybrid-4j/
 

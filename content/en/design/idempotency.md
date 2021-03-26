@@ -12,6 +12,7 @@ weight: 30
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ### Networks are unreliable. 
@@ -22,9 +23,7 @@ moving across the wire, they’re still going to fail given enough time. Outages
 routing problems, and other intermittent failures may be statistically unusual on 
 the whole, but still bound to be happening all the time at some ambient background rate.
 
-While in microservices architecture, the number of network connections grow
-exponentially and the risk of network issues will be much higher than monolithic
-applications. 
+While in microservices architecture, the number of network connections grows exponentially and the risk of network issues will be much higher than with monolithic applications.
 
 To overcome this sort of inherently unreliable environment, it’s important to design 
 APIs and clients that will be robust in the event of failure, and will predictably 
@@ -43,33 +42,20 @@ the work in limbo.
 - The call could succeed, but the connection breaks before the server can tell its 
 client about it.
 
-Any one of these leaves the client that made the request in an uncertain situation. 
-In some cases, the failure is definitive enough that the client knows with good certainty 
-that it’s safe to simply retry it. For example, a total failure to even establish a 
-connection to the server. In many others though, the success of the operation is ambiguous 
-from the perspective of the client, and it doesn’t know whether retrying the operation is 
-safe. A connection terminating midway through message exchange is an example of this case.
+Any one of these leaves the client that made the request in an uncertain situation. In some cases, the failure is definitive enough that the client knows with good certainty that it’s safe to simply retry it, for example, in the case of a total failure to even establish a connection to the server. In many others though, the success of the operation is ambiguous from the perspective of the client, and it doesn’t know whether retrying the operation is safe. A connection terminating midway through message exchange is an example of this case.
 
 This problem is a classic staple of distributed systems, and the definition is broad when 
 talking about a “distributed system” in this sense: as few as two computers connecting 
 via a network that are passing each other messages.
  
-With microservices are getting popular, the partial failure is more complicated as it can
-happen deep in the chain of services. It is not a simple retry from any client and the retry
-has to be initialized from the original client. This requires all the services in the chain
-must be idempotent.
+With microservices getting popular, partial failure is more complicated as it can happen deep in the chain of services. It is not a simple retry from any client and the retry has to be initialized from the original client. This requires all the services in the chain must be idempotent.
 
 
 ### Use of idempotency
 
-The easiest way to address inconsistencies in distributed state caused by failures is to 
-implement server endpoints so that they’re idempotent, which means that they can be called 
-any number of times while guaranteeing that side effects only occur once.
+The easiest way to address inconsistencies in a distributed state caused by failures is to implement server endpoints so that they’re idempotent, which means that they can be called any number of times while guaranteeing that side effects only occur once.
 
-When a client sees any kind of error, it can ensure the convergence of its own state with 
-the server’s by retrying, and can continue to retry until it verifiably succeeds. This 
-fully addresses the problem of an ambiguous failure because the client knows that it can 
-safely handle any failure using one simple technique.
+When a client sees any kind of error, it can ensure the convergence of its own state with the server’s by retrying, and can continue to retry until it verifiably succeeds. This fully addresses the problem of an ambiguous failure because the client knows that it can safely handle any failure using one simple technique.
 
 As an example, consider the API call for a hypothetical DNS provider that enables us to add 
 subdomains via an HTTP request:
@@ -85,14 +71,7 @@ particular signifies that a target resource should be created or replaced entire
 contents of a request’s payload (in modern RESTful service, a partial modification would be 
 represented by a PATCH).
 
-We have used request/response communication style as an example; however, messaging based
-microservices should follow the same approach in case duplicate messages are delivery in the
-pipeline. In fact, most message driven async microservices are more tolerant to partial 
-failures than sync style of ineractions like REST, GraphQL and RPC. That is why we have
-provided [light-tram-4j][](transactional messaging), [light-eventuate-4j][](eventual consistency 
-with event sourcing and CQRS) and [light-saga-4j][](distributed transaction orchestraion between
-services) frameworks and all of them rely on service idempotency. 
-
+We have used request/response communication style as an example; however, messaging based microservices should follow the same approach in case duplicate messages are delivered in the pipeline. In fact, most message driven async microservices are more tolerant to partial failures than sync style of interactions like REST, GraphQL and RPC. That is why we have provided [light-tram-4j][](transactional messaging), [light-eventuate-4j][](eventual consistency with event sourcing and CQRS) and [light-saga-4j][](distributed transaction orchestration between services) frameworks and all of them rely on service idempotency.
 
 ### Guarantee exactly once
 
@@ -112,18 +91,12 @@ If we consider our sample network failure cases from above:
 - On retrying a connection failure, on the second request the server will see the ID for the 
 first time, and process it normally.
 
-- On a failure midway through an operation, the server picks up the work and carries it through. 
-The exact behavior is heavily dependent on implementation, but if the previous operation was 
-successfully rolled back by way of an ACID database, it’ll be safe to retry it. Otherwise, state 
-is recovered and the call is continued.
+- On a failure midway through an operation, the server picks up the work and carries it through. The exact behavior is heavily dependent on implementation, but if the previous operation was successfully rolled back by way of an ACID database, it’ll be safe to retry it. Otherwise, the state is recovered and the call is continued.
 
 - On a response failure (i.e. the operation executed successfully, but the client couldn’t get 
 the result), the server simply replies with a cached result of the successful operation.
 
-In light-4j, we have a component traceability that is a middleware handler to move traceabilityId
-from request header to response header. Also, the client module which is used to call services
-has the ability to propagate traceabilityId to the next request in the service call stack. This
-header can be used as idempotency key on mutating services(i.e. anything under POST in our case).
+In light-4j, we have a component traceability that is a middleware handler to move traceabilityId from request header to response header. Also, the client module which is used to call services has the ability to propagate traceabilityId to the next request in the service call stack. This header can be used as an idempotency key on mutating services(i.e. anything under POST in our case).
 
 If the above one request fails due to a network connection error, you can safely retry it 
 with the same idempotency key, and the services must be designed to work with the idempotency 
@@ -155,11 +128,7 @@ We can address thundering herd by adding some amount of random “jitter” to e
 time. This will space out requests across all clients, and give the server some breathing room 
 to recover.
 
-The client module in [light-4j](https://github.com/networknt/light-4j) will be enhanced to retry 
-on failure automatically with an idempotency key using increasing backoff times and jitter. Given
-not all client need to retry on failure, we need to make sure it is configurable in client.yml so
-that retry can only be initiated from the original client.
-
+The client module in [light-4j](https://github.com/networknt/light-4j) will be enhanced to retry on failure automatically with an idempotency key using increasing backoff times and jitter. Given the fact that not all clients need to retry on failure, we need to make sure it is configurable in client.yml so that retry can only be initiated from the original client.
 
 ### Design robust APIs
 

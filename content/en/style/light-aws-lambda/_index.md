@@ -15,9 +15,9 @@ draft: false
 reviewed: true
 ---
 
-In the light-platform, we are using the middleware handlers to address cross-cutting concerns for microservices in the request/response chain in the same service process or within a light-proxy/light-router at the network level. 
+In Light, we are using the middleware handlers to address cross-cutting concerns for microservices in the request/response chain in the same service process or within a light-proxy/router at the network level.
 
-With more and more serverless Lambda functions deployed to the AWS cloud, we need to find a way to address the cross-cutting concerns in the same fashion as the light-4j so that the Lambda functions can be integrated with the light ecosystem for security, logging, tracing, auditing and metrics. 
+With more and more serverless Lambda functions deployed to the AWS cloud, we need to find a way to address the cross-cutting concerns in the same fashion as the light-4j so that the Lambda functions can be integrated with the Light ecosystem for security, logging, tracing, auditing and metrics.
 
 There are two different options to implement cross-cutting concerns for Lambda functions, and you should choose one or the other based on your non-functional requirements. 
 

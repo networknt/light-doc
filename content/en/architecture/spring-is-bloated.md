@@ -12,6 +12,7 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Over the years, Spring seemed to be the replacement of JEE servers with IoC
@@ -36,28 +37,18 @@ which was designed over ten years ago without multi-core, NIO etc in
 consideration. There is a little improvement in Servlet 3.1 but it wasn't
 right due to backward compatible requirement. 
 
-I did a performance test between Spring Boot and My own Light Java Framework
-and Spring Boot is 44 times slower. The performance test code and result can be
-found [here](https://github.com/networknt/light-example-4j/tree/master/performance)
+I did a performance test on both Spring Boot and my own Light Java Framework and found that Spring Boot is 44 times slower. The performance test code and results can be found [here](https://github.com/networknt/light-example-4j/tree/master/performance).
 
-The test result for Spring Boot was based on the embedded tomcat server and
-later on I have switched to Undertow servlet container for Spring Boot. The
-Undertow Servlet container is faster but still over 20-30 times slower then
-Light Java Framework which is built on top of Undertow core http server. 
+The test result for Spring Boot was based on the embedded tomcat server; later on, I switched to Undertow servlet container for Spring Boot. The Undertow Servlet container is faster but still over 20-30 times slower than Light Java Framework which is built on top of the Undertow core http server. 
 
 The 20-30 times difference between the two is due to Servlet overhead and Spring
 Boot overhead and it is very significant.
 
-After I published the peformance test results, one of the Spring developers pointed
-me to a new approach to build Spring Boot application with Netty. The performance
-is getting better but still very slow compare with Light Java.
-
+After I published the performance test results, one of the Spring developers pointed me to a new approach to build Spring Boot application with Netty. The performance is getting better but is still very slow compared with Light Java.
 
 ### Memory Footprint
 
-During these test, I observed that Spring Boot with embedded servlet container uses
-at least 5 times more memory. This is a big different in cloud computer as memory is
-very expensive. 
+During these tests, I observed that Spring Boot with an embedded servlet container uses at least 5 times more memory. This is a big difference in cloud computing as memory is very expensive. 
 
 ### Conclusion
 

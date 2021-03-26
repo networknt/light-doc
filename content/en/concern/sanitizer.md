@@ -33,14 +33,13 @@ sanitizeHeader: false
 
 If the enabled flag is false, this middleware won't be loaded during server startup. 
 
-sanitizeBody and sanitizeHeader control if body and header need to be sanitized or both. In most of the cases, sanitizing body makes sense and sanitizing header is not necessary.
+sanitizeBody and sanitizeHeader control if the body and/or the header need to be sanitized. In most of the cases, sanitizing the body makes sense and sanitizing the header is not necessary.
 
-### When to use sanitizer
+### When to use Sanitizer 
 
-This handler should only be used when you are collecting user input from Web/Mobile UI and later on, use the input data to generate web pages. For example, a forum or blog application.
+This handler should only be used when you are collecting user input from Web/Mobile UI and later on, using the input data to generate web pages, for example, a forum or blog application.
 
-For services that user input will never be used to construct web pages, don't use this handler. 
-
+For services where user input will never be used to construct web pages, don’t use this handler.
 
 ### Query Parameters
 
@@ -53,6 +52,6 @@ and the library can be found at https://github.com/OWASP/owasp-java-encoder
 
 ### Encode Level
 
-The encoding level we are using for both header and body is forJavaScriptSource. It gives us certain level of confidence, and it won't mess up header and body in most the case.
+The encoding level we are using for both header and body is forJavaScriptSource. It gives us a certain level of confidence, and it won’t mess up the header and body in most cases.
 
 [Body]: /concern/body/

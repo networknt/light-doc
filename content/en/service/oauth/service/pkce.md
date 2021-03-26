@@ -8,6 +8,7 @@ weight: 90
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Public OAuth clients that use the code grant and run on smartphones are susceptible to 
@@ -30,23 +31,20 @@ server stores them until a token request is received by the client.
 code_verifier included. The OAuth2 server recomputes the code challenge, and if it matches 
 the original one, releases the requested tokens.
 
-PKCE essentially works by preventing a malicious app or code had intercepted the code (as it 
-was passed from the system browser / the OS to the app) from exchanging it for a token.
+PKCE essentially works by preventing a malicious app or code that has intercepted the code (as it was passed from the system browser / the OS to the app) from exchanging it for a token.
 
 The latest release of the light-oauth2 server adds complete support for PKCE. In order to make 
 use of it a public client just needs to set the appropriate PKCE request parameters. The server 
 will take care of the rest.
 
-We also provide utility class CodeVerifierUtil in light-4j utility module to assist Java client
-to create code verifier and code challenge. 
-
+We also provide the utility class CodeVerifierUtil in the light-4j utility module to assist Java clients in creating code verifiers and code challenges.
 
 
 ### PKCE Authorization Request
 
 An authorization request that uses PKCE goes out with 
 
-code_challenge parameter and optionally with code_challenge_method parameter. 
+code_challenge parameter and optionally with the code_challenge_method parameter. 
 
 The value of code_challenge parameter is computed by applying a code challenge method (= computation 
 logic) to a code verifier.
@@ -109,7 +107,7 @@ and the code challenge method stored in the in-memory data grid.
 
 If the two code challenges are equal, the token request can be regarded as from the legitimate client 
 application that has made the original authorization request. Otherwise, the token request must be 
-regarded from a malicious application.
+regarded as from a malicious application.
 
 If a token request is verified, an authorization server issues an access token as usual.
 

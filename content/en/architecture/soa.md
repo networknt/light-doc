@@ -12,16 +12,12 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Some of people ask, “isn’t microserivces architecture just another name for SOA?”  
-Service-Oriented Architecture (SOA) sprung up during the first few years of this 
-century, and microservice architecture (abbreviated by some as MSA) bears a number 
-of similarities. Traditional SOA, however, is a broader framework and can mean a 
-wide variety of things. Some microservices advocates reject the SOA tag altogether, 
-while others consider microservices to be simply an ideal, refined form of SOA.  
-In any event, we think there are clear enough differences to justify a distinct 
-“microservice” concept.
+Some people ask: “Isn’t microservices architecture just another name for SOA?”
+ 
+Service-Oriented Architecture (SOA) sprung up during the first few years of this century, and microservices architecture (abbreviated by some as MSA) bears a number of similarities. Traditional SOA, however, is a broader framework and can mean a wide variety of things. Some microservices advocates reject the SOA tag altogether, while others consider microservices to be simply an ideal, refined form of SOA.
  
 The typical SOA model, for example, usually has more dependent ESBs, with 
 microservices using faster messaging mechanisms. SOA also focuses on imperative 

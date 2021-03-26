@@ -11,12 +11,11 @@ draft: false
 reviewed: true
 ---
 
-The light-oauth2 authorization code service supports both SPNEGO/Kerberos and Basic Authentications in HTTP get endpoint /oauth2/code. After successfully authenticated, an authorization code will be direct back to the Single Page Application. If the SPA does not handle the redirected URI path, then the BFF(backend for frontend) will get the authorization code to complete the authentication and authorization flow on behalf of the SPA. In this flow, the user credentials won't be revealed to the SPA and the access token won't be revealed to the SPA running on the browser. If the SPA knows the token, it is subject to XSS attack which is very hard to prevent given the current Javascript and Single Page Application ecosystem.
-
+The light-oauth2 authorization code service supports both SPNEGO/Kerberos and Basic Authentications in HTTP get endpoint /oauth2/code. After being successfully authenticated, an authorization code will be directed back to the Single Page Application. If the SPA does not handle the redirected URI path, then the BFF(backend for frontend) will get the authorization code to complete the authentication and authorization flow on behalf of the SPA. In this flow, the user credentials won’t be revealed to the SPA and the access token won’t be revealed to the SPA running on the browser. If the SPA knows the token, it is subject to XSS attack which is very hard to prevent given the current Javascript and Single Page Application ecosystem.
 
 ### Authentication Flow
 
-You can securely negotiate and authenticate HTTP requests for code service in the light-oauth2 by using the Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) as the web authentication service. 
+You can securely negotiate and authenticate HTTP requests for code services in the light-oauth2 by using the Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) as the web authentication service.
 
 SPNEGO is a standard specification that is defined in The Simple and Protected GSS-API Negotiation Mechanism (IETF RFC 2478) and SPNEGO-based Kerberos and NTLM HTTP Authentication in Microsoft Windows (IEFT RFC 4559).
 

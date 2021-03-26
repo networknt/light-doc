@@ -10,8 +10,7 @@ draft: false
 reviewed: true
 ---
 
-
-Unlike web services that all services are built into a monolithic application and we can put a gateway in front of the application for security, the service to service communication adds a lot of overhead if we go through a gateway. We also cannot go to the OAuth 2.0 provider to get token or verify token for each request due to the dramatically increased volume.
+Unlike web services where all services are built into a monolithic application and we can put a gateway in front of the application for security, the service to service communication adds a lot of overhead if we go through a gateway. We also cannot go to the OAuth 2.0 provider to get token or verify token for each request due to the dramatically increased volume.
 
 The following are some of the architectural considerations for the microservice OAuth 2.0 provider. 
  
@@ -22,8 +21,7 @@ It is built on top of light-4j/light-rest-4j frameworks as 7 microservices and e
 
 ### In-Memory Data Grid
 
-Hazelcast is used as Data Grid across multiple services and the majority of operations won't hit database server for best performance. This also makes the database as a plugin so that persistence layer can be anything from SQL to NoSQL.
-
+Hazelcast is used as a Data Grid across multiple services and the majority of operations won't hit database server for best performance. This also makes the database as a plugin so that persistence layer can be anything from SQL to NoSQL.
 
 ### Built-in Security
 
@@ -47,8 +45,8 @@ Designed as native cloud services on top of lightweight Java framework to lower 
 
 ### Federated OAuth 2.0 providers
 
-It can be deployed as multiple clusters. Each cluster works independently and can be registered to another cluster as a trusted provider. Any provider can access trusted providers public key certificates and make them available for its resource server to verify JWT tokens issued by a trusted provider. 
+It can be deployed as multiple clusters. Each cluster works independently and can be registered to another cluster as a trusted provider. Any provider can access trusted providers' public key certificates and make them available for its resource server to verify JWT tokens issued by a trusted provider. 
 
 ### By-value and by-reference tokens
 
-It uses by-value tokens inside the corporate network and by-reference token on the Internet. An endpoint is provided to dereference opaque token to JWT once the requests come inside the network. You should set up an external AS and an internal AS to responsible for external clients and internal clients in this use case. 
+It uses by-value tokens inside the corporate network and by-reference token on the Internet. An endpoint is provided to dereference opaque token to JWT once the requests come inside the network. You should set up an external AS and an internal AS to be responsible for external clients and internal clients in this use case. 

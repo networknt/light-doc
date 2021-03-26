@@ -14,7 +14,7 @@ toc: false
 draft: false
 ---
 
-You can build APIs or services with different frameworks provided by the light platform. 
+You can build APIs or services with different frameworks provided by Light.
 
 - [light-rest-4j](/style/light-rest-4j/)
   * [OpenAPI 3.0](/style/light-rest-4j/openapi/)

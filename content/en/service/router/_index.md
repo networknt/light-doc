@@ -27,16 +27,16 @@ The light-router has the following features:
 
 * High throughput, low latency, and small memory footprint. 
 * TLS passthrough or termination
-* Discover service with Consul, Zookeeper, etc.
-* Support environment tags for multiple testing environments deployed to the same cloud.  
-* Integrate light-oauth2 to retrieve the access token and renew the token before expiration.
+* Discovers service with Consul, Zookeeper, etc.
+* Supports environment tags for multiple testing environments deployed to the same cloud.
+* Integrates light-oauth2 to retrieve the access token and renew the token before expiration.
 * Built-in load balancer and cluster support
 * Can be started with Docker or standalone
-* Support HTTP 2.0 protocol on both in/out connections
-* Support REST, GraphQL and RPC style of APIs
+* Supports HTTP 2.0 protocol on both in/out connections
+* Supports REST, GraphQL and RPC style of APIs
 * Centralized logging to ELK with traceabilityId, and correlationId
-* Collect client and service metrics into InfluxDB and view the dashboard on Grafana
-* Manage configuration with light-config-server
+* Collects client and service metrics into InfluxDB and view the dashboard on Grafana
+* Manages configuration with light-config-server
 
 To learn how to use this router, please refer to 
 

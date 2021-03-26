@@ -15,13 +15,7 @@ toc: false
 draft: false
 ---
 
-Light platform encourage microservices or severless architecture although it can be
-used to build monolithic services. When you have two many services running within 
-the organization, managing these service specifications during development and instances
-during runtime become a daunting job. Light-portal provide features that help you
-to manage the entire life-cycle of services from planning to decommission. 
-
-
+Light encourages microservices or serverless architecture although it can be used to build monolithic services. When you have too many services running within the organization, managing these service specifications during development and instances during runtime can become a daunting job. Light-portal provides features that help you manage the entire life-cycle of services from planning to decommission.
 
 ### lightapi.net portal
 

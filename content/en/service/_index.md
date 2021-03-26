@@ -18,7 +18,7 @@ For organizations that are planning to migrate an existing monolithic applicatio
 
 Usually, you can start building several services and deploy them to your existing data center; however, once you have a dozen services running with multiple instances, you will need supporting services for security, tracing, monitoring, metrics, etc.
 
-The following are some of the important services recommended by the Light platform. Some of them are built by ourselves as existing products on the market cannot meet our requirement with microservices in the cloud. For example, light-oauth2 and light-portal. Other services are our picks of industry leaders, and the list is changing as the landscape of cloud-native computing is changing these days dramatically. 
+The following are some of the important services recommended by Light. Some of them are built ourselves as existing products on the market cannot meet our requirement with microservices in the cloud. For example, light-oauth2 and light-portal. Other services are our picks of industry leaders, and the list is changing as the landscape of cloud-native computing is changing dramatically these days.
 
 [light-oauth2][] is our security service built on top of light-rest-4j to protect services accessed by the unauthorized client. It has a unique feature to facilitate the service to service communication with two tokens.
 
@@ -49,15 +49,13 @@ The following are some of the important services recommended by the Light platfo
 - [COVID-19](/service/covid-19/)
 
 
-[oauth-kafka][] is our enterprise OAuth 2.0 provider build on top of light-kafka and kafka streams for event sourcing and CQRS. It is scalalbe and integrated with light-portal. The light-oauth2 will be still available for users who want to put everything together on a destop or a laptop. The API interface is the same and serviceIds are slightly different. This component is available for enterprise customers and subscription services will be availabe from light-portal site. 
+[oauth-kafka][] is our enterprise OAuth 2.0 provider built on top of light-kafka and kafka streams for event sourcing and CQRS. It is scalable and integrated with light-portal. The light-oauth2 will still be available for users who want to put everything together on a desktop or a laptop. The API interface is the same and the serviceIds are slightly different. This component is available for enterprise customers and subscription services will be available from light-portal site.
 
 [light-portal][] is an API runtime management and marketplace. In the service mesh context, it is the control plane. 
 
 [light-controller][] is a standard edition of global registry and discovery service with runtime monitoring. 
 
-[light-router][] is a proxy service that can help an external or a  legacy client to access cloud-native microservices by encapsulating consumer side cross-cutting concerns into a microservice as a distributed gateway. 
-
-
+[light-router][] is a proxy service that can help an external or a legacy client access cloud-native microservices by encapsulating consumer side cross-cutting concerns into a microservice as a distributed gateway.
 
 [light-proxy][] is a proxy service that can bring legacy REST API to the Light ecosystem by encapsulating all provider side cross-cutting concerns into a microservice as a distributed gateway. 
 

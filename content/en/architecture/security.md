@@ -16,14 +16,13 @@ reviewed: true
 ---
 
 
-Note: If this is the first time you hear about OAuth 2.0 or you want to get familiar with the grant types we are using, please read this [article][] first.
+Note: If this is your first time hearing about OAuth 2.0 or you want to get familiar with the grant types we are using, please read this [article][] first.
 
 Everyone’s excited about microservices, but the actual implementation is sparse. Perhaps the reason is that people are unclear on how these services talk to one another. The most tricky thing is access management throughout a sea of independent services.
 
 While designing microservices, a big monolithic application is broken down into smaller services that can be independently developed and deployed. The final application will have more HTTP calls than a single monolithic application, how can we protect these calls between services?
 
-To protect APIs/services, the answer is OAuth 2.0, and most simple and popular solution will be simple web token as an access token. The client authenticates itself on OAuth 2.0 server and OAuth server issues a simple web token (a UUID in most of the cases), then the client sends the request to API server with access token in the Authorization header. Once API server receives the request,
-it has to send the access token to OAuth server to verify if this is valid token and if this token is allowed to access this API. As you can see, there must be a database lookup on OAuth server to do that. Distributed cache helps a lot, but there is still a network call and lookup for every single request. OAuth server eventually becomes a bottleneck and a single point of failure. For more details on why Simple Web Token is not suitable for microservices architecture, please refer to [swt vs jwt][].
+To protect APIs/services, the answer is OAuth 2.0, and the most simple and popular solution will be a simple web token as an access token. The client authenticates itself on OAuth 2.0 server and OAuth server issues a simple web token (a UUID in most of the cases), then the client sends the request to API server with access token in the Authorization header. Once the API server receives the request, it has to send the access token to OAuth server to verify if this is a valid token and if this token is allowed to access this API. As you can see, there must be a database lookup on OAuth server to do that. Distributed cache helps a lot, but there is still a network call and lookup for every single request. OAuth server eventually becomes a bottleneck and a single point of failure. For more details on why Simple Web Token is not suitable for microservices architecture, please refer to [swt vs jwt][].
 
 Years ago, when JWT draft specification was out, I came up with the idea to do the distributed security verification with JWT to replace Simple Web Token for one of the big banks in Canada. At that time, there was nobody using JWT this way, and the bank sent the design to Paul Madson and John Bradley who are the Authors of OAuth 2.0 and JWT specifications and got their endorsements to use JWT this way.
 
@@ -43,11 +42,11 @@ Traditional Web Service is flattened and typically only used within the internal
 
 #### Microservice to Microservice
 
-When a original client calling the first microservice, it only pass one token in the Authorization header. That token can be authorization code token or client credientials token. When the first microservice calls another one, the original token is still passed in Authorization header to the next service; however, the orginal token won't have the right scope 
+When an original client calls the first microservice, it only passes one token in the Authorization header. That token can be the authorization code token or the client credentials token. When the first microservice calls another one, the original token is still passed in the Authorization header to the next service; however, the original token won’t have the right scope.
 
 #### Standalone App to Microservices
 
-Standalone application like desktop application or batch job might not have a specific user info but it need to access API or services to fulfill its task. In this case, the client credentials grant type will be followed. 
+Standalone applications like desktop applications or batch jobs might not have a specific user info but will need to access API or services to fulfill its task. In this case, the client credentials grant type will be followed.
 
 #### Single Page App to Microservices
 
@@ -59,7 +58,7 @@ Standalone application like desktop application or batch job might not have a sp
 
 ## Design Principal
 
-OAuth 2.0 is the de facto standard for API security, and we are following it as close as possible. However, OAuth 2.0 was written for web services, not Microservices and there is no coverage for service to service invocation. The solution is to add more functionalities when OAuth 2.0 is not enough. 
+OAuth 2.0 is the de facto standard for API security, and we are following it as closely as possible. However, OAuth 2.0 was written for web services, not microservices, and there is no coverage for service to service invocation. The solution is to add more functionalities when OAuth 2.0 is not enough.
 
 ## Distributed JWT Verification
 
@@ -87,7 +86,7 @@ This token will be put into the Authorization header of the request to API A. Wh
 
 ### API A calls API B and API C
 
-Now API A needs to call API B and API C to fulfill the request. As this is API to API call or service to service call, there is no user id involved and Client Credentials flow will be used here to get another JWT token to access B and C. The original JWT token doesn't have the scopes to access B and C as Client1 does not even care A is calling B and C. So here API A needs to get a token associated with client_id apia which has proper scope to access API B and API C.
+Now API A needs to call API B and API C to fulfill the request. As this is API to API call or service to service call, there is no user ID involved and Client Credentials flow will be used here to get another JWT token to access B and C. The original JWT token doesn’t have the scopes to access B and C as Client1 does not even care A is calling B and C. So here API A needs to get a token associated with client_id apia which has the proper scope to access API B and API C.
 
 This token will have the following claims.
 
@@ -118,11 +117,11 @@ Similar to API B and API C token verification.
 
 As described above, there are two tokens involved for service to service invocation and this pattern should cover most of the security requirement. However, there are certain cases that verify only the immediate caller is not enough. For example, the payment service needs to know that the request is initiated from the shopping cart and go through the order service. This cannot be done with the above two token pattern. In order to verify the call stack, the access/scope token must be chained so that the entire call stack can be verified by any token in the chain. 
 
-OAuth 2.0 has a draft specification called [token exchange][] and it can be utilized to embed previous token client id in the current token client id. In this case, when service goes to OAuth server to get the token, it must pass the access token it has received to the OAuth server so that the client id can be chained together in the new token. When the target service receives the token, it can verify the call stack in the token against its configuration to decide if access can be granted. 
+OAuth 2.0 has a draft specification called [token exchange][] and it can be utilized to embed previous token client id in the current token client id. In this case, when service goes to OAuth server to get the token, it must pass the access token it has received to the OAuth server so that the client id can be chained together in the new token. When the target service receives the token, it can verify the call stack in the token against its configuration to decide if access can be granted.
 
 ## Client Credentials / Scope Token Cache
 
-As described above, for every API to API call, the caller must pass in a scope token in addition to the original token. Unlike the original token which is associated with a user, the scope token is only associated with a client (API / service) and it will only be expired after a period configured on OAuth server. So it is not necessary to get the new scope token for every API to API call. The token is retrieved and cached in memory until it is about to be expired then a new token will be retrieved. 
+As described above, for every API to API call, the caller must pass in a scope token in addition to the original token. Unlike the original token which is associated with a user, the scope token is only associated with a client (API / service) and it will only expire after a period configured on OAuth server. So it is not necessary to get the new scope token for every API to API call. The token is retrieved and cached in memory until it is about to be expired then a new token will be retrieved.
 
 The entire token renew process is managed by [Client][] module provided in the light-4j framework. This client module encapsulates a lot of features to help API to API calls.
 

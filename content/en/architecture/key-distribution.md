@@ -16,7 +16,7 @@ reviewed: true
 ---
 
 
-The light-4j and related frameworks integrate with light-oauth2 very tightly so that tokens issued by light-oauth2 can be verified on services built on top of light-4j frameworks independently. We call this centralized security policy management on light-oauth2 and distributed policy enforcement on services. It eliminates the needs to call oauth2 server to verify token for each request to a service. If we do that, then the oauth2 server will become a bottleneck as the number of calls between services are significantly higher then traditional web services architecture.
+The light-4j and related frameworks integrate with light-oauth2 very tightly so that tokens issued by light-oauth2 can be verified on services built on top of light-4j frameworks independently. We call this centralized security policy management on light-oauth2 and distributed policy enforcement on services. It eliminates the need to call oauth2 server to verify a token for each request to a service. If we do that, then the oauth2 server will become a bottleneck as the number of calls between services are significantly higher then traditional web services architecture.
 
 In order to do token verification distributedly, we have to use PKI to sign the JWT token and distribute the public key certificate to each running service. Each service will use the public key certificate to verify token signature to ensure that the token is issued by the right OAuth 2.0 provider and the claims are not tempered.
 
@@ -30,7 +30,7 @@ When a service is generated from the light-codegen, it will include two public k
 
 ## Which key to use
 
-As mentioned above, light-4j supports multiple public key certificates at any time because once a key is rotated, service still needs to use the old key to verify tokens sign by the old private key as these tokens were issued before the new key is deployed and they are not expired yet. 
+As mentioned above, light-4j supports multiple public key certificates at any time because once a key is rotated, the service still needs to use the old key to verify tokens signed by the old private key as these tokens were issued before the new key is deployed and they are not expired yet.
 
 Here is the security.yml config file for security handler.
 

@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-While working on the light platform, we have developed some utility libraries. These libraries are important dependencies of the light platform; however, they can be used by other project without using any light-4j frameworks. One of them is json-schema-validator which is used by a lot of the users and it has its own community. 
+While working on Light, we have developed some utility libraries. These libraries are important dependencies of Light; however, they can be used by other projects without using any light-4j frameworks. One of them is json-schema-validator, which is used by a lot of the users and even its own community.
 
-Here we want to group them together and write down all the document in order to support these library to be used by other projects. 
+Here, we want to group them together and write down all the documents in order to support these libraries to be used by other projects.
 
 - [json-schema-validator](/library/json-schema-validator/)
 - [json-overlay](/library/json-overlay/)

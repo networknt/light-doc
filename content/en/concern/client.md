@@ -12,16 +12,15 @@ reviewed: true
 
 ## Introduction
 
-In microservices architecture, service to service communication can be done by request/response style or messaging/event style. An efficient HTTP client is crucial in request/response style as the number of interactions between services are high and extra latency can kill the entire application performance to cause the failure of a microservices application.
+In microservices architecture, service to service communication can be done through a request/response style or messaging/event style. An efficient HTTP client is crucial in a request/response style as the number of interactions between services is high and extra latency can kill the entire application performance, causing the failure of a microservices application.
 
-In the early days of light-4j, we have a client module based on Apache HttpClient and Apache HttpAsyncClient which supports HTTP 1.1 and is very popular in the open source community. However, it was designed long ago, and it is tough to use because of too many configurations. It is also huge, and slow compare with other modern HTTP clients. Another big issue is HTTP 2.0 support as light-4j frameworks support HTTP2 natively and we want to take advantage of the client side as well.
+In the early days of light-4j, we had a client module based on Apache HttpClient and Apache HttpAsyncClient which supported HTTP 1.1 and was very popular in the open source community. However, it was designed long ago and was tough to use because of its many configurations. It was also huge and slow compared to other modern HTTP clients. Another big issue was the HTTP 2.0 support as light-4j frameworks support HTTP2 natively and we want to take advantage of the client side as well.
 
-In looking for Java HTTP clients that support HTTP 2.0, we were stuck there as none of them supports it gracefully. Some are partial support, and most of them require you to put -Xbootclasspath with a specific version of jar file per JDK version in the command line to work with Java 8. Everybody seems to wait for Java 11 to come out, but we cannot use it on production until it is ready.
+While looking for Java HTTP clients that supported HTTP 2.0, we were stuck as none could support it gracefully. Some provided partial support, while most of them required you to put -Xbootclasspath with a specific version of the jar file per JDK version in the command line for it to work with Java 8. Everybody seems to want to wait for Java 11 to come out but we cannot use it on production until it is ready.
 
-Given the above situations, I decided to implement our own Http2Client based on what we have in Undertow. I have proposed the idea to implement a generic Http2Client to Undertow community, but it wasn't interested. It will take a long time to build an independent Http2Client without depending on Undertow, and it is OK with us as our server is based on Undertow anyway. Other people might have a concern on that, but the argument is Undertow core is extremely small, and I don't think it is an issue for other people to use it outside of light-4j frameworks.
+Given the above situation, I decided to implement our own Http2Client based on what we have in Undertow. I proposed the idea of implementing a generic Http Client to the Undertow community, but it wasn’t interesting. It will take a long time to build an independent Http 2Client without depending on Undertow, which is OK with us as our server is based on Undertow anyway. Others may have concerns, but our argument is that the Undertow core is extremely small, and I don’t think it is an issue for other people to use it outside of light-4j frameworks.
 
-I am starting an [http client benchmark](https://github.com/networknt/http2client-benchmark)
-and if there are more interests on this client, I will make it an independent module without depending on Undertow core so that other people working on other platforms can use it without the extra Undertow core.
+I am starting an [http client benchmark](https://github.com/networknt/http2client-benchmark). If there is more interest in this client, I will make it an independent module without depending on Undertow core so that other people working on other platforms can use it without the extra Undertow core.
 
 ## Usage
 
@@ -31,19 +30,19 @@ Http2Client supports both HTTP 1.1 and HTTP 2.0 transparently depending on if th
 2. Standalone Application/Mobile Application
 3. API/Service
 
-It provides methods to get authorization token and automatically gets client credentials token for scopes in API to API calls. It also helps to pass correlationId and traceabilityId and other configurable headers to the next service.
+It provides methods to get authorization tokens and automatically receives the client credentials token for scopes in API to API calls. It also helps pass correlationId and traceabilityId and other configurable headers to the next service.
 
-Although it supports HTTP 1.1, it requires the user to create a connection pool as HTTP 1.1 connection doesn't support multiplex and one connection can only handle one request concurrently. I am planning to add an internal connection pool if there is a need but currently it is not necessary as all the communication is on HTTP 2.0
+Although it supports HTTP 1.1, it requires that the user create a connection pool as the HTTP 1.1 connection doesn’t support multiplex. One connection can only handle one request concurrently. I am planning on adding an internal connection pool if there is a need, but currently, it is not necessary as all communication is on HTTP 2.0
 
-Http2Client is a very low-level component, and it is best to be used in service to service communication. If you are trying to write an original client application in Java 8, please take a look at [light-consumer-4j][] which is written by Nicholas Azar and contributed by the community. It is built on top of Http2Client and has a lot of extra features like connection pooling etc. 
+Our Http2Client is a very low-level component that is best used in service to service communication. If you are trying to write an original client application in Java 8, please take a look at [light-consumer-4j][] which is written by Nicholas Azar and was contributed by the community. It is built on top of Http2Client, and has a lot of extra features like connection pooling.
 
 ### Localhost vs 127.0.0.1
 
-When using the client module to call a service on the same host, you can use localhost or 127.0.0.1 before release 1.5.29 as there was a hostname verification bug in the framework. Since 1.5.29, you must use localhost in the URL as the bug was fixed and localhost is matching the hostname in the generated client.truststore and server.keystore files. 
+When using the client module to call a service on the same host, you can use localhost or 127.0.0.1 before release 1.5.29 as there was a hostname verification bug in the framework. Fom version 1.5.29 onwards, you must use localhost in the URL as the bug was fixed and localhost matches the hostname in the generated client.truststore and server.keystore files.
 
 ### Generic response callback functions
 
-Like Undertow core server, it is event-driven with callbacks so non-blocking all the time to free your CPU for other important computation. Http2Client has two generic callback functions implemented to handle requests with a body (POST, PUT, PATCH) and requests without a body(GET, DELETE). Users can create their own customized callback functions to handle the response from the server if they need special logic inside the callback function.
+Like the Undertow core server, it is event-driven with callbacks so non-blocking all the time to free your CPU for other important computation. Http2Client has two generic callback functions implemented to handle requests with a body (POST, PUT, PATCH) and requests without a body(GET, DELETE). Users can create their own customized callback functions to handle the response from the server if they need special logic inside the callback function.
 
 Signature for GET/DELETE
 
@@ -61,13 +60,13 @@ Note that you need to pass in a requestBody for POST, PUT or PATCH.
 
 ### Client Credentials token renew and cache
 
-The renew of token happens behind the scene, and it supports the circuit breaker if the OAuth 2.0 server is down or busy. It renews the token pro-actively before the current one is expired and lets all requests go with the current token. It only blocks other requests if the current request is trying to renew an expired token. When token renewal in this case fails, all requests will be rejected with a timeout and subsequent requests the same until a grace period is passed so that the renew process starts again. 
+The renewal of the token happens behind the scene, and it supports the circuit breaker if the OAuth 2.0 server is down or busy. The token is renewed pro-actively before the current one expires and lets all requests go with the current token. It only blocks other requests if the current request is trying to renew an expired token. When token renewal in this case fails, all requests will be rejected with a timeout and subsequent requests will react in the same way until a grace period is passed so that the renew process starts again.
 
-There is a good reason we renew the token proactively. If we leave the token to the expiration, the traditional API service can return 401 error with the token expired message to notify the client to get a new token. In the microservices architecture, this is not possible. What if the token is one second before the expiration and service A accepts it and write something into its database and then service B accepts it and write something into its database. However, when service C receives it, it is expired already and rejected. There must be extra logic to compensate the transactions service A and B have performed already. We have a framework [light-saga-4j][] for this type of microservices orchestration, but it is really not necessary for just token expiration handling. It would be better to handle it gracefully in the client module to ensure that the token sent has a longer expiration time than the entire application SLA. 
+There is a good reason we renew the token proactively. If we leave the token to expire, the traditional API service can return a 401 error with the token expired message to notify the client to get a new token. In microservices architecture, this is not possible. What if the token is one second before the expiration, and service A accepts it, writing something into its database which service B accepts, writing something into its database? However, when service C receives it, it is already expired and rejected. There must be extra logic to compensate for the transactions service A and B have performed already. We have a framework [light-saga-4j][] for this type of microservices orchestration, but it is really not necessary for just token expiration handling. It would be better to handle it gracefully in the client module to ensure that the token sent has a longer expiration time than the entire application SLA.
 
 ### Sign Request API
 
-The light-oauth2 Token service has a signing endpoint to sign the incoming map object to support information exchange signature verification between multiple microservices. For more information about the service, please visit [signing][]. 
+The light-oauth2 Token service has a signing endpoint to sign the incoming map object to support the information exchange signature verification between multiple microservices. For more information about the service, please visit [signing][].
 
 For the issuer service which wants to provide the signed JWT, it needs to use the client module to access the remote service in the light-oauth2. The client module provided an API to simplify access. 
 
@@ -93,10 +92,10 @@ For the default config file, please visit [client.yml][]
 
 ```
 
-Before calling the API, you need to create a POJO object for the SignRequest. The class constructor will load the above configuration parameter into the object. You need to provide to properties: 
+Before calling the API, you need to create a POJO object for the SignRequest. The class constructor will load the above configuration parameter into the object. You need to provide these properties:
 
-* expires - which is the number of seconds the token expires
-* payload - which is a map contains all the attributes you want to put as JWT claims
+* expires - which is the number of seconds until the token expires
+* payload - which is a map which contains all the attributes you want to put as JWT claims
 
 Once you have the SignRequest object created, you can call the OauthHelper class with the following static method.
 
@@ -113,10 +112,10 @@ This feature is implemented by embedding the connection pool into an existing me
 CompletableFuture<ClientResponse> callService(URI uri, ClientRequest request, Optional<String> requestBody)
 ```
 
-The user can call this method or `getRequestService(URI uri, ClientRequest request, Optional<String> requestBody)` which combine the `callService()` with a circuit breaker to cache the established connections and reuse them without considering the type of connection.
+The user can call this method or `getRequestService(URI uri, ClientRequest request, Optional<String> requestBody)` which combines the `callService()` with a circuit breaker to cache the established connections and reuse them without considering the type of connection.
 
 ##### HTTP/1.1 Connection
-* **Multiple connections** will be added to connection pool for the same host.
+* **Multiple connections** will be added to the connection pool for the same host.
   * This workflow is to monitor whether there are connections that are not yet occupied by other requests and are not waiting for a reponse when a request is sent. If this is the case, reuse the connection until the connection is closed or the maximum number of requests is reached. Otherwise, a new connection is established and cached into the connection pool for this host.
 
 ##### HTTP/2 Connection
@@ -125,7 +124,7 @@ The user can call this method or `getRequestService(URI uri, ClientRequest reque
 
 
 #### Configuration
-Users can configure the size of the connection pool; the maximum number of requests per connection, and whether HTTP/2 is enabled through configuring the client.yml
+Users can configure the size of the connection pool, the maximum number of requests per connection, and whether HTTP/2 is enabled through configuring the client.yml.
 
 >Or the user can clean up the connection pool manually by calling `Http2ClientConnectionPool.getInstance().clear()`
 
@@ -199,13 +198,13 @@ Http2Client is a singleton, and you only need one instance in your application. 
 
 #### Call from web server
 
-To set the header with authorization code JWT token.
+To set the header with the authorization code JWT token.
 
 ```
     public void addAuthToken(HttpRequest request, String token) 
 ```
 
-To set the header with authorization code JWT token and traceabilityId.
+To set the header with the authorization code JWT token and traceabilityId.
 
 ```
     public void addAuthTokenTrace(HttpRequest request, String token, String traceabilityId) 
@@ -213,12 +212,12 @@ To set the header with authorization code JWT token and traceabilityId.
 
 #### Call from standalone app/mobile app
 
-To set the header with client credentials JWT token.
+To set the header with the client credentials JWT token.
 ```
     public void addCcToken(HttpRequest request) throws ClientException, ApiException 
 ```
 
-To set the header with client credentials JWT token and traceabilityId.
+To set the header with the client credentials JWT token and traceabilityId.
 
 ```
     public void addCcTokenTrace(HttpRequest request, String traceabilityId) throws ClientException, ApiException 
@@ -247,7 +246,7 @@ All tests in light-*-4j frameworks are real tests against the real server, and t
 
 ### Http2Client communicate with third party server.
 
-Within light-4j, there are several places that Http2Client is used to communicate with third party servers
+Within light-4j, there are several places that Http2Client is used to communicate with third party servers:
 
 * OAuth2 server
 
@@ -279,7 +278,7 @@ https://github.com/networknt/light-example-4j/tree/master/router
 
 ### Close connection
 
-In most of the cases, we don't close the connection, and all the requests will go through the same HTTP/2 connection with multiplex support. However, there are times you need to create a new connection on demand and close it once it is used. For example, in [Server.java](https://github.com/networknt/light-4j/blob/master/server/src/main/java/com/networknt/server/Server.java) we create a new connection to load config from light-config-server during server startup. In this case, although our config server supports HTTP/2, we create and close the connection as this is a one-time request and we don't want to hold the resource. Here are the lines to close the connection in finally block.
+In most cases, we don’t close the connection, and all the requests will go through the same HTTP/2 connection with multiplex support. However, there are times when you need to create a new connection on demand and close it once it is used. For example, in [Server.java](https://github.com/networknt/light-4j/blob/master/server/src/main/java/com/networknt/server/Server.java) we create a new connection to load config from light-config-server during server startup. In this case, although our config server supports HTTP/2, we create and close the connection as this is a one-time request and we don’t want to hold the resource. Here are the lines to close the connection in the final block.
 
 ```java
     } finally {
@@ -287,13 +286,13 @@ In most of the cases, we don't close the connection, and all the requests will g
     }
 ```
 
-Although it is recommended to keep the connection cached for high volume services, the connection must be closed from time to time so that the load balancer can redirect the same client instance to different server instance unless you want to pin a particular client instance to a server instance for a long time. This will eventually cause imbalance load on the service instances if there are not too many different clients. 
+Although it is recommended to keep the connection cached for high volume services, the connection must be closed from time to time so that the load balancer can redirect the same client instance to a different server instance unless you want to pin a particular client instance to a server instance for a long time. This will eventually cause an imbalance load on the service instances if there are not too many different clients.
 
-The Consul client is one of the examples that the connection is reset from time to time to ensure that we are not running out of max number of requests per connection in HTTP/2. The current connection will be dropped and recreated after 1 million requests. 
+The Consul client is one of the examples in which the connection is reset from time to time to ensure that we are not running out of max number of requests per connection in HTTP/2. The current connection will be dropped and recreated after 1 million requests.
 
 https://github.com/networknt/light-4j/blob/master/consul/src/main/java/com/networknt/consul/client/ConsulClientImpl.java
 
-The easier way to close collection periodically is to close it after a number of requests or close it after a number of minutes. The same finally block can be written as.
+The easier way to close collection periodically is to close it after a number of requests or close it after a number of minutes. The same finally block can be written as:
 
 ```java
     } finally {
@@ -322,13 +321,13 @@ Here is the example to check the connection before using it.
         }
 ```
 
-The above code checks the cached connectionC and if it is closed already, then create a new connection and cache it again.
+The above code checks the cached connectionC and if it is closed already, creates a new connection and caches it again.
 
 For the full example, please refer to https://github.com/networknt/light-example-4j/blob/master/discovery/api_a/consul/src/main/java/com/networknt/apia/handler/DataGetHandler.java
 
 ### Multiple Request Pattern
 
-If you send multiple request through one connection, here is an example. 
+If you send multiple requests through one connection, here is an example.
 
 ```java
     public void testRouterHttps48k() throws Exception {
@@ -392,19 +391,19 @@ connection.sendRequest(request, client.createClientCallback(reference, latch, js
 
 ### NPE at reference.get()
 
-When accessing a server with heavy load, the response time might be longer. In the above example, we waited 1000ms to ensure that the response is comming back. If we only wait 10ms, chances are the response is not backed yet and the subsequent call to get statusCode will throw NullPointerException. If you see this exception, try to increase the await timeout to bigger number like 1000ms. In the above example, we are sending 100 big requests(48k) to the server so the wait time is set as 1000ms. 
+When accessing a server with heavy load, the response time might be longer. In the above example, we waited 1000ms to ensure that the response was coming back. If we only wait 10ms, chances are the response is not backed yet and the subsequent call to get statusCode will throw a NullPointerException. If you see this exception, try to increase the wait timeout to a bigger number like 1000ms. In the above example, we are sending 100 big requests(48k) to the server so the wait time is set as 1000ms.
 
 ```
 latch.await(1000, TimeUnit.MILLISECONDS);
 ```
 
-If you want to wait until the default timeout defined in client.yml is reached, you can just call. 
+If you want to wait until the default timeout defined in client.yml is reached, you can just call:
 
 ```
 latch.await();
 ```
 
-For some slow services, you might need to adjust the default timeout in client.yml to allow the client to wait longer before timeout. This is usually dealing with legacy services, and these services should be upgraded with the async approach if possible. 
+For some slow services, you might need to adjust the default timeout in client.yml to allow the client to wait longer before timeout. This is usually dealt with legacy services, and these services should be upgraded with the async approach if possible.
 
 ### HOST Header
 
@@ -419,9 +418,9 @@ You can see the entire example in the above testRouterHttps48k method.
 
 ### Configuration
 
-When using client module of light-4j, you need to have a configuration file client.yml in your src/main/resources/config folder. If OAuth 2.0 is used to secure the API access, then you need to update secret.yml to have client secrets configured there.
+When using the client module of light-4j, you need to have a configuration file client.yml in your src/main/resources/config folder. If OAuth 2.0 is used to secure the API access, then you need to update secret.yml to have client secrets configured there.
 
-The following is the default client.yml in light-4j and you should replace it with an externalized client.yml file.
+The following is the default client.yml in light-4j which you should replace with an externalized client.yml file.
 
 ```yaml
 # This is the configuration file for Http2Client.
@@ -516,7 +515,7 @@ oauth:
 
 Please be aware that bufferSize need to be increased to the size of your maximum request body. The default 24*1024 should be good enough for most of the application. There is a [tutorial][] to give you more details on the bufferSize configuration. 
 
-Also, the values of `keystore` and `truststore` represent the paths of them. They should be relative to the external config directory. For example, If the server start with `-Dlight-4j-config-dir=/external_dir/config`, and the absolute path of `keystore` is `/external_dir/config/ssl/client.keystore`, their configuration in client.yml should be: 
+The values of `keystore` and `truststore` also represent the paths of them. They should be relative to the external config directory. For example, If the server start with `-Dlight-4j-config-dir=/external_dir/config`, and the absolute path of `keystore` is `/external_dir/config/ssl/client.keystore`, their configuration in client.yml should be:
 
 ```yaml
 tls:
@@ -600,7 +599,7 @@ The config item `verifyHostname` in the [Configuration](#Configuration) section 
 
 However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS environment, we provide a configuration based approach for service identity check. In this approach, the server side ssl certificate needs to include a service identity. Users can choose any meaningful ids or names to identify their services. Once the ids or names are added to server ssl certificate, the clients of the service need to add the specified ids or names in to `trustedNames` of the configuration file `client.yml`. At runtime, the https or http2 client verifies server certificates agains configured `trustedNames`. If a match is found, the service is trusted and connections are established. Otherwise, connections are terminated or refused.
 
-The following steps illustrate how to set up service identify check using service IDs. 
+The following steps illustrate how to set up service identify checks using service IDs. 
 
 1. Put service IDs into the server certificate. Ideally, the service IDs should be put in subject alternative names of the certificate (as shown below). If subject alternative names are not set, the common name is used in the verification. For each service, the service ID can be found in the server.yml configuration file. 
 

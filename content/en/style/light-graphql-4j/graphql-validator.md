@@ -15,7 +15,7 @@ Graphql Validator validates the path and methods of the request. Other schema va
 
 Basic request validation for the graphql path and methods is done by this middleware handler. It is the first line of validation right after graphql-security and it doesn’t have any knowledge about the graphql query parameter and body. Other schema based validation will be done at GraphQL level.
 
-From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a validator configuration file for different frameworks, a new graphql-validator.yml with the same content has been introduced. The validator.yml is still loaded if graphql-validator.yml doesn't exist for backward compatibility. 
+From release 1.5.18, Light supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a validator configuration file for different frameworks, a new graphql-validator.yml with the same content has been introduced. The validator.yml is still loaded if graphql-validator.yml doesn’t exist for backward compatibility.
 
 Here is an example of graphql-validator.yml
 
