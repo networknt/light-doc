@@ -195,6 +195,9 @@ section, some of the most important tutorials are listed here and more will be a
 - [Light-reference](/tutorial/reference/)
   * [Update Reference Table](/tutorial/reference/sql-update/)
   
+- [Light-mesh](/tutorial/mesh/)
+  * [KsqldbConsumer](/tutorial/mesh/kafka/ksqldb/)
+
 ### Tool Chain
 
 - [Light-codegen](/tutorial/generator/)
