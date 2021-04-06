@@ -7,14 +7,10 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-If you API server serves SPA (single page application) built on top of Angular
-or React, there is no issue for the SPA to access APIs on the same server.
-However, some of the single page applications are served by another server
-on another domain. In this case, the API server has to handle the pre-flight
-options request in order to allow browser client to access the APIs directly. 
-
+If your API server serves a SPA (single page application) built on top of Angular or React, there is no issue when the SPA accesses APIs on the same server. However, some of the single page applications are served by another server on another domain. In this case, the API server has to handle the pre-flight options request in order to allow browser clients to access the APIs directly.
 
 ## CorsHttpHandler
 

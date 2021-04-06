@@ -14,7 +14,7 @@ draft: false
 reviewed: true
 ---
 
-It is an open-source application that enables the local community to help each other to get through the COVID-19 pandemic. 
+This is an open-source application that enables the local community to help each other get through the COVID-19 pandemic.
 
 * [Why do I build this app][]
 * [Usage Guide][]

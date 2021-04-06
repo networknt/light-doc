@@ -16,21 +16,21 @@ draft: false
 reviewed: true
 ---
 
-For public APIs, it makes sense to use RESTful; however, if it is an internal API, the RPC based API style will be more efficient. As these days, Javascript on the browser is really powerful, and it can deal with JSON or other binary protocol very easily. These browser object (JSON/Binary) contains type information so that there is no need to do Object to URI and URI to Object transformation based on OpenAPI specification or RAML.
+For public APIs, it makes sense to use RESTful; however, if it is an internal API, the RPC based API style will be more efficient. These days, Javascript on the browser is really powerful, and it can deal with JSON or other binary protocols very easily. These browser objects (JSON/Binary) contain type information so that there is no need to do Object to URI and URI to Object transformation based on OpenAPI specification or RAML.
 
-If you look at an OpenAPI specification, you will be shocked as it is too complicated with so many moving parts. Both client and server will be dealing with headers, query parameters, path parameters, and request body. Also, because of the transformation between JSON object to URI, data type information is lost, and you have to define it in the specification so that the server can derive the type from it. It makes the REST framework less efficient than other RPC based frameworks that send the JSON or binary object to the server with all the type information available. 
+If you look at an OpenAPI specification, you will be shocked by its complexity and many moving parts. Both the client and the server will be dealing with headers, query parameters, path parameters, and request bodies. Also, because of the transformation between JSON objects to URI, data type information is lost, so you have to define it in the specification so that the server can derive the type from it. It makes the REST framework less efficient than other RPC based frameworks that send the JSON or binary object to the server with all the type information available.
 
-With hybrid schema, it is very easy to combine several services together as merging schemas are much easier than OpenAPI specification. This is why we call the light-hybrid-4j framework as a hybrid. You can put several services together into the same JVM instance to save memory and later on you can split up high volume service to separate JVM instance for scaling. This gives customers more flexible deployment options, and they can move from monolithic->hybrid-> microservices based on the growth of the business. 
+With hybrid schema, it is very easy to combine several services together as merging schemas is much easier than OpenAPI specification. This is why we call the light-hybrid-4j framework a hybrid. You can put several services together into the same JVM instance to save memory and later on you can split up high volume service to separate JVM instances for scaling. This gives customers more flexible deployment options, and they can move from monolithic->hybrid-> microservices based on the growth of the business.
 
 Light-hybrid-4j is a generic RPC framework, and it supports JSON RPC.  Other binary RPC like gRPC will be supported later. 
 
-The easiest way to start a hybrid service is too use [light-codegen][] to generate a server and then generate a service based on a schema. Then you can put the service in the pom.xml of the server, or put the service jar file into the classpath when starting the server. The second options is more flexible than the first one. 
+The easiest way to start a hybrid service is to use [light-codegen][] to generate a server and then generate a service based on a schema. Then you can put the service in the pom.xml of the server, or put the service jar file into the classpath when starting the server. The second option is more flexible than the first one 
 
 To show users how easy to start a generic server and build a generic service, let's follow the steps below.
 
 ### Prepare Environment
 
-Before starting, we need to prepare the environment by clone several repositories from the networknt organization on GitHub.com and build light-codegen. Let’s assume that you are using a workspace called networknt under your user's home directory.
+Before starting, we need to prepare the environment by cloning several repositories from the networknt organization on GitHub.com and building light-codegen. Let’s assume that you are using a workspace called networknt under your user’s home directory.
 
 ```
 cd ~/networknt
@@ -52,7 +52,7 @@ mv generic-service generic-service.bak
 
 ### Generate Generic Server
 
-It leverages the generic server and generic service defined in model-config/hybrid. These server and service are used to test the new version of the light-hybrid-4j and new version of light-codegen.
+It leverages the generic server and generic service defined in model-config/hybrid. These servers and services are used to test the new version of the light-hybrid-4j and new version of light-codegen.
 
 In light-codegen, light-hybrid-4j framework generator needs a config.json as input to generate a server project. This file can be found in model-config/hybrid/generic-server
 

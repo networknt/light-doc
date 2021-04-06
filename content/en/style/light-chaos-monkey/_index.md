@@ -28,7 +28,7 @@ While helping my customers to build large scale distributed systems in light-4j,
 
 As you can see, there are a lot of questions to be answered to make our customers comfortable to rollout distributed applications. 
 
-These questions led me to dive into [Chaos Engineering](https://principlesofchaos.org/) and started this project to share my thoughts and experience.
+These questions led me to dive into [Chaos Engineering](https://principlesofchaos.org/) and start this project to share my thoughts and experience.
 
 ### How does it work?
 
@@ -40,11 +40,11 @@ To simulate some of the Chaos Monkey behaviours, we built several middleware han
 
 Each middleware handler has its configuration file with a switch to enable or disable. So you can even deploy it to the production without any negative impact. 
 
-A configuration endpoint /chaosmonkey enables these handlers at runtime with different parameters. It allows controlled Chaos Engineering from the pipeline so that it can be rerun for every release. Also, this gives the team more opportunities to simulate random production behaviours. 
+A configuration endpoint /chaosmonkey enables these handlers at runtime with different parameters. It allows controlled Chaos Engineering from the pipeline so that it can be rerun for every release. This also gives the team more opportunities to simulate random production behaviours.
 
 ### Assault Handlers
 
-Assault handlers are the heart of Chaos Monkey and the service makes use of them based on your configuration. Following assault handlers are actual provided.
+Assault handlers are the heart of Chaos Monkey and the service makes use of them based on your configuration. The following assault handlers are actually provided.
 
 * [Latency Assault][]
 

@@ -15,12 +15,12 @@ draft: false
 reviewed: true
 ---
 
-Frequently asked questions and known issues, recent workarounds pulled from the [gitter][] forums and [reddit] discussions. It also contains information that helps developers to debug applications if something abnormal happens. 
+Frequently asked questions and known issues, recent workarounds pulled from [Gitter][] forums and [Reddit][] discussions. It also contains information that helps developers debug applications if something abnormal happens.
 
 
 ### Debug
 
-As we are dealing with POJO in Java SE, you can debug your entire application in IDE without any remote connection. If you have two or more services interact each other, you can load all of them into the IDE and debug from one service to another. Here are some tutorials for IntelliJ Idea and Eclipse. 
+As we are dealing with POJO in Java SE, you can debug your entire application in IDE without any remote connection. If you have two or more services interacting with each other, you can load all of them into the IDE and debug from one service to another. Here are some tutorials for IntelliJ Idea and Eclipse.
 
 * [Debug with IntelliJ Idea][]
 * [Debug with Eclipse][]
@@ -31,8 +31,8 @@ As we are dealing with POJO in Java SE, you can debug your entire application in
 * [Request with French character in body to light-router with http2 to backend with early version of light-4j service][]
 
 
-[gitter]: https://gitter.im/networknt/light-4j
-[reddit]: https://www.reddit.com/r/lightapi/
+[Gitter]: https://gitter.im/networknt/light-4j
+[Reddit]: https://www.reddit.com/r/lightapi/
 [Debug with IntelliJ Idea]: /tutorial/common/debug/idea/
 [Debug with Eclipse]: /tutorial/common/debug/eclipse/
 [Request with French character in body to light-router with http2 to backend with early version of light-4j service]: /troubleshooting/router-http2-to-older-version-service/

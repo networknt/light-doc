@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-This is a server health check handler that outputs OK or a JSON object to indicate the server is alive. Normally, it will be used by F5, light-router to check if the server is healthy before route requests to it. The global registry will also use the same endpoint to ensure all instances there are healthy for consumers to discover. Another way to check server health is to ping the IP and port, and it is the standard way to check server status for F5 or any reverse proxy servers. However, the service instance is up and running doesn't mean it is functioning. The handler can output more information about the server for reverse proxies. 
+This is a server health check handler that outputs OK or a JSON object to indicate the server is alive. Normally, it will be used by F5/light-router to check if the server is healthy before routing requests to it. The global registry will also use the same endpoint to ensure all instances are healthy for consumers to discover. Another way to check server health is to ping the IP and port, and it is the standard way to check server status for F5 or any reverse proxy servers. However, just because the service instance is up and running doesn’t mean it is functioning. The handler can output more information about the server for reverse proxies.
 
 We recommend using the light-router as the router for Internet traffic for back-end services with static IP addresses that act as a traditional web server. These services will be sitting in DMZ to serve mobile native and browser SPA and aggregate other back-end services. There is no reverse proxy for services deployed in the cloud dynamically but using client-side service discovery.
 

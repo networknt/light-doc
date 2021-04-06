@@ -12,6 +12,7 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 For some people microservices is "the next big thing", whereas for others it's simply a lightweight 
@@ -68,43 +69,24 @@ microservices, like any architectural approach, are a trade-off.
 
 Microservices have one important downside and can lead to one huge architecture mistake.
 
-The downside is that microservices architecture leads to huge complexity increases for deployment 
-and operations. Deploying one monolith is very different from deploying 100 or 1000 separate services. 
-Monitoring and de-bugging then become a very difficult job. There are solutions, but each adds to 
-costs and complexity. This investment might not pay off for smaller products.
+The downside is that microservices architecture leads to huge complexity increases for deployment and operations. Deploying one monolith is very different from deploying 100 or 1000 separate services. Monitoring and debugging then becomes a very difficult job. There are solutions, but each adds to costs and complexity. This investment might not pay off for smaller products.
 
-The architecture mistake is to create microservices that directly depend on other microservices. 
-This is just a re-creation of the dependency hell problem in deployment. If dependencies are 
-hierarchical, changing a service propagates and require a lot of redeployments. Instead, aim for 
-services that completely encapsulate one atomic change. This is the hardest thing to do about 
-microservices; no wonder it took Fred George’s team weeks to figure it out (and probably a lot 
-more time after starting the development).
+The architecture mistake is to create microservices that directly depend on other microservices. This is just a re-creation of the dependency hell problem in deployment. If dependencies are hierarchical, changing a service propagates and requires a lot of redeployments. Instead, aim for services that completely encapsulate one atomic change. This is the hardest thing to do about microservices; no wonder it took Fred George’s team weeks to figure it out (and probably a lot more time after starting the development).
 
 ### Modular monolith
 
 There is an alternative to microservices, one that we used successfully for light-hybrid-4j: the 
 modular monolith.
 
-Can we realize the benefit of microservices and still enjoy the simplicity of monolith? The answer
-is modular monolith. It is an architecture sitting in between monolith and microservices. Instead of
-big black box of monolith, we apply [microservices principles][] to vertically slice the application
-to multiple independent services; however, we don't want to deploy these services distributed in the
-first place but put them together so that the communication is in-process instead of HTTP or other
-network protocol. This removes the complex topology of microservices and hugo front infrastructure
-cost. And it leave the room to scale these services individually if load is heavy. 
+Can we realize the benefit of microservices and still enjoy the simplicity of monolith? The answer is the modular monolith. It is an architecture sitting in between monolith and microservices. Instead of a big black box of the monolith, we apply [microservices principles][] to vertically slice the application to multiple independent services; however, we don’t want to deploy these services distributed in the first place but put them together so that the communication is in-process instead of HTTP or other network protocol. This removes the complex topology of microservices and hugo front infrastructure cost. And it leaves the room to scale these services individually if the load is heavy.
 
 In JVM, this means we have several independent services deployed into the same JVM whether or not
 they are in the same container or virtual machine. 
- 
 
-[light-hybrid-4j] framework is designed to be a modular monolith or microservices framework. Developers
-can build services just like the normal microservices with the final output a jar file. Several jar
-files can be deployed to the same docker container volume and loaded into the same JVM. The communication
-between these services are through well defined interface contract and all the details for each service
-is hidden. If one or more services are getting too much load, then you can put these services into
-separate containers to scale them only. 
+[light-hybrid-4j] framework is designed to be a modular monolith or microservices framework. Developers can build services just like the normal microservices with the final output a jar file. Several jar files can be deployed to the same docker container volume and loaded into the same JVM. The communication between these services are through well defined interface contracts and all the details for each service is hidden. If one or more services are getting too much load, then you can put these services into separate containers to scale them only.
 
 [microservices principles]: /architecture/microservices/
 [light-hybrid-4j]: /style/light-hybrid-4j/
+
 
 

@@ -12,18 +12,13 @@ weight: 1
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Majority of the sections in this site are about how to build, deploy and manage
-services. This section will address microservices architecture and best practices 
-from consumer perspective. 
+The majority of the sections in this site are about how to build, deploy and manage services. This section will address microservices architecture and the best practices from a consumer perspective.
 
-Unlike monolithic JavaEE web service with only one client and one server, there
-are many microservices involved in one external request and client to server
-communication efficiency is very important to overall latency. The definition
-of client vs server or consumer vs provider is blurred as one service can be 
-the server for another service and at the same time it can be a client for
-another service. 
+Unlike monolithic JavaEE web services with only one client and one server, there are many microservices involved in one external request, and client to server communication efficiency is very important to overall latency. The definition of client vs server or consumer vs provider is blurred as one service can be the server for another service. At the same time it can be a client for another service.
+The following contains architecture, design and best practices. → The following contains architecture, design and best practices:
 
 The following contains architecture, design and best practices. 
 

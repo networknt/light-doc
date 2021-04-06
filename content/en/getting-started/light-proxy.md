@@ -16,7 +16,7 @@ draft: false
 reviewed: true
 ---
 
-For an organization that established infrastructure to support services built on top of the Light Platform, chances are they have some existing services built with other platforms or even different languages. To leverage the security, metrics, logging, tracing, auditing, client-side service discovery for these existing services, it is a good idea to put [light-proxy][] in front of these services to provide cross-cutting concerns and gateway features for them. Although the light-proxy adds an additional network hop, however, it might be faster given it supports HTTP 2.0 by default. 
+For an organization that establishes infrastructure to support services built on top of Light, chances are they have some existing services built with other platforms or even different languages. To leverage the security, metrics, logging, tracing, auditing, client-side service discovery for these existing services, it is a good idea to put [light-proxy][] in front of these services to provide cross-cutting concerns and gateway features for them. Although the light-proxy adds an additional network hop, however, it might be faster given it supports HTTP 2.0 by default.
 
 A proxy server is a go‑between or intermediary server that forwards requests for content from multiple clients to different servers across the Internet. A reverse proxy server is a type of proxy server that typically sits behind the firewall in a private network and directs client requests to the appropriate backend server. A reverse proxy provides an additional level of abstraction and control to ensure the smooth flow of network traffic between clients and servers.
 
@@ -66,19 +66,19 @@ You can enable rate limiting handler on the proxy server to ensure that the high
 
 * Static IP service
 
-As most light services will be Dockerized and deployed on the cloud. There is no static IP addresses
-and port number available. For Mobile native applications or Single Page application, it would be easier
-to address a reverse proxy server which has a static IP address and provide service discovery to forward
-the request to the right IP and port number. (working in progress)
+As most Light services will be Dockerized and deployed on the cloud. There is no static IP address
+and port number available. For Mobile native applications or Single Page applications, it would be easier
+to address a reverse proxy server which has a static IP address and provide a service discovery to forward
+the request to the right IP and port number. (work in progress)
 
 * Serve static content
 
-Like the static IP service, the proxy server can act as a web server as well to provide static content to serve single page application and associated contents. For a single site, the path resource handler can be used and for multiple sites, the virtual host handler should be used. Normally, the light-router is more suitable for this use case as it is designed to be placed closer to the consumer and the SPA is the consumer for the backend services. 
+Like the static IP service, the proxy server can act as a web server as well to provide static content to serve single page applications and associated contents. For a single site, the path resource handler can be used and for multiple sites, the virtual host handler should be used. Normally, the light-router is more suitable for this use case as it is designed to be placed closer to the consumer and the SPA is the consumer for the backend services. 
 
-In summary, the light-proxy provides the features of generic reverse proxy servers like Nginx or HAProxy and at the same time, provide better performance and a lot of cross-cutting concerns other proxies won't have. 
+In summary, the light-proxy provides the features of generic reverse proxy servers like Nginx or HAProxy and at the same time, providing better performance and a lot of cross-cutting concerns other proxies won't have. 
 
 To learn more on how to configure each feature in the configuration files. Please refer to [Configuration][]
-and [Tutorial][]. To find out all the deployment options and choose the right one, please refer to [Artifact][] 
+and [Tutorial][]. To find all the deployment options and to choose the right one, please refer to [Artifact][] 
 
 
 [light-proxy]: /service/proxy/

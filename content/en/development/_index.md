@@ -12,12 +12,12 @@ weight: 1
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Compare with monolithic application development, the process is totally different when adopting microservices architecture. 
+Compared with monolithic application development, the process is totally different when adopting microservices architecture.
 
-In this section, numeric topics will be covered for developers who want to work on light platform or developers who want to build applications on top of light platform. 
-
+In this section, numerous topics will be covered for developers who want to work on Light or who want to build applications on top of Light.
 
 - [Best Practices](/development/best-practices/) 
   * [Swagger 2.0 Best Practices](/development/best-practices/swagger2/)

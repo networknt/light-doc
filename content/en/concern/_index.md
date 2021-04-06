@@ -13,15 +13,16 @@ sections_weight: 50
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-One of the design goals of the light-4j is to address all the technical cross-cutting concerns in the frameworks so that service developers will only focus on the business logic without worry about security, auditing, logging, metrics, etc. The same pattern can be applied in the business context as well so that you can have several handlers to perform different tasks within the business context. For example, the fine-grained authorization can be done as a cross-cutting concern in the business context without mixing into the real business logic within the core request handler. 
+One of the design goals of light-4j is to address all the technical cross-cutting concerns in the frameworks so that service developers only need to focus on the business logic without worrying about security, auditing, logging, metrics, etc. The same pattern can be applied in the business context as well so that you can have several handlers performing different tasks within the business context. For example, the fine-grained authorization can be done as a cross-cutting concern in the business context without mixing into the real business logic within the core request handler.
 
 ## Technical Cross-Cutting Concerns
 
-When building an application, there is a functional requirement, and normally there is always a non-functional requirement that is created to address all technical concerns. In most platforms, developers need to address these concerns in the same business handler at the same time. It makes the application very hard to maintain and to reason about as functional requirements, and business requirements are implemented at the same time in the same context. The code is blended and hard to separate, hence decrease the maintainability. The light platform divides these concerns into individual handlers so that multiple developers can work together. These handlers are relatively simple and easy to be shared between services, and we have provided dozens built-in handlers in the platform. Without non-functional concerns in the business logic, the main business handler will be much simpler to implement and reason about. In a long run, it is easy to maintain as any modification will be focused on the business logic only. 
+When building an application, there is a functional requirement. Normally, there is always a non-functional requirement that is created to address all technical concerns. In most platforms, developers need to address these concerns in the same business handler at the same time. It makes the application very hard to maintain and to reason about as functional requirements and business requirements are implemented at the same time in the same context. The code is blended and hard to separate, hence decreasing the maintainability. Light divides these concerns into individual handlers so that multiple developers can work together. These handlers are relatively simple and easy to be shared between services, and we have provided dozens built-in handlers in the platform. Without non-functional concerns in the business logic, the main business handler will be much simpler to implement and reason about. In the long run, it is easy to maintain as any modification will be focused on the business logic only.
 
-Here is a list of cross-cutting concerns provided by the light platform. 
+Here is a list of cross-cutting concerns provided by Light.
 
 #### light-4j
 

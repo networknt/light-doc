@@ -14,7 +14,7 @@ reviewed: true
 
 This handler is part of the [light-rest-4j][] which is built on top of light-4j but focused on RESTful API only. Also, it only works with Swagger 2.0 specification.
 
-Light-4j  encourages design driven implementation so swagger specification should be done before the implementation starts. With the [light-codegen][] generator, the server stub can be generated and start running within seconds. However, we cannot rely on the generator for validation as specification will be changed along the life cycle of the API. This is why we have provided a validator that works on top of the specification at runtime. In this way, the generator should only be used once, and the validator will take the latest specification and validate according to the specification at runtime. 
+Light-4j encourages design driven implementation so Swagger specification should be done before the implementation starts. With the [light-codegen][] generator, the server stub can be generated and start running within seconds. However, we cannot rely on the generator for validation as specification will be changed along the life cycle of the API. This is why we have provided a validator that works on top of the specification at runtime. In this way, the generator should only be used once, and the validator will take the latest specification and validate according to the specification at runtime.
 
 ### Fail fast
 
@@ -27,7 +27,7 @@ RequestValidator will be called. Response validation should be done in the [clie
 
 ### Configuration
 
-From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a validator configuration file for different frameworks, a new `swagger-validator.yml` with the same content as the old `validator.yml` has been introduced. The validator.yml is still loaded if swagger-validator.yml doesn't exist for backward compatibility. 
+From release 1.5.18, Light supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a validator configuration file for different frameworks, a new `swagger-validator.yml` with the same content as the old `validator.yml` has been introduced. The validator.yml is still loaded if swagger-validator.yml doesn’t exist for backward compatibility.
 
 Here is an example of swagger-validator.yml
 
@@ -45,7 +45,7 @@ skipBodyValidation: false
 
 ```
 
-As we know the `swagger-validator` can validate the request body if the body is parsed by the body handler. For put, post and patch request, if the body is missing from the exchange attachment, an error message that indicates the body is missing will be returned. There are two different situations that we cannot use the body parser in the request chain as once the body stream is consumed, it won't be available for the downstream handlers anymore.
+As we know the `swagger-validator` can validate the request body if the body is parsed by the body handler. For put, post and patch requests, if the body is missing from the exchange attachment, an error message that indicates the body is missing will be returned. There are two different situations in which we cannot use the body parser in the request chain as once the body stream is consumed, it won’t be available for the downstream handlers anymore.
 
 * Validation in [light-router][] and [light-proxy][]. We have to keep the body stream to pass to the downstream service so we cannot consume it.
 

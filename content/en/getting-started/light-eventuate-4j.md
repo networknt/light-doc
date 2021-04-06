@@ -50,12 +50,7 @@ states, and consistency rules can be relaxed to let the final state be eventuall
 
 ### Distributed data management problems in a microservice architecture:
 
-In microservice system, normally each service has its own database. Some business transactions, 
-however, span multiple services so you need a mechanism to ensure data consistency across 
-services. For example, let’s imagine that you are building an e-commerce store where customers 
-have a credit limit. The application must ensure that a new order will not exceed the customer’s 
-credit limit. Since Orders and Customers are in different databases the application cannot simply 
-use a local ACID transaction.
+In a microservice system, normally each service has its own database. Some business transactions, however, span multiple services so you need a mechanism to ensure data consistency across services. For example, let’s imagine that you are building an e-commerce store where customers have a credit limit. The application must ensure that a new order will not exceed the customer’s credit limit. Since Orders and Customers are in different databases the application cannot simply use a local ACID transaction.
 
 ### Event-driven architecture
 
@@ -70,10 +65,7 @@ the master copy is updated.
 
 ### Event Sourcing
 
-One essential requirement in an EDA is the ability to atomically update state and publish events. 
-In a traditional application the database storing the state and the message broker could participate 
-in a distributed transactions. But the lack of 2PC in a cloud native world makes this a challenging 
-problem to solve. 
+One essential requirement in an EDA is the ability to automatically update state and publish events. In a traditional application the database stores the state and the message broker could participate in a distributed transaction. But the lack of 2PC in a cloud native world makes this a challenging problem to solve.
 
 A good solution to this problem is to use event sourcing. Event sourcing persists the state of 
 a business entity as a sequence of state-changing events. Whenever the state of a business entity 
@@ -88,12 +80,12 @@ in the event store, it is delivered to all interested subscribers.
 
 ### light-eventuate-4j
 
-When building services with light platform, you can use request/response approach
+When building services with Light, you can use request/response approach
 like [Rest][], [GraphQL][] or [Hybrid][] to serve consumers. For service to service
 communication, you have two options. One is synchronous request/response over HTTP.
 This requires all involved services to be responsive and highly available. 
-There is another way to handler interaction between services - asynchronous event driven.
-light-eventuate-4j is not only event driven framework, it supports Event Sourcing and
+There is another way to handle interaction between services - asynchronous event driven.
+light-eventuate-4j is not only an event driven framework, it supports Event Sourcing and
 CQRS to ensure data consistency between services. 
 
 If you are a developer to build services, then you don't need to clone the source code

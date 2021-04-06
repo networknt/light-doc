@@ -7,15 +7,11 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-A Zookeeper registry implementation that use Zookeeper as registry and discovery
-server. It implements both registry and discovery in the same module for
-Zookeeper communication. If the API/server is delivered as docker image, another
-product called registrator will be used to register it with Zookeeper server.
-Otherwise, the server module will be responsible to register itself during
-startup.
+A Zookeeper registry implementation uses Zookeeper as a registry and discovery server. It implements both registry and discovery in the same module for Zookeeper communication. If the API/server is delivered as a docker image, another product called registrator will be used to register it with Zookeeper server. Otherwise, the server module will be responsible to register itself during startup.
 
 ## Interface
 

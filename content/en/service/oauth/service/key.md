@@ -8,15 +8,10 @@ weight: 60
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In microservices architecture, the traditional way of copying public key certificates
-to hosts of services is not working. With container orchestration tool like Kubernetes
-old containers can be shutdown and new container can be started at anytime. So the push
-certificates to services has to be changed to pull certificates from OAuth2 server
-instead. This service is designed to pull public key certificate based on keyId that is
-in the JWT token header. It is tightly integrated with light-4j framework security
-component.
+In microservices architecture, the traditional way of copying public key certificates to hosts of services does not work. With container orchestration tools like Kubernetes old containers can be shut down and new containers can be started at any time. The push certificates to services have to be changed to pull certificates from OAuth2 server instead. This service is designed to pull public key certificates based on the keyId that is in the JWT token header. It is tightly integrated with the light-4j framework security component.
 
 For more information on how light-4j security module integrates with this service, please
 refer to [key distribution][] 
@@ -98,12 +93,7 @@ definitions:
 
 ### /oauth2/key/{keyId}@get
 
-This endpoint is used to get public key certificate for JWT signature verification based
-on keyId in the JWT header. Light-Java framework should have packaged with several keys
-already when deployed to production, however, keys are changing frequently as old ones
-are expired. You don't want to redeploy your services just due to key changes on the
-OAuth server. This endpoint is available for all services which have an entry in client
-table so that clientId and clientSecret can be used to verify the identity of the service.
+This endpoint is used to get a public key certificate for JWT signature verification based on keyId in the JWT header. The light-Java framework should have been packaged with several keys already when deployed to production, however, keys are changing frequently as old ones expire. You don’t want to redeploy your services just due to key changes on the OAuth server. This endpoint is available for all services which have an entry in the client table so that clientId and clientSecret can be used to verify the identity of the service.
 
 The following validations are performed before the key is issued by the service.
 

@@ -16,7 +16,7 @@ reviewed: true
 ---
 
 
-Environment segregation in APIs has primarily two goals:
+Environment segregation in APIs has two primary goals:
 
 * __Prevent cross fire__
 
@@ -40,7 +40,7 @@ The above use cases are pretty complicated even in a traditional monolithic appl
 In the [light-4j](https://github.com/networknt/light-4j) framework, we are using [light-oauth2](https://github.com/networknt/light-oauth2)
 to distinguish between test and production environments, or even different test phases within a larger test environment.
 
-For each environment (or test phase), there is an OAuth2 provider to sign JWT tokens with its private key. All the services deployed to that articular environment will have the public key from the provider. In this case, even if a UAT service is trying to access a production service, the token provided by the caller cannot be verified due to an invalid signature, as a server provided the token in a different environment with different keys. Given the configuration mentioned above, there is no way we can have a crossfire if the configuration for each application and service is correctly implemented.
+For each environment (or test phase), there is an OAuth2 provider to sign JWT tokens with its private key. All the services deployed to that particular environment will have the public key from the provider. In this case, even if a UAT service is trying to access a production service, the token provided by the caller cannot be verified due to an invalid signature, as a server provides the token in a different environment with different keys. Given the configuration mentioned above, there is no way we can have a crossfire if the configuration for each application and service is correctly implemented.
 
 In turn, how can we prevent mistakes from occurring when deploying services in a cloud environment? How can we ensure that the configuration files won't be wrong during deployment?
 
@@ -55,10 +55,9 @@ resources of those respective APIs.
 
 To employ this model, the same API has multiple instances, each accessing its own resources, and for each of their API releases, the organization has to start several API instances connected to different databases and hand the proper instance to individual QA teams to test.
 
-Ideally, the test environment backend should be consolidated to share the same reference data and employ similar data sets as the production environment. Unfortunately, the current model is in place for close to a decade, and it is too costly to consolidate the test data.
+Ideally, the test environment backend should be consolidated to share the same reference data and employ similar data sets as the production environment. Unfortunately, the current model has been in place for close to a decade, and it is too costly to consolidate the test data.
 
-The solution we provided is to have an environment variable in the server.yml configuration file, to indicate which environment
-(backend) database the instance is connecting. This additional attribute will be registered in Consul for service discovery, and the service discovery logic will check the variable to add additional filtering if it already exists.
+The solution we provided is to have an environment variable in the server.yml configuration file, to indicate which environment (backend) database the instance is connecting to. This additional attribute will be registered in Consul for service discovery, and the service discovery logic will check the variable to add additional filtering if it already exists.
 
 The above logic also resolves service-to-service calls, binding to the same environment. For the original client, for example, Java EE based web server or test tools like SOATest or Load Runner, it must either use our client module to make the service discovery with an additional environment or is has to manually do the lookup on Consul to find the right instance with the right environment tag.
 
@@ -75,4 +74,4 @@ The existing solution passes an environment header in the request to indicate th
 
 There is no environment header specified in requests to production environments, and there should be only one database or set of resources configured by default.
 
-By resolving cross-fire and multiple test instances at the framework level in a micro-service architecture using service discovery and the API's server.yml configuration, there is no need to pass in, or propagate, request header values while ensuring proper resource access and correct propagation in the invocation chain.
+By resolving cross-fire and multiple test instances at the framework level in a microservices architecture using service discovery and the API’s server.yml configuration, there is no need to pass in, or propagate, request header values while ensuring proper resource access and correct propagation in the invocation chain.

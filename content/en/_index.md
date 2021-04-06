@@ -25,12 +25,12 @@ features:
   - heading: Multi-Style Support for Different Products
     image_path: /images/icon-multilingual2.svg
     tagline: Both synchronous request/response and asynchronous event driven frameworks
-    copy: Support Restful(light-rest-4j), Graphql(light-graphql-4j), Hybrid(light-hybrid-4j) and Eventuate Consistency(light-eventuate-4j). Also Saga(light-saga-4j) for transaction orchestration between services.
+    copy: Supports Restful(light-rest-4j), Graphql(light-graphql-4j), Hybrid(light-hybrid-4j), and Eventuate Consistency(light-eventuate-4j), as well as Saga(light-saga-4j) for transaction orchestration between services. 
 
   - heading: OAuth2, Portal and Services to Form an Ecosystem
     image_path: /images/icon-custom-outputs.svg
     tagline: Provide a platform for on-premise solutions as well as hosted solutions
-    copy: light-oauth2 for security and light-portal is for service runtime monitoring and management and API marketplace. Kafka for messaging, ELK for logging, InfluxDB and Grafana for metrics and ArangoDB for DB.
+    copy:  light-oauth2 is for security while light-portal is for service runtime monitoring and management and the API marketplace. Kafka is for messaging, ELK is for logging, InfluxDB and Grafana are for metrics, and ArangoDB is for DB.
 sections:
   - heading: "Cross-Cutting Concerns"
     cta: Check out light-4j middleware handlers.
@@ -43,20 +43,21 @@ sections:
     link: /architecture/category/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
-    copy: "Restful for public API, Graphql for mobile and Sing Page Application, Hybrid for serverless and take advantage of both Monolithic and Microservices architecture. Eventuate for event driven."
+    copy: "Restful is for public APIs, Graphql is for mobile and Single Page Applications, while Hybrid for serverless. It takes advantage of both Monolithic and Microservices architecture. Eventuate is for event-driven applications."
   - heading: "Infrastructure Services"
     cta: OAuth2, Portal and other infrastructure services.
     link: /service/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
-    copy: "OAuth2 provider is responsible for centralize policy management and services are responsible for policy enforcement. Portal is API management and marketplace. Others are third party services."
+    copy: "The OAuth2 provider is responsible for centralizing policy management and services which are responsible for policy enforcement. Portal is for API management and the marketplace. Others are third party services."
   - heading: "Tool Chains"
     cta: Tool chain for code generation, devops and CI/CD.
     link: /tool/
     color_classes: bg-primary-color-light black
     image: /images/home-page-templating-example.png
-    copy: "Light-codegen is used for scaffolding project from OpenAPI spec, GraphQL IDL or Hybrid Schema. Light-bot Pipeline for building, packaging, releasing and dockerizing. Kubernetes is for service orchestration."
+    copy: "Light-codegen is used for scaffolding projects from OpenAPI spec, GraphQL IDL or Hybrid Schema. Light-bot Pipeline is for building, packaging, releasing and dockerizing. Kubernetes is for service orchestration."
 
 ---
 
-Light means light-weight, lighting fast and shed light on how to program with modern Java SE.
+Light means light-weight, lightning-fast, and shedding light on how to program with modern Java SE.
+

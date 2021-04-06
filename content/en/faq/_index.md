@@ -12,7 +12,8 @@ weight: 1
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This section contains some of the typical questions asked by our customers repeatedly. 
+This section contains some of the typical questions asked repeatedly by our customers.
 

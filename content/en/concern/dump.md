@@ -7,21 +7,20 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is a handler that dumps the entire request and response into a log file. It
-should only be used in development mode for debugging purpose as it is very slow.
-
+This is a handler that dumps the entire request and response into a log file. It should only be used in development mode for debugging purposes as it is very slow.
 
 ### Introduction 
 
 This handler can log HTTP request/response info based on configuration.
 
-This is a generic dump handler may be useful to troubleshooting in developing/testing environment.
+This is a generic dump handler that may be useful for troubleshooting in a developing/testing environment.
 
 The dump request/response log file should be configured in logback.xml.
 
-The dumping request/response info format can be default format or json format depends on the configuration. 
+The dumping request/response info format can be default format or json format depending on the configuration.
 
 ### Configuration
  

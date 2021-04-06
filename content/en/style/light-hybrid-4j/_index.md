@@ -19,7 +19,7 @@ For most organizations, switching from a monolithic architecture to microservice
 
 The light-hybrid-4j is a framework built on top of the light-4j for modularized monolithic and serverless architecture. The idea is that you first create a server with all the third-party dependencies included in the instance. Then you can build multiple services with the same dependencies or a subset of dependencies for development, unit tests, and integration tests. Once your services are completed, they will be built into small jar files without any dependency but only the business handlers. You drop these jars into a service folder on the host the server is running, start the server and all services in the folder will be loaded, and the traffic will be routed to the right handler in the right service for the request. 
 
-Similar to the light-graphql-4j, the JSON based light-hybrid-4j is a particular case of RESTful API with all the information defined in the body of the request instead of scatted in the path parameters, query parameters. It gives us a uniformed request body structure so that we can quickly and efficiently identify the handler for a particular request. As JSON is typed, we don't need a very complicated Swagger specification to describe the variable conversion between service and consumer. 
+Similar to the light-graphql-4j, the JSON based light-hybrid-4j is a particular case of RESTful API with all the information defined in the body of the request instead of scattered in the path parameters and query parameters. It gives us a uniformed request body structure so that we can quickly and efficiently identify the handler for a particular request. As JSON is typed, we don’t need a very complicated Swagger specification to describe the variable conversion between service and consumer.
 
 For each service, you need to define a specification file that contains JSON schema for the light-hybrid-4j to validate the incoming request. This schema can also be used by the [react-schema-form][] to generate the application in a React SPA. 
 
@@ -29,7 +29,7 @@ Light-hybrid-4j contains the following components.
 
 ### rpc-router
 
-rpc-router is a middleware handler that implement light-4j [handler interface][] and it will be inject into the request/response chain. It is responsible for parsing the incoming request body and then route to the request to the right handler to handle it. The handler will be implemented in one of the service jar file included into the server instance. 
+rpc-router is a middleware handler that implements light-4j [handler interface][] and will be injected into the request/response chain. It is responsible for parsing the incoming request body and then routing the request to the right handler to handle it. The handler will be implemented in one of the service jar files included in the server instance.
 
 
 ### rpc-security

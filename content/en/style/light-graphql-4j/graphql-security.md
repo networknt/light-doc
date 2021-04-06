@@ -11,12 +11,11 @@ draft: false
 reviewed: true
 ---
 
-Graphql Security verifies JWT token in request header and verifies scopes if it is enabled. It is very similar with swagger-security / openapi-security but as there is no swagger specification we cannot verify scopes against the specification. GraphQL recommend authorization 
-outside of schema so that we can only verify query scope and mutation scope for read and write access.
+Graphql Security verifies the JWT token in the request header and verifies scopes if it is enabled. It is very similar to swagger-security / openapi-security but as there is no Swagger specification we cannot verify scopes against the specification. GraphQL recommends authorization outside of schema so that we can only verify query scope and mutation scope for read and write access.
 
 This is the handler that should be put before graphql-validator. There is no need to do any validation if JWT token does not exist in the request header.
 
-From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a security configuration file for different frameworks, a new graphql-security.yml with the same content has been introduced. The security.yml is still loaded if graphql-security.yml doesn't exist for backward compatibility. 
+From release 1.5.18, Light supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a security configuration file for different frameworks, a new graphql-security.yml with the same content has been introduced. The security.yml is still loaded if graphql-security.yml doesn’t exist for backward compatibility.
 
 Here is an example of graphql-security.yml
 

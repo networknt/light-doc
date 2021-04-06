@@ -12,24 +12,16 @@ weight: 50
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-High throughput and low latency are [principles of light platform][] and when it comes to
-service to service communication, we recommend to use client side service discovery and load
-balancing. 
+High throughput and low latency are [principles of Light][]. When it comes to service to service communication, we recommend  using client side service discovery and load balancing.
 
-light-4j has a [client module][] called Http2Client that can be embedded into any Java application
-to handle the communication to services built in light platform. It handles HTTP 2.0 connection
-and OAuth 2.0 provider communication as well as traceability in the service to service call tree.
+light-4j has a [client module][] named Http Client that can be embedded into any Java application to handle the communication to services built in Light. It handles HTTP 2.0 connection and OAuth 2.0 provider communication as well as traceability in the service to service call tree.
 
-However, the client module is not suitable for all scenarios as it requires that consumer application
-must be built in Java 8 and above. This is not an issue for service to service communication
-if both are built in light platform. But what about other consumers like applications built with
-lower Java version, or built with other languages. 
+However, the client module is not suitable for all scenarios as it requires that the consumer application be built in Java 8 and above. This is not an issue for service to service communication if both are built in Light. But what about other consumers like applications built with lower Java versions or with other languages?
 
-For other languages, we are trying to provide client modules based on priority. However, if you
-want to consume services now, you can leverage [light-router][] which is a client module at network
-level.
+For other languages, we are trying to provide client modules based on priority. However, if you want to consume services now, you can leverage [light-router][] which is a client module at the network level.
 
 You have two options to deploy light-router: 
 
@@ -49,6 +41,6 @@ consumer, you cannot deploy client_id and client_secret on the router to handle 
 from OAuth 2.0 provider. 
 
 
-[principles of light platform]: https://doc.networknt.com/about/principles/
+[principles of Light]: https://doc.networknt.com/about/principles/
 [client module]: /concern/client/
 [light-router]: /service/router/

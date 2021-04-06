@@ -10,18 +10,17 @@ draft: false
 reviewed: true
 ---
 
-API security is paramount, and today most APIs don't have security built-in at all but relying on third-party API gateway to handle the security at the network level. It assumes that within the organization, it is safe or some firewall setup to ensure that only the Gateway server can access the service host. 
+API security is paramount, and today most APIs don’t have security built-in at all but rely on third-party API gateways to handle the security at the network level. It assumes that it is safe within the organization or utilizes some firewall setup to ensure that only the Gateway server can access the service host.
 
-Once we move to the cloud, everything is dynamic, and [firewall won't work][] anymore as services can be down on one VM but started in another VM immediately by container orchestration tools.
+Once we move to the cloud, everything is dynamic, and [firewalls won't work][] anymore as services can be down on one VM but start in another VM immediately through container orchestration tools.
 
-The traditional gateway also adds another layer of network calls.  If so many service-to-service calls, the add-up latency is unacceptable. 
+The traditional gateway also adds another layer of network calls. With so many service-to-service calls, add-up latency is unacceptable. 
 
 Here is a [gateway article][] in the architecture section that talks about the drawbacks of the API  gateway and why it is not suitable for microservices architecture. 
 
 To make sure that security works for microservices, we have extended the OAuth 2.0 specification and come up with a brand new approach for authorization with JWT. Here is a [security article][] talks about the API security in light*4j frameworks. 
 
-Basically, we have [light-oauth2][] OAuth 2.0 provider and built-in JWT security verification in the frameworks. The security policy is managed by the OAuth2 provider with service registration and client registration; however, policy enforcement is done distributed at each service level. 
-With PIK signed JWT token issued from the light-oauth2, all services can verify the token with the JWT signature public key certificate. 
+Basically, we have the [light-oauth2][] OAuth 2.0 provider and built-in JWT security verification in the framework. The security policy is managed by the OAuth2 provider with service registration and client registration; however, policy enforcement is done distributed at each service level. With a PIK signed JWT token issued from the light-oauth2, all services can verify the token with the JWT signature public key certificate.
 
 The following is a list of key components in light-4j security.
 
@@ -29,7 +28,7 @@ The following is a list of key components in light-4j security.
 
 Light-4j and related frameworks support OAuth 2.0 and related specifications to authorize service access. By default, the framework contains two pairs of public-key certificates issued by our testing oauth2 server, which can be installed from Docker. For more info, please refer to [light-oauth2](/service/oauth/)
 
-Light-4j also provides a client module that can communicate with light-oauth2 in the background to get access token and renew the access token before it is expired. 
+Light-4j also provides a client module that can communicate with light-oauth2 in the background to receive the access token and renew the access token before it is expired.
 
 The light-4j platform also supports other OAuth 2.0 providers with some customizations for microservices architecture. 
 
@@ -40,11 +39,9 @@ is opinionated so that we can eliminate all the flaws in the generic implementat
 
 There are at least two attacks related to the alg header. 
 
-* In early days, some of the libraries support none for the algorithm in alg header and bypass the signature verification if none is specified as alg. An attacker can create a token with alg=none, and this token will be treated as a valid token by some servers. In the light-4j framework, we verify
-the signature always without exception.
+* In early days, some of the libraries supported none for the algorithm in the alg header and bypassed the signature verification if none were specified as alg. An attacker can create a token with alg=none, and this token will be treated as a valid token by some servers. In the light-4j framework, we always verify the signature without exception.
 
-* Most generic JWT libraries support multiple algorithms at the same time. For example, it supports HS256(HMAC) and RS256(RSA) at the same time. With RSA like algorithms, tokens are created and signed using a private key but verified using a corresponding public key. This is pretty neat: if you publish the public key but keep the private key to yourself, only you can sign tokens, but anyone can check if a given token is correctly signed. In systems using HMAC signatures, the verification key 
-will be the server's secret signing key (since HMAC uses the same key for signing and verifying).
+* Most generic JWT libraries support multiple algorithms at the same time. For example, they may support HS256(HMAC) and RS256(RSA) at the same time. With RSA-like algorithms, tokens are created and signed using a private key but verified using a corresponding public key. This is pretty neat: if you publish the public key but keep the private key to yourself, only you can sign tokens, but anyone can check if a given token is correctly signed. In systems using HMAC signatures, the verification key will be the server’s secret signing key (since HMAC uses the same key for signing and verifying).
 
 In systems using an asymmetric algorithm, the verification key will be the public key against which the token should be verified. Unfortunately, an attacker can abuse this. If a server is expecting a token signed with RSA, but actually receives a token signed with HMAC, it will think the public key is actually an HMAC secret key.
                           
@@ -55,9 +52,7 @@ key. The trickiest part is making sure that serverRSAPublicKey is identical to t
                                                 
 ## kid
 
-Since services are deployed in the cloud without static IP, the traditional push certificates to each service is not working anymore. In this framework, each service will pull the certificate from OAuth2 provider
-key service by a kid from the JWT token header if the key doesn't exist locally. This approach that uses kid to identify public key certificate to verify the JWT token also helps if you have more than one key
-used on your OAuth 2.0 provider. One use case is that you must support at least two keys during key rotation on a yearly basis to maximize the security. 
+Since services are deployed in the cloud without static IP, the traditional push certificates to each service do not work anymore. In this framework, each service will pull the certificate from OAuth2 provider key service by a kid from the JWT token header if the key doesn’t exist locally. This approach uses a kid to identify public key certificates to verify the JWT token, and will help if you have more than one key used on your OAuth 2.0 provider. One use case is that you must support at least two keys during key rotation on a yearly basis to maximize the security.
 
 Light-4j JwtVerifier also supports standard JWK Key Set by the keyResolver configuration in the security.yml or each framework specific security configuration. 
 
@@ -132,7 +127,7 @@ bootstrapFromKeyService: false
 
 ### Enable security
 
-To enable security, just update enableVerifyJwt to true. If you want to verify the scopes defined in swagger.json or openapi.yaml against the scope registered on OAuth 2.0 provider, then set enableVerifyScope to true. It is highly recommended to have both enabled on production. 
+To enable security, just update enableVerifyJwt to true. If you want to verify the scopes defined in swagger.json or openapi.yaml against the scope registered on OAuth 2.0 provider, then set enableVerifyScope to true. It is highly recommended to have both enabled during production.
 
 ### Enable mock JWT generation
 
@@ -165,7 +160,7 @@ important pieces of info only. Normally, you choose one of them or disable both.
 
 ### oauthHttp2Support
 
-To indicate if the OAuth 2.0 provider supports HTTP 2.0 protocol. The default is true as we are assuming light-oauth2 is used. 
+This is used to indicate if the OAuth 2.0 provider supports HTTP 2.0 protocol. The default is true as we are assuming light-oauth2 is used.
 
 ### enableJwtCache
 
@@ -175,14 +170,12 @@ Cache the JWT token within the period of expiry so that we can only check if the
 
 The default is false as we assume that you are in dev without OAuth 2.0 server access, or you are using other OAuth 2.0 server instead of [light-oauth2][]. If the value is false, the server will load public key certificates for JWT signature verification from the location specified by jwt/certificate in this config file, which is 100 -> primary.crt and 101 -> secondary.crt.
 
-If this value is set to true, then the public key certificate or JWK key set will be loaded from [light-oauth2 key service][], or a JWK supported OAuth 2.0 provider dynamically. The key will be loaded once the first JWT token is received, the security middleware handler will check the kid in the token header and then check if there is a cached copy of the public key certificate map to this kid. If no cache, then send a request to light-oauth2 key service to get the public key cert with kid as a query parameter. To ensure the connection to the right Key service, the TLS connection is a must. In addition, the service itself must be registered on light-oauth2 client registration as a client as well, and client_id and client_secret need to be passed in the Authorization header for authentication. This is to further ensure that the OAuth 2.0 provider is the right one to issue the public key certificates.
+If this value is set to true, then the public key certificate or JWK key set will be loaded from the [light-oauth2 key service][], or a JWK supported OAuth 2.0 provider dynamically. The key will be loaded once the first JWT token is received. The security middleware handler will then check the kid in the token header and then check if there is a cached copy of the public key certificate map to this kid. If there is no cache, then a request to light-oauth2 key service must be sent to get the public key cert with kid as a query parameter. To ensure the connection to the right Key service, the TLS connection is a must. In addition, the service itself must be registered on light-oauth2 client registration as a client as well, and client_id and client_secret need to be passed in the Authorization header for authentication. This is to further ensure that the OAuth 2.0 provider is the right one to issue the public key certificates.
 
-This feature will impact the Server Info endpoint provided by all services built on top of light-4j as fingerprints of OAuth 2.0 public-key certificates might not be available locally. The Server Info might return nothing about this list of fingerprints if this config parameter is set to true. Also, the certifying process on light-portal will let it go if no fingerprints returned from Server Info endpoint. That means the certificates are from the light-oauth2 server dynamically and there is no risk the testing certificates
-will be packaged into production configuration.    
-
+This feature will impact the Server Info endpoint provided by all services built on top of light-4j as fingerprints of OAuth 2.0 public-key certificates might not be available locally. The Server Info might return nothing about this list of fingerprints if this config parameter is set to true. Also, the certifying process on light-portal will let it go if no fingerprints are returned from the Server Info endpoint. That means the certificates are from the light-oauth2 server dynamically and there is no risk the testing certificates will be packaged into production configuration.
 
 [gateway article]: /architecture/gateway/
 [security article]: /architecture/security/
 [light-oauth2]: /service/oauth/
 [light-oauth2 key service]: /service/oauth/service/key/
-[firewall won't work]: /architecture/firewall/
+[firewalls won't work]: /architecture/firewall/

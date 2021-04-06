@@ -29,7 +29,7 @@ If you don't have JDK 11 and Git installed, please prepare your [environment][].
 
 There are several frameworks available to support different styles of API. If this is the very first time you try to create an API, please try [light-rest-4j][]. If you are unsure which style you should choose for your project, please visit [API category][].
 
-* [Light-4j][] - For an expert that need absolute high throughput and low latency
+* [Light-4j][] - For an expert that needs absolute high throughput and low latency
 * [Light-rest-4j][] - Restful API with OpenAPI 3.0 or Swagger 2.0 specification
 * [Light-graphql-4j][] - GraphQL API with query, mutation and subscription based on IDL
 * [Light-hybrid-4j][] - RPC style of hybrid monolithic and microservices serverless framework
@@ -37,7 +37,7 @@ There are several frameworks available to support different styles of API. If th
 * [Light-eventuate-4j][] - An eventual consistency framework based on Event Sourcing and CQRS
 * [Light-saga-4j][] - A saga implementation to manage distributed transaction across multiple microservices
 * [Light-spring-boot][] - Leverage light-4j middleware handlers in existing Spring Boot application
-* [Web Server][] - A web server that serve static content and APIs
+* [Web Server][] - A web server that serves static content and APIs
 * [WebSocket][] - A WebSocket server to support client to client or client to server communication
 * [Light-session-4j][] - Distributed session managers (Redis, Hazelcast, JDBC) that support server cluster
 * [Light-spa-4j][] - A set of middleware handlers for Single Page Application
@@ -49,17 +49,17 @@ Services we built
 * [Light-oauth2][] - OAuth 2.0 provider implemented as microservices for microservices
 * [Light-portal][] - A portal UI that integrate all the services to manage the life-cycle of services
 * [Light-router][] - Working with external client or client not implemented in Java 8 and above
-* [Light-proxy][] - Deploy in front of legacy API application to address cross-cutting concerns
+* [Light-proxy][] - Deploys in front of legacy API application to address cross-cutting concerns
 * [Light-config-server][] - Centralized configuration and secret management service
-* [Light-tokenization][] - Tokenize sensiteve info before sending info outside of corporate network
+* [Light-tokenization][] - Tokenizes sensitive info before sending info outside of corporate network
 
 Services we integrated
 
 * [Consul][] - For service registration and discovery
 * [Kafka][] - Message broker that is most popular with event based frameworks
 * [Elasticsearch][] - Centralized logging index and analysis
-* [InfluxDB][] - Push the metrics data to the time series database
-* [Prometheus][] - Pull the metrics data from each individual service
+* [InfluxDB][] - Pushes the metrics data to the time series database 
+* [Prometheus][] - Pulls the metrics data from each individual service
 * [Kubernetes][] - Vanilla Kubernetes cluster platform
 * [Openshift][] - Commercial Kubernetes cluster platform
 
@@ -83,8 +83,7 @@ Tools we used
 
 ### Getting Started
 
-The easiest way to start your RESTful API project is from Swagger 2.0 specification or OpenAPI 
-3.0 specification and here is a video to show you how to generate a project from Swagger spec.
+The easiest way to start your RESTful API project is by starting with the Swagger 2.0 specification or OpenAPI 3.0 specification. Here is a video to show you how to generate a project from Swagger spec.
 
 [light-4j-getting-started](https://youtu.be/xSJhF1LcE0Q)
 
@@ -102,15 +101,11 @@ For event-driven service, you might be interested in [light-eventuate-4j][].
 
 ### Examples
 
-Anther way to start a new project is to copy from an existing example and expends it. This 
-is not recommended but if you don't have IDL(Inteface Definition Language) specification like 
-OpenAPI specification or your service has very special requirement that cannot be generated, you 
-can find many example projects at a separate repo [light-example-4j][] and start by copying one 
-of them.
+Another way to start a new project is to copy from an existing example and expand on it. This is not recommended but if you don’t have IDL(Interface Definition Language) specification like OpenAPI specification or your service has a very special requirement that cannot be generated, you can find many example projects at a separate repo light-example-4j and start by copying one of them.
 
 There are folders in light-example-4j that contains examples like:
 
-* rest folder container examples built on top of light-rest-4j framework
+* rest folder contains examples built on top of light-rest-4j framework
 * graphql folder contains examples built on top of light-graphql-4j framework
 * hybrid folder contains examples built on top of light-hybrid-4j framework
 * eventuate folder contains examples built on top of light-eventuate framework

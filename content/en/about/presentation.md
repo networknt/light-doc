@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When interacting with our customers, we have prepared some presentations. Here are some in PDF format and they might help users to understand the architecture and design of the light-platform. 
+When interacting with our customers, we have prepared some presentations. Here are some in PDF format which might help users understand the architecture and design of light-platform. 
 
 [Light-4j Components][]
 

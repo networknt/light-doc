@@ -13,11 +13,12 @@ sections_weight: 6
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-All of the light platforms are open source, including the documentation. If you find problems or you want to improve it, please [get involved][]. 
+All of Light is open source, including the documentation. If you find problems or you want to improve it, please [get involved][]. 
 
-If you have trouble with Light-4j, we would like to help. 
+If you are having trouble with Light-4j, we would like to help. 
 
 * Try the [FAQ][] documents. They provide solutions to the most common questions. 
 * Ask a question on Stack Overflow. We monitor stackoverflow.com for questions tagged with light-4j.

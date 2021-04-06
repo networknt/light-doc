@@ -25,13 +25,13 @@ To provide IP Infringement Indemnity to our customers, we have thoroughly review
 
 Here is a list of actions we have done in general. 
 
-* Make sure we have a LICENSE file in each repository to state the open source license clearly.
-* Add NOTICE file in each repository to clearly state the license and copyright of dependencies.
-* Update source code to add license/copyright in the header. 
-* For redistributed source code from the third-party open-source project, make sure that the correct license and copyright header is in each file. Correct the license based on the parent project if necessary.  
-* Update the contribution guideline to ensure that license, copyright and author are in each source file. 
+* Made sure we have a LICENSE file in each repository to state the open source license clearly.
+* Added NOTICE files in each repository to clearly state the license and copyright of dependencies.
+* Updated source code to add license/copyright in the header.
+* For redistributed source code from the third-party open-source project, made sure that the correct license and copyright header are in each file. Corrected the license based on the parent project if necessary.  
+* Updated the contribution guideline to ensure that the license, copyright and author are in each source file.
 
-
+ 
 Here are all the related commits in each repository for auditing purposes. 
 
 light-4j

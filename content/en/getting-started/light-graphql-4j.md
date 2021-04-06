@@ -16,7 +16,7 @@ draft: false
 ---
 
 [GraphQL][] is a new style of protocol open sourced by Facebook and it is getting popular
-especially in Mobile and Single Page Application as front end. GraphQL provides a complete 
+especially in Mobile and Single Page Applications as a front end. GraphQL provides a complete 
 and understandable description of the data in your API, gives clients the power to ask for 
 exactly what they need and nothing more, makes it easier to evolve APIs over time, and 
 enables powerful developer tools.

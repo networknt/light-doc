@@ -15,19 +15,19 @@ draft: false
 reviewed: true
 ---
 
-Although you can deploy the microservices built on top of the light platform to a data center with `java -jar` or with Docker, the ultimate deployment platform would be a Kubernetes cluster. 
+Although you can deploy the microservices built on top of Light to a data center with java -jar or with Docker, the ultimate deployment platform would be a Kubernetes cluster.
 
-Before deploying a service to a Kubernetes cluster, you need to create secrets with all the externalized configuration files. These files usually are copied to config folder in each project in [light-config-test][] or [light-config-prod][]. For detailed directory structure, please refer to [petstore][]. 
+Before deploying a service to a Kubernetes cluster, you need to create secrets with all the externalized configuration files. These files usually are copied to the config folder in each project in l[light-config-test][] or [light-config-prod][]. For a detailed directory structure, please refer to [petstore][].
 
 ### Secrets
 
-To create secrets, make sure you have all the configuration files in the config folder. Then run the following create_secrets.sh
+To create secrets, make sure you have all the configuration files in the config folder. Then run the following create_secrets.sh:
 
 ```
 kubectl create secret generic petstore-secret --from-file=config
 ```
 
-The above script creates a generic secret object with all the config files in the config folder. Each file name will be the key, and the base64 encoded content will be the value. 
+The above script creates a generic secret object with all the config files in the config folder. Each file name will be the key and the base64 encoded content will be the value.
 
 To list all the secrets: 
 
@@ -41,7 +41,7 @@ To view the content of a specific secret:
 kubectl get secret petstore-secret -o yaml
 ```
 
-To delete a secret
+To delete a secret:
 
 ```
 kubectl delete secret petstore-secret
@@ -49,7 +49,7 @@ kubectl delete secret petstore-secret
 
 ### Deployment
 
-To deploy the service to a Kubernetes cluster, we need to create a deployment.yaml file with a following content.
+To deploy the service to a Kubernetes cluster, we need to create a deployment.yaml file with the following content:
 
 ```
 apiVersion: apps/v1
@@ -118,13 +118,13 @@ kubectl get pods
 
 In the above deployment.yaml, we have set the [memory limit][] for the container. To verify that, let's put some load on the server and see if the service respects the limitation. 
 
-To access the server, go to the consul server first to find the IP and port number for the petstore service. Verify if it works with a curl command. 
+To access the server, go to the consul server first to find the IP and port number for the petstore service. Verify if it works with a curl command:
 
 ```
 curl -k https://38.113.162.51:2408/v2/pet/111
 ```
 
-Now use the wrk to generate some load for 5 minutes. 
+Now use the wrk to generate some load for 5 minutes: 
 
 ```
 wrk -t1 -c128 -d300s https://38.113.162.51:2408/v2/pet/111
@@ -137,13 +137,13 @@ To monitor the memory usage, login to the node which petstore is deployed and fi
 docker ps
 ```
 
-With the id found above, issue the following command to monitor the container memory usage. 
+With the id found above, issue the following command to monitor the container memory usage:
 
 ```
 docker stats {containerid}
 ```
 
-You can find that the container only use about 300MB memory with the limit of 512MB
+You will find that the container only uses about 300MB memory with the limit of 512MB.
 
 
 [light-config-test]: https://github.com/networknt/light-config-test

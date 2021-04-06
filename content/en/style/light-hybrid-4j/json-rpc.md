@@ -8,13 +8,13 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 You can use JSON to define the schema for each service and the server will use it to validate
 the request body. 
 
-There are two different part in the request body, meta data and data. The schema only applies
-to the data portion. 
+There are two different parts in the request body: metadata and data. The schema only applies to the data portion.
 
 Here is an example of schema. 
 

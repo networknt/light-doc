@@ -7,13 +7,10 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true 
 ---
 
-This module caches all the service instances that are needed by the current 
-service and calling underline registry(Direct, Consul and ZooKeeper) to
-discover the service if necessary (first time a service is called and registry
-notifies something has been changed regarding to subscribe the services on
-Consul or ZooKeeper).
+This module caches all the service instances that are needed by the current service and calling underline registry(Direct, Consul and ZooKeeper) to discover the service if necessary (the first time a service is called, the registry notifies something has been changed regarding the subscription to services on Consul or ZooKeeper).
 
 ## Interface
 
