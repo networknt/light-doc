@@ -29,7 +29,7 @@ Light services also embed a distributed gateway to address all the cross-cutting
 * Light-Controller as part of the light-portal or [Consul](https://github.com/hashicorp/consul) for service registry
 * [Kubernetes](https://kubernetes.io/) for container orchestration
 
-Currently, we only support Java language; however, we are planning to support Nodejs, Rust, and Go in the future if there are enough customer's demands. Some of our customers have some existing RESTful APIs built on top of other Java frameworks or other languages. We have frequently been asked how to interact with these services to/from light services and enable security, metrics, logging, tracing, discovery, validation, sanitization, etc. on the existing services. 
+Currently, we only support Java; however, we are planning to support Nodejs, Rust, and Go in the future if there is enough customer demand. Some of our customers have some existing RESTful APIs built on top of other Java frameworks or other languages. We have frequently been asked how to interact with these services to/from light services and enable security, metrics, logging, tracing, discovery, validation, sanitization, etc. on the existing services.
 
 Our answer is to deploy a reverse proxy built on top of the light-4j framework that wraps the existing service. 
 

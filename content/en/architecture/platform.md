@@ -12,9 +12,10 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-There are five major elements of API platform
+There are five major elements of our API platform.
 
 ## Runtime infrastructure services
 

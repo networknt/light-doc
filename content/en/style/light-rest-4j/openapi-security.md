@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-This handler is part of the [light-rest-4j][], which is built on top of light-4j but focused on RESTful API only. Also, it only works with the OpenAPI 3.0 specification. There is another set of middleware handlers that work with Swagger 2.0 specification. 
+This handler is part of [light-rest-4j][], which is built on top of light-4j but focused on RESTful API only. It only works with the OpenAPI 3.0 specification. There is another set of middleware handlers that work with Swagger 2.0 specification.
 
 It supports OAuth2 with JWT token distributed verification and can be extended to other authentication and authorization approaches. 
 
@@ -19,7 +19,7 @@ It supports OAuth2 with JWT token distributed verification and can be extended t
 
 This is the handler that is injected during server startup if security.yml enableVerifyJwt is true. It does further scope verification if enableVerifyScope is true against OpenAPI specification.
 
-From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. In order to have a security configuration file for each framework, a new openapi-security.yml with the same content has been introduced. The security.yml is still loaded if openapi-security.yml doesn't exist for backward compatibility. 
+From release 1.5.18, Light supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. In order to have a security configuration file for each framework, a new openapi-security.yml with the same content has been introduced. The security.yml is still loaded if openapi-security.yml doesn’t exist for backward compatibility.
 
 Here is an example of openapi-security.yml
 

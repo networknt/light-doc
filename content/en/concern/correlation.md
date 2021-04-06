@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-CorrelationId handler is part of the [traceability][] of microservices architecture along with traceabilityId handler that is used to index centralized logs collected from all containerized services or the original client. 
+CorrelationId handler is part of the [traceability][] of microservices architecture along with the traceabilityId handler that is used to index centralized logs collected from all containerized services or the original client.
 
 This is a middleware handler that checks if X-Correlation-Id exists in the request header. If it doesn't exist it will generate a UUID and put it into the request header. During API to API calls, this header will be passed to the next API by the [Client][] module.
 
@@ -18,7 +18,7 @@ This is a middleware handler that checks if X-Correlation-Id exists in the reque
 
 The correlationId is very useful in microservices architecture as there are multiple services involved in the same client request. When logs are aggregated into a centralized tool like Elasticsearch, it is very important there is a unique identifier to associate logs from multiple services for the same request. The Id is a UUID and must be generated in the first service called from the original client.
 
-The generation logic is very simple. Whenever the correlationId handler is wired in the request/response chain, and it is enabled and autogenCorrelationID is true in correlation.yml config file, it checks if X-Correlation-Id is in the request header. If the header doesn't exist, a UUID will be created. When all microservices has this handler enabled, the first microservice in the invocation chain generates the correlationId. This correlationId will be pass to all the subsequent microservices after it is generated. This will ensure that all services use the same correlationId for logging. 
+The generation logic is very simple. Whenever the correlationId handler is wired in the request/response chain, and it is enabled and autogenCorrelationID is true in the correlation.yml config file, it checks if X-Correlation-Id is in the request header. If the header doesn’t exist, a UUID will be created. When all microservices have this handler enabled, the first microservice in the invocation chain generates the correlationId. This correlationId will be passed to all the subsequent microservices after it is generated. This will ensure that all services use the same correlationId for logging.
 
 ### Passing
 
@@ -100,7 +100,7 @@ In the generated logback.xml, the cId is part of the appender config as pattern 
 ```
 ### Configuration
 
-The configuration for this module is very simple. Just enable it or not. Here is the default config named correlation.yml in the module. You can external this config file and turn the handler off or autogenCorrelationID if necessary. 
+The configuration for this module is very simple. Just enable it or not. Here is the default config named correlation.yml in the module. You can externalize this config file and turn the handler autogenCorrelationID off if necessary.
 
 ```
 # Correlation Id Handler Configuration

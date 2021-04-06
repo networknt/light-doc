@@ -15,19 +15,19 @@ draft: false
 reviewed: true
 ---
 
-The light-4j framework is one of the fastest microservices/API frameworks on the market, and there is a lot of effort to make that happen. There are many frameworks and languages to build microservices, but the most popular ones are Java, Go and Nodejs.
+The light-4j framework is one of the fastest microservices/API frameworks on the market, with a concentrated effort to achieve this result. There are a lot of frameworks, languages to build microservices but the most popular ones are Java, Go and Nodejs.
 
 Nodejs used to be faster than Java EE platforms, but it has many [issues][] in the enterprise world.
 
-Go has potentials but is still not mature in enterprise applications. We are starting with Java because it is highly optimized, and there are so many existing investments in most organizations.
+Go has potential but is still not mature in enterprise applications. We are starting with Java because it is highly optimized and there are so many existing investments in most organizations.
 
-In Java, the most popular framework is Spring Boot, and a lot of users want to compare Light-4j with Spring Boot. We just started a new project [light-spring-boot][] to allow Spring Boot applications to leverage the Light-4j middleware handlers to address cross-cutting concerns with [better performance][]. 
+In Java, the most popular framework is Spring Boot. Many users want to compare light-4j with Spring Boot. We just started a new project, [light-spring-boot][], to allow Spring Boot applications to leverage the light-4j middleware handlers to address cross-cutting concerns with [better performance][].
 
-We have tested most of the microservices frameworks, and here are the [benchmarks][] along with source code.
+We have tested most microservices frameworks. Here are the [benchmarks][] along with source code.
 
-Also, we have submitted test cases to TechEmpower for the third-party test from [Round 14][] (Please note that light-4j was called light-java in this report) and [latest][] preview with some optimizations.
+We have also submitted test cases to TechEmpower for the third-party test from [round 14][] (Please note that light-4j was called light-java in this report) and the [latest][] preview with some optimizations.
 
-All the implementations for TechEmpower are following RESTful style, although many middleware handlers are removed. The source code can be used as an example of how to implement high-performance microservices.
+All the implementations for TechEmpower are following the RESTful style although a lot of middleware handlers are removed. The source code can be used as an example on how to implement high-performance microservices.
 
 * Microservices framework [benchmarks][] tested most popular microservices frameworks.
 * Third-party [Techempower Benchmarks][] tested more HTTP frameworks with contributions open source community.

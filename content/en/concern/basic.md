@@ -10,18 +10,18 @@ draft: false
 reviewed: true
 ---
 
-As we know that the default security for the light platform is OAuth 2.0 and we have a provider light-oauth2 implemented as microservices. However, for some special use cases we do need to support other authentication mechanisms. One of them is basic authentication that is constantly asked by our customers who want to deploy the service to IoT devices. 
-
+As we know that the default security for Light is OAuth 2.0 and we have a provider light-oauth2 implemented as microservices. However, for some special use cases we do need to support other authentication mechanisms. One of them is basic authentication, which is constantly asked about by our customers who want to deploy the service to IoT devices
+.
 Unlike JWT verification, the basic authentication can be implemented as a generic middleware handler in light-4j instead of having different implementations for different frameworks as it has no dependencies to the framework. 
 
 
 ### Introduction
 
-This is an optional middleware handler that is only used when OAuth 2.0 cannot be used. This handler should replace the default JwtVerifyHandler in the service.yml configuration. It basically take the Authorization header and decode it into username and password in order to compare with the usernam/password list. If the username or password is not matched, an error message will be returned. Otherwise, it will pass the control to the next handler in the chain. 
+This is an optional middleware handler that is only used when OAuth 2.0 cannot be used. This handler should replace the default JwtVerifyHandler in the service.yml configuration. It basically takes the Authorization header and decodes it into an username and password in order to compare with the usernam/password list. If the username or password is not matched, an error message will be returned. Otherwise, it will pass the control to the next handler in the chain. 
 
 ### Configuration
 
-Here is an example of configuration basic.yml which has a flag to enable or disable it. Also, it contains a list of username/password pairs. Please note that the password can be encrypted with the [encryptor utility][]. 
+Here is an example of the  configuration basic.yml which has a flag to enable or disable it. It also contains a list of username/password pairs. Please note that the password can be encrypted with the [encryptor utility][].
 
 ```
 # Basic Authentication Security Configuration for light-4j
@@ -39,7 +39,7 @@ users:
 
 Although this middleware handler can support multiple users, there is no role concept for these users and all users should have the same access level. If you want to give different users different privileges, you can customized this handler. 
 
-In order for this handler to be wire in the middleware handler chain, this handler need to be configured in service.yml middleware section. Here is an example. 
+In order for this handler to be wired in the middleware handler chain, this handler needs to be configured in the service.yml middleware section. Here is an example.
 
 ```
 # MiddlewareHandler implementations, the calling sequence is as defined in the request/response chain.
@@ -67,7 +67,7 @@ In order for this handler to be wire in the middleware handler chain, this handl
 
 ```
 
-If encryptor and decryptor are used, you need to provide Decryptor implementation in the service.yml as well.
+If the encryptor and decryptor are used, you need to provide the decryptor implementation in the service.yml as well.
 
 ```
 # HandlerProvider implementation

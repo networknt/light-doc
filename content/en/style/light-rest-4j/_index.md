@@ -14,8 +14,7 @@ toc: false
 draft: false
 reviewed: true
 ---
-
-The light platform provides a plugin architecture and dozens of [middleware handlers][] to address cross-cutting concerns in general. When you decide to build an API or service, you have to choose from different styles and the corresponding framework.
+Light provides a plugin architecture and dozens of [middleware handlers][] to address cross-cutting concerns in general. When you decide to build an API or service, you have to choose from different styles and the corresponding 
 
 Chances are you are building a public Web API and want to follow RESTful style to make sure everyone can understand and consume it. 
 

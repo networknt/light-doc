@@ -12,7 +12,7 @@ reviewed: true
 
 ### Introduction
 
-Almost every module in light-4j has a configuration file externalized with default in the module itself or the API implementation config folder. A special handler injected in your hander.yml gives an overview of the server runtime, system properties, specification, and configurations for each enabled modules. Once this handler endpoint is called, it will output all the server info in a JSON format. 
+Almost every module in light-4j has a configuration file externalized with default in the module itself or the API implementation config folder. A special handler injected in your hander.yml gives an overview of the server runtime, system properties, specification, and configurations for each enabled module. Once this handler endpoint is called, it will output all the server info in a JSON format. 
 
 
 ### Configuration

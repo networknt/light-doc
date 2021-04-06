@@ -44,77 +44,71 @@ We often use a set of principles to guide decision making, and the following is 
 
 #### Modelled Around Business Domain
 
-Unlike monolithic application layered with presentation, business logic and repository which is cut horizontally. Micorservices encourage breaking monolithic application to each function domain which is cut vertically. In SOA monolith, the application is divided by technical layers and in MSA,
-the application is divided by business bounded context. 
+Unlike monolithic applications layered with presentation, business logic and repository, which is cut horizontally, Microservices encourage breaking monolithic applications to each function domain which is cut vertically. In SOA monolith, the application is divided by technical layers and in MSA, the application is divided by business bounded context.
 
-If a system is divided in in technical layers, then every small change for example adding a new field will involve three teams to update UI, Business Logic and Data Repo. The scenario will be getting worse if the application is getting bigger as the interface between layers are not stable and subject to
-change due to influx of business requirements. 
+If a system is divided in technical layers, then every small change, for example, adding a new field will involve three teams to update UI, Business Logic and Data Repo. The scenario will get worse if the application is getting bigger as the interface between layers is not stable and is subject to change due to the influx of business requirements.
 
-By decomposing services around business domain can make the interface relative stable as it represent business function which is more stable then technologies domain. Also, each team will have knowledge on the particular business domain and responsible to support it as well. 
+By decomposing services around the business domain, we can make the interface relatively stable as it represents a business function which is more stable than the technologies domain. Also, each team will have knowledge on the particular business domain and be responsible to support it as well. 
 
-The book "Domain-Driven Design" by Eric Evans is a very good one that can guide you to model microservices. It was published over a decade ago but only getting popular recently as architecture shift and tool chain is ready for it.    
+The book “Domain-Driven Design” by Eric Evans is a very good one that can guide you to model microservices. It was published over a decade ago but is only getting popular recently as architecture shifts and the tool chain is ready for it.  
 
 #### Culture of Automation
 
-If you only deploy several services, then manual VM provision and deploy your services is doable. However, if you have thousands of services, the entire process must be automatic to allow this kind of scale. When we think about automation, we are thinking about infrastructure, platform and tool chains. This will make the microserivces architecture very expensive for the front investment. Normally, for an organization to adopt microservices architecture, it take them serveral months to deploy 2 or 3 services and then they start to realize that they need to invest the ecosystem to support services and working on it for several months. Once the platform is ready, the number services deployed will be exploded in a couple of months.
+If you only deploy several services, then manual VM provision and deploying your services is doable. However, if you have thousands of services, the entire process must be automatic to allow this kind of scale. When we think about automation, we are thinking about infrastructure, platform and tool chains. This will make the microservices architecture very expensive for the front investment. Normally, for an organization to adopt microservices architecture, it takes them several months to deploy 2 or 3 services and then they start to realize that they need to invest in the ecosystem to support services and work on it for several months. Once the platform is ready, the number services deployed will explode in a couple of months.
 
-We need to automated testing at four different levels: unit tests, consumer driven tests, integration tests and end-to-end test. These tests can give us confidence to delivery to production on the same day code is changed. 
+We need automated testing at four different levels: unit tests, consumer driven tests, integration tests and end-to-end tests. These tests can give us confidence to deliver to production on the same day code is changed.
 
 We need to have continuous delivery pipeline to deploy the service once the code is merged to master branch.
 
 
 #### Hide Implementation Details
 
-Microservice should hide its implementation details and the only interface to the outside is the interface contract. More often, people want to share the same database between multiple services and this is a very bad design borrowed from monolith world. This design make these services tightly coupled at db level and it is very hard for one service to add a new field into a table or change the name of a column name.
+Microservices should hide their implementation details, leaving the only interface to the outside as the interface contract. More often, people want to share the same database between multiple services which is a very bad design borrowed from the monolith world. This design makes these services tightly coupled at db level and it is very hard for one service to add a new field into a table or change the name of a column name.
 
-Every service should have its own database and this allow them to choose the right db for the job and they can switch db if it is necessary. Also they can change their implementation language or framework if new technologies emerged. 
+Every service should have its own database which allows them to choose the right db for the job so they can switch db if it is necessary. They can also change their implementation language or framework if new technologies emerge.
 
-Another perspective is about interface design around bounded contexts and aggregates. This will guarantee that the exposed interface is design for the business domain without revealing details. 
+Another perspective is about interface design around bounded contexts and aggregates. This will guarantee that the exposed interface is designed for the business domain without revealing details. 
 
 #### Decentralize All The Things
 
-Micorserivces architecture is optimized around autonomy and each team is responsible for one to many serivces. They are given as much freedom as possible to do the job at hand. Do they need to open a ticket to create a VM to deploy a test instance or they can do that on their own? Do they have shared
-governance so that teams can work together to make decision without central authority?  
+Microservices architecture is optimized around autonomy and each team is responsible for one to many services. They are given as much freedom as possible to do the job at hand. Do they need to open a ticket to create a VM to deploy a test instance or they can do that on their own? Do they have shared governance so that teams can work together to make decisions without central authority?
 
-It also comes with technical decisions. Are we going to use a centralized API gateway in front of all services? Do we need an EMB to do some magic in order to make services work together? Or we adopt dumb-pipes, smart endpoints to have a message broker layer for service to service communication without
-business logic?
+It also comes with technical decisions. Are we going to use a centralized API gateway in front of all services? Do we need an EMB to do some magic in order to make services work together? Or do we adopt dumb-pipes and smart endpoints to have a message broker layer for service to service communication without business logic?
 
 
 #### Deployed Independently
 
-You deploy your service to production without impacting other services. If you need to deploy your service because other services are deploying, something is wrong and it needs to be fixed. From operation point of view, we need to figure out if we want to make every service totally isolated or several services can share the same host/vm. A new service deployed to a shared host might hog the CPUs and brought down all other services on the same host. 
+You deploy your service to production without impacting other services. If you need to deploy your service because other services are deploying, something is wrong and it needs to be fixed. From an operational point of view, we need to figure out if we want to make every service totally isolated or several services share the same host/vm. A new service deployed to a shared host might hog the CPUs and bring down all other services on the same host.
 
-But how can I ensure that my service deploys to production won't impact others? Most people will say that we have all related services deployed and test them end-to-end but in reality, this might not be possible or very costly. As services are designed with an interface contract, [consumer-driven contract][]
-testing is here for rescue. All consumers will have their expectations built as test cases and submitted to service provider. These tests must be passed in order to release to production and it also help the service provider to identify which consumer is broken if a change is occurring.  
+But how can I ensure that my service deploying to production won’t impact others? Most people will want to have all related services deployed and test them end-to-end but in reality, this might not be possible, or might be very costly. As services are designed with an interface contract, [consumer-driven contract][] testing is to the rescue. All consumers will have their expectations built as test cases and submitted to service providers. These tests must be passed in order to release to production and help the service provider to identify which consumer is broken if a change is occurring.
 
-Sometimes you have to introduce breaking upgrade on your service and you can have two versions of the service instances running in parallel for a while until all consumers upgrade to the latest version. 
+Sometimes you have to introduce a breaking upgrade on your service and you can have two versions of the service instances running in parallel for a while until all consumers upgrade to the latest version. 
 
 
 #### Consumer First
 
-Serivces exist to be called from the interface provided. When designing APIs, you need to involve the consumers to understand their needs and deigned the contract based on the consumer requirement as long with your understanding of the domain. 
+Services exist to be called from the interface provided. When designing APIs, you need to involve the consumers to understand their needs and design the contract based on the consumer requirement as long with your understanding of the domain.
 
-Before services are built, the IDL(interface definition language) must be completed as it is the contract that can be reviewed by consumers. OpenAPI specification is one of the example in REST API.
+Before services are built, the IDL(interface definition language) must be completed as it is the contract that can be reviewed by consumers. OpenAPI specification is one of the examples in REST API.
 
-Service providers need to think about how to make their services easily to be consumed. For example, each service will register itself on a centralized registry so that consumers can discover them by serviceId only. The consume sometimes can also pass in a tag to look for a special instance of the
-service. For example, there are several instances of the same service that connect to different dbs for testing. Here is an [design article][] on this topic.  
+Service providers need to think about how to make their services easy to be consumed. For example, each service will register itself on a centralized registry so that consumers can discover them by serviceId only. The consumer sometimes can also pass in a tag to look for a special instance of the service. For example, there are several instances of the same service that connect to different dbs for testing. Here is a [design article][] on this topic.
 
-Marketplace is another tool that can help consumers to find available services and contact service provider to speed up the process to consume it. 
+Marketplace is another tool that can help consumers find available services and contact service providers to speed up the process to consume it. 
 
 #### Isolate Failure
 
-Distributed system is much easier to make things fail. There are more network boundaries and more services increase the surface of failure.  
+Using a distributed system makes it much easier for things to fail. There are more network boundaries and more services which increases the surface of failure.  
 
-Also due to more services involve in a request, one bad service will lock up others and causing cascade failure which brought down the entire system. There are several techniques to lower the risks. For example, all services should be designed fail-fast with very short timeout. In Java EE
-platform, circuit breaker, bulkhead need to be considered almost all the case. Another way is to change your architecture from request/response to event driven.   
+Due to more services being involved in a request, one bad service will lock up others and cause a cascade failure which brings down the entire system. There are several techniques to lower the risks. For example, all services should be designed in a fail-fast manner with a very short timeout. In Java EE platform, the circuit breaker and bulkhead need to be considered in almost all cases. Another way is to change your architecture from request/response to event driven.
+   
 
 #### Highly Observable
 
-Active monitoring is OK if there are small number of services. Once your system scale to hundreds of services, you need reactive monitoring. The platform needs to provide centralized logging and metrics and there should be some stream processing on the incoming data to alert operation team something abnormal is happening. Also, the logs must be aggregated by a traceabilityId or correlationId so that the same transaction can be visible in logging aggregator tool such as ELK.
+Active monitoring is OK if there are a small number of services. Once your system scales to hundreds of services, you need reactive monitoring. The platform needs to provide centralized logging and metrics and there should be some stream processing on the incoming data to alert the operation team if something abnormal is happening. The logs must also be aggregated by a traceabilityId or correlationId so that the same transaction can be visible in logging aggregator tools such as ELK.
 
 ####  High Throughput, Low Latency and Small Memeory Footprint
 
-The reason to adopt microservices architecture is to scale and it requires each service to be performed better. There are more services involved in a request so all services latencies will be added up to impact overall SLA. Unlike monolith, there might be thousands microservices instances running within your organization and smaller memory footprint will save a lot for production provision cost.
+The reason to adopt the microservices architecture is to scale, requiring each service to be better performed. There are more services involved in a request so all services latencies will be added up to impact overall SLA. Unlike monolith, there might be thousands of microservices instances running within your organization and a smaller memory footprint will save a lot on production provision costs.
    
 #### High Productivity
 
@@ -144,7 +138,7 @@ The original intent of the microservice architecture concept—to replace comple
 
 ##### Safety
 
-* Greater e ciency in the software system reduces infrastructure costs and reduces the risk of capacity-related service outages.
+* Greater efficiency in the software system reduces infrastructure costs and reduces the risk of capacity-related service outages.
 * Independent manageability contributes to improved efficiency, and also reduces the need for scheduled downtime.
 * Replaceability of components reduces the technical debt that can lead to aging, unreliable environments.
 * Stronger resilience and higher availability ensure a good customer experience.

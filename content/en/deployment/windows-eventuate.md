@@ -12,6 +12,7 @@ weight: 40
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 There are some dependent services that need to be started in order to do the development of
@@ -28,9 +29,7 @@ The following link is the official installation document from Kafka.
 
 https://kafka.apache.org/quickstart
 
-
-
-To start zookeeper and kafka from windows local, please use windows consoles and type following commands
+To start Zookeeper and Kafka from Windows local, please use Windows console and type following commands
 
 Start zookeeper:
 
@@ -69,8 +68,7 @@ https://github.com/networknt/light-docker/blob/master/mysql/replication.cnf
 
 ### Start CDC server for tram
 
-If you want to start tram CDC server from java -jar, you need to checkout the following repos.
-I am assuming you are using networknt as your workspace under your user home directory. 
+If you want to start a tram CDC server from java -jar, you need to check out the following repos. I am assuming you are using networknt as your workspace under your user home directory.
 
 ```
 cd ~/networknt
@@ -91,7 +89,6 @@ java -java target/eventuate-cdc-server.jar
 
 ```
 
-If all above services are up and running, you can build and run integration tests for
-light-tram-4j and light-eventuate-4j and build applications based on these frameworks. 
+If all the above services are up and running, you can build and run integration tests for light-tram-4j and light-eventuate-4j and build applications based on these frameworks. 
 
 [tutorial]: /tutorial/eventuate/getting-started/

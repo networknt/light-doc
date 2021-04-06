@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed:true
 ---
 
-There are several benefits to use HTTP/2 instead of HTTP/1.x in microservices architecture. 
+There are several benefits to using HTTP/2 instead of HTTP/1.x in microservices architecture.
 
 ### HTTP/2 is Binary, Instead of Textual
 

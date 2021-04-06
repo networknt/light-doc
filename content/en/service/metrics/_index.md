@@ -12,14 +12,10 @@ weight: 40	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Proper monitoring is one of the most important parts of building a production-ready microservice and 
-guarantees higher microservice availability. In this section, microservice monitoring are covered, 
-including which key metrics to monitor, how to log key metrics, building dashboards that display 
-key metrics. Another part of production monitoring is alerts. We cannot let support guys looking
-at the dashboard in a reactive mode but need the monitor system to issue alter is something abnormal
-happens. 
+Proper monitoring is one of the most important parts of building a production-ready microservice and guarantees higher microservice availability. In this section, microservice monitoring is covered, including which key metrics to monitor, how to log key metrics, building dashboards that display key metrics. Another part of production monitoring is alerts. We cannot let support guys look at the dashboard in a reactive mode, and need the monitor system to issue alterations if something abnormal happens.
 
 
 

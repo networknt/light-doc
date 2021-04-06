@@ -21,7 +21,7 @@ reviewed: true
 
 Note: This is the issue with JDK 8 for 1.6.x and 1.5.x releases. If you are using JDK11 with the 2.0.x release, you don't need to worry about it. 
 
-The issue is that if Xmx option is not defined explicitly, then JVM uses 1/4th of all memory available for the host OS due to a default internal garbage collection (GC) ergonomic algorithm. This can lead to killing the Java process by the kernel if JVM memory usage grows over the cgroups limit defined for a Docker container.
+The issue is that if the Xmx option is not defined explicitly, then JVM uses 1/4th of all memory available for the host OS due to a default internal garbage collection (GC) ergonomic algorithm. This can lead to killing the Java process by the kernel if JVM memory usage grows over the cgroups limit defined for a Docker container.
 
 To solve this problem, one improvement was recently implemented in OpenJDK 9 and backported to OpenJDK 8 in version 8u131.  
 
@@ -36,5 +36,5 @@ The command line to set it up is:
 java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1 -XshowSettings:vm -version
 ```
 
-As we are using a later version of Java 8 on both Alpine and Redhat container, we are going to update the light-codegen to add these options in the java command line. Once this is done, we can control the container memory limitation with Kubernetes deployment configuration file. 
+As we are using a later version of Java 8 on both Alpine and Redhat containers, we are going to update the light-codegen to add these options in the Java command line. Once this is done, we can control the container memory limitation with the Kubernetes deployment configuration file.
 

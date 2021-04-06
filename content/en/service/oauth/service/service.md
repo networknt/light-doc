@@ -8,13 +8,10 @@ weight: 30
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Every micro service or API needs to register itself to OAuth2 server in order to control who
-can access it. During the registration/on-boarding, a list of scopes defined in the OpenAPI
-specification or other schema contracts for GraphQL and Hybrid RPC should be populated as well. 
-This list of scopes will be used for client to register scopes in order to access this particular 
-service or API during client registration. 
+Every microservice or API needs to register itself to OAuth2 server in order to control who can access it. During the registration/on-boarding, a list of scopes defined in the OpenAPI specification or other schema contracts for GraphQL and Hybrid RPC should be populated as well. This list of scopes will be used for clients to register scopes in order to access this particular service or API during client registration.
 
 This service has several endpoints and listens to port 6883.
 
@@ -293,15 +290,11 @@ be returned if the page is greater than the last page.
 
 * pageSize
 
-Default pageSize is 10 and you can overwrite it with another number. Please don't
-use a big number due to performance reason. 
+Default pageSize is 10, and you can overwrite it with another number. Please don’t use a big number due to performance reasons.
 
 * serviceId
 
-This is the only filter available and it supports filter by start with a few characters.
-For example, "serviceId=abc" means any serviceId starts with "abc". The result is also
-sorted by serviceId in the pagination. 
-
+This is the only filter available and it supports filters by starting with a few characters. For example, “serviceId=abc” means any serviceId starts with “abc”. The result is also sorted by serviceId in the pagination.
 
 The following validation will be performed in the service.
 
@@ -346,8 +339,7 @@ before a new service is created.
 
 ### /oauth2/service@put
 
-This is the endpoint to update existing service. Before service is updated, the
-following validation will be performed.
+This is the endpoint to update existing services. Before service is updated, the following validation will be performed.
 
 * If serviceId cannot be found in the service cache, then the following error will be
 returned.
@@ -374,8 +366,7 @@ returned.
 
 ### /oauth2/service/{serviceId}@delete
 
-This endpoint is used to delete existing service. Before the service is deleted,
-the following validations will be performed.
+This endpoint is used to delete existing services. Before the service is deleted, the following validations will be performed.
 
 * If serviceId cannot be found in the service cache, then the following error will be
 returned.
@@ -432,9 +423,7 @@ returned.
 
 ### /oauth2/service/{serviceId}/endpoint@delete
 
-This is an endpoint that is used to delete all the endpoints for a particular service. You
-have to make sure that there is no client links to the service endpoints before issuing
-delete request. Otherwise, you will have database constraint error. 
+This is an endpoint that is used to delete all the endpoints for a particular service. You have to make sure that there are no client links to the service endpoints before issuing a delete request. Otherwise, you will have database constraint errors.
 
 * If service endpoints cannot be found in the service cache, then the following error will be
 returned.

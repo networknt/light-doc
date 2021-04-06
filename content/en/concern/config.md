@@ -7,27 +7,28 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true 
 ---
 
-Config is a configuration module that supports externalized config in official standalone deployment or docker container. It is encouraged that every module should have its own configuration file and these files can be served by light-config-server which aggregates/merges config files from a different level of organizations in GitHub or other git servers.
+Config is a configuration module that supports externalized config in the official standalone deployment or docker container. It is encouraged that every module should have its own configuration file and that these files be served by light-config-server which aggregates/merges config files from a different level of organization in GitHub or other git servers.
 
 ## Introduction
 
-Externalized configuration from the application package is very important. It allows us to deploy the same package to DEV/SIT/UAT/PROD environment with different configuration packages without reopening the delivery package. For development, embedded configuration gives us the flexibility to take default values out of the box.
+Externalized configuration from the application package is very important. It allows us to deploy the same package to the DEV/SIT/UAT/PROD environment with different configuration packages without reopening the delivery package. For development, embedded configuration gives us the flexibility to take default values out of the box.
 
-When dockerizing our application, the external configuration can be mapped to a volume which can be updated and restarted the container to take effect.
+When dockerizing our application, the external configuration can be mapped to a volume which can update and restart the container to take effect.
 
 When Kubernetes is used for docker orchestration, config files can be managed by ConfigMap and Secret.
 
-The reason we encourage every module has its own configuration file is to ease the management and facilitate individual module independence. Every module can be upgraded independently and change its config format without impact other modules. 
+The reason we encourage every module to have its own configuration file is to ease the management and facilitate individual module independence. Every module can be upgraded independently and change its config format without impacting other modules.
 
 Most config files are not sensitive and it is recommended to manage them in git so that all the changes can be tracked and audited. With proper access control to the organization/lob level of config repo, only certain users can update the config files per environment. 
 
-There is one separate config file secret.yml that contains all the secrets in the application like database password, private key etc. Although this file can be checked into the git along with other config files, the content should be just placeholders and it needs to be updated during deployment. With Kubernets, this file will be mapped to Secrets.
+There is one separate config file secret.yml that contains all the secrets in the application like database password, private key etc. Although this file can be checked into the git along with other config files, the content should be just placeholders, and needs to be updated during deployment. With Kubernetes, this file will be mapped to Secrets.
 
-For now, only file system optionally associate with environment variables configuration is supported; however, config files can be served by light-config-server in a zip format and the server module can be started to load all config from light-config-server in a zip file format. It will automatically unzip it and put the config files into the right location to bootstrap the server. Given the risk of single point failure, only when the server start, it will contact external light-config-sever to load (first time) or update the local file system so that config files are cached. Except first time start the server, the server can use the local cache to start if config service is not available.
+For now, only the file system optionally associated with environment variables configuration is supported. However, config files can be served by light-config-server in a zip format and the server module can be started to load all config from light-config-server in a zip file format. It will automatically unzip and put the config files into the right location to bootstrap the server. Given the risk of single point failure, it will only contact the external light-config-sever to load (for the first time) or update the local file system so that config files are cached when the server starts. Excepting the first start of the server, the server can use the local cache to start if the config service is not available.
 
-In 1.5.26 release, an external config file 'values' with extension json, yaml or yml are provided which can be optionally used to inject value into the config. By configuring this file, environment-specific values in the configuration file can be managed more easily and directly. The guidance also can be found in this document.
+In the 1.5.26 release, an external config file called ‘values’ with the extension json, yaml or yml are provided, which can be optionally used to inject value into the config. By configuring this file, environment-specific values in the configuration file can be managed more easily and directly. The guidance also can be found in this document.
 
 
 ## Singleton
@@ -59,18 +60,17 @@ The following abstract methods are implemented in the default service provider.
 
 ## Usage
 
-It is encouraged to create a POJO for your config if the JSON structure is static. However, some of the config files have repeatable elements, a map or list is the only options to represent the data in this case.
+It is encouraged to create a POJO for your config if the JSON structure is static. However, as some of the config files have repeatable elements, a map or list is the only option to represent the data in this case.
 
-The two methods return String and InputStream is for loading files such as text file with different formats and X509 certificates etc.
+The two methods return String and InputStream, which are for loading files such as text files with different formats and X509 certificates.
 
-getMapper() is a convenient way to get Jackson ObjectMapper instead of creating one which is too heavy.
-
+getMapper() is a convenient way to get a Jackson ObjectMapper instead of creating one which is too heavy.
 
 ## Cache
 
-Loading configuration files from file system takes time so the config file will be cached once it is loaded the first time. All subsequent access to the same config file (maybe different key/value pair) will read from the cached copy. In order to make sure that server startup won't be impacted by all modules to load config files, lazy loading is encouraged unless the module must be initialized during server startup.
+Loading configuration files from the file system takes time so the config file will be cached once it is loaded the first time. All subsequent access to the same config file (maybe different key/value pair) will read from the cached copy. In order to make sure that server startup won’t be impacted by all modules to load config files, lazy loading is encouraged unless the module must be initialized during server startup.
 
-The server [info][] module will output the config files in map format for each enabled module, and it creates another un-cached copy with getJsonMapConfigNoCache as some of the configs contains sensitive info that needs to be masked. For example, secret.yml.
+The server [info][] module will output the config files in map format for each enabled module, and will also create another un-cached copy with getJsonMapConfigNoCache as some of the configs contains sensitive info that needs to be masked, for example, secret.yml.
 
 ## Loading sequence
 
@@ -78,14 +78,13 @@ Each module should have a config file that named the same as the module name. An
 
 For example, the Security module as a config file named security.yml and it resides in the module /src/main/resources/config folder by default.
 
-For an application that uses the Security module, it can override the default module level config by providing security.yml in application's resource folder /src/main/resources/config.
+An application that uses the Security module can override the default module level config by providing security.yml in the application’s resource folder /src/main/resources/config.
 
-Config will also be loaded from the classpath of the application, and this is mainly used for testing as it is easy to inject different combinations of config copies in test cases into classpath for unit testing.
+Config will also be loaded from the classpath of the application, and this is mainly used for testing as it is easy to inject different combinations of config copies in test cases into the classpath for unit testing.
 
-For official runtime environment, config files should be externalized to a separate folder outside of the package by a system property
-"light-4j-config-dir". You can start the server with a "-Dlight-4j-config-dir=/config" option and put all your files into /config. Once in docker image, it can be mapped to a host volume with -v /etc/light-4j:/config in docker run command.
+For the official runtime environment, config files should be externalized to a separate folder outside of the package by a system property “light-4j-config-dir”. You can start the server with a “-Dlight-4j-config-dir=/config'' option and put all your files into /config. Once as a docker image which can be mapped to a host volume with the -v /etc/light-4j:/config in docker run command.
 
-When Kubernetes cluster is your deployment environment, and you have config files scattered in several folders on host, they must be mounted relative to the same config folder specified by the -Dlight-4j-config-dir and all references to other files in the config file must use relative path. Here is an example. 
+When the Kubernetes cluster is your deployment environment, and you have config files scattered in several folders on host, they must be mounted relative to the same config folder specified by the -Dlight-4j-config-dir and all references to other files in the config file must use a relative path. Here is an example.
 
 ```
   volumeMounts:
@@ -111,9 +110,9 @@ Given the above explanation, the loading sequence is:
 3. Application resources/config folder
 4. Module resources/config folder
 
-Most modules will have a default config file with `yml` format, and it can be overwritten by putting a `yml` config in application/service resources/config folder. For unit test and end-to-end test, you can create another copy of `yml` config file under test/resources/config folder. If you need to test the different behaviors under different configuration, you need to manually manipulate the config file in the classpath in your test case in order to simulate different configurations. 
+Most modules will have a default config file with `yml` format which can be overwritten by putting a `yml` config in the application/service resources/config folder. For unit tests and end-to-end tests, you can create another copy of `yml` config file under test/resources/config folder. If you need to test the different behaviors under different configurations, you need to manually manipulate the config file in the classpath in your test case in order to simulate different configurations.
 
-For official deploy environment, externalized config in light-4j-config-dir is recommended; however, not all config files need to be externalized. Only the ones that you might change from one environment to another or might be changed on production under certain conditions. 
+For the official deployment environment, externalized config in light-4j-config-dir is recommended; however, not all config files need to be externalized. Only the ones that you might change from one environment to another or might be changed during production under certain conditions.
 
 The above loading sequence assumes that `yml` is used as the config file extension. If `yaml` or `json` is used, the loading sequence is the same. Remember you only use one extension for a module and these extensions cannot be mixed. 
 
@@ -137,11 +136,11 @@ For each module, you can choose either YAML or JSON as config file format, but y
 
 yml > yaml > json
 
-Note that all default config files for light-4j and other framework built on top of light-4j modules are using `yml` as config format except swagger.json which is generated from the swagger editor. If you want to overwrite the default config for one of the modules, you must use the {module name}.yml in your app config folder or externalize to config directory specified by system properties.
+Note that all default config files for light-4j and other frameworks built on top of light-4j modules use `yml` as a config format except swagger.json which is generated from the swagger editor. If you want to overwrite the default config for one of the modules, you must use the {module name}.yml in your app config folder or externalize to config directory specified by system properties.
 
 ## Environment/External config Injection
 
-In 1.5.26 release, values in the configuration file can be managed/override by setting environment variables or using an external config 'values' with extension `yml`, `yaml`, `json`. 
+In the 1.5.26 release, values in the configuration file can be managed/overridden by setting environment variables or by using an external config 'values' with the extension `yml`, `yaml`, `json`.
 
 In each config file (take `yaml` as the example here),  you can replace fixed configuration as following:
 
@@ -177,7 +176,8 @@ Mode [1] Inject from system environment first, then overwrite by "values.yaml" i
    
 Mode [2] Inject from "values.yaml" first, then overwrite with the values in the system environment.
 
-After setting the injection mode, you can set environment or values. (yml/yaml/json) based on the mode you chose. environment variables can be simply export by using a command line like this. `export DOCKER_HOST_IP=192.168.1.120` while the values.(yml/yaml/json) can be set as following example. The values can be set as String, List or Map inside this external config.
+After setting the injection mode, you can set the environment or values. (yml/yaml/json) based on the mode you chose. Environment variables can simply be exported by using a command line like this. `export DOCKER_HOST_IP=192.168.1.120` while the values.(yml/yaml/json) can be set as the following example. The values can be set as String, List or Map inside this external config.
+
 
 whitelists.yaml:
 ```
@@ -196,10 +196,7 @@ paths:
 - '10.10.*.*'
 ```
 
-In version 1.5.26, all values from environment variables and default values are strings. It may cause the exception in
-terms of the type casting error if do not pay attention to use, especially for setting boolean. So in 1.5.29, the type
-of environment variables and default values will be cast based on their content. The rules are similar to the conversion 
-rules of snakeyaml, as follows:
+In version 1.5.26, all values from environment variables and default values are strings. It may cause the exception in terms of the type casting error if one does not pay attention to use, especially for setting the boolean. So in 1.5.29, the type of environment variables and default values will be cast based on their content. The rules are similar to the conversion rules of snakeyaml, as follows:
 
 | Config | Result |
 | ------ | ------ |
@@ -276,9 +273,7 @@ Notes:
 braces. For example,`"{value: 1}"`, It should be noticed that the quotes outside the parentheses cannot 
 be omitted in this case.
 
-2. In order to prevent some unchangeable files from being affected by this feature. Variable injection 
-can be prevented by setting config.yml. In 1.5.29, a default config.yml will be generated by light-codegen. 
-For details, see the comments in the file.
+2. In order to prevent some unchangeable files from being affected by this feature, variable injection can be prevented by setting the config.yml. In 1.5.29, a default config.yml will be generated by light-codegen. For details, see the comments in the file.
 
 3. In 1.6.2, `null` and `""` are supported to be injected by using environment variables or values.yml. For instance, configuring the values.yml as following:
     ```yaml
@@ -310,19 +305,21 @@ ValidatorConfig config = (ValidatorConfig)Config.getInstance().getJsonObjectConf
 
 ## Config Server
 
-With every module or application has its own config file, it is hard to manage these files for the different version of the framework, different deployment environment.
+With every module or application having its own config file, it is hard to manage these files for different versions of the framework, and different deployment environments.
 
-In order to make it easier, we have provided a [light-config-server](https://github.com/networknt/light-config-server) to manage config files in multiple git organizations. The default config files are provided by the networknt organization in GitHub. For companies to use the framework, they can have an overwritten default config repo for each version of the framework for each environment. Also, each individual application or service can have its overwritten config files for a framework version of a specific environment.
+In order to make it easier, we have provided a [light-config-server](https://github.com/networknt/light-config-server) to manage config files in multiple git organizations. The default config files are provided by the networknt organization in GitHub. For companies to use the framework, they can have an overwritten default config repo for each version of the framework for each environment. Each individual application or service can also have its overwritten config files for a framework version of a specific environment.
 
 For more information about light-config-server please check [README.md](https://github.com/networknt/light-config-server)
 
 ## Handle encrypted values in config files
-Encrypted values are inevitable in configuration files. It's not acceptable to put confidential information, such as passwords, access tokens, or keys, in plain text in configration files.
-In early versions of light-4j (before 1.5.32), users needs to put all encrypted values in the special config file `secret.yml` and use the utility class `DecryptUtil` to decrypt the file before they can use the configured values. This approach is not convinient in two aspects:
-1. it increases the difficulty in maintaining configuration files. People may forget to update or delete an encrypted configuration item when it's context changed.
-2. extra efforts are needed to compose or load configurations from multiple configuration files. The extra efforts can be large when integration with third party applications is involved.
+Encrypted values are inevitable in configuration files. It’s not acceptable to put confidential information, such as passwords, access tokens, or keys, in plain text in configuration files.
+In early versions of light-4j (before 1.5.32), users needed to put all encrypted values in the special config file `secret.yml` and use the utility class `DecryptUtil` to decrypt the file before they could use the configured values. This approach is not convenient in two aspects:
+1. It increases the difficulty in maintaining configuration files. People may forget to update or delete an encrypted configuration item when its context changes.
+2. Extra efforts are needed to compose or load configurations from multiple configuration files. The extra efforts can be large when integration with third party applications is involved.
 
 To address this issue, we enhanced the `config` module in release light-4j-1.6.0 and provide transparent access to encrypted values. With this enhancement, all values returned from `Config.getJson...()` methods are decrypted using the provided decryptor. Users can specify the decryptor in `config.yml` as shown below. There are three types of decryptor to choose from AESDcryptor, AutoAESDcryptor, and ManualAESDecryptor. The value of `decryptorClass` needs to be a concrete class that implements the interface `com.networknt.decrypt.Decryptor`. If `decryptorClass` is not configured, values are not decrypted (that is, the same behavior as before). 
+
+To address this issue, we enhanced the `config` module in release light-4j-1.6.0 and provide transparent access to encrypted values. With this enhancement, all values returned from Config.getJson...() methods are decrypted using the provided decryptor. Users can specify the decryptor in `config.yml` as shown below. There are three types of decryptor to choose from: AESDcryptor, AutoAESDcryptor, and ManualAESDecryptor. The value of `decryptorClass`s needs to be a concrete class that implements the interface `com.networknt.decrypt.Decryptor`. If `decryptorClass` is not configured, values are not decrypted (that is, the same behavior as before is maintained).
 
 ```
 decryptorClass: 

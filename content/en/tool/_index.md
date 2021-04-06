@@ -12,9 +12,10 @@ weight: 01	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-There are so many tools that help us to deliver microservices and here is a small list.
+There are so many tools that help us deliver microservices. Here is a small list:
 
 Tools we build. 
 

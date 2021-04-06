@@ -24,7 +24,7 @@ public interface StartupHookProvider {
 }
 ```
 
-Startup hooks are loaded during the server startup from [service][] module and the config file that binds all startupHooksProviders is the `service.yml` file. This file is in src/main/resources/config folder in your generated project from [light-codegen][], and it should be externalized for any official deployment environment. 
+Startup hooks are loaded during the server startup from the [service][] module and the config file that binds all startupHooksProviders is the `service.yml` file. This file is in the src/main/resources/config folder in your generated project from [light-codegen][], and it should be externalized for any official deployment environment.
 
 Here is an example.
 
@@ -60,9 +60,9 @@ Shutdown hooks are loaded during the server startup from the service module, and
 
 Light-4j has two different types of handlers: middleware handler and business handler. 
 
-Middleware handler doesn't return anything except errors as a response but only manipulate the request or the response in the request/response chain. Each middleware handler handles the request/response and then pass the request/response to the next middleware handler in the chain. 
+The middleware handler doesn’t return anything except errors as a response but only manipulates the request or the response in the request/response chain. Each middleware handler handles the request/response and then passes the request/response to the next middleware handler in the chain.
 
-Business handler is the final handler in the chain that runs the business logic and return the real business response to the caller. 
+The business handler is the final handler in the chain that runs the business logic and returns the real business response to the caller.
 
 For more information about handlers, please visit the [handler][] cross-cutting concern. 
 
@@ -197,7 +197,7 @@ If you want the server to load configuration files from the config server, the f
 * light-env
 * light-config-server-uri
 
-Once the server starts, it will access the [light-config-server](https://github.com/networknt/light-config-server) instance to get a map of key/value pairs that match the values.yml config files for the particular service for the environment and the framework version. The key/value map will be injected by the [config][] module automatically into the config file templates in /config folder which is specified by light-4j-config-dir system properties or src/main/resources/config folder. 
+Once the server starts, it will access the [light-config-server](https://github.com/networknt/light-config-server) instance to get a map of key/value pairs that match the values.yml config files for the particular service for the environment and the framework version. The key/value map will be injected by the config module automatically into the config file templates in the /config folder which is specified by light-4j-config-dir system properties or src/main/resources/config folder.
 
 If you are deploying hundreds or thousands of services, it would be much easier to manage the configurations with light-config-server which supports hierarchical config file management with multiple GitHub organizations and repositories as well as encryption and decryption values between the config server and services inside the containers.
 
@@ -205,7 +205,7 @@ If you are deploying hundreds or thousands of services, it would be much easier 
 
 ### Service Registry
 
-If enableRegistry is true in server.yml, then the server will register itself to Consul or Zookeeper whichever is configured in service.yml. The self-registration is used in data center deployment which you might have several Java instances running on the same host. It is also used in Kubernetes cluster as all the services are running on the host network to take advantages of direct service discovery. 
+If enableRegistry is true in server.yml, then the server will register itself to Consul or Zookeeper, whichever is configured in the service.yml. The self-registration is used in data center deployment, where you might have several Java instances running on the same host. It is also used in Kubernetes cluster as all the services are running on the host network to take advantage of direct service discovery.
 
 For service registration, you can specify dynamicPort to true so that the server module will try to bind a port in a range defined between minPort and maxPort. 
 
@@ -315,12 +315,12 @@ Since release 1.5.29, we have updated the [config][] module to support config fi
 
 ### Gracefully Shutdown
 
-As we are using the service registry, discovery and client-side load balance, our client module maintains a list of live services per serviceId interested. If any service is shutting down, it takes a short while to propagate to all clients. To handle in-flight request from the clients that don't know the server instance is down, the server has to send a shutdown signal to the registry(Consul or Zookeeper) and keep processing for at least 20 to 30 seconds and then shut down. Within this period of time, all client should have known the service instance is gone and won't send any new request to it.
+As we are using the service registry, discovery and client-side load balance, our client module maintains a list of live services per serviceId interested. If any service is shutting down, it takes a short while to propagate to all clients. To handle in-flight requests from the clients that don’t know the server instance is down, the server has to send a shutdown signal to the registry (Consul or Zookeeper) and keep processing for at least 20 to 30 seconds and then shut down. Within this period of time, all clients should have known the service instance is gone and won’t send any new requests to it.
 
 
 ### TLS Hostname Verification
 
-For testing, we can disable the hostname verification on the [client][] for the certificate; however, it is recommended that on production, hostname verification should be turned on to eliminate man-in-the-middle attacks. If possible, the two-way TLS should be enabled on both client.yml and server.yml to maximize the security. For more information on the verifyHostname setup, plese visit [client][] module.
+For testing, we can disable the hostname verification on the [client][] for the certificate; however, it is recommended that during production, hostname verification should be turned on to eliminate man-in-the-middle attacks. If possible, the two-way TLS should be enabled on both client.yml and server.yml to maximize the security. For more information on the verifyHostname setup, please visit the [client][] module.
 
 To get the certificates, you have two options:
 
@@ -344,9 +344,9 @@ When we set the enableRegistry flag to true in the server.yml to register the se
 
 It is the desired behaviour if we are using the global registry for service discovery. However, in the following scenario, we might want the server to start even if it is failed to register. 
 
-In a development environment and the Light-control is deployed as a standalone service without the cluster configuration backed by Kafka Streams. The registration is done on a best-effort basis. The purpose of the registry is to monitor the runtime instances with the health check. And to leverage the additional features like server info access and changing the logging level on an individual instance in a cloud environment. 
+In a development environment Light-control is deployed as a standalone service without the cluster configuration backed by Kafka Streams. The registration is done on a best-effort basis. The purpose of the registry is to monitor the runtime instances with the health check, and to leverage the additional features like server info access and changing the logging level on an individual instance in a cloud environment.
 
-If the enable registry is true, startOnRegistryFailure is true, and Light-controller is down. You will see the following message during the server startup to warn you that the global registry is down; however, the server is up and running. 
+If the enabled registry is true, startOnRegistryFailure is true, and Light-controller is down, you will see the following message during the server startup to warn you that the global registry is down; however, the server is up and running. 
 
 ```
 Failed to register service, start the server without registry.

@@ -1,5 +1,5 @@
 ---
-title: "Websocket with light platform"
+title: "Websocket with Light"
 date: 2017-12-20T21:21:31-05:00
 description: ""
 categories: []
@@ -12,9 +12,10 @@ weight: 05	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Light-4j is built on top of Undertow core, and it supports Websocket natively without going through Java EE stack. So the performance is much better than other servers in terms of throughput and latency. There are two examples in [light-example-4j][] to demo client-to-server and peer-to-peer WebSocket. 
+Light-4j is built on top of Undertow core and supports Websocket natively without going through Java EE stack. So the performance is much better than other servers in terms of throughput and latency. There are two examples in [light-example-4j][] to demo client-to-server and peer-to-peer WebSocket.
 
 Both projects have been upgraded to the light-4j 2.0.x with Java 11 support. To build and run them, run the following command lines. 
 

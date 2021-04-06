@@ -8,24 +8,25 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-API security is very crucial, and it is an essential part of the cross-cutting concerns provided by the light platform. For business API endpoints, we should use OAuth 2.0 JWT token to secure them. For some other functional endpoints that cannot be secured by OAuth 2.0, the Basic Authentication is an option. For example, one of the users is using Basic Authentication to security their API deployed on an IoT device. 
+API security is very crucial, and it is an essential part of the cross-cutting concerns provided by Light. For business API endpoints, we should use the OAuth 2.0 JWT token to secure them. For some other functional endpoints that cannot be secured by OAuth 2.0, Basic Authentication is an option. For example, one of the users is using Basic Authentication to secure their API deployed on an IoT device.
 
-In release 1.5.18, we have provided a new feature that allows multiple chains to be defined in a single API instance. Naturally, the /server/info and /health endpoints are separated from the business endpoints so that they can use different middleware handler chains. It has been asked by our customers for a long time to bypass the OAuth 2.0 security check for health check endpoint so that the orchestration layer can access it without providing a token. In most deployment, Consul is used for service registry, and discovery and the /health is periodically accessed from Consul to ensure the service is up and running. It is not very convenient to use JWT or even Basic Authentication in this use case. Since most Consul servers are deployed in physical machines or VMs with fixed IP addresses. It would be great if we can support the IP whitelist for the /health endpoint. After several hours of hard work, the ip-whitelist middleware handler is born. 
-
-### Requirement
+In release 1.5.18, we provided a new feature that allows multiple chains to be defined in a single API instance. Naturally, the /server/info and /health endpoints are separated from the business endpoints so that they can use different middleware handler chains. It has been asked by our customers for a long time to bypass the OAuth 2.0 security check for a health check endpoint so that the orchestration layer can access it without providing a token. In most deployments, Consul is used for service registry, and discovery and the /health is periodically accessed from Consul to ensure the service is up and running. It is not very convenient to use JWT or even Basic Authentication in this use case. Since most Consul servers are deployed in physical machines or VMs with fixed IP addresses. It would be great if we can support the IP whitelist for the /health endpoint. After several hours of hard work, the ip-whitelist middleware handler was born.
+ 
+### Requirements
 
 * The IP whitelist must be defined per endpoint which is the path and method combination. 
 * Both IPv4 and IPv6 should be supported. 
 * Need to support the different format of IP addresses. For example, exact, wildcard, slash. 
-* User can specify if access is allowed for the endpoints without IP whitelist defined. 
+* Users can specify if access is allowed for the endpoints without IP whitelist defined.
 
 ### Implementation
 
 The implementation is a middleware handler and it can be plugged into any API with whitelist.yml and handler.yml configuration files.
 
-Majority of the logic is in the WhitelistConfig class which is responsible for loading the configuration and parse the rules into an object that can be leveraged during the runtime. 
+The majority of the logic is in the WhitelistConfig class which is responsible for loading the configuration and parsing the rules into an object that can be leveraged during the runtime.
 
 Since we are supporting both IPv4 and IPv6, the address must be parsed with a pattern to differentiate the format. When checking the ACLs in the handler, both IPv4 rules and IPv6 rules will be iterated. 
 

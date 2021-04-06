@@ -8,12 +8,10 @@ weight: 20
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is a post endpoint to get JSON web tokens. Currently, it support three different
-grant types: authorization_code, client_credentials and password. It issues subject
-token to identify the original human caller, access token for the client and refresh
-token if needed. It also support token exchange and token chaining for maximum security.
+This is a post endpoint to get JSON web tokens. Currently, it supports three different grant types: authorization_code, client_credentials and password. It issues subject token to identify the original human caller, access token for the client and refresh token if needed. It also supports token exchange and token chaining for maximum security.
 
 In this implementation, we only support JSON Web Token as Simple Web Token is not scaling
 very well. In a microservices architecture, the tokens must be verified at each service
@@ -95,12 +93,7 @@ an error response.
 
 ### Resource Owner Password Credentials Grant Type
 
-The resource owner password credentials grant type is suitable in cases where 
-the resource owner has a trust relationship with the client, such as the device 
-operating system or a highly privileged application. The authorization server 
-should take special care when enabling this grant type and only allow it when 
-other flows are not viable. In this implementation, only client registered as
-trusted can use password grant type. 
+The resource owner password credentials grant type is suitable in cases where the resource owner has a trust relationship with the client, such as the device operating system or a highly privileged application. The authorization server should take special care when enabling this grant type and only allow it when other flows are not viable. In this implementation, only clients registered as trusted can use password grant type.
 
 This grant type is suitable for clients capable of obtaining the resource owner's 
 credentials (username and password, typically using an interactive form).  It is 
@@ -182,12 +175,7 @@ If valid and authorized, the authorization server issues an access token. If the
 request failed verification or is invalid, the authorization server returns an error
 response.
 
-The authorization server issues a new refresh token and the client MUST discard the 
-old refresh token and replace it with the new refresh token. The authorization server 
-revoke the old refresh token after issuing a new refresh token to the client. The new 
-refresh token scope MUST be identical to that of the refresh token included by the 
-client in the request.
-   
+The authorization server issues a new refresh token and the client MUST discard the old refresh token and replace it with the new refresh token. The authorization server revokes the old refresh token after issuing a new refresh token to the client. The new refresh token scope MUST be identical to that of the refresh token included by the client in the request.
    
 ### Implementation
 
@@ -294,9 +282,7 @@ other grant_type is passed in, the following error will be returned.
   }
 ```
 
-* When this endpoint is called, the client_id and client_secret must be base64 encoded and put
-into Authorization header. If there is no Authorization header available in the request, the
-following error will be returned.
+* When this endpoint is called, the client_id and client_secret must be base64 encoded and put into the Authorization header. If there is no Authorization header available in the request, the following error will be returned.
 
 ```
   "ERR11017": {
@@ -319,9 +305,7 @@ the client cache in memory. If client_id doesn't exist, the following error will
   }
 ```
 
-* The encoded client_id:client_secret combination will be decoded and then client secret will
-be checked with hashed and salted in memory client secret to make sure it is correct. If the
-client secret is not correct, the following error will be returned.
+* The encoded client_id:client_secret combination will be decoded and then the client secret will be checked with hashed and salted in memory client secret to make sure it is correct. If the client secret is not correct, the following error will be returned.
 
 ```
   "ERR12007": {

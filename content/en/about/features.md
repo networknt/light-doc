@@ -13,14 +13,15 @@ sections_weight: 2
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ## General
 
 * [Extremely fast][] Up to 3 million requests per second on commodity hardware
-* Support or encourage [design first][] and [test driven][] development
-* [Easy to deploy][] Support all platforms with JDK 8(branch 1.5.x and 1.6.x) and JDK 11 (branch master and 2.0.x) installed or Docker containers
-* [Powerful plugins][] Allow users to choose built-in plugins or customized plugins
+* Supports or encourages [design first][] and [test driven][] development
+* [Easy to deploy][] Supports all platforms with JDK 8(branch 1.5.x and 1.6.x) and JDK 11 (branch master and 2.0.x) installed or Docker containers
+* [Powerful plugins][] Allows users to choose built-in plugins or customized plugins
 
 See what's coming next in the [roadmap][].
 

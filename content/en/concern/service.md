@@ -10,9 +10,9 @@ draft: false
 reviewed: true
 ---
 
-### Why do we re-invent the wheel 
+### Why we reinvent the wheel 
 
-While building a light-weight microservices platform, we need an IoC service to bind implementations to interfaces. Given light-4j has server startup and shutdown hooks, we usually only need to inject during the server startup with constructor injection only. 
+While building a lightweight microservices platform, we need an IoC service to bind implementations to interfaces. Given light-4j has server startup and shutdown hooks, we usually only need to inject with a constructor injection during the server startup.
 
 We have evaluated several IoC containers and found them to be too heavy for my use cases. Also, most of them are still using XML as configuration or annotations which eliminate the benefit of configurable IoC.
 
@@ -30,11 +30,11 @@ https://advancedweb.hu/2018/03/06/dependency-injection-boundaries/
 
 ### Features of Singleton Service Factory
 
-Given above reasons, We have built our own IoC service module which is a light-weight and fast dependency injection framework without any third party dependencies. It only supports constructor inject, and the injection is done during server startup. All the objects are saved into a map, and the key is the interface class name. It can guarantee that only one instance of implementation is available during runtime. 
+Given the above reasons, we have built our own IoC service module which is a lightweight and fast dependency injection framework without any third party dependencies. It only supports constructor inject, and the injection is done during server startup. All the objects are saved into a map, and the key is the interface class name. It can guarantee that only one instance of implementation is available during runtime.
 
-The Light Platform encourages developers to build microservices with Functional Programming Style. One of the fundamental principles is immutability so that the code can be optimized to take advantage of multi-core CPUs. All singleton classes should be designed as immutable and the initialized object will be cached in the service map ready to be looked up. 
+Light encourages developers to build microservices with the Functional Programming Style. One of the fundamental principles is immutability so that the code can be optimized to take advantage of multi-core CPUs. All singleton classes should be designed as immutable, and the initialized object will be cached in the service map ready to be looked up.
 
-Unlike other IoC container, our service module only deals with singleton during server startup with constructor injection. It gives developers an opportunity to choose from several implementations of an interface in the service.yml config file.
+Unlike other IoC containers, our service module only deals with singletons during server startup with constructor injection. It gives developers an opportunity to choose from several implementations of an interface in the service.yml config file.
 
 For example, if you have an interface with two different implementations, you can change the externalized service.yml file on production to switch between two implementations.
 

@@ -7,11 +7,11 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-This module contains some useful classes that shared by multiple modules within
-the light-* frameworks.
+This module contains some useful classes that are shared by multiple modules within the light-* frameworks.
 
 # Constants
 

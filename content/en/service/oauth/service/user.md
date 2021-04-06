@@ -8,15 +8,12 @@ weight: 50
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is a service for user registration and management. The OAuth server supports
-integration with other user management system like active directory or LDAP.
-However, for most enterprise customers, their customer information normally will
-be in database. This service provides a database table for user management and
-several endpoints to manage users. 
+This is a service for user registration and management. The OAuth server supports integration with other user management systems like active directory or LDAP. However, for most enterprise customers, their customer information normally will be in the database. This service provides a database table for user management and several endpoints to manage users.
 
-In OAuth 2.0 specification, user is normally called resource owner. 
+In OAuth 2.0 specification, a user is normally called the resource owner.
 
 ### User Type
 
@@ -270,10 +267,9 @@ definitions:
 
 ### /oauth2/password/{userId}@post
 
-This endpoint is used to reset user password. The user has to provide existing password,
-the new password and password confirmation in order to reset it.
+This endpoint is used to reset user passwords. The user has to provide the existing password, the new password and password confirmation in order to reset it.
 
-There are several validations need to be performed before the password can be reset.
+There are several validations that need to be performed before the password can be reset.
 
 * If userId cannot be found in the user cache, then the following error will be returned.
 
@@ -297,8 +293,7 @@ There are several validations need to be performed before the password can be re
   }
 ```
 
-* If new password and password confirmation are not matched, then the following error
-will be returned.
+* If the new password and password confirmation are not matched, then the following error will be returned.
 
 ```
   "ERR12012": {

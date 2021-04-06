@@ -12,7 +12,7 @@ reviewed: true
 
 ### Introduction
 
-Body parser is a middleware handler designed for [light-rest-4j][]only. It will parse the body to a list or map according to the content-type in the HTTP header for POST, PUT and PATCH HTTP methods. The content-type can be parsed includes "application/json", "text/plain", "multipart/form-data" and "application/x-www-form-urlencoded". The "application/json" type is parsed into a list or map depending on the first character of the body. The "text/plain" will be parsed into a String object. The multipart/form-data" and "application/x-www-form-urlencoded" will be parsed to a map of fields. Other content-types will be handled as an input stream, including content-type is missing from the HTTP header. 
+Body parser is a middleware handler designed for [light-rest-4j][] only. It will parse the body to a list or map according to the content-type in the HTTP header for POST, PUT and PATCH HTTP methods. The content-type that can be parsed includes “application/json”, “text/plain”, “multipart/form-data'' and “application/x-www-form-urlencoded”. The “application/json” type is parsed into a list or map depending on the first character of the body. The “text/plain” will be parsed into a String object. The multipart/form-data'' and “application/x-www-form-urlencoded” will be parsed to a map of fields. Other content-types will be handled as an input stream, including content-type which is missing from the HTTP header.
 
 After the body is parsed, it will be attached to the exchange so that subsequent handlers can use it directly from the exchange attachment.
 
@@ -20,7 +20,7 @@ After the body is parsed, it will be attached to the exchange so that subsequent
 
 ### Configuration
 
-Here is an example of configuration body.yml which has a flag to enable or disable it.
+Here is a code example that receives the body object (Map or List) from the exchange.
 
 ```
 # Enable body parse flag

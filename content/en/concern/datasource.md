@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-Most services have to persist data into a database. Although No-SQL databases are getting popular these days, relational databases are still used by most enterprise customers. We used to create datasource instance from service.yml automatically just like the below configuration. 
+Most services have to persist data into a database. Although No-SQL databases are getting popular these days, relational databases are still used by most enterprise customers. We used to create a datasource instance from service.yml automatically just like the below configuration. 
 
 ```
 - javax.sql.DataSource:
@@ -192,7 +192,7 @@ sqlServerPassword: StrongPassw0rd
 oraclePassword: oracle
 ```
 
-From release 1.6.0, light-4j handler encrypt/decrypt  in every config file, user can define encrypted password in the datasource.yml directly with datasource definition:
+From release 1.6.0, light-4j handler encrypts/decryps in every config file, and so the user can define the encrypted password in the datasource.yml directly with the datasource definition:
 
 ```
 SqlServerDataSource:
@@ -205,8 +205,7 @@ SqlServerDataSource:
 
 ```
 
-System will check the if there is password field defined in the datasource or not (use field name 'password'). If there is not 'password' define, system will check the secret.yml.
-
+The system will check if there is a password field defined in the datasource or not (use field name ‘password’). If there is no ‘password’ defined, the system will check the secret.yml.
 
 The mapping can be found in the service.yml file so that each datasource instance can be loaded from SingletonServiceFactory. 
 
@@ -250,7 +249,7 @@ singletons:
 
 ```
 
-To define multiple datasources with same database type, user can define multiple datasources with different dsname:
+To define multiple datasources with the same database type, the user can define multiple datasources with different dsname:
 
 datasource.yml
 
@@ -283,7 +282,7 @@ Define the mapping in the service.yml:
 
 ```
 
-And then in the application code, user can get the datasource list with defined in the service.yml:
+And then in the application code, the user can get the datasource list with defined in the service.yml:
 
 ```
 

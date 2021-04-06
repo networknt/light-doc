@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the light platform, we are using OAuth 2.0 to authorize the client request to the service with JWT token that contains two different claims. 
+In Light, we are using OAuth 2.0 to authorize the client request to the service with JWT token that contains two different claims. 
 
 ### Scopes
 

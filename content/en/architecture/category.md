@@ -12,12 +12,10 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When an organization pursues microservices, the services/APIs can be grouped
-into the following categories. For each category, certain microservice style
-is more suitable than others. There are several ways to categorize APIs, and
-here we differentiate APIs by visibility. 
+When an organization pursues microservices, the services/APIs can be grouped into the following categories. For each category, certain microservice styles are more suitable than others. There are several ways to categorize APIs, and here we differentiate APIs by visibility
 
 ## Open Web APIs
 
@@ -28,36 +26,17 @@ way, they can extend their business and reach more customers than before.
 
 #### Rest
 
-When building public APIs, it seems RESTful is a natural choice as it is well known 
-by almost every developer and support almost every language. It is the most mature
-technology and has support from a lot of commercial infrastructure and tools.
+When building public APIs, it seems RESTful is a natural choice as it is well known by almost every developer and supports almost every language. It is the most mature technology and has support from a lot of commercial infrastructure and tools.
 
-[light-rest-4j][] is designed to build microservices in RESTful style on top of 
-OpenAPI specification with most cross-cutting concerns addressed and allowed developers 
-to focus on the domain business logic only. 
+[light-rest-4j][] is designed to build microservices in RESTful style on top of OpenAPI specification with most cross-cutting concerns addressed and allowed developers to focus on the domain business logic only.
 
-The drawback for RESTful interaction style is its complexity in the specification and
-less efficient in communication. With today's smart browser with Single Page 
-Application and mobile device, REST forces the client to convert the data model
-into URI and send through the HTTP connection to the server with all type information
-lost. The server has to transform the URI into data model with the help of Swagger
-specification. The response reverses the same process. That is the reason Swagger
-specification is so complicated and very hard to write compare with other IDLs.  
+The drawback for RESTful interaction style is its complexity in the specification and its low efficiency in communication. With today’s smart browser with Single Page Application and mobile devices, REST forces the client to convert the data model into URI and send it through the HTTP connection to the server with all type information lost. The server has to transform the URI into a data model with the help of Swagger specification. The response reverses the same process. That is the reason Swagger specification is so complicated and very hard to write compared with other IDLs. 
 
 #### GraphQL
 
-Since Facebook open-sourced GraphQL, it is getting popular in the open source community
-very fast, and some companies start to adopt it to replace RESTful APIs for public
-APIs. Github.com is one of the examples as they are moving to GraphQL from Restful.
+Since Facebook open-sourced GraphQL, it is quickly getting popular in the open source community, and some companies start to adopt it to replace RESTful APIs with public APIs. Github.com is one of the examples as they are moving to GraphQL from Restful.
 
-[light-graphql-4j][] is designed to build GraphQL API with GraphQL IDL(Interface 
-Definition Language). Developers just need to wire in the domain logic into the 
-generated graphql schema class to make the API works. Sometimes, GraphQL APIs can be 
-used as an aggregate API in front of several RESTful or Hybrid APIs to serve 
-different consumers like Web Server, Native Mobile and Single Page Application 
-on Browser.
-
- 
+[light-graphql-4j][] is designed to build GraphQL API with GraphQL IDL(Interface Definition Language). Developers just need to wire the domain logic to the generated graphql schema class to make the API work. Sometimes, GraphQL APIs can be used as an aggregate API in front of several RESTful or Hybrid APIs to serve different consumers like Web Server, Native Mobile and Single Page Application on Browse
 
 ## B2B APIs
 
@@ -68,7 +47,7 @@ to the close relationship.
 
 #### Rest
 
-Rest is very popular with this type of APIs.
+Rest is very popular with these types of APIs.
 
 #### GraphQL
 
@@ -109,26 +88,11 @@ recommended. In fact, all services built in light-portal are based on the hybrid
 
 #### Eventuate
 
-Above three microservices frameworks are all designed for request/response type of
-interaction between consumers and services. In another word, the interaction style
-is synchronous and it would scale to a certain point once volume increases. In a data 
-rich environment, it has its drawbacks in dealing with transactions. The distributed
-transaction is not the answer in the microservices world. Ultimately, each service should 
-have its own database. So no shared database is allowed. In this case, the eventual 
-consistency microservices framework is needed to glue all services together to allow 
-data synch between them.
+The above three microservices frameworks are all designed for request/response type of interactions between consumers and services. In another word, the interaction style is synchronous and it would scale to a certain point once volume increases. In a data rich environment, it has its drawbacks in dealing with transactions. The distributed transaction is not the answer in the microservices world. Ultimately, each service should have its own database. So no shared database is allowed. In this case, the eventual consistency microservices framework is needed to glue all services together to allow data synch between them.
 
-[light-eventuate-4j][] is designed to build microservices based on messaging, Event 
-Sourcing and CQRS on top of Kafka. The interaction style is asynchronous which is based
-on domain events and ensures data consistency eventually. Combining with [light-saga-4j][],
-it can handle distributed transactions between multiple services. 
+[light-eventuate-4j][] is designed to build microservices based on messaging, Event Sourcing and CQRS on top of Kafka. The interaction style is asynchronous which is based on domain events and ensures eventual data consistency. Combined with [light-saga-4j][], it can handle distributed transactions between multiple services.
 
-Light-Eventuate-4j is a [service mesh][] that is deployed in an organization
-as infrastructure service to support microservices. All services still need to be built
-with light-rest-4j, light-graphql-4j or light-hybrid-4j to serve consumers but underline
-communication between services is done through light-eventuate-4j and transaction orchestration
-is done by light-saga-4j. 
-
+Light-Eventuate-4j is a [service mesh][] that is deployed in an organization as an infrastructure service to support microservices. All services still need to be built with light-rest-4j, light-graphql-4j or light-hybrid-4j to serve consumers but underlying communication between services is done through light-eventuate-4j and transaction orchestration is done by light-saga-4j.
 
 ## Product APIs
 

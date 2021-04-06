@@ -12,19 +12,16 @@ weight: 30
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Light-4J is packaged as a fatjar and normally will be running in docker container
-on production; however, it can be executed on Windows or Linux host machine or VM
-with the following command.
+Light-4J is packaged as a fatjar, and normally would be running in the docker container during production; however, it can be executed on a Windows or Linux host machine or VM with the following command.
 
 ```
 java -jar filename.jar
 ```
 
-For production deployment, you want to make sure that when you host server/VM
-is restarted, the application will be restarted automatically. 
-
+For production deployment, you want to make sure that when your host server/VM is restarted, the application will be restarted automatically.
 
 The following describes step-by-step how you can create a Windows service for your 
 Light-4J application or any Java application that can be packaged in a fatjar.

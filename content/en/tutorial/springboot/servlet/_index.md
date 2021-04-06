@@ -17,7 +17,7 @@ draft: false
 
 In this tutorial, we are going to generate a typical Spring Boot application from https://start.spring.io/ and modify it to inject light-4j middleware handlers. The final application can be found at https://github.com/networknt/light-example-4j/tree/master/springboot/servlet
 
-Light-4j encourages design driven approach and it load the specification during the runtime to validate the reqeust and verify the JWT token scopes based on the specification. For this example application, the specification can be found at https://github.com/networknt/model-config/blob/master/rest/springboot/servlet/openapi.yaml
+Light-4j encourages a design driven approach and it loads the specification during the runtime to validate the request and verify the JWT token scopes based on the specification. For this example application, the specification can be found at https://github.com/networknt/model-config/blob/master/rest/springboot/servlet/openapi.yaml
 
 ### Generate Project
 
@@ -121,7 +121,7 @@ The source folder is located at https://github.com/networknt/light-example-4j/tr
 
 ### Update Specification
 
-As the config files are copied from the OpenAPI 3.0 petstore application, it contains all the endpoints to list pets, get a pet by Id, create a pet and delete a pet. We are going to update the specification a little bit to duplicate the endpoints so that we can implement them with both Spring Boot controllers and light-4j handlers.
+As the config files are copied from the OpenAPI 3.0 petstore application, it contains all the endpoints to list pets, gets a pet by Id, creates a pet and deletes a pet. We are going to update the specification a little bit to duplicate the endpoints so that we can implement them with both Spring Boot controllers and light-4j handlers.
 
 Here is the updated specification. It is named openapi.json and located in the config folder.
 
@@ -625,7 +625,7 @@ Also, the light-4j endpoint has a final business handler and Spring Boot endpoin
 
 ### Copy the light-4j handlers
 
-As we have wired in the petstore handlers in the handler.yml file, we need to copy these classes to this project from petstore project. The source folder are located at https://github.com/networknt/light-example-4j/tree/master/rest/openapi/petstore/src/main/java/com/networknt/petstore/handler
+As we have wired in the petstore handlers in the handler.yml file, we need to copy these classes to this project from the petstore project. The source folder is located at https://github.com/networknt/light-example-4j/tree/master/rest/openapi/petstore/src/main/java/com/networknt/petstore/handler
 
 When copying these files, we need to make sure that the package name is the same com.networknt.petstore.handler
 
@@ -633,7 +633,7 @@ These handlers are generated from the light-codegen based on the examples define
 
 ### Spring Boot Controllers
 
-Now, let's implement the Spring Boot controllers. We can create a single controller, but for demo purpose, we are going to create three controllers for the four endpoints. 
+Now, let’s implement the Spring Boot controllers. We can create a single controller, but for demo purposes, we are going to create three controllers for the four endpoints.
 
 ListPetsController.java
 

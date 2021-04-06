@@ -12,12 +12,10 @@ weight: 1
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Tutorials give developers step by step guidance on how to use each component or framework. As light
-platform is an ecosystem to deliver enterprise scale microservices, there are a lot of middleware
-handlers, frameworks, infrastructure services and tools need to be covered with tutorials. In this
-section, some of the most important tutorials are listed here and more will be added into the list. 
+Tutorials give developers step by step guidance on how to use each component or framework. As Light is an ecosystem that delivers enterprise scale microservices, there are a lot of middleware handlers, frameworks, infrastructure services and tools that need to be covered with tutorials. In this section, some of the most important tutorials are listed and more will be added to the list.
 
 
 ### Cross-Cutting Concerns
