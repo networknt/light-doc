@@ -1,5 +1,5 @@
 ---
-title: "Callback Consumer"
+title: "Reactive Consumer"
 date: 2021-03-26T10:59:04-04:00
 description: ""
 categories: []
@@ -10,18 +10,18 @@ draft: false
 reviewed: true
 ---
 
-The callback consumer is similar to the Kafka Streams. The backend API/APP exposes an API endpoint to receive data once the sidecar detects messages in the Kafka topic(s). 
+The reactive consumer is similar to the Kafka Streams. The backend API/APP exposes an API endpoint to receive data once the sidecar detects new messages in the Kafka topic(s). 
 
 ### Configuration
 
-The config file kafka-consumer.yml is shared by both the active consumer and the callback consumer. But there are several properties only for the callback consumer. 
+The config file kafka-consumer.yml is shared by both the active consumer and the reactive consumer. But there are several properties only for the reactive consumer. 
 
 ```
-# Callback Consumer Specific Configuration
-# The topic that is going to be consumed. For callback consumer only in the kafka-sidecar.
+# Reactive Consumer Specific Configuration
+# The topic that is going to be consumed. For reactive consumer only in the kafka-sidecar.
 # If two or more topics are going to be subscribed, concat them with comma without space.
 topic: test1,test2
-# The default consumer group. For callback consumer only in the kafka-sidecar.
+# The default consumer group. For reactive consumer only in the kafka-sidecar.
 groupId: group1
 # Waiting period in millisecond to poll another batch
 waitPeriod: 1000
@@ -97,6 +97,9 @@ components:
 
 ```
 
+The path of the endpoing is configurable on the kafka-sidecar, so you can customize the endpoint for your backend API implementation. 
+
+
 ### Backend API Implementation
 
 
@@ -140,6 +143,15 @@ public class KafkaRecordsPostHandler implements LightHttpHandler {
 ```
 
 The example application can be found on the Github.com in /networknt/light-example-4j/kafka/sidecar-backend/
+
+### Test Within IDE
+
+
+### Test with Docker
+
+
+### Test in Kubernetes
+
 
 
 

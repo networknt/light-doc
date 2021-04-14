@@ -52,13 +52,39 @@ reviewed: true
     ProduceRequest:
       type: object
       properties:
+        keyFormat:
+          type: integer
+          enum: [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
         keySchema:
           type: string
         keySchemaId:
+          type: integer
+        keySchemaVersion:
+          type: integer
+        keySchemaSubject:
           type: string
+        valueFormat:
+          type: integer
+          enum: [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
         valueSchema:
           type: string
         valueSchemaId:
+          type: integer
+        valueSchemaVersion:
+          type: integer
+        valueSchemaSubject:
           type: string
         records:
           type: array
@@ -72,10 +98,99 @@ reviewed: true
 
 The above section is extracted from the openapi.yaml for the producer endpoint. It is a post request with the topic as a path parameter.  The request body contains the key schemaId or raw schema and value schemaId or raw schema as optional fields. If schema info is missing from the request body, the producer will use the latest version of the schema defined for the topic key and value. A list of records is mandatory for the producer. 
 
+### Configuration
+
+The kafka-producer.yml is the configuration file for the producer in Kafka sidecar. The following is an example. 
+
+```
+---
+# Generic configuration for Kafka producer.
+properties:
+  key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+  value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+  acks: ${kafka-producer.acks:all}
+  bootstrap.servers: localhost:9092
+  buffer.memory: 33554432
+  retries: ${kafka-producer.retries:3}
+  batch.size: 16384
+  linger.ms: 1
+  max.in.flight.requests.per.connection: ${kafka-producer.max.in.flight.requests.per.connection:5}
+  enable.idempotence: ${kafka-producer.enable.idempotence:false}
+  # security configuration for enterprises
+  # security.protocol: SASL_SSL
+  # sasl.mechanism: PLAIN
+  # sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"username\" password=\"password\";"
+  # ssl.endpoint.identification.algorithm: ""
+  # client.rack:
+
+# The default topic for the producer. Only certain producer implementation will use it.
+topic: portal-event
+# if open tracing is enable. traceability, correlation and metrics should not be in the chain if opentracing is used.
+injectOpenTracing: ${client.injectOpenTracing:false}
+# inject serviceId as callerId into the http header for metrics to collect the caller. The serviceId is from server.yml
+injectCallerId: ${client.injectCallerId:false}
+# schema registry url
+schemaRegistryUrl: http://localhost:8081
+# schema registry identity cache size
+schemaRegistryCache: 100
+
+```
+
+There are several errors that might happen with the wrong configuration of the kafka-producer.yml. 
+
+* Cluster authorization failed
+
+This might be due to the idempotent enabled and the permission is not enabled. Set the enable.idempotence: false will resolve the problem. 
+
+* Messages are rejected since there are fewer in-sync replicas than required
+
+This might due to the acks: all in the config file with the topic only has one partition. Change the configuration to acks: '1' will resolve the problem.
+
+
+We also need to update the service.yml to enable producer startup and shutdown hooks. 
+
+```
+- com.networknt.server.StartupHookProvider:
+  - com.networknt.mesh.kafka.ProducerStartupHook
+  # - com.networknt.mesh.kafka.ConsumerStartupHook
+  # - com.networknt.mesh.kafka.KsqldbConsumerStartupHook
+  - com.networknt.mesh.kafka.ReactiveConsumerStartupHook
+# ShutdownHookProvider implementations, there are one to many and they are called in the same sequence defined.
+- com.networknt.server.ShutdownHookProvider:
+  - com.networknt.mesh.kafka.ProducerShutdownHook
+  # - com.networknt.mesh.kafka.ConsumerShutdownHook
+  # - com.networknt.mesh.kafka.KsqldbConsumerShutdownHook
+  - com.networknt.mesh.kafka.ReactiveConsumerShutdownHook
+- com.networknt.kafka.producer.NativeLightProducer:
+  - com.networknt.kafka.producer.SidecarProducer
+
+```
+
+### Certificate
+
+When SSL/TLS is enabled for the Kafka servers, we need to get the certificate and import to the cacerts file under your jdk folder. 
+
+```
+cd jdk-home/lib/security
+keytool -import alias kafka -keystore cacerts -file yourcert.cer
+```
 
 ### Format
 
-We can produce the message to a Kafka topic with three different formats for schema validation and serialization. 
+We can produce the message to a Kafka topic with five different formats for schema validation and serialization. 
+
+From the schema above, you can see that the keyFormat and valueFormat are integers. There is a Java Enum that you can use in the programming if your API is in Java. Otherwise, here is the mapping. 
+
+0 -> binary
+1 -> json
+2 -> avro
+3 -> jsonschema
+4 -> protobuf
+
+
+##### binary
+
+
 
 ##### jsonschema
 

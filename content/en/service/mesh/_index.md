@@ -15,11 +15,11 @@ draft: false
 reviewed: true
 ---
 
-Several sidecars in the light-mesh project can be used as a sidecar container in a Kubernetes pod along with your API built with any frameworks or languages to address cross-cutting concerns. With most of the cross-cutting concerns addressed, your developers can focus on the business logic only. 
+Several sidecars in the light-mesh project can be used as a sidecar container in a Kubernetes pod along with your API built with any frameworks or languages to address cross-cutting concerns. With most of the cross-cutting concerns addressed, your developers can focus on the business logic only in the backend API. 
 
 * [Light-Proxy](/service/proxy/)
 
-The light-proxy can be used as a sidecar to address cross-cutting concerns for APIs built with any framework and language.
+The light-proxy can be used as a sidecar to address cross-cutting concerns for APIs built with any framework and language. 
 
 
 * [Kafka-Sidecar](/service/mesh/kafka/)
