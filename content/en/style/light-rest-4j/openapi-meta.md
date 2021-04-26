@@ -30,7 +30,7 @@ To match the incoming request path to the paths defined in the OpenAPI specifica
 
 ### OpenApiHandler
 
-This is an HttpHandler to parse the OpenAPI spec based on the request path and method and attach an OpenApiOperation object to the exchange. The openapi-security and openapi-validator modules use it to do their jobs without parsing the openapi.yaml or openapi.json a second time.
+This is an HttpHandler to parse the OpenAPI specification based on the request path and method and attach an OpenApiOperation object to the exchange. The openapi-security and openapi-validator modules use it to do their jobs without parsing the openapi.yaml or openapi.json a second time.
 
 [light-rest-4j]: https://github.com/networknt/light-rest-4j
 [openapi-security]: /style/light-rest-4j/openapi-security/
