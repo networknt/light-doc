@@ -62,10 +62,10 @@ One of the main goals for the Kafka sidecar is to address [cross-cutting concern
 
 * HTTP Request validation with OpenAPI 3.0 specification and schema validation and serialization with Confluent schema registry. 
 * Propagate light-4j correlationId/traceabilityId or open tracing tracerId to the downstream service through Kafka record headers. 
-* Inject correlationId/traceabilityId/tracerId to the MDC for logging statements and update logging level for sidcar packages from the control pane during runtime.
+* Inject correlationId/traceabilityId/tracerId to the MDC for logging statements and update logging level for sidecar packages from the control pane during runtime.
 * Metrics collection on both client and service perspectives and integration with InfluxDB or enterprise metrics tools.
 * The sidecar connects to the Kafka with authentication and authorization over TLS and only allow the connection from the same pod with localhost for HTTP requests.
-* Sidecar auditing activities are sent to a Kafka topic throught the producer and subsequently can be streams to a database for query with Confluent connect.
+* Sidecar auditing activities are sent to a Kafka topic through the producer and subsequently can be streams to a database for query with Confluent connect.
 
 [Kafka Active Consumer]: /service/mesh/kafka/active-consumer/
 [Kafka Reactive Consumer]: /service/mesh/kafka/reactive-consumer/
