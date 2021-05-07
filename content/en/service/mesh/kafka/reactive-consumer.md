@@ -35,6 +35,7 @@ As the sidecar will invoke an API to the backend API once the data is available,
 
 ```
 ---
+---
 openapi: "3.0.0"
 info:
   version: "1.0.0"
@@ -82,13 +83,9 @@ components:
         topic:
           type: "string"
         key:
-          oneOf:
-            - $ref: "#/components/schemas/StringKey"
-            - $ref: "#/components/schemas/ObjectKey"
+          type: "string"
         value:
-          oneOf:
-            - $ref: "#/components/schemas/StringValue"
-            - $ref: "#/components/schemas/ObjectValue"
+          type: "string"
         header:
           type: "object"
         partition:
@@ -97,14 +94,7 @@ components:
         offset:
           type: "number"
           minimum: 0
-    StringKey:
-      type: "string"
-    ObjectKey:
-      type: "object"
-    StringValue:
-      type: "string"
-    ObjectValue:
-      type: "object"
+
 ```
 
 The path of the endpoing is configurable on the kafka-sidecar, so you can customize the endpoint for your backend API implementation. 

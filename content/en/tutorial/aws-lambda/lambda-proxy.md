@@ -64,7 +64,7 @@ java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f openapilambda -o l
 
 ### petstore-proxy
 
-Watch the video for the project walkthrough.
+Watch the video for the project walthrough.
 
 {{< youtube CSkAJhnTxzo >}}
 
