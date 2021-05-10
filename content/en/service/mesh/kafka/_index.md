@@ -66,6 +66,8 @@ One of the main goals for the Kafka sidecar is to address [cross-cutting concern
 * Metrics collection on both client and service perspectives and integration with InfluxDB or enterprise metrics tools.
 * The sidecar connects to the Kafka with authentication and authorization over TLS and only allow the connection from the same pod with localhost for HTTP requests.
 * Sidecar auditing activities are sent to a Kafka topic through the producer and subsequently can be streams to a database for query with Confluent connect.
+* Dead letter queue to handle the situation that the backend API cannot process the corrupted record successfully due to runtime exceptions. The problematic records will be pushed to a dead letter topic for future processing once the backend API is fixed and redeployed. 
+
 
 [Kafka Active Consumer]: /service/mesh/kafka/active-consumer/
 [Kafka Reactive Consumer]: /service/mesh/kafka/reactive-consumer/
