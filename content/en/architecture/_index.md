@@ -35,7 +35,7 @@ Here is a list of architecture decisions for the platform:
 
 * Can be [integrated][] with existing applications to protect investment over the years for your organization.
 
-* Support client-side discovery without any [gateway][] and proxy between service to service calls as they add too much overhead. 
+* Support [client-side discovery][] without any [gateway][] and proxy between service to service calls as they add too much overhead. 
 
 * Service logs will be aggregated with ElasticSearch, LogStash and Kibana with [monitoring and alerting][].
 
@@ -68,5 +68,6 @@ Here is a list of architecture decisions for the platform:
 [Elements]: /architecture/platform/
 [category]: /architecture/category/
 [service mesh]: /architecture/service-mesh/
+[client-side discovery]: /architecture/client-discovery/
 [Firewall is killed by Cloud]: /architecture/firewall/
 [coarse-grained authorization with scopes and fine-grained authorization with custom claims]: /architecture/cga-fga/

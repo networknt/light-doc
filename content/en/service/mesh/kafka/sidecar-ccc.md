@@ -10,6 +10,9 @@ draft: false
 reviewed: true
 ---
 
+The Kafka Sidecar is built with light-4j and light-rest-4j, so all the common cross-cutting concerns of [light-4j](/concern/) and [light-rest-4j](/style/light-rest-4j/) can be enabled with configuration. The cross-cutting concerns below are specific for the Kafka Sidecar only.
+
+
 ### Dead Letter
 
 There are two situations we will use the dead letter topic. One is on the sidecar with the reactive consumer, and the other is on the backend API with the active consumer. 
@@ -47,11 +50,20 @@ With an active consumer, the backend API has the control on when to load the rec
 
 When the dead letter message is rewritten to the dead letter topic, the original message that the sidecar sent to the backend API is recorded; when we replay the dead letter messages, we don't need to retrieve it from the original topic. Sometimes, the original topic retention.ms is not long enough. The original message might be gone already when we replay the dead letter message. It is why we keep the original message in the dead letter topic for replay instead of referring to the original topic. 
 
+Each backend API will have a separate dead letter topic that is named with the original topic + an ext that is defined in the kafka-consumer.yml file. For each onboarding consumer, we need to create a dead letter topic for it. And it will put the ext into the config file to construct the dead letter topic name in the sidecar. By setting up each backend API a separated dead letter topic, we can avoid putting the consumer group to the dead letter message. Also, we don't need to maintain the replay state in a separate state topic to manage the offset for each backend API. 
+
+```
+# The extension of the dead letter queue(topic) that is added to the original topic to form the dead letter topic
+deadLetterTopicExt: ${kafka-consumer.deadLetterTopicExt:.dl1}
+```
+
 The replay will be an endpoint exposed on the sidecar, and it can be accessed from the Control Pane like other admin endpoints. The replay will always start from the offset 0; however, the user can choose the last offset to replay. If there is no last offset specified in the request, it will replay all messages in the dead letter topic. 
 
 Some dead letter messages still cannot be handled during the replay process, and they will be pushed to the dead letter topic again. The replay process won't process the newly produced dead-letter messages as their offset is greater than the offset specified for the request. 
 
-Once the replay is completed, the sidecar will change the retention.ms to the last offset replayed + 1 ms to drop all the replayed messages.  
+When sidecar replays the dead letter messages for its specific dead letter topic, it starts another separate consumer group. The Kafka consumer group will manage the offset to avoid repeatedly replaying the same message. The offset will be advanced for each replay process, and the next replay will always start from the last completed offset + 1. 
+
+
 
 Questions:
 
@@ -65,15 +77,31 @@ Questions:
 
 Audit on the sidecar is an important cross-cutting concerns that we need to address. Every records we send to the backend API and the response from the backend API should be persisted in a Kafka topic and potentially push to a SQL or No-SQL database for query and reporting. We can also use streams processing on the Control Pane to project the audit info to different dementions for query and report from the Control Pane. 
 
-On the producer side, we need to record all the success and failure records to the sidecar-audit topic through the sidecar as well. 
+On the producer side, we need to record all the success and failure records to the sidecar-audit topic through the sidecar as well. Due to threading issue, we cannot produce the audit entry to Kafka in the callback of the original message, we have to use a queue to save all the audit entries and send them after sending the original messages in batch. 
 
 
+To ensure the centralized processing in the future, we need to have only one audit topic across the entire organization. The data in the audit topic contains only the meta data instead of the original message value. 
 
-Question: 
+The retention.ms for the audit topic should be set based on the retention policy of the organization. 
 
-* What needs to go to the audit topic? The real records or just topic, partition, offset, key?
-* How long we need to keep these audit records? 
-* If we have the audit avaiable, do we still need to send the partition and offset to the backend API? 
+
+### Avro to Json Transformer
+
+When using the confluent Avro schema for producer serialization, a data type is wrapping up the data value in the JSON format. For example, the JSON format looks like this. 
+
+```
+count: {
+  "int": 0
+}
+```
+This format is hard for the consumer to convert the value to a POJO with Jackson ObjectMapper. To make the consumer side easier in a light-4j service or a backend API behind the light-mesh/kafka-sidecar, we want to convert the value to something like this. 
+
+```
+{count: 0}
+```
+In the kafka-consumer.yml, we have added a flag useNoWrappingAvro to control which converter to use. When no wrapping converter is used, the type will be removed. 
+
+This flag defaults to false in the kafka-consumer.yml, and you only need to set it to true if you are using a third-party producer with the default Confluent Avro serializer. When using the kafka-sidecar producer, the type wrapper is removed in the producer record serialization. 
 
 
 
