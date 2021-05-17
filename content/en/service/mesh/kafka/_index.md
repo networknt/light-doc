@@ -69,6 +69,803 @@ One of the main goals for the Kafka sidecar is to address [cross-cutting concern
 * Dead letter queue to handle the situation that the backend API cannot process the corrupted record successfully due to runtime exceptions. The problematic records will be pushed to a dead letter topic for future processing once the backend API is fixed and redeployed. 
 
 
+## Specification
+
+Here is the sidecar specification, and the latest version can be found [here](https://github.com/networknt/model-config/blob/master/rest/kafka-sidecar/openapi.yaml).
+
+```
+openapi: 3.0.0
+
+info:
+  title: Light Mesh Kafka Sidecar
+  version: 1.0.0
+  description: |-
+    # Kafka producer and consumer endpoints
+servers:
+  - url: https://kafka.networknt.com
+
+paths:
+  '/producers/{topic}':
+    post:
+      operationId: postData
+      summary: Post a list of users to Kafka
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          description: The kafka topic name
+          schema:
+            type: string
+      requestBody:
+        description: message data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProduceRequest'
+      responses:
+        '200':
+          description: Data successfully produced.
+        '400':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+
+  '/consumers/{group}':
+    post:
+      operationId: createConsumerInstanceInGroup
+      summary: Create a new consumer instance in the consumer group
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group
+          schema:
+            type: string
+      requestBody:
+        description: consumer instance request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConsumerInstanceRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConsumerInstanceResponse'
+        '400':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+  '/consumers/{group}/instances/{instance}':
+    delete:
+      operationId: deleteConsumerInstance
+      summary: Delete the consumer instance
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+  '/consumers/{group}/instances/{instance}/offsets':
+    post:
+      operationId: commmitConsumerOffsets
+      summary: Commit a list of offsets for the consumer
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      requestBody:
+        description: topic partition offset metadata
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerOffsetCommitRequest'
+      responses:
+        '200':
+          description: No Content
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+    put:
+      summary: Get the last committed offsets for the given partition
+      operationId: getCommittedOffsets
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      requestBody:
+        description: consumer committed request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerCommittedRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerCommittedResponse'
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+  '/consumers/{group}/instances/{instance}/subscriptions':
+    post:
+      operationId: subscribeTopics
+      summary: Subscribe to the given list of topics or a topic pattern to get dynamically assigned partitions.
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      requestBody:
+        description: consumer seek to request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerSubscriptionRecord'
+      responses:
+        '204':
+          description: Successful response
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+
+    get:
+      operationId: getSubscribedTopics
+      summary: Get the current subscribed list of topics
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsumerSubscriptionResponse'
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:r
+
+    delete:
+      operationId: unsubscribeTopics
+      summary: Unsubscribe from topics currently subscribed
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+
+
+  '/consumers/{group}/instances/{instance}/assignments':
+    post:
+      operationId: assignPartitions
+      summary: Manually assign a list of partitions to this consumer.
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      requestBody:
+        description: consumer seek to request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerAssignmentRequest'
+      responses:
+        '204':
+          description: Successful response
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+
+    get:
+      operationId: getAssignedPartitions
+      summary: Get the list of partitions currently manually assigned to this consumer
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsumerAssignmentResponse'
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:r
+
+
+  '/consumers/{group}/instances/{instance}/positions':
+    post:
+      operationId: overrideFetchOffset
+      summary: Overrides the fetch offsets that the consumer will use for the next set of records to fetch
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      requestBody:
+        description: consumer seek to request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerSeekRequest'
+      responses:
+        '204':
+          description: Successful response
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+
+
+  '/consumers/{group}/instances/{instance}/positions/first':
+    post:
+      operationId: seekFirstOffset
+      summary: Seek to the first offset for each of the given partitions
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      requestBody:
+        description: consumer seek to request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerSeekToRequest'
+      responses:
+        '204':
+          description: Successful response
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+
+  '/consumers/{group}/instances/{instance}/positions/last':
+    post:
+      operationId: seekLastOffset
+      summary: Seek to the last offset for each of the given partitions
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+      requestBody:
+        description: consumer seek to request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerSeekToRequest'
+      responses:
+        '204':
+          description: Successful response
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:w
+  '/consumers/{group}/instances/{instance}/records':
+    get:
+      operationId: fetchTopicData
+      summary: Fetch data for the topics or partitions specified using one of the subscribe/assign APIs
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: The consumer group name
+          schema:
+            type: string
+        - name: instance
+          in: path
+          required: true
+          description: The Id of the consumer instance
+          schema:
+            type: string
+        - name: timeout
+          in: query
+          description: Maximum amount of milliseoncds the sidecar will spend fetching records
+          required: false
+          schema:
+            type: integer
+        - name: max_bytes
+          in: query
+          description: Maximum number of bytes of the unencoded keys and values in the response
+          required: false
+          schema:
+            type: integer
+        - name: format
+          in: query
+          description: The format of response
+          required: true
+          schema:
+            type: string
+            enum:
+              - binary
+              - json
+              - avro
+              - jsonschema
+              - protobuf
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsumerRecord'
+        '404':
+          description: Consumer instance not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Status"
+      security:
+        - kafka_auth:
+            - kafka:r
+
+components:
+  securitySchemes:
+    kafka_auth:
+      type: oauth2
+      description: This API uses OAuth 2.0 with the client credential grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://localhost:6882/token'
+          scopes:
+            kafka:w: Kafka producer
+            kafka:r: Kafka consumer
+  schemas:
+    ProduceRequest:
+      type: object
+      properties:
+        keyFormat:
+          type: integer
+          enum: [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        keySchema:
+          type: string
+        keySchemaId:
+          type: integer
+        keySchemaVersion:
+          type: integer
+        keySchemaSubject:
+          type: string
+        valueFormat:
+          type: integer
+          enum: [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        valueSchema:
+          type: string
+        valueSchemaId:
+          type: integer
+        valueSchemaVersion:
+          type: integer
+        valueSchemaSubject:
+          type: string
+        records:
+          type: array
+          items:
+            type: object
+      required:
+        - records
+    CreateConsumerInstanceRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+            - binary
+            - avro
+            - json
+            - jsonschema
+            - protobuf
+        autoOffsetReset:
+          type: string
+        autoCommitEnable:
+          type: string
+        responseMinBytes:
+          type: integer
+          minimum: -1
+          maximum: 10000000
+        requestWaitMs:
+          type: integer
+    CreateConsumerInstanceResponse:
+      type: object
+      properties:
+        instanceId:
+          type: string
+        baseUri:
+          type: string
+    ConsumerOffsetCommitRequest:
+      type: object
+      properties:
+        offsets:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TopicPartitionOffsetMetadata"
+    TopicPartitionOffsetMetadata:
+      type: object
+      properties:
+        topic:
+          type: string
+        partition:
+          type: integer
+          minimum: 0
+        offset:
+          type: number
+        metadata:
+          type: string
+
+    ConsumerCommittedResponse:
+      type: object
+      properties:
+        offsets:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TopicPartitionOffsetMetadata"
+    ConsumerCommittedRequest:
+      type: object
+      properties:
+        offsets:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TopicPartition"
+
+    TopicPartition:
+      type: object
+      properties:
+        topic:
+          type: string
+        partition:
+          type: integer
+          minimum: 0
+
+    ConsumerRecord:
+      type: object
+      properties:
+        topic:
+          type: string
+        key:
+          type: object
+        value:
+          type: object
+        partition:
+          type: integer
+        offset:
+          type: number
+    ConsumerSeekToRequest:
+      type: object
+      properties:
+        partitions:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TopicPartition"
+    ConsumerSeekRequest:
+      type: object
+      properties:
+        offsets:
+          type: array
+          items:
+            "$ref": "#/components/schemas/PartitionOffset"
+        timestamps:
+          type: array
+          items:
+            "$ref": "#/components/schemas/PartitionTimestamp"
+
+    PartitionOffset:
+      type: object
+      properties:
+        topic:
+          type: string
+        partition:
+          type: integer
+        offset:
+          type: number
+        metadata:
+          type: string
+
+    PartitionTimestamp:
+      type: object
+      properties:
+        topic:
+          type: string
+        partition:
+          type: integer
+        timestamp:
+          type: string
+        metadata:
+          type: string
+
+    ConsumerAssignmentRequest:
+      type: object
+      properties:
+        partitions:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TopicPartition"
+    ConsumerAssignmentResponse:
+      type: object
+      properties:
+        partitions:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TopicPartition"
+
+    ConsumerSubscriptionRecord:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            type: string
+        topic_pattern:
+          type: string
+
+    ConsumerSubscriptionResponse:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            type: string
+
+    Status:
+      type: object
+      properties:
+        statusCode:
+          description: HTTP response code
+          type: integer
+        code:
+          description: Code is the machine-readable error code
+          type: string
+        message:
+          description: Error messsage
+          type: string
+        description:
+          description: The detailed description of the error status
+          type: string
+      required:
+        - statusCode
+        - code
+
+```
+
+
+## Deployment
+
+When deploying the Kafka Sidecar to a Kubernetes cluster, we need to allocate more memory for the container because Kafka uses more memory when producing and consuming records. 
+
+```
+resources:
+  limits:
+    cpu: 500m
+    memory: 1024Mi
+  requests:
+    cpu: 250m
+    memory: 768Mi  
+```
+
+Also, set the Java command line memory options as an environment variable or in the command line in Dockerfile.
+
+```
+env:
+  -name: JVM_OPTS
+  value: -Xmx768m -Xms960m
+```
+
+
 [Kafka Active Consumer]: /service/mesh/kafka/active-consumer/
 [Kafka Reactive Consumer]: /service/mesh/kafka/reactive-consumer/
 [Kafka Producer]: /service/mesh/kafka/producer/
