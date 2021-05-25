@@ -362,3 +362,59 @@ curl -k --location --request POST 'https://localhost:8443/producers/event' \
 --data-raw '{"subject": "UserCreatedEvent", "records":[{"key":"alice","value":{"count":2}},{"key":"john","value":{"count":1}},{"key":"alex","value":{"count":2}}]}'
 ```
 
+### Backend API
+
+When producing from the backend API, several things need to be considered in the code and the sidecar configuration. 
+
+Unlike the consumer, we have to serialize the key and value in the sidecar with the assistance of the Confluent Schema Registry. If the connection is  HTTPS, we need some additional configuration properties in the kafka-producer.yml. 
+
+```
+# Confluent schema registry url
+schema.registry.url: ${kafka-producer.schema.registry.url:http://localhost:8081}
+# Schema registry identity cache size
+schema.registry.cache: ${kafka-producer.schema.registry.cache:100}
+# Schema registry client truststore location
+schema.registry.ssl.truststore.location: ${kafka-producer.schema.registry.ssl.truststore.location:/config/client.truststore}
+# Schema registry client truststore password
+schema.registry.ssl.truststore.password: ${kafka-producer.schema.registry.ssl.truststore.password:password}
+
+```
+
+Make sure that you import the certificate of the Confluent Schema Registry site to the client.truststore.
+
+
+To call the /producers/{topic} endpoint on the sidecar, you need to construct a JSON request body like the [ProduceRequest](https://github.com/networknt/light-kafka/blob/master/kafka-entity/src/main/java/com/networknt/kafka/entity/ProduceRequest.java) in the light-kafka/kafka-entity module.
+
+If you are using Java to build your backend code, it is better to include the following dependency.
+
+```
+<dependency>
+    <groupId>com.networknt</groupId>
+    <artifactId>kafka-entity</artifactId>
+    <version>${version.light-4j}</version>
+</dependency>
+
+```
+
+If you use Jackson to convert the ProduceRequest to JSON string, the following module needs to be in the dependencies.
+
+```
+<dependency>
+   <groupId>com.fasterxml.jackson.datatype</groupId>
+   <artifactId>jackson-datatype-jdk8</artifactId>
+   <version>${version.jackson}</version>
+</dependency>
+
+```
+
+Register the module for the ObjectMapper instance to handle the optional data in the ProduceRequest. For more info, please visit the following [link](https://www.baeldung.com/jackson-optional).
+
+```
+ObjectMapper mapper = new ObjectMapper();
+mapper.registerModule(new Jdk8Module());
+```
+
+Here is a JUnit [test case](https://github.com/networknt/light-kafka/blob/master/kafka-producer/src/test/java/com/networknt/kafka/producer/ProduceRequestTest.java) on how to serialize the ProduceRequest. 
+
+
+
