@@ -30,6 +30,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Load Balance](/concern/balance/)
 * [Basic Authentication](/concern/basic/)
 * [Body Parser](/concern/body/)
+* [Proxy Body Parser](/concern/proxy-body/)
 * [HTTP/2 Client](/concern/client/)
 * [Cluster Support](/concern/cluster/)
 * [Common Component](/concern/common/)
