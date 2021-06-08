@@ -865,6 +865,80 @@ env:
   value: -Xmx768m -Xms960m
 ```
 
+## Performance
+
+When using the Kafka sidecar to interact with Kafka Cluster, the Kafka Client will be wrapped by the sidecar. The backend API will not have any dependencies on Kafka libraries. As we know, the Kafka client is CPU and memory heavy due to the cache. 
+
+### Producer
+For the producer, we need to control the size of the request body to be smaller than 1MB. If you have too many messages to be sent to Kafka, divide them into smaller sizes and send multiple requests. 
+
+Depending on the size of the message, we recmmend sending hundreds or thousands of messages each batch, and the total size is smaller than 1MB. 
+
+If you have a smaller message size, the batch size should be smaller as the number of messages in the batch will impact the throughput dramatically. With more messages in the batch, Kafka Sidecar has to divide them into several Kafka batches and write the audit in the same handler. It requires more memory and CPU power. Also, the Jackson parser is getting slower when there are too many small objects in a JSON array than fewer bigger objects in a JSON array when both JSON are about the same size. 
+
+If you have some special case that one message that is bigger than 1MB (should be very rare), then you need to update the server.yml to all light-4j to accept requests bigger than 1MB. 
+
+```
+# Set the max transfer file size for uploading files—default to 1000000, which is 1 MB.
+# maxTransferFileSize: ${server.maxTransferFileSize:1000000}
+```
+
+### Reactive Consumer
+
+For each reactive consumer application, we need to carefully design the batch size to reach the optimal performance in terms of throughput and CPU/memory usage. 
+
+The bigger the batch size, the better throughput to consume more messages in a short time. However, more memory and more CPU power 
+will be utilized when the batch size is increased. 
+
+When tuning the performance for the Reactive Consumer, we need to consider the following factors. 
+
+##### Batch Size
+
+It is configurable in the kafka-consumer.yml, and the default value is 100K. With an average record size of 1KB, a batch will contain about 100 messages. 
+
+```
+# maximum number of bytes message keys and values returned. Default to 100*1024
+requestMaxBytes: ${kafka-consumer.requestMaxBytes:102400}
+```
+
+##### Record Size
+
+When the backend is consuming the messages, each message will take some time. The more messages in the batch, the more time is needed to process the entire batch. If the record size is smaller, please make sure the batch size is smaller so that the backend won't be overloaded. In general, we should make sure each batch only container about 100 records.
+
+##### Backend Processing Time
+
+How long will it take for the backend to process each record will impact the performance and the design for the batch size. Depending on the business logic, we need to ensure the entire processing time to be limited to 20 to 30 seconds. The average processing time should be used to design the batch size along with the record size. 
+
+##### fetch.max.bytes
+
+Once we decided on the requestMaxBytes, we need to adjust several Kafka properties to make sure that the polling from Kafka is more efficient. As we don't want to cache more data on the sidecar, we want to make sure that the fetch.max.bytes are just about the requestMaxBytes. 
+
+```
+  # max fetch size from Kafka cluster. Default 50mb is too big for cache consumption on the sidecar
+  fetch.max.bytes: ${kafka-consumer.fetch.max.bytes:102400}
+
+```
+
+##### max.poll.records
+
+This Kafka property gives us more control over the Kafka consumer. The default value is 100, and it should be adjusted based on the record size and the batch size. 
+
+```
+  # max pol records default is 500. Adjust it based on the size of the records to make sure each poll
+  # is similar to requestMaxBytes down below.
+  max.poll.records: ${kafka-consumer.max.poll.records:100}
+
+```
+
+##### max.partition.fetch.bytes
+
+This property is similar to the` fetch.max.bytes` but it is defined on the partition level. The value should be the same as the `fetch.max.bytes`, which in line with the requestMaxBytes. 
+
+```
+  # The maximum amount of data per-partition the server will return. Records are fetched in batches by the consumer.
+  # If the first record batch in the first non-empty partition of the fetch is larger than this limit, the batch will still be returned to ensure that the consumer can make progress.
+  max.partition.fetch.bytes: ${kafka-consumer.max.partition.fetch.bytes:102400}
+```
 
 [Kafka Active Consumer]: /service/mesh/kafka/active-consumer/
 [Kafka Reactive Consumer]: /service/mesh/kafka/reactive-consumer/
