@@ -894,11 +894,11 @@ When tuning the performance for the Reactive Consumer, we need to consider the f
 
 ##### Batch Size
 
-It is configurable in the kafka-consumer.yml, and the default value is 100K. With an average record size of 1KB, a batch will contain about 100 messages. 
+It is configurable in the kafka-consumer.yml, and the default value is 100K. With an average record size of 1KB, a batch will contain about 100 messages. We need to ensure this size is bigger than the fetch.max.bytes so that one poll from Kafka can be sent to the backend in one batch without leftover. 
 
 ```
-# maximum number of bytes message keys and values returned. Default to 100*1024
-requestMaxBytes: ${kafka-consumer.requestMaxBytes:102400}
+# maximum number of bytes message keys and values returned. Default to 200*1024
+requestMaxBytes: ${kafka-consumer.requestMaxBytes:204800}
 ```
 
 ##### Record Size
@@ -939,6 +939,39 @@ This property is similar to the` fetch.max.bytes` but it is defined on the parti
   # If the first record batch in the first non-empty partition of the fetch is larger than this limit, the batch will still be returned to ensure that the consumer can make progress.
   max.partition.fetch.bytes: ${kafka-consumer.max.partition.fetch.bytes:102400}
 ```
+
+### TroubleShooting
+
+##### Group Rebalancing
+
+If you see the following INFO from the log, that means your batch size is too big to handle within a reasonable period. 
+
+```
+Attempt to heartbeat failed since group is rebalancing
+```
+
+The `kakfa max.poll.interval.ms` is the maximum delay between invocations of poll() when using consumer group management. This places an upper bound on the amount of time that the consumer can be idle before fetching more records. Suppose poll() is not called before the expiration of this timeout. In that case, the consumer is considered failed, and the group will rebalance in order to reassign the partitions to another member. For consumers using a non-null group.instance.id which reach this timeout, partitions will not be immediately reassigned. Instead, the consumer will stop sending heartbeats, and partitions will be reassigned after the expiration of the session.timeout.ms. This mirrors the behaviour of a static consumer which has shut down. The default value for this config property is 300000 (5 minutes) and we need to ensure we poll records from Kafka within 5 minute. 
+
+As you know, we poll a batch from Kafka and send it to the backend API for consuming (processing). Once the backend processes all the records in the batch, it returns a response to the sidecar and the sidecar will poll from Kafka again for another batch and send to the backend again. If the backend processing is slow and more prolonged than 5 minutes, then the heartbeat failure will be sent from the sidecar instance. Even the backend processing is faster, we might still trigger this problem if the batch size of the Kafka poll is bigger than the batch size we send to the backend API. This means one Kafka poll is split into multiple backend API calls and potentially makes the next poll() delayed over 5 minutes. This is why we recommend the Kafka `fetch.max.bytes` is smaller than the `requestMaxBytes`. 
+
+When you see the above errors in the log, you will eventually see the following error to indicate that the Kafka sidecar is kicked out of the consumer group. 
+
+```
+Member xxx sending LeaveGroup request to coordinator xxx due to consumer poll timeout has expired. This means the time between subsequent calls to poll() was longer than the configured `max.poll.interval.ms`, which typically implies that the poll loop is spending too much time processing messages. You can address this either by increasing max.poll.interval.ms or by reducing the maximum size of batches returned in poll() with `max.poll.records`.
+```
+
+We don't recommend increasing the max.poll.interval.ms but to reduce the size of the batch with the `fetch.max.bytes`.
+
+After the rebalancing, the partition is not assigned to the current consumer. The normal response from the backend cannot commit the offset anymore. So you might have this error in the log. 
+
+```
+Offset commit cannot be completed since the consumer is not part of an active group for auto partition assignment; it is likely that the consumer was kicked out of the group. 
+```
+
+Since the batch cannot be committed and the partition has migrated to another instance, the same batch will be consumed from another instance. With the idempotent backend, this is not an issue. However, we need to reduce the size of the batch to get the root cause resolved. 
+
+
+
 
 [Kafka Active Consumer]: /service/mesh/kafka/active-consumer/
 [Kafka Reactive Consumer]: /service/mesh/kafka/reactive-consumer/
