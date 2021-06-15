@@ -15,7 +15,7 @@ draft: false
 reviewed: true
 ---
 
-Services built on Light Frameworks are composed of many plugins as part of the embedded gateway. Each plugin (or middleware handler) has its configuration file and runtime behaviour to control if they are enabled. Developers usually don't need to worry about these config files as these can be added later on by the operation team.
+Services built on Light Frameworks are composed of many plugins as part of the embedded gateway. Each plugin (or middleware handler) has its configuration file and runtime behaviour to control if they are enabled. Developers usually don't need to worry about these config files as these can be added later on by the operation team in the DevOps pipeline.
 
 Unlike other application frameworks, we are not using a single config file but multiple config files because each service decides which plugins should be utilized and how they are utilized. 
 
@@ -35,5 +35,7 @@ When managing the configurations, the following things need to be considered:
 - [Process](/service/config/process/)
 - [API Doc](/service/config/api/)
 - [service verify](/service/config/verify/)
+- [Service Configuation](/service/config/service-config/)
+- [Key Design](/service/config/key-design/)
 
 For more information on how to use the Config Server, please visit the [tutorial](/tutorial/config-server/) section. 
