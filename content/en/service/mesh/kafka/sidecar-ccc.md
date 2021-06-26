@@ -75,15 +75,79 @@ Questions:
 
 ### Audit
 
-Audit on the sidecar is an important cross-cutting concerns that we need to address. Every records we send to the backend API and the response from the backend API should be persisted in a Kafka topic and potentially push to a SQL or No-SQL database for query and reporting. We can also use streams processing on the Control Pane to project the audit info to different dementions for query and report from the Control Pane. 
+Audit on the sidecar is an important cross-cutting concerns that we need to address. Every records we send to the backend API and the response from the backend API should be persisted in a sidecar audit log file or Kafka topic and potentially push to a SQL or No-SQL database for query and reporting. We can also use streams processing on the Control Pane to project the audit info to different dementions for query and report from the Control Pane. 
 
-On the producer side, we need to record all the success and failure records to the sidecar-audit topic through the sidecar as well. Due to threading issue, we cannot produce the audit entry to Kafka in the callback of the original message, we have to use a queue to save all the audit entries and send them after sending the original messages in batch. 
+Here is the section about audit in the kafka-consumer.yml 
 
+```
+# Indicator if the audit is enabled.
+auditEnabled: ${kafka-consumer.auditEnabled:true}
+# Audit log destination topic or logfile. Default to topic
+auditTarget: ${kafka-consumer.auditTarget:topic}
+# The consumer audit topic name if the auditTarget is topic
+auditTopic: ${kafka-consumer.auditTopic:sidecar-audit}
+```
 
-To ensure the centralized processing in the future, we need to have only one audit topic across the entire organization. The data in the audit topic contains only the meta data instead of the original message value. 
+The default auditTarget is a Kafka topic, and the topic name is defined in the auditTopic. It is the recommended audit target; however, it requires resource allocation and impacts the overall throughput a little bit. 
+
+For some users who want to use a log file and then inject it into a centralized logging system like ELK, we also provide a helper to write the audit to sidecar-audit.log in the log directory. To enable it, change the auditTarget to `logfile` from `topic` and update the logback.xml to add a logger. 
+
+```
+    <!--sidecar audit log-->
+    <appender name="sidecar" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/sidecar-audit.log</file> <!-- logfile location -->
+        <encoder>
+            <pattern>%date{ISO8601} %msg%n</pattern> <!-- the layout pattern used to format log entries -->
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>log/sidecar-audit.log.%i.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>5</maxIndex> <!-- max number of archived logs that are kept -->
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>200MB
+            </maxFileSize> <!-- The size of the logfile that triggers a switch to a new logfile, and the current one archived -->
+        </triggeringPolicy>
+    </appender>
+
+    <logger name="Sidecar" level="info" additivity="false">
+        <appender-ref ref="sidecar"/>
+    </logger>
+
+```
+
+Here are some audit records captured during the test in the sidecar-audit.json file. 
+
+```
+2021-06-18 18:11:19,516 {"id":"a2bd0e2a-95e9-41f6-a17c-1bc045463973","serviceId":"com.networknt.kafka-sidecar-1.0.0","auditType":"PRODUCER","topic":"test1","partition":0,"offset":496453,"correlationId":"GMDC3LeXSLuRV0Hz5KfVHg","traceabilityId":null,"auditStatus":"SUCCESS","stacktrace":null}
+2021-06-18 18:11:19,517 {"id":"e7fe9a9f-d438-4090-8dbb-9cafdfb89008","serviceId":"com.networknt.kafka-sidecar-1.0.0","auditType":"PRODUCER","topic":"test1","partition":0,"offset":496454,"correlationId":"GMDC3LeXSLuRV0Hz5KfVHg","traceabilityId":null,"auditStatus":"SUCCESS","stacktrace":null}
+2021-06-18 18:11:19,517 {"id":"e05bf3f6-7314-4e62-9b0b-5670c5c413af","serviceId":"com.networknt.kafka-sidecar-1.0.0","auditType":"PRODUCER","topic":"test1","partition":0,"offset":496455,"correlationId":"GMDC3LeXSLuRV0Hz5KfVHg","traceabilityId":null,"auditStatus":"SUCCESS","stacktrace":null}
+2021-06-18 18:11:20,581 {"id":"4c8334cb-332a-4d5e-b542-f0bc6b609c05","serviceId":"com.networknt.kafka-sidecar-1.0.0","auditType":"REACTIVE_CONSUMER","topic":"test1","partition":0,"offset":496453,"correlationId":"GMDC3LeXSLuRV0Hz5KfVHg","traceabilityId":null,"auditStatus":"SUCCESS","stacktrace":null}
+2021-06-18 18:11:20,585 {"id":"d25c4b2f-0ec0-4210-8f4f-ec7937e263da","serviceId":"com.networknt.kafka-sidecar-1.0.0","auditType":"REACTIVE_CONSUMER","topic":"test1","partition":0,"offset":496454,"correlationId":"GMDC3LeXSLuRV0Hz5KfVHg","traceabilityId":null,"auditStatus":"FAILURE","stacktrace":null}
+2021-06-18 18:11:20,586 {"id":"eb06230c-f882-459b-9bd7-8e49b02e6de1","serviceId":"com.networknt.kafka-sidecar-1.0.0","auditType":"REACTIVE_CONSUMER","topic":"test1","partition":0,"offset":496455,"correlationId":"GMDC3LeXSLuRV0Hz5KfVHg","traceabilityId":null,"auditStatus":"SUCCESS","stacktrace":null}
+
+```
+
+On the producer side, we need to record all the success and failure records to the sidecar-audit file or topic through the sidecar as well. Due to threading issue, we cannot produce the audit entry to Kafka in the callback of the original message, we have to use a queue to save all the audit entries and send them after sending the original messages in batch. 
+
+Here is the section in kafka-producer.yml file about audit.
+
+```
+# Indicator if the audit is enabled.
+auditEnabled: ${kafka-producer.auditEnabled:true}
+# Audit log destination topic or logfile. Default to topic
+auditTarget: ${kafka-producer.auditTarget:topic}
+# The consumer audit topic name if the auditTarget is topic
+auditTopic: ${kafka-producer.auditTopic:sidecar-audit}
+
+```
+
+When auditTarget is set to `logfile` the logback.xml and the example audit entries are shown above.
+
+To ensure the centralized processing in the future, we need to have only one audit topic across the entire organization if audit topic is used. The data in the audit topic contains only the meta data instead of the original message value. 
 
 The retention.ms for the audit topic should be set based on the retention policy of the organization. 
-
 
 ### Avro to Json Transformer
 
