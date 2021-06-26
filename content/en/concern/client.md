@@ -12,15 +12,16 @@ reviewed: true
 
 ## Introduction
 
-In microservices architecture, service to service communication can be done through a request/response style or messaging/event style. An efficient HTTP client is crucial in a request/response style as the number of interactions between services is high and extra latency can kill the entire application performance, causing the failure of a microservices application.
+The service-to-service communication can be done through a request/response style or messaging/event style in a microservices architecture. An efficient HTTP client is crucial in a request/response style as the number of interactions between services is high, and extra latency can kill the entire application performance, causing the failure of a microservices application.
 
-In the early days of light-4j, we had a client module based on Apache HttpClient and Apache HttpAsyncClient which supported HTTP 1.1 and was very popular in the open source community. However, it was designed long ago and was tough to use because of its many configurations. It was also huge and slow compared to other modern HTTP clients. Another big issue was the HTTP 2.0 support as light-4j frameworks support HTTP2 natively and we want to take advantage of the client side as well.
+In the early days of light-4j, we had a client module based on Apache HttpClient and Apache HttpAsyncClient, which supported HTTP 1.1 and was very popular in the open-source community. However, it was designed long ago and was hard to use because of its numerous configurations. It was also huge and slow compared to other modern HTTP clients. Another big issue was the HTTP 2.0 support as light-4j frameworks support HTTP2 natively, and we want to take advantage of the client-side as well.
 
-While looking for Java HTTP clients that supported HTTP 2.0, we were stuck as none could support it gracefully. Some provided partial support, while most of them required you to put -Xbootclasspath with a specific version of the jar file per JDK version in the command line for it to work with Java 8. Everybody seems to want to wait for Java 11 to come out but we cannot use it on production until it is ready.
+While looking for Java HTTP clients that supported HTTP 2.0, we were stuck as none could support it gracefully. Some provided partial support, while most of them required you to put -Xbootclasspath with a specific version of the jar file per JDK version in the command line for it to work with Java 8. Everybody seems to want to wait for Java 11 to come out, but we cannot use it on production until it is ready.
 
-Given the above situation, I decided to implement our own Http2Client based on what we have in Undertow. I proposed the idea of implementing a generic Http Client to the Undertow community, but it wasn’t interesting. It will take a long time to build an independent Http 2Client without depending on Undertow, which is OK with us as our server is based on Undertow anyway. Others may have concerns, but our argument is that the Undertow core is extremely small, and I don’t think it is an issue for other people to use it outside of light-4j frameworks.
+Given the above situation, I decided to implement our own Http2Client based on what we have in Undertow. I proposed the idea of implementing a generic HTTP Client to the Undertow community, but it wasn’t interested. It will take a long time to build an independent HTTP 2Client without depending on Undertow, which is OK with us as our server is based on Undertow anyway. Others may have concerns, but our argument is that the Undertow core is extremely small, and I don’t think it is an issue for other people to use it outside of light-4j frameworks.
 
-I am starting an [http client benchmark](https://github.com/networknt/http2client-benchmark). If there is more interest in this client, I will make it an independent module without depending on Undertow core so that other people working on other platforms can use it without the extra Undertow core.
+I am starting an [http client benchmark](https://github.com/networknt/http2client-benchmark). If there are more users interested in this client, I will make it an independent module without depending on the Undertow core so that other people working on other platforms can use it without the extra Undertow core.
+
 
 ## Usage
 
@@ -30,19 +31,21 @@ Http2Client supports both HTTP 1.1 and HTTP 2.0 transparently depending on if th
 2. Standalone Application/Mobile Application
 3. API/Service
 
-It provides methods to get authorization tokens and automatically receives the client credentials token for scopes in API to API calls. It also helps pass correlationId and traceabilityId and other configurable headers to the next service.
+It provides methods to get authorization tokens and automatically receives the client credentials token for scopes in API to API calls. It also helps to pass correlationId and traceabilityId and other configurable headers to the next service.
 
-Although it supports HTTP 1.1, it requires that the user create a connection pool as the HTTP 1.1 connection doesn’t support multiplex. One connection can only handle one request concurrently. I am planning on adding an internal connection pool if there is a need, but currently, it is not necessary as all communication is on HTTP 2.0
+HTTP 2.0 is multiplex that one connection can send multiple requests at the same time. There is no need to build a connection pool if only HTTP 2.0 is used. However, some users have services that only support HTTP 1.1 without an immediate path to upgrade. To support those users, we have added a connection pool in the Http2Client. 
 
-Our Http2Client is a very low-level component that is best used in service to service communication. If you are trying to write an original client application in Java 8, please take a look at [light-consumer-4j][] which is written by Nicholas Azar and was contributed by the community. It is built on top of Http2Client, and has a lot of extra features like connection pooling.
+Our Http2Client is a very low-level component that is best used in service-to-service communication. 
 
 ### Localhost vs 127.0.0.1
 
-When using the client module to call a service on the same host, you can use localhost or 127.0.0.1 before release 1.5.29 as there was a hostname verification bug in the framework. Fom version 1.5.29 onwards, you must use localhost in the URL as the bug was fixed and localhost matches the hostname in the generated client.truststore and server.keystore files.
+When using the client module to call a service on the same host, you can use localhost or 127.0.0.1 before release 1.5.29 as there was a hostname verification bug in the framework. However, from version 1.5.29 onwards, you must use localhost in the URL as the bug was fixed, and localhost matches the hostname in the generated client.truststore and server.keystore files.
+
+If you are using the Http2Client inside a Docker container and the target server is on the host machine or another Docker container, you must use the host IP address instead of localhost. Inside a Docker container, localhost means the Linux OS inside the docker.  
 
 ### Generic response callback functions
 
-Like the Undertow core server, it is event-driven with callbacks so non-blocking all the time to free your CPU for other important computation. Http2Client has two generic callback functions implemented to handle requests with a body (POST, PUT, PATCH) and requests without a body(GET, DELETE). Users can create their own customized callback functions to handle the response from the server if they need special logic inside the callback function.
+Like the Undertow core server, it is event-driven with callbacks, so non-blocking all the time to free your CPU for other important computations. Http2Client has two generic callback functions implemented to handle requests with a body (POST, PUT, PATCH) and requests without a body(GET, DELETE). Users can create their own customized callback functions to handle the response from the server if they need special logic inside the callback function.
 
 Signature for GET/DELETE
 
@@ -60,44 +63,80 @@ Note that you need to pass in a requestBody for POST, PUT or PATCH.
 
 ### Client Credentials token renew and cache
 
-The renewal of the token happens behind the scene, and it supports the circuit breaker if the OAuth 2.0 server is down or busy. The token is renewed pro-actively before the current one expires and lets all requests go with the current token. It only blocks other requests if the current request is trying to renew an expired token. When token renewal in this case fails, all requests will be rejected with a timeout and subsequent requests will react in the same way until a grace period is passed so that the renew process starts again.
+The renewal of the token happens behind the scene, and it supports the circuit breaker if the OAuth 2.0 server is down or busy. The token is renewed pro-actively before the current one expires and lets all requests go with the current token. It only blocks other requests if the current request is trying to renew an expired token. When token renewal in this case fails, all requests will be rejected with a timeout, and subsequent requests will react in the same way until a grace period is passed so that the renewal process starts again.
 
-There is a good reason we renew the token proactively. If we leave the token to expire, the traditional API service can return a 401 error with the token expired message to notify the client to get a new token. In microservices architecture, this is not possible. What if the token is one second before the expiration, and service A accepts it, writing something into its database which service B accepts, writing something into its database? However, when service C receives it, it is already expired and rejected. There must be extra logic to compensate for the transactions service A and B have performed already. We have a framework [light-saga-4j][] for this type of microservices orchestration, but it is really not necessary for just token expiration handling. It would be better to handle it gracefully in the client module to ensure that the token sent has a longer expiration time than the entire application SLA.
+There is a good reason we renew the token proactively. If we leave the token to expire, the traditional API service can return a 401 error with the expired token message to notify the client to get a new token. In a microservices architecture, this is not possible. What if the token is one second before the expiration, and service A accepts it, writing something into its database which service B accepts, writing something into its database? However, when service C receives it, it is already expired and rejected. There must be extra logic to compensate for the transactions service A and B have performed already. We have a framework [light-kafka][] for this type of microservices orchestration, but it is not necessary for just token expiration handling. It would be better to handle it gracefully in the client module to ensure that the token sent has a longer expiration time than the entire application SLA.
 
 ### Sign Request API
 
 The light-oauth2 Token service has a signing endpoint to sign the incoming map object to support the information exchange signature verification between multiple microservices. For more information about the service, please visit [signing][].
 
-For the issuer service which wants to provide the signed JWT, it needs to use the client module to access the remote service in the light-oauth2. The client module provided an API to simplify access. 
+For the issuer service which wants to provide the signed request, it needs to use the client module to access the remote service in the light-oauth2. The client module provided an API to simplify access. 
 
-There is a seciton in the client.yml to define OAuth 2.0 service parameters, and it would be something like the following in the `oauth/token` section. 
+There is a section in the client.yml to define OAuth 2.0 service parameters, and it would be something like the following in the `oauth/token` section. 
 
 For the default config file, please visit [client.yml][]
 
 ```
   # sign endpoint configuration
   sign:
-    # token server url. The default port number for token service is 6882.
-    server_url: https://localhost:6882
+    # token server url. The default port number for token service is 6882. If this url exists, it will be used.
+    # if it is not set, then a service lookup against serviceId will be taken to discover an instance.
+    # server_url: ${client.signServerUrl:https://localhost:6882}
+    # For users who leverage SaaS OAuth 2.0 provider from lightapi.net or others in the public cloud
+    # and has an internal proxy server to access code, token and key services of OAuth 2.0, set up the
+    # proxyHost here for the HTTPS traffic. This option is only working with server_url and serviceId
+    # below should be commented out. OAuth 2.0 services cannot be discovered if a proxy server is used.
+    # proxyHost: ${client.signProxyHost:proxy.lightapi.net}
+    # We only support HTTPS traffic for the proxy and the default port is 443. If your proxy server has
+    # a different port, please specify it here. If proxyHost is available and proxyPort is missing, then
+    # the default value 443 is going to be used for the HTTP connection.
+    # proxyPort: ${client.signProxyPort:3128}
+    # token serviceId. If server_url doesn't exist, the serviceId will be used to lookup the token service.
+    serviceId: ${client.signServiceId:com.networknt.oauth2-token-1.0.0}
     # signing endpoint for the sign request
-    uri: "/oauth2/token"
+    uri: ${client.signUri:/oauth2/token}
     # timeout in milliseconds
-    timeout: 2000
+    timeout: ${client.signTimeout:2000}
     # set to true if the oauth2 provider supports HTTP/2
-    enableHttp2: true
+    enableHttp2: ${client.signEnableHttp2:true}
     # client_id for client authentication
-    client_id: f7d42348-c647-4efb-a52d-4c5787421e72
+    client_id: ${client.signClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
     # client secret for client authentication and it can be encrypted here.
-    client_secret: f6h1FTI8Q3-7UScPZDzfXA
-
+    client_secret: ${client.signClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
+    # the key distribution sever config for sign. It can be different then token key distribution server.
+    key:
+      # key distribution server url. It will be used to establish connection if it exists.
+      # if it is not set, then a service lookup against serviceId will be taken to discover an instance.
+      # server_url: ${client.signKeyServerUrl:https://localhost:6886}
+      # For users who leverage SaaS OAuth 2.0 provider from lightapi.net or others in the public cloud
+      # and has an internal proxy server to access code, token and key services of OAuth 2.0, set up the
+      # proxyHost here for the HTTPS traffic. This option is only working with server_url and serviceId
+      # below should be commented out. OAuth 2.0 services cannot be discovered if a proxy server is used.
+      # proxyHost: ${client.signKeyProxyHost:proxy.lightapi.net}
+      # We only support HTTPS traffic for the proxy and the default port is 443. If your proxy server has
+      # a different port, please specify it here. If proxyHost is available and proxyPort is missing, then
+      # the default value 443 is going to be used for the HTTP connection.
+      # proxyPort: ${client.signKeyProxyPort:3128}
+      # the unique service id for key distribution service, it will be used to lookup key service if above url doesn't exist.
+      serviceId: ${client.signKeyServiceId:com.networknt.oauth2-key-1.0.0}
+      # the path for the key distribution endpoint
+      uri: ${client.signKeyUri:/oauth2/key}
+      # client_id used to access key distribution service. It can be the same client_id with token service or not.
+      client_id: ${client.signKeyClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
+      # client secret used to access the key distribution service.
+      client_secret: ${client.signKeyClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
+      # set to true if the oauth2 provider supports HTTP/2
+      enableHttp2: ${client.signKeyEnableHttp2:true}
 ```
 
 Before calling the API, you need to create a POJO object for the SignRequest. The class constructor will load the above configuration parameter into the object. You need to provide these properties:
 
 * expires - which is the number of seconds until the token expires
-* payload - which is a map which contains all the attributes you want to put as JWT claims
+* payload - which is a map that contains all the attributes you want to put as JWT claims
 
 Once you have the SignRequest object created, you can call the OauthHelper class with the following static method.
+
 
 ```
     public static Result<TokenResponse> getSignResult(SignRequest signRequest) {
@@ -106,13 +145,65 @@ Once you have the SignRequest object created, you can call the OauthHelper class
 If there is no error, then the response will be in the TokenResponse. 
 
 ### Connection Pool of Http2Client Feature
-This feature is implemented by embedding the connection pool into an existing method:
+
+The high level API is implemented by embedding the connection pool into an existing method:
 
 ```java
 CompletableFuture<ClientResponse> callService(URI uri, ClientRequest request, Optional<String> requestBody)
 ```
 
 The user can call this method or `getRequestService(URI uri, ClientRequest request, Optional<String> requestBody)` which combines the `callService()` with a circuit breaker to cache the established connections and reuse them without considering the type of connection.
+
+The low level API is though the borrowConnection and returnConnection methods. The following is the generated test case from the light-codegen.
+
+```java
+    @Test
+    public void testPetsPetIdDeleteHandlerTest() throws ClientException {
+
+        final Http2Client client = Http2Client.getInstance();
+        final CountDownLatch latch = new CountDownLatch(1);
+        final ClientConnection connection;
+        try {
+            if(enableHttps) {
+                connection = client.borrowConnection(new URI(url), Http2Client.WORKER, Http2Client.SSL, Http2Client.BUFFER_POOL, enableHttp2 ? OptionMap.create(UndertowOptions.ENABLE_HTTP2, true): OptionMap.EMPTY).get();
+            } else {
+                connection = client.borrowConnection(new URI(url), Http2Client.WORKER, Http2Client.BUFFER_POOL, OptionMap.EMPTY).get();
+            }
+        } catch (Exception e) {
+            throw new ClientException(e);
+        }
+        final AtomicReference<ClientResponse> reference = new AtomicReference<>();
+        String requestUri = "/v1/pets/VKVDHrCqEjLdRSJEzweRKRPFflj";
+        String httpMethod = "delete";
+        try {
+            ClientRequest request = new ClientRequest().setPath(requestUri).setMethod(Methods.DELETE);
+            
+            //customized header parameters 
+            request.getRequestHeaders().put(new HttpString("key"), "hgNijJaFIMAgwKhUIgnndaLfD");
+            request.getRequestHeaders().put(new HttpString("host"), "localhost");
+            connection.sendRequest(request, client.createClientCallback(reference, latch));
+            
+            latch.await();
+        } catch (Exception e) {
+            logger.error("Exception: ", e);
+            throw new ClientException(e);
+        } finally {
+            client.returnConnection(connection);
+        }
+        String body = reference.get().getAttachment(Http2Client.RESPONSE_BODY);
+        Optional<HeaderValues> contentTypeName = Optional.ofNullable(reference.get().getResponseHeaders().get(Headers.CONTENT_TYPE));
+        SchemaValidatorsConfig config = new SchemaValidatorsConfig();
+        ResponseValidator responseValidator = new ResponseValidator(config);
+        int statusCode = reference.get().getResponseCode();
+        Status status;
+        if(contentTypeName.isPresent()) {
+            status = responseValidator.validateResponseContent(body, requestUri, httpMethod, String.valueOf(statusCode), contentTypeName.get().getFirst());
+        } else {
+            status = responseValidator.validateResponseContent(body, requestUri, httpMethod, String.valueOf(statusCode), JSON_MEDIA_TYPE);
+        }
+        Assert.assertNull(status);
+    }
+```
 
 ##### HTTP/1.1 Connection
 * **Multiple connections** will be added to the connection pool for the same host.
@@ -124,6 +215,7 @@ The user can call this method or `getRequestService(URI uri, ClientRequest reque
 
 
 #### Configuration
+
 Users can configure the size of the connection pool, the maximum number of requests per connection, and whether HTTP/2 is enabled through configuring the client.yml.
 
 >Or the user can clean up the connection pool manually by calling `Http2ClientConnectionPool.getInstance().clear()`
@@ -147,7 +239,7 @@ request:
  minConnectionNumPerHost: 250
 ```
 
-#### Example for Fixed URI
+#### Example for Fixed URI with callService
 ```java
 try {
     ClientRequest requestB = new ClientRequest().setMethod(Methods.GET).setPath(apibPath);
@@ -165,7 +257,7 @@ try {
 }
 ```
 
-#### Example for Service ID
+#### Example for Service ID with callService
 
 > Provides an overloading method for callservice() to embedded service discovery and load balancing
 
@@ -286,7 +378,7 @@ In most cases, we don’t close the connection, and all the requests will go thr
     }
 ```
 
-Although it is recommended to keep the connection cached for high volume services, the connection must be closed from time to time so that the load balancer can redirect the same client instance to a different server instance unless you want to pin a particular client instance to a server instance for a long time. This will eventually cause an imbalance load on the service instances if there are not too many different clients.
+Although it is recommended to keep the connection cached for high volume services, the connection must be closed from time to time so that the load balancer can redirect the same client instance to a different server instance unless you want to pin a particular client instance to a server instance for a long time. This will eventually cause an imbalanced load on the service instances if there are not too many different clients.
 
 The Consul client is one of the examples in which the connection is reset from time to time to ensure that we are not running out of max number of requests per connection in HTTP/2. The current connection will be dropped and recreated after 1 million requests.
 
@@ -302,6 +394,8 @@ The easier way to close collection periodically is to close it after a number of
     }
 
 ```
+
+Creating a new connection and closing it after the request is recommended for one-time requests only. However, if you are sending multiple requests from your client during a period of time, it is recommended to use the connection pool with borrowConnection and returnConnection methods.
 
 ### Check connection
 
@@ -333,7 +427,7 @@ If you send multiple requests through one connection, here is an example.
     public void testRouterHttps48k() throws Exception {
         ClientConnection connection = null;
         try {
-            connection = client.connect(new URI("https://localhost:8000"), Http2Client.WORKER, Http2Client.SSL, Http2Client.BUFFER_POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true)).get();
+            connection = client.borrowConnection(new URI("https://localhost:8000"), Http2Client.WORKER, Http2Client.SSL, Http2Client.BUFFER_POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true)).get();
             final String json = getResourceFileAsString("48k.json");
             for(int i = 0; i < 100; i++) {
                 final CountDownLatch latch = new CountDownLatch(1);
@@ -351,7 +445,7 @@ If you send multiple requests through one connection, here is an example.
                 if(!body.startsWith("[")) System.out.println(body);
             }
         } finally {
-            if(connection != null) IoUtils.safeClose(connection);
+            client.returnConnection(connection);
         }
     }
 
@@ -373,7 +467,7 @@ request.getRequestHeaders().put(Headers.CONTENT_TYPE, "application/json");
 
 ### Post Request
 
-I got a lot of questions on how to make a post request to the server and above is an example. Please remember the following. 
+I got a lot of questions on how to make a post request to the server, and the above is an example. Please remember the following. 
 
 * You need the following headers. 
 
@@ -407,7 +501,7 @@ For some slow services, you might need to adjust the default timeout in client.y
 
 ### HOST Header
 
-When using Http2Client, you need to add the following header to the request. 
+When using Http2Client, you need to add the following header to the request if HTTP 1.1 is used as it is required for the HTTP 1.1 specification. 
 
 ```
 request.getRequestHeaders().put(Headers.HOST, "localhost");
@@ -418,104 +512,224 @@ You can see the entire example in the above testRouterHttps48k method.
 
 ### Configuration
 
-When using the client module of light-4j, you need to have a configuration file client.yml in your src/main/resources/config folder. If OAuth 2.0 is used to secure the API access, then you need to update secret.yml to have client secrets configured there.
+When using the client module of light-4j, you need to have a configuration file client.yml in your src/main/resources/config folder or externalized config folder. 
 
-The following is the default client.yml in light-4j which you should replace with an externalized client.yml file.
+The following is the default client.yml in light-4j, which you should replace with an externalized client.yml file.
 
 ```yaml
 # This is the configuration file for Http2Client.
 ---
-# Buffer Size in the buffer pool in KB. If should be bigger than your request or response body size.
-bufferSize: 24
 # Settings for TLS
 tls:
   # if the server is using self-signed certificate, this need to be false. If true, you have to use CA signed certificate
   # or load truststore that contains the self-signed cretificate.
-  verifyHostname: true
+  verifyHostname: ${client.verifyHostname:true}
+  # The default trustedNames group used to created default SSL context. This is used to create Http2Client.SSL if set.
+  defaultGroupKey: ${client.defaultGroupKey:trustedNames.local}
+  # trusted hostnames, service names, service Ids, and so on.
+  # Note: localhost and 127.0.0.1 are not trustable hostname/ip in general. So, these values should not be used as trusted names in production.
+  trustedNames:
+    local: localhost
+    negativeTest: invalidhost
+    empty:
   # trust store contains certifictes that server needs. Enable if tls is used.
-  loadTrustStore: true
+  loadTrustStore: ${client.loadTrustStore:true}
   # trust store location can be specified here or system properties javax.net.ssl.trustStore and password javax.net.ssl.trustStorePassword
-  trustStore: client.truststore
+  trustStore: ${client.trustStore:client.truststore}
+  # trust store password
+  trustStorePass: ${client.trustStorePass:password}
   # key store contains client key and it should be loaded if two-way ssl is uesed.
-  loadKeyStore: false
+  loadKeyStore: ${client.loadKeyStore:false}
   # key store location
-  keyStore: client.keystore
+  keyStore: ${client.keyStore:client.keystore}
+  # key store password
+  keyStorePass: ${client.keyStorePass:password}
+  # private key password
+  keyPass: ${client.keyPass:password}
 # settings for OAuth2 server communication
 oauth:
   # OAuth 2.0 token endpoint configuration
   token:
+    cache:
+      #capacity of caching TOKENs
+      capacity: ${client.tokenCacheCapacity:200}
     # The scope token will be renewed automatically 1 minutes before expiry
-    tokenRenewBeforeExpired: 60000
+    tokenRenewBeforeExpired: ${client.tokenRenewBeforeExpired:60000}
     # if scope token is expired, we need short delay so that we can retry faster.
-    expiredRefreshRetryDelay: 2000
+    expiredRefreshRetryDelay: ${client.expiredRefreshRetryDelay:2000}
     # if scope token is not expired but in renew windown, we need slow retry delay.
-    earlyRefreshRetryDelay: 4000
-    # token server url. The default port number for token service is 6882.
-    server_url: https://localhost:6882
-    # token service unique id for OAuth 2.0 provider
-    serviceId: com.networknt.oauth2-token-1.0.0
+    earlyRefreshRetryDelay: ${client.earlyRefreshRetryDelay:4000}
+    # token server url. The default port number for token service is 6882. If this is set,
+    # it will take high priority than serviceId for the direct connection
+    # server_url: ${client.tokenServerUrl:https://localhost:6882}
+    # token service unique id for OAuth 2.0 provider. If server_url is not set above,
+    # a service discovery action will be taken to find an instance of token service.
+    serviceId: ${client.tokenServiceId:com.networknt.oauth2-token-1.0.0}
+    # For users who leverage SaaS OAuth 2.0 provider from lightapi.net or others in the public cloud
+    # and has an internal proxy server to access code, token and key services of OAuth 2.0, set up the
+    # proxyHost here for the HTTPS traffic. This option is only working with server_url and serviceId
+    # below should be commented out. OAuth 2.0 services cannot be discovered if a proxy server is used.
+    # proxyHost: ${client.tokenProxyHost:proxy.lightapi.net}
+    # We only support HTTPS traffic for the proxy and the default port is 443. If your proxy server has
+    # a different port, please specify it here. If proxyHost is available and proxyPort is missing, then
+    # the default value 443 is going to be used for the HTTP connection.
+    # proxyPort: ${client.tokenProxyPort:3128}
     # set to true if the oauth2 provider supports HTTP/2
-    enableHttp2: true
+    enableHttp2: ${client.tokenEnableHttp2:true}
     # the following section defines uri and parameters for authorization code grant type
     authorization_code:
       # token endpoint for authorization code grant
-      uri: "/oauth2/token"
-      # client_id for authorization code grant flow. client_secret is in secret.yml
-      client_id: f7d42348-c647-4efb-a52d-4c5787421e72
+      uri: ${client.tokenAcUri:/oauth2/token}
+      # client_id for authorization code grant flow.
+      client_id: ${client.tokenAcClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
+      # client_secret for authorization code grant flow.
+      client_secret: ${client.tokenAcClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
       # the web server uri that will receive the redirected authorization code
-      redirect_uri: https://localhost:8080/authorization_code
+      redirect_uri: ${client.tokenAcRedirectUri:https://localhost:3000/authorization}
       # optional scope, default scope in the client registration will be used if not defined.
-      scope:
-      - petstore.r
-      - petstore.w
+      # If there are scopes specified here, they will be verified against the registered scopes.
+      # scope:
+      # - petstore.r
+      # - petstore.w
     # the following section defines uri and parameters for client credentials grant type
     client_credentials:
       # token endpoint for client credentials grant
-      uri: "/oauth2/token"
-      # client_id for client credentials grant flow. client_secret is in secret.yml
-      client_id: f7d42348-c647-4efb-a52d-4c5787421e72
+      uri: ${client.tokenCcUri:/oauth2/token}
+      # client_id for client credentials grant flow.
+      client_id: ${client.tokenCcClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
+      # client_secret for client credentials grant flow.
+      client_secret: ${client.tokenCcClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
       # optional scope, default scope in the client registration will be used if not defined.
-      scope:
-      - petstore.r
-      - petstore.w
+      # If there are scopes specified here, they will be verified against the registered scopes.
+      # scope:
+      # - petstore.r
+      # - petstore.w
     refresh_token:
       # token endpoint for refresh token grant
-      uri: "/oauth2/token"
-      # client_id for refresh token grant flow. client_secret is in secret.yml
-      client_id: f7d42348-c647-4efb-a52d-4c5787421e72
+      uri: ${client.tokenRtUri:/oauth2/token}
+      # client_id for refresh token grant flow.
+      client_id: ${client.tokenRtClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
+      # client_secret for refresh token grant flow
+      client_secret: ${client.tokenRtClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
       # optional scope, default scope in the client registration will be used if not defined.
-      scope:
-      - petstore.r
-      - petstore.w
-  # light-oauth2 key distribution endpoint configuration
-  key:
-    # key distribution server url
-    server_url: https://localhost:6886
-    # the unique service id for key distribution service
-    serviceId: com.networknt.oauth2-key-1.0.0
-    # the path for the key distribution endpoint
-    uri: "/oauth2/key"
-    # client_id used to access key distribution service. It can be the same client_id with token service or not.
-    client_id: f7d42348-c647-4efb-a52d-4c5787421e72
+      # If there are scopes specified here, they will be verified against the registered scopes.
+      # scope:
+      # - petstore.r
+      # - petstore.w
+    # light-oauth2 key distribution endpoint configuration for token verification
+    key:
+      # key distribution server url for token verification. It will be used if it is configured.
+      # If it is not set, a service lookup will be taken with serviceId to find an instance.
+      # server_url: ${client.tokenKeyServerUrl:https://localhost:6886}
+      # key serviceId for key distribution service, it will be used if above server_url is not configured.
+      serviceId: ${client.tokenKeyServiceId:com.networknt.oauth2-key-1.0.0}
+      # the path for the key distribution endpoint
+      uri: ${client.tokenKeyUri:/oauth2/key}
+      # client_id used to access key distribution service. It can be the same client_id with token service or not.
+      client_id: ${client.tokenKeyClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
+      # client secret used to access the key distribution service.
+      client_secret: ${client.tokenKeyClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
+      # set to true if the oauth2 provider supports HTTP/2
+      enableHttp2: ${client.tokenKeyEnableHttp2:true}
+  # sign endpoint configuration
+  sign:
+    # token server url. The default port number for token service is 6882. If this url exists, it will be used.
+    # if it is not set, then a service lookup against serviceId will be taken to discover an instance.
+    # server_url: ${client.signServerUrl:https://localhost:6882}
+    # For users who leverage SaaS OAuth 2.0 provider from lightapi.net or others in the public cloud
+    # and has an internal proxy server to access code, token and key services of OAuth 2.0, set up the
+    # proxyHost here for the HTTPS traffic. This option is only working with server_url and serviceId
+    # below should be commented out. OAuth 2.0 services cannot be discovered if a proxy server is used.
+    # proxyHost: ${client.signProxyHost:proxy.lightapi.net}
+    # We only support HTTPS traffic for the proxy and the default port is 443. If your proxy server has
+    # a different port, please specify it here. If proxyHost is available and proxyPort is missing, then
+    # the default value 443 is going to be used for the HTTP connection.
+    # proxyPort: ${client.signProxyPort:3128}
+    # token serviceId. If server_url doesn't exist, the serviceId will be used to lookup the token service.
+    serviceId: ${client.signServiceId:com.networknt.oauth2-token-1.0.0}
+    # signing endpoint for the sign request
+    uri: ${client.signUri:/oauth2/token}
+    # timeout in milliseconds
+    timeout: ${client.signTimeout:2000}
     # set to true if the oauth2 provider supports HTTP/2
-    enableHttp2: true
+    enableHttp2: ${client.signEnableHttp2:true}
+    # client_id for client authentication
+    client_id: ${client.signClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
+    # client secret for client authentication and it can be encrypted here.
+    client_secret: ${client.signClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
+    # the key distribution sever config for sign. It can be different then token key distribution server.
+    key:
+      # key distribution server url. It will be used to establish connection if it exists.
+      # if it is not set, then a service lookup against serviceId will be taken to discover an instance.
+      # server_url: ${client.signKeyServerUrl:https://localhost:6886}
+      # For users who leverage SaaS OAuth 2.0 provider from lightapi.net or others in the public cloud
+      # and has an internal proxy server to access code, token and key services of OAuth 2.0, set up the
+      # proxyHost here for the HTTPS traffic. This option is only working with server_url and serviceId
+      # below should be commented out. OAuth 2.0 services cannot be discovered if a proxy server is used.
+      # proxyHost: ${client.signKeyProxyHost:proxy.lightapi.net}
+      # We only support HTTPS traffic for the proxy and the default port is 443. If your proxy server has
+      # a different port, please specify it here. If proxyHost is available and proxyPort is missing, then
+      # the default value 443 is going to be used for the HTTP connection.
+      # proxyPort: ${client.signKeyProxyPort:3128}
+      # the unique service id for key distribution service, it will be used to lookup key service if above url doesn't exist.
+      serviceId: ${client.signKeyServiceId:com.networknt.oauth2-key-1.0.0}
+      # the path for the key distribution endpoint
+      uri: ${client.signKeyUri:/oauth2/key}
+      # client_id used to access key distribution service. It can be the same client_id with token service or not.
+      client_id: ${client.signKeyClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
+      # client secret used to access the key distribution service.
+      client_secret: ${client.signKeyClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
+      # set to true if the oauth2 provider supports HTTP/2
+      enableHttp2: ${client.signKeyEnableHttp2:true}
   # de-ref by reference token to JWT token. It is separate service as it might be the external OAuth 2.0 provider.
   deref:
-    # Token service server url, this might be different than the above token server url.
-    server_url: https://localhost:6882
-    # token service unique id for OAuth 2.0 provider. Need for service lookup/discovery.
-    serviceId: com.networknt.oauth2-token-1.0.0
+    # Token service server url, this might be different than the above token server url. The static url will be used if it is configured.
+    # server_url: ${client.derefServerUrl:https://localhost:6882}
+    # For users who leverage SaaS OAuth 2.0 provider in the public cloud and has an internal
+    # proxy server to access code, token and key services of OAuth 2.0, set up the proxyHost
+    # here for the HTTPS traffic. This option is only working with server_url and serviceId
+    # below should be commented out. OAuth 2.0 services cannot be discovered if a proxy is used.
+    # proxyHost: ${client.derefProxyHost:proxy.lightapi.net}
+    # We only support HTTPS traffic for the proxy and the default port is 443. If your proxy server has
+    # a different port, please specify it here. If proxyHost is available and proxyPort is missing, then
+    # the default value 443 is going to be used for the HTTP connection.
+    # proxyPort: ${client.derefProxyPort:3128}
+    # token service unique id for OAuth 2.0 provider. Need for service lookup/discovery. It will be used if above server_url is not configured.
+    serviceId: ${client.derefServiceId:com.networknt.oauth2-token-1.0.0}
     # set to true if the oauth2 provider supports HTTP/2
-    enableHttp2: true
+    enableHttp2: ${client.derefEnableHttp2:true}
     # the path for the key distribution endpoint
-    uri: "/oauth2/deref"
+    uri: ${client.derefUri:/oauth2/deref}
     # client_id used to access key distribution service. It can be the same client_id with token service or not.
-    client_id: f7d42348-c647-4efb-a52d-4c5787421e72
+    client_id: ${client.derefClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
+    # client_secret for deref
+    client_secret: ${client.derefClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
+# circuit breaker configuration for the client
+request:
+  # number of timeouts/errors to break the circuit
+  errorThreshold: ${client.errorThreshold:2}
+  # timeout in millisecond to indicate a client error.
+  timeout: ${client.timeout:3000}
+  # reset the circuit after this timeout in millisecond
+  resetTimeout: ${client.resetTimeout:7000}
+  # if open tracing is enable. traceability, correlation and metrics should not be in the chain if opentracing is used.
+  injectOpenTracing: ${client.injectOpenTracing:false}
+  # inject serviceId as callerId into the http header for metrics to collect the caller. The serviceId is from server.yml
+  injectCallerId: ${client.injectCallerId:false}
+  # the flag to indicate whether http/2 is enabled when calling client.callService()
+  enableHttp2: ${client.enableHttp2:true}
+  # the maximum host capacity of connection pool
+  connectionPoolSize: ${client.connectionPoolSize:1000}
+  # the maximum request limitation for each connection
+  maxReqPerConn: ${client.maxReqPerConn:1000000}
+  # maximum quantity of connection in connection pool for each host
+  maxConnectionNumPerHost: ${client.maxConnectionNumPerHost:1000}
+  # minimum quantity of connection in connection pool for each host. The corresponding connection number will shrink to minConnectionNumPerHost
+  # by remove least recently used connections when the connection number of a host reach 0.75 * maxConnectionNumPerHost.
+  minConnectionNumPerHost: ${client.minConnectionNumPerHost:250}
 ``` 
 
-Please be aware that bufferSize need to be increased to the size of your maximum request body. The default 24*1024 should be good enough for most of the application. There is a [tutorial][] to give you more details on the bufferSize configuration. 
-
-The values of `keystore` and `truststore` also represent the paths of them. They should be relative to the external config directory. For example, If the server start with `-Dlight-4j-config-dir=/external_dir/config`, and the absolute path of `keystore` is `/external_dir/config/ssl/client.keystore`, their configuration in client.yml should be:
+The values of `keystore` and `truststore` also represent the paths. They should be relative to the external config directory. For example, If the server start with `-Dlight-4j-config-dir=/external_dir/config`, and the absolute path of `keystore` is `/external_dir/config/ssl/client.keystore`, their configuration in client.yml should be:
 
 ```yaml
 tls:
@@ -525,7 +739,9 @@ tls:
   keyStore: ssl/client.keystore
   ...
 ```
-Otherwise, if all config files flattened into one folder. The configuration could be simplified as:
+
+Otherwise, if all config files are flattened into one folder. The configuration could be simplified as:
+
 ```yaml
 tls:
   ...
@@ -535,7 +751,7 @@ tls:
   ...
 ```
 
-And here is an example of secret.yaml with client secrets.
+And here is an example of secret.yaml with client secrets in 1.6.x release. For 2.0.x release, we don't use the secret.yml anymore and all sensitive info are in the client.yml encryped. 
 
 ```yaml
 # This file contains all the secrets for the server and client in order to manage and
@@ -597,7 +813,7 @@ emailPassword: change-to-real-password
 
 The config item `verifyHostname` in the [Configuration](#Configuration) section enables default HTTPS hostname verification. That means the hostname in the client request URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected. It is a common practice for APIs with a proper DNS. 
 
-However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in CaaS environment, we provide a configuration based approach for service identity check. In this approach, the server side ssl certificate needs to include a service identity. Users can choose any meaningful ids or names to identify their services. Once the ids or names are added to server ssl certificate, the clients of the service need to add the specified ids or names in to `trustedNames` of the configuration file `client.yml`. At runtime, the https or http2 client verifies server certificates agains configured `trustedNames`. If a match is found, the service is trusted and connections are established. Otherwise, connections are terminated or refused.
+However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in the CaaS environment, we provide a configuration-based approach for a service identity check. In this approach, the server-side SSL certificate needs to include a service identity. Users can choose any meaningful ids or names to identify their services. Once the ids or names are added to the server SSL certificate, the clients of the service need to add the specified ids or names to `trustedNames` of the configuration file `client.yml`. At runtime, the HTTPS or http2 client verifies server certificates against configured `trustedNames`. If a match is found, the service is trusted, and connections are established. Otherwise, connections are terminated or refused.
 
 The following steps illustrate how to set up service identify checks using service IDs. 
 
@@ -655,6 +871,6 @@ tls:
 [Service discovery tutorial]: /tutorial/common/discovery/
 [tutorial]: https://github.com/networknt/light-example-4j/tree/master/router
 [light-consumer-4j]: https://github.com/networknt/light-consumer-4j
-[light-saga-4j]: /style/light-saga-4j/
+[light-kafka]: /style/light-kafka/
 [signing]: /service/oauth/service/signing/
 [client.yml]: https://github.com/networknt/light-4j/blob/master/client/src/main/resources/config/client.yml
