@@ -72,7 +72,7 @@ public class UserQueryStartupHook implements StartupHookProvider {
     public static UserQueryStreams streams = null;
     @Override
     public void onStartup() {
-        int port = Server.config.getHttpsPort();
+        int port = Server.getServerConfig().getHttpsPort();
         String ip = NetUtils.getLocalAddressByDatagram();
         logger.info("ip = " + ip + " port = " + port);
         streams = new UserQueryStreams();
@@ -316,7 +316,7 @@ public class QueryUserIdGetHandler implements LightHttpHandler {
             StreamsMetadata metadata = UserQueryStartupHook.streams.getUserIdStreamsMetadata(userId);
             if(logger.isDebugEnabled()) logger.debug("found address in another instance " + metadata.host() + ":" + metadata.port());
             String url = "https://" + metadata.host() + ":" + metadata.port();
-            if(NetUtils.getLocalAddressByDatagram().equals(metadata.host()) && Server.config.getHttpsPort() == metadata.port()) {
+            if(NetUtils.getLocalAddressByDatagram().equals(metadata.host()) && Server.getServerConfig().getHttpsPort() == metadata.port()) {
                 setExchangeStatus(exchange, OBJECT_NOT_FOUND, "user", userId);
                 return;
             } else {

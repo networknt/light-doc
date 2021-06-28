@@ -96,7 +96,7 @@ Exemplo 2:
             
             clientBuilder.setClientRequest(clientRequest);
             clientBuilder.setLatch(new CountDownLatch(1));
-            if (!Server.config.isEnableHttp2()) {
+            if (!Server.getServerConfig().isEnableHttp2()) {
               clientBuilder.disableHttp2();
             }
             clientBuilder.setApiHost(CUSTOMERS_URL);
@@ -142,7 +142,7 @@ Exemplo 2:
     
     clientBuilder.setClientRequest(clientRequest);
     clientBuilder.setLatch(new CountDownLatch(1));
-    if (!Server.config.isEnableHttp2()) {
+    if (!Server.getServerConfig().isEnableHttp2()) {
         clientBuilder.disableHttp2();
     }
     clientBuilder.setServiceDef(new ServiceDef("https", CUSTOMERS_SERVICE, "training", null));
