@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-For developers who are working on the light platform, it is very important to have all related repositories to be built on the local machine and install the jar files into the .m2 repository. It is OK to check out all the repositories from https://github.com/networknt and build them one by one;
+For developers who are working on Light, it is very important to have all related repositories to be built on the local machine and install the jar files into the .m2 repository. It is OK to check out all the repositories from https://github.com/networknt and build them one by one;
 however, it is very time-consuming. To our contributor's life easier, we have created a config in the light-config-test repository to utilize light-bot to build necessary repositories in one shot and sync with remote git server on a daily basis or when it is necessary. 
 
 **Please note**: If you are only working on one repository, you can just check out the particular repository and build it locally. We have snapshot versions of all repositories published to the maven central so all dependencies should be downloaded from the Internet. 
@@ -61,7 +61,7 @@ cd ~/networknt/light-config-test/light-bot/develop-build/build-all
 java -Dlight-4j-config-dir=./config -Dlogback.configurationFile=./logback.xml -jar ~/networknt/light-bot/bot-cli/build/libs/bot-cli-fat-1.0.jar -t develop-build
 ```
 
-Wait for several minutes, all the related light platform jar files should be built and installed. 
+Wait for several minutes, all the related Light jar files should be built and installed. 
 
 ### Repeat this when necessary
 

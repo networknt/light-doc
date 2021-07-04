@@ -34,8 +34,7 @@ the original one, releases the requested tokens.
 PKCE essentially works by preventing a malicious app or code that has intercepted the code (as it was passed from the system browser / the OS to the app) from exchanging it for a token.
 
 The latest release of the light-oauth2 server adds complete support for PKCE. In order to make 
-use of it a public client just needs to set the appropriate PKCE request parameters. The server 
-will take care of the rest.
+use of it a public client just needs to set the appropriate PKCE request parameters. The server will take care of the rest.
 
 We also provide the utility class CodeVerifierUtil in the light-4j utility module to assist Java clients in creating code verifiers and code challenges.
 

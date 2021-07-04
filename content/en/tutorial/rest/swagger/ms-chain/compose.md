@@ -8,8 +8,8 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
-
 
 So far, we have four servers running and they can talk to each other as standalone
 services. In this step, we are going to dockerize all of them and start them with a
@@ -118,7 +118,7 @@ networks:
 ```
 
 
-From above docker compose file you can see we have a volume for each api with externalized
+From the above docker compose file you can see we have a volume for each api with externalized
 configuration folder under ms_chain/etc/api_x/config. Since we are using docker compose
 we cannot use localhost:port to call services and we have to use service name in 
 docker-compose-app.yml for the hostname. To resolve the issue without rebuilding the services

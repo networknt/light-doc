@@ -11,13 +11,13 @@ draft: false
 reviewed: true
 ---
 
-This tutorial will show you how to start light-eventuate-4j services with docker-compose. It is very convenient for developers who want to do integration test on his/her laptop or desktop. For official test environment and production, it is not recommended to use docker-compose or docker. These services should be installed in a data center or virtual machines to form a cluster. 
+This tutorial will show you how to start light-eventuate-4j services with docker-compose. It is very convenient for developers who want to do an integration test on his/her laptop or desktop. For the official test environment and production, it is not recommended to use docker-compose or docker. These services should be installed in a data center or virtual machines to form a cluster. 
 
 ### Prepare Environment
 
 Kafka needs a network IP address for ADVERTISED_HOST_NAME, and it cannot be localhost or 127.0.0.1 as localhost within docker container means the docker container itself. It must be an address on the host that is accessible within docker container. It should be the hostname of your computer or the real network IP address of your computer that runs docker. 
 
-There is a script in light-docker that can try to find the hostname and export it as DOCKER_HOST_IP, but it is not reliable as hostname might map to 127.0.0.1 on some computers. The best way to do that would manually find out the IP address on your computer and export it.
+There is a script in light-docker that can try to find the hostname and export it as DOCKER_HOST_IP, but it is not reliable as the hostname might map to 127.0.0.1 on some computers. The best way to do that would manually find out the IP address on your computer and export it.
 
 ##### Manually export DOCKER_HOST_IP
 
@@ -65,9 +65,9 @@ export M2=%M2_HOME%\bin
 export DOCKER_HOST_IP=192.168.1.120
 ```
 
-Note that above manual export and script will only work on the terminal window with the export and you have to start the docker-compose with the exact terminal in order to work as the environment variable only associates to that particular terminal instance. 
+Note that the above manual export and script will only work on the terminal window with the export and you have to start the docker-compose with the exact terminal in order to work as the environment variable only associates to that particular terminal instance. 
 
-Right after you updated .bashrc, you can run the following command and then run the docker-compose from the same terminal. The next time you restart your computer, you can run the docker-compose in any terminal.
+Right after you have updated .bashrc, you can run the following command and then run the docker-compose from the same terminal. The next time you restart your computer, you can run the docker-compose in any terminal.
 
 ```
 cd ~
@@ -79,16 +79,16 @@ This approach only works with a desktop as it has a static IP. If you are using 
 
 ### Start eventuate services
 
-Now you have used a script or manually export DOCKER_HOST_IP. The next step is to start eventuate services with a docker-compose file in the light-docker repository. 
+Now you have used a script or manually exported DOCKER_HOST_IP. The next step is to start eventuate services with a docker-compose file in the light-docker repository. 
 ```
 cd ~/networknt
 git clone https://github.com/networknt/light-docker.git
 cd light-docker
 ```
 
-Now let's start the docker-compose-integration-test.yml from light-docker folder. Before we run the compose, we need to export the DOCKER_HOST_IP on this terminal unless you have updated .bashrc file.
+Now let's start the docker-compose-integration-test.yml from the light-docker folder. Before we run the compose, we need to export the DOCKER_HOST_IP on this terminal unless you have updated .bashrc file.
 
-After double check the DOCKER_HOST_IP environment variable, you can issue the following command to start Kafka, Zookeeper, and Mysql altogether.
+After double checking the DOCKER_HOST_IP environment variable, you can issue the following command to start Kafka, Zookeeper, and Mysql altogether.
 
 ```
 cd ~/networknt/light-docker
@@ -101,7 +101,7 @@ Depending on how fast your computer is and if you have all the docker images cac
 
 ** The following section is only for CDC server developers. If you are creating applications based on light-eventuate-4j, light-tram-4j, and light-saga-4j you don't need the steps below. **
 
-Eventuate CDC is a server that monitors the events table in the database and sends the events to Kafka for other services to subscribe. It is part of the docker-compose-integration-test.yml already so you don't need to start it separately. 
+Eventuate CDC is a server that monitors the events table in the database and sends the events to Kafka for other services to subscribe to. It is part of the docker-compose-integration-test.yml already so you don't need to start it separately. 
 
 However, if you are a developer who is working on the eventuate CDC server, then you might want to comment out the eventuate-cdcserver from docker-compose-integration-test.yml and start eventuate CDC server by yourself. 
 

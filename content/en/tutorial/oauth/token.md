@@ -8,6 +8,7 @@ weight: 40
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This service has only one endpoint to get access token. It supports authorization

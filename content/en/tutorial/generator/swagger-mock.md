@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When using light-codegen with Swagger 2.0 specification to generate light-rest-4j project,

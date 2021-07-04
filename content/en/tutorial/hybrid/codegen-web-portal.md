@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Most developers use [light-codegen][] as a Java command line tool or Docker command line
@@ -37,7 +38,7 @@ The configuration files are located at light-config-test/light-portal/hybrid-que
 folder and you need to go to that folder to start the server. 
 
 First let's build light-codegen so that we can have all the jar files locally. As light-codegen
-are released to maven central, you can download the right version of jar files from there as
+is released to maven central, you can download the right version of jar files from there as
 well. 
 
 ```

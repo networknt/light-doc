@@ -8,10 +8,11 @@ aliases: []
 weight: 80
 toc: false
 draft: false
+reviewed: true
 ---
 
-Integration test in monolithic application is complicated as there might be database that
-need to be populated and there might be third party systems that need to be running in order
+Integration tests in monolithic applications is complicated as there might be a database that
+needs to be populated and there might be third party systems that need to be running in order
 to test all functionalities. In microservices architecture, it is even worse as there are
 more services that need to be running together in order to test a single service. For simple
 application which consists only several services, it is OK to be tested on developers laptop

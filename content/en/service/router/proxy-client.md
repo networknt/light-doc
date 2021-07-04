@@ -12,7 +12,7 @@ reviewed: true
 ---
 
 
-This is a simple proxy client for light-router, and it can discover and load balance the hosts from Consul or other service discovery services supported by the light platform.
+This is a simple proxy client for light-router, and it can discover and load balance the hosts from Consul or other service discovery services supported by Light.
 
 As the target servers are implemented in light-4j which is HTTP 2.0 supported, there is no need to have a connection pool to be implemented. For each host, there would be only one connection as HTTP 2.0 supports multiplexing.
 

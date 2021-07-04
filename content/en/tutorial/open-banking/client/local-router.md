@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous step, we started the [light-oauth2][] services locally. In this section, we are going to start the light-router instance to act as a consumer proxy and host the two single-page applications as a virtual host. 

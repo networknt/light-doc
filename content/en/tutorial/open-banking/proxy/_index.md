@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous step, we have config the light-router instance to [route][] traffic to the microservices we have built. It is recommended that each application has a router instance or a cluster of instances. In this sense, the light-router is designed for consumers. 
+In the previous step, we have configured the light-router instance to [route][] traffic to the microservices we have built. It is recommended that each application has a router instance or a cluster of instances. In this sense, the light-router is designed for consumers. 
 
 For an enterprise, services might be built with different technology stack, and it is not feasible to rewrite all of them in microservices. When you build a new application, chances are you need to leverage some of the legacy APIs. To bring these APIs to the light-4j ecosystem, we have introduced a gateway light-proxy to address all cross-cutting concerns. Unlike the light-router that is consumer-focused, the light-proxy is provider focused for services not built on top of light-4j. For services built on top of light-4j, there is no need to use light-proxy as all the gateway cross-cutting concerns are embedded. 
 

@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous step, an individual docker container is started with all the config files
@@ -130,7 +131,7 @@ What can you see? A lot more debug info? This is the way that we can enable diff
 logging level the application with externalized logback.xml file. 
 
 
-In this tutorial, we have externalize the config files and start server with docker-compose
+In this tutorial, we have externalized the config files and start server with docker-compose
 with externalized config files. You can put all config files into the externalized config 
 folder or just put the files that you want to override the default one inside the container. 
 

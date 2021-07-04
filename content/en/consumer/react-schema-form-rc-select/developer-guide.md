@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Recently, I have upgraded this react-schema-form add-on to the latest for all dependencies to resolve the security vulnerabilities. The process is relatively easy. 

@@ -333,7 +333,7 @@ Here is the section of the config.json after adding the agent token.
 
 ### ACL Policy
 
-In the light platform, two different clients need to communicate with Consul and the policies are different. 
+In Light, two different clients need to communicate with Consul and the policies are different. 
 
 * Service
 

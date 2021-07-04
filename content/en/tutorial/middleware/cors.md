@@ -11,7 +11,7 @@ reviewed: true
 ---
 
 
-For some of the APIs/services, the endpoints will be accessed from a Single Page Application(React/Vue/Angular) served from another domain. In this case, the API server needs to handle the preflight OPTIONS request to enable CORS. As light-4j platform can serve single page application from the same domain as the API/service, you normally don't need to do that if you are the owner of both client and service.
+For some APIs/services, the endpoints will be accessed from a Single Page Application(React/Vue/Angular) served from another domain. In this case, the API server needs to handle the preflight OPTIONS request to enable CORS. As the light-4j platform can serve a single page application from the same domain as the API/service, you normally don't need to do that if you are the owner of both client and service.
 However, during the development of the single page application, most developers will use nodejs to serve the Javascript with webpack hot reload to increase productivity, and you can use a proxy on the nodejs server to your APIs/services built on top of the light-4j frameworks. In this setup, you need to have CORS to be enabled on the API server so that the Javascript single page app can call the API from browser. 
 
 As CORS only used in the above scenario, the handler is not wired in by default in light-codegen scaffolded projects. 
@@ -159,7 +159,7 @@ Here is the final config.json that you can find from the above specification lin
 
 ```
 
-With both specification file openapi.yaml and config.json available, let's scaffold the project. Please note that we have another file called openapi.json and it is another optional input for the light-codegen. The YAML format is preferred as it is easy for a human to read and easy to be consumed by computers. The two formats are interchangeable in the swagger editor, and we have both in the GitHub model-config repo. 
+With both the specification file openapi.yaml and config.json available, let's scaffold the project. Please note that we have another file called openapi.json and it is another optional input for the light-codegen. The YAML format is preferred as it is easy for a human to read and easy to be consumed by computers. The two formats are interchangeable in the swagger editor, and we have both in the GitHub model-config repo. 
 
 Assume that you have a working directory called networknt under your user home directory. Before we generate the project, we are going to back up the existing folder in light-example-4j, and we are going to generate the project to the cors folder. 
 

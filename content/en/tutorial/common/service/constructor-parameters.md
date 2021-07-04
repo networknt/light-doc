@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-As we are dealing with constructor injection and so far all our implementations have
-a default constructor without any parameter. What if there are implementation with
-parameters in constructor? This tutorial will show you how to do it. Also, the service
+We are now dealing with constructor injection. So far all our implementations have
+a default constructor without any parameters. What if there are implementations with
+parameters in the constructor? This tutorial will show you how to do it. Also, the service
 module supports constructor parameters to be injected as well. You just need to make
 sure that parameters are injected early in the service.yml file.
 

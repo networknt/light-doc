@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In this tutorial, we are going to deploy the four APIs to an Openshift project. Openshift is built on top of Kubernetes, but there are still a lot of differences. It has a different command line `oc` than `kubectl` with similar syntax. 

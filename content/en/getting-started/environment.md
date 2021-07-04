@@ -17,7 +17,7 @@ reviewed: true
 
 * JDK 8 or JDK 11 (Mandatory)
 
-Currently, the majority of the components in the light platform 1.5.x or 1.6.x is based on Java 8, and master 2.0.x is based on Java 11. Before starting your first project, we need to install the following software packages on your system. 
+Currently, the majority of the components in Light 1.5.x or 1.6.x is based on Java 8, and master 2.0.x is based on Java 11. Before starting your first project, we need to install the following software packages on your system. 
 
 Most of our customers are working on light-4j production ready 1.5.x and 1.6.x versions which are dependent on Java 8. We have released 2.0.x on JDK 11 and the main development has already been moved to the JDK 11, but some of our customers are waiting for the Redhat certified JDK 11 docker image on the Openshift environment. 
 

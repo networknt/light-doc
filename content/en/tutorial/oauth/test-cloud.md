@@ -93,7 +93,7 @@ Change the MySQL host from to the test1 IP address in service.yml file.
 jdbcUrl: jdbc:mysql://38.113.162.51:3306/oauth2?useSSL=false&disableMariaDbDriver
 ```
 
-For code service only, update the cors.yml to remove the localhost as we will never access from the local. 
+For the code service only, update the cors.yml to remove the localhost as we will never access from the local. 
 
 ```
 enabled: false

@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This is a restful microservice generated from config.json and OpenAPI 3.0 specification

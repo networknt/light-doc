@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When building the taiji-blockchain, we are using Avro for binary encoding and decoding for service to service communication. To make sure that the size of the binary data is smallest, we need a centralized server to save all the schema so that only a schema ID will be serialized into the binary data. Both clients and services will go to the centralized schema registry to get the Avro schema to encode and decode the data. 

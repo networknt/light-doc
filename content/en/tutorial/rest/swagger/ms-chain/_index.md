@@ -6,10 +6,11 @@ categories: []
 keywords: [tutorial]
 toc: false
 draft: false
+reviewed: true
 ---
 
-These days light weight container like Docker is getting traction, more and more 
-API services are developed for docker container and deployed to the cloud. In this
+These days lightsweight containers like Docker are getting traction, as more and more 
+API services are developed for docker containers and deployed to the cloud. In this
 environment, traditional heavy weight containers like Java EE and Spring are 
 losing ground as it doesn't make sense to have a heavy weight container wrapped 
 with a light weight docker container. Docker and container orchestration tools 

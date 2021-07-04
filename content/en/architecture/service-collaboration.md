@@ -12,6 +12,7 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The recent trend in application architectures is to transition from monolithic applications to a 

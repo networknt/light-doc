@@ -10,7 +10,7 @@ toc: false
 draft: false
 ---
 
-Working in process. For real examples, please take a look at [light-codegen][] and [light-portal][].
+Work in progress. For real examples, please take a look at [light-codegen][] and [light-portal][].
 
 [light-codegen]: https://github.com/networknt/light-codegen
 [light-portal]: https://github.com/networknt/light-portal

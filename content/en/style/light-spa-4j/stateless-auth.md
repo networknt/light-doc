@@ -64,7 +64,7 @@ As you can see, we don't have a session object on the server side for each user,
 
 ### Reference App
 
-To help developers to learn how to use the light platform for developing Single Page App that consumes APIs, we have created a reference SPA application using React. The source code can be found at the following location. 
+To help developers to learn how to use Light for developing Single Page Apps that consume APIs, we have created a reference SPA application using React. The source code can be found at the following location. 
 
 https://github.com/networknt/light-example-4j/tree/master/spa/react-stateless
 

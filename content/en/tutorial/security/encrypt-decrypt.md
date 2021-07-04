@@ -8,10 +8,11 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In this tutorial, we are going to show you how to create a customized encryptor command line
-utility and a customized decryptor class inside your API. Also, it shows you how to wire in
+utility and a customized decryptor class inside your API. It also shows you how to wire in
 your decryptor in service.yml file. 
 
 ### Decryptor Interface
@@ -407,7 +408,7 @@ public class DecryptUtilTest {
 
 ### Summary
 
-Above steps show you how to customize the encryption and decryption to protect secret.yml config file. The
+The above steps show you how to customize the encryption and decryption to protect secret.yml config file. The
 provided reference implementation is not safe to use as anybody can read the source code to figure out the
 key that is used. 
 

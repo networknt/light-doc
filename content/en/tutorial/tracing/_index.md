@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When moving monolithic architecture to monolithic, the majority of operational challenges that arise are narrowed in two areas: networking and observability. 
+When moving monolithic architecture to microservices, the majority of operational challenges that arise are narrowed in two areas: networking and observability. 
 
 This is where Distributed Tracing can really help. Distributed Tracing helps with two fundamental challenges faced by microservices:
 

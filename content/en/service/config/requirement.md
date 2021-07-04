@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When managing the configurations, the following things need to be considered as part of the requirement. 
@@ -48,7 +49,7 @@ For a big organization, there might be multiple LOBs and each will have their ow
 
 * The final config files must be sent to the service in a secure way
 
-The final config zip file loaded from config server contains all the sensitive info that is populated by the config server. It must be secure during the transportation with TLS. Alos, all sensitive info must be encrypted that only the service itself can decrypt it. 
+The final config zip file loaded from config server contains all the sensitive info that is populated by the config server. It must be secure during the transportation with TLS. Also, all sensitive info must be encrypted that only the service itself can decrypt it. 
 
 
 * The service needs to be allowed to be restarted automatically

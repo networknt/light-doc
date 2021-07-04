@@ -24,7 +24,7 @@ cd light-bot
 ./gradlew build
 ```
 
-Once build is completed, you can find a bot-cli-fat-1.0.jar file in `~/networknt/light-bot/bot-cli/build/libs` folder. This jar file contains the command line class to execute light-bot tasks. 
+Once the build is completed, you can find a bot-cli-fat-1.0.jar file in `~/networknt/light-bot/bot-cli/build/libs` folder. This jar file contains the command line class to execute light-bot tasks. 
 
 As you can see this project is built with Gradle as we are trying to support both Maven and Gradle in the light-codegen for API projects. We are using this project to test Gradle Kotlin DSL. 
 

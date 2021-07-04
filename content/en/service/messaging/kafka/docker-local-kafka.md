@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-While working on one of the streams processing applications running in a Docker container to access local Kafka instance on the docker host, I had a lot of trouble to get the connection done right. 
+While working on one of the streams processing applications running in a Docker container to access local Kafka instance on the docker host, I had a lot of trouble getting the connection done right. 
 
 First, I tried to use the host IP address 192.168.1.144:9092 to connect to the Kafka server and it doesn't work as expected. The issue is that it works in some instances but not others. 
 

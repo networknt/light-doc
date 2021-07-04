@@ -8,13 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ### How to serve Single Page Application(React/Angular etc.) from your API server instance
 
 
 During development, we normally use Nodejs to serve the single page application as it is easy
-to package and test/debug. However, on production, it makes sense that the API server serves
+to package and test/debug. However, during production, it makes sense that the API server serves
 the single page application by itself. In this way, we don't need to enable [CORS handler][]
 and same another instance of the server.
 
@@ -28,7 +29,7 @@ There are two options depending on if you are using Docker or not.
 
 ### Without Docker
 
-You can serve the SPA with command line to start the server. The only thing that you need
+You can serve the SPA with the command line to start the server. The only thing that you need
 to make sure is to have the webserver.json config file point to the exact local filesystem
 directory. The default config point to the relative folder which is not going to work.
 
@@ -38,7 +39,7 @@ For more info, please take a look at the [webserver example][] and its readme.
 
 It is much easier to deploy SPA with containerized API as you can just put your SPA into
 a folder in your host machine and then map into the Docker with a volume. The API server
-can find the static files and serve them. Also, it allows you to change the UI easier without
+can find the static files and serve them. Also, it allows you to change the UI easily without
 touching the API.
 
 Take a look at a Dockerfile in [webserver example][] example and pay attention on the volume that maps 

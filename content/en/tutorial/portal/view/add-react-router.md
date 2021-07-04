@@ -9,6 +9,7 @@ weight: 60
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The light-portal has a lot of services and that means there would be a lot of menus on the UI and we need react-route to manage the routing in between components. 

@@ -46,7 +46,7 @@ VALUES('ericbroda', 'customer', 'Eric', 'Broda', 'ericbroda@gmail.com', 'user', 
 
 ```
 
-Above statements add two users: stevehu/123456 and ericbroda/123456
+The above statements add two users: stevehu/123456 and ericbroda/123456
 
 ```
 -- Open Banking SPA demo client registration to https://ob.lightapi.net/authorization

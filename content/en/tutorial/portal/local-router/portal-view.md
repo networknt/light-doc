@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous step, we have [started the light-router][] instance for the local portal. It listens 443 for the host lightapi.net
+In the previous step, we have [started the light-router][] instance for the local portal. It listens to 443 for the host lightapi.net
 
 In this step, we are going to explore the lightapi.net UI implementation with a focus on the light-oauth2 view.
 

@@ -16,7 +16,7 @@ draft: false
 reviewed: true
 ---
 
-The following is a list of articles that mention light platform. 
+The following is a list of articles that mention Light. 
 
 ### English
 

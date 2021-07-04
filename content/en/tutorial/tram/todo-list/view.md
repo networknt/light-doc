@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 TodoEventConsumer.java
@@ -234,7 +235,7 @@ public class TodoViewServiceImpl implements TodoViewService {
 ```
 
 This service implementation is using ElesticSearch to index the TodoView so that we can search
-the object and update the index once receives command side events.
+the object and update the index once it receives command side events.
 
 In the next step, let's take a look at [tram-todo-command][] restful microservice. 
 

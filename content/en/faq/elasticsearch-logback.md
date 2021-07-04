@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When using ElasticSearch for centralized logging, all logback output will goes to the stdout so that Logstash or Fluentd will pick it up and inject into ElasticSearch for indexing. In the production logback.xml in externalized config folder, there is a template with fixed columns to assist log injection. Everything works except Java stacktrace as it contains multiple lines and all injectors are handle single line only. 
+When using ElasticSearch for centralized logging, all logback output will go to the stdout so that Logstash or Fluentd will pick it up and inject into ElasticSearch for indexing. In the production logback.xml in externalized config folder, there is a template with fixed columns to assist log injection. Everything works except Java stacktrace as it contains multiple lines and all injectors are handle single line only. 
 
 To make multiple line stacktrace into a single line, we have manipulated the logback template a bit to concat the stacktrace. 
 

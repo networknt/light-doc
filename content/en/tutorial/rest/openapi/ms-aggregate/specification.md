@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Light-rest-4j microservices framework encourages Design Driven API building and 

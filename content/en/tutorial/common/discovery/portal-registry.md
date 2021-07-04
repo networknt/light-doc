@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 Until recently, we always recommend our customers to use Consul for the global registry and discovery. However, we found some issues with Consul reported from our customers. So we started to work on our own registry on the portal to replace the Consul. For more information about this component, please refer to [Portal Registry][]. 

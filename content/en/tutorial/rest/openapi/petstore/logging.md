@@ -9,6 +9,7 @@ weight: 100
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Logging is very important in microservices architecture as logs must be aggregated in
@@ -24,7 +25,7 @@ to ElasticSearch.
 Bofore taking any action, let's first kill the petstore docker container if it is still
 running. 
  
-For demo purpose, ELK will be started with a docker-compose locally. There is a compose
+For demo purposes, ELK will be started with a docker-compose locally. There is a compose
 file available in light-docker called docker-compose-logging.yml
 
 **Please note** that ElasticSearch has some requirements in memory, file handlers etc.

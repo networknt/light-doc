@@ -8,14 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In light-eventuate-4j we have two different CDC implementations mysql binlog and polling. The first is
-only working with MySql database and it is the most efficient way. The second polling is a generic
-implementation that is suitable for any SQL database like Postgres or Oracle. 
+In light-eventuate-4j we have two different CDC implementations mysql binlog and polling. The first only works with MySql database and it is the most efficient way. The second polling is a generic implementation that is suitable for any SQL database like Postgres or Oracle. 
 
-For each implementation, we need to start a server to allocate a thread to do the CDC work. There are
-two different ways to implement the server. light-rest-4j or light-hybrid-4j. 
+For each implementation, we need to start a server to allocate a thread to do the CDC work. There are two different ways to implement the server. light-rest-4j or light-hybrid-4j. 
 
 ### eventuate-cdc-server
 

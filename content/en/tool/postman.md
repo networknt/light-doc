@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 To test your HTTP service, the best tool is the Postman which has a GUI interface. The old version is running as part of the Chrome browser but the latest version is a standalone desktop application supports Linux, Mac and Windows. 

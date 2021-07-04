@@ -9,10 +9,11 @@ weight: 60
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-The best GUI tool to test RESTful API is [Postman][] and best command line tool is curl. 
+The best GUI tool to test RESTful API is [Postman][] and the best command line tool is curl. 
 
 Postman is very easy to set headers and other parameters and save the configuration for 
 future usage. If you have a lot of endpoints, it is highly recommended to save all of

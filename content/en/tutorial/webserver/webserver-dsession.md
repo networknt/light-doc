@@ -10,5 +10,5 @@ toc: false
 draft: false
 ---
 
-Working in progress. For more details, please refer to https://github.com/networknt/light-session-4j
+Work in progress. For more details, please refer to https://github.com/networknt/light-session-4j
 

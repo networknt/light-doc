@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous [remote service](/tutorial/open-banking/client/remote-service/) tutorial, we have demonstrated how to leverage remote test cloud services from the local Nodejs server for UI developers. The tutorial is only suitable for pure UI developers who only know the API of the backend services and focus on the React UI application 100 percent. In most organizations, there might be some full-stack developers who have to work on both SPA and backend APIs at the same time. They need an OAuth 2.0 SaaS provider for authentication and authorization remotely so that they can focus on their business locally. 
+In the previous [remote service](/tutorial/open-banking/client/remote-service/) tutorial, we have demonstrated how to leverage remote test cloud services from the local Nodejs server for UI developers. The tutorial is only suitable for pure UI developers who only know the API of the backend services and focus 100% on the React UI application. In most organizations, there might be some full-stack developers who have to work on both SPA and backend APIs at the same time. They need an OAuth 2.0 SaaS provider for authentication and authorization remotely so that they can focus on their business locally. 
 
 For us, the light-oauth2 is a high-performance OAuth 2.0 provider with seven microservices, and we have planned to deploy it to our test cloud to help organizations who are not keen to install the light-oauth2 internally for development. In the long term, we also plan to offer the light-oauth2 for production service as SaaS. 
 
@@ -242,7 +242,7 @@ allowedMethods:
 
 ### react-client
 
-We need to update the setupProxy.js with target https://login.lightapi.net which is hosted in the local light-router instance. Unlike other configuration, we need to redirect to localhost, and the Nodejs server must support a specific origin https://login.lightapi.net with credentials as true. For information on how to configure the cors module, please check https://www.npmjs.com/package/cors#configuration-options
+We need to update the setupProxy.js with the target https://login.lightapi.net which is hosted in the local light-router instance. Unlike other configuration, we need to redirect to localhost, and the Nodejs server must support a specific origin https://login.lightapi.net with credentials as true. For information on how to configure the cors module, please check https://www.npmjs.com/package/cors#configuration-options
 
 ```
 module.exports = function(app) {

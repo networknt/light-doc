@@ -8,12 +8,13 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In this tutorial, we are going to port the [Relay TodoMVC example][] where the GraphQL server is replaced with
 [light-graphql-4j][].  
 
-Let's build this from [mutation example][] and make some modification. 
+Let's build this from [mutation example][] and make some modifications. 
 
 ### Backup and Copy
 

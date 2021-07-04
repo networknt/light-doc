@@ -18,7 +18,7 @@ It is implemented in light-oauth2/authhub/src/main/java/com/networknt/oauth/Defa
 
 ### Authentication
 
-The authentication logic is very simple, it first checks if the passed in Credential is an instance of LightPasswordCredential. If yes, then try to match the password with the users' cache which is mapped to the user service of light-oauth2. 
+The authentication logic is very simple, it first checks if the passed in Credential is an instance of LightPasswordCredential. If yes, then it tries to match the password with the users' cache which is mapped to the user service of light-oauth2. 
 
 If the passed in Credential is an instance of LightGSSContextCredential, then it has been authenticated by Kerberos/SPNEGO. 
 

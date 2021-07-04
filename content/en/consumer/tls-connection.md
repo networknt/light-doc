@@ -8,9 +8,10 @@ weight: 20
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The light platform supports One-Way SSL by default in the [light-codegen][] and Two-Way SSL by updating server.yml to enable. Unless you are using some old tools that don't support HTTPS, it is recommended to use at least One-Way SSL even in the development phase, so you don't have any surprise when releasing to an official test environment. 
+Light supports One-Way SSL by default in the [light-codegen][] and Two-Way SSL by updating server.yml to enable. Unless you are using some old tools that don't support HTTPS, it is recommended to use at least One-Way SSL even in the development phase, so you don't have any surprise when releasing to an official test environment. 
 
 ### TLS certificates
 

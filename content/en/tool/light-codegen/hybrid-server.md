@@ -8,13 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
 Hybrid server is a special project that is designed as a host server for services built on top
 of light-hybrid-4j framework. Every service is built as a small jar file with only the business
-logic handlers inside and multiple jar files can be put into a docker volume to be loaded by a
-hybrid server instance running in docker container. In this way, the developers has nothing to 
+logic handlers inside. Multiple jar files can be put into a docker volume to be loaded by a
+hybrid server instance running in docker container. In this way, the developer has nothing to 
 do with the server at all they just need to focus on their domain business logic. Also as all
 these services are deployed in the same JVM, the communication between them are faster although
 it is still through HTTPS channel. This is our serverless solution.   
@@ -23,7 +24,7 @@ it is still through HTTPS channel. This is our serverless solution.
 
 #### Model
 
-This generator only generate the server platform that can host many other serivices. It doesn't 
+This generator only generates the server platform that can host many other services. It doesn't 
 have any model for input.
 
 #### Config
@@ -110,7 +111,7 @@ The following command is using docker to generate light-hybrid-4j server into
 docker run -it -v ~/networknt/light-codegen/light-hybrid-4j/src/test/resources:/light-api/input -v /tmp/light-codegen:/light-api/out networknt/light-codegen -f light-hybrid-4j-server -c /light-api/input/serverConfig.json -o /light-api/out/hybridserver
 ```
 
-On Linux environment, the generated code might belong to root:root and you need to change the
+In the Linux environment, the generated code might belong to root:root and you need to change the
 owner to yourself before building it. 
 
 Let's change the owner and build the server

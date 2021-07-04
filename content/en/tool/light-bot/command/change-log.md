@@ -19,7 +19,7 @@ After searching on the Internet for other alternative tools, we decided to build
 
 The idea is very simple. First, we need to get the commit log within the release branch from the previous tag to the HEAD. This list contains all the changes in the branch since the last release. 
 
-As `git log` only support DateTime to specify the beginning of the commit log to retrieve. We create one method to get the DateTime of the previous tag with the following git CLI.
+As `git log` only supports DateTime to specify the beginning of the commit log to retrieve. We create one method to get the DateTime of the previous tag with the following git CLI.
 
 ```
 git log -1 --format=%aI 1.5.32
@@ -83,7 +83,7 @@ With all the info available, we generate a map from the result of the query. Fro
 
 ### Merge with CHANGELOG.md
 
-Once the entries for the current release is generated, we need to save it into the existing CHANGELOG.md file. This is done by just merging two lists at a certain index. 
+Once the entries for the current release are generated, we need to save them into the existing CHANGELOG.md file. This is done by just merging two lists at a certain index. 
 
 ### Summary
 

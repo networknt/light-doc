@@ -8,15 +8,16 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Microservices enable businesses to innovate faster and stay ahead of the competitions.
+Microservices enable businesses to innovate faster and stay ahead of the competition.
 But one major challenge with the microservices architecture is the management of
 distributed data. Each microservice has its own private database. It is difficult to
 implement business transactions that maintain data consistency across multiple services
 as well as queries that retrieve data from multiple services.
 
-The light-eventuate-4j is an event sourcing and CQRS framework provides a simple yet
+The light-eventuate-4j is an event sourcing and CQRS framework which provides a simple yet
 powerful event-driven programming model that solves the distributed data management
 problems inherent in a microservice architecture.
 
@@ -26,18 +27,18 @@ and Command Query Responsibility Segregation (CQRS).
 light-eventuate-4j consists of a scalable, distributed event store server and client
 libraries for frameworks like light-rest-4j, light-graphql-4j and light-hybrid-4.
 
-This tutorial is for developers who are interested in building services that leverage
+This tutorial is for developers who are interested in building services that leverage the
 light-eventuate-4j framework for service to service communication. If you want to work
 on the components in light-eventuate-4j, please follow this [tutorial][] to set up your 
 working environment. 
 
 Also, the following steps assume that you have docker installed on your computer. Your
-OS should be Linux or Mac. Windows these days are still not Docker friendly and there
-are some issue with docker-compose. 
+OS should be Linux or Mac. Windows these days is still not Docker friendly and there
+are some issues with docker-compose. 
 
 ### Setting DOCKER_HOST_IP for Mac
 
-You can install Mysql, Kafka individually and start them at OS level and it is
+You can install Mysql, Kafka individually and start them at an OS level. This is
 the only option if you are using Windows. However, the most convenient way is to
 use docker-compose to run the application services and eventuate infrastructure 
 services: Mysql, Zookeeper, Kafka and CDC server.
@@ -57,7 +58,7 @@ sudo ifconfig lo0 alias 10.200.10.1/24  # (where 10.200.10.1 is some unused IP a
 export DOCKER_HOST_IP=10.200.10.1
 ```
 
-Once you have complete the export command, please ues the same terminal to start
+Once you have complete the export command, please use the same terminal to start
 docker-compose-eventuate.yml described in the next step as other terminal doesn't
 have this DOCKER_HOST_IP set.
 
@@ -65,7 +66,7 @@ For more information on the DOCKER_HOST_IP, please refer to [getting started][]
 
 ### Start Mysql, Zookeeper and Kafka
 
-Assume you have a working directory under your home directory called networknt
+Assuming you have a working directory under your home directory called networknt
 
 
 ```
@@ -97,7 +98,7 @@ If you are using light-hybrid-4j to develop microservices, you don't need to sta
 in the above step. There is a cdc-service available and it can be started with other command
 side services and share the same hybrid command server.
 
-Here is the steps to start both command server and query server.
+Here are the steps to start both command server and query server.
 
 ```
 cd ~/networknt/light-docker

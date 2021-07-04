@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 It is a very good commandline tool that can be used to test APIs. The following are some of the examples for some of the light services. 

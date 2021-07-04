@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The service to support federated OAuth 2.0 providers.
@@ -74,7 +75,7 @@ jwt:
 
 
 
-1.  Client get token from local light-oauth server (from the diagram, Light-Oauth B). The token header includes certificate Key Id
+1.  Client gets token from local light-oauth server (from the diagram, Light-Oauth B). The token header includes certificate Key Id
 
 
 ```
@@ -84,13 +85,13 @@ jwt:
    }
 ```
 
-2.  Client try to access the service which registered on light-oauth A with the access token;
+2.  Client tries to access the service which registered on light-oauth A with the access token;
 
 
-3. Service will check the light-oauth server (Light-Oauth A) for the token to verify the access. The light-oauth server (Light-Oauth A) will try get the local certificate based on the key Id in the token header
+3. The service will check the light-oauth server (Light-Oauth A) for the token to verify the access. The light-oauth server (Light-Oauth A) will try get the local certificate based on the key Id in the token header
 
 
-4. If light-oauth server (Light-Oauth A) can get certificate directly from local server, verify the token directly. If light-oauth server (Light-Oauth A) cannot get certificate directly from local server, then light-oauth key service will try to get the certificate from registered provider.
+4. If light-oauth server (Light-Oauth A) can get the certificate directly from local server, verify the token directly. If light-oauth server (Light-Oauth A) cannot get the certificate directly from local server, then light-oauth key service will try to get the certificate from registered provider.
 
 
 5. If light-oauth key service will try to get the certificate from registered provider, then verify the token with the certificate. Otherwise, return with access error.

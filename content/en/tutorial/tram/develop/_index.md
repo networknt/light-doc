@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
@@ -15,7 +16,7 @@ draft: false
 
 
 
-Normal solution for the message/event store is use message broker for the message queue.The traditional solution is to use a distributed transaction that spans the database and the message broker.
+The normal solution for the message/event store is to use message broker for the message queue.The traditional solution is to use a distributed transaction that spans the database and the message broker.
 However, distributed transactions are not a good choice for modern application.
 
 
@@ -33,7 +34,7 @@ Atomicity is guaranteed since this is a local ACID transaction. Figure diagram s
 
 
 
-light-tram-4j define a message table which similar as normal message broker message by including header and payload:
+light-tram-4j defines a message table which is similar to a normal message broker message, including a header and payload:
 
 
 ```
@@ -64,9 +65,9 @@ PAYLOAD: define the message payload; payload field save json format message body
 {"orderId":1,"orderTotal":{"amount":20},"customerId":1879729051024977}
 ```
 
-PUBLISHED: this is fields is used for oracle pulling cdc. If user chose mysql or postgre as database, please ignore this field.
+PUBLISHED: these are fields used for oracle pulling cdc. If the user chose mysql or postgre as database, please ignore this field.
 
-When user can light-tram-4j api to send message/event, this fields will use system default value 0; After oracle pulling cdc service published the message to kafka (or other message broker), the field value will be changed to 1 byn oracle pulling cdc service.
+When the user can use light-tram-4j api to send a message/event, this fields will use system default value 0; After oracle pulling cdc service published the message to kafka (or other message broker), the field value will be changed to 1 byn oracle pulling cdc service.
 
 
 ### Command message publish:

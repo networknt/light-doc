@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-Most developers who are working on the light-platform are building the final business handlers. Their job is to get the HTTP query parameters, path parameters and request body in the generated request handlers and create the corresponding response based on the input above. When users choose different HTTP frameworks, they need to know how to get the details from the request and then send the response. This document will be focusing on the request details. 
+Most developers who are working on Light are building the final business handlers. Their job is to get the HTTP query parameters, path parameters and request body in the generated request handlers and create the corresponding response based on the input above. When users choose different HTTP frameworks, they need to know how to get the details from the request and then send the response. This document will be focusing on the request details. 
 
 ### Header
 

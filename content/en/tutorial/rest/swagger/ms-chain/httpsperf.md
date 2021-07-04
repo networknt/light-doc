@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
@@ -41,10 +42,10 @@ Requests/sec:   9578.74
 Transfer/sec:      2.20MB
 ```
 
-As you can see https connections are slower than http connections which is expected. But is 
-is not that slow compare with http. 
+As you can see https connections are slower than http connections which is expected, but is 
+is not that slow compared with http. 
 
-Before starting the next step, please kill all four instances by Ctrl+C. And check in
+Before starting the next step, please kill all four instances by Ctrl+C, and check in
 the httpschain folder we just created and updated. 
 
 [here]: /tool/wrk-perf/

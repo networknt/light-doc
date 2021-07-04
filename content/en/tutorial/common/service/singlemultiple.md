@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is a use case that you have an interface and multiple implementations will be all used
+This is a use case where you have an interface, and multiple implementations will all be used
 during runtime. For example, in light-4j framework, we have multiple StartupHookProviders to
 be loaded during server startup and execute them one by one. Also, all our middleware handlers
 are wired into the request/response chain the same way. 

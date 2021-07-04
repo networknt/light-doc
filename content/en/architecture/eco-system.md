@@ -12,9 +12,10 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The light platform is an eco-system that support microservices on the cloud. There are several
+Light is an eco-system that support microservices on the cloud. There are several
 types of the components as part of the platform.
 
 ### Cross-cutting concerns

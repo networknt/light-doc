@@ -7,12 +7,13 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
 This is another pattern that is very useful for serving mobile native applications. The mobile
-app just send one request to an aggregate API and it will call multiple APIs to gather info
-and send back to the consumer. This avoid mobile device to call multiple APIs to get data on a
+app just sends one request to an aggregate API and it will call multiple APIs to gather info
+and send back to the consumer. This avoids mobile device to call multiple APIs to get data on a
 slow network. 
 
 This tutorial shows you how to build 4 services with one of them the aggregator. And it will

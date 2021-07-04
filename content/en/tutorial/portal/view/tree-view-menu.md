@@ -9,11 +9,12 @@ weight: 70
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In the previous section, we have [added react-router][] into the application with a responsive drawer implemented. We also added two menu links `Home` and `Abort` to route to these components. As we are building a portal site,  we might have a lot of services integrated into the portal with menus. Also, we are planning to support multi-tenant on the site so that each host can define its customized menu items to choose which services to be available. 
+In the previous section, we have [added react-router][] into the application with a responsive drawer implemented. We also added two menu links `Home` and `Abort` to route to these components. As we are building a portal site,  we might have a lot of services integrated into the portal with menus. Also, we are planning to support multi-tenants on the site so that each host can define its customized menu items to choose which services to be available. 
 
-Given the above requirement, we need to have a service to manage menu items per host in a hierarchical structure and serve the menu items when the Single Page Application is loaded for the host. To make it a little bit simpler, we want to build the tree view menu first with a static JSON definition file locally. In the following sections, we are going to hook up with the menu service of the light-portal to get JSON response from the service by the host. 
+Given the above requirements, we need to have a service to manage menu items per host in a hierarchical structure and serve the menu items when the Single Page Application is loaded for the host. To make it a little bit simpler, we want to build the tree view menu first with a static JSON definition file locally. In the following sections, we are going to hook up with the menu service of the light-portal to get JSON response from the service by the host. 
 
 The tree view is customized from https://github.com/fiffty/react-treeview-mui project with Rect 16 and Material UI 3.x support. As the project is only an old version released to the npmjs.org, we had to copy the component and made the modifications. 
 

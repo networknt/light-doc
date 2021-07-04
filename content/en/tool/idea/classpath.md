@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When debugging light-hybrid server, it is necessary to add all the jar files from the services target directory to the server classpath in the IDE. 

@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The tokenization service is designed to be a hosting service that can support thousands of clients to access concurrently. If this service is installed in-house, it is supposed to be used in high throughput and low latency enterprise environment. The performance of the service is critical.
+The tokenization service is designed to be a hosting service that can support thousands of clients to access concurrently. If this service is installed in-house, it is supposed to be used in a high throughput and low latency enterprise environment. The performance of the service is critical.
 
 The following section described how the performance test is done locally to measure if the service is suitable for your use case. 
 

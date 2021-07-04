@@ -8,16 +8,17 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-[Light-codegen][] provides a generator to generate eventuate base API based on OpenAPI 3.0 specification.
+[Light-codegen][] provides a generator to generate the eventuate base API based on OpenAPI 3.0 specification.
 
 The eventuate based API is built based on light-eventuate-4j framework. light-eventuate-4j framework design eventuate microservice API based on CQRS (Command Query Responsibility Segregation) design pattern.
 The service specification defined for Eventuate based API code generator should include the service definition for both CQRS command side service and query side service.
 
-Command side service will publish event to event store to change the state of the domain object or entire system
+The command side service will publish the event to event store to change the state of the domain object or entire system.
 
-Query side service will subscribe the event from event store and return results only and do not change the state of an object
+The query side service will subscribe the event from event store and return results only and does not change the state of an object.
 
 
 
@@ -27,9 +28,9 @@ Query side service will subscribe the event from event store and return results 
 
 In light-eventuate-4j framework generator, the model that drives code generation is the OpenAPI
 specification which same as normal light-rest-4j API OpenAPI specification.
-But different as normal light-rest-4j api OpenAPI specification, the eventuate based rest API Json format specification includes two services module definition (command service & query service)
+Being different from the normal light-rest-4j api OpenAPI specification, the eventuate based rest API Json format specification includes two services module definition (command service & query service)
 
-The base Json format will like the following:
+The base Json format will be like the following:
 
 ```
 {
@@ -111,8 +112,8 @@ Here is an example of config.json for openapi generator.
 ```
 
 
-For initialize the eventuate based the API service, the config value `overwriteEventuateModule` should be set as `true`.
-The the light-codegen eventuate generator will generate the eventuate rest API project with the following modules:
+To initialize the eventuate based the API service, the config value `overwriteEventuateModule` should be set as `true`.
+The light-codegen eventuate generator will generate the eventuate rest API project with the following modules:
 
 -- **common module**:      Shared components module which will be used on both  command side service module and  query side service module. Normally, it includes events definition and data module for rest API
 
@@ -163,7 +164,7 @@ cd /tmp/eventuate/todo-list
 mvn clean install
 ```
 
-Then user can start API developing the detail services from the generated project. For the detail development for the eventuate based API, please refer the [todo-list example][]  or [account-transfer example][] code on the light-example-4j repo
+Then user can start the API developing the detail services from the generated project. For the detail development for the eventuate based API, please refer the [todo-list example][]  or [account-transfer example][] code on the light-example-4j repo
 
 The [eventuate tutorial][] document includes the detail information about light-eventuate-4j framework and how to use it for eventuate based service API.
 

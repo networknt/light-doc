@@ -16,7 +16,7 @@ This service is part of light-portal, and it is used for managing users for the 
 
 ### Scope
 
-User Management only manages user registration, email confirmation, profile update, user delete and password change. The user login and logout will be managed by the light-spa-4j and light-oauth2 on light-portal for single-page applications. When you scale to multiple router instances, the session management will be implemented with [light-session-4j][].
+User Management only manages user registrations, email confirmations, profile updates, user deletes and password changes. The user login and logout will be managed by the light-spa-4j and light-oauth2 on light-portal for single-page applications. When you scale to multiple router instances, the session management will be implemented with [light-session-4j][].
 
 ### Workflow
 

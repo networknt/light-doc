@@ -36,18 +36,18 @@ Our answer is to deploy a reverse proxy built on top of the light-4j framework t
 The reverse proxy has the following features:
 
 * High throughput, low latency, and small footprint. 
-* Integrate light-oauth2 to protect un-secured services
+* Integrates light-oauth2 to protect un-secured services
 * Built-in load balancer with multiple data centers and clouds support
 * Can be started with Docker or standalone
-* Support HTTP 2.0 protocol on both in/out connections
+* Supports HTTP 2.0 protocol on both in/out connections
 * TLS termination
-* Allow adding other handlers—for example, TableauAuthHandler.
-* Support REST, GraphQL and RPC style of APIs
+* Allows adding other handlers—for example, TableauAuthHandler.
+* Supports REST, GraphQL and RPC style of APIs
 * Centralized logging with ELK, TraceabilityId, and CorrelationId
 * OpenTracing with Jaeger tracer integration
-* Collect client and service metrics into InfluxDB or Prometheus and view the dashboard on Grafana
+* Collects client and service metrics into InfluxDB or Prometheus and view the dashboard on Grafana
 * Service registry and discovery with Portal Registry or Consul
-* Manage configuration with light-config-server
+* Manages configuration with light-config-server
 
 To learn how to use this proxy, please refer to 
 

@@ -54,7 +54,7 @@ Once the table is created, we can issue the following command to query the table
 SELECT * from  USER_TABLE WHERE  USERID = 'stevehu' EMIT CHANGES;
 ```
 
-As we have run the producer before, the messages are sent to the test topic already. We need to click the Add query properties link to add the following property.
+As we have run the producer before, the messages are already sent to the test topic. We need to click the Add query properties link to add the following property.
 
 auto.offset.reset = Earliest
 
@@ -177,7 +177,7 @@ And the result:
 
 As you can see, the result is a list of data elements in the table. It is due to the design by the ksqldb client to mimic the database query result. In the return row object, we have access to each column's header and data type. It is easy to convert the result to a JSON if we want. 
 
-Compare with the Kafka [stream-query][] implementation; the service is significantly slower. It will get slower when more user objects are sent to the test topic because we set the property to redo the stream from the earliest each query dynamically. 
+Compared with the Kafka [stream-query][] implementation; the service is significantly slower. It will get slower when more user objects are sent to the test topic because we set the property to redo the stream from the earliest each query dynamically. 
 
 In essence, we delegate the Streams processing to the ksqlDB server with SQL like statements, and then we call the ksqlDB with its Java client from our service built with light-rest-4j. In the stream-query, we combine the Streams processing and query on the local store in the same service to gain the best performance and reduce the license cost for the ksqlDB. 
 

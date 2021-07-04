@@ -8,13 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Light-OAuth2 supports custom grant types and it is very easy to implement with a
 special client type called trusted. The trusted client type is an add-on based on 
 the standard public or confidential client types provided in OAuth 2.0 specification.
 
-The key condition that to setup trusted client is that client and OAuth 2.0 provider
+The key condition to setup a trusted client is that the client and OAuth 2.0 provider
 are deployed in the same organization so that OAuth 2.0 provider can trust the client
 on certain custom grant types.
 
@@ -28,7 +29,7 @@ make sure the the client type is "trusted".
 Once the client is registered, you should have a client_id and client_secret returned
 from the endpoint. Please write down both especially client_secret as there is no way
 to recover it. The client secret is generated and the hashed and salted result is saved
-into the database table. So there is no way we can retrieve it later.
+into the database table, so there is no way we can retrieve it later.
 
 For information on client registration, please refer to [client tutorial][]
 

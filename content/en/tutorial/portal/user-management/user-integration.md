@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 # Integration Test
@@ -44,7 +45,7 @@ The docker-compose will start local postgres database and usermanagement-service
 
 ## Event sourcing microservice:
 
-Integrate the service with light-eventuate-4j framework to process user management with event sourcing. It include command side service and query side service.
+Integrate the service with light-eventuate-4j framework to process user management with event sourcing. It includes the command side service and query side service.
 
 Module:
 
@@ -82,7 +83,7 @@ curl -X POST \
 '
 ```
 
--- Active user by the link in the confirm email (replace the token from DB)
+-- Activate user by the link in the confirm email (replace the token from DB)
 
 ```
 curl -X PUT \

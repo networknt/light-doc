@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-As of light-4j 1.6.3 release, we have added a feature for light-hybrid-4j to allow individual handler to register as a serfvice on Consul so that client can discover it and invoke it directly. It gives the flexibility to deploy serverless services to any individual hybird server instance without making all server instance hosting the same number of services. 
+As of the light-4j 1.6.3 release, we have added a feature for light-hybrid-4j to allow individual handlers to register as a service on Consul so that client can discover it and invoke it directly. It gives the flexibility to deploy serverless services to any individual hybird server instance without making all server instance hosting the same number of services. 
 
 In this tutorial, we are going to show you how to do that using light-codegen as an example. You can find the docker-compose and configuration files in light-config-test/light-codegen-handler folder. The purpose of this example is to allow different version of codegen-web handlers to be deployed and invoked to generate project based on different releases.
 

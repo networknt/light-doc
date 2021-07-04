@@ -12,7 +12,7 @@ reviewed: true
 ---
 
 
-OAuth2 is used to protect services, and each service must register itself with endpoints and scopes to have fine-grained access control. OAuth 2.0 specification only mentioned client registration with scopes along with it. For a simple application or single monolithic web service, it is OK. However, if we have hundreds of services with thousands of scopes, the scope management will be a nightmare. 
+OAuth2 is used to protect services, and each service must register itself with endpoints and scopes to have fine-grained access control. The OAuth 2.0 specification only mentioned client registration with scopes along with it. For a simple application or single monolithic web service, it is OK. However, if we have hundreds of services with thousands of scopes, the scope management will be a nightmare. 
 
 It is easier for consumers and providers to use endpoints in discussion than meaningless scopes. To do that, we introduced service registration and service endpoint registration. Based on the endpoint access between client and service, we can calculate the client's scope during the token creation. 
 

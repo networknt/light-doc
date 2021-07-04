@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When you are planning to turn it on in security.yml, you must ensure that you have [light-oauth2][]
@@ -54,7 +55,7 @@ output.
 [{"clientId":"f7d42348-c647-4efb-a52d-4c5787421e72","clientSecret":null,"clientType":"public","clientProfile":"mobile","clientName":"PetStore Web Server","clientDesc":"PetStore Web Server that calls PetStore API","ownerId":"admin","scope":"petstore.r petstore.w","redirectUri":"http://localhost:8080/authorization","createDt":"2017-12-11","updateDt":null}]
 ```
 
-In this tutorial, we are going to use petstore service, if you are working on another service, you need
+In this tutorial, we are going to use the petstore service, if you are working on another service, you need
 to register your service as a client through [client service][]. Also there is an [client service tutorial][] 
 you can follow.
 
@@ -315,14 +316,14 @@ keyClientSecret: f6h1FTI8Q3-7UScPZDzfXA
 
 ### Build and Test again
 
-Let's rebuilt and restart the server.
+Let's rebuild and restart the server.
 
 ```
 cd ~/networknt/light-example-4j/rest/swagger/petstore.bak
 mvn clean install exec:exec
 ``` 
 
-Now let's issue the same curl command as above and you will have an error as there is no token in
+Now let's issue the same curl command as above. You will have an error as there is no token in
 the header. 
 
 ```
@@ -364,8 +365,8 @@ And the result should be
 
 ### Summary
 
-Above steps show you how to enable communication with light-oauth2 key service to get public key
-certificate according to the kid header in JWT. Further, you can even enable bootstrapFromKeyService
+The above steps show you how to enable communication with light-oauth2 key service to get a public key
+certificate according to the kid header in JWT. Furthermore, you can even enable bootstrapFromKeyService
 to true so that you don't need to load public key certificates from config files. The key distribution
 service is a unique feature of light-oauth2 to change the traditional push certificates to all server
 instances to pull certificates from a central security server. 

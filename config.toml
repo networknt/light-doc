@@ -120,7 +120,7 @@ params = ["categories", "tags"]
 # High level items
 
 [[menu.docs]]
-  name = "About Light Platform"
+  name = "About Light"
   weight = 1
   identifier = "about"
   url = "/about/"

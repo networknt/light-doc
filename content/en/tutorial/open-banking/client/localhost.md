@@ -208,7 +208,7 @@ module.exports = function(app) {
 
 As you can see, we have enabled the CORS and also added all the API endpoints to the proxy. The last two endpoints are for the light-spa-4j StatelessAuthHandler. 
 
-There is another place in the react application that needs to be updated. When the react-client is redirecting to the login-view application for the light-oauth2 authentication and authorization, it can pass a redirectUri optional. Since we don't want to switch between https://localhost:3000 and https://ob.lightapi.net constantly, we need to remove the redirectUri from the redirect so that the OAuth 2.0 provider will use the redirectUri provided by the client registration. 
+There is another place in the react application that needs to be updated. When the react-client is redirected to the login-view application for the light-oauth2 authentication and authorization, it can pass a redirectUri optional. Since we don't want to switch between https://localhost:3000 and https://ob.lightapi.net constantly, we need to remove the redirectUri from the redirect so that the OAuth 2.0 provider will use the redirectUri provided by the client registration. 
 
 Here is the login function without redirect URL in ResponsiveDrawer.js
 

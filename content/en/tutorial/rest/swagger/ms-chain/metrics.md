@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-All services can be configed to enable metrics collection and report metrics info to Influxdb 
+All services can be configured to enable metrics collection and report metrics info to Influxdb 
 and subsequently viewed from Grafana dashboard. 
 
 If InfluxDB is not available the report will be a noop.

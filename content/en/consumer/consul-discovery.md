@@ -8,9 +8,10 @@ weight: 190
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Consul service discovery is enabled by the [consul][] module in light-4j and it is the best overall solution for service registry and discovery in the light platform. You can also choose zookeeper but it is no recommended. 
+Consul service discovery is enabled by the [consul][] module in light-4j and it is the best overall solution for service registry and discovery in Light. You can also choose zookeeper but it is not recommended. 
 
 [consul]: /concern/consul/
 [zookeeper]: /consumer/zookeeper-discovery/

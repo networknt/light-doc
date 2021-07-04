@@ -1,7 +1,7 @@
 ---
 title: "Benchmark Overview"
 date: 2017-11-06T11:16:05-05:00
-description: "Benchmark of Light Platform"
+description: "Benchmark of Light"
 categories: []
 keywords: [benchmark]
 menu:

@@ -10,8 +10,8 @@ The arguments are:
 * Nodejs is faster than Java at runtime.
 * Nodejs development is more productive than Java.
 
-These claims are proved to be false already as I've been working on both 
-platforms in banking industry for the last couple of years. I have been
+These claims have already been proven to be false as I've been working on both 
+platforms in the banking industry for the last couple of years. I have been
 building REST API frameworks on both Java and Nodejs and the following are
 my observations on Nodejs in enterprise computing.
 
@@ -28,9 +28,9 @@ shutdown the server. Not ideal but it reduce the risk to certain level. Due to
 this reason, Nodejs API platform is only recommended for readonly API in the
 bank. 
 
-Node server crashes under load (cpu 90% or up). We found this during out loaded
-test with Winston logger enabled and the server always dead without any response
-after a while. The reason is these callbacks don't have enough cpu time to
+Node servers crash under load (cpu 90% or up). We found this during our loaded
+test with Winston logger enabled and the server always died without any response
+for a while. The reason is these callbacks don't have enough cpu time to
 complete and there are piling up in memory until you run out of memory, the server
 won't shutdown in this situation but simply won't respond. The solution for
 us is to monitor the cpu usage and starting more containers when it is in 
@@ -38,18 +38,18 @@ heavy load.
 
 ## Callback Hell
 
-This is know issue for Javascript. Although promise helps a lot, it is still a
+This is a known issue for Javascript. Although promise helps a lot, it is still a
 big issue with Node platform.
 
  
 ## Code Maintenance
 
 Nodejs is easy to get into and very fast to build small Hello World application;
-however, building complex enterprise level application with thousands of line of
+however, building complex enterprise level application with thousands of lines of
 code is very hard. When I look at my own code wrote one year ago, I couldn't
 reason about what that piece code does. I have to put some debug info and run it
 to figure out how the code works. Callback Hell is one of the causes. For 
-enterprise applications, easy to understand and maintain is very important and I 
+enterprise applications, being easy to understand and maintain is very important and I 
 feel sorry for the bank employees who have taken over my work.
 
 ## Debugging
@@ -83,32 +83,32 @@ A lot of people praises npm and I agree that it is very good tool to manage modu
 However, only manage modules is no enough, it has to manage modules with versions.
 
 Most Node developers will have this experience. You have an application running today
-and tomorrow, you run npm install again and it stops working:) As one of the dependencies
-got a new version and it is not backward compatible. Shrinkwrap helps a little bit but
+and tomorrow, you run npm install again and it stops working. As one of the dependencies
+received a new version, it is not backward compatible. Shrinkwrap helps a little bit but
 it is very hard to update one or two immediate dependent modules as there is no way to
 update sub dependencies. Another way is to check in node_modules into git and packaged it
 into docker container. Now we always package node_modules into docker image.
 
 ## Windows Un-Friendly
 
-while trying to check in node_modules folder into git on Windows platform, most cases
+While trying to check in node_modules folder into git on Windows, in most cases
 you will get an error as some files are buried too deep in the directory and Windows 
-has limitation on path length. This issue has been partially fixed in later version
+has limitations on the path length. This issue has been partially fixed in later versions
 of Node as npm tries to flatten all the dependencies.
 
-Some of the modules depending on C/C++ that cannot be compiled on Windows. It causes
+Some modules depend on C/C++ cannot be compiled on Windows. It causes
 issues for teams that use different platforms for development. 
 
-Given Windows is not case sensitive on file names, application developed on Windows
+Given Windows is not case sensitive on file names, applications developed on Windows
 usually cannot be executed on Linux the first time.
 
 ## Long Running process hogs CPU
 
-This is not a problem of Nodejs but mistake of developers. I have seen too many this
-kind of mistakes and I want to highlight it here. As node is using event loop
-to dispatch tasks/callbacks, if any callback designed wrongly and doesn't give up CPU
+This is not a problem of Nodejs but a mistake of developers. I have seen too many of this
+kind of mistakes and I want to highlight it here. As Node is using an event loop
+to dispatch tasks/callbacks, if any callback is designed wrongly and doesn't give up CPU
 for a period of time, the entire system will suffer. If you have to process thousands
-of records loaded from database, process them in 100 blocks. There are so many articles
+of records loaded from database, process them in 100s of blocks. There are so many articles
 talking about this topic. 
 
 ## Public Module Quality
@@ -116,16 +116,16 @@ talking about this topic.
 No doubt there is a very active community for Nodejs and there are a lot of modules published
 on public npm repository. I myself got several modules published. 
 
-On the other hand, there are so many modules are in bad shape as developers of these modules
-often migrated from frontend without any enterprise level experience. Some of modules got 
-10 line of the code but will depending on 8 other modules. Write a small express application
-in nodejs and take a look at how many modules in node_modules folder. Is you application
+On the other hand, there are many modules in bad shape as developers of these modules
+often migrated from frontend without any enterprise level experience. Some of modules have 
+10 line of the code but will depend on 8 other modules. Write a small express application
+in nodejs and take a look at how many modules in node_modules folder. Is your application
 using them all? I guess less than 5 percent of the code in node_modules are in the 
 execution path and the rest of them are just wasting your hard drive space.
  
 A legendary Node developer TJ mentioned the same reason in his farewell article
 regarding to modules. Javascript sets the bar very low and it attracts a lot of low level 
-developers. Remember Visual Basic was the most popular language on Microsoft platform?
+developers. Remember when Visual Basic was the most popular language on Microsoft platform?
 
 ## Stability of the Platform
 
@@ -135,8 +135,7 @@ I understand, other customers are on the same version. We were told to upgrade t
 once it was prouduction ready and then Nodejs and IO.js were merged and Nodejs 4 was out. 
 Before Nodejs 4 was production ready, they've moved to Nodejs 5 and now on Nodejs 6.
 
-We are having big issue with Nodejs 0.10.39 as https module is not performing with API to 
-API calls and the issue was resolved in 0.12.x. So our recommendation for Nodejs API 
+We are having big issues with Nodejs 0.10.39 as the https module is not performing with API to API calls and the issue was resolved in 0.12.x. So our recommendation for Nodejs API 
 framework added another condition upon only readonly API - The API must not call another
 API in https. All APIs that calling another API with https must be implemented in Java 
 framework.
@@ -144,7 +143,7 @@ framework.
 
 ## Talents abandoned the ship
 
-As you might know, TJ who is the developer of express - most popular nodejs framework left
+As you might know, TJ, who is the developer of express - most popular nodejs framework left
 Nodejs to GO. Here is his [farewell](https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.5brqa9has)
 There are other heavy weight Nodejs developers left and that might make you think what 
 is going on.
@@ -176,18 +175,14 @@ with shared heap memory.
 As for speed, it is faster than WebSphere/WebLogic/JBoss but not in the same level as other
 new containerless Java frameworks and platforms. 
  
-Here is a [benchmarks](https://github.com/networknt/microservices-framework-benchmark) 
-that have both popular Java microservices frameworks and Nodejs/Express. The above performance
-result only focus on raw throughput and latency. While more code is added, Nodejs will be
+Here is a [benchmark](https://github.com/networknt/microservices-framework-benchmark) 
+that has both popular Java microservices frameworks and Nodejs/Express. The above performance
+result only focuses on raw throughput and latency. As more code is added, Nodejs will be
 getting slower and slower. 
 
 ## Summary
 
-I work on both Nodejs and Java so my opinion is not biased but to point out the facts on
-Nodejs platform. No doubt you can build rock solid Nodejs application with a group of senior
-developers but it is very hard to find that level of developers. I am not saying Java is 
-better as I know there are a lot of issues with Java. I just hope these points will help 
-you in choosing your next application platform. 
+I worked on both Nodejs and Java, so my opinion is not biased, but I wish instead to point out the facts on Nodejs platform. No doubt you can build rock solid Nodejs application with a group of senior developers, but it is very hard to find that level of developers. I am not saying Java is better, as I know there are a lot of issues with Java. I just hope these points will help you in choosing your next application platform. 
 
 
 

@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The light-bot is a command line tool at the moment. We can easily wrap it with a light-4j server to enable it as a service in the future. 
@@ -18,7 +19,7 @@ The light-bot is based on light-4j service module for dependency injection so al
 
 There are two types of classes: command and task. 
 
-A command is a fine-grained action that focuses on only one specific job. For example, create a branch for a Git repository. It has its configuration on how the action should be taken, but usually, they don't work independently. All commands are located in the exec-core module cmd folder. 
+A command is a fine-grained action that focuses on only one specific job, for example, creating a branch for a Git repository. It has its configuration on how the action should be taken, but usually, they don't work independently. All commands are located in the exec-core module cmd folder. 
 
 A task is a group of commands glued together with a configuration file to define the sequence and logic for the command executions. For example, the create-branch task will call the following commands to complete. 
 

@@ -7,9 +7,10 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
-Here is an article that discusses the [discovery patterns](https://www.javacodegeeks.com/2016/11/microservices-series-quick-look-service-discovery-patterns.html). You can learn what is the client-side vs server-side discovery in the above article.
+Here is an article that discusses the [discovery patterns](https://www.javacodegeeks.com/2016/11/microservices-series-quick-look-service-discovery-patterns.html). You can learn what client-side vs server-side discovery is in the above article.
 
 
 ### Who is using client-side discovery

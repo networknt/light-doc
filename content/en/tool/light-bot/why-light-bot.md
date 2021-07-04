@@ -15,7 +15,7 @@ reviewed: true
 
 All existing DevOps tools on the market are focusing on single repo but in a microservices architecture, there are a lot of related services, and libraries need to be built and tested at the same time if one upstream repository is changed. For example, in the networknt organization, if light-4j is changed, we need to build and test other dozens of repositories that are depending on light-4j. If you build light-4j only, chances are light-eventuate-4j is broken due to the change introduced in light-4j although all unit test cases passed in light-4j. 
 
-When we adopt microservices architecture, a traditional monolithic application will be split into dozens of smaller services and each service will have its own repository. Sometime, these repositories will be scattered in multiple organizations or multiple git servers. When one of the services changed, we need to build/test it, and we need to build other upstream and downstream services as well to do the integration tests to ensure all of them are working together. It is very hard to define this kind of dependencies and building multiple repositories in today's DevOps tools as they are all single repository focused.   
+When we adopt microservices architecture, a traditional monolithic application will be split into dozens of smaller services and each service will have its own repository. Sometimes, these repositories will be scattered in multiple organizations or multiple git servers. When one of the services changed, we need to build/test it, and we need to build other upstream and downstream services as well to do the integration tests to ensure all of them are working together. It is very hard to define this kind of dependencies and building multiple repositories in today's DevOps tools as they are all single repository focused.   
 
 ### Fully Automatic Pipeline with Code
 
@@ -23,7 +23,7 @@ Most of the existing tools are trying to provide a fancy UI, but it is very hard
 
 ### Linxu and Git only
 
-Our target is the cloud-native environment, and we don't need to worry about Windows support and other version control system like DevOps tools. This will save us 80 percent of the time and resource to deliver a light-weight and optimized solution for our target user base. If you look at the most popular DevOps tool Jenkins, it has built an OS abstract layer to support multiple operating systems and an SCM abstract layer to support all type of version control systems like CVS and SVN, etc. This makes the code very hard to reason about, and at the same time, you lose the opportunity to optimize it.  
+Our target is the cloud-native environment, and we don't need to worry about Windows support and other version control system like DevOps tools. This will save us 80 percent of the time and resources to deliver a light-weight and optimized solution for our target user base. If you look at the most popular DevOps tool Jenkins, it has built an OS abstract layer to support multiple operating systems and an SCM abstract layer to support all types of version control systems like CVS and SVN, etc. This makes the code very hard to reason about, and at the same time, you lose the opportunity to optimize it.  
 
 ### Cache Local Repositories
 
@@ -33,7 +33,7 @@ For example, if we change one repository in the networknt organization, light-bo
 
 ### Shared Dependencies Repository
 
-Dependencies don't need to be downloaded for every build, and they need to be shared by different build tasks on the same host to reduce the network traffic and speed up the build process. In Jenkins, we had a hard time to share the .m2 local repository to support multiple related builds as it treats every build as independent and builds each one in a separated environment. This generates too much network traffic and slows down the build process dramatically.   
+Dependencies don't need to be downloaded for every build, and they need to be shared by different build tasks on the same host to reduce the network traffic and speed up the build process. In Jenkins, we had a hard time sharing the .m2 local repository to support multiple related builds as it treats every build as independent and builds each one in a separated environment. This generates too much network traffic and slows down the build process dramatically.   
 
 ### Shared Infrastructure Services
 
@@ -45,11 +45,11 @@ You can have multiple bots running at different servers or even on the same serv
 
 ### Easy to Plugin
 
-The implementation of task executor can be easily replaced with the externalized jar file and configuration change. And the different team can wire in only the plugins they need. As it is an open source framework, it is very easy to test your own plugin and see the interactions during the build. You can also customize the framework for your own needs.  
+The implementation of the task executor can be easily replaced with the externalized jar file and configuration change. And the different teams can wire in only the plugins they need. As it is an open-source framework, it is very easy to test your own plugin and see the interactions during the build. You can also customize the framework for your own needs.  
 
 ### Build across Multiple Organizations
 
-In microservices architecture, different teams might have their own organizations and some of the dependencies are across multiple organizations. The DevOps tool needs to know how to check out and build repositories from many organizations. Also, these related services might reside in different git providers or git servers. To manage the access control in this complex git environment in DevOps tool is a daunting job. 
+In microservices architecture, different teams might have their own organizations and some of the dependencies are across multiple organizations. The DevOps tool needs to know how to check out and build repositories from many organizations. Also, these related services might reside in different git providers or git servers. To manage the access control in this complex git environment in the DevOps tool is a daunting job. 
 
 ### Idempotency  
 

@@ -15,7 +15,7 @@ In the previous steps, we have tried the single query, multiple queries, and upd
 
 The first step is to start the Oracle database in Docker. The command has shown above.
 
-Next, we need to add manually install Oracle JDBC driver jar into your local maven repository. You can search on the Internet on the instructions. If you are not interested in Oracle, please skip this step. The only reason I have Oracle in this tutorial is that one of our customers only have Oracle database as the approved solution. Downloading Oracle XE Docker image will take a long time, and that image is not stable and can be broken at any time. 
+Next, we need to manually install Oracle JDBC driver jar into your local maven repository. You can search on the Internet on the instructions. If you are not interested in Oracle, please skip this step. The only reason I have Oracle in this tutorial is that one of our customers only have Oracle database as the approved solution. Downloading Oracle XE Docker image will take a long time, and that image is not stable and can be broken at any time. 
 
 To switch to the Oracle database, you need to replace service.yml from dbscript/oracle/config folder. First, let's create a new folder from updates and copy the service.yml
 
@@ -27,7 +27,7 @@ cp dbscript/oracle/config/service.yml oracle/src/main/resources/config
 
 Second, we need to update pom.xml to include the Oracle DB driver. Since Oracle DB driver is not available in maven central, you need to manually download it from oracle.com and manually install it in your local .m2 repository. 
 
-The reason we have include Oracle here is due to some of our customers can only use this database as the corporate policy. If you are part of these type of organizations, then you know how to install the Oracle driver. Otherwise, it is highly recommended to use other open source relational databases like MySql or Postgres. If you are building microservices with separate database instances per service and you have thousands of services, Oracle license cost will be too high to afford even big banks. 
+The reason we have include Oracle here is since one of our customers can only use this database as the corporate policy. If you are part of these type of organizations, then you know how to install the Oracle driver. Otherwise, it is highly recommended to use other open source relational databases like MySql or Postgres. If you are building microservices with separate database instances per service and you have thousands of services, Oracle license cost will be too high to afford even big banks. 
 
 Here is a line that needs to be added into pom.xml <properties></properties> section
 

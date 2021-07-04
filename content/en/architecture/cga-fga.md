@@ -27,7 +27,7 @@ Since the scopes in the JWT token are used for the framework to determine if the
 
 In the light-oauth2 implementation, we have clients, services and clients to service endpoints relationship registered so that the light-oauth2 token service can calculate the scopes. It is the recommended approach for most customers, and it is the easiest way to handle the scopes in the JWT issuing. 
 
-Sometimes, there might be too many scopes in the calculated result and the token generated might have too broader access level to meet some organization's security policy. In this case, we provide two way to reduce the scopes in the JWT token. 
+Sometimes, there might be too many scopes in the calculated result and the token generated might have a very broad access level to meet some organization's security policy. In this case, we provide two ways to reduce the scopes in the JWT token. 
 
 * Pass in intention
 
@@ -43,7 +43,7 @@ For most OAuth 2.0 implementation, this is the only option available as service 
 
 ### Custom Claims
 
-As you can see,  the scopes verification is done by the framework at the technical level. For most services, this is not enough. Specific fine-grained authorization might be necessary within the business context. Unlike the scope/endpoint level of authorization, this level of authorization must happen within the business context that means it might be different per service. To implement this level of authorization, it is recommended implementing with middleware handlers like other cross-cutting concerns in the light platform. In this case, the fine-grained authorization handler(s) will be wired in after the technical middleware handlers and before the business handler. 
+As you can see,  the scopes verification is done by the framework at the technical level. For most services, this is not enough. Specific fine-grained authorization might be necessary within the business context. Unlike the scope/endpoint level of authorization, this level of authorization must happen within the business context that means it might be different per service. To implement this level of authorization, it is recommended implementing with middleware handlers like other cross-cutting concerns in Light. In this case, the fine-grained authorization handler(s) will be wired in after the technical middleware handlers and before the business handler. 
 
 Strictly speaking, the scopes are part of the custom claims; however, it is kind of standard in the OAuth 2.0 implementation although it is not defined in the OAuth 2.0 specification. 
 
@@ -61,7 +61,7 @@ These are attributes associated with the login user. For example, the user's rol
 
 For example, if you are a manager role, you can transfer the amount higher than 10K. If you are located in Asia, you cannot access the accounts opened in America. 
 
-From the implementation point of view, these attributes would be somewhere in one or more database tables. The light-oauth2 has an authorizer interface and allow you to plugin the integration logic. If you are using another implementation of OAuth 2.0, you can find out how to integrate with your existing service or database from the documentation. 
+From an implementation point of view, these attributes would be somewhere in one or more database tables. The light-oauth2 has an authorizer interface and allow you to plugin the integration logic. If you are using another implementation of OAuth 2.0, you can find out how to integrate with your existing service or database from the documentation. 
 
 With the integration between the OAuth 2.0 server and your own database or service, nothing needs to be done at the client level. Depending on the policies on the OAuth 2.0 server, the client custom claims and user custom claims will be automatically included in the generated JWT token. 
 
@@ -78,9 +78,9 @@ If your OAuth 2.0 implementation doesn't support the integration to register the
 
 ### Summary
 
-I wrote this article because I saw some users requested to add custom claims into our client module to allow their OAuth 2.0 server to issue JWT tokens with custom claims for fine-grained authorization. This is the wrong approach that we must point out as this mistake will have serious consequences. 
+I wrote this article because I saw that some users requested to add custom claims into our client module to allow their OAuth 2.0 server to issue JWT tokens with custom claims for fine-grained authorization. This is the wrong approach that we must point out as this mistake will have serious consequences. 
 
-The most common argument that I heard is that the OAuth 2.0 server they are using doesn't support integration. In this case, it would be wise to skip the custom claims from the client/JWT and implement the standard fine-grained authorization middleware handler that is included in all the services. Within the middleware handler, you can integrate with any subsystems that support the client attributes and user attributes. In this way, it is still that the service decides the authorization, not the client. In the client credentials flow, the client_id is in the JWT token so that you can use it to look up the client attributes that support the fine-grained authorization. In the authorization code flow, both client_id and user_id will be in the JWT token to look up the client attributes, and user attributes to support the fine-grained authorization at the client level and user level. 
+The most common argument that I have heard is that the OAuth 2.0 server they are using doesn't support integration. In this case, it would be wise to skip the custom claims from the client/JWT and implement the standard fine-grained authorization middleware handler that is included in all the services. Within the middleware handler, you can integrate with any subsystems that support the client attributes and user attributes. In this way, it is still that the service decides the authorization, not the client. In the client credentials flow, the client_id is in the JWT token so that you can use it to look up the client attributes that support the fine-grained authorization. In the authorization code flow, both client_id and user_id will be in the JWT token to look up the client attributes, and user attributes to support the fine-grained authorization at the client level and user level. 
 
 The other argument I've heard is that our clients and services are all in the same organization and there is auditing procedure in place to ensure that client code is sending the correct custom claims all the time. This simply cannot be enforced, and in a real microservices architecture, the number of services and clients are increasing very fast. Eventually, your service will be accessed by the party you have no control or even outside of your organization. As the client is passing in the custom claims, it is very easy for hackers to explore the security hole. 
 
@@ -90,5 +90,5 @@ You have a building with a lot of rooms, and each room has a security door that 
 
 To enforce the proper access rules given the security desk cannot do so, it might be better not to issue the pass from the security desk to the employee but allow the room owner to verify the employee permission at the door. 
 
-The light platform is security first design, and we have implemented a lot of features to make the traditional OAuth 2.0 specification work with microservices architecture. Our principle is centralized policy management and distributed policy enforcement. In our architecture, the policies are managed in the light-oauth2 services most to the cases. If your OAuth 2.0 server doesn't support customization, please pass this responsibility to the service implementation with middleware handlers to share between multiple services. You cannot pass the security responsibility to the clients. If all clients decide the scopes and custom claims, then there is no security at all even you have the scopes and custom claims verification implementation on the service side as clients can simply send anything they want. 
+Light is a security first design, and we have implemented a lot of features to make the traditional OAuth 2.0 specification work with microservices architecture. Our principle is centralized policy management and distributed policy enforcement. In our architecture, the policies are managed in the light-oauth2 services most to the cases. If your OAuth 2.0 server doesn't support customization, please pass this responsibility to the service implementation with middleware handlers to share between multiple services. You cannot pass the security responsibility to the clients. If all clients decide the scopes and custom claims, then there is no security at all even you have the scopes and custom claims verification implementation on the service side, as clients can simply send anything they want. 
 

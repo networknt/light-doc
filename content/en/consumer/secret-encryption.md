@@ -8,13 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Light platform has a [decryptor][] that can be injected into the application to decrypt encrypted sensitive 
+Light has a [decryptor][] that can be injected into the application to decrypt encrypted sensitive 
 info in config files. There is a separate utility that is used to encrypt secret.yml or other config files
 that contain sensitive info. 
 
-From consumer perspective, only secret.yml will be used unless the client application is trying to used the
+From a consumer perspective, only secret.yml will be used unless the client application is trying to used the
 feature to secure other client specific config files. 
 
 The following is an example of secret.yml that might be used along with client.yml and TLS keystores. 
@@ -69,7 +70,7 @@ emailPassword: change-to-real-password
 
 ```
 
-In most of the cases, the following fields are used by the client. 
+In most cases, the following fields are used by the client. 
 
 ```yaml
 

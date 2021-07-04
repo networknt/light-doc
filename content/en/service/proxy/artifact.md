@@ -28,7 +28,7 @@ You can download the fat jar from maven central with all the dependencies includ
 
 ### Source Code
 
-It makes sense for enterprise users to fork the source code repository and add their customized handlers to make the light-proxy suitable to be the sidecar container in front of all the back-end APIs to handle cross-cutting concerns on the network level. It will allow the API developers to focus on business logic only with different frameworks in different languages and still join the light platform's service mesh along with light-router and light-portal. 
+It makes sense for enterprise users to fork the source code repository and add their customized handlers to make the light-proxy suitable to be the sidecar container in front of all the back-end APIs to handle cross-cutting concerns on the network level. It will allow the API developers to focus on business logic only with different frameworks in different languages to still join Light's service mesh along with light-router and light-portal. 
 
 
 

@@ -8,22 +8,23 @@ aliases: []
 weight: 40
 toc: false
 draft: false
+reviewed: true
 ---
 
-Not all tests are running fast and some of the tests are very complex with external
+Not all tests run at a fast speed, as some of the tests are very complex with external
 dependencies. It will take more time to run all tests so it is better to separate
 unit tests and integration tests.
 
 In this case, in the normal package, only unit tests will be executed so that can be
 done really fast.
 
-On a daily basis, we might run nightly build to include both unit tests and integration
+On a daily basis, we might run nightly builds to include both unit tests and integration
 tests together.
 
 ## Integration tests
 
-Normally, integration test will require there are some servers running like database,
-webserver etc. Or some test cases need to be repeated too many time. These tests will
+Normally, the integration test will require that there are some servers running such as database,
+webserver etc. Some test cases need to be repeated many times. These tests will
 be located in src/integration folder and all test classes will end with "IT".
 
 As integration is not the default test source folder or resources folder, we need to add

@@ -12,7 +12,7 @@ draft: false
 ---
 
 We have [light-codegen][] to support project scaffolding for all the frameworks provided
-by light platform. We believe that for enterprise scale and microservices, you have to
+by Light platform. We believe that for enterprise scale and microservices, you have to
 adopt [design first][]. There are numeric ways to use light-codegen and here we are just 
 using it as command line cli tool.  
 

@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous step, we have started the [all-in-one][] Jaeger. You can see that there is only one service registered as jaeger-query on the UI. In this step, we are going to change the configuration of petstore to enable jaeger-tracing. 
@@ -56,7 +57,7 @@ We need to update the pom.xml in petstore-jaeger to add dependency for jaeger-tr
 
 Next, we will create a config folder in light-config-test to add tracing to the application. Before doing that, we need to build a fatjar for petstore-jaeger so that we can start the server with `java -jar -Dlight-4j-config-dir=`
 
-To speed up the development cycle, all generated light-4j projects will only be build into a samll jar that can be started with `exec:exec` target in Maven. This is to avoid building source.jar doc.jar and fatjar which takes a lot of time during active development. When you need to build a fatjar, you can use the `release` profile. 
+To speed up the development cycle, all generated light-4j projects will only be built into a samll jar that can be started with `exec:exec` target in Maven. This is to avoid building source.jar doc.jar and fatjar which takes a lot of time during active development. When you need to build a fatjar, you can use the `release` profile. 
 
 ```
 cd ~/networknt/light-example-4j/rest/openapi/petstore-jaeger
@@ -153,7 +154,7 @@ Goto the Jaeger UI, you should find the trace for this request.
 
 ### handlers
 
-Until now, we are not touch any existing code in petstore-jaeger after copied from the petstore project. The only file that we have updated in the folder is the pom.xml that we have added the jaeger-tracing module into the dependency. 
+Until now, we have not touched any existing code in petstore-jaeger after copying it from the petstore project. The only file that we have updated in the folder is the pom.xml that we have added the jaeger-tracing module into the dependency. 
 
 From the above picture, you can see that the request trace is flat which means we have only one span per request. In this step, we are going to update the `PetsGetHandler` to add tracing to it. 
 

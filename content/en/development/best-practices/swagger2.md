@@ -11,21 +11,20 @@ draft: false
 reviewed: true
 ---
 
-Swagger 2.0 specification is a very loose specification and it gives designer too many options to write the spec. Most
-of the cases, developers write the code with annotations and generate the specification afterward. With enterprise
-scale in mind, we encourage [design first][] approach. The outcome is not just a document but a specification that
+Swagger 2.0 specification is a very loose specification that gives designer many options to write the spec. In most cases, developers write the code with annotations and generate the specification afterward. With an enterprise
+scale in mind, we encourage a [design first][] approach. The outcome is not just a document but a specification that
 can be used to scaffold a new project and loaded during runtime to verify JWT scopes for security and validate requests
 to protect the business layer against attacks.
 
 To enable [light-codegen][] to generate meaningful code and utilize the full potential of the [light-rest-4j][] framework,
-the author of the Swagger 2.0 specification should follow the best practices below.
+the author of the OpenAPI 3.0 specification should follow the best practices below.
 
 ### Guidelines
 
 - clear and easily readable by architects, analysts, developers
 - well documented, with explanations provided in description tags
-- adhere to OpenAPI specifications - v2.0 at the time of this writing
-- use a design which lends itself to a clean and easily consumable object model
+- adheres to OpenAPI specifications - v2.0 at the time of this writing
+- uses a design which lends itself to a clean and easily consumable object model
 
 ### Security First
 

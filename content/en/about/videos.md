@@ -13,9 +13,10 @@ sections_weight: 9
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-### Third party video mentioned Light Platform. 
+### Third party video mentioning Light. 
 
 * Adopting APIs & Microservices at a Major Bank (part 1)
 

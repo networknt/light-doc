@@ -124,7 +124,7 @@ Validator<Info> infoValidator = SingletonServiceFactory.getBean(Validator.class,
 
 ### Tutorial
 
-The service module is one of the most important modules in the light platform and a lot of other components are relying on it. To help developers to learn it quickly, we have provided a [service tutorial][] in the tutorial section. 
+The service module is one of the most important modules in Light and a lot of other components are relying on it. To help developers to learn it quickly, we have provided a [service tutorial][] in the tutorial section. 
   
 [service tutorial]: /tutorial/common/service/
 

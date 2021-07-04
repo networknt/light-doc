@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-Unlike other frameworks that are based on containers, light-4j is based on a light-weight HTTP core and implemented as POJOs. That means you don't need to use a remote debugger but just debug locally within your IDE. In most of the cases, we are using the unit or integration test cases to trigger the debugger. 
+Unlike other frameworks that are based on containers, light-4j is based on a light-weight HTTP core and implemented as POJOs. That means you don't need to use a remote debugger but simply need to debug locally within your IDE. In most of the cases, we are using the unit or integration test cases to trigger the debugger. 
 
 ### IntelliJ IDEA
 

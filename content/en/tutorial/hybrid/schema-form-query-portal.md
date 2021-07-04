@@ -8,12 +8,13 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This tutorial shows how to load schema form query side service from hybrid-query in 
 light-portal. 
 
-After [host-menu query side][] integration, it should be very straight forward to add
+After [host-menu query side][] integration, it should be very straightforward to add
 another light-eventuate-4j service to the hybrid-query server. 
 
 ### Build

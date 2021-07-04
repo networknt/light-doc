@@ -8,6 +8,7 @@ weight: 30
 sections_weight: 30
 draft: false
 toc: true
+reviewed: true
 ---
 
 ## Introduction
@@ -87,7 +88,7 @@ latch.await(100, TimeUnit.MILLISECONDS);
 ClientResponse response = reference.get();
 ```
 
-Closing the connection, if necessary could be done
+Closing the connection, if necessary, could be done
 
 ## FAQ
 

@@ -14,7 +14,7 @@ reviewed: true
 Assuming that light-eventuate-4j platform is up and running, let's check out the light-example-4j project and rename the todo-list folder in eventuate so that we can
 recreate it in this tutorial.
 
-As other tutorials, we are going to use networknt under user's home directory as our workspace. 
+As with other tutorials, we are going to use networknt under user's home directory as our workspace. 
 
 The default configuration in the source code uses remote Kafka and MySQL hosted in the cloud for developers. We encourage you to set up your own eventuate environment locally once you feel comfortable so that you can learn the process. 
 

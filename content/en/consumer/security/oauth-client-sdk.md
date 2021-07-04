@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 These days, most API endpoints are protected by OAuth 2.0 standard either through an API Gateway or distributed verification based on JWT tokens by the services themselves. 
@@ -63,7 +64,7 @@ dynamind/spring-boot-security-oauth2-minimal
 Although updating from the author, mttkay/signpost only supports OAuth 1.0 with 556 stars. 
 
 
-The most promising standalone library for Andriod is https://github.com/openid/AppAuth-Android with 831 stars, and it was last updated 10 months ago. It is highly recommended for Andriod applications to communicate with backend services protected with OAuth 2.0. 
+The most promising standalone library for Android is https://github.com/openid/AppAuth-Android with 831 stars, and it was last updated 10 months ago. It is highly recommended for Andriod applications to communicate with backend services protected with OAuth 2.0. 
 
 Other client libraries are mostly integrated with the OAuth 2.0 providers, and they are tightly coupled with the server side implementation like the oxAuth at https://github.com/GluuFederation/oxAuth.  It is an OAuth 2.0 provider with a built-in client. Since OAuth 2.0 specification is a standard, we can be sure that the client can work with other OAuth 2.0 providers. Please be aware that most OAuth 2.0 providers will have some extra features and extensions and you might need to customize the client library to leverage these features. The project has 176 stars, 20 releases, and recent updates. 
 

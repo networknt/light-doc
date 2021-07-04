@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: true
 draft: false
+reviewed: true
 ---
 >This is the Quick Start tutorial that utilizes the pre-built repository to provide an introduction to MS Chain Services. 
 >If you prefer to do a step-by-step setup of MS Chain Services please visit the [MS Chain Services Home](/tutorial/rest/swagger/ms-chain/)

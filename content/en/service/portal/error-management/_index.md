@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 Light-4j has a module named status that is used to manage the error message returned from the API. It loads the status object from the status.yml file in the status module along with the app-status.yml defined by each service built on top of light-4j frameworks. 

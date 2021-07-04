@@ -9,6 +9,7 @@ weight: 80
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When petstore is generated, a folder called docker with two default Dockerfiles were

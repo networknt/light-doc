@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-End-to-End test in light-eventuate-4j application is very hard as too many components need to
-work together in order for message to be delivered from one service to another. Also, eachs
-service instance must be lived long enough in order to receive async events. Internally, we
+End-to-End test in light-eventuate-4j application is very hard as many components need to
+work together in order for message to be delivered from one service to another. Also, each
+service instance must live long enough in order to receive async events. Internally, we
 have so many services that are built on top of light-eventuate-4j and light-hybrid-4j and we
 are using [light-bot][] develop task to test them all during the develop branch build. 
 

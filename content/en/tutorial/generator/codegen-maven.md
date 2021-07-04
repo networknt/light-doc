@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-Besides using java command line to generate microservice API based on the OpenAPI 3.0 specification, light-codegen also can be integrated with the project maven build process.
+Besides using the java command line to generate microservice API based on the OpenAPI 3.0 specification, light-codegen also can be integrated with the project maven build process.
 
 Sometimes the specification could be changed by different team members frequently. In this case, it could be challenging to re-generate the API project from the Java command line for every specification change.
 
@@ -22,7 +22,7 @@ To serve this purpose a new way is introduced here which could integrate the lig
 
 - Initiate the microservice API project. Define one module for the service and another module for specification
 
-- create or copy the specification and the config JSON file to the specification module, for example, /petstore-spec/config
+- Create or copy the specification and the config JSON file to the specification module, for example, /petstore-spec/config
 
 - In the specification module, add maven plugin to run the light-codegen [pom example in the petstore project][]
 

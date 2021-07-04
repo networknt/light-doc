@@ -8,17 +8,18 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Before reading specific information regarding to Unit Test, please read the general [unit test tutorial][]
+Before reading specific information regarding the Unit Test, please read the general [unit test tutorial][]
 This section will only focus on the specific information regarding to light-eventuate-4j. There are a lot
-of modules in light-eventuate-4j and each module has it's own JUnit test cases and they are all located in
-each project's src/test folder. Also, there might be a config folder under src/test/resources/ to control
+of modules in light-eventuate-4j and each module has its own JUnit test cases. They are all located in
+each project's src/test folder. There might also be a config folder under src/test/resources/ to control
 how each involved light-4j component behaves. 
 
 ## JUnit Test
 
-Run the JUnit test cases in the each component modules src/test folder. You can run individual test within
+Run the JUnit test cases in the each component modules src/test folder. You can run individual tests within
 IDE from one particular test class by clicking on the test method and right click it. Or you can run all
 test methods in a test class by right clicking on the test class name. 
 

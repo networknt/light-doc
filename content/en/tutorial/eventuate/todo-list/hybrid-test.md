@@ -46,7 +46,7 @@ java -cp ~/networknt/light-docker/eventuate/hybrid-command/service/*:target/hybr
 ```
 
 
-Next, let's start hybrid-query server with todo-list hybrid-query
+Next, let's start hybrid-query server with the todo-list hybrid-query
 service. 
 
 As there are more jars that need to be on the classpath of hybrid-query server we are going to copy all of them into light-docker/

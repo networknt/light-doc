@@ -11,7 +11,7 @@ reviewed: true
 
 Services typically need to call one another. In monolithic applications, services invoke one another through language-level methods or procedure calls. In a traditionally distributed system deployment, services run at fixed, well-known locations (hosts and ports), so they can easily call one another using HTTP/REST or some RPC mechanism. However, a modern microservice-based application typically runs in a virtualized or containerized environments where the number of instances of a service and their locations (IP and port) changes dynamically.
 
-This tutorial shows how to use the service registry and discovery feature of the light platform to discover services and invoke them with the client module.
+This tutorial shows how to use the service registry and discovery feature of the Light platform to discover services and invoke them with the client module.
 
 * [Introduction and Code Generation][]
 

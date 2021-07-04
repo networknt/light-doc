@@ -1,5 +1,5 @@
 ---
-title: About Light Platform
+title: About Light
 linktitle: Overview
 description: Light's features, component, roadmap, license, and motivation.
 date: 2017-11-01

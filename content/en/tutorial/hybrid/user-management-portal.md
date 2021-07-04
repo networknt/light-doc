@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-User management is the hybrid service in light-portal which used for portal user management. It provide the following services:
+User management is the hybrid service in light-portal which used for portal user management. It provides the following services:
 
 -- Register New User
 
@@ -94,9 +95,9 @@ curl -X POST \
 
 ```
 
-After user created, user should get an email from 'lightapi.net', to active the user.
+After user is created, the user should get an email from 'lightapi.net', to active the user.
 
-User can click the link or get the url from the link and manually input into browser to active user.
+The user can click the link or get the url from the link and manually input into browser to active user.
 
 
 ```

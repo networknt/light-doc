@@ -1,5 +1,5 @@
 ---
-title: What is Light Platform
+title: What is Light
 linktitle: What is Light
 description: Light is a platform written in Java SE and designed to build cloud native Web/API with different options.
 date: 2017-02-01
@@ -23,15 +23,15 @@ Websites or services built with Light are extremely fast and secure. Light servi
 
 We think of Light Platform as the ideal website or services creation tool with flexible architecture so that plugins can be injected or enabled with externalized configuration changes. 
 
-## How Fast is Light Platform?
+## How Fast is Light?
 Visit our github link to compare how fast Light is:   
 https://github.com/networknt/microservices-framework-benchmark
 
-## What Does Light Platform Do?
+## What Does Light Do?
 
 In technical terms, Light takes an IDL (Interface Definition Language) and scaffolds a new service project with light-codegen for developers to add only business logic in generated handlers and write unit tests for handlers. It also provides a toolchain for building and delivering the dockerized image to the target environment. During runtime, there are light-portals to manage the services and light-oauth2 to secure the services to services interactions.
 
-## Who Should Use Light Platform?
+## Who Should Use Light?
 
 * Light is for people who need to handle huge volumes as it can handle millions of requests per second on commodity hardware.
 

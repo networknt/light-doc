@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This handler is part of the [light-rest-4j][] which is built on top of light-4j but 
@@ -22,7 +23,7 @@ This is the handler that is injected during server start up if security.yml
 enableVerifyJwt is true. It does further scope verification if enableVerifyScope 
 is true against swagger specification.
 
-From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a security configuration file for different frameworks, a new swagger-security.yml with the same content has been introduced. The security.yml is still loaded if swagger-security.yml doesn't exist for backward compatibility. 
+From release 1.5.18, Light supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a security configuration file for different frameworks, a new swagger-security.yml with the same content has been introduced. The security.yml is still loaded if swagger-security.yml doesn't exist for backward compatibility. 
 
 Here is an example of swagger-security.yml
 
@@ -68,7 +69,7 @@ bootstrapFromKeyService: false
 
 ### Distributed JWT verification
 
-Unlike simple web token, the resource server has to contact Authorization server 
+Unlike simple web tokens, the resource server has to contact Authorization server 
 to validate the bearer token. JWT can be verified by resource server as long as 
 the token signing certificate is available at resource server. 
 

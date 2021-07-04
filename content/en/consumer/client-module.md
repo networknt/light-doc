@@ -8,15 +8,16 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The [client module][] in light-4j is a very important component in light platform for
+The [client module][] in light-4j is a very important component in Light for
 interactions between client to service or service to service in synchronous request/response
 over HTTPS and HTTP2. Microservices are expected to have high throughput and low latency
 so that multiple services can be chained together to fulfill one external request. This is
-why the client module is designed for direct connection between consumer and provider with
+why the client module is designed for direct connection between the consumer and provider with
 the HTTP 2.0 over TLS connection cached on the consumer side for most high throughput applications.
-For low throughput consumer, the connection can be closed after the request and reopen when
+For low throughput consumers, the connection can be closed after the request and reopen when
 the next request comes in. 
 
 There are a lot of features in the client module and these should be utilized in certain

@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In this tutorial, we are going to setup the develop branch build and test for networknt GitHub organization on github.com on my MacBook Pro laptop. The configuration is designed for networknt projects and light-examples-4j demo applications; however, it is straightforward to customize the develop-build.yml to make it for your Java modules and microservices. If you want to learn how to use it with your microservices, please refer to [microservices develop][]
+In this tutorial, we are going to setup the develop branch build and test for networknt GitHub organization on github.com on my MacBook Pro laptop. The configuration is designed for networknt projects and light-examples-4j demo applications; however, it is straightforward enough to customize the develop-build.yml to make it for your Java modules and microservices. If you want to learn how to use it with your microservices, please refer to [microservices develop][]
 
 
 ### Preparation
@@ -58,7 +58,7 @@ java -jar bot-cli-fat-1.0.jar -t develop-build
 
 ```
 
-If the build is failed, you can check bot.log in the same directory as default email server is not set up with a correct password, there would be no email will be sent out if build or test is failed.
+If the build failed, you can check bot.log in the same directory as default email server is not set up with a correct password, there would be no email will be sent out if build or test is failed.
 
 ### Run the develop branch build with customized config
 

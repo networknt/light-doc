@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Most of our developers are using IntelliJ Idea as the IDE when working on light-platform or building application on the light platform. Its community edition is free and has all the features we need.
+Most of our developers are using IntelliJ Idea as the IDE when working on light-platform or building application on Light. Its community edition is free and has all the features we need.
 
 ### Settings
 
@@ -23,7 +24,7 @@ I am using a 40 inch 4K monitor and have more screen real estate. It would be mu
 
 ##### Inotify Watches Limit
 
-IntelliJ IDEA is monitor the filesystem changes and reload the files into the IDE once files are changed from outside. If you have bigger project with thousands of files, you need to increate the watch limit. 
+IntelliJ IDEA monitors the filesystem changes and reloads the files into the IDE once files are changed from outside. If you have a bigger project with thousands of files, you need to increate the watch limit. 
 
 - Add the following line to either /etc/sysctl.conf file or a new *.conf file (e.g. idea.conf) under /etc/sysctl.d/ directory:
 

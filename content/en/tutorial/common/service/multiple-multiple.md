@@ -8,10 +8,11 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This is an complex use case that you have multiple interfaces and multiple implementations. It
-is a rare use case but we need to handle it.
+is a rare use case but we need to know how to handle it.
 
 Let's write two interfaces. 
 

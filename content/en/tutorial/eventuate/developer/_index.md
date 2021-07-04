@@ -8,14 +8,15 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The environment setup is a little bit complicated in light-eventuate-4j framework and here
-are want to give some advices on what is the best practices on setting develop environment
+The environment setup is a little bit complicated in light-eventuate-4j framework, Here
+are want to give some advice on what is the best practices on setting develop environment
 for both light-eventuate-4j developers or services developers as the focuses are different
 for these two type of developers.
 
-If you just want to developer microservices on top of light-eventuate-4j framework, things
+If you just want to develop microservices on top of light-eventuate-4j framework, things
 are simpler. You can follow the instructions in the [service developer tutorial][] to get
 everything set up.
 

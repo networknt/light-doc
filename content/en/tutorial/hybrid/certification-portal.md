@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This tutorial shows the steps to add api-certification hybrid service into light-portal
@@ -18,7 +19,7 @@ There are two ways to add a service to a hybrid server:
 
 ### Update hybrid-query pom.xml
 
-This service need to communicate with other service's server info endpoint, so client module
+This service needs to communicate with other service's server info endpoint, so client module
 must be included into the hybrid-query server. 
 
 We need to ensure that client module is included in the dependencies in pom.xml file. It is

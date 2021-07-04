@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the light-4j 1.6.0 release, we have upgraded the Google error-prone plugin in the pom.xml to the latest version. This cause the IntelliJ IDEA to throw an error as the following. 

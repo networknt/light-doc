@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is the module that is handling the static content. It is built to serve Single Page Application with Javascript, CSS and images. 
+This is the module that handles the static content. It is built to serve Single Page Application with Javascript, CSS and images. 

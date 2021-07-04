@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The tokenization service is shipped in three different forms to give customers maximum flexibility to consume it. 

@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Sometimes, we have an interface with generic types, i.e. Validator<T> which Type is an model

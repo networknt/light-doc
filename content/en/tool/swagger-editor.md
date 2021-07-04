@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
@@ -50,8 +51,7 @@ To access the Swagger online editor, click the following link.
 
   * To save/export the specification in YAML format - File --> Download YAML.
 
-Online editor work if you are working on only one API without any externalized references. If you want to work with
-multiple APIs, you have to run the editor locally.
+Online editors work if you are working on only one API without any externalized references. If you want to work with multiple APIs, you have to run the editor locally.
 
 ### Running editor locally
 

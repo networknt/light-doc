@@ -182,7 +182,7 @@ server, 19-Jan-2013, trustedCertEntry,
 Certificate fingerprint (SHA1): 87:3B:92:F5:0A:FE:99:E9:C5:AF:38:F1:C8:65:98:7A:C1:13:19:1D
 ```
 
-The password for the client.trustore can be found it the secret.yml which is described below. 
+The password for the client.trustore can be found in the secret.yml which is described below. 
 
 ### consul.yml
 

@@ -27,7 +27,7 @@ A separate container for the sidecar also gives us the opportunity to work with 
 
 ### Deployment Flexibility
 
-Even we have two containers, they will be deployed in the same pod in a Kubernetes cluster. 
+Even when we have two containers, they will be deployed in the same pod in a Kubernetes cluster. 
 
 It is hard to standardize the base image when two processes share the same container as different languages have their recommended base image from the vendor. 
 

@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-As you know, we have developed a service in light-codegen called codegen-web to generate light-4j projects on the cloud without build and run light-codegen locally. As we have multiple release branches, we need to support users to generate code for the release they are working. It requires that we must support multiple APIs at the same time. 
+As you know, we have developed a service in light-codegen called codegen-web to generate light-4j projects on the cloud without building and running light-codegen locally. As we have multiple release branches, we need to support users to generate code for the release they are working. It requires that we must support multiple APIs at the same time. 
 
 Codegen-web is built on top of light-hybrid-4j, which is very easy to support multiple versions of the same service running at the same time. However, it requires the UI to be implemented much more complicated to call different versions. To make the UI much simpler, we are going to run two or more codegen-web servers. At this moment, we are going to support release 1.6.x and 2.0.x at the same time. 
 

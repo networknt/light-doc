@@ -17,7 +17,7 @@ This generator is based on the OpenAPI 3.0 specification, and it is a very new s
 
 #### Model
 
-In light-rest-4j framework generator, the model that drives code generation is the OpenAPI 3.0 specification previously named Swagger specification. When editing it, it usually will be in YAML format with separate files for readability and flexibility. Before leverage it in the light-rest-4j framework, all YAML files need to be bundled to a single file in YAML or JSON format to be consumed by the framework and generator. Also, validation needs to be done to make sure that the openapi.yaml or openapi.json is valid against JSON schema of the OpenAPI 3.0 specification.
+In light-rest-4j framework generator, the model that drives code generation is the OpenAPI 3.0 specification previously named Swagger specification. When editing it, it usually will be in YAML format with separate files for readability and flexibility. Before leveraging it in the light-rest-4j framework, all YAML files need to be bundled to a single file in YAML or JSON format to be consumed by the framework and generator. Also, validation needs to be done to make sure that the openapi.yaml or openapi.json is valid against JSON schema of the OpenAPI 3.0 specification.
 
 Note: currently, we support both OpenAPI 3.0 specification and Swagger 2.0 specification. There is a similar [Swagger 2.0 generator tutorial][] available.
 
@@ -118,7 +118,7 @@ Note: currently, we support both OpenAPI 3.0 specification and Swagger 2.0 speci
 }
 ```
 
-In most of the cases, developers will only update handlers, handler tests and models in a generated project. Of course, you might need a different database for your project, and we have a [database tutorial] that can help you to further config Oracle and Postgres.   
+In most cases, developers will only update handlers, handler tests and models in a generated project. Of course, you might need a different database for your project, and we have a [database tutorial] that can help you to further config Oracle and Postgres.   
 
 Given we have most of our model and config files in [model-config][] repo, most generator input would come from the rest folder in model-config for the light-rest-4j framework.
 
@@ -194,7 +194,7 @@ java -jar codegen-cli/target/codegen-cli.jar -f openapi -o /tmp/openapi-petstore
 
 Please note that you need to use a raw url when accessing github files. The above command line will generate a petstore service in /tmp/openapi-petstore.
 
-Given we have most of the model and config files in model-config repo, most generator input would from the rest folder in model-config. Here is the example to generate petstore. Assuming model-config is in the same workspace as light-codegen.
+Given we have most of the model and config files in model-config repo, most generator input would be from the rest folder in model-config. Here is the example to generate petstore. Assuming model-config is in the same workspace as light-codegen.
 
 Working directory: networknt
 
@@ -249,7 +249,7 @@ curl localhost:8080/v1/pets/111
 
 #### Docker Scripting
 
-You can use docker run command to call the generator but it is very complicated for the parameters. In order to make things easier and friendlier to DevOps flow let's create a script to call the command line from docker image.
+You can use docker run command to call the generator but it is very complicated for the parameters. In order to make things easier and friendlier to DevOps flow, let's create a script to call the command line from docker image.
 
 If you look at the docker run command you can see that we basically need one input folder for schema and config files and one output folder to generated code. Once these volumes are mapped to local directory and with framework specified, it is easy to derive other files based on convention.
 

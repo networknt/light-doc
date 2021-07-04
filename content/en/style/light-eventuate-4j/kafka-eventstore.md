@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When using Kafka as pipeline for event sourcing, people will ask why not use
@@ -16,10 +17,10 @@ for as long as it requires.
 
 There are several drawbacks in doing so.
 
-- Kafka only guarantees at least once delivery and there are duplicates in the event
+- Kafka only guarantees at least one delivery and there are duplicates in the event
 store that cannot be removed.
 
-- Due to immutability, there is no way to manipulate event store when application
+- Due to immutability, there is no way to manipulate the event store when the application
 evolves and events need to be transformed.
 
 - No place to persist snapshots of entities/aggregates and replay will become slower

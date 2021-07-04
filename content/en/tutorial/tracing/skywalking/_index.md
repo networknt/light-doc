@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 As of [Skywalking v6.5.0][1], there is support for light-4j (both versions 1.6.x and 2.x) in the form of a plugin. This page provides instructions on how to start generating traces on the Skywalking platform for a light-4j application.

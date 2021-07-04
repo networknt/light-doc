@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous [debug with hybrid server][] tutorial, we have tried to put the user-query service in the hybrid-query server and use the JUnit test in the user-command service to debug the interaction between these two services. In this tutorial, we are going to run both user-query and user-command in servers within two IDE sessions. Instead of triggering the event with JUnit tests, we are going to use Postman to issue a request to either the query side or the command side.

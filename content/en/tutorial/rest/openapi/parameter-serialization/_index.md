@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-For most users, their use cases are straightforward in term of parameters; however, we do have some users have advanced use cases with [parameter serialization][]. 
+For most users, their use cases are straightforward in term of parameters; however, we do have some users who have advanced use cases with [parameter serialization][]. 
 
 OpenAPI 3.0 supports arrays and objects in operation parameters (path, query, header, and cookie) and lets you specify how these parameters should be serialized. The serialization method is defined by the `style` and `explode` keywords:
 

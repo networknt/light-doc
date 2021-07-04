@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-Light-4j applications are standalone Java applications without any JEE container and can be debugged inside [IntelliJ][] or [Eclipse][] directly. Most of the times, we are going to debug the application before dockerizing it to ensure it is functioning. Sometimes, an application works when starting with `java -jar xxx.jar` but when running with a docker container, it stops working. Most cases, this is due to the docker network issue. 
+Light-4j applications are standalone Java applications without any JEE container and can be debugged inside [IntelliJ][] or [Eclipse][] directly. Most of the time, we are going to debug the application before dockerizing it to ensure it is functioning. Sometimes, an application works when starting with `java -jar xxx.jar` but when running with a docker container, it stops working. Most cases, this is due to the docker network issue. 
 
 In case this happens, it would be great if we can debug the application running inside the Docker container remotely from your favorite IDE. In this tutorial, we are going to walk through the steps with IntelliJ IDEA. For developers who are using Eclipse, the process should be very similar. 
 

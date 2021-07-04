@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous step, we have instrumented the OpenAPI [petstore][] application and walked through the Jaeger UI. When talking about distributed tracing, we need to pass the context from one service to another service. If you remember, we have the [service discovery][] tutorial with four services calling each other. We are going to extend it with OpenTracing so that users can see how the original request flows through multiple services. We can also add a standalone client to invoke the api_a and pass in a tracing context. 
@@ -206,7 +207,7 @@ enableVerifyScope: false
 
 ```
 
-Now, let's start api_d and test it out. We assume that the Jaeger All-in-One are up and running in the first step. 
+Now, let's start api_d and test it out. We assume that the Jaeger All-in-One is up and running in the first step. 
 
 ```
 cd ~/networknt/light-example-4j/discovery/api_d/open-tracing
@@ -234,7 +235,7 @@ You should see one more service called com.networknt.apid-1.0.0 in the Service d
 
 ### API C
 
-API C is the same like API D, it is called by API A. 
+API C is the same as API D, it is called by API A. 
 
 First we need to update pom.xml to add the dependency of jaeger-tracing. 
 
@@ -784,7 +785,7 @@ Let's go to the Jaeger UI at http://localhost:16686/ and search Service com.netw
 
 ![jaeger-discovery](/images/jaeger-discovery.png)
 
-For the above picture, you can clearly see the call tree and time spent on each service. If you have database call or other important task in each service, you can manually intrument them and you will have a clear picture how each service works and the performance of each task. This give us valueable information if something happens on production. For more details on how to intrument light-4j service, please review the [petstore][] tracing tutorial. 
+For the above picture, you can clearly see the call tree and time spent on each service. If you have a database call or other important task in each service, you can manually intrument them and you will have a clear picture how each service works and the performance of each task. This give us valueable information if something happens on production. For more details on how to intrument light-4j service, please review the [petstore][] tracing tutorial. 
 
 
 [petstore]: /tutorial/tracing/jaeger/petstore-jaeger/

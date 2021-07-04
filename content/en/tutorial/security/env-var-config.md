@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 When working with a light-4j application, there might be a lot of configuration files that need to be checked into the Git repository. For an open-source project, chances are you need to check the source code and configuration files to the public repository on the GitHub. If you have some sensitive information in one or more config files, you need to be really careful not to check the information to the public repository. 

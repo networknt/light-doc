@@ -13,7 +13,7 @@ reviewed: true
 
 Some users are using the light-bot tasks on their local computer for daily job. Other users might install the light-bot on their remote server to run some tasks triggered by Cron jobs. If you run tasks remotely several times per day, an email notification is crucial. 
 
-To enable email notification, you need to make the following configuration changes. 
+To enable email notifications, you need to make the following configuration changes. 
 
 * cli.yml
 
@@ -46,6 +46,6 @@ auth: true
 
 * secret.yml
 
-If you want to use encrypted email password, you can use the secret.yml or the email.yml 
+If you want to use encrypted email passwords, you can use the secret.yml or the email.yml 
 
 The other option is to set the email password as an environment variable in .bashrc or .profile

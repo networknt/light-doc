@@ -9,6 +9,7 @@ weight: 70
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 By default, the generated API has security turned off. You can turn on the JWT 

@@ -12,6 +12,7 @@ weight: 01	#rem
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 For organizations that are planning to migrate an existing monolithic application to microservices, the upfront infrastructure investment is very significant. Some essential services must be implemented before deploying a large number of services.

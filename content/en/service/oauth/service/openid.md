@@ -8,6 +8,7 @@ weight: 80
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 OpenID Connect (OIDC) is an authentication layer on top of OAuth 2.0, an authorization framework. The 

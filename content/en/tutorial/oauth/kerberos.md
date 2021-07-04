@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Light-oauth2 supports Kerberos/SPNEGO with the built-in default authentication/authorization authenticator. This allows the user only sign-on the desktop once and call OAuth2 authorization code flow with Single Sign On on the browser.

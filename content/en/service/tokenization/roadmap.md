@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ### Database Encryption
@@ -16,7 +17,7 @@ For some organizations, they need to encrypt the value in the token_vault table 
 
 As tokenization service is read heavy and we have an in-memory cache that contains clear text. The read service performance won't be impacted by the database encryption.  The token creation may be a little bit slower than clear text as the encryption is part of the process. 
 
-The encryption is configurable at the service level first. And then at each format scheme, there is a flag to support encryption or not. In this case, not all data is encrypted. There must be a prefix for encrypted value in database value to indicate that. 
+The encryption is configurable at the service level first. At each format scheme, there is a flag to support encryption or not. In this case, not all data is encrypted. There must be a prefix for encrypted value in database value to indicate that. 
 
 ### Token Value Mapping
 

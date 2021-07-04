@@ -13,7 +13,7 @@ These tutorials are not specific to any frameworks but common across all type of
 For example, how to do service registry and service discovery? How to use service module to
 bound implementations to an interface, How to inject java beans into service map so that
 other modules can use the singleton instance. It also covers how to test and debug services
-built on top of the light platform. 
+built on top of the Light platform. 
 
 ### Test
 

@@ -11,14 +11,14 @@ draft: false
 reviewed: true
 ---
 
-The light platform consists of dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][], and we need your help to make Light even brighter. You do not need to be a Java/Kotlin/Javascript guru to contribute to the projects.
+Light consists of dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][], and we need your help to make Light even brighter. You do not need to be a Java/Kotlin/Javascript guru to contribute to the projects.
 
 ### Assumptions
 
 This contribution guide takes a step-by-step approach in hopes of helping newcomers. Therefore, we only assume the following:
 
 * You are new to Git or open-source projects in general
-* You are a fan of the light platform and enthusiastic about contributing to the projects
+* You are a fan of Light and enthusiastic about contributing to the projects
 
 {{% note "Additional Questions?" %}}
 If you are struggling at any point in this contribution guide, reach out to the community in [gitter](https://gitter.im/networknt/light-4j) or [reddit](https://www.reddit.com/r/lightapi/) or [Google Group](https://groups.google.com/forum/#!forum/light-4j).
@@ -204,7 +204,7 @@ We have developed a [separate documentation contribution guide][docscontrib] for
 
 Thank you for reading through this contribution guide. Hopefully, we will see you again soon on GitHub. There are plenty of [open issues][issues] for you to help with.
 
-Feel free to open an issue if you think you found a bug or you have a new idea to improve the light platform. We are happy to hear from you.
+Feel free to open an issue if you think you found a bug or you have a new idea to improve Light. We are happy to hear from you.
 
 ### Additional References for Learning Git
 

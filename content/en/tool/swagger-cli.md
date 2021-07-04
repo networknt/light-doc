@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When editing swagger specification file, naturally we will be using yaml format as it is very
+When editing the swagger specification file, naturally we will be using yaml format as it is very
 easy to read and manipulate. Also, we might extract common definitions into separate files
 so that there is no duplications for multiple APIs. For the light-codegen, however, it requires
 one single swagger.json as model input. To generate a single json formatted specification file,
@@ -18,11 +19,11 @@ we can use the Swagger 2.0 command-line tool.
 
 
 * Supports multi-file APIs via $ref pointers
-* Validate Swagger 2.0 APIs in JSON or YAML format
-* Bundle multiple Swagger files into one combined Swagger file
+* Validates Swagger 2.0 APIs in JSON or YAML format
+* Bundles multiple Swagger files into one combined Swagger file
 * Built-in HTTP server to serve your REST API
 
-Note: that you don't need this tool if your specification file is self contained yaml file in
+Note: that you don't need this tool if your specification file is a self contained yaml file in
 swagger-editor. You can export into json format and it is validated already during the export
 process. 
 
@@ -88,8 +89,8 @@ rm -r common
 
 #### Script
 
-The above command line steps are very easy to understand but it is not the most convenient
-way to bundle and validate yaml files. Here is another way that leverage a script in
+The above command line steps are very easy to understand but are not the most convenient
+way to bundle and validate yaml files. Here is another way that leverages a script in
 model-config/rest folder. 
 
 Note: the script assume that the common definition is defined in common folder and all API

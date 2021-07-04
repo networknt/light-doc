@@ -12,6 +12,7 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 light-eventuate-4j is an event-driven framework based on Event Sourcing and CQRS. Some people

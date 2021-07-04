@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The OpenApi Parser is a Java-based validating parser for OpenAPI 3.0 offering full compliance with the OpenAPI 3.0 Specification, and a highly uniform read/write programming API. OpenAPI, formerly known as the Swagger specification, is the industry-standard format for machine-readable REST API descriptions.

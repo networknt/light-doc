@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 While implementing our tokenization service, we have evaluated several commercial products and open source offerings. Our philosophy is to pick the right open source product that meets our requirement and can be easily integrated into our ecosystem. When there is no open source project suitable for our needs, then we consider commercial offerings. Our last resort is to implement it on our own. 

@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous step, we have [generated service1][] project. In this step, we are going to work with the service1 project in the IntelliJ IDEA. 
+In the previous step, we have [generated a service1][] project. In this step, we are going to work with the service1 project in the IntelliJ IDEA. 
 
 If you don't have IntelliJ community edition installed, please [install][] it, and it is free. You can use Eclipse as well if it is your preferred IDE. 
 
@@ -164,7 +164,7 @@ public class InfoTest {
 
 ```
 
-As you can see, the body of the test case is commented out. This is due to we don't know the request body and response body assertion in the light-codegen. 
+As you can see, the body of the test case is commented out. This is due to the fact that we don't know the request body and response body assertion in the light-codegen. 
 
 Let's uncomment the code and replace the request body with the following. 
 

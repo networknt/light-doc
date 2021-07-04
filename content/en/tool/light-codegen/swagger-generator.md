@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviwed: true
 ---
 
 This generator is based on Swagger 2.0 specification and it is the most popular specification
@@ -24,10 +25,7 @@ against Swagger for Path Parameters, Query Parameters, Headers and Request Body 
 
 In light-rest-4j framework generator, the model that drives code generation is the Swagger 2.0 
 specification. When editing it, normally it will be in yaml format with separate files for 
-readability and flexibility. Before leverage it in light-rest-4j framework, all yaml files need 
-to be bundled and converted into json format in order to be consumed by the framework and generator. 
-Also, a validation needs to be done to make sure that the generated swagger.json is valid against 
-json schema of Swagger 2.0 specification. 
+readability and flexibility. Before leveraging it in light-rest-4j framework, all yaml files need to be bundled and converted into json format in order to be consumed by the framework and generator. Also, a validation needs to be done to make sure that the generated swagger.json is valid against json schema of Swagger 2.0 specification. 
  
 Note: currently, we support Swagger 2.0 specification and OpenAPI 3.0 specification. You can
 find a similar [tutorial for OpenAPI 3.0 generator][]
@@ -97,12 +95,10 @@ Here is an exmaple of config.json for swagger generator.
 ```
 
 
-In most of the cases, developers will only update handlers, handler tests and models in a project.
-Of course, you might need different database for your project and we have a [database tutorial] that
-can help you to further config Oracle and Postgres.   
+In most cases, developers will only update handlers, handler tests and models in a project.
+Of course, you might need different database for your project and we have a [database tutorial] that can help you to further config Oracle and Postgres.   
 
-Given we have most of our model and config files in model-config repo, most generator input would
-from the rest folder in model-config for light-rest-4j framework.
+Given we have most of our model and config files in model-config repo, most generator input would be from the rest folder in model-config for light-rest-4j framework.
 
 Let's clone the project to your workspace as we will need it in the following steps.
 I am using ~/networknt as workspace but it can be anywhere in your home directory.  
@@ -284,7 +280,7 @@ Now you should have a project generated in /tmp/petstore/genereted
 
 #### Codegen Site
 
-You can generate single project or multiple projects from the site https://codegen.lightapi.net with your model and config files. 
+You can generate a single project or multiple projects from the site https://codegen.lightapi.net with your model and config files. 
  
 
 [tutorial for OpenAPI 3.0 generator]: /tutorial/generator/openapi/

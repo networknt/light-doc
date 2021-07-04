@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This generator is based on the OpenAPI 3.0 specification, and it is a new specification that is supposed to replace Swagger 2.0 specification. It has some significant changes to enhance the spec definition and simply the validate with only JSON schema. In my opinion, it is much easier to use, and the implementation is much simpler then Swagger 2.0. OpenAPI adds a number of features as well. The only issue I can see is the entire toolchains around Swagger 2.0 are not migrated to OpenAPI 3.0 yet, and we have to build our own [openapi-parser][] for parsing and validation.
+This generator is based on the OpenAPI 3.0 specification, and it is a new specification that is supposed to replace the Swagger 2.0 specification. It has some significant changes to enhance the spec definition and simply validate with only JSON schema. In my opinion, it is much easier to use, and the implementation is much simpler then Swagger 2.0. OpenAPI adds a number of features as well. The only issue I can see is the entire toolchains around Swagger 2.0 are not migrated to OpenAPI 3.0 yet, and we have to build our own [openapi-parser][] for parsing and validation.
 
 ## Input
 

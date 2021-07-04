@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Now these APIs are working if you start them and they will output the mock responses
+Now that these APIs are working if you start them, they will output the mock responses
 generated based on the API specifications. Let's take a look at the API handler itself
 and update it based on our business logic, you can call API A and subsequently all other
 APIs will be called in a chain.

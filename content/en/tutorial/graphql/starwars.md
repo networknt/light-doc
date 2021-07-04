@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-This tutorial is very similar to [Hello World][]. The only difference is that this one has generated from the star wars schema. 
+This tutorial is very similar to [Hello World][]. The only difference is that this one has been generated from the star wars schema. 
 
 Schema is defined in a file with extension .graphqls and the schema used in this project can be found at https://github.com/networknt/model-config/blob/master/graphql/starwars/schema.graphqls
 

@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is a use case that we have multiple interface but only need to load one implementation
+This is a use case in which we have multiple interfaces but only need to load one implementation
 during runtime. 
 
 Here are two interfaces.

@@ -8,14 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The service module is very flexible and powerful as you can combine all the above use
 cases together to create composite use cases. Take a look at the generated service.yml
-from our [light-codegen][] and you an see that we are using it to inject plugins all
-over the places.
+from our [light-codegen][] and you an see that we are using it to inject plugins in many places.
 
-There are a lot more [test cases][] in service module and it is a good place to start to
+There are a lot more [test cases][] in service module. It is a good place to start to
 learn it.
 
 [light-codegen]: /tool/light-codegen

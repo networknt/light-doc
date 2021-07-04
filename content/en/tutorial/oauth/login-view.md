@@ -41,7 +41,7 @@ The login-view is based on the redirect Authorization Code flow for Single Page 
 
 * To prevent CSRF(Cross-site request forgery), the original application must get the csrf cookies and put it into the request header for each request. 
 
-Above is a simplified flow without a lot of detail for easy to understand. 
+The above is a simplified flow without a lot of detail for easy to understand. 
 
 ### Source Code
 

@@ -10,9 +10,9 @@ draft: false
 reviewed: true
 ---
 
-There are numeric options to connect to databases in the light platform, and this tutorial is only one of the most straightforward options. It gives you the flexibility to support multiple databases with just configuration changes. However, you are working with generic JDBC configuration and losing fine-grained control on each specific database JDBC driver. If you are using one particular database and want more settings on the JDBC driver, please use the [data-source][] module in light-4j.
+There are numerous options to connect to databases in the Light platform, and this tutorial is only one of the most straightforward options. It gives you the flexibility to support multiple databases with just configuration changes. However, you are working with generic JDBC configuration and losing fine-grained control on each specific database JDBC driver. If you are using one particular database and want more settings on the JDBC driver, please use the [data-source][] module in light-4j.
 
-Also, for large-scale microservices deployment, it is seldom dealing with the database directly from your service. Chances are your service is working with in-memory cache or in-memory data grid or some No-SQL database directly. For service to service orchestration, you might take a look at the [light-eventuate-4j][] to adopt Event Sourcing and CQRS as your architecture pattern. 
+Also, for large-scale microservices deployment, you are seldom dealing with the database directly from your service. Chances are your service is working with in-memory cache or in-memory data grid or some No-SQL database directly. For service to service orchestration, you might take a look at the [light-eventuate-4j][] to adopt Event Sourcing and CQRS as your architecture pattern. 
 
 In this tutorial, we will walk through the following steps with Oracle/Postgres/Mysql for light-rest-4j framework. If you use light-graphql-4j or light-hybrid-4j frameworks, the steps will be somewhat different, but the concept is the same. Please note, the specification we use in this tutorial is based on OpenAPI 3.0, which is migrated from the Swagger 2.0. 
 
