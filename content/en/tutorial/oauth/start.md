@@ -64,16 +64,6 @@ It is because we are using a docker network called `localnet` in the docker-comp
 docker network create localnet
 ```
 
-### MariaDB
-
-To start light-oauth2 microservices with MariaDB.
-
-```
-git clone https://github.com/networknt/light-docker.git
-cd light-docker
-docker-compose -f docker-compose-oauth2-mariadb.yml up
-```
-
 ### SQLServer
 
 To start light-oauth2 microservices with Microsoft SQL Server.
@@ -100,6 +90,16 @@ If you have modified source code, you need to rebuild the updated service and th
 ```
 docker rmi -f [image id]
 ```
+
+### Deprecated Databases
+
+We used to support Oracle and MariaDB but marked them deprecated due to some issues. 
+
+Oracle was removed due to the licensing issue for the Oracle Client. The Oracle Client driver is not in the maven central and needs a registered user to access from the Oracle repository. Also, the docker image is too big to download. For anyone to use Oracle, they might have Oracle installed already, and it is not necessary to demo with docker here. 
+
+MariaDB shares the same driver with MySQL, and MySQL supports SSL by default. We have updated the driver configuration to support SSL, but there is no way for us to enable SSL with the MariaDB docker container. So we have to mark the docker-compose deprecated.  
+
+Although the above databases are not supported with docker-compose, you can still use it with a small update in the application. The database scripts are still available for users. 
 
 
 [light-bot]: https://github.com/networknt/light-bot
