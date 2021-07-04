@@ -23,7 +23,7 @@ reality, these APIs will be accessed from light-portal UI.
 To add a new client.
 
 ```
-curl -k -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"mobile","clientName":"AccountViewer","clientDesc":"Retail Online Banking Account Viewer","scope":"act.r act.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin"}' https://localhost:6884/oauth2/client
+curl -k -H "Content-Type: application/json" -X POST -d '{"clientType":"public","clientProfile":"mobile","clientName":"AccountViewer","clientDesc":"Retail Online Banking Account Viewer","scope":"act.r act.w","redirectUri": "http://localhost:8080/authorization","ownerId":"admin", "host":"lightapi.net"}' https://localhost:6884/oauth2/client
 ```
 
 And here is the result with client_id and client_secret.
@@ -59,7 +59,7 @@ And here is the result.
 To update a client with a shorter clientDesc.
 
 ```
-curl -k -H "Content-Type: application/json" -X PUT -d '{"clientDesc":"PetStore Web Server","clientId":"f7d42348-c647-4efb-a52d-4c5787421e72","clientType":"public","clientProfile":"mobile","redirectUri":"http://localhost:8080/authorization","clientName":"PetStore Web Server","scope":"petstore.r petstore.w","clientSecret":"f6h1FTI8Q3-7UScPZDzfXA","ownerId":"admin","updateDt":null,"createDt":"2016-12-31"}' https://localhost:6884/oauth2/client
+curl -k -H "Content-Type: application/json" -X PUT -d '{"clientDesc":"PetStore Web Server","clientId":"f7d42348-c647-4efb-a52d-4c5787421e72","clientType":"public","clientProfile":"mobile","redirectUri":"http://localhost:8080/authorization","clientName":"PetStore Web Server","scope":"petstore.r petstore.w","clientSecret":"f6h1FTI8Q3-7UScPZDzfXA","ownerId":"admin","host":"lightapi.net"}' https://localhost:6884/oauth2/client
 ```
 
 To delete a client with client id.
