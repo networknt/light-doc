@@ -101,6 +101,8 @@ As you can see, the response code is 302 redirect, and the redirect location is 
 
 In this tutorial, we are just show you how to verify that the code service is working. For a real example, please take a look at the open banking [client][] tutorial.
 
+The authorization code in the redirect URL can be used to get a token with authorization code grant type, and it is demonstrated in the [token tutorial](/tutorial/oauth/token/). In a mobile or single-page application, light-router will be responsible for getting the token. 
+
 
 [login view]: /tutorial/oauth/login-view/
 [client]: /tutorial/open-banking/client/
