@@ -113,6 +113,13 @@ The iptables-restore command will need to be executed manually, or your system c
 sudo apt-get install iptables-persistent
 ```
 
+If the package is installed already. 
+
+```
+
+sudo dpkg-reconfigure iptables-persistent
+```
+
 See https://help.ubuntu.com/community/IptablesHowTo for other Ubuntu options. There are many other resources describing this; please consult your system's documentation or search on the internet for information specific to your flavor of Linux.
 
 If you are unsure at all about what kind of system you have, consult that system's documentation on how to update iptables configuration.
