@@ -8,10 +8,11 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-The OAuth2 services can be integrated with existing Active Directory, LDAP or customer
+The OAuth2 services can be integrated with an existing Active Directory, LDAP or customer
 database for authentication. If there is no existing authentication service, you can
 register users into database as default implementation. For the light-portal we are using
 our own database for all users. 

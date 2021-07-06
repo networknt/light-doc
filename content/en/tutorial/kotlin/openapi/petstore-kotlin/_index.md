@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Everybody knows that light-4j is a Java framework; however, @logi build an application purely in Kotlin on top of light-4j last year. I was surprised for the clean and concise test server and test cases from his [gists][], so I spent some time to learn Kotlin. The more I learn it, the more I love it. With the first demo application created, I created a [code generator for Kotlin][] based on the OpenAPI 3.0 specification.  
+Everybody knows that light-4j is a Java framework; however, @logi built an application purely in Kotlin on top of light-4j last year. I was surprised by the clean and concise test server and test cases from his [gists][], so I spent some time to learn Kotlin. The more I learn it, the more I love it. With the first demo application created, I created a [code generator for Kotlin][] based on the OpenAPI 3.0 specification.  
 
 In this tutorial, we are going to walk through the generated Kotlin petstore application and compare it with the Java version. 
 
@@ -39,7 +40,7 @@ mvn clean install
 
 We are going to use the same OpenAPI 3.0 petstore specification for the code generation. Also, the same config.json will be used to control the code generation. The specification openapi.yaml and config.json can be found in model-config repository at https://github.com/networknt/model-config/tree/master/rest/openapi/petstore/1.0.0
 
-In the previous step, we have checked out the model-config respository to our workspace. You can browser the petstore specification and config on your local computer. 
+In this previous step, we have checked out the model-config respository to our workspace. You can browse the petstore specification and config on your local computer. 
 
 ### Generator
 

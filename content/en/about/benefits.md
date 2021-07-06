@@ -1,5 +1,5 @@
 ---
-title: Benefits of Light Platform
+title: Benefits of Light
 linktitle: Benefits
 description: Improved performance, lowered production costs, security and ease of use are just a few of the reasons Light is so appealing.
 date: 2017-02-01
@@ -20,7 +20,7 @@ reviewed: true
 ---
 ## Lower the business requirement cost
 
-Compared with the traditional software development process, the business analyst and designer can sit together to create an OpenAPI specification. It eliminates the need for a Word or Excel document which can never be traced and be update-to-date. Also, the spec can be understood by both computers and humans without any confusion or clarification. For client application requirements, it is much simpler as we just need to pick up services available in the organization or public to form an application, just like building with Lego.
+As opposed to the traditional software development process, the business analyst and designer can sit together to create an OpenAPI specification. It eliminates the need for a Word or Excel document which can never be traced and be update-to-date. Also, the spec can be understood by both computers and humans without any confusion or clarification. For client application requirements, it is much simpler as we just need to pick up services available in the organization or public to form an application, just like building with Lego.
 
 
 ## Lower the solution design cost

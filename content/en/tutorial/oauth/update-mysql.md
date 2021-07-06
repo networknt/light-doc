@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 The deployed light-oauth2 services on the test cloud and prod cloud are using the MySQL database. To support multi-tenancy, we need to add a host column to the client and service table. The database scripts are updated in all repositories. And we need to update the live database without recreating it on test4 and prod4 server. 

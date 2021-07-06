@@ -7,13 +7,15 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
 As light-4j API/service is aiming to deployed with Docker containers and
-Kubernetes is the most popular container orchestration tool. It is very hard
-to setup multiple nodes cluster on laptop development environment but there
-is a minikube can be used on laptop to create one node cluster on your laptop.
+Kubernetes is the most popular container orchestration tool, it is very hard
+to set up multiple nodes cluster in a laptop development environment. However, 
+there is a minikube can be used on laptop to create one node cluster on your 
+laptop.
 
 ## Install on Mac.
 
@@ -31,7 +33,7 @@ sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machi
 
 ### Install minikube
 
-The general installation guide is in the [README](https://github.com/kubernetes/minikube) 
+The general installation guide is in [README](https://github.com/kubernetes/minikube) 
 and the latest instruction is always specific for the latest release. The current
 release instruction can be found [here](https://github.com/kubernetes/minikube/releases)
 

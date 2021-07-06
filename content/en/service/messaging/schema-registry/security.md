@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When you want to expose Schema Registry access to client applications in your network or even the Internet, you need to make sure that Authentication and Authorization are properly configured so that only authorized users/apps can update schema and most users/apps will just have read-only access. 

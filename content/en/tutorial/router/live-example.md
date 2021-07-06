@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 As all our services are built with light-4j frameworks, we don't need to use light-router instances for service to service communication. We do use light-router to support the SPA and mobile applications from the Internet. 

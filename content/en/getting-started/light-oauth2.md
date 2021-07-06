@@ -16,7 +16,7 @@ draft: false
 reviewed: true
 ---
 
-The nature of the services is easy to access so security is the most important thing when deploying services. The light platform is a security first design and an OAuth 2.0 service provider is available as part of the ecosystem. Along with light-portal client registration and service registration, light-oauth2 provides more than normal OAuth 2.0 for microservices such as public key distribution, scope management, and distributed policy management.
+The nature of the services is easy to access so security is the most important thing when deploying services. Light is a security first design and an OAuth 2.0 service provider is available as part of the ecosystem. Along with light-portal client registration and service registration, light-oauth2 provides more than normal OAuth 2.0 for microservices such as public key distribution, scope management, and distributed policy management.
 
 If you are new to OAuth 2.0, please read this [introduction][] document to get familiar with the concept. 
 

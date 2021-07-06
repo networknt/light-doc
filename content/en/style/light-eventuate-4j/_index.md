@@ -7,6 +7,7 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When building an application based on microservices architecture, there are two major patterns
@@ -29,29 +30,21 @@ consumer independently.
  
 ### Which Style to Choose
 
-For pros and cons of each communication patterns, please see [communication pattern][]
+For the pros and cons of each communication patterns, please see [communication pattern][]
 
 
 ### Why light-eventuate-4j 
 
-For microservices implementation, developing business transactions that update entities that are 
-owned by multiple services is a challenge, as is implementing queries that retrieve data from multiple 
-services; For complicated application that has too many services interact with each other. It is
-essential to choose asynchronous message-based style for service communication and transaction
-management with eventual consistency. 
+For microservices implementation, developing business transactions that update entities that are owned by multiple services is a challenge, as is implementing queries that retrieve data from multiple services; for a complicated application that has too many services interact with each other. It is essential to choose an asynchronous message-based style for service communication and transaction management with eventual consistency. 
 
-For large scale application, event driven approach gives you more flexibility and scalability
-and requests from client don't need all the services to be up and running the exact time. 
+For a large scale application, an event driven approach gives you more flexibility and scalability and requests from client don't need all the services to be up and running the exact time. 
 
-In addition to event driven application, Event Sourcing and CQRS are getting populate these
+In addition to event driven application, Event Sourcing and CQRS are getting popular these
 days for high scale applications. 
 
-Once you've decided that asynchronous message-based communication is best for your use case, you
-need to make some architecture decision to choose the best of combination of frameworks to build
-your microservices.
+Once you've decided that asynchronous message-based communication is best for your use case, you need to make some architecture decisions to choose the best combination of frameworks to build your microservices.
 
-For large scale application, event driven approach gives you more flexibility and scalability
-and requests from client don't need all the services to be up and running the exact time. 
+For large scale applications, the event driven approach gives you more flexibility and scalability and requests from client don't need all the services to be up and running the exact time. 
 
 In addition to event driven application, Event Sourcing and CQRS are getting populate these
 days for high scale applications. 
@@ -60,8 +53,7 @@ light-eventuate-4j is a framework that provides user to build Event Sourcing and
 without worrying about the underline infrastructure. It provides an event store and APIs to
 publish and subscribe events to/from clients. You can build your services with light-rest-4j, 
 light-graphql-4j or light-hybrid-4j and they are all seemlessly integrated with light-eventuate-4j 
-framework which provide event store and event producing and consuming client for services built 
-on top of other light-4j frameworks.
+framework which provide event store and event producing and consuming client for services built on top of other light-4j frameworks.
 
 Another alternative solution would be [light-tram-4j][] which is another event driven framework but
 without the complicated event sourcing to deal with. 

@@ -8,12 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In a monolithic application, components invoke one another via method or function calls. In contrast,
-a microservices-based application might be distributed on multiple Docker containers or VMs or multiple
-machines. Each service instance is typically a process and services must interact using an inter-process
-communication mechanism. 
+In a monolithic application, components invoke one another via method or function calls. In contrast, a microservices-based application might be distributed on multiple Docker containers or VMs or multiple machines. Each service instance is typically a process and services must interact using an inter-process communication mechanism. 
 
 ### Patterns
 
@@ -23,12 +21,7 @@ There are two major styles in client/service or service/service communication.
 
 The client expects a timely response from the service and might even block while it waits.
 
-When using a synchronous, request/response-based IPC mechanism, a client sends a request to a service. 
-The service processes the request and sends back a response. In many clients, the thread that makes the 
-request blocks while waiting for a response. Other clients might use asynchronous, event-driven client 
-code that is perhaps encapsulated by Futures or Rx Observables. However, unlike when using messaging, the 
-client assumes that the response will arrive in a timely fashion. There are numerous styles to choose 
-from. Two popular HTTP styles are REST and RPC. 
+When using a synchronous, request/response-based IPC mechanism, a client sends a request to a service. The service processes the request and sends back a response. In many clients, the thread that makes the request blocks while waiting for a response. Other clients might use asynchronous, event-driven client code that is perhaps encapsulated by Futures or Rx Observables. However, unlike when using messaging, the client assumes that the response will arrive in a timely fashion. There are numerous styles to choose from. Two popular HTTP styles are REST and RPC. 
 
 There are numerous benefits to using a communication style that is based on HTTP:
 
@@ -41,27 +34,18 @@ line using curl (assuming JSON or some other text format is used).
 
 There are some drawbacks to using HTTP:
 
-- It only directly supports the request/response style of interaction. You can use HTTP for notifications 
-but the server must always send an HTTP response.
-- Because the client and service communicate directly (without an intermediary to buffer messages), they 
-must both be running for the duration of the exchange.
-- The client must know the location (i.e., the URL) of each service instance and this is a non-trivial 
-problem in a modern application. Clients must use a service discovery mechanism to locate service instances.
+- It only directly supports the request/response style of interaction. You can use HTTP for notifications but the server must always send an HTTP response.
+- Because the client and service communicate directly (without an intermediary to buffer messages), they must both be running for the duration of the exchange.
+- The client must know the location (i.e., the URL) of each service instance and this is a non-trivial problem in a modern application. Clients must use a service discovery mechanism to locate service instances.
 
 
 ##### Asynchronous, Message-Based Communication
 
-The client doesn’t block while waiting for a response, and the response, if any, isn’t necessarily 
-sent immediately. 
+The client doesn’t block while waiting for a response, and the response, if any, isn’t necessarily sent immediately. 
 
-When using messaging, processes communicate by asynchronously exchanging messages. A client makes a 
-request to a service by sending it a message. If the service is expected to reply, it does so by sending 
-a separate message back to the client. Since the communication is asynchronous, the client does not block 
-waiting for a reply. Instead, the client is written assuming that the reply will not be received immediately.
+When using messaging, processes communicate by asynchronously exchanging messages. A client makes a request to a service by sending it a message. If the service is expected to reply, it does so by sending a separate message back to the client. Since the communication is asynchronous, the client does not block waiting for a reply. Instead, the client is written assuming that the reply will not be received immediately.
 
-A message consists of headers (metadata such as the sender) and a message body. Messages are exchanged 
-over channels. Any number of producers can send messages to a channel. Similarly, any number of consumers 
-can receive messages from a channel. 
+A message consists of headers (metadata such as the sender) and a message body. Messages are exchanged over channels. Any number of producers can send messages to a channel. Similarly, any number of consumers can receive messages from a channel. 
 
 There are many advantages to use messaging:
 

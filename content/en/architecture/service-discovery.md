@@ -57,7 +57,7 @@ When you have hundreds of services deployed, to ensure that all services are pat
 
 ### High Availability
 
-When the control pane is used for additional features, more than just query the available APIs in the cloud, we need to ensure the high availability for the control pane service. For a particular API instance, it can only register itself to one instance of the control pane during the startup. It requires the registry info to be replicated between different control pane instances. To ensure real-time replication, we use the Kafka streams processing on each instance. Once a new instance is registered on a control pane instance, it will push it to a Kafka topic. All instances will subscribe the topic with Kafka stream to update its in-memory cache. With this approach, we can guarantee the sync between instances, even after an instance is restarted. 
+When the control pane is used for additional features, more than just querying the available APIs in the cloud, we need to ensure the high availability for the control pane service. For a particular API instance, it can only register itself to one instance of the control pane during the startup. It requires the registry info to be replicated between different control pane instances. To ensure real-time replication, we use the Kafka streams processing on each instance. Once a new instance is registered on a control pane instance, it will push it to a Kafka topic. All instances will subscribe the topic with Kafka stream to update its in-memory cache. With this approach, we can guarantee the sync between instances, even after an instance is restarted. 
 
 ### Security Model
 

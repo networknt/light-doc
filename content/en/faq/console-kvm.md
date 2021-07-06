@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 While working on KVM virtual machines, I once locked out of the guess VMs due to ufw enabled and I forgot to allow port 22. After my session is timed out, I cannot connect to my VMs through SSH anymore. The following is the steps to gain access to the VMs and then enable SSH to access them. 

@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-As we know, you can plug in over 100 middleware handlers from the light platform in the light-proxy to customize it for your needs. One of the features most users are interested in is the schema validation on the proxy. For example, when you have the OpenAPI 3.0 specification for the backend service, you can deploy the openapi.yaml to the proxy and wire in the openapi-validator to perform the validation against the specification. 
+As we know, you can plug in over 100 middleware handlers from Light in the light-proxy to customize it for your needs. One of the features most users are interested in is the schema validation on the proxy. For example, when you have the OpenAPI 3.0 specification for the backend service, you can deploy the openapi.yaml to the proxy and wire in the openapi-validator to perform the validation against the specification. 
 
 For PUT/POST/PATCH requests that pass through the proxy, there are some special configuration considerations. 
 

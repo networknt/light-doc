@@ -11,11 +11,11 @@ draft: false
 reviewed: true
 ---
 
-In the previous step, we have [deployed service2][] to the same server instance and tested both services. In a real production environment, the server instance will be deployed to the could with no static IP and port number. All services need to register itself to the registry like Consul to let client to discovery them. 
+In the previous step, we have [deployed service2][] to the same server instance and tested both services. In a real production environment, the server instance will be deployed to the cloud with no static IP and port number. All services need to register itself to the registry like Consul to let client discover them. 
 
-Unlike other frameworks, all endpoints are in the same server instance, light-hybrid-4j services can share the same instance and each server instance might have differnet number of services depending how each service is scaled. This requires that each individual service need to register itself instead of the server instace itself. 
+Unlike other frameworks, where all endpoints are in the same server instance, light-hybrid-4j services can share the same instance and each server instance might have different number of services depending how each service is scaled. This requires that each individual service needs to register itself instead of the server instace itself. 
 
-The RpcStartupHookProvider is responsible to register the service right after the service is discovered and merged during the server startup. It simply tell the Server instance that a list of services need to be registered and the Server will help to register them after the binding is done. 
+The RpcStartupHookProvider is responsible to register the service right after the service is discovered and merged during the server startup. It simply tells the Server instance that a list of services need to be registered and the Server will help to register them after the binding is done. 
 
 For this step, there is no code change but only configuration changes. It shows users how to update the configuration of the light-4j platform to change the behavior of the application. 
 

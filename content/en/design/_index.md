@@ -1,7 +1,7 @@
 ---
 title: "Design Overview"
 date: 2017-11-06T11:14:38-05:00
-description: "Light Platform Design"
+description: "Light Design"
 categories: []
 keywords: [design]
 menu:

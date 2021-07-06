@@ -8,10 +8,11 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 light-4j is a platform or ecosystem for building and running cloud native microservices. The
-design goal is higher throughput, lower latency and smaller memory footprint to lower production cost.
+design goal is higher throughput, lower latency and smaller memory footprint to lower production costs.
 
 It contains the following: 
 
@@ -20,15 +21,15 @@ It contains the following:
 All light-4j frameworks are built on top of an embedded gateway to address cross-cutting concerns
 for cloud native services within the request/response chain. These plugins or middleware handlers 
 are wired in with IoC service during server startup and can be enabled or disabled or change 
-behaviors via configurations. One of the design goal is to allow developers only write business logic.
+behaviors via configurations. One of the design goals is to allow developers to only write business logic.
 
 For more info please refer to [cross-cutting concerns][]
 
 
 ### Interaction Style
 
-In microservices architecture, services need to interact with each other and there are several
-frameworks to help build services with certain interaction style. 
+In microservices architecture, services need to interact with each other. There are several
+frameworks to help build services with certain interaction styles. 
 
 Synchronous (Request/Response over HTTP): 
 
@@ -70,7 +71,7 @@ Kafka and Zookeeper - Message Broker
 
 [openapi-parser][] - A light weight and fast OpenAPI 3.0 parser and validator
 
-[swagger-bundler][] - Bundle multiple swagger files together and validate the final result.
+[swagger-bundler][] - Bundles multiple swagger files together and validate the final result.
 
 [light-bot][] - Devops pipeline for microservices.
 

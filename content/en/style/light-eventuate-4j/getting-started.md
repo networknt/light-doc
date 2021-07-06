@@ -8,21 +8,19 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The light-eventuate-4j framework is a service mesh infrastructure that provide messaging
+The light-eventuate-4j framework is a service mesh infrastructure that provides messaging
 and Event Sourcing/CQRS. 
 
 
-If you are a developer that working on microservices built with 
-light-rest-4j/light-graphql-4j/light-hybrid-4j and want to leverage light-eventuate-4j for ES/CQRS,
-then you can start the light-eventuate-4j services with docker-compose in light-docker.
+If you are a developer that working on microservices built with light-rest-4j/light-graphql-4j/light-hybrid-4j and want to leverage light-eventuate-4j for ES/CQRS, then you can start the light-eventuate-4j services with docker-compose in light-docker.
 
-For details steps, please refer to [light-eventuate-4j getting started][]
+For detailed steps, please refer to [light-eventuate-4j getting started][]
 
 
-If you want to contribute to light-eventuate or dig into the details on how it works, you have to
-clone the project and build on your local. 
+If you want to contribute to light-eventuate or dig into the details on how it works, you have to clone the project and build on your local. 
 
 
 

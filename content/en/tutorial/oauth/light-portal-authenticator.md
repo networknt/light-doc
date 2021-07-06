@@ -14,7 +14,7 @@ One of the essential features of light-oauth2 is its extensibility. When a bank 
 
 To make the integration with back end authenticators easier, we have provided the authhub module in light-oauth2. In this tutorial, we are going to walk through the process to add Light Portal Authenticator to the light-oauth2. 
 
-Light-portal is using user-command and user-query to manage users with event sourcing and CQRS. The user-query service exposes a `loginUser` endpoint to accept email and password for user authentication. 
+Light-portal uses user-command and user-query to manage users with event sourcing and CQRS. The user-query service exposes a `loginUser` endpoint to accept an email and a password for user authentication. 
 
 ### Customized Authenticator
 

@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-Note: After upgrade to 2.2.1, we have upgrade the testnet to 2.3.1 recently by following the same process. 
+Note: After upgrade to 2.2.1, we have upgraded the testnet to 2.3.1 recently by following the same process. 
 
 In the previous section, we have written down the steps to [install][] a Kafka cluster on test1/test2/test3 VMs. The installed version is 2.0.0, which was the latest at the time of the installation. 
 

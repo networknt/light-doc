@@ -27,7 +27,7 @@ cp -r light-example-4j/discovery/api_d/tag light-example-4j/discovery/api_d/toke
 
 ## Starting Consul
 
-If you consul server is still running, please stop it and restart it with the following:
+If your consul server is still running, please stop it and restart it with the following:
 
 ```bash
 docker run -d -p 8400:8400 -p 8500:8500/tcp -p 8600:53/udp -e 'CONSUL_LOCAL_CONFIG={"acl_datacenter":"dc1","acl_default_policy":"deny","acl_down_policy":"extend-cache","acl_master_token":"the_one_ring","bootstrap_expect":1,"datacenter":"dc1","data_dir":"/usr/local/bin/consul.d/data","server":true}' consul agent -server -ui -bind=127.0.0.1 -client=0.0.0.0

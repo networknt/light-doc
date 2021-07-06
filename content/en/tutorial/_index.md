@@ -213,7 +213,7 @@ Tutorials give developers step by step guidance on how to use each component or 
 
 - [Light-bot](/tutorial/bot/)
   * Clone and [build light-bot](/tutorial/bot/build-light-bot/) project and command line tool with Gradle
-  * Clone and build [dependency](/tutorial/bot/dependency/) in develop branches for light platform developers
+  * Clone and build [dependency](/tutorial/bot/dependency/) in develop branches for Light developers
   * Set up [develop](/tutorial/bot/local-develop/) branch build and test on your local computer
   * Set up [devops](/tutorial/bot/devops-develop/) sever for develop branch build automatically
   * Build [light-portal local](/tutorial/bot/light-portal-local/) develop branch using cloud eventuate services

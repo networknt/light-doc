@@ -9,6 +9,7 @@ weight: 100
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous step, we have explored how to send logs to a centralized server so that activity across multiple services can be viewed on the same screen. In this step, we are going to setup metrics in the pet store to send it to InfluxDB and then subsequently viewed the dashboard from Chronograf UI.

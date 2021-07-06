@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In most of the cases, the only configuration file you want to change is datasouce.yml file. 

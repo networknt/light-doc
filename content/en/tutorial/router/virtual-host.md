@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In the previous tutorial, we have shown how to server a single page application from a router instance. In this tutorial, we are going to expend it again to host multiple domain in the same router instance. 
+In the previous tutorial, we have shown how to sever a single page application from a router instance. In this tutorial, we are going to expend it again to host multiple domains in the same router instance. 
 
 The first step is to create a virtual-host folder in networknt/light-config-test/light-router and copy the content of taiji-faucet content into this folder. 
 

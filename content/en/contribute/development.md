@@ -16,7 +16,7 @@ draft: false
 reviewed: true
 ---
 
-The light platform consists dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][rfcs], and we need your help to make Light even brighter. You do not need to be a Java/Kotlin/Javascript guru to contribute to the projects.
+Light consists dozens of open-source projects and lives by the work of its contributors. There are plenty of open issues and [request for comments][rfcs], and we need your help to make Light even brighter. You do not need to be a Java/Kotlin/Javascript guru to contribute to the projects.
 
 ### Contribution Flow
 

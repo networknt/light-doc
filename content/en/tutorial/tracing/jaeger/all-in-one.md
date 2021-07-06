@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Your applications must be instrumented before they can send tracing data to Jaeger backend. Before that, we need to start the tracer. 
 
-All-in-one is an executable designed for quick local testing, launches the Jaeger UI, collector, query, and agent, with an in-memory storage component.
+All-in-one is an executable designed for quick local testing, launching the Jaeger UI, collector, query, and agent, with an in-memory storage component.
 
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
 
@@ -37,7 +38,7 @@ Please be aware that this is only for local testing. For production, please visi
 * Kubernetes Operator: https://github.com/jaegertracing/jaeger-operator
 * OpenShift templates: https://github.com/jaegertracing/jaeger-openshift
 
-Now we have all the component of the tracer started. In the next step, we are going to reuse the service discovery application we built before to add additional steps for distributed tracing. 
+Now we have all the components of the tracer started. In the next step, we are going to reuse the service discovery application we built before to add additional steps for distributed tracing. 
 
 Before we dive into a distributed application, let's first modify the openapi [petstore](https://github.com/networknt/light-example-4j/tree/release/rest/openapi/petstore) application to enable tracing and get a feeling of it. 
 

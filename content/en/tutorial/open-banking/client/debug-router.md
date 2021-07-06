@@ -46,7 +46,7 @@ Notice that we are using the absolute path for the base to load the two single-p
 
 ### Remote Docker Container
 
-Sometime, the application might work well in standalone mode but doesn't work inside a docker container. Most of the cases, this is due to the docker network issue. A lot of developers are getting used to the localhost and don't know that the same localhost points to the docker OS loopback address instead of the docker host address. 
+Sometimes, the application might work well in standalone mode but doesn't work inside a docker container. In most cases, this is due to the docker network issue. A lot of developers are getting used to the localhost and don't know that the same localhost points to the docker OS loopback address instead of the docker host address. 
 
 To resolve issues in the docker container, you can connect to the application within the docker container to [debug remotely][]. 
 

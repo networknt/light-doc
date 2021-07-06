@@ -8,10 +8,11 @@ weight: 50
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-As described in [security architecture][], light platform uses two tokens to secure service
-to service calls. One token is the original token from the login user and it has original
+As described in [security architecture][], Light uses two tokens to secure service
+to service calls. One token is the original token from the login user that has original
 caller information and possible additional info for fine-grained authorization. This token
 is called Subject Token.
 

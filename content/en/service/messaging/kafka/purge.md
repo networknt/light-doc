@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-During the development cycle, chances are you want to reset the entire Kafka cluster to the original state like a refreshed installation. Here are the steps to archive that. 
+During the development cycle, chances are you want to reset the entire Kafka cluster to the original state like a refreshed installation. Here are the steps to achieve that. 
 
 ### Stop Applications
 

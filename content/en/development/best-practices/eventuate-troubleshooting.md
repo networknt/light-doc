@@ -12,7 +12,7 @@ reviewed: true
 ---
 
 
-Event-driven frameworks are very complicated as there are too many moving parts. The following describes some troubleshooting techniques that can help developers to find out where would be the problem if the application is not working. 
+Event-driven frameworks are very complicated as there are many moving parts. The following describes some troubleshooting techniques that can help developers to find out where would be the problem if the application is not working. 
 
 ### Turn on Debug Log
 

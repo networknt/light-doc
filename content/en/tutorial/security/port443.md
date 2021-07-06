@@ -13,7 +13,7 @@ reviewed: true
 
 The default light-codegen generated project will have HTTPS and HTTP2 enabled on port 8443. Typically, HTTPS servers run on port 443. But this port is considered privileged on Unix/Linux systems, and the process using them must be owned by root. 
 
-Unless your service is running in a dedicated locked down VM, we don't recommend running as root - it should be run as its own user. For most of our customers, they have F5 facing the Internet and it can route the traffic to the IP and port combination. When deploying light-4j instance to the cloud, one solution is to front light-4j with a server such as HAProxy or Nginx, and let it proxy requests to light-4j, but this requires maintaining the another installation and reduce the performance dramatically as well. In situations where you are wanting to run light-4j on port 443, but you do not want to setup a proxy server you can use iptables on Linux to forward traffic.
+Unless your service is running in a dedicated locked down VM, we don't recommend running as root - it should be run as its own user. For most of our customers, they have F5 facing the Internet and it can route the traffic to the IP and port combination. When deploying light-4j instance to the cloud, one solution is to front light-4j with a server such as HAProxy or Nginx, and let it proxy request to light-4j, but this requires maintaining the another installation, which reduces the performance dramatically as well. In situations where you are wanting to run light-4j on port 443, but you do not want to setup a proxy server you can use iptables on Linux to forward traffic.
 
 
 ### Prerequisites
@@ -146,7 +146,7 @@ sudo tail -f /var/log/syslog
 
 ### Local access
 
-The above setup is working on a remote server that is accessed from the Internet. However, if you want to access the 443 port on the same host expected to be forwarded to the 8443, you need to add the following command line. In most cases, it is your Linux desktop for development. 
+The above setup works on a remote server that is accessed from the Internet. However, if you want to access the 443 port on the same host expected to be forwarded to the 8443, you need to add the following command line. In most cases, it is your Linux desktop for development. 
 
 ```
 sudo iptables -t nat -A OUTPUT -p tcp --dport 443 -o lo -j REDIRECT --to-port 8443

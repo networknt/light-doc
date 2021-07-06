@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-Light-proxy is a critical service component that can glue all other alien APIs into the light platform ecosystem without re-writing. Once putting light-proxy in front of legacy APIs, these API can enjoy all the cross-cutting concerns provided by the light-platform, such as security, metrics, auditing, traceability, validation, service registry/discovery, etc. From the consumer point of view, your backend API looks just like an API built on top of light-4j frameworks. 
+Light-proxy is a critical service component that can glue all other alien APIs into the Light ecosystem without re-writing. Once putting light-proxy in front of legacy APIs, these API can enjoy all the cross-cutting concerns provided by the light-platform, such as security, metrics, auditing, traceability, validation, service registry/discovery, etc. From the consumer point of view, your backend API looks just like an API built on top of light-4j frameworks. 
 
 ### OpenAPI 3.0 Backend 
 

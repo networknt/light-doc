@@ -13,6 +13,7 @@ sections_weight: 130
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In this tutorial, we are going to generate a typical Spring Boot application from https://start.spring.io/ and modify it to inject light-4j middleware handlers. The final application can be found at https://github.com/networknt/light-example-4j/tree/master/springboot/servlet
@@ -79,7 +80,7 @@ In order to inject the light-4j handlers, we need to add another dependency.
 		</dependency>
 ```
 
-As the dependency refer to the version of the light-4j, we need to define it in the properties section in the pom.xml
+As the dependency refers to the version of the light-4j, we need to define it in the properties section in the pom.xml
 
 ```
 	<properties>
@@ -619,7 +620,7 @@ paths:
       - swaggerui
 ```
 
-Please note that we have defined two default chains. One is named default-spring for Spring Boot and one is called default-light for Light-4j. The different is that light-4j chain has body parser handler wired in. As Spring Boot controllers need Body stream, we cannot consume the body in the request chain so that body handler is skipped. 
+Please note that we have defined two default chains. One is named default-spring for Spring Boot and one is called default-light for Light-4j. The difference is that light-4j chain has a body parser handler wired in. As Spring Boot controllers need Body stream, we cannot consume the body in the request chain so that body handler is skipped. 
 
 Also, the light-4j endpoint has a final business handler and Spring Boot endpoint only has a middleware handler chain default-spring. The spring-servlet module will automatically call the IntialServletHandler once the handlers in default-spring are all executed. 
 
@@ -835,7 +836,7 @@ Note that there is an extra header `key: 1` in the request as the specification 
 
 ### Security
 
-For the above test, you can see that request validation handler based on the specification is working. In fact, there are other handlers like exception, metrics, tracebility, correction, sanitizer and security wired in and working behind the scene. In the configuration, the JWT token verfication is disable, let's enable it and to check if the security will work for both Spring Boot and Light-4j endpoints. 
+For the above test, you can see that request validation handler based on the specification is working. In fact, there are other handlers like exception, metrics, tracebility, correction, sanitizer and security wired in and working behind the scene. In the configuration, the JWT token verfication is disabled, let's enable it and to check if the security will work for both Spring Boot and Light-4j endpoints. 
 
 Let's open openapi-security.yml and change the enableVerifyJwt to true and rebuild and restart the server.
 

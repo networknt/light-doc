@@ -12,7 +12,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous [create-react-app][] section, we had scaffold a React application and modified it a little bit on the App.js file. In this section, we are going to deploy it to the light-portal server so that everybody from the Internet can access it. 
+In the previous [create-react-app][] section, we had scaffolded a React application and modified it a little bit on the App.js file. In this section, we are going to deploy it to the light-portal server so that everybody from the Internet can access it. 
 
 ### Build
 

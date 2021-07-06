@@ -11,11 +11,11 @@ draft: false
 reviewed: true
 ---
 
-Apache Kafka is a distributed streaming platform developed by Apache Software Foundation and written in Java and Scala. Light Platform uses Kafka for messaging broker for event-based frameworks (light-eventuate-4j, light-tram-4j, and light-saga-4j). In this document, we will show you how to install Kafka 2.0 on Ubuntu 18.04 VMs to form a three nodes cluster. 
+Apache Kafka is a distributed streaming platform developed by Apache Software Foundation and written in Java and Scala. Light uses Kafka for its messaging broker for event-based frameworks (light-eventuate-4j, light-tram-4j, and light-saga-4j). In this document, we will show you how to install Kafka 2.0 on Ubuntu 18.04 VMs to form a three nodes cluster. 
 
 ### Prerequisites
 
-Three KVM boxes with 32GB memory each and you need to have `sudo` access to all the VMs. In the following steps, we are going to use the names of the hosts as test1, test2, and test3. First, let's log in to test1 and install everything. 
+You will need three KVM boxes with 32GB memory each and to have `sudo` access to all the VMs. In the following steps, we are going to use the names of the hosts as test1, test2, and test3. First, let's log in to test1 and install everything. 
 
 ### Install OpenJDK 8
 
@@ -40,7 +40,7 @@ java -version
 
 ### Install Kafka
 
-In this step, we will install the Apache Kafka using the binary files that can be downloaded from the Kafka website. We will install and configure apache Kafka and run it as a non-root user.
+In this step, we will install Apache Kafka using the binary files that can be downloaded from the Kafka website. We will install and configure apache Kafka and run it as a non-root user.
 
 Add a new user named kafka
 

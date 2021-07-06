@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This tutorial shows you how to load host-menu query side hybrid service with the hybrid-query
@@ -74,7 +75,7 @@ pom.xml file for hybrid-query project.
 
 ```
 
-After update pom.xml, the hybrid-query project in light-portal needs to be rebuilt. 
+After updating pom.xml, the hybrid-query project in light-portal needs to be rebuilt. 
 
 ```
 cd ~/networknt/light-portal/hybrid-query

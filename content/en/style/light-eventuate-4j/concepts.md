@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Light-eventuate-4j conceptual model
@@ -18,9 +19,7 @@ Light-eventuate-4j conceptual model
 
 An entity is a business object such as an Order. 
 
-An entity is an instance of an EntityType. In Domain-Driven Design terms, an entity is an aggregate. Each 
-entity has an ID, unique among instances of the same entity type, which you can choose or allow Eventuate 
-to assign to you.
+An entity is an instance of an EntityType. In Domain-Driven Design terms, an entity is an aggregate. Each entity has an ID, unique among instances of the same entity type, which you can choose or allow Eventuate to assign to you.
 
 An entity has a sequence of one or more events.
 
@@ -114,14 +113,11 @@ the following components:
 
 ##### Writing services
 
-Services are responsible for handling each external request (for example, an HTTP request) by either 
-creating a new aggregate or updating an existing one. Services are typically invoked by client through
-REST, GraphQL or RPC. 
+Services are responsible for handling each external request (for example, an HTTP request) by either creating a new aggregate or updating an existing one. Services are typically invoked by client through REST, GraphQL or RPC. 
 
 ##### Defining event handlers
 
-A command-side event handler subscribes to one or more event types. It processes each event by updating 
-an existing aggregate or creating a new one.
+A command-side event handler subscribes to one or more event types. It processes each event by updating an existing aggregate or creating a new one.
 
 ##### Defining snapshot strategies
 
@@ -129,9 +125,7 @@ A snapshot strategy is given the opportunity to create a snapshot when an aggreg
 
 ##### Developing query-side modules
 
-A query-side module maintains a materialized view of command-side aggregates. It has one or more event 
-handlers that subscribe to events published by command-side aggregates. The event handlers process each 
-event by updating the view.
+A query-side module maintains a materialized view of command-side aggregates. It has one or more event handlers that subscribe to events published by command-side aggregates. The event handlers process each event by updating the view.
 
 
 

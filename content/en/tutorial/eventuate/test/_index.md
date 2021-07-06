@@ -8,13 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 As there are several dependencies for light-eventuate-4j applications to run, it is a little
 complicated to test services built on top of light-eventuate-4j compare with other simple
 services. 
 
-In this section, we will walk through Unit Test, Integration Test and End-to-End Test with
+In this section, we will walk through the Unit Test, Integration Test and End-to-End Test with
 real examples so that others can learn what is the difference of each type of test and how
 to write these test ensure high quality services are produced. 
 

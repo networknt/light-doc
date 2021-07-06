@@ -7,6 +7,7 @@ keywords: [tutorial]
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The petstore RESTful API is used by a lot of frameworks as reference application
@@ -16,8 +17,8 @@ the features of light-4j and light-rest-4j OpenAPI 3.0 support. If you are
 interested in light-rest-4j Swagger 2.0 support, please take a look at 
 [Swagger 2.0 Petstore Tutorial][].
 
-Please note that our frameworks are aiming microservices and there are several
-tutorials to show case multiple services interact with each other. These can be
+Please note that our frameworks are aimed towards microservices. There are several
+tutorials to showcase multiple services interacting with each other. These can be
 found at [rest tutorial][] section. The public available petstore specification
 is designed as monolithic API. 
 

@@ -13,6 +13,7 @@ sections_weight: 20
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 [GraphQL][] is a new style of protocol open sourced by Facebook and it is getting popular

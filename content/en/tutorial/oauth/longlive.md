@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the normal case, your clients or testing tools should integrate with OAuth authorization server to get tokens during runtime; however, for manual testing, it is very inconvenient to get access token every 10 minutes. To make tester's jobs easier, you can generate a long-lived token for dev testing from a tool in the light-4j framework.
+Normally, your clients or testing tools should integrate with OAuth authorization server to get tokens during runtime; however, for manual testing, it is very inconvenient to get an access token every 10 minutes. To make the testers' jobs easier, you can generate a long-lived token for dev testing from a tool in the light-4j framework.
 
 The light-oauth2 contains two testing key pairs for testing only. Both private keys and public key certificates can be found in [security module of light-4j][] or [light-docker oauth2-token config][]. The same public key certificates are included in light-4j services generated from [light-codegen][] so that the server can verify any token issued by the OAuth server.
 

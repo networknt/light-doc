@@ -8,10 +8,11 @@ weight: 60
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Access Token is used for service to service invocation or standalone application invokes a
-service. Usually, this token is retrieved from OAuth 2.0 provider by following client credentials
+Access Token is used for service to service invocation or standalone applications which invoke a
+service. Usually, this token is retrieved from OAuth 2.0 provider by following the client credentials
 grant flow. The token doesn't have any information about a user but only has client_id to indicate
 who is the calling application. 
 

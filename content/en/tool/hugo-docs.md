@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-For most open source developers, they would use github.com to manage their projects and then have a README.md for documentation. For some bigger projects, they might have a wiki for additional documents and linked them from README.md.
+For most open source developers, they would use github.com to manage their projects and then have a README.md for documentation. For some bigger projects, they might have a wiki for additional documents and link them from README.md.
 
 **This tutorial is written for Linux and Mac users; however, it should not be hard to follow by Windows users.**
 

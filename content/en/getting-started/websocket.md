@@ -13,6 +13,7 @@ sections_weight: 120
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 HTTP protocol is pretty efficient, especially HTTP 2.0; however, to handle repeated communication between server to browser or between browser to browser, nothing can compete with Websocket. Once the connection is established, the communication channel is open until it is closed. It is very efficient to handle messages or events in an event driven application.

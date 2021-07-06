@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-There are two ways to implement a complete distributed microservices application with Light Platform in a Kubernetes cluster: Embedded and Sidecar. 
+There are two ways to implement a complete distributed microservices application with Light in a Kubernetes cluster: Embedded and Sidecar. 
 
 If you use Java 8 or Java 11 to implement your service, you can leverage one of the Light frameworks with [cross-cutting concerns][] embedded in the request/response chain. 
 

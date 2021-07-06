@@ -11,9 +11,8 @@ draft: false
 reviewed: true
 ---
 
-OpenAPI 3.0 specification is a very loose specification and it gives designer too many options to write the spec. Most
-of the cases, developers write the code with annotations and generate the specification afterward. With enterprise
-scale in mind, we encourage [design first][] approach. The outcome is not just a document but a specification that
+OpenAPI 3.0 specification is a very loose specification which gives the designer many options to write the spec. In most cases, developers write the code with annotations and generate the specification afterward. With an enterprise
+scale in mind, we encourage a [design first][] approach. The outcome is not just a document but a specification that
 can be used to scaffold a new project and loaded during runtime to verify JWT scopes for security and validate requests
 to protect the business layer against attacks.
 
@@ -24,18 +23,18 @@ the author of the OpenAPI 3.0 specification should follow the best practices bel
 
 - clear and easily readable by architects, analysts, developers
 - well documented, with explanations provided in description tags
-- adhere to OpenAPI specifications - v3.0 at the time of this writing
-- use a design which lends itself to a clean and easily consumable object model
+- adheres to OpenAPI specifications - v3.0 at the time of this writing
+- uses a design which lends itself to a clean and easily consumable object model
 
 ### Security First
 
 Often API designers focus on functionalities and add security later on. We would encourage to follow security first
 approach so that security is considered for every endpoint during the design.
 
-Before working on a new specification, you can copy from an existing one and [petstore][] is a good starting point.
+Before working on a new specification, you can copy from an existing one. [Petstore][] is a good starting point.
 There are also other OpenAPI specifications in the [model-config][] repository to help you in learning the design style.   
 
-Within petstore specification you can find the following block that defines the security under the component. This section
+Within the petstore specification you can find the following block that defines the security under the component. This section
 is optional in the specification, but here it is mandatory. [light-codegen][] throws an error if securitySchemes are not
 found.  
 

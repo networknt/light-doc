@@ -28,7 +28,7 @@ Years ago, when JWT draft specification was out, I came up with the idea to do t
 
 ## Requirement
 
-Different organizations have different security requirement. When designing the security architecture of the light platform, we have to make sure that it is suitable for all types of organizations. In most of the cases, security is a tradeoff between performance and risk. If you build a blog application, you want it to be as fast as possible with adequate security. If you are building a banking application, you want it to be as secure as possible. So we cannot have one security design for all customers. We need to have multi-tier of security ranged from low, medium and high. In the next section, we list all the use cases in the consideration. 
+Different organizations have different security requirements. When designing the security architecture of Light, we have to make sure that it is suitable for all types of organizations. In most cases, security is a tradeoff between performance and risk. If you build a blog application, you want it to be as fast as possible with adequate security. If you are building a banking application, you want it to be as secure as possible. So we cannot have one security design for all customers. We need to have multi-tier of security ranged from low, medium and high. In the next section, we list all the use cases in the consideration. 
 
 Beside above requirements, we need to ensure that interactions to the OAuth 2.0 provide is miniume so that we can save network hops. 
 
@@ -144,16 +144,16 @@ Role-Based authorization must be specific to one or a group of services with a s
 
 ### Attribute-Based
  
-For example, only account manager can access an account. Or employee based on one geolocation can access customers based on the same geolocation.
+For example, only an account manager can access an account, or an employee based on one geolocation can access customers based on the same geolocation.
 
 ### Rule-Based
 
-Teller can only transfer money less than $10,000.00 etc. and his/her manager can override the rule with manager's token. 
+Teller can only transfer money less than $10,000.00 etc, and his/her manager can override the rule with manager's token. 
 
 
 ##  Request and Response Filter
 
-Sometimes, certain request fields need to be removed based on the clientId or other attributes so that the rule business handler can be done in a consistent way. Also, for certain client or user, the response might need to filter out some information before returning to the consumer. 
+Sometimes, certain request fields need to be removed based on the clientId or other attributes so that the rule business handler can be done in a consistent way. Also, for certain clients or users, the response might need to filter out some information before returning to the consumer. 
 
 ## JWT public key certificate distribution
 

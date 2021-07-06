@@ -12,7 +12,7 @@ draft: false
 ---
 
 We have built [light-codegen][] to support project scaffolding for all the frameworks 
-provided by the light platform. We believe that in order to build scalable enterprise 
+provided by the Light platform. We believe that in order to build scalable enterprise 
 applications and microservices, you have to adopt a [design first][] methodology. 
 There are numerous ways to use light-codegen but for the purposes of this tutorial, 
 we are using it as a command line tool.

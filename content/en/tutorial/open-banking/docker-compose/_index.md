@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous step, we have enabled [security][] and dockerize the services. In this section, we are going to create a docker-compose to start all services together with externalized configuration. We also register the services to the Consul cluster in the test cloud so that the client can discover them. 
+In the previous step, we have enabled [security][] and dockerize the services. In this section, we are going to create a docker-compose to start all services together with externalized configuration. We will also register the services to the Consul cluster in the test cloud so that the client can discover them. 
 
 We are going to use another repository for the deployment configuration, and it can be accessed at https://github.com/open-banking/light-config-test
 

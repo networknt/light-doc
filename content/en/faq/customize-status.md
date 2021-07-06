@@ -8,14 +8,15 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 ### How to customize the output format for Error Status response
 
-Light-4j Status module is an object that model the error response and constructed from
-error code defined in status.yml config file. The framework provide some error code and
+Light-4j Status module is an object that models the error response and is constructed from
+error code defined in status.yml config file. The framework provides some error code and
 we are expecting the API itself provide some service specific error code. For more detail
-on [Status][] module, please check the cross-cutting concerns section. 
+on the [Status][] module, please check the cross-cutting concerns section. 
 
 The default output of error status is a JSON string with several properties flattened in
 a map. Here is an example.

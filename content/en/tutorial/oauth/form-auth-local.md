@@ -207,7 +207,7 @@ allowedMethods:
 - DELETE
 ```
 
-As we don't have the light-oauth2 console hooked up yet, we don't have a chance to create a new client_id/client_secret pair. We need to rely on the create_mysql.sql script to populate a client for our test. There is an existing bootstrap client, and we just need to modify it with the following redirect_uri. The is the URI that will handle the authorization code returned from the light-oauth2 code service. The real handler is the light-spa-4j StatelessAuthHandler which is wired in the light-router handler.yml file. 
+As we don't have the light-oauth2 console hooked up yet, we don't have a chance to create a new client_id/client_secret pair. We need to rely on the create_mysql.sql script to populate a client for our test. There is an existing bootstrap client, and we just need to modify it with the following redirect_uri. It is the URI that will handle the authorization code returned from the light-oauth2 code service. The real handler is the light-spa-4j StatelessAuthHandler which is wired in the light-router handler.yml file. 
 
 ```
 'https://lightapi.net/authorization'

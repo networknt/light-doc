@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-By default, the services built on top of the light platform have HTTP 2.0 enabled automatically right of the light-codegen. The server also supports HTTP 1.1 connection if the client cannot negotiate HTTP 2.0 with the server. 
+By default, the services built on top of Light have HTTP 2.0 enabled automatically right of the light-codegen. The server also supports HTTP 1.1 connection if the client cannot negotiate HTTP 2.0 with the server. 
 
 There are a lot of benefits with HTTP 2.0, but JDK 8 and below don't support it natively. Though there are some workarounds, none of them is a practical solution. Given the situation, we have built a client module based on Undertow core for HTTP 2.0 support. 
 

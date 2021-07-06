@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-When you have an application that is not working as expected, the first thing would be checking the application logs to see if there are any error there. Even there are no errors, the information in logs can significantly help developers or supporters to understand how the application is working and where it stops. 
+When you have an application that is not working as expected, the first thing would be checking the application logs to see if there are any errors there. Even if there are no errors, the information in logs can significantly help developers or supporters to understand how the application is working and where it stops. 
 
 In production or any official testing environment, logging level must be set on error so that the application can focus on the business logic other than handling the logging. When an error occurs, it would be better to turn on the debug to collect more information about the suspicious subsystem or microservice.  
 
@@ -25,7 +25,7 @@ ADD /target/petstore-1.0.1.jar server.jar
 CMD ["/bin/sh","-c","java -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
 ```
 
-Above command tells the application to look for logback.xml in the /config folder first before settling down with the default file in src/main/resources folder. This setup gives us an opportunity to overwrite the default configuration with externalized logback.xml file.
+The above command tells the application to look for logback.xml in the /config folder first before settling down with the default file in src/main/resources folder. This setup gives us an opportunity to overwrite the default configuration with externalized logback.xml file.
 
 When a dockerized application starts, a filesystem directory can be mapped to /config inside the container. Here is an example of a docker-compose file. 
 
@@ -67,7 +67,7 @@ networks:
     external: true
 ```
 
-In above compose file, you can put your logback.xml into ./hybrid-command/cloud/config folder to overwrite the default one. Once a new file is copied over, or an existing file is updated, you can restart the particular service with the following command. 
+In the above compose file, you can put your logback.xml into ./hybrid-command/cloud/config folder to overwrite the default one. Once a new file is copied over, or an existing file is updated, you can restart the particular service with the following command. 
 
 ```
 docker-compose -f docker-compose-cloud.yml restart hybrid-command

@@ -8,6 +8,7 @@ weight: 40
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This service has only one endpoint to get access tokens. It supports authorization code grant type, and client credentials grant type. Also, it supports some customized authorization types required by our customers. These customized flows will only work on certain clients, which have to be set up as trusted clients. 

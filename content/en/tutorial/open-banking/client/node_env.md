@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the [oauth config tutorial](/tutorial/open-banking/client/oauth-config/), we have created to client for the react-client application. One has the redirect URI https://ob.lightapi.net for production, and another has the redirect URI https://localhost:3000 for local development. There are two client_ids available, and we have to put the client_id into the react-client application login function to access the /oauth/code endpoint. 
+In the [oauth config tutorial](/tutorial/open-banking/client/oauth-config/), we have created a client for the react-client application. One has the redirect URI https://ob.lightapi.net for production, and another has the redirect URI https://localhost:3000 for local development. There are two client_ids available, and we have to put the client_id into the react-client application login function to access the /oauth/code endpoint. 
 
 Here is the login function in ResponsiveDrawer.js
 

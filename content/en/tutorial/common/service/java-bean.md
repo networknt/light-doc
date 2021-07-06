@@ -8,13 +8,13 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Above use cases are about interface implementation and how to bind the implementation to
-one or more interfaces. How about normal Java Beans? If there is a Java Bean and we want
-to create a singleton instance that can be shared within the JVM. What to do in service
-module. Further, some of the Java Beans have complicated initialization logic and where
-to put the logic in? In this section, we are going to explore the POJO beans and how to 
+The above use cases are about interface implementation and how to bind the implementation to
+one or more interfaces. How about normal Java Beans? For example, what if there is a Java Bean and we want
+to create a singleton instance that can be shared within the JVM? What to do in the service module? Furthermore, some Java Beans have complicated initialization logic, so where
+do we put the logic in? In this section, we are going to explore the POJO beans and how to 
 utilize service.yml file to control how to initialize them as singletons. 
 
 Let's assume we have an interface ChannelMapping. This use case has nothing to do with
@@ -95,7 +95,7 @@ public class IntegrationData {
 
 ```
 
-To create these object, we will define a helper class to initialize them and we can invoke this
+To create these objects, we will define a helper class to initialize them and we can invoke this
 class from service module given the definition in service.yml
 
 Here is the helper initializer class. 

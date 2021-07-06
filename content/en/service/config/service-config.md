@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 For any service built with the light-4j frameworks to leverage the light-config-server, we need to add some extra configuration files and environment variables to bootstrap the service. 

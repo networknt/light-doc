@@ -13,6 +13,7 @@ sections_weight: 60
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Light encourages microservices or serverless architecture although it can be used to build monolithic services. When you have too many services running within the organization, managing these service specifications during development and instances during runtime can become a daunting job. Light-portal provides features that help you manage the entire life-cycle of services from planning to decommission.

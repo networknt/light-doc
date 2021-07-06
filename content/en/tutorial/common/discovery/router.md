@@ -17,7 +17,7 @@ reviewed: true
 
 There are two ways to [deploy light-router][], and it is highly recommended for the client to own the instance of light-router.  
 
-For demo purpose, the light-router will be deployed in Kubernetes cluster master node as it has a static IP address. By following the steps below, you should have a router instance up and running and connect to multiple instances of API A in the Kubernetes cluster. Communication between API A, B, C, and D is handled with the client module inside each API. 
+For demo purposes, the light-router will be deployed in Kubernetes cluster master node as it has a static IP address. By following the steps below, you should have a router instance up and running and connect to multiple instances of API A in the Kubernetes cluster. Communication between API A, B, C, and D is handled with the client module inside each API. 
 
 ### Environment
 
@@ -25,7 +25,7 @@ The light-router will be deployed to the sandbox which is our development Kubern
 
 ### Config
 
-All configuration can be found at https://github.com/networknt/light-config-test/tree/master/light-router/cloud/config
+All configurations can be found at https://github.com/networknt/light-config-test/tree/master/light-router/cloud/config
 
 ### Start 
 
@@ -94,7 +94,7 @@ And the result is:
 
 ### Summary
 
-Light-router is an infrastructure service that can assist internal client which is not built on top of Java 8 for service discovery and security. It also can act as an external access point for external client to access internal service. In this case, it is playing a role of distributed API gateway.  
+Light-router is an infrastructure service that can assist internal clients, and is not built on top of Java 8 for service discovery and security. It also can act as an external access point for external client to access internal service. In this case, it is playing a role of distributed API gateway.  
 
 All previous steps with Consul discovery are based on a dockerized consul instance with http connections. In production, we need to have a consul cluster and https needs to be enabled. In the next step, we are going to explore the [Consul cluster with TLS] connection. 
 

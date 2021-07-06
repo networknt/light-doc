@@ -13,7 +13,7 @@ reviewed: true
 
 In the previous [proxy][] step, we have set up a light-proxy instance to mimic the transactions service in case transactions service is not built on top of light-4j and doesn't have any cross-cutting concerns addressed. 
 
-Given there are several distributed services in the same application, monitoring these services on production will be a challenge. In this section, we are going to explore the distributed tracing with Jaeger. We also support Skywalking tracer from Apache and will implement it if someone interested. 
+Given there are several distributed services in the same application, monitoring these services on production will be a challenge. In this section, we are going to explore the distributed tracing with Jaeger. We will also support Skywalking tracer from Apache and will implement it if someone interested. 
 
 The first step is to copy the proxy folder to the tracing folder in the light-config-test folder in open-banking as our base configuration. Then we make the following updates. 
 

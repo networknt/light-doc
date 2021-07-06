@@ -6,7 +6,7 @@ categories: []
 keywords: []
 slug: ""
 toc: false
-draft: false,
+draft: false
 reviewed: true
 ---
 

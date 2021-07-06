@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This is a very long tutorial that documents the steps we build light-portal UI  with React and other related libraries. It is not part of the core features of our [light-4j platform][]; however, I think it is essential for the following reasons. 

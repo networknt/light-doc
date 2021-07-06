@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-For developers who are working on the light platform, they have to work on the develop branch which is not released to the maven central yet. When they are working on a repo which depends on other repositories, Maven will try to find these dependencies in the local .m2 directory and will report an error if it cannot locate them. 
+For developers who are working on the Light platform, they have to work on the develop branch which is not released to the maven central yet. When they are working on a repo which depends on other repositories, Maven will try to find these dependencies in the local .m2 directory and will report an error if it cannot locate them. 
 
 For experienced developers, they can figure out which module is in the dependency tree and clone/build these modules individually until the current project can be built. However, this takes a lot of time, and it is a repetitive task. To streamline the process, we have introduced a light-bot config to checkout and build all dependencies for the networknt organization. 
 

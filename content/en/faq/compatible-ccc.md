@@ -8,12 +8,13 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 How many cross-cutting concerns need to be implemented in order to bring services built with other frameworks or 
 languages into light ecosystem?
 
-As of today, light platform only supports Java but some big customers have multiple LOBs with different preferred
+As of today, Light only supports Java but some big customers have multiple LOBs with different preferred
 languages or frameworks. We were constantly asked how to bring services built with other languages or frameworks
 to the light ecosystem so that these services can interact with each other. 
 
@@ -22,31 +23,27 @@ the following is a list of cross-cutting concerns that are mandatory.
 
 * Security Verification
 
-Light platform utilize OAuth 2.0 JWT token with scopes for security. A security validator needs to be implemented
+Light utilizes OAuth 2.0 JWT tokens with scopes for security. A security validator needs to be implemented
 to verify the signature of the JWT token as well as comparing specification defined scopes with JWT token scopes.
 
-This means that the service needs to load the specification during runtime in order to do the comparison. Also, it 
+This means that the service needs to load the specification during runtime in order to do the comparison. It also
 needs to have a plugin architecture to support fine-grained authorization within business context based ont the
 custom claims in the JWT token. 
 
-For maximum security, two tokens (subject token and access token) need to be supported at least. Token exchange and
-token chaining are optional.
+For maximum security, two tokens (subject token and access token) need to be supported at the very least. Token exchange and token chaining are optional.
 
 * Specification Validation    
 
-Before the request reaches the business handler, it needs to be validated based on the specification. Only valid
-requests will reach the business handler. The error handling is fail fast and this reduce the attack surface and
-won't expose business handler to invalid request.  
+Before the request reaches the business handler, it needs to be validated based on the specification. Only valid requests will reach the business handler. The error handling is fail fast and this reduces the attack surface, meaning it won't expose the business handler to an invalid request.  
 
 * Traceability and Correlation
 
-The service needs to generate correlationId and pass traceabilityId (If passed in) and correlationId to the next
-service. All logging statements should have the traceabilityId and correlationId in order to diagnose production
+The service needs to generate correlationId and pass traceabilityId (If passed in) and correlationId to the next service. All logging statements should have the traceabilityId and correlationId in order to diagnose production
 issues. 
 
 * Centralized Logging
 
-Logging need to be sent to a centralized server for indexing, alert, monitor and search. TraceabilityId and correlationId
+Logging need to be sent to a centralized server for indexing, alertd, monitoring and searches. TraceabilityId and correlationId
 will help to link logs for the same external request together. 
 
 * Centralized Metrics
@@ -56,13 +53,13 @@ from both consumer perspective and provider perspective. Multiple dimensional da
 
 * Request Auditing
 
-For enterprise level services, a centralized auditing is needed. It can be separate log file or database and it is
+For enterprise level services, a centralized auditing is needed. It can be a separate log file or database and it is
 better to give an plugin interface so that different team can choose their implementation. 
 
 * Exception Handling
 
-There must be an exception handler to capture all exceptions and convert them to formatted error messages. This include
-both checked exception and runtime exception. It is not allowed to return 500 error with stacktrace to the caller.
+There must be an exception handler to capture all exceptions and convert them to formatted error messages. This includes
+both checked exception and runtime exception. It is not allowed to return a 500 error with stacktrace to the caller.
 
 * Service Registration
 
@@ -72,21 +69,20 @@ registration but Consul is the most popular one.
 
 * Consumer support
 
-Need to provide a consumer module which can do service discovery, client side load balance and cluster support. The module
+We need to provide a consumer module which can do service discovery, client side load balance and cluster support. The module
 is responsible for retrieving/renewing JWT token from OAuth 2.0 provider. It is best for the consumer module to support
 HTTP 2.0 in order to leverage the high performance with other services. 
 
 * Health Check
 
-Every service needs to expose a health check endpoint so that registry service and pull to maintain a list of healthy
+Every service needs to expose a health check endpoint that the registry service can pull to maintain a list of healthy
 instances. If Kubernetes Ingress is used, it needs this endpoint as well for load balancing.
 
 * Encryptor Decryptor
 
-A pair of encryptor and decryptor to hide password or passphrase in config files. 
+This is a pair of an encryptor and decryptor to hide password or passphrase in config files. 
 
-Above are mandatory and here is a list with optional cross-cutting concerns. They are not mandatory for all services, but
-nice to have for most of the services. 
+The above are mandatory, but here is a list with optional cross-cutting concerns. They are not mandatory for all services, but it is nice to have for most of the services. 
 
 * Mask
 

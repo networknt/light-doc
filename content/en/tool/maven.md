@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In this tutorial, we are going to show you how to install Maven on Ubuntu server. 
+In this tutorial, we are going to show you how to install Maven on a Ubuntu server. 
 
 First you need to go to apache.org to find out the url to the latest Maven bin.tar.gz
 

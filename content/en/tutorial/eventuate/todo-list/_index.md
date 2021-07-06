@@ -12,7 +12,7 @@ reviewed: true
 ---
 
 
-This is the most straightforward Hello World type of application with Event Sourcing and CQRS on top of light-eventuate-4j. It has command side service that adds a new todo item, update an existing todo item and remove a todo item. It also has query side service to retrieve all the todo items for display in a single page application. 
+This is the most straightforward Hello World type of application with Event Sourcing and CQRS on top of light-eventuate-4j. It has command side service that adds a new todo item, updates an existing todo item and removes a todo item. It also has query side service to retrieve all the todo items for display in a single page application. 
 
 This example can be found at [light-example-4j][]. 
 
@@ -39,7 +39,7 @@ Step 2: Command service processes the request and generates a "create todo" even
 
 Step 3: CDC service will capture the data change based on MySQL replication log and publish the event data to Kafka distributed stream system
 
-Step 4: Query side service's event handler  knows the new event data published to Kafka, an event handler will subscribe the event
+Step 4: Query side service's event handler  knows the new event data published to Kafka, an event handler will subscribe to the event
 
 Step 5: Query side service will process the event and save the result to a local table. (In this example: mysql/todo_db/TODO)
 

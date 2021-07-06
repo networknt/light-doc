@@ -19,7 +19,7 @@ Often you need to replace something in your projects across multiple repositorie
 
 If you have several repositories, it will not take a long time to do so. However, if you have dozens or hundreds of repositories, it would be a daunting job. 
 
-What if you have to do it on a regular basis. For example, upgrade a library to a certain version across all repositories. 
+What if you have to do it on a regular basis, for example, if you had to upgrade a library to a certain version across all repositories?
 
 light-bot regex-replace is a task created to do the replacement automatically for us. In this tutorial, we will upgrade Jackson jackson-databind from 2.9.1 to 2.9.4 as 2.9.1 has CVE-2017-17485 deserialization flaw found by one of our customers during a security scan. 
 

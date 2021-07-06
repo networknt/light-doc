@@ -67,7 +67,7 @@ cd light-doc/docs
 hugo
 ```
 
-This will build the site and put rendered site into public folder.
+This will build the site and put the rendered site into public folder.
 
 ### Deployment script
 

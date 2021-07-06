@@ -8,14 +8,15 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-These days, GraphQL is getting popular and a lot of companies adopt it to build their API
-and github.com is one of them. In most case, developer will write their schema code with
+These days, GraphQL is getting popular and many companies have adopted it to build their API
+and github.com is one of them. In most cases, developer will write their schema code with
 their favorite language and then wire in the business logic into the resolvers. Recently
 there is a IDL defined by the community; although it is not a standard yet, there are a
-lot of big players support it. Our generator can utilize the GraphQL IDL or just scaffold
+lot of big players that supprot it. Our generator can utilize the GraphQL IDL or just scaffold
 a project with simple Hello World for developer to extend. Either way, you need to wire in
 your business logic after the project is generated. 
  
@@ -86,7 +87,7 @@ Here is an example of config.json for light-graphql-4j generator.
 ```
 
 
-In most of the cases, developers will only update schema class and other depending classes in schema package. 
+In most cases, developers will only update schema class and other depending classes in schema package. 
 
 
 ## Usage
@@ -154,7 +155,7 @@ mvn clean install exec:exec
 
 ```
 
-To test the server, please follow the instructions above in utility command line.
+To test the server, please follow the instructions above in the utility command line.
 
 
 #### Docker Scripting

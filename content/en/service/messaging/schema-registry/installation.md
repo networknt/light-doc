@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-In most of the cases, we are using Open Source Kafka, Zookeeper and Confluent Schema Registry for our applications. For some of the customers, they have the enterprise license and support from Confluent Inc., but we have to focus on the access for most of the users. 
+In most cases, we are using Open Source Kafka, Zookeeper and Confluent Schema Registry for our applications. For some customers, they have the enterprise license and support from Confluent Inc., but we have to focus on the access for most of the users. 
 
 If you haven't had Kafka and ZooKeeper installed, please refer to the [installation document][]. 
 

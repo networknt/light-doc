@@ -13,7 +13,7 @@ reviewed: true
 
 ### Why this generator
 
-In the earlier days of light-platform, we only have a Restful framework, and we are leveraging [swagger-codegen][] to generate our projects from Swagger 2.0 specifications. However, there are several issues that we cannot resolve. 
+In the earlier days of light-platform, we only had a Restful framework, and we were leveraging [swagger-codegen][] to generate our projects from Swagger 2.0 specifications. However, there are several issues that we could not resolve. 
 
 - swagger-codegen does not support Java 8 and Java 11, so we have to fork it and customize it.
 - swagger-codegen does not give your flexibility to customize the project. For example, if Oracle Database is supported.

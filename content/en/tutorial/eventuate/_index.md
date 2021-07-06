@@ -17,7 +17,7 @@ Before starting a service project based on light-eventuate-4j, you need to get t
 
 Once you have your environment set up, the first tutorial is [todo-list][] which is a hello world type of application to demonstrate how to build two microservices on command side and query side based on Event Sourcing and CQRS. 
 
-Todo-list is a simple application that demonstrates the features of light-eventuate-4j with Event Sourcing and CQRS. Although it is very simple, it is utilizing all the parts of the eventuate framework. It helps the developer to focus on the flow of the eventuate framework instead of complex business logic. If you want to see a full-blown business application, then you can refer to [account management tutorial][].
+Todo-list is a simple application that demonstrates the features of light-eventuate-4j with Event Sourcing and CQRS. Although it is very simple, it utilizes all the parts of the eventuate framework. It helps the developer to focus on the flow of the eventuate framework instead of complex business logic. If you want to see a full-blown business application, then you can refer to [account management tutorial][].
 
 * [getting started](/tutorial/eventuate/getting-started/)
 * [todo-list][]

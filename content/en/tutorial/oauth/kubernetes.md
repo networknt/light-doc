@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the [start services][] section, we have introduced docker-comopse commands to start the light-oauth2 services with different databases. It is good for dev and test environment but not production. For production deployment, we are going to use Kubernetes or other Kubernetes implementations like Openshift. In this tutorial, we are going to walk through the deployment on a three nodes Kubernetes cluster. 
+In the [start services][] section, we have introduced docker-comopse commands to start the light-oauth2 services with different databases. It is good for a dev and test environment, but not production. For production deployment, we are going to use Kubernetes or other Kubernetes implementations like Openshift. In this tutorial, we are going to walk through the deployment on a three nodes Kubernetes cluster. 
 
 
 ### Introduction
@@ -27,11 +27,11 @@ node3           Ready     <none>    13d       v1.11.0
 sandbox         Ready     master    13d       v1.11.0
 ```
 
-In most of the cases, we would recommend installing light-oauth2 into the VMs so that we can easily control how to form the cluster with the internal Hazelcast IMDG. In this tutorial, we will deploy all the services to the Kubernetes cluster and access these services from Kubernetes service names. There are numeric other ways to deploy the light-oauth2 to a Kubernetes cluster. We will explore them in other tutorials. 
+In most cases, we would recommend installing light-oauth2 into the VMs so that we can easily control how to form the cluster with the internal Hazelcast IMDG. In this tutorial, we will deploy all the services to the Kubernetes cluster and access these services from Kubernetes service names. There are numeric other ways to deploy the light-oauth2 to a Kubernetes cluster. We will explore them in other tutorials. 
 
 ### Docker Images
 
-In this tutorail, we are going to use the docker images from https://hub.docker.com/u/networknt/dashboard/
+In this tutorial, we are going to use the docker images from https://hub.docker.com/u/networknt/dashboard/
 
 1.5.19 is the latest tag at the moment when this tutorial is written. 
 

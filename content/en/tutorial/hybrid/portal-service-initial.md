@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The light-hybrid-4j is a generic RPC framework, and it supports JSON RPC at the moment. In the future, we are going to support binary RPC like gRPC or other binary protocols.
@@ -63,6 +64,6 @@ Then we have the base hybrid-command and hybrid-query service ready. Following o
  -- user-management
 
 
-And user can create their own hybrid services and copy it to light-config-test hybrid  service folders.
+And the user can create their own hybrid services and copy it to light-config-test hybrid  service folders.
 
 

@@ -34,7 +34,7 @@ For each microservices, we have Dockerfile in the root folder and Dockerfile-Red
 
 https://github.com/networknt/light-oauth2/tree/master/client/docker
 
-You can manually build these images one by one per service or leverage [light-bot][] dockerhub task to release all services to docker hub together. For each release of light platform, we will push these service to networknt docker hub. You can start these services with the following commands.
+You can manually build these images one by one per service or leverage [light-bot][] dockerhub task to release all services to docker hub together. For each release of Light, we will push these service to networknt docker hub. You can start these services with the following commands.
 
 
 ```

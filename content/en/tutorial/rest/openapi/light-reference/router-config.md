@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous step, we have [deploy][] the reference API with docker-compose. However, the instance on test2 is not exposed to the Internet for security reasons. It has to be accessed from the light-portal server with virtual host configuration in the light-router instance. The light-router can enable security and all other tracing, metrics, etc. Also, it can host the single-page applications so that there is no need to wire in the CORS handler. 
+In the previous step, we have [deployed][] the reference API with docker-compose. However, the instance on test2 is not exposed to the Internet for security reasons. It has to be accessed from the light-portal server with virtual host configuration in the light-router instance. The light-router can enable security and all other tracing, metrics, etc. Also, it can host the single-page applications so that there is no need to wire in the CORS handler. 
 
 For the test cloud environment, the light-router is deployed to the portal VM, and the configuration files can be found at [light-config-test](https://github.com/networknt/light-config-test/tree/master/light-router/test-portal) repository. 
 

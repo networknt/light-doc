@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The light-4j framework is a [design-driven][] framework which means you have to start with the specification before starting with code. It makes sense as the contract is the most important thing for a service and it should be finalized before coding is started. The easy way to start a microservice with the light-rest-4j framework is to use [light-codegen][] to scaffold a running application based on your Swagger 2.0 specification or OpenAPI 3.0 specification and a config.json that controls how code generator works.

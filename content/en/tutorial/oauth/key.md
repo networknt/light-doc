@@ -8,18 +8,19 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
 Light-Java and Light-OAuth2 support distributed security verification and this
 requires the JWT public key certificate to be distributed to all services. By
 default, all services built on top of Light-Java will include a set of 
-certificates. But how to distributed new certificates to thousands of running
+certificates. But how do you distribute new certificates to thousands of running
 services if certificates are renewed? There is no way we can copy certificates
 to all the running containers as they are dynamic and new containers can be
 started anytime by container orchestration tool. 
 
-The traditional push approach is not working and a new way of pull certificates
+The traditional push approach does not work, and a new way of pull certificates
 from OAuth2 key service is implemented in Light-Java and Light-OAuth2.
 
 This feature is tightly integrated with Light-Java and it should work seamlessly.

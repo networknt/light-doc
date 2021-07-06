@@ -15,7 +15,7 @@ draft: false
 reviewed: true
 ---
 
-Light is aimed towards enterprise-scale microservices and there are too many moving parts. The general feedback from our users is that it is hard to learn especially for Java EE developers. Even though there are a lot of examples in the[light-example-4j][] repository and we have so many infrastructure services built on the platform like [light-oauth2][], [light-portal][], [light-proxy][] and [light-router][], a lot of beginners still don’t know where to get started.
+Light is aimed towards enterprise-scale microservices and there are too many moving parts. The general feedback from our users is that it is hard to learn, especially for Java EE developers. Even though there are a lot of examples in the[light-example-4j][] repository and we have so many infrastructure services built on the platform like [light-oauth2][], [light-portal][], [light-proxy][] and [light-router][], a lot of beginners still don’t know where to get started.
 
 To help our users, we have written tutorials that cover almost every perspective of the platform. These tutorials can be found at the [document site][], at the [light-doc][] repository.
 

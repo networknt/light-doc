@@ -8,10 +8,11 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Now we have four openapi.yaml files and four openapi.json files available. Let's use light-codegen
-to start four projects in light-example-4j/rest/openapi/ms_aggregate. In normal API build, you 
+to start four projects in light-example-4j/rest/openapi/ms_aggregate. In a normal API build, you 
 should create a repo for each API. For us, we have to user light-example-4j for all the
 examples and tutorial for easy management in networknt github organization.
 

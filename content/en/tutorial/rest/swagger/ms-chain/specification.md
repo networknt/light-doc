@@ -8,18 +8,19 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-Light*4j microservices frameworks encourage Design Driven API building and for REST
-style of APIs we support Swagger 2.0 specification and OpenAPI 3.0 specification. In
-this tutorial, we are going to use Swagger 2.0 specification as the central piece to 
+Light*4j microservices frameworks encourage Design Driven API building. For the REST
+style of APIs we support the Swagger 2.0 specification and OpenAPI 3.0 specification. In
+this tutorial, we are going to use the Swagger 2.0 specification as the central piece to 
 drive the runtime for security and validation. Also, the specification can be used to 
 scaffold a running server project the first time so that developers can focus their 
 efforts on the domain business logic implementation without worrying about how each 
 component are wired together.
 
-During the service implementation phase, specification might be changed and you can
+During the service implementation phase, specification might be changed. You can
 regenerate the service codebase again without overwriting your handlers and test
 cases for handlers. The regeneration is also useful if you want to upgrade to the
 latest version of the frameworks for your project. 

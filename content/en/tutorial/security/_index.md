@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-The light platform is following security first design as most of our customers are big financial companies and they need to ensure confidentiality, availability, and integrity first then scale the system to lower the production cost and development cost. 
+The Light platform is following security first design as most of our customers are big financial companies and they need to ensure confidentiality, availability, and integrity first then scale the system to lower the production cost and development cost. 
 
 When the platform was designed, we focused a lot of efforts on the security details and made a lot of default configuration so that our customers won't need to do extra things to bring up a system securely. Once they feel comfortable, they can start to configure their services based on their business requirement or non-functional requirement. 
 

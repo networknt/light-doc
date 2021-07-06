@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Most cases, when basic authentication is used, we are going to look up user profile from a database to verify the hashed/salted password in order to authenticate the user with credentials. For some organizations, they are using Active Directory for user management and everybody logs into a Windows domain. 
+In most cases, when basic authentication is used, we are going to look up the user profile from a database to verify the hashed/salted password in order to authenticate the user with credentials. For some organizations, they are using Active Directory for user management and everybody logs into a Windows domain. 
 
 In this environment, it is better to setup SPNEGO/Kerberos so that SSO on the broswer can be done seamlessly. If SPNEGO is not implemented, we can still use LDAP to do the SSO explicitly. This LDAP Identity Manager is designed for this use case. 
 

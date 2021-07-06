@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-As most module in light-4j has a config file and there are different options available
+As most modules in light-4j have a config file, there are different options available
 to change the behaviour of the module through config. When writing unit tests, we want
-to test the module behaviours in different configuration. 
+to test the module behaviours in different configurations. 
 
 The config module supports loading config file from module local, application, classpath
 and system property specified directory. The following example will construct and load
@@ -22,7 +23,7 @@ The entire code can be found [status test][] folder
 
 ## Manually construct the config
 
-The status module supports customized serializer to format the status in different format
+The status module supports a customized serializer to format the status in a different format
 suitable for each organization through service.yml dependency injection. If there is no
 implementation specified or there is no service.yml available, then the default serializer
 will be used to output the status object into a flattened map. 
@@ -115,8 +116,8 @@ public class StatusSerializerTest {
 
 ```
 
-As you can see, in the junit setUp static method, a json object is constructed and write to
-service.json in the home directory of the current user. The last line add this directory to
+As you can see, in the junit setUp static method, a json object is constructed to write to
+service.json in the home directory of the current user. The last line adds this directory to
 the classpath. 
 
 During tearDown, the file written in the setUp is removed for clean up.
@@ -127,7 +128,7 @@ to serialize the status object with "error" as root object.
 ## Run junit tests in separate classloaders
 
 Now let's take a look at the StatusDefaultTest class. JUnit will use the same JVM to run all
-the test classes in the same module and the previous test class has created a singleton instance
+the test classes in the same module. The previous test class has created a singleton instance
 of config already. If we don't do anything, the same instance will be used. In order to switch to
 the state that there is no service.yml config available. We need to have another classloader to
 run this test case.

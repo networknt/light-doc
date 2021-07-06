@@ -9,6 +9,7 @@ weight: 50
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous tutorial, we have [wired in Redux][] into the application. Bofore adding any component, we want to add [material-ui][] into the picture. 

@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true 
 ---
 
 There are three major processes in the light-config-server design: 

@@ -9,6 +9,7 @@ weight: 80
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous [tree-view-menu][] section, we have added several menu items into the ResponsiveDrawer to form a hierarchical navigation component with react-router integrated. In this section, we are going to hook up [react-schema-form][] to have generic form generation for most of the menu items. 

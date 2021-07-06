@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-Now we have four API swagger.yaml files available. Let's use light-codegen
-to start four projects in light-example-4j/rest/swagger/ms_chain. In normal API build, 
+Now that we have four API swagger.yaml files available, let's use light-codegen
+to start four projects in light-example-4j/rest/swagger/ms_chain. In a normal API build, 
 you should create a repo for each API. For us, we have to user light-example-4j for all 
 the examples and tutorial for easy management in networknt github organization.
 
@@ -72,8 +73,8 @@ cd ~/networknt
 java -jar light-codegen/codegen-cli/target/codegen-cli.jar -f swagger -o light-example-4j/rest/swagger/ms_chain/api_a/generated -m model-config/rest/swagger/api_a/1.0.0/swagger.json -c model-config/rest/swagger/api_a/1.0.0/config.json
 ```
 
-You might realized that light-codegen is very fast compare with other code generators. It is 
-due to using rocker template engine which compiles templates into Java classes during build 
+You might realized that light-codegen is very fast compared to other code generators. It is 
+due to it using a rocker template engine which compiles templates into Java classes during the build 
 process. It supports dynamic template reloading but we are not using it. That is why is has
 a info logging "INFO com.fizzed.rocker.runtime.RockerRuntime - Rocker template reloading not 
 activated". This message can be simply ignored. 

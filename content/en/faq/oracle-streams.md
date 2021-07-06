@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
@@ -21,7 +22,7 @@ After several days of investigation,  we don't think Oracle Streams is working i
 ### Oracle Stream
 
 
-The Oracle Streams is not fit our CDC solution. It can capture the data change to the queue, but the queue is oracle database queue.
+The Oracle Streams does not fit our CDC solution. It can capture the data change to the queue, but the queue is oracle database queue.
 
 
 Oracle Steams use Oracle ANYDATA queue for the message store.
@@ -55,11 +56,11 @@ END;
 
 
 
-And if we want to use other messaging systems as message broker for CDC, we need to use Oracle Message Gateway. Messaging Gateway enables communication between applications based on non-Oracle messaging systems and Oracle Streams AQ.
+And if we want to use other messaging systems as a message broker for CDC, we need to use Oracle Message Gateway. Messaging Gateway enables communication between applications based on non-Oracle messaging systems and Oracle Streams AQ.
 
 But the Oracle Message Gateway currently only supports the integration of Oracle Streams AQ with applications based on WebSphere MQ 6.0 and TIB/Rendezvous 7.2.
 
-it doesn't support Kafka (framework default message broker for CDC) for now
+It doesn't support Kafka (framework default message broker for CDC) for now.
 
 
 ### Other solutions:

@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the [mutation tutorial][], we have created a new project by copying and modifying [hello world tutorial][]. In this tutorial, we are going to generate the project from IDL and change it accordingly. Users can compare between these two implementations and see the difference. It helps users to understand that in which case to copy an existing project and create the schema or create the schema first and generate the project from it. 
+In the [mutation tutorial][], we have created a new project by copying and modifying the [hello world tutorial][]. In this tutorial, we are going to generate the project from IDL and change it accordingly. Users can compare between these two implementations and see the difference. It helps users to understand that in which case to copy an existing project and create the schema or create the schema first and generate the project from it. 
 
 ### Prepare environment
 

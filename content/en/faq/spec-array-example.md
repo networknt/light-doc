@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Most of us know how to create a response example in OpenAPI 3.0 specification in order to allow the light-codegen to generate the example output out of the specification. When dealing with array response, a lot of people don't know how to write the specification to do so. Here is an example and the service is used to test light-router. 

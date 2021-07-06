@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When working with light-eventuate-4j, there are so many moving parts and it would be
+When working with light-eventuate-4j, there are many moving parts. It would be
 very easy to start all infrastructure services with docker-compose. For other frameworks,
 you only need to package the delivery artifact into docker image but here in you have to
 get familiar with Docker in the beginning. 

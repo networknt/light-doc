@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Once the [Host Menu Command Side][] is completed, it is very easy to add another eventuate
@@ -69,7 +70,7 @@ java -Dlight-4j-config-dir=./config -Dlogback.configurationFile=./logback.xml -c
 
 ### Test
 
-Tobe completed.
+To be completed.
 
 
 [Host Menu Command Side]: /tutorial/hybrid/host-menu-command-portal/

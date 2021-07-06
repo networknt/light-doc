@@ -25,7 +25,7 @@ It is the entry point of the validator, and it is injected during server startup
 
 ### Configuration
 
-From release 1.5.18, the light platform supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a validator configuration file for different frameworks, a new `openapi-validator.yml` with the same content as the old `validator.yml` has been introduced. The `validator.yml` is still loaded if `openapi-validator.yml` doesn't exist for backward compatibility. 
+From release 1.5.18, Light supports multiple chains of middleware handlers and multiple frameworks mixed in the same service instance. To have a validator configuration file for different frameworks, a new `openapi-validator.yml` with the same content as the old `validator.yml` has been introduced. The `validator.yml` is still loaded if `openapi-validator.yml` doesn't exist for backward compatibility. 
 
 Here is an example of `openapi-validator.yml`
 

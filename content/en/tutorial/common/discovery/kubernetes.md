@@ -16,7 +16,7 @@ First, let's create a Kubernetes cluster with one master and three worker nodes.
 
 This step is for production use; however, to simplify the discovery, I have not enabled JWT token verification. All communication is in HTTPS and HTTP 2.0 though.
 
-Kubernetes provides many components to abstract different layers and to simplify the service interactions; however, it might not be the fastest way for high-speed services. In most of the conditions, a Layer 7 proxy is used to load balance the traffic between nodes and pods. For normal usage, this is OK, but if you want to scale, the proxy hop significantly hinder your throughput. If you are doing real microservices which means you have dozens of services involved in most requests coming from outside, you want to bypass these proxies and establish the connection directly and cache it for a while. It is one of the principal reasons we have used client-side discovery instead of server-side discovery. Another reason is to support environment segregation with tags which we have shown in the [tag][] section.    
+Kubernetes provides many components to abstract different layers and to simplify the service interactions; however, it might not be the fastest way for high-speed services. In most conditions, a Layer 7 proxy is used to load balance the traffic between nodes and pods. For normal usage, this is OK, but if you want to scale, the proxy hop significantly hinders your throughput. If you are doing real microservices which means you have dozens of services involved in most requests coming from outside, you want to bypass these proxies and establish the connection directly and cache it for a while. It is one of the principal reasons we have used client-side discovery instead of server-side discovery. Another reason is to support environment segregation with tags which we have shown in the [tag][] section.    
 
 ### Environment
 
@@ -385,7 +385,7 @@ enableHttp2: false
 
 ```
 
-Please note that we are using consul as the host name to consul server on the sandbox. Also we have change health check to httpCheck so that consul server will try to ping all services to sure they are up and running. 
+Please note that we are using consul as the host name to consul server on the sandbox. Also we have to change health check to httpCheck so that consul server will try to ping all services to sure they are up and running. 
 
 Now let's create a Docker image and upload it to docker hub.
 
@@ -466,7 +466,7 @@ From the log, you can see which host and port this particular instance is bound 
 curl -k https://ip:port/v1/data
 ```
 
-You should have result like the following. 
+You should have a result like the following. 
 
 ```json
 ["API C: Message 1","API C: Message 2"]

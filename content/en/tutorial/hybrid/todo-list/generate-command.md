@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-In the previous step, we have the [workspace parepared][] and the light-codegen is built lcally. In this step, we are going to generate the command service.
+In the previous step, we have the [workspace parepared][] and the light-codegen is built locally. In this step, we are going to generate the command service.
 
 As we know, to generate a hybrid service, we need to have a config.json and a schema.json as inputs for the light-codegen. For this tutorial, we have the command service config and schema created in the model-config repository already. They are located at https://github.com/networknt/model-config/tree/master/hybrid/todo-command
 

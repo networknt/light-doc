@@ -43,15 +43,14 @@ maxConnectionRetries: 3
 
 ### Http 2.0 Connection from client
 
-Most of our customers are using light-router for legacy clients or client that is built
-with other languages instead of Java. Chances are these clients are not support HTTP 2.0
-neither. If this is the case, you need to setup http2Enabled as false. 
+Most of our customers use light-router for legacy clients or clients that are built
+with other languages instead of Java. Chances are these clients do not support HTTP 2.0 either. If this is the case, you need to set http2Enabled as false. 
 
-If you don't know if your client can send HTTP 2.0 request, then you can enable it and
+If you don't know if your client can send HTTP 2.0 requests, then you can enable it and
 the light-router can downgrade itself to HTTP 1.1 if the client doesn't support HTTP 2.0
 
 For all outbound traffic, HTTP 2.0 will be used by default as the assumption is that the
-services are built on top of light platform. 
+services are built on top of Light. 
 
 ### Https Connection to from client
 
@@ -69,11 +68,10 @@ and production.
 
 ### Request timeout to backend services
 
-This is the timeout period if backend instance is too slow to respond. In above example,
-it is set as 1 seconds. You should set it properly based on the normal response time
+This is the timeout period if the backend instance is too slow to respond. In the above example, it is set as 1 seconds. You should set it properly based on the normal response time
 of you backend service. In general, you should set this number as small as possible.
 
-If you backend service is slow, you might see this error message in the light-router log. 
+If your backend service is slow, you might see this error message in the light-router log. 
 
 ```
 ERROR io.undertow.proxy cancel - UT005027: Timing out request to ...
@@ -83,7 +81,7 @@ When you see this error message, you need to bump up the timeout in the configur
 
 ## client.yml
 
-If you are thinking from service perspective, the light-router is an client for them. So
+If you are thinking from a service perspective, the light-router is an client for them. So
 there must be a client.yml defined in light-router. Here is an example. 
 
 ```yaml
@@ -177,11 +175,11 @@ oauth:
     client_id: f7d42348-c647-4efb-a52d-4c5787421e72
 ```
 
-As you have seen that the interaction with OAuth 2.0 provider is defined in client.yml and the light-router will be responsible for retrieving JWT token and renewing JWT token. 
+As you have seen, the interaction with OAuth 2.0 provider is defined in client.yml, and the light-router will be responsible for retrieving JWT token and renewing JWT token. 
 
 Also, the client.truststore is defined and loaded to support outbound TLS connection. If you want to support Two-Way TLS, then you need to loadKeyStore to true and put the client key into client.keystore.
 
-If you have request body bigger than 24*1024, then you need to adjust bufferSize in the client.yml file. For more details, please refer to https://github.com/networknt/light-example-4j/tree/master/router
+If you have a request body bigger than 24*1024, then you need to adjust bufferSize in the client.yml file. For more details, please refer to https://github.com/networknt/light-example-4j/tree/master/router
   
 ## server.yml
 
@@ -237,8 +235,7 @@ For more information about this config file please refer to [server][]
 ## secret.yml
 
 For every server, it might call another server as a client. In secret.yml file, all server
-and client secrets are defined here. This file is treated special in term of visibility and
-it will map to the Security in Kubernetes if it is used. 
+and client secrets are defined here. This file is treated as special in terms of visibility , and will map to the Security in Kubernetes if it is used. 
 
 Here is an example of secret.yml
 
@@ -571,7 +568,7 @@ defaultHandlers:
 
 ```
 
-The light-router defines all the paths available from the backend service only let the request pass through. However, the taiji-faucet service will handle request with its hanlder chain. 
+The light-router defines all the paths available from the backend service only let the request pass through. However, the taiji-faucet service will handle requests with its hanlder chain. 
 
 ## token.yml
 

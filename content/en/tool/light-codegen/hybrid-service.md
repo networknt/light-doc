@@ -8,13 +8,14 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is a generator that scaffold hybrid service which is on top of light-hybrid-4j and light-4j
+This is a generator that scaffolds hybrid services which is on top of light-hybrid-4j and light-4j
 frameworks. Hybrid framework contains a set of handlers to support RPC style of contract instead
 of Restful to eliminate the complex transformation between model and URI and vice verse. Currently
-we support JSON RPC only and binary RPC will be supported if there are requests. Another benefit
-of hybrid framework is that services can be composed as a modular monolith and running within the
+we only support JSON RPC and binary RPC will be supported if there are requests. Another benefit
+of the hybrid framework is that services can be composed as a modular monolith and running within the
 same JVM in the beginning and then split them into several JVM later on if load is getting higher.
 
 It is very suitable for small and medium size business as you can start microservices without
@@ -138,7 +139,7 @@ Here is an exmaple of schema that defines several services.
 
 #### Config
 
-Here is an exmaple of config.json for light-hybrid-4j generator.
+Here is an example of config.json for light-hybrid-4j generator.
 
 ```json
 {
@@ -257,7 +258,7 @@ The following command is using docker to generate light-hybrid-4j service into
 docker run -it -v ~/networknt/light-codegen/light-hybrid-4j/src/test/resources:/light-api/input -v /tmp/light-codegen:/light-api/out networknt/light-codegen -f light-hybrid-4j-service -m /light-api/input/schema.json -c /light-api/input/serviceConfig.json -o /light-api/out/hybridservice
 ```
 
-On Linux environment, the generated code might belong to root:root and you need to change the
+In the Linux environment, the generated code might belong to root:root and you need to change the
 owner to yourself before building it. 
 
 Let's change the owner and build the service

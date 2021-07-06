@@ -120,7 +120,7 @@ You can see the result contains the balance from the balances service and the la
 
 At this moment, our services are exposed to the Internet with HTTPS/HTTP2 enabled, and OAuth2 protected. To access it, use the subdomain ob.lightapi.net with the default HTTPS port. 
 
-So far, we have four microservices implemented in light-4j. In an enterprise, there might be some other services that are implemented in other languages. To bring these services to the light ecosystem, we can put an instance of [light-proxy][] in front of a legacy service. 
+So far, we have four microservices implemented in light-4j. In an enterprise, there might be some other services that are implemented in other languages. To bring these services to the Light ecosystem, we can put an instance of [light-proxy][] in front of a legacy service. 
 
 {{< youtube 5osz4GrRWNo >}}
 

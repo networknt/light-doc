@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When you build a service based on the light-rest-4j framework, the first thing is to create an OpenAPI 3.0 specification. There are several options in the construction of the OpenAPI 3.0 specification. 

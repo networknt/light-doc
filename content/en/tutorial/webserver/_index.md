@@ -8,11 +8,12 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Most documents and articles regarding to Light-4j are about RESTful or GraphQL or
 Hybrid services; however, there are a lot user cases that combine the API and 
-static site rendering together, especially, single page applications built on top 
+static site rendering together, particularly single page applications built on top 
 of React or Angular. 
 
 ## Handler Provider
@@ -34,20 +35,20 @@ following list.
 * /assets
 * /api
 
-Above rules make sure that images and other asserts(css etc) can be loaded and
+The above rules make sure that images and other asserts(css etc) can be loaded and
 API endpoint will be started as /api/xxx
 
 # Web Server Configuration
 
-In most of the case, each APP or API built on top of light-4j framework will
-have a configuration file to control how it behaves during runtime. Here is the
+In most cases, each APP or API built on top of light-4j framework will
+has a configuration file to control how it behaves during runtime. Here is the
 content of webserver.yml
 
 ```
 base: "/public"
 transferMinSize: '100'
 ```
-Given that base is defined as /public, we know the static content root will be
+Given that the base is defined as /public, we know the static content root will be
 /public in host file system and all static content will be served from this folder
 or sub folders.
 
@@ -59,7 +60,7 @@ can be configured by webserver.yml and it can be externalized.
 
 # Docker Container
 
-Above section describes how to serve static content from packaged jar file and it 
+The above section describes how to serve static content from packaged jar file and it 
 is only suitable for development. When you deploy the app/api to official environment
 with docker container, the /public must be externalized so that website can be updated
 independently without repackage the server. 

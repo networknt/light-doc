@@ -7,6 +7,7 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 Security is the most important cross-cutting concern that needs to be addressed first for the AWS Lambda Functions. The solution from the AWS is the custom authorizer that is deployed to the API Gateway. For endpoint level authorization, the custom authorizer is not enough. We still need a Lambda extension to verify the scopes against the specification scope definition. 

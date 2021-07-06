@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This service is part of light-portal, and it is used to check if the production deployment meets the security requirements.

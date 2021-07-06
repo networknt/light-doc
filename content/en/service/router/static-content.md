@@ -11,11 +11,11 @@ draft: false
 reviewed: true
 ---
 
-In most of the cases, light-4j microservices will be deployed to a Kubernetes cluster in the cloud with dynamic IPs and ports. Web applications consuming these services must be able to discover the services based on the serviceIds. The light-router is built for the exact purpose. 
+In most cases, light-4j microservices will be deployed to a Kubernetes cluster in the cloud with dynamic IPs and ports. Web applications consuming these services must be able to discover the services based on the serviceIds. The light-router is built for the exact purpose. 
 
 It provides a static IP access point to all the microservices in the cloud with service discovery and security addressed so that a single page application running on the browser can access the backend services through APIs. 
 
-Most single page applications will consume different endpoins from services serving by different domains. If the access is direct, this requires all microservices to have CORS enabled and sometimes it is hard to do as these services might be owned by different companies. 
+Most single page applications will consume different endpoints from services serving by different domains. If the access is direct, this requires all microservices to have CORS enabled and sometimes it is hard to do as these services might be owned by different companies. 
 
 The light-router in this scenario can be deployed as a microservices gateway to router traffic from SPA to other services. From the SPA point of view, all endpoints are served by the same domain of light-router. This pattern is different than the traditional API gateway as the microservices gateway serves to one and only one client and it can be scaled infinitely based one the SPA traffic. 
 

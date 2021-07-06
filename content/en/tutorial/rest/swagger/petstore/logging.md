@@ -9,11 +9,12 @@ weight: 90
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Logging is very important in microservices architecture as logs must be aggregated in
 order to trace all the activities of a particular request from a consumer. We are using
-ELK stack for logging. In production in Kubernetes cluster, there are vary options for
+ELK stack for logging. In production in Kubernetes cluster, there are various options for
 logging and we may replace Logstash with Fluentd. In this turorial, Elasticsearch, 
 Logstash and Kibana are all started in the same docker-compose.yml.
 
@@ -24,7 +25,7 @@ to ElasticSearch.
 Bofore taking any action, let's first kill the petstore docker container if it is still
 running. 
  
-For demo purpose, ELK will be started with a docker-compose locally. There is a compose
+For demo purposes, ELK will be started with a docker-compose locally. There is a compose
 file available in light-docker called docker-compose-logging.yml
 
 **Please note** that ElasticSearch has some requirements in memory, file handlers etc.
@@ -41,9 +42,9 @@ cd ~/networknt/light-docker
 docker-compose -f docker-compose-logging.yml up
 ```
 
-You can goto http://localhost:9200 to confirm that ElasticSearch is running.
+You can go to http://localhost:9200 to confirm that ElasticSearch is running.
 
-And you can goto http://localhost:5601 to confirm that Kibana is running.
+And you can go to http://localhost:5601 to confirm that Kibana is running.
 
 With ELK running, here is the command line to start the petstore docker container. 
 
@@ -72,8 +73,8 @@ Now you can see the logs if you hit Discover menu.
 First let's stop the docker container by finding the container id first with "docker ps"
 and then issue a docker stop {container id}
 
-As we have export the LOGSTASH_ADDRESS in the previous step, don't need to do that again.
-If you have skip the previous step, then you need to do the export. 
+As we have exported the LOGSTASH_ADDRESS in the previous step, don't need to do that again.
+If you have skipped the previous step, then you need to do the export. 
 
 ```
 export LOGSTASH_ADDRESS=$(docker inspect --format '{{ .NetworkSettings.Networks.localnet.IPAddress }}' lightdocker_logstash_1)

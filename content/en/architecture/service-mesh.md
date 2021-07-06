@@ -12,6 +12,7 @@ weight: 10
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 A service mesh is a dedicated infrastructure layer for making service-to-service communication safe, fast, and reliable. If you’re building a cloud-native application, you need a service mesh!
@@ -63,7 +64,7 @@ While service mesh adoption in the cloud-native ecosystem is growing rapidly, th
 
 ## Conclusion
 
-The service mesh is a critical component of the cloud-native stack. A little more than a half year from its launch, light-4j is part of the core service layer for the light platform, and almost all other services are built on top of it. 
+The service mesh is a critical component of the cloud-native stack. A little more than a half year from its launch, light-4j is part of the core service layer for Light, and almost all other services are built on top of it. 
 
 The light-eventuate-4j open source community of adopters and contributors are demonstrating the value of the service mesh model every day. We’re committed to building a fantastic product and continuing to grow our incredible community. [Join us][]!
 

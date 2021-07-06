@@ -7,11 +7,12 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Light-tram-4j is the foundation of event driven frameworks and it handles transactional
+Light-tram-4j is the foundation of event driven frameworks and handles transactional
 messaging without XA. On top of light-tram-4j, there is light-saga-4j to handle distributed 
-transactions across multiple microservices. Also there is a framework light-eventuate-4j to
+transactions across multiple microservices. There is also a framework light-eventuate-4j to
 support Event Sourcing and CQRS architecture. All tutorials here are showing basic message,
 event or command delivery from one service to another service. 
 

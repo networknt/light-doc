@@ -8,16 +8,17 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-This example can be found at [light-example-4j][] and it is a more realistic example than Todolist.
+This example can be found at [light-example-4j][], and is a more realistic example than Todolist.
 
-Account Money Transfer example is build on light-4j, light-rest-4j and light-eventuate-4j which 
+Account Money Transfer example is built on light-4j, light-rest-4j and light-eventuate-4j which 
 uses event sourcing and CQRS as major patterns to handle event process in multiple microservices. 
 
 The application consists of loosely coupled components that communicate using events and leverages
-eventual consistency, event-driven approach rather than using traditional distributed transaction.
+eventual consistency and an event-driven approach rather than using traditional distributed transaction.
 
 These components can be deployed either as separate services or packaged as a monolithic application 
 for simplified development and testing.

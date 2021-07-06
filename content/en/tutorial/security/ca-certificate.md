@@ -36,7 +36,7 @@ Here are the steps to follow.
 
 ##### PKCS12 keystore
 
-Create PKCS 12 file using your private key and CA-signed certificate of it. You can use `openssl` command for this. Please specify the alias to `server` as light-4j is looking for this alias name in the server.keystore. If you don't specify the alias name and there is only one key/certificate in the store, the light-4j is still working but the `/server/info` endpoint won't return the fingerprint of the certificate. 
+Create PKCS 12 file using your private key and CA-signed certificate of it. You can use the `openssl` command for this. Please specify the alias to `server` as light-4j is looking for this alias name in the server.keystore. If you don't specify the alias name and there is only one key/certificate in the store, the light-4j is still working but the `/server/info` endpoint won't return the fingerprint of the certificate. 
 
 ```
 openssl pkcs12 -export -in [path to certificate] -inkey [path to private key] -certfile [path to certificate ] -name [alias] -out server.p12
@@ -73,7 +73,7 @@ Entry for alias 1 successfully imported.
 Import command completed:  1 entries successfully imported, 0 entries failed or cancelled
 ```
 
-For demo purpose, I am using `password` as password for both keystore and private key. 
+For demo purposes, I am using `password` as password for both keystore and private key. 
 
 By using the following command line you can change the private key password. 
 

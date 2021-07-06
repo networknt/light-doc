@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-We have a team of developers using MacBook Pro for development, and they have to travel from one office to another. When the laptop joins the WIFI network at a different location, a brand new IP address is allocated. This should be an issue for most docker containers running on the laptop except Kafka as it has to advertise to DOCKER_HOST_IP. 
+We have a team of developers using MacBook Pros for development, and they have to travel from one office to another. When the laptop joins the WIFI network at a different location, a brand new IP address is allocated. This should be an issue for most docker containers running on the laptop except Kafka as it has to advertise to DOCKER_HOST_IP. 
 
 We can use ifconfig to find the real IP address and export it with the following command. 
 

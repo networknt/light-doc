@@ -22,7 +22,7 @@ These days, the typical design would be an API gateway acts as a BFF which handl
 When adopting microservices architecture, we need distributed API gateways so that workload can be balanced to different instances specifically designed for each client. These distributed gateways know the client requests much better and handle the security for the client with the OAuth 2.0 provider to shield the complex logic for client developers. Ideally, these distributed gateways should be built as microservices to ensure scalability in the long run. 
 
 
-In the light platform, three components can act as a distributed gateway which is known as a BFF. 
+In Light, three components can act as a distributed gateway which is known as a BFF. 
 
 
 ### Existing Web Server

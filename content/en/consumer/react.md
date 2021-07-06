@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 React is the most popular Javascript library for Single Page Applications. It is very good at building components which encapsulate everything inside.

@@ -59,5 +59,5 @@ sections:
 
 ---
 
-Light means light-weight, lightning-fast, and shedding light on how to program with modern Java SE.
+Light means lightweight, lightning-fast, and shedding light on how to program with modern Java SE.
 

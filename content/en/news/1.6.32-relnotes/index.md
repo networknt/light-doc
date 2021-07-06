@@ -1,5 +1,5 @@
 ---
-title: "1.6.32 Light Platform Released"
+title: "1.6.32 Light Released"
 date: 2021-03-07
 description: "A release with several defect fixes and enhancements"
 categories: ["Releases"]

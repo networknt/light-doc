@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 When using message driven approach for service to service communication on top of light-eventuate-4j
@@ -24,7 +25,7 @@ a [command line interface][] for it. The second is data confidentiality and inte
 
 ### User Authentication and Authorization
 
-There are a lot of discussions on ACLs in Kafka and it is documented in [Security 101][]. 
+There are a lot of discussions on ACLs in Kafka, which are documented in [Security 101][]. 
 
 
 ### Data Confidentiality and Integrity

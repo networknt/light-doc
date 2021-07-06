@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In order to work with light-tram-4j, we need to start the infrastructure services and the easier

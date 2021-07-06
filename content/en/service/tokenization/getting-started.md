@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 There are several endpoints for tokenization service. You can start the server at local or access our testing service to get familiar with the tokenization service.   

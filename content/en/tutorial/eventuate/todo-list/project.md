@@ -11,7 +11,7 @@ draft: false
 reviewed: true
 ---
 
-As we have made a backup of the existing todo-list application, we are going to create a new folder and copy some of the files or directories to the new folder. At any time, you can always compare the two folders to find out the differences.  
+As we have made a backup of the existing todo-list applications, we are going to create a new folder and copy some of the files or directories to the new folder. At any time, you can always compare the two folders to find out the differences.  
 
 Let's create a todo-list folder and copy the pom.xml from the existing project.
 
@@ -125,7 +125,7 @@ public class TodoAggregate extends ReflectiveMutableCommandProcessingAggregate<T
 
 ### Query side API
 
-Query side API implements event subscriber and process. It defines an event handler for process events:
+Query side API implements the event subscriber and process. It defines an event handler for process events:
 
 ```
 @EventSubscriber(id = "todoQuerySideEventHandlers")

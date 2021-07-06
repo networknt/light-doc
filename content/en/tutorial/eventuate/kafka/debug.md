@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 As we are using Kafka as message broker, we need to make sure we can debug and

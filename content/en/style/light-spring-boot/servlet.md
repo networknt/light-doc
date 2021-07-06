@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Most of the existing Spring Boot applications are built on top of embedded Servlet container. By default, Tomcat is used but users can easily switch from Tomcat to Undertow Servlet container transparently. This light-4j module only works with Undertow Servlet container as it injects light-4j and light-rest-4j OpenAPI 3.0 handlers to the Undertow core http server to form a chain of handlers to handle the request and response. With this inject, the controll will go to the light-4j handlers and then pass it to the Spring Boot controllers. 
@@ -74,7 +75,7 @@ public class DemoApplication {
 
 ### Dependencies
 
-This module also depending on some of the typical modules in light-4j and light-rest-4j to handle RESTful requests. With all dependencies defined in the pom.xml in this module, your Spring Boot application only need to depending on this module in order to work. 
+This module also depends on some of the typical modules in light-4j and light-rest-4j to handle RESTful requests. With all dependencies defined in the pom.xml in this module, your Spring Boot application only needs to depend on this module in order to work. 
 
 If you want to leverage other light-4j middleware handles, you need to either add them individually to your Spring Boot application pom.xml or just open an PR to add to this module.
 

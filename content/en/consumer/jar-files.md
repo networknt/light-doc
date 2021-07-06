@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-When using the client module from any Java application built on top of Java 8 but not on the light platform, several modules need to be included together to perform multiple functions including HTTP/2 request, service discovery, load balance and cluster support. These jar files are tiny which only contain 2 to 5 classes. The following list includes all the related jar files from Maven Central when using client module. 
+When using the client module from any Java application built on top of Java 8 but not on Light, several modules need to be included together to perform multiple functions including HTTP/2 request, service discovery, load balance and cluster support. These jar files are tiny which only contain 2 to 5 classes. The following list includes all the related jar files from Maven Central when using client module. 
 
 For all the modules listed below, there are three configuration files that need to be externalized in order to work. There are: 
 

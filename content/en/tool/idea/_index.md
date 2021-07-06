@@ -7,6 +7,7 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Most of our developers are using IntelliJ IDEA as IDE for the platform develop or application development. The community edition is free and it is more than enough for our users. 

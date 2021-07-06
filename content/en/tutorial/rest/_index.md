@@ -6,9 +6,10 @@ categories: []
 keywords: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Restful style of API/service is very simple and easy to be consumed by everybody, even there are some shortcomings. Basically, almost every language has a client that can easily talk to Restful service. 
+The Restful style of API/service is very simple and easy to be consumed by everybody, even if there are some shortcomings. Basically, almost every language has a client that can easily talk to Restful service. 
 
 Light-rest-4j contains two different implementations based on different versions of specifications.
 

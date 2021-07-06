@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-For light-4j services, there are four options to get the configuration values for each handler or cross-cutting concerns. 
+For light-4j services, there are four options to get the configuration values for each handler or cross-cutting concern. 
 
 * externalized configuration files with all the final values.
 * externalized configuration files with values.yml to inject into the config file templates. 

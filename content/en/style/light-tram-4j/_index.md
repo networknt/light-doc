@@ -7,6 +7,7 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The foundation of the Service Broker programming model is transactional messaging. Any operation that 

@@ -7,6 +7,7 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The OpenApi Parser is based on the generated code of KaiZen OpenApi Parser from RepreZen which is a Java-based validating parser for OpenAPI 3.0 offering full compliance with the [OpenAPI 3.0 Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md), and a highly uniform read/write programming API. [OpenAPI](http://openapis.org), formerly known as the Swagger specification is the industry-standard format for machine-readable REST API descriptions.

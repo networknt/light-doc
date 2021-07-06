@@ -67,7 +67,7 @@ consulToken: d08744e7-bb1e-dfbd-7156-07c2d57a0527
 
 ### Switch to HTTPS for Consul Registry
 
-Update the consul.yml file to switch Consul connection to HTTPS from HTTP. Please update four files from consul-tls in api_a, api_b, api_c and api_d folders. We also need to update the consul IP address in the same file. As we don't have DNS set up yet, we can use the IP address now. To simulate the dynamic nature of connections, we are going to setup api_a and api_d to connect to 198.55.49.188, api_b to connect to 198.55.49.187 and api_c to connect to 198.55.49.186. 
+Update the consul.yml file to switch the Consul connection to HTTPS from HTTP. Please update four files from consul-tls in api_a, api_b, api_c and api_d folders. We also need to update the consul IP address in the same file. As we don't have DNS set up yet, we can use the IP address now. To simulate the dynamic nature of connections, we are going to setup api_a and api_d to connect to 198.55.49.188, api_b to connect to 198.55.49.187 and api_c to connect to 198.55.49.186. 
 
 Here is the url in consul.yml for api_a and api_d
 

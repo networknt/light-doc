@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 
@@ -66,9 +67,9 @@ a text file. We will use the customer id in the open account restful API call to
 
 ##### Create an account with the customer (replace the customer id with real customer id):
 
-* On account command side, system sends the OpenAccountCommand and applies AccountOpenedEvent event.
-* On account view side, system subscribes the AccountOpenedEvent by registering event handlers. In the 
-example, system will process event and save account and account/customer relationship to local database.
+* On the account command side, system sends the OpenAccountCommand and applies AccountOpenedEvent event.
+* On the account view side, system subscribes the AccountOpenedEvent by registering event handlers. In the 
+example, system will process events and save the account and the account/customer relationship to local database.
 * Open account for the customer created above, use the customer id above in the json data for HTTP POST: 
 customerId":"0000015cf50351d8-0242ac1200060000"
 
@@ -94,8 +95,8 @@ save it in a text file. We will use the account Id for money transfer restful AP
 
 ##### Create an account (no link with customer)
 
-* On account command side, system sends the OpenAccountCommand and applies AccountOpenedEvent event.
-* On account view side, system subscribes the AccountOpenedEvent by registering event handlers. In the 
+* On the account command side, the system sends the OpenAccountCommand and applies AccountOpenedEvent event.
+* On the account view side, the system subscribes to the AccountOpenedEvent by registering event handlers. In the 
 example, system will process event and save account to local database.
 
 ```
@@ -112,15 +113,15 @@ Result:
 {"accountId":"0000015cf5084627-0242ac1200090001","balance":12355}
 ```
 
-The json format result include system generated account id for new opened account: 
+The json format result includes the system generated account id for a new opened account: 
 "accountId":"0000015cf5084627-0242ac1200090001". Get the account id (A2) from your real result and 
 save it in a text file. It will be used to link with customer (C2) in "Link account to customer" service call.
 
 
 ##### Create new customer (C2):
 
-* On customer command side, system sends the CreateCustomerCommand and applies CustomerCreatedEvent event.
-* On customer view side, system subscribes the CustomerCreatedEvent by registering event handlers. In the 
+* On the customer command side, the system sends the CreateCustomerCommand and applies CustomerCreatedEvent event.
+* On the customer view side, the system subscribes to the CustomerCreatedEvent by registering event handlers. In the 
 example, system will process event and save customer to local database.
 
 ```
@@ -136,7 +137,7 @@ Result:
 {"id":"0000015cf50bfe50-0242ac1200060001","customerInfo":{"name":{"firstName":"Google11","lastName":"Com"},"email":"aaa2.bbb@google.com","password":"password","ssn":"9999999999","phoneNumber":"4166666666","address":{"street1":"Yonge St","street2":"2556 unit","city":"toronto","state":"ON","zipCode":"Canada","country":"L3R 5F5"}}}
 ```
 
-The json format result include system generated customer id for new created customer: 
+The json format result includes the system generated customer id for a new created customer: 
 "id":"0000015cf50bfe50-0242ac1200060001". Get the customer id (C2) from your real result and save it 
 in a text file.  It will be used to link with account (opened on previous service call) in 
 "Link account to customer" service call.
@@ -145,9 +146,9 @@ in a text file.  It will be used to link with account (opened on previous servic
 
 ##### Link account to customer (replace the customer id and account with real Id):
 
-* On customer command side, system sends the AddToAccountCommand and applies CustomerAddedToAccount event.
-* On customer view side, system subscribes the CustomerAddedToAccount event by registering event handlers. In 
-the example, system will process event and save customer/account relationship to local database.
+* On the customer command side, the system sends the AddToAccountCommand and applies CustomerAddedToAccount event.
+* Onthe customer view side, the system subscribes the CustomerAddedToAccount event by registering event handlers. In 
+the example, the system will process the event and save the customer/account relationship to local database.
 * Use the new created customer id (replace the {customerId}  with customer id (C2) in the url) and replace 
 the account id (A2) in POST json data which created on previous service call.
 
@@ -165,19 +166,19 @@ Result: 0000015cf50bfe50-0242ac1200060001
 
 ##### Transfer money from account (replace the from account and to account id with real id):
  
-* On transaction command side, system sends MoneyTransferCommand and applies the MoneyTransferCreatedEvent 
-event with certain amount
-* On account command side, system subscribes the MoneyTransferCreatedEvent event. System will verify the 
+* On the transaction command side, the system sends MoneyTransferCommand and applies the MoneyTransferCreatedEvent 
+event with a certain amount
+* On the account command side, the system subscribes to the MoneyTransferCreatedEvent event. The system will verify the 
 account balance based on the debit event.
-* If the balance is not enough, system publishes AccountDebitFailedDueToInsufficientFundsEvent. Otherwise, 
-system sends AccountCreditedEvent/AccountDebitedEvent.
-* On transaction command side, if subscribes events are AccountCreditedEvent/AccountDebitedEvent, system 
-will process event and publish CreditRecordedEvent/debitRecordedevent, if subscribed event is 
-AccountDebitFailedDueToInsufficientFundsEvent, system will publish FailedDebitRecordedEvent.
-* On account view side, if subscribes events are creditRecorded event and debitRecorded event, system will 
-update local account balance and update the transaction status to COMPLETED. If subscribed even 
-FailedDebitRecordedEvent, system will update transaction status to FAILED_DUE_TO_INSUFFICIENT_FUNDS.
-* Use the two new opened account id (A1, A2) on previous services for the fromAccountId and toAccountId in 
+* If the balance is not enough, the system publishes AccountDebitFailedDueToInsufficientFundsEvent. Otherwise, 
+the system sends AccountCreditedEvent/AccountDebitedEvent.
+* On the transaction command side, if the subscribed event is a AccountCreditedEvent/AccountDebitedEvent, the system 
+will process the event and publish CreditRecordedEvent/debitRecordedevent, If the subscribed event is 
+AccountDebitFailedDueToInsufficientFundsEvent, the system will publish FailedDebitRecordedEvent.
+* On the account view side, if the subscribed event is a creditRecorded event and debitRecorded event, system will 
+update the local account balance and update the transaction status to COMPLETED. If subscribed event is a
+FailedDebitRecordedEvent, the system will update transaction status to FAILED_DUE_TO_INSUFFICIENT_FUNDS.
+* Use the two new opened account ids (A1, A2) on previous services for the fromAccountId and toAccountId in 
 the following service call.
 
 ```
@@ -199,11 +200,11 @@ Return system generated money transfer transaction id
 
 ##### Delete account:
 
-* On account command side, system sends the DeleteAccountCommand  and applies AccountDeletedEvent event.
-* On account view side, system subscribes the AccountDeletedEvent by registering event handles. On the 
-example, system will process event and inactive account to local database.
-* On customer view side, system subscribes the AccountDeletedEvent event by registering event handles. On 
-the example, system will process event and delete customer/account relationship to local database.
+* On the account command side, the system sends the DeleteAccountCommand and applies the AccountDeletedEvent event.
+* On the account view side, the system subscribes to the AccountDeletedEvent by registering event handles. On the 
+example, the system will process event and inactive account to local database.
+* On the customer view side, the system subscribes to the AccountDeletedEvent event by registering event handles. In 
+the example, the system will process the event and delete the customer/account relationship to the local database.
 
 ```
 curl -X DELETE \
@@ -242,7 +243,7 @@ Result:
 {"id":"0000015cf50351d8-0242ac1200060000","name":{"firstName":"Google22","lastName":"Com"},"email":"aaa1.bbb@google.com","password":"password","ssn":"9999999999","phoneNumber":"4166666666","address":{"street1":"Yonge St","street2":"2556 unit","city":"toronto","state":"ON","zipCode":"Canada","country":"L3R 5F5"},"toAccounts":null}
 ```
 
--- view account by Id (replace the Id with real account Id)
+-- View account by Id (replace the Id with real account Id)
 
 ```
 curl http://localhost:8082/v1/accounts/{accountId}

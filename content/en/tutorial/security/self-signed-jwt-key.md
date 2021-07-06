@@ -7,10 +7,11 @@ keywords: []
 slug: ""
 toc: false
 draft: false
+reviewed: true
 ---
 
 
-The light-oauth2 server needs a private key to sign the JWT token and all servers need a public key certificate to verify the token. The following is the steps to create both primary and secondary key pairs. 
+The light-oauth2 server needs a private key to sign the JWT token and all servers need a public key certificate to verify the token. The following includes the steps to create both primary and secondary key pairs. 
 
 ### keystore
 
@@ -45,5 +46,5 @@ keytool -export -alias secondary -keystore secondary.jks -rfc -file secondary.cr
 
 ### deployment
 
-copy the primary.crt and secondary.crt to every server config folder and copy the primary.jks and secondary.jks to light-oauth2/token service config folder. 
+Copy the primary.crt and secondary.crt to every server config folder and copy the primary.jks and secondary.jks to light-oauth2/token service config folder. 
 

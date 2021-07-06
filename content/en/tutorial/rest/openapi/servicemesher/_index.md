@@ -20,9 +20,9 @@ It uses java async concurrent feature and processes the service call in parallel
 
 ### Introduction:
 
-For microservice application, The application will be split into a set of smaller, interconnected services instead of building a single monolithic application. Each microservice is a small application that has its own hexagonal architecture consisting of business logic along with various adapters. So there will be lots of service to service calls to get the required data for the business method. Microservices architecture adds complexity to the project just by the fact that a microservices application is a distributed system.
+For microservice applications, the application will be split into a set of smaller, interconnected services instead of building a single monolithic application. Each microservice is a small application that has its own hexagonal architecture consisting of business logic along with various adapters. So there will be lots of service to service calls to get the required data for the business method. Microservices architecture adds complexity to the project just by the fact that a microservices application is a distributed system.
 
-So massive service call needs to guarantee excellent performance to complete the business logic in a short time. If those service calls implement synchronously, that means the service calls will be invoked one by one, and any of them takes longer time will hang up the whole application.
+So massive service calls need to guarantee excellent performance to complete the business logic in a short time. If those service calls implement synchronously, that means the service calls will be invoked one by one, and any of them takes longer time will hang up the whole application.
 
 Light-4j client module and light-consumer-4j component use Jave CompletableFuture asynchronous programming to implement
 non-blocking code by running a task on a separate thread than the main application thread and notifying the main thread about its progress, completion or failure;

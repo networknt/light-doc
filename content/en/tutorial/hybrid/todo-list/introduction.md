@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 A hybrid service is a type of service between JEE service and microservice. It can help some organizations to take step by step approach to fully adopt microservices. Users can split the original large project to several Hybrid services to run at same JVM. From the consumer side, Hybrid services can be treated as microservices.

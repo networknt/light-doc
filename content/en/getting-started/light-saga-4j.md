@@ -13,6 +13,7 @@ sections_weight: 90
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In microservices architecture, one request might trigger multiple services in the call stack, so to ensure data consistency between services, we have provided light-saga-4j to manage distributed transactions. Sagas require your services to be idempotent and provide a compensation action for each update action. light-saga-4j is built on top of light-eventuate-4j.

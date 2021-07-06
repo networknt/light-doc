@@ -1,5 +1,5 @@
 ---
-title: "Light Platform Release"
+title: "Light Release"
 date: 2018-10-05T09:02:16-04:00
 description: ""
 categories: []
@@ -10,7 +10,7 @@ toc: false
 draft: false
 ---
 
-Light Platform consists of numeric repositories in github.com/networknt organization. Some of the repositories are libraries and some of them are applications built on top of other libraries. For libraries, they need to be released to maven central, and for applications, they need to be released to docker hub or both. Before we have [light-bot][], the manual release takes several days for testing and repeating the cycle. Sometimes we have to abort a release number as a defect is identified at a late stage of the release cycle. 
+Light consists of numeric repositories in github.com/networknt organization. Some of the repositories are libraries and some of them are applications built on top of other libraries. For libraries, they need to be released to maven central, and for applications, they need to be released to docker hub or both. Before we have [light-bot][], the manual release takes several days for testing and repeating the cycle. Sometimes we have to abort a release number as a defect is identified at a late stage of the release cycle. 
 
 The problem we were facing is common for large-scale microservices DevOps. There are too many repositories with libraries and applications with complex dependencies. Existing DevOps tools are focusing on a single repository and none of them can handler the integration test and multiple repositories or even organizations release process. 
 

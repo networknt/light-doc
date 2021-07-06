@@ -12,7 +12,7 @@ reviewed: true
 ---
 
 
-To create query side hybrid service, we are going to use light-codegen to generate the project in todo-list. Before generating the project, we need to create a config.json to control how the generator works and a schema.json to define the service contract.
+To create a query side hybrid service, we are going to use light-codegen to generate the project in the todo-list. Before generating the project, we need to create a config.json to control how the generator works and a schema.json to define the service contract.
 
 These two files can be found in model-config/hybrid/todo-query folder. 
 

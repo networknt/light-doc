@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 It's challenging for micro-service API to update data (e.g. a Domain-Driven design aggregate) and 
@@ -64,14 +65,14 @@ data in ElasticSearch.
 
 The Todo application uses the light-tram-4j framework to publish and consume domain events.
 
-1. TodoCommandService persist todo entity to local data store and publishes an event when it 
+1. TodoCommandService persists the todo entity to the local data store and publishes an event when it 
 creates, updates, or deletes a Todo item. It uses the DomainEventPublisher, which is implemented 
 by the light-tram-4j framework.
 
 2. light-tram-4j cdc server will get the published events from MESSAGE table and publish to Kafka 
 message broker.
 
-3. TodoQueryService application use TodoEventConsumer defines the event handlers, which update 
+3. TodoQueryService application uses TodoEventConsumer defines the event handlers, which updates 
 Elasticsearch to maintain a materialize view.
 
 

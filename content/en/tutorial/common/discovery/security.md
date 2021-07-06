@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In previous steps, we have explored all different options of service discovery. In this step, we are going to build on top of http-health codebase and enable the security with light-oauth2. It is requested by some users who want to see how different features work together in a distributed application. 

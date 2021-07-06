@@ -13,15 +13,16 @@ sections_weight: 8
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The code generator [light-codegen][] could be used to support project scaffolding for all the frameworks provided by the light platform.
+The code generator [light-codegen][] could be used to support project scaffolding for all the frameworks provided by Light.
 
 The code generator based on Rocker template engine that can be used as a utility or web service. It is used currently as scaffold services which include [light-rest-4j][], [light-graphql-4j][],  [light-eventuate-4j][] and [light-hybrid-4j][].
 
 ### Workflow
 
-Light-codegen generates initialized microservice project based on user-defined specification and configuration file:
+Light-codegen generates initialized microservice projects based on user-defined specification and configuration file:
 
 -- Light-rest-4j
 

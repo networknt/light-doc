@@ -7,6 +7,7 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 mask.yml is the configuration file for masking logging info.  
 this configuration file can also be used for centralizing mask rules.  

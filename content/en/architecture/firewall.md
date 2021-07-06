@@ -8,13 +8,13 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 The traditional firewall is dead or at the very least dying.
 
 Cloud and hybrid environments, mobile access, and online applications have made it all but 
-obsolete, experts say, and data center operators should be looking at replacing their firewalls 
-with more granular security technologies.
+obsolete, experts say, and data center operators should be looking at replacing their firewalls with more granular security technologies.
 
 Applications and data used to live in data centers and be delivered from there to employees 
 who were themselves on a corporate network with a desktop on a static IP address.
@@ -23,8 +23,7 @@ who were themselves on a corporate network with a desktop on a static IP address
 Systems.
 
 That’s not true anymore. Today, applications can live in cloud and hybrid environments or be 
-delivered via websites by external services providers. Employees and customers access them, often 
-via the web, from wherever they happen to be.
+delivered via websites by external services providers. Employees and customers access them, often via the web, from wherever they happen to be.
 
 That means the firewall can’t see what’s going on, where the connections are coming from, or 
 where they’re going, while the IP addresses change all the time or are obscured by content 
@@ -67,7 +66,7 @@ the solution? Unlike the old world you have monolithic applications, if you have
 thousands of microservices deployed in the cloud with some well known interface like REST,
 then everyone can access it if there is no authentication or authorization. 
 
-In light platform, we are moving the security to the application itself as part of the framework
+In Light, we are moving the security to the application itself as part of the framework
 and all each individual service instance to enforce the security policy defined on light-oauth2
 server. In another words, centralized policy management but decentralized policy enforcement.
 
@@ -96,7 +95,7 @@ the request. For example, if original user is just a teller, he/she can only tra
 if the user is based at Asia, then he/she cannot transfer out fund for customers based at America.
 
 As you can see this layer of security is business related and cannot be handled at technical level
-in a generic way. In light platform, we are providing a generic handler framework and our customers
+in a generic way. In Light, we are providing a generic handler framework and our customers
 can fill in the business rules to define fine-grained authorization. 
 
 [security handler]: /concern/security/

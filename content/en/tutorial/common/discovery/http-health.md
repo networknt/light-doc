@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 In the previous [Consul TLS][] tutorial, we have set up Consul to ping the service IP address and port number to determine if the service is healthy. It works in certain cases, but not all the cases. It has a flaw as described below.
@@ -23,7 +24,7 @@ It looks like we cannot use TCP health check in our case although it is the most
 
 The TTL based health check is also not ideal as we put a lot of load to the consul servers to update the pass and fail status by calling consul APIs.
 
-The only thing that is left is the HTTP health check option. With the release 1.5.18, we have update the the /health endpoint to /health/{serviceId} in the new handler.yml so that Consul won't get status code 200 if the target service is not the same service as registered. 
+The only thing that is left is the HTTP health check option. With the release 1.5.18, we have to update the the /health endpoint to /health/{serviceId} in the new handler.yml so that Consul won't get status code 200 if the target service is not the same service as registered. 
 
 ### Create HTTP health folder
 

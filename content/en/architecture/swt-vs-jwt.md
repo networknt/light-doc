@@ -32,7 +32,7 @@ To standardize this approach, the OAuth 2.0 specification working group publishe
 
 ### Miscoservices architecture
 
-As the light platform is aiming microservices, the number of requests for service to service communication grows exponentially. There is no way we can use SWT in the OAuth 2.0 provider. So when we decided to implement microservices based [light-oauth2][], we chose the JWT for the token format. 
+As Light is aiming for microservices, the number of requests for service to service communication grows exponentially. There is no way we can use SWT in the OAuth 2.0 provider. So when we decided to implement microservices based [light-oauth2][], we chose the JWT for the token format. 
 
 ### JWT Pros and Cons
 

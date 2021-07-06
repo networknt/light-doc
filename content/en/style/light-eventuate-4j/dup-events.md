@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 As we are using Kafka as our messaging broker for event sourcing and Kafka

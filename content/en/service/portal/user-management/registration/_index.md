@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-When you go to https://lightapi.net, the landing page is the dashboard. On the upper right corner, there is a user icon. Click it, and you will find two menus Sign In and Sign Up.
+When you go to https://lightapi.net, the landing page is the dashboard. On the upper right corner, there is a user icon. Click it, and you will find two menus: Sign In and Sign Up.
 
 To register a new user, click the Sign Up on th menu. A user profile form will be shown up. 
 

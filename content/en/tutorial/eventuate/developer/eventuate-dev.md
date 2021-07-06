@@ -8,15 +8,16 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Microservices enable businesses to innovate faster and stay ahead of the competitions.
+Microservices enable businesses to innovate faster and stay ahead of the competition.
 But one major challenge with the microservices architecture is the management of
 distributed data. Each microservice has its own private database. It is difficult to
 implement business transactions that maintain data consistency across multiple services
 as well as queries that retrieve data from multiple services.
 
-The light-eventuate-4j is an event sourcing and CQRS framework provides a simple yet
+The light-eventuate-4j is an event sourcing and CQRS framework that provides a simple yet
 powerful event-driven programming model that solves the distributed data management
 problems inherent in a microservice architecture.
 
@@ -26,7 +27,7 @@ and Command Query Responsibility Segregation (CQRS).
 light-eventuate-4j consists of a scalable, distributed event store server and client
 libraries for frameworks like light-rest-4j, light-graphql-4j and light-hybrid-4.
 
-The following assume you are going to update or add new feature to the light-eventuate-4j
+The following assumes you are going to update or add new features to the light-eventuate-4j
 framework and install every component manually so that you have better control in order
 to debug into each of them.
 
@@ -78,14 +79,14 @@ The following steps are for two types of developers:
 - DevOps guy that need to install above software package into official environments
 including production.
 
-- Hardcore developer that don't want to install Docker and want fully control of each
+- Hardcore developer that doesn't want to install Docker and wants fully control of each
 component so that they can debug into them with configuration changes at ease.
 
 
-The light-eventuate-4j event sourcing/CQRS framework build on event store which used to save
+The light-eventuate-4j event sourcing/CQRS framework builds on the event store which is used to save
 and dispatch events for subscribing microservices.
 
-The event store is build upon the database Mysql (Postgres and Oracle in the future) and
+The event store is built upon the database Mysql (Postgres and Oracle in the future) and
 distributed stream system (Kafka). Zookeeper is require to run Kafka cluster. For the local
 environment without Docker, please follow below steps to setup the infrastructure components.
 
@@ -96,9 +97,9 @@ environment without Docker, please follow below steps to setup the infrastructur
 
 -- Download mysql database (version: 5.7.18 and above) and install it in local environment.
 
--- start mysql database: >mysqld
+-- Start mysql database: >mysqld
 
--- get and run DB setup script from https://github.com/networknt/light-docker/tree/master/mysql
+-- Get and run DB setup script from https://github.com/networknt/light-docker/tree/master/mysql
 
 
 ##### Install Kafka
@@ -106,7 +107,7 @@ environment without Docker, please follow below steps to setup the infrastructur
 --Download Kafka (distributed steam system) from for version (2.11-0.10.2.0 or above):
   http://www.us.apache.org/dist/kafka/0.10.2.0/kafka_2.11-0.10.2.0.tgz
 
--- Start zookeeper server and Kafka server:
+-- Start Zookeeper server and Kafka server:
    Kafka uses ZooKeeper so you need to first start a ZooKeeper server if you don't already have 
    one. You can use the convenience script packaged with kafka to get a quick-and-dirty single-node 
    ZooKeeper instance.
@@ -205,8 +206,8 @@ cd ~/networknt/light-eventuate-4j/hybrid-command
 java -cp ~/networknt/light-eventuate-4j/docker/command/service/*:target/hybrid-command-1.0.0.jar com.networknt.server.Server
 ```
 
-Note: due to maintenance issue, the hybrid-command has been removed from light-eventuate-4j
-project and there is a copy in light-portal can be used for this.
+Note: due to maintenance issues, the hybrid-command has been removed from the light-eventuate-4j
+project. There is a copy in light-portal can be used for this.
 
 
 ### Prepare and start CQRS query server with query services
@@ -223,13 +224,13 @@ java -cp ~/networknt/light-eventuate-4j/docker/query/service/*:target/hybrid-que
 
 ```
 
-Note: due to maintenance issue, the hybrid-query has been removed from light-eventuate-4j
-project and there is a copy in light-portal can be used for this.
+Note: due to maintenance issues, the hybrid-query has been removed from the light-eventuate-4j
+project. There is a copy in light-portal can be used for this.
 
 
 ### Start command server and query server together with Docker
 
-You can start both command server and query server along with their services
+You can start both the command server and query server along with their services
 with docker-compose.
 
 ```

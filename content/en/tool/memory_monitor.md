@@ -7,11 +7,11 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-
-While you are testing performance of your microservices, you might be interested in
-monitoring your server memory usage. The memory footprint is very important as we
+While you are testing the performance of your microservices, you might be interested 
+in monitoring your server memory usage. The memory footprint is very important as we
 are talking about microservices - we might need to deploy hundreds or even thousands
 of microservices to compose a big application. In today's cloud environment, you can
 create vms or containers based on cpu, memory and hard drive usage and usually memory

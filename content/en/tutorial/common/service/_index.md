@@ -6,10 +6,11 @@ keywords: [tutorial]
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 This tutorial shows how to use service IoC injection in light*4j frameworks. All material
-are in github [service module test folder][] and here the test cases are broken down to
+is in the Github [service module test folder][]. Here are the test cases are broken down to
 smaller piece so that they are easy to understand. The best way to learn it is to debug
 the test cases one by one and stop into the service model. 
 

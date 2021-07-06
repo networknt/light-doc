@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 Another way to start a brand new project is to copy from one of the existing examples. You can find several Restful API examples at [light-example-4j][] repository and the majority of them has a [tutorial][] to walk you through step by step. If you are interested in implementing your service in Kotlin, you can find examples in [light-example-kotlin][] repository. 

@@ -7,9 +7,10 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-The light platform is an ecosystem with too many components. It is very complex and has a very steep learning curve as 
+Light is an ecosystem with many components. It is very complex and has a very steep learning curve as 
 it is designed for enterprise scale. While working with customers and developers, we have collected some tips and tricks 
 over the years. Hopefully, these best practices help new users to get started quickly and avoid unnecessary mistakes.
  

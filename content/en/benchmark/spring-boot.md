@@ -8,9 +8,10 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-Recently, one of the big customers asked if we can integrate light-4j middleware handlers to address cross-cutting concerns to Spring Boot applications. They want to leverage the light-4j middleware handlers as they are faster, smaller and easier to customize. Most importantly, these handlers working with light platform infrastructure to form an ecosystem to support microservices architecture. In this way, they can migrate their thousands of Spring Boot applications to the light platform without changing the existing controllers and business logic. The different development teams welcome the idea as they can still use Spring Boot to develop or maintain their applications without knowing the light-4j middleware injections as the DevOps team handles it in the pipeline. 
+Recently, one of the big customers asked if we can integrate light-4j middleware handlers to address cross-cutting concerns to Spring Boot applications. They want to leverage the light-4j middleware handlers as they are faster, smaller and easier to customize. Most importantly, these handlers work with Light infrastructure to form an ecosystem to support microservices architecture. In this way, they can migrate their thousands of Spring Boot applications to Light without changing the existing controllers and business logic. The different development teams welcome the idea as they can still use Spring Boot to develop or maintain their applications without knowing the light-4j middleware injections as the DevOps team handles it in the pipeline. 
 
 
 The customer realizes the [performance difference] between Light-4j and Spring Boot as they have compared both with their typical applications. While we are working on the integration in [light-spring-boot][] project, we can easily inject Light-4j handlers to the Spring Boot application in the same process. So we did a simple performance test to figure out what is the difference between the Light-4j implementation vs. Spring Boot controller. 
@@ -209,9 +210,9 @@ Requests/sec: 4906794.22
 Transfer/sec:    472.63MB
 ```
 
-Compare the two results, we can see that the light-4j path is about 20 times throughput than spring-boot path and the latency is 0.93ms vs. 19.89ms. Imagine if you want to reach the same throughput and same latency of light-4j path, how many Spring Boot instances are needed. We have one customer switched from Spring Boot to Light-4j for their service that collects data from IoT devices and they reduced from 250 medium size AWS VMs to only 4 small size AWS VMs with much better performance. 
+In comparing the two results, we can see that the light-4j path achieves about 20 times the throughput of spring-boot path and the latency is 0.93ms vs. 19.89ms. Imagine if you wanted to reach the same throughput and same latency of light-4j path: how many Spring Boot instances would be needed? We have one customer who switched from Spring Boot to Light-4j for their service that collects data from IoT devices and they reduced from 250 medium size AWS VMs to only 4 small size AWS VMs with much better performance. 
 
-The test was done on my desktop comptuer with AMD 2700X and 32GB memory. The [source code][] can be found at Github and you can run it locally. 
+The test was done on my desktop computer with AMD 2700X and 32GB memory. The [source code][] can be found at Github and you can run it locally. 
 
 [microservices-framework-benchmark]: https://github.com/networknt/microservices-framework-benchmark
 [performance difference]: https://github.com/networknt/microservices-framework-benchmark

@@ -8,14 +8,15 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-By now, we have walked through each sub-modules and let's build and test the services
+By now, we have walked through each sub-modules. Let's build and test the services
 we have built. 
 
 ### Build
 
-Here is the commands to build the project and run the test cases.
+Here are the commands to build the project and run the test cases.
 
 ```
 cd ~/networknt/light-example-4j/tram/light-tram-todolist/multi-module
@@ -37,7 +38,7 @@ As our view service is depending on ElasticSearch, let's first start it in a doc
 docker-compose -f docker-compose-elasticsearch.yml up
 ```
 
-Two things should be verify before run the service:
+Two things should be verified before running the service:
 
 1. since we are using Elasticsearch for view persistence, please increase the docker memory 
 space to 4gb  for the docker. The problem seems to be only on Mac Book Pro and Linux is fine.

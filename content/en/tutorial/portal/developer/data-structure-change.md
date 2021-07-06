@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-While working on the light-portal, I sometimes need to change the data structure or schema for an endpoint. As the portal application has too many moving parts, I am using this document to collect all the necessary changes in each repository and project as a reminder. It can be a guide for new developers in the future. 
+While working on the light-portal, I sometimes needed to change the data structure or schema for an endpoint. As the portal application has too many moving parts, I am using this document to collect all the necessary changes in each repository and project as a reminder. It can be a guide for new developers in the future. 
 
 The change for today is to remove the email from the change password endpoint. We don't need to have an additional email field in the form because only a logged-in user can take action. The email can be retrieved from the JWT token on the server.
 

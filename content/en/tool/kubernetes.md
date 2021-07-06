@@ -7,15 +7,16 @@ keywords: []
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This is the tutorial that document the process to install Kubernetes 1.9.3 on four Ubuntu Linux
+This is the tutorial that documents the process to install Kubernetes 1.9.3 on four Ubuntu Linux
 VMs. 
 
 ### Install Master
 
-A new VM is just created and it is called sandbox with 2 CPUs, 4GB memory and 30GB hard drive. 
-This server is installed Ubuntu 16.04 LTS server. This server will be acted as a master only
+A new VM will be created, called sandbox, with 2 CPUs, 4GB memory and 30GB hard drive. 
+This server is installed in the Ubuntu 16.04 LTS server. This server will act as a master only
 and no pods will be deployed on this VM. 
 
 The first step will install docker and you can refer to 
@@ -56,31 +57,31 @@ swap.
 sudo swapoff -a
 ```
 
-To make permanent change you need to comment out the swap file in /etc/fstab file
+To make permanent changes you need to comment out the swap file in /etc/fstab file
 
-Before init kubeadm we need to find out the ip address of your master server and it can be found
+Before init kubeadms we need to find the ip address of your master server, which can be found
 through ifconfig
 
 ```
 ifconfig
 ```
 
-Once you found your network ip address you will use it to replace 10.133.15.28 in the following
+Once you find your network ip address you will use it to replace 10.133.15.28 in the following
 command line. 
 
 ```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.133.15.28 --kubernetes-version stable-1.9
 ```
 
-After the command is completed, it will show you a command to join other node to the master. 
+After the command is completed, it will show you a command to join other nodes to the master. 
 
-something like the following.
+Something like the following.
 
 ```
 sudo kubeadm join --token 582493.ce5e13aa64d9ccb8 10.133.15.28:6443 --discovery-token-ca-cert-hash sha256:fab46528c4a2e0d38bdf60c6ed5042a60a8535ac48443356c06d3f461204af6d
 ```
 
-Config a user account or just use the current user if you have logged in with non-root user.
+Config a user account or just use the current user if you have logged in with a non-root user.
 
 The following is an example if you are using root so far and you want to create a new user
 called packet. 
@@ -121,9 +122,9 @@ kubectl get all --namespace=kube-system
 ### Install Worker
 
 After master is installed and all services are running, you can install workers. Here we are going
-to install three works. test1, test2 and test3. 
+to install three works: test1, test2 and test3. 
 
-Make sure that all packages are up to date
+Make sure that all packages are up to date.
 ```
 sudo apt-get update
 sudo apt-get upgrade
@@ -135,13 +136,13 @@ Make sure that docker is installed already.
 sudo apt-get install -y apt-transport-https
 ```
 
-install key
+Install key.
 
 ```
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 ```
 
-create kubernetes.list
+Create kubernetes.list.
 
 ```
 echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list

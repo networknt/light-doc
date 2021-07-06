@@ -8,6 +8,7 @@ slug: ""
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
 If you saw the following error, chances are you need to increase the bufferSize in your client.yml file. The default is 24 which is 24k bytes. It should be OK for small applications, but for bigger request body, you need to increase it to 100 or even 1024 for one of our customers. 

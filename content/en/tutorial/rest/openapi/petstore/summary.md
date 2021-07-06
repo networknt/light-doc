@@ -9,11 +9,12 @@ weight: 110
 aliases: []
 toc: false
 draft: false
+reviewed: true
 ---
 
-This conclude the OpenAPI petstore tutorial on the dev environment; however, the steps are 
-not for production as there are a lot of security issues need to be addressed and containers
-won't be managed by docker-compose on production. Kubernetes or Docker Swarm will be utilized 
+This concludes the OpenAPI petstore tutorial on the dev environment; however, the steps are 
+not for production as there are a lot of security issues that need to be addressed and containers
+that won't be managed by docker-compose on production. Kubernetes or Docker Swarm will be utilized 
 likely. This is out of the scope for this tutorial for now. 
 
 ##### Under construction.

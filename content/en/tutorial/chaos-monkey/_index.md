@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-For large scaled microservices deployment on the cloud, many un-predictable issues might happen on production. We can always guess the application's behaviour when something happens, but we can never verify the hypothesis. To ensure the system resiliency, Chaos engineering has been introduced, and a commonly used tool is Chaos Monkey. 
+For large scaled microservices deployment on the cloud, many unpredictable issues might happen on production. We can always guess the application's behaviour when something happens, but we can never verify the hypothesis. To ensure the system resiliency, Chaos engineering has been introduced, and a commonly used tool is Chaos Monkey. 
 
 As light-4j addresses the cross-cutting concerns with middleware handlers in the request/response chain, we can easily design the Chaos Monkey tools with middleware handlers to injected into the live application with a disabled state by default. By providing an API, testers can dynamically enable the Chaos Monkey handlers at runtime with different configurations to test the system response with average production request volume. 
 
