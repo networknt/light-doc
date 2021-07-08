@@ -104,15 +104,19 @@ export CONFIG_SERVER_CLIENT_TRUSTSTORE_LOCATION=/home/steve/networknt/light-4j/s
 erver/src/main/resources/config/bootstrap.truststore
 export CONFIG_SERVER_CLIENT_TRUSTSTORE_PASSWORD=password
 export CONFIG_SERVER_CLIENT_VERIFY_HOST_NAME=false
+export CONFIG_SERVER_AUTHORIZATION=eyJraWQiOiIxMDAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ1cm46Y29tOm5ldHdvcmtudDpvYXV0aDI6djEiLCJhdWQiOiJ1cm46Y29tLm5ldHdvcmtudCIsImV4c
+CI6MTk0MTEyMjc3MiwianRpIjoiTkc4NWdVOFR0SEZuSThkS2JsQnBTUSIsImlhdCI6MTYyNTc2Mjc3MiwibmJmIjoxNjI1NzYyNjUyLCJ2ZXJzaW9uIjoiMS4wIiwiY2xpZW50X2lkIjoiZjdkNDIzNDgtYzY0Ny
+00ZWZiLWE1MmQtNGM1Nzg3NDIxZTcyIiwic2NvcGUiOiJwb3J0YWwuciBwb3J0YWwudyIsInNlcnZpY2UiOiIwMTAwIn0.Q6BN5CGZL2fBWJk4PIlfSNXpnVyFhK6H8X4caKqxE1XAbX5UieCdXazCuwZ15wxyQJg
+WCsv4efoiwO12apGVEPxIc7gpvctPrRIDo59dmTjfWH0p3ja0Zp8tYLD-5Sh65WUtJtkvPQk0uG96JJ64Da28lU4lGFZaCvkaS-Et9Wn0BxrlCE5_ta66Qc9t4iUMeAsAHIZJffOBsREFhOpC0dKSXBAyt9yuLDuD
+t9j7HURXBHyxSBrv8Nj_JIXvKhAxquffwjZF7IBqb3QRr-sJV0auy-aBQ1v8dYuEyIawmIP5108LH8QdH-K8NkI1wMnNOz_wWDgixOcQqERmoQ_Q3g
 export LIGHT_ENV=dev
-# export LIGHT_4J_CONFIG_DIR=/config
-export LIGHT_CONFIG_SERVER_URI=https://localhost:8443
 ```
 
+You can also pass in all the variables through the -D option on the Java command line, but some duplicated variables need to be set up for every service. I normally only put two variables to the -D option per project. One is to specify the externalized config folder, and the other is to turn on the config server bootstrap instead of the file system config loader. 
 
 
 ```
-java -Dlight-config-server-uri="http://localhost:8443" -Dlight-env=dev -Dlight-4j-config-dir="/config" -Dconfig_server_client_truststore_location="/home/steve/networknt/light-4j/server/src/main/resources/config/bootstrap.truststore" -Dconfig_server_client_truststore_password=password -Dconfig_server_client_verify_host_name=false -jar target/server.jar 
+java -Dlight-4j-config-dir=/home/steve/networknt/light-config-test/light-example-4j/rest/petstore-config-server -Dlight-config-server-uri=https://localhost:8443 -jar target/server.jar 
 ```
 
 
