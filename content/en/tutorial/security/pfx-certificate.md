@@ -34,7 +34,7 @@ Then we will need convert the PFX certificate  to Java keystore for API authenti
 
 1. Get the key from the PFX file; this key is later used for p12 keystore  (change the highlighted part)
 
-```aidl
+```
 openssl pkcs12 -in sample.pfx  -nocerts -out keyfromppfx.key -nodes -passin pass:yourpassword
 
 ```
@@ -43,7 +43,7 @@ openssl pkcs12 -in sample.pfx  -nocerts -out keyfromppfx.key -nodes -passin pass
 
 2. Generate  crt for truststore:
 
-```aidl
+```
 openssl pkcs12 -in sample.pfx -clcerts -nokeys -out config.crt -passin pass:yourpassword
 
 ```
@@ -56,9 +56,9 @@ Now, we have a key and crt file.
 
 ---  in case the alias already existing alias and we want to replace it with new cert, we can issue delete keytool command first.
 
-```aidl
+```
 
-keytool -delete -alias myapi -keystore client.truststore     
+keytool -delete -alias myapi -keystore client.truststore     ---  in case the alias already existing alias and we want to replace it with new cert, we can issue delete keytool command first.
 
 keytool -import -file config.crt  -alias myapi -keystore client.truststore
 
@@ -74,7 +74,7 @@ If we only need a truststore,  we stop here.
 
 4. Create server side keystore
 
-```aidl
+```
 
 openssl pkcs12 -export -in config.crt -inkey keyfromppfx.key -certfile config.crt -name "configcert" -out keystore.p12
 
@@ -85,7 +85,7 @@ openssl pkcs12 -export -in config.crt -inkey keyfromppfx.key -certfile config.cr
 
 In some cases, p12 can be used directly as server side keystore. But in our API platform, we can import to the server keystore, or generate a new jks as server keystore.
 
-```aidl
+```
 
 keytool -importkeystore -srckeystore keystore.p12 -srcstoretype pkcs12 -destkeystore server.keystore -deststoretype pkcs12
 
