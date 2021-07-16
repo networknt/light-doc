@@ -78,6 +78,7 @@ Tutorials give developers step by step guidance on how to use each component or 
      + How to use [environment variables][] for config values
      + How to create [self-signed client and server keystore] for light-4j server
      + How to create [self-signed JWT key and cert] for light-oauth2 and light-4j service
+     + How to [generate keystore and truststore from PFX] for light-4j service
 
 
 ### API Styles
@@ -264,3 +265,4 @@ Tutorials give developers step by step guidance on how to use each component or 
 [environment variables]: /tutorial/security/env-var-config/
 [self-signed client and server keystore]: /tutorial/security/self-signed-certificate/
 [self-signed JWT key and cert]: /tutorial/security/self-signed-jwt-key/
+[generate keystore and truststore from PFX]: /tutorial/security/pfx-certificate/

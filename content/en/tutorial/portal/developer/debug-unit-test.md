@@ -26,22 +26,22 @@ In different combinations, we need to ensure the local environment is ready for 
 Almost all services in light-portal need Kafka for event sourcing and CQRS. We need to start the Confluent platform locally. I have it installed in my tool folder. 
 
 ```
-cd ~/tool/confluent-5.4.1/bin
-confluent local start
+cd ~/tool/confluent-6.1.0/bin
+confluent local services start
 ```
 
 To check the status.
 
 
 ```
-confluent local status
+confluent local services status
 ```
 
 To stop the Confluent platform.
 
 
 ```
-confluent local stop
+confluent local services stop
 ```
 
 ##### Consul
