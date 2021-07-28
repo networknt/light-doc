@@ -16,6 +16,11 @@ We recommend using the light-router as the router for Internet traffic for back-
 
 This handler needs to be injected into the handler.yml as a standard path to return something that indicates the server is still alive. Currently, it returns "OK"  or {"result": "OK"} only, and in the future, it will be enhanced to add more features.
 
+When deploying the server to a Kubernetes cluster, there are three possible ways the health check endpoint is invoked:
+
+1. Kubernetes liveness and readiness probes
+2. Light Control Plane
+3. Third-party monitor tools.
 
 
 ### Configuration
@@ -28,11 +33,21 @@ Here is the default config health.yml for the module.
 ```
 # Server health endpoint that can output OK to indicate the server is alive
 
-# true to enable this middleware handler.
+# true to enable this middleware handler. By default the health check is enabled.
 enabled: ${health.enabled:true}
-
-# true to return Json format message
+# true to return Json format message. By default, it is false. It will only be changed to true if the monitor
+# tool only support JSON response body.
 useJson: ${health.useJson:false}
+
+# For some of the services like light-proxy, http-sidecar and kafka-sidecar, we might need to check the down
+# stream API before return the health status to the invoker. By default it is not enabled.
+
+# if the health check needs to invoke down streams API. It is false by default.
+downstreamEnabled: ${health.downstreamEnabled:false}
+# down stream API host. http://localhost is the default when used with http-sidecar and kafka-sidecar.
+downstreamHost: ${health.downstreamHost:http://localhost}
+# down stream API health check path. This allows the down stream API to have customized path implemented.
+downstreamPath: ${health.downstreamPath:/health}
 ```
 
 ##### handler.yml
@@ -99,4 +114,6 @@ As you can see, we put the proxy handler in the exec for the /health/{serviceId}
 The health check handler we implemented in the light-4j is just a reference implementation. I would recommend implementing customized handlers for real APIs to provide health info based on the dependencies. 
 
 For example, if an API connects to a database to serve its request, it would check the database connection before returning the OK to the health check call. 
+
+One example of a health check is the Kafka sidecar that checks the backend connectivity when Reactive Consumer is enabled. The source code can be accessed at https://github.com/networknt/kafka-sidecar/blob/master/src/main/java/com/networknt/mesh/kafka/handler/SidecarHealthHandler.java
 

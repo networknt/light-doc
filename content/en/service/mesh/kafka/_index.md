@@ -842,6 +842,44 @@ components:
 
 ```
 
+## Admin Endpoints
+
+Like other light-4j services, we have injected admin endpoints for it to integrate with Light Control Plane. For server info, chaos monkey and logger config, they are standard. However, the health check for the Kafka sidecar is a customized one. 
+
+### Health Check
+
+The Kafka sidecar connects to the Kafka cluster and potentially backend API if Reactive Consumer is enabled. For the health check, we iterate the startup hooks and check the following:
+
+* If the producer is enabled, then we need to check if the ProducerStartupHook.producer to see if it is created successfully. 
+
+* If the reactive consumer is enabled, we need to check if the ReactiveConsumerStartupHook.kafkaConsumerManager is created successfully. Also, we need to check if we can send a health check request to the backend to ensure the connection to the backend. 
+
+The backend health check is disabled by defautl and can be enabled with the following health.yml config file. 
+
+
+```
+# Server health endpoint that can output OK to indicate the server is alive
+
+# true to enable this middleware handler. By default the health check is enabled.
+enabled: ${health.enabled:true}
+# true to return Json format message. By default, it is false. It will only be changed to true if the monitor
+# tool only support JSON response body.
+useJson: ${health.useJson:false}
+
+# For some of the services like light-proxy, http-sidecar and kafka-sidecar, we might need to check the down
+# stream API before return the health status to the invoker. By default it is not enabled.
+
+# if the health check needs to invoke down streams API. It is false by default.
+downstreamEnabled: ${health.downstreamEnabled:true}
+# down stream API host. http://localhost is the default when used with http-sidecar and kafka-sidecar.
+downstreamHost: ${health.downstreamHost:http://localhost}
+# down stream API health check path. This allows the down stream API to have customized path implemented.
+downstreamPath: ${health.downstreamPath:/health}
+
+```
+
+If you are using frameworks other than light-4j for the backend implementation, you can customize the downstreamPath if necessary.
+
 
 ## Deployment
 
