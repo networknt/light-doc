@@ -36,25 +36,25 @@ sections:
     cta: Check out light-4j middleware handlers.
     link: /concern/
     color_classes: bg-primary-color-light black
-    image: /images/home-page-templating-example.png
+    image: /images/cross-cutting-concerns.png
     copy: "Light-4j and related frameworks provide dozens of middleware handlers that can be injected into the request/response chain to give your service an embedded gateway." 
   - heading: "Interaction Styles"
     cta: Use the right framework for the right product.
     link: /architecture/category/
     color_classes: bg-primary-color-light black
-    image: /images/home-page-templating-example.png
+    image: /images/interaction-styles.png
     copy: "Restful is for public APIs, Graphql is for mobile and Single Page Applications, while Hybrid for serverless. It takes advantage of both Monolithic and Microservices architecture. Eventuate is for event-driven applications."
   - heading: "Infrastructure Services"
     cta: OAuth2, Portal and other infrastructure services.
     link: /service/
     color_classes: bg-primary-color-light black
-    image: /images/home-page-templating-example.png
+    image: /images/infrastructure-services.png
     copy: "The OAuth2 provider is responsible for centralizing policy management and services which are responsible for policy enforcement. Portal is for API management and the marketplace. Others are third party services."
   - heading: "Tool Chains"
     cta: Tool chain for code generation, devops and CI/CD.
     link: /tool/
     color_classes: bg-primary-color-light black
-    image: /images/home-page-templating-example.png
+    image: /images/toolchains.png
     copy: "Light-codegen is used for scaffolding projects from OpenAPI spec, GraphQL IDL or Hybrid Schema. Light-bot Pipeline is for building, packaging, releasing and dockerizing. Kubernetes is for service orchestration."
 
 ---
