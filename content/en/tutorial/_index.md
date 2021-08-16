@@ -197,6 +197,13 @@ Tutorials give developers step by step guidance on how to use each component or 
 - [Light-mesh](/tutorial/mesh/)
   * [KsqldbConsumer](/tutorial/mesh/kafka/ksqldb/)
 
+- [Kafka-sidecar](/tutorial/kafka-sidecar/)
+  * [Confluent Local installation on Ubuntu](/tutorial/kafka-sidecar/confluent-local/)
+  * [Local development with Confluent Local](/tutorial/kafka-sidecar/local-dev/)
+
+- [Http-sidecar](/tutorial/http-sidecar/)
+
+
 ### Tool Chain
 
 - [Light-codegen](/tutorial/generator/)
