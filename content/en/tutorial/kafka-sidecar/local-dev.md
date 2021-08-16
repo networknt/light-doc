@@ -1,6 +1,6 @@
 ---
-title: "Local Default"
-date: 2021-05-06T08:10:48-04:00
+title: "Local Development with Default Configuration"
+date: 2021-08-16T08:09:36-04:00
 description: ""
 categories: []
 keywords: []
