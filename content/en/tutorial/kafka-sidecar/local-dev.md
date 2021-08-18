@@ -26,7 +26,7 @@ To test with different schemas for validation and serialization/deserialization,
 
 ##### test1
 
-For test1 topic, json schema will be used to define the key and value as the following. 
+For test1 topic, json schema will be used to define the key and value as the following (Type: JSON Schema).
 
 key schema
 
@@ -64,7 +64,7 @@ value schema
 ##### test2
 
 
-For test2 topic, avro will be used to define the key and value as the following.
+For test2 topic, avro will be used to define the key and value as the following (Type: Avro).
 
 key schema
 
@@ -93,7 +93,7 @@ value schema
 ##### test3
 
 
-For test3 topic, protobuf will be used to define the key and value as the following.
+For test3 topic, protobuf will be used to define the key and value as the following (Type: Protobuf).
 
 key schema
 
@@ -129,7 +129,8 @@ Checkout the light-mesh repo from Github networknt org.
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/light-mesh.git
+
+git@github.com:networknt/kafka-sidecar.git
 ```
 
 Start the kafka-sidecar with IntelliJ Idea. 
@@ -141,6 +142,7 @@ By default, the sidecar will enable the reactive consumer during the startup bas
 
 ```
 cd ~/networknt
+
 git clone git@github.com:networknt/light-example-4j.git
 ```
 
