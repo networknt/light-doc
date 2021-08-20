@@ -15,3 +15,6 @@ To speed up the development, we are using the confluent local on Ubuntu 20.10 fo
 
 https://www.confluent.io/product/confluent-platform
 
+Or use local kafka docker image:
+
+https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html
