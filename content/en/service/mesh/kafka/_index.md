@@ -1023,3 +1023,4 @@ Since the batch cannot be committed and the partition has migrated to another in
 [Kafka Streams]: /service/mesh/kafka/kafka-streams/
 [Kafka Sidecar Admin]: /service/mesh/kafka/sidecar-amdin/
 [cross-cutting concerns]: /service/mesh/kafka/sidecar-ccc/
+[Kafka Dead Letter Queue]: /service/mesh/kafka/kafka-dlq/
