@@ -22,7 +22,7 @@ confluent local services start
 
 ### Create Test Topics
 
-To test with different schemas for validation and serialization/deserialization, we will create three topics (test1, test2, test3). If you are using the Confluent Platform, it can be done from the control center interface. 
+To test with different schemas for validation and serialization/deserialization, we will create several topics. If you are using the Confluent Platform, it can be done from the control center interface. 
 
 
 ##### test1
@@ -121,6 +121,34 @@ message value_test3 {
 
 ```
 
+##### test4
+
+for test4 topic, we have different formats for the key and value. The value will be using jsonschema and key the will have no schema with string format only. 
+
+In most of the cases, we use schemas for both key and value so that the kafka-sidecar can decide how to validate and serialize the record based on the schema definition (jsonschema, avro or protobuf). However, there are cases that key will be just plain string especially when the consumer is expecting the key is a string intead of an object with a schema. 
+
+The following is the schema for the value and it is the same as test1 value.
+
+```
+{
+  "$id": "http://example.com/myURI.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "description": "Sample schema to help you get started.",
+  "properties": {
+    "count": {
+      "description": "The integer type is used for integral numbers.",
+      "type": "integer"
+    }
+  },
+  "title": "value_test1",
+  "type": "object"
+}
+
+```
+
+
+
 ### Sidecar
 
 The sidecar supports different configurations based on the business logic of the backend API. We will use the default configuration for this first tutorial to start it in an IDE with debug mode.
@@ -195,6 +223,21 @@ Result:
 
 ```
 {"offsets":[{"partition":0,"offset":7},{"partition":0,"offset":8},{"partition":0,"offset":9}],"key_schema_id":6,"value_schema_id":7,"requestStatus":"OK"}
+```
+
+To produce some messages to the test4 topic, we can issue a curl command.
+
+```
+curl -k --location --request POST 'https://localhost:8443/producers/test4' \
+--header 'Content-Type: application/json' \
+--data-raw '{"records":[{"key":"alice","value":{"count":2}},{"key":"john","value":{"count":1}},{"key":"alex","value":{"count":2}}]}'
+
+```
+
+Result:
+
+```
+{"offsets":[{"partition":0,"offset":6},{"partition":0,"offset":7},{"partition":0,"offset":8}],"value_schema_id":24,"requestStatus":"OK"}
 ```
 
 ### Reactive Consumer
