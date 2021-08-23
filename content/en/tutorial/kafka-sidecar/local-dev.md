@@ -22,7 +22,8 @@ confluent local services start
 
 ### Create Test Topics
 
-To test with different schemas for validation and serialization/deserialization, we will create three topics. If you are using the Confluent Platform, it can be done from the control center interface. 
+To test with different schemas for validation and serialization/deserialization, we will create three topics (test1, test2, test3). If you are using the Confluent Platform, it can be done from the control center interface. 
+
 
 ##### test1
 
