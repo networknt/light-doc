@@ -22,7 +22,9 @@ confluent local services start
 
 ### Create Test Topics
 
-To test with different schemas for validation and serialization/deserialization, we will create several topics. If you are using the Confluent Platform, it can be done from the control center interface. 
+To test with different schemas for validation and serialization/deserialization, we will create three topics (test1, test2, test3). If you are using the Confluent Platform, it can be done from the control center interface.
+
+To verify kafka sidecar Reactive Consumer DLQ feature,   we can create a Dead Letter Queue(DLQ): test1.dlq
 
 
 ##### test1
@@ -244,3 +246,17 @@ Result:
 
 
 While producing some records to the test1 topic, the backend API will receive notifications from the sidecar. This can be found from the console log with the messages in the logging statements. 
+
+And from kafka sidecar console, we can see the logs:
+
+```text
+12:42:20.801 [XNIO-1 task-1]  5qgC8sVTRamrAjRHueNdyw INFO  c.s.e.e.m.k.h.ProducersTopicPostHandler:154 handleRequest - ProducerTopicPostHandler handleRequest start with topic test1
+12:42:21.206 [pool-3-thread-1]   INFO  c.s.e.e.m.k.ReactiveConsumerStartupHook$1:172 onCompletion - Send a batch to the backend API
+12:42:21.222 [pool-3-thread-1]   INFO  c.s.e.e.m.k.ReactiveConsumerStartupHook$1:186 onCompletion - Got successful response from the backend API
+```
+
+In the sample backend API, the first event for each message, it will be mark as process failed; And the  kafka sidecar Reactive Consumer will send the message to kafka DLQ (test1.dlq).
+
+```text
+ RecordProcessedResult rpr = new RecordProcessedResult(record, false, sw.toString());
+```
