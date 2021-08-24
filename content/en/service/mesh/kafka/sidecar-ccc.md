@@ -169,3 +169,7 @@ This flag defaults to false in the kafka-consumer.yml, and you only need to set 
 
 
 
+### Bad Message
+
+Sometimes, one or more bad messages produced to the topic and consumer cannot deserialize them due to the invalid message based on the schema. When we update the logic for the health check, we have updated the logic for the exception handling. If this happens, we are marking the ReactiveConsumer un-healthy and the container will be restarted after several times of failed health checks ( 10 times in the current configuration for the startup probe ). As there is no way for us to bypass the bad message, we need the amdin to remove the message from the topic and the sidecar will auto recover from the error state whether it is restart or not depending on how long it takes to get the bad message removed.
+

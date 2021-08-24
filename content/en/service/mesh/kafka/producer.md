@@ -59,7 +59,8 @@ reviewed: true
             1,
             2,
             3,
-            4
+            4,
+            5
           ]
         keySchema:
           type: string
@@ -76,7 +77,8 @@ reviewed: true
             1,
             2,
             3,
-            4
+            4,
+            5
           ]
         valueSchema:
           type: string
@@ -106,33 +108,63 @@ The kafka-producer.yml is the configuration file for the producer in Kafka sidec
 ---
 # Generic configuration for Kafka producer.
 properties:
+  # The sidecar does the serialization to byte array for both key and value
   key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
   value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+  # This value is a string, if using 1 or 0, you must use '1' or '0' as the value
   acks: ${kafka-producer.acks:all}
-  bootstrap.servers: localhost:9092
-  buffer.memory: 33554432
+  bootstrap.servers: ${kafka-producer.bootstrap.servers:localhost:9092}
+  buffer.memory: ${kafka-producer.buffer.memory:33554432}
   retries: ${kafka-producer.retries:3}
-  batch.size: 16384
-  linger.ms: 1
+  batch.size: ${kafka-producer.batch.size:16384}
+  linger.ms: ${kafka-producer.linger.ms:1}
   max.in.flight.requests.per.connection: ${kafka-producer.max.in.flight.requests.per.connection:5}
-  enable.idempotence: ${kafka-producer.enable.idempotence:false}
-  # security configuration for enterprises
-  # security.protocol: SASL_SSL
-  # sasl.mechanism: PLAIN
-  # sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"username\" password=\"password\";"
-  # ssl.endpoint.identification.algorithm: ""
-  # client.rack:
+  enable.idempotence: ${kafka-producer.enable.idempotence:true}
+  # Transactional producer configuration
+  # The TransactionalId to use for transactional delivery.
+  # transactional.id: ${kafka-producer.transactional.id:T1000}
+  # The maximum amount of time in ms that the transaction coordinator will wait for a transaction status
+  # update from the producer before proactively aborting the ongoing transaction. Default to 1 minute.
+  # transaction.timeout.ms: ${kafka-producer.transaction.timeout.ms:60000}
+  # The time in ms that the transaction coordinator will wait without receiving any transaction status
+  # updates for the current transaction before expiring its transactional id. Default to 7 days.
+  # transactional.id.expiration.ms: ${kafka-producer.transactional.id.expiration.ms:604800000}
+  # Confluent schema registry url
+  schema.registry.url: ${kafka-producer.schema.registry.url:http://localhost:8081}
+  # Schema registry identity cache size
+  schema.registry.cache: ${kafka-producer.schema.registry.cache:100}
+  # Schema registry client truststore location, use the following two properties only if schema registry url is https.
+  # schema.registry.ssl.truststore.location: ${kafka-producer.schema.registry.ssl.truststore.location:/config/client.truststore}
+  # Schema registry client truststore password
+  # schema.registry.ssl.truststore.password: ${kafka-producer.schema.registry.ssl.truststore.password:password}
+  # security configuration for enterprise deployment
+  # security.protocol: ${kafka-producer.security.protocol:SASL_SSL}
+  # sasl.mechanism: ${kafka-producer.sasl.mechanism:PLAIN}
+  # sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${kafka-producer.username:username}\" password=\"${kafka-producer.password:password}\";"
+  # ssl.endpoint.identification.algorithm: ${kafka-producer.ssl.endpoint.identification.algorithm:algo-name}
+  # client.rack: ${kafka-producer.client.rack:rack-name}
+  # basic authentication user:pass for the schema registry
+  # basic.auth.user.info: ${kafka-producer.username:username}:${kafka-producer.password:password}
+  # basic.auth.credentials.source: ${kafka-producer.basic.auth.credentials.source:USER_INFO}
+  # If you have message that is bigger than 1 MB to produce, increase this value.
+  max.message.size: ${kafka-producer.max.message.size:1048576}
 
 # The default topic for the producer. Only certain producer implementation will use it.
-topic: portal-event
-# if open tracing is enable. traceability, correlation and metrics should not be in the chain if opentracing is used.
-injectOpenTracing: ${client.injectOpenTracing:false}
-# inject serviceId as callerId into the http header for metrics to collect the caller. The serviceId is from server.yml
-injectCallerId: ${client.injectCallerId:false}
-# schema registry url
-schemaRegistryUrl: http://localhost:8081
-# schema registry identity cache size
-schemaRegistryCache: 100
+topic: ${kafka-producer.topic:test1}
+# Default key format if no schema for the topic key
+keyFormat: ${kafka-producer.keyFormat:jsonschema}
+# Default value format if no schema for the topic value
+valueFormat: ${kafka-producer.valueFormat:jsonschema}
+# If open tracing is enable. traceability, correlation and metrics should not be in the chain if opentracing is used.
+injectOpenTracing: ${kafka-producer.injectOpenTracing:false}
+# Inject serviceId as callerId into the http header for metrics to collect the caller. The serviceId is from server.yml
+injectCallerId: ${kafka-producer.injectCallerId:false}
+# Indicator if the audit is enabled.
+auditEnabled: ${kafka-producer.auditEnabled:true}
+# Audit log destination topic or logfile. Default to topic
+auditTarget: ${kafka-producer.auditTarget:logfile}
+# The consumer audit topic name if the auditTarget is topic
+auditTopic: ${kafka-producer.auditTopic:sidecar-audit}
 
 ```
 
@@ -186,10 +218,12 @@ From the schema above, you can see that the keyFormat and valueFormat are intege
 2 -> avro
 3 -> jsonschema
 4 -> protobuf
+5 -> string
 
 
 ##### binary
 
+In the case that you want to produce binary data to a Kafka topic, you can use binary which accepts base64 encoded string. This is the perfect format for small audit and video files. 
 
 
 ##### jsonschema
@@ -332,6 +366,70 @@ Result:
 
 ```
 {"offsets":[{"partition":0,"offset":7},{"partition":0,"offset":8},{"partition":0,"offset":9}],"key_schema_id":6,"value_schema_id":7,"requestStatus":"OK"}
+```
+
+##### string
+
+The key or value can use string format to validate and serialize the producer records. When both key and value are using string format, there is no need to define a schema. However, in most of the cases, we only recommend to use string format for the key not the value. Unlike the binary format, the string format will use the UTF8 to convert between a string and a byte array. 
+
+In the following example, we will create topic test4 with key as string format and value as jsonschema format with schema definition. 
+
+Here is the schema for the value and it is the same like test1 value schema.
+
+```
+{
+  "$id": "http://example.com/myURI.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "description": "Sample schema to help you get started.",
+  "properties": {
+    "count": {
+      "description": "The integer type is used for integral numbers.",
+      "type": "integer"
+    }
+  },
+  "title": "value_test1",
+  "type": "object"
+}
+
+```
+
+To produce some messages to the test4 topic, we can issue a curl command.
+
+```
+curl -k --location --request POST 'https://localhost:8443/producers/test4' \
+--header 'Content-Type: application/json' \
+--data-raw '{"records":[{"key":"alice","value":{"count":2}},{"key":"john","value":{"count":1}},{"key":"alex","value":{"count":2}}]}'
+```
+
+Result: 
+
+```
+{"offsets":[{"partition":0,"offset":0},{"partition":0,"offset":1},{"partition":0,"offset":2}],"value_schema_id":2,"requestStatus":"OK"}
+```
+
+In the above request body, we have just added a list of record without specifying the key format and value format. As the value format is defined as a JSON schema, there is no need to put it into the request body or kafka-producer.yml configuration file. However, the key is not using a schema and we have to make the default format in the config file. 
+
+Here is a section in the kafka-producer.yml config file.
+
+```
+# Default key format if no schema for the topic key
+keyFormat: ${kafka-producer.keyFormat:jsonschema}
+# Default value format if no schema for the topic value
+valueFormat: ${kafka-producer.valueFormat:jsonschema}
+```
+
+As you can see, we allow the user to specify the default key format and default value format for the producer so that you don't need to add them to the request body. If you are using schema for key or value, you don't need to specify the default format at all. The schema registry will take the priority in term of validation and serialization. 
+
+When using binary, string and json, you must specify a default keyFormat or valueFormat in the config file if you don't want to specify it in the request body. This is the most convenient way if the sidecar is dealing with a list of topics that have the same format for the key and value. 
+
+With the above config file, the default is jsonschema for both key and value. We can overwrite them by externalize these values into the values.yml file.
+
+Here is an example for the values.yml to set the default key format to string.
+
+```
+kafka-producer.keyFormat: string
+
 ```
 
 ### Latest Schema
