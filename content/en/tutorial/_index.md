@@ -200,6 +200,8 @@ Tutorials give developers step by step guidance on how to use each component or 
 - [Kafka-sidecar](/tutorial/kafka-sidecar/)
   * [Confluent Local installation on Ubuntu](/tutorial/kafka-sidecar/confluent-local/)
   * [Local development with Confluent Local](/tutorial/kafka-sidecar/local-dev/)
+  * [Local binary format with external config](/tutorial/kafka-sidecar/local-binary/)
+
 
 - [Http-sidecar](/tutorial/http-sidecar/)
 

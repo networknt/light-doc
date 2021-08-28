@@ -68,6 +68,94 @@ One of the main goals for the Kafka sidecar is to address [cross-cutting concern
 * Sidecar auditing activities are sent to a Kafka topic through the producer and subsequently can be streams to a database for query with Confluent connect.
 * Dead letter queue to handle the situation that the backend API cannot process the corrupted record successfully due to runtime exceptions. The problematic records will be pushed to a dead letter topic for future processing once the backend API is fixed and redeployed. 
 
+## Format
+
+The Kafka Sidecar supports the following format in the configuration for both key and value. 
+
+```
+            - binary
+            - avro
+            - json
+            - jsonschema
+            - protobuf
+            - string
+
+```
+
+And there is a Enum class that defines the enum values at [EmbeddedFormat.java](https://github.com/networknt/light-kafka/blob/master/kafka-entity/src/main/java/com/networknt/kafka/entity/EmbeddedFormat.java)
+
+The corresponding values for the above format in enum values should be
+
+```
+0
+1
+2
+3
+4
+5
+```
+
+#### binary
+
+When users produce small binary audio and video streams to a Kafka topic, you can use the base64 to encode the binary data on the backend and send it to the Kafka sidecar. When the keyFormat or valueFormat is defined as binary in the kafka-producer.yml, the sidecar will decode the key or value based on the binary configuration and save the decoded byte[] to the Kafka topic. This will significantly reduce the size of the key or value (average 33% reduction). Also, saving the binary data as the original gives third-party consumers direct access to the binary from the topic. 
+
+
+Please be aware that the binary format is normally used on value only, and it is not a good idea to save large binary data to Kafka. For example, by default, Kafka producer can only accept up to 1MB per message, and if you have audio or video streams larger than 1MB, you should save the content to a filesystem or S3 and only push the location to the Kafka. 
+
+For testing, you can use the this [site](https://codebeautify.org/base64-encode) to encode and decode between String to Base64 and Base64 to String. 
+
+
+Given we have topic test6 created without any schema for the key and value, here is a test reqeust with keyFormat string and valueFormat binary 
+
+```
+curl -k --location --request POST 'https://localhost:8443/producers/test6' \
+--header 'Content-Type: application/json' \
+--data-raw '{"records":[{"key":"alice","value":"YWJj"},{"key":"john","value":"ZGVm"},{"key":"alex","value":"eHl6"}]}'
+
+```
+
+In the kafka-producer.yml, we should have the following config for the keyFormat and valueFormat.
+
+```
+# Default key format if no schema for the topic key
+keyFormat: ${kafka-producer.keyFormat:string}
+# Default value format if no schema for the topic value
+valueFormat: ${kafka-producer.valueFormat:binary}
+
+```
+
+If a consumer is used, then we need to have the following config in the kafka-consumer.yml
+
+```
+
+topic: ${kafka-consumer.topic:test6}
+# the format of the key optional
+keyFormat: ${kafka-consumer.keyFormat:string}
+# the format of the value optional
+valueFormat: ${kafka-consumer.valueFormat:binary}
+
+```
+
+For the same test6 topic, we can switch the format between the key and value so that the keyFormat is binary and valueFormat is string. Here is the test request. 
+
+```
+curl -k --location --request POST 'https://localhost:8443/producers/test6' \
+--header 'Content-Type: application/json' \
+--data-raw '{"records":[{"key":"YWxpY2U=","value":"abc"},{"key":"am9obg==","value":"def"},{"key":"YWxleA==","value":"xyz"}]}'
+
+```
+
+For the above curl command to work with the Kafka sidecar, we need to change the configuration for producer and consumer. This time, we are going to update the values.yml 
+
+```
+kafka-producer.keyFormat: binary
+kafka-producer.valueFormat: string
+
+kafka-consumer.keyFormat: binary
+kafka-consumer.valueFormat: string
+
+```
+
 
 ## Specification
 
@@ -581,6 +669,7 @@ paths:
               - avro
               - jsonschema
               - protobuf
+              - string
 
       responses:
         '200':
@@ -623,7 +712,8 @@ components:
             1,
             2,
             3,
-            4
+            4,
+            5
           ]
         keySchema:
           type: string
@@ -640,7 +730,8 @@ components:
             1,
             2,
             3,
-            4
+            4,
+            5
           ]
         valueSchema:
           type: string
@@ -671,6 +762,7 @@ components:
             - json
             - jsonschema
             - protobuf
+            - string
         autoOffsetReset:
           type: string
         autoCommitEnable:
