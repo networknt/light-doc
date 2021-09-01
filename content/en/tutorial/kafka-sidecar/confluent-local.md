@@ -10,11 +10,10 @@ draft: false
 reviewed: true
 ---
 
-To speed up the development, we are using the confluent local on Ubuntu 20.10 for Kafka server. Here is the link to get it installed. 
+We are using the confluent local on Ubuntu 20.10 for the Kafka server to speed up the development. Here is the link to get it installed. 
 
 
 https://www.confluent.io/product/confluent-platform
 
-Or use local kafka docker image:
 
-https://docs.confluent.io/platform/current/quickstart/ce-docker-quickstart.html
+Or use the confluent [docker-compose](/tutorial/kafka-sidecar/confluent-docker/)

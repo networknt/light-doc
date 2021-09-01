@@ -199,12 +199,16 @@ Tutorials give developers step by step guidance on how to use each component or 
 
 - [Kafka-sidecar](/tutorial/kafka-sidecar/)
   * [Confluent Local installation on Ubuntu](/tutorial/kafka-sidecar/confluent-local/)
+  * [Confluent Docker Compose](/tutorial/kafka-sidecar/confluent-docker/)
   * [Local development with Confluent Local](/tutorial/kafka-sidecar/local-dev/)
   * [Local binary format with external config](/tutorial/kafka-sidecar/local-binary/)
 
 
 - [Http-sidecar](/tutorial/http-sidecar/)
 
+- [Light-scheduler](/tutorial/scheduler/)
+  * [Local development for developers](/tutorial/scheduler/local-dev/)
+  
 
 ### Tool Chain
 

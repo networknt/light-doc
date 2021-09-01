@@ -18,3 +18,4 @@ As part of [light-mesh](/service/mesh/) offering, the [Kafka Sidecar](/service/m
 [Local development]: /tutorial/kafka-sidecar/local-dev/
 [Local binary]: /tutorial/kafka-sidecar/local-binary/
 [Confluent local]: /tutorial/kafka-sidecar/confluent-local/
+[Confluent Docker]: /tutorial/kafka-sidecar/confluent-docker/
