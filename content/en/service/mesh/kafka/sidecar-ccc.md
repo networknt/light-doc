@@ -145,9 +145,31 @@ auditTopic: ${kafka-producer.auditTopic:sidecar-audit}
 
 When auditTarget is set to `logfile` the logback.xml and the example audit entries are shown above.
 
-To ensure the centralized processing in the future, we need to have only one audit topic across the entire organization if audit topic is used. The data in the audit topic contains only the meta data instead of the original message value. 
+##### Audit Topic
+
+To ensure the centralized processing in the future, we need to have only one audit topic across the entire organization if audit topic is used. The data in the audit topic contains only the meta data instead of the original message value. Some organizations with higher security requirements can use separate audit topics per application, per line of business or domain due to the stack trace shown in the audit entries. 
+
+
+##### Retention
 
 The retention.ms for the audit topic should be set based on the retention policy of the organization. 
+
+##### Tracing
+
+Tracing is a crucial aspect of auditing. Without it, nobody can link multiple audit entries to a particular transaction in the business domain. Given that there is no way to have a unique key picked up for the Id, we are generating a unique Id for the audit. 
+
+There are three fields in the RecordProcessedResult class for tracing.
+
+* correlationId and traceabilityId
+
+The sidecar will try to get the correlationId from the record header with the name X-Correlation-Id and fall back to this value if the record header doesn't have it. The backend API will add this if the original producer
+is not adding the header to the producer record. The traceabilityId is the same. The sidecar will always trying to get the X-Correlation-Id or X-Traceability-Id from the record header first. If it cannot get it there, it will try to use the correlationId or traceabilityId from teh RecordProcessedResult object. 
+
+* key
+
+It is a picked key to identify the transaction of the message. The backend API must populate this field from either the Kafka record key in a readable format (string) or a field extracted from the value like customerId, userId or account number. 
+
+
 
 ### Avro to Json Transformer
 
