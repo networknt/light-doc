@@ -79,8 +79,61 @@ CREATE STREAM TEST_STREAM (
     country VARCHAR
 ) WITH (
   kafka_topic = 'test',
-  value_format = 'json'
+  value_format = 'JSON_SR'
 );
 ```
+
+Please note we are using "JSON_SR" here as value format. There are two JSON formats, JSON and JSON_SR. Both support serializing and deserializing JSON data. The latter offers integration with the Schema Registry, registering and retrieving JSON schemas while the former does not. These two formats are not byte compatible (you cannot read data produced by one by the other)
+
+
+### Verify KsqlDB Stream
+
+Now let's add some event message to the topic (test) we created above:
+
+-  Start kafka-sidecar locally by referring to  [kafka-sidecar](/tutorial/kafka-sidecar/local-dev/)
+
+
+-  produce some event message to "test" topic:
+
+```text
+curl --location --request POST 'https://localhost:8443/producers/test' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "records": [
+        {
+            "key": "1",
+            "value": {
+                "userId": "1111",
+                 "firstName": "test1"
+            }
+        },
+        {
+            "key": "2",
+            "value": {
+                "userId": "2222",
+                 "firstName": "test2"                
+            }
+        },
+        {
+            "key": "3",
+            "value": {
+                "userId": "3333",
+                 "firstName": "test3"                       
+            }
+        }
+    ]
+}'
+```
+
+- From  the Kafka Control Center, in the navigation bar, click ksqlDB. In the Steams tab, we can see the "TEST_STREAM" we created above.
+
+
+- Click the stream link (TEST_STREAM), and then click "Query stream" button.
+
+
+- We can see the  query  running and result display as below:
+
+![Stream result](/images/stream1.png)
+
 
 
