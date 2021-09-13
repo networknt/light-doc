@@ -131,6 +131,8 @@ Here are some audit records captured during the test in the sidecar-audit.json f
 
 On the producer side, we need to record all the success and failure records to the sidecar-audit file or topic through the sidecar as well. Due to threading issue, we cannot produce the audit entry to Kafka in the callback of the original message, we have to use a queue to save all the audit entries and send them after sending the original messages in batch. 
 
+Please note that if your backend API is only a consumer, you still need to enable the producer with the producer startup and shutdown hooks and provide kafka-producer.yml configurations in values.yml if you want the audit to be written into a Kafka topic. 
+
 Here is the section in kafka-producer.yml file about audit.
 
 ```
