@@ -16,20 +16,22 @@ As we have two different approaches to address cross-cutting concerns for the AW
 
 ##### Pros
 
-* Completed Lambda Implementation with AWS API Gateway
-* Lowest Cost for small and medium organizations
-
+* Completed Lambda Implementation with shared authorizer deployed on AWS API Gateway.
+* Lowest Cost for small and medium organizations when the public cloud is used.
+* Tightly integration with AWS products and toolchains, which are familiar to most Lambda developers.
 
 ##### Cons
 
-* Only support Java language
-* Limited due to the Lambda SDK
+* Only support Java language. Other similar frameworks need to be implemented and maintained if users want to write Lambda functions with .Net, Python, Nodejs etc. 
+* Limited due to the Lambda SDK and extension APIs. Hard to integrate with the existing enterprise ecosystem. 
+* Vendor lockdown to the AWS cloud solution or ecosystem.
 
 
 ##### Who should use
 
-* Personal and small business with focus on the cost reduction. 
-* For Lambda functions that are called in-frequently.
+* Personal and small business focusing on cost reduction with AWS Lambda function pricing model on the public cloud. 
+* For Lambda functions that are called in-frequently such batch jobs.
+* New startup companies want to simplify their IT solutions. 
 
 
 ### Lambda Proxy
@@ -37,10 +39,10 @@ As we have two different approaches to address cross-cutting concerns for the AW
 
 ##### Pros
 
-* Support multiple language for Lamdba functions
-* Same Light-proxy image can be used for Rest APIs and Lambda to address corss-cutting concerns.
-* Replace the AWS API Gateway with capability to extend middleware handlers.
-* High throughput
+* Support multiple languages for Lamdba functions implementation.
+* Same Light-proxy image can be used for Rest APIs and Lambda to address cross-cutting concerns in the same fashion.
+* Replace the AWS API Gateway with the capability to extend middleware handlers for easy customization and integration with the existing ecosystem.
+* High throughput, low latency with extra functionalities compare with AWS API Gateway.
 
 
 ##### Cons
@@ -49,9 +51,9 @@ As we have two different approaches to address cross-cutting concerns for the AW
 
 ##### Who should use
 
-* For medium and large size organization to address cross-cutting concerns for Lambda functions.
-* For companies with existing EC2 instances pre-allocated
-* For companies want to customize the security, logging, metrics, auditing, valation etc.
-* For companies who are using the light-proxy or http-sidecar already.
-
+* For medium and large-size organizations to address cross-cutting concerns for Lambda functions with high throughput.
+* For companies with existing EC2 instances pre-allocated.
+* For companies that want to customize the security, logging, metrics, auditing, validation etc.
+* For companies who are using the light-proxy or http-sidecar already in their cloud solution.
+* For organizations who are using Amazon VPC as AWS API Gateway is not free. 
 
