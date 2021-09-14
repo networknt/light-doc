@@ -163,6 +163,40 @@ We are going to start both Kafka Sidecar and the sidecar-backend with the comman
 
 ### Docker Compose
 
+The easy way to get the Kafka-sidecar and backend API started together is the docker-compose-demo.yml in the Kafka-sidecar repo. 
+
+Checkout kafka-sidecar and start the confluent platform with docker-compose.
+
+```
+cd ~/networknt
+git clone https://github.com/networknt/kafka-sidecar.git
+cd ~/networknt/kafka-sidecar
+docker-compose up -d
+
+```
+
+Start the kafka sidecar and backend API with another docker-compose with host network. 
+
+```
+cd ~/networknt/kafka-sidecar
+docker-compose -f docker-compose-demo.yml up
+
+```
+
+Create a topic test6 and dead letter topic test6.dlq from the control center and send a test request with curl.
+
+```
+
+curl -k --location --request POST 'https://localhost:8443/producers/test6' \
+--header 'Content-Type: application/json' \
+--data-raw '{"records":[{"key":"YWxpY2U=","value":"abc"},{"key":"am9obg==","value":"def"},{"key":"YWxleA==","value":"xyz"}]}'
+```
+
+You should see the logs in the docker-compose-demo console for the new messages. 
+
+The following is a video tutorial, and please ignore the DOCKER_HOST_IP set up in the demo as it is not necessary with the host network. 
+
+
 {{< youtube D0LNMtteF_0 >}}
 
 
