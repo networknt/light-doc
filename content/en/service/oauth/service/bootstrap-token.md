@@ -54,5 +54,29 @@ The token looks similar to other normal tokens, but there are several difference
 
 ### Endpoint
 
+###POST /oauth2/token
+Get bootstrap token with client id and secret
 
+####Authorization:
 
+* Using header 
+``` 
+  Authorization: Basic ZjdkNDIzNDgtYzY0Ny00ZWZiLWE1MmQtNGM1Nzg3NDIxZTAwOmY2aDFGVEk4UTMtN1VTY1BaRHpmWEE=
+```
+
+* Using body form
+```
+client_id="f7d42348-c647-4efb-a52d-4c5787421e00"
+client_secret="f6h1FTI8Q3-7UScPZDzfXA"
+```
+
+####Required header parameters: 
+
+* Host = localhost
+* Content-Type = application/x-www-form-urlencoded
+* Transfer-Encoding = chunked
+
+####Required body form parameters:
+
+* grant_type = bootstrap_token
+* sid
