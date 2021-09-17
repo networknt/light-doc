@@ -56,6 +56,8 @@ The following are some of the important services recommended by Light. Some of t
 
 [light-controller][] is a standard edition of global registry and discovery service with runtime monitoring. 
 
+[light-scheduler][] is an distributed schedueler based on Kafka and Kafka Streams for cloud applications.
+
 [light-router][] is a proxy service that can help an external or a legacy client access cloud-native microservices by encapsulating consumer side cross-cutting concerns into a microservice as a distributed gateway.
 
 [light-proxy][] is a proxy service that can bring legacy REST API to the Light ecosystem by encapsulating all provider side cross-cutting concerns into a microservice as a distributed gateway. 
@@ -109,3 +111,4 @@ The following are some of the important services recommended by Light. Some of t
 [SkyWalking]: /service/tracing/skywalking/
 [How to secure Hazelcast]: /service/oauth/deployment/hazelcast/
 [light-controller]: /service/controller/
+[light-scheduler]: /service/scheduler/
