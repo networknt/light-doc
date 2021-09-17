@@ -24,5 +24,9 @@ Kafka Sidecar is part of the service mesh platform to handle all the cross-cutti
 
 The [KsqldbConsumer][] is part of the Kafka sidecar that subscribes to the KsqlDB server and calls back to the backend API. 
 
+The [Ksqldb Active Consumer][] provide an endpoint to run the pull query against KsqlDB server and return the result as API response.
+
 
 [KsqldbConsumer]: /tutorial/mesh/kafka/ksqldb/
+
+[Ksqldb Active Consumer]: /tutorial/mesh/kafka/ksqldb_active/
