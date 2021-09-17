@@ -10,11 +10,11 @@ draft: false
 reviewed: true
 ---
 
-Unlike other consumers, the KsqlDB consumer is connecting to the KsqlDB instead of the Kafka cluster. Because the KsqlDB has processed the streams on the server, the Kafka-sidecar is just a client for the KsqlDB. 
+Unlike other consumers, the KsqlDB consumer is connecting to the KsqlDB server instead of the Kafka cluster. Because the KsqlDB has processed the streams on the server, the Kafka-sidecar is just a client for the KsqlDB. 
 
 ### Configuration
 
-The following is the config file kafka-ksqldb.yml
+For local connection, the following is the config file kafka-ksqldb.yml
 
 ```
 # ksqlDB host
@@ -29,18 +29,69 @@ properties:
 
 ```
 
+For the enterprise KsqlDB server, we need enable Tls  and set basic Authentication for the connection:
 
-To enable the consumer, we also need to update the service.yml file to add the startup and shutdown hooks. 
+```json
+
+ksqldbHost: ${kafka-ksqldb.ksqldbHost:localhost}
+ksqldbPort: ${kafka-ksqldb.ksqldbPort:8088}
+# ksqlDB use tls or not. For local environment, default set as false. For enterprise kafka, please change to use true
+useTls: ${kafka-ksqldb.useTls:false}
+# ksqlDB ssl truststore location
+trustStore: ${kafka-ksqldb.trustStore:/truststore/kafka.server.truststore.jks}
+# ksqlDB ssl truststore Password
+trustStorePassword: ${kafka-ksqldb.trustStorePassword:changeme}
+# ksqlDB basic Authentication Credentials username
+basicAuthCredentialsUser: ${kafka-ksqldb.username:userId}
+# ksqlDB basic Authentication Credentials Password
+basicAuthCredentialsPassword: ${KAFKA_KSQLDB_PASSWORD:changeme}
+```
+
+There are two types of consumers for ksqlDB:
+
+- Active consumer
+
+- Reactive consumer
+
+To enable the consumers, we also need to update the service.yml(or values.yml) file to add the startup and shutdown hooks. 
 
 ```
-- com.networknt.server.StartupHookProvider:
-  - com.networknt.mesh.kafka.KsqldbConsumerStartupHook
-- com.networknt.server.ShutdownHookProvider:
-  - com.networknt.mesh.kafka.KsqldbConsumerShutdownHook
+# Service Startup and Shutdown Hooks
+service.com.networknt.server.StartupHookProvider:
+  - com.networknt.mesh.kafka.ProducerStartupHook
+  - com.networknt.mesh.kafka.KsqldbReactiveConsumerStartupHook
+  - com.networknt.mesh.kafka.KsqldbActiveConsumerStartupHook
+  - com.networknt.mesh.kafka.ReactiveConsumerStartupHook
+service.com.networknt.server.ShutdownHookProvider:
+  - com.networknt.mesh.kafka.ProducerShutdownHook
+  - com.networknt.mesh.kafka.ActiveConsumerShutdownHook
+  - com.networknt.mesh.kafka.KsqldbActiveConsumerShutdownHook
+  - com.networknt.mesh.kafka.ReactiveConsumerShutdownHook
+  - com.networknt.mesh.kafka.KsqldbReactiveConsumerShutdownHook
 
 ```
 
-### Backend API Specification
+### To Access Active Consumer endpoint:
+
+path: /ksqldb/active
+
+Method: POST
+
+Sample request paylaod:
+
+```json
+
+{
+
+    "deserializationError": false,
+    "tableScanEnable": true,
+    "query": "select * from QUERYUSER where id = '1';"
+}
+```
+
+### To use Reactive Consumer
+
+Reactive Consumer will pull the ksql query result tthe Backend API Specification.
 
 The following is one of the examples for the backend API to receive the call from the Kafka sidecar. The path is configurable from the sidecar. 
 
