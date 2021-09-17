@@ -22,3 +22,4 @@ Light-portal is based on light-kafka for event sourcing and CQRS, and it is high
 
 The new repository is named oauth-kafka, and it is a private on GitHub.com. The source code is available for developers and enterprise customers. 
 
+The functionality between the oauth-kafka and light-oauth2 is the same from the users' perspective. For the details, please refer to the [light-oauth2](/service/oauth/). 

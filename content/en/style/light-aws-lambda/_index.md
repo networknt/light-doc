@@ -19,11 +19,12 @@ In Light, we are using the middleware handlers to address cross-cutting concerns
 
 With more and more serverless Lambda functions deployed to the AWS cloud, we need to find a way to address the cross-cutting concerns in the same fashion as the light-4j so that the Lambda functions can be integrated with the Light ecosystem for security, logging, tracing, auditing and metrics.
 
-There are two different options to implement cross-cutting concerns for Lambda functions, and you should choose one or the other based on your non-functional requirements. 
+There are two different options to implement cross-cutting concerns for Lambda functions, and you should choose one or the other based on your non-functional requirements. For details, please refer to the [pros and cons][] for each approach.
 
 * [Lambda-Proxy][] - using the light-proxy to address cross-cutting concerns for Lambda functions. 
 
 * [Lambda-Framework][] - cross-cutting concerns with interceptors, extensions within Lambda functions and custom authorizer on the AWS API Gateway for JWT verification.
+
 
 Most users want to focus on the business logic implementation for the Lambda functions instead of boilerplate code. Regardless of which approach to use, the light-codegen can scaffold the Lambda function project based on the OpenAPI specification. 
 
@@ -40,4 +41,5 @@ When building Lambda functions in Java, the JVM runtime is prone to [code start 
 [Lambda Proxy Generation]: /style/light-aws-lambda/codegen-proxy/
 [Lambda Framework Generation]: /style/light-aws-lambda/codegen-framework/
 [native-image]: /style/light-aws-lambda/native-image/
+[pros and cons]: /style/light-aws-lambda/which-approach/
 

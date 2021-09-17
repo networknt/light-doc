@@ -14,6 +14,8 @@ As part of infrastructure services, [light-scheduler](/service/scheduler/) offer
 
 * [Local development][] with [Confluent Docker][]
 
+
+
 [Local development]: /tutorial/scheduler/local-dev/
 [Confluent Docker]: /tutorial/kafka-sidecar/confluent-docker/
 

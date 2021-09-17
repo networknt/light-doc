@@ -11,6 +11,8 @@ reviewed: true
 ---
 
 * [Local Dev][]
-
+* [Bootstrap Token][]
 
 [Local Dev]: /tutorial/oauth-kafka/local-dev/
+[Bootstrap Token]: /tutorial/oauth-kafka/bootstrap-token/
+
