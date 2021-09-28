@@ -75,7 +75,7 @@ https://docs.spring.io/spring-security-kerberos/docs/current/reference/html/brow
 To test the code service with an default client, paste the following url in the address bar. 
 
 ```
-https://dev.oauth.cibc.com:6881/oauth2/code?response_type=code&client_id=f7d42348-c647-4efb-a52d-4c5787421e72&redirect_uri=http://localhost:8080/authorization
+https://dev.oauth.networknt.com:6881/oauth2/code?response_type=code&client_id=f7d42348-c647-4efb-a52d-4c5787421e72&redirect_uri=http://localhost:8080/authorization
 ```
 
 If there is no popup window show up to ask your username and password and you have a redirect url returned with an authorization code, then that means the Kerberos/SPNEGO works. 

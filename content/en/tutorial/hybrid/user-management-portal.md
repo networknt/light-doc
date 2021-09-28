@@ -90,7 +90,7 @@ curl -X POST \
   https://localhost:8443/api/json \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
-  -d ' {"host":"lightapi.net","service":"user","action":"createUser","version":"0.1.0","data":{"host":"cibc","screenName":"testUser","password":"1222222","contactData":{"email":"gavinyan.han@gmail.com","addresses":[{"country":"CA","state":"AK","city":"BaBa","addressLine1":"222 Bay Street","addressType":"SHIPPING"}],"gender":"MALE"}}}
+  -d ' {"host":"lightapi.net","service":"user","action":"createUser","version":"0.1.0","data":{"host":"networknt.com","screenName":"testUser","password":"1222222","contactData":{"email":"gavinyan.han@gmail.com","addresses":[{"country":"CA","state":"AK","city":"BaBa","addressLine1":"222 Bay Street","addressType":"SHIPPING"}],"gender":"MALE"}}}
 '
 
 ```
@@ -121,7 +121,7 @@ curl -X POST \
   https://localhost:8443/api/json \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
-  -d ' {"host":"lightapi.net","service":"user","action":"updateUser","version":"0.1.0","data":{"id":"222-111", "host":"cibc","screenName":"testUser","password":"1222222","contactData":{"email":"lqqq.qqq@DDD.COM","addresses":[{"country":"CA","state":"AK","city":"BaBa","addressLine1":"222 Bay Street","addressType":"SHIPPING"}],"gender":"MALE"}}}
+  -d ' {"host":"lightapi.net","service":"user","action":"updateUser","version":"0.1.0","data":{"id":"222-111", "host":"networknt.com","screenName":"testUser","password":"1222222","contactData":{"email":"lqqq.qqq@DDD.COM","addresses":[{"country":"CA","state":"AK","city":"BaBa","addressLine1":"222 Bay Street","addressType":"SHIPPING"}],"gender":"MALE"}}}
 '
 
 ```

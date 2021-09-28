@@ -128,7 +128,7 @@ curl -X POST \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
   -H 'Postman-Token: b9803960-e5b2-42c7-afc1-5d071bc57d96' \
-  -d '{"host":"lightapi.net","service":"config","action":"create-service-secrets","version":"0.1.0","data":{"configServiceId":"00000165680f7e16-0242ac1200060000","values":[{"key":"server/buildNumber","value":"cibcBuild"}, {"key":"server/truststoreName","value":"keytab:112"}]}}
+  -d '{"host":"lightapi.net","service":"config","action":"create-service-secrets","version":"0.1.0","data":{"configServiceId":"00000165680f7e16-0242ac1200060000","values":[{"key":"server/buildNumber","value":"networkntBuild"}, {"key":"server/truststoreName","value":"keytab:112"}]}}
 '
 ```
 
@@ -175,7 +175,7 @@ curl -X POST \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
   -H 'Postman-Token: 278c94c0-59e6-43c6-852e-381b30f6fdf4' \
-  -d '{"host":"lightapi.net","service":"config","action":"update-service-secrets","version":"0.1.0","data":{"configServiceId":"00000165680f7e16-0242ac1200060000","values":[{"key":"server/buildNumber","value":"cibc-gow-1.1.2"}, {"key":"server/truststoreName","value":"keycache:112"}]}}
+  -d '{"host":"lightapi.net","service":"config","action":"update-service-secrets","version":"0.1.0","data":{"configServiceId":"00000165680f7e16-0242ac1200060000","values":[{"key":"server/buildNumber","value":"networknt-1.1.2"}, {"key":"server/truststoreName","value":"keycache:112"}]}}
 '
 
 ```
