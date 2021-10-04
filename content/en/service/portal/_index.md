@@ -37,6 +37,7 @@ The following are major components for light-portal:
 * [OAuth 2.0 Provider](/service/portal/oauth2-admin/)
 * [API Certification](/service/portal/api-certification/)
 * [Light-Controller](/service/portal/light-controller/)
+* [SPA Component](/service/portal/spa-component/)
 
 
 [technology stack]: /service/portal/technology-stack/
