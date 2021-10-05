@@ -5,6 +5,11 @@ description: ""
 categories: []
 keywords: []
 slug: ""
+menu:
+  docs:
+    parent: "design"
+    weight: 53
+weight: 53
 aliases: []
 toc: false
 draft: false
