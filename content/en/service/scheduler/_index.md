@@ -127,7 +127,7 @@ TaskDefinition.avsc
     {"name": "action","type": "DefinitionAction"},
     {"name": "frequency","type": ["null", "TaskFrequency"], "default": null},
     {"name": "topic", "type": "string"},
-    {"name": "start", "type": ["null", "long"], "default": null},
+    {"name": "start", "type": "long"},
     {"name": "data","type": [ "null",
       {
         "type": "map",
@@ -138,10 +138,11 @@ TaskDefinition.avsc
 }
 ```
 
-The host and name are part of the key, and the combination is unique. The topic is the output topic for the scheduled task. The start timestamp is optional, and you only need to populate it if you want to schedule a task starting at a future time. If it doesn't exist in the request, then the current time converted to the next exact TimeUnit will be used. 
+The host and name are part of the key, and the combination is unique. The topic is the output topic for the scheduled task. 
+
+The start timestamp is mandatory, and you need to populate it to the current system millisecond or a future time if you want to schedule a task starting at a future time. 
 
 The data field is an open structure so that users can put some extra information to assist the task execution. It is optional, but most cases will be populated based on the task itself. 
-
 
 ##### Endpoints
 
@@ -217,6 +218,11 @@ Here are the two endpoints in the specification.
         - scheduler_auth:
             - sched:r
 ```
+
+### Design
+
+- [Task Creation](/service/scheduler/task-creation/)
+
 
 ### References
 

@@ -46,10 +46,9 @@ Please note that there is only one client in the picture to make the diagram sim
 
 Although the light-controller is not an open-source project, it is free to use in a docker container. We also provide a docker-comopse-controller.yml in the light-docker project with all the configuration files externalized to the controller folder for customization. 
 
-To start the light-controller
-
-```
-cd ~/networknt/light-docker
-docker-compose -f docker-compose-controller.yml up -d
-```
+- [Getting Started](/service/controller/getting-started/)
+- [High Availability](/service/controller/high-availability/)
+- [Two Mode](/service/controller/two-mode/)
+- [Service Registration](/service/controller/service-registration/)
+- [Health Check](/service/controller/health-check/)
 

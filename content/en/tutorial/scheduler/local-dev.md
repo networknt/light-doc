@@ -17,6 +17,8 @@ The following are steps to get the development environment ready on your desktop
 
 You can start the Confluent Platform with [confluent local][] or [confluent docker][], and most users prefer the latter. 
 
+https://youtu.be/L5RoJvCbkT0
+
 
 ### Create Topics
 
@@ -25,7 +27,6 @@ We need to create at least two topics for the task definitions and the other for
 ```
 light-scheduler
 controller-health-check
-
 ```
 
 ### Configuration
@@ -116,9 +117,15 @@ curl -k --location --request POST 'https://localhost:8401/schedulers' \
 
 ```
 
-Here is a video to walk through the development process.
+Query active task definitions.
 
-{{< youtube W_ceowazWMU >}}
+```
+curl -k --location --request GET 'https://localhost:8401/schedulers'
+```
+
+### Code Walkthrough
+
+{{< youtube pmPYqaQ-HIE >}}
 
 
 [confluent local]: /tutorial/kafka-sidecar/confluent-local/
