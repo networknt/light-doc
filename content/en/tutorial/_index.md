@@ -207,8 +207,11 @@ Tutorials give developers step by step guidance on how to use each component or 
 - [Http-sidecar](/tutorial/http-sidecar/)
 
 - [Light-scheduler](/tutorial/scheduler/)
-  * [Local development for developers](/tutorial/scheduler/local-dev/)
-  
+  * [Local Confluent][] to support local development and test.
+  * [Local development][] with [Local Confluent][]
+  * [API Endpoints][] with Postman and Curl command line.
+  * [Three-node Cluster][] with fat jar and externalized config folders.
+  * [Cluster Debug][] with docker-compose and IDE mix.
 
 ### Tool Chain
 
@@ -279,3 +282,9 @@ Tutorials give developers step by step guidance on how to use each component or 
 [self-signed client and server keystore]: /tutorial/security/self-signed-certificate/
 [self-signed JWT key and cert]: /tutorial/security/self-signed-jwt-key/
 [generate keystore and truststore from PFX]: /tutorial/security/pfx-certificate/
+[Local Confluent]: /tutorial/scheduler/local-confluent/
+[Local development]: /tutorial/scheduler/local-dev/
+[API Endpoints]: /tutorial/scheduler/api-endpoint/
+[Three-node Cluster]: /tutorial/scheduler/local-cluster/
+[Cluster Debug]: /tutorial/scheduler/cluster-debug/
+

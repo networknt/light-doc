@@ -16,6 +16,7 @@ As part of infrastructure services, [light-scheduler](/service/scheduler/) offer
 * [Local development][] with [Local Confluent][]
 * [API Endpoints][] with Postman and Curl command line.
 * [Three-node Cluster][] with fat jar and externalized config folders.
+* [Cluster Debug][] with docker-compose and IDE mix.
 
 
 [Local Confluent]: /tutorial/scheduler/local-confluent/
@@ -23,4 +24,4 @@ As part of infrastructure services, [light-scheduler](/service/scheduler/) offer
 [Confluent Docker]: /tutorial/kafka-sidecar/confluent-docker/
 [API Endpoints]: /tutorial/scheduler/api-endpoint/
 [Three-node Cluster]: /tutorial/scheduler/local-cluster/
-
+[Cluster Debug]: /tutorial/scheduler/cluster-debug/
