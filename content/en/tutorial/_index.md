@@ -213,6 +213,14 @@ Tutorials give developers step by step guidance on how to use each component or 
   * [Three-node Cluster][] with fat jar and externalized config folders.
   * [Cluster Debug][] with docker-compose and IDE mix.
 
+- [Light-controller](/tutorial/controller/)
+  * [Petstore Registry][] to show users how to the light-controller for service interaction.
+  * [Service Discovery][] to show users how to leverage the light-controller for global registry and discovery. 
+  * [Kubernetes Cluster][] to show users how to use the light-controller in a Kubernetes cluster for instance management and goblal discovery. 
+  * [Local IDE][] to integrate light-scheduler, light-controller and petstore API
+  * [Local Docker][] to integrate light-scheduler, light-controller and petsotre API with multiple nodes docker-compose.
+
+
 ### Tool Chain
 
 - [Light-codegen](/tutorial/generator/)
@@ -287,4 +295,8 @@ Tutorials give developers step by step guidance on how to use each component or 
 [API Endpoints]: /tutorial/scheduler/api-endpoint/
 [Three-node Cluster]: /tutorial/scheduler/local-cluster/
 [Cluster Debug]: /tutorial/scheduler/cluster-debug/
-
+[Petstore Registry]: /tutorial/controller/petstore-registry/
+[Service Discovery]: /tutorial/controller/service-discovery/
+[Kubernetes Cluster]: /tutorial/controller/kubenetes-cluster/
+[Local IDE]: /tutorial/controller/local-ide/
+[Local Docker]: /tutorial/controller/local-docker/
