@@ -220,6 +220,10 @@ Tutorials give developers step by step guidance on how to use each component or 
   * [Local IDE][] to integrate light-scheduler, light-controller and petstore API
   * [Local Docker][] to integrate light-scheduler, light-controller and petsotre API with multiple nodes docker-compose.
 
+- [Light-config-server](/tutorial/config-server/)
+  * [Mongo Provider in Debug Mode](/tutorial/config-server/mongo-debug/)
+  * [View Development][] with local config server as backend.
+
 
 ### Tool Chain
 
@@ -300,3 +304,4 @@ Tutorials give developers step by step guidance on how to use each component or 
 [Kubernetes Cluster]: /tutorial/controller/kubenetes-cluster/
 [Local IDE]: /tutorial/controller/local-ide/
 [Local Docker]: /tutorial/controller/local-docker/
+[View Development]: /tutorial/config-server/local-view/
