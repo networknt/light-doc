@@ -152,6 +152,32 @@ InputStream inputStream = exchange.getInputStream();
 exchange.putAttachment(REQUEST_BODY, inputStream);
 ```
 
+If user wants to upload large binary file from API to API call, below is the sample code:
+
+```text
+            ClientRequest request = new ClientRequest().setPath(requestUri).setMethod(Methods.POST);
+            
+            request.getRequestHeaders().put(Headers.CONTENT_TYPE, FORM_DATA_TYPE);
+            request.getRequestHeaders().put(Headers.TRANSFER_ENCODING, "chunked");
+            InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("sample.pdf");
+            HashMap<String, Object> requestMap = new HashMap<>();
+            requestMap.put("name", "test_sample.pdf");
+            requestMap.put("profileFile", IOUtils.toByteArray(resourceAsStream));
+             //customized header parameters 
+            connection.sendRequest(request, client.createClientCallback(reference, latch, ByteBuffer.wrap(SerializationUtils.serialize(requestMap))));
+```
+
+Or user can try test from postman by using  form-data:
+
+In postman, set method type to POST.
+
+Then select Body -> form-data -> Enter your parameter name (file according to your code)
+
+And on right side next to value column, there will be dropdown "text, file", select File. choose your image file and post it.
+
+
+![form-data](/images/postman.png)
+
 For details, please take a look at the [pdf example][] in the light-example-4j. 
 
 [pdf example]: https://github.com/networknt/light-example-4j/tree/master/client/pdf
