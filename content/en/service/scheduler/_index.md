@@ -219,6 +219,17 @@ Here are the two endpoints in the specification.
             - sched:r
 ```
 
+##### Post
+
+It is the endpoint to insert, update and delete a task definition. When an update or delete action is used, the handler will check if the task definition exists or not before pushing the event into the scheduler topic. 
+
+The handler will query the scheduler store to find the same host, name, unit entity before allowing the update and delete action accepted. It means you cannot update the host, name and time unit for an existing task definition. Your only option would be to delete the current entry and insert a new one. 
+
+##### Get
+
+It returns all the task definitions based on the optional query parameter (host, name and unit) combinations. Users can use one or more query parameters to filter the result. 
+
+
 ### Design
 
 - [Task Creation](/service/scheduler/task-creation/)
