@@ -122,7 +122,7 @@ There is new endpoint added for executing ksqlDB query:
 
 - Create a topic name as test:
 
-![create-topic](test1-topic.png)
+![create-topic](/images/create-topic.png)
 
 And set the value JSON schema:
 

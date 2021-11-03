@@ -49,6 +49,8 @@ This tutorial shows how to use the SQL database in your microservices-based on l
 
 * [Switch to Postgre][]
 
+* [Use H2][]
+  
 * [Unit tests][]
 
 * [Performance][]
@@ -69,3 +71,4 @@ This tutorial shows how to use the SQL database in your microservices-based on l
 [light-eventuate-4j]: /style/light-eventuate-4j/
 [Switch to Oracle]: /tutorial/rest/openapi/database/oracle/
 [Switch to Postgre]: /tutorial/rest/openapi/database/postgres/
+[Use H2]: /tutorial/rest/openapi/database/h2/
