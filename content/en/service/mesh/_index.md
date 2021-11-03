@@ -41,12 +41,12 @@ In Kubernetes cluster environment, sidecar can be deployed as Sidecar container 
 
 
 
-* [Http-sidecar](/service/mesh/http/)
+* [Http-sidecar](/service/http-sidecar/)
 
 The Http-sidecar integrate light-proxy and light-router features to handler ingress and egress traffic in a Kubernetes pod;  and it can be used as a sidecar to address cross-cutting concerns for APIs built with any framework and language. 
 
 
-* [Kafka-Sidecar](/service/mesh/kafka/)
+* [Kafka-Sidecar](/service/kafka-sidecar/)
 
 Kafka sidecar contains both producer and consumers (consumer group, stream processor and ksqldb subscriber) to interact with a Kafka cluster without the developer knowing Kafka client. All the interactions to Kafka are through the sidecar with REST APIs. Like using the light-proxy as a sidecar, we can leverage light-4j middleware handlers to address cross-cutting concerns at the sidecar level and propagate tracer to the ProducerRecord headers.
 

@@ -62,11 +62,11 @@ The following are some of the important services recommended by Light. Some of t
 
 [light-proxy][] is a proxy service that can bring legacy REST API to the Light ecosystem by encapsulating all provider side cross-cutting concerns into a microservice as a distributed gateway. 
 
+[http-sidecar][] is a service mesh sidecar to address cross-cutting concerns for both incoming and outgoing traffic for a backend API in the same pod.
 
+[kafka-sidecar][] is a service mesh sidecar to address cross-cutting concerns for backend API to interact with Kafka. 
 
 [Messaging service][] is provided by [Apache Kafka][] for high throughput and high availability. 
-
-
 
 [Logging][] is provided by [ELK][] stack for centralized logging
 
@@ -112,3 +112,5 @@ The following are some of the important services recommended by Light. Some of t
 [How to secure Hazelcast]: /service/oauth/deployment/hazelcast/
 [light-controller]: /service/controller/
 [light-scheduler]: /service/scheduler/
+[http-sidecar]: /service/http-sidecar/
+[kafka-sidecar]: /service/kafka-sidecar/

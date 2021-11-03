@@ -1108,11 +1108,11 @@ Since the batch cannot be committed and the partition has migrated to another in
 
 
 
-[Kafka Active Consumer]: /service/mesh/kafka/active-consumer/
-[Kafka Reactive Consumer]: /service/mesh/kafka/reactive-consumer/
-[Kafka Producer]: /service/mesh/kafka/producer/
-[Kafka KsqlDB Consumer]: /service/mesh/kafka/ksqldb-consumer/
-[Kafka Streams]: /service/mesh/kafka/kafka-streams/
-[Kafka Sidecar Admin]: /service/mesh/kafka/sidecar-amdin/
-[cross-cutting concerns]: /service/mesh/kafka/sidecar-ccc/
-[Kafka Dead Letter Queue]: /service/mesh/kafka/kafka-dlq/
+[Kafka Active Consumer]: /service/kafka-sidecar/active-consumer/
+[Kafka Reactive Consumer]: /service/kafka-sidecar/reactive-consumer/
+[Kafka Producer]: /service/kafka-sidecar/producer/
+[Kafka KsqlDB Consumer]: /service/kafka-sidecar/ksqldb-consumer/
+[Kafka Streams]: /service/kafka-sidecar/kafka-streams/
+[Kafka Sidecar Admin]: /service/kafka-sidecar/sidecar-amdin/
+[cross-cutting concerns]: /service/kafka-sidecar/sidecar-ccc/
+[Kafka Dead Letter Queue]: /service/kafka-sidecar/kafka-dlq/

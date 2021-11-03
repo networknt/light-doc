@@ -119,6 +119,55 @@ We also take the opportunity to clean up stale services with stale health checks
 Also, the lookup result will be filtered by the stale checks. 
 
 
+### Get Check with Id
 
 
+```
+  '/services/check/{id}':
+    get:
+      summary: Retrieve the current check status for a check id
+      description: Get the live check status for the node
+      operationId: getCheckStatus
+      parameters:
+        - name: id
+          in: path
+          description: id of the check object in format serviceId|tag:address:port
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Check'
+        '400':
+          description: Invalid Service Register Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+      security:
+        - portal_auth:
+            - 'A8E73740C0041C03D67C3A951AA1D7533C8F9F2FB57D7BA107210B9BC9E06DA2'
 
+
+```
+
+The endpoint is called from the UI, and it will get the health check status for a particular check Id. As the health store is partitioned on the Kafka and the local store can be located on any node. The handler will first look up the local store, and if the check id doesn't exist, then it will call the Kafka streams API to locate the right instance that contains this particular id. Once the address and port are located, a remote request will be sent to the target server to get the health status. 
+
+The endpoint has a path parameter that is the check id. This id needs to be URL encoded before passing to the API. If you call the API directly from the Curl or Postman, you need to encode the '|' vertical bar with "%7C". If the call is from a SPA application, the URL will be encoded automatically. 
+
+Here is a curl command. 
+
+```
+curl -k https://localhost:8438/services/check/com.networknt.petstore-3.0.1%7Cdev:https:172.17.0.1:8443
+```
+
+You can also encode the entire path parameter. 
+
+```
+curl -k https://localhost:8438/services/check/com.networknt.petstore-3.0.1%7Cdev%3Ahttps%3A172.17.0.1%3A8443
+
+```

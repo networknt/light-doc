@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-Compared with the embedded cross-cutting concerns in the same process, the sidecar approach has a separate process plus the back-end API process. We can deploy the two processes in the same container or the sidecar process in a different container in a pod. 
+The sidecar approach has a separate backend API process compared with the embedded cross-cutting concerns in the same process. We can deploy the two processes in the same container or the sidecar process in a different container in a pod. 
 
 Putting the sidecar and backend API in the same container can reduce the resource usage overall, as an additional container will have its OS. However, there are several benefits if the sidecar is in its own container.
 
@@ -44,5 +44,5 @@ Change of the sidecar or backend API can be deployed independently without impac
 
 ### Summary
 
-Given the above analysis, we recommend that the sidecar be deployed with a separate container in the same pod as the back-end API. The concern of extra latency is negligible based on this performance test [report](/service/proxy/benchmark/). The extra provisioning cost is justified with the flexibility for a separate sidecar container. 
+Given the above analysis, we recommend that the sidecar be deployed with a separate container in the same pod as the backend API. The concern of extra latency is negligible based on this performance test [report](/service/proxy/benchmark/). The extra provisioning cost is justified with the flexibility for a separate sidecar container. 
 

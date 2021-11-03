@@ -65,6 +65,47 @@ curl -k --location --request POST 'https://localhost:8401/schedulers' \
 ```
 
 
+Delete using different frequency will return a not found error. 
+
+```
+curl -k --location --request POST 'https://localhost:8401/schedulers' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "host": "lightapi.net",
+  "name": "com.networknt.petstore-3.0.1|dev:https:172.17.0.1:8443",
+  "action": "DELETE",
+  "frequency": {
+    "timeUnit": "MINUTES",
+    "time": 1
+  },
+  "topic": "controller-health-check",
+  "start": 1633813345308,
+  "data": {
+    "tlsSkipVerify": "true",
+    "address": "172.17.0.1",
+    "lastExecuteTimestamp": "0",
+    "executeInterval": "0",
+    "lastFailedTimestamp": "0",
+    "protocol": "https",
+    "port": "8443",
+    "interval": "10000",
+    "id": "com.networknt.petstore-3.0.1|dev:https:172.17.0.1:8443",
+    "deregisterCriticalServiceAfter": "120000",
+    "healthPath": "/health/",
+    "tag": "dev",
+    "serviceId": "com.networknt.petstore-3.0.1"
+  }
+}'
+```
+
+The result would be 
+
+```
+{"statusCode":404,"code":"ERR11637","message":"OBJECT_NOT_FOUND","description":"Object task definition not found for key lightapi.net com.networknt.petstore-3.0.1|dev:https:172.17.0.1:8443 MINUTES.","severity":"ERROR"}
+```
+
+
+
 Delete
 
 ```
@@ -98,6 +139,7 @@ curl -k --location --request POST 'https://localhost:8401/schedulers' \
   }
 }'
 ```
+
 
 ### Video Tutorial
 

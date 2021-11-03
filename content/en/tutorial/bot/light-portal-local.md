@@ -147,5 +147,5 @@ Now you have light-portal built in your `~/networknt` workspace. To start the li
 
 [build light-bot]: /tutorial/bot/build-light-bot/
 [start light-portal service]: /tutorial/portal/start-portal-service/
-[light-config-test]: https://github.com/networknt/light-config-test/tree/master/light-bot/develop-build/build-portal
+[light-config-test]: https://github.com/networknt/light-config-test/tree/master/light-bot/release-docker/2_0_x/light-portal
 

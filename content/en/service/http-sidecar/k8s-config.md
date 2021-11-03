@@ -24,5 +24,3 @@ This is the file used to set up the logging level on the http-sidecar and it sho
 The http-sidecar will connect to the OAuth 2.0 provider to get the JWK to verify the JWT token. Also, it will connect to the config server to get the configuration files and connect to the control plane to register itself and discover other downstream services. All above accesses need a TLS connection, and a certificate needs to be added to the client.truststore that is referred in client.yml by the light-4j Http2Client module. To ensure environment segregation, we should create a client.truststore per overlay so that dev http-sidecar can only connect to dev OAuth 2.0 provider, dev config server and dev control plane even if the dev and sit are deployed in the same Kubernetes cluster.
 
 
-
-

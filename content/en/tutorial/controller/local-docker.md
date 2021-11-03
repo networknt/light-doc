@@ -64,6 +64,33 @@ curl -k https://localhost:8440/services
 
 ```
 
+To access the lookup endpoint for a particular service on each node.
+
+```
+curl -k 'https://localhost:8438/services/lookup?serviceId=com.networknt.petstore-3.0.1&tag=dev'
+curl -k 'https://localhost:8439/services/lookup?serviceId=com.networknt.petstore-3.0.1&tag=dev'
+curl -k 'https://localhost:8440/services/lookup?serviceId=com.networknt.petstore-3.0.1&tag=dev'
+
+```
+
+To access all the health checks. 
+
+```
+curl -k https://localhost:8438/services/check
+curl -k https://localhost:8439/services/check
+curl -k https://localhost:8440/services/check
+
+```
+
+To get heath check for a particular check id.
+
+```
+curl -k 'https://localhost:8438/services/check/com.networknt.petstore-3.0.1%7Cdev:https:172.17.0.1:8443'
+curl -k 'https://localhost:8439/services/check/com.networknt.petstore-3.0.1%7Cdev:https:172.17.0.1:8443'
+curl -k 'https://localhost:8440/services/check/com.networknt.petstore-3.0.1%7Cdev:https:172.17.0.1:8443'
+
+```
+
 ### Video
 
 
