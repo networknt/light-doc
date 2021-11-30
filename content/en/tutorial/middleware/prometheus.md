@@ -31,9 +31,14 @@ Prometheus config yml file (for exampe: /v1/prometheus) ; The pulling interval i
 # If prometheus metrics handler is enabled or not
 enabled: false
 
+# If the Prometheus hotspot is enabled or not.
+# hotspot include thread, memory, classloader,...
+enableHotspot: false
+
 ```
 
-Change the enabled value to true to enable the Prometheus metrics handler;
+Change the enabled value to true to enable the Prometheus metrics handler; And if we need thread, memory, classloader hotspots metrics information, enable hotspots as well.
+
 
 
 ## Configuration for services
@@ -101,45 +106,184 @@ If user want to change existing service which created before based on light-4j p
 ```
 
 
-2.  Change the service.yml file to use Prometheus  MiddlewareHandler handler:
+2.  Change the handler.yml file to use Prometheus  MiddlewareHandler handler:
 
 ```
-- com.networknt.handler.MiddlewareHandler:
-  # Exception Global exception handler that needs to be called first to wrap all middleware handlers and business handlers
-  - com.networknt.exception.ExceptionHandler
-  # Metrics handler to calculate response time accurately, this needs to be the second handler in the chain.
-  - com.networknt.metrics.prometheus.PrometheusHandler
-  ...
+handlers:
+  - com.networknt.metrics.prometheus.PrometheusHandler@prometheus
+  - com.networknt.metrics.prometheus.PrometheusGetHandler@getprometheus
+  
+chains:
+  default:
+    - exception
+    #- metrics
+    - prometheus  
+  
+  - path: '/prometheus'
+    method: 'get'
+    exec:
+      - getprometheus  
+```
 
+3 . add an endpoint for prometheus metrics:
+
+```text
+  - path: '/prometheus'
+    method: 'get'
+    exec:
+      - getprometheus
 ```
 
 
-3.  Change the api spec (openapi.json or swagger.json) by adding Prometheus metrics_path:
+4.  Change the api spec (openapi.json or swagger.json) by adding Prometheus metrics_path:
 
 ```
 "/prometheus":{"get":{"responses":{"200":{"description":"successful operation"}},"parameters":[]}}
 ```
 
 
-4. Change the
 
-
-```java
-import com.networknt.metrics.prometheus.PrometheusGetHandler;
-
-public class PathHandlerProvider implements HandlerProvider {
-    @Override
-    public HttpHandler getHandler() {
-        return Handlers.routing()
-                .add(Methods.GET, "/v1/prometheus", new PrometheusGetHandler());
-    }
-}
-
-```
 
 The metrics_path is configurable. In light-codegen, we set it as /prometheus, but it can be change to any url user want. Then user just to to set the same "metrics_path" in the Prometheus config file.
 
+After the API server start, the prometheus metrics can get by path /prometheus
 
+http://localhost:8080/prometheus
+
+Below is the sample prometheus report:
+```text
+# HELP jvm_classes_loaded The number of classes that are currently loaded in the JVM
+# TYPE jvm_classes_loaded gauge
+jvm_classes_loaded 5201.0
+# HELP jvm_classes_loaded_total The total number of classes that have been loaded since the JVM has started execution
+# TYPE jvm_classes_loaded_total counter
+jvm_classes_loaded_total 5201.0
+# HELP jvm_classes_unloaded_total The total number of classes that have been unloaded since the JVM has started execution
+# TYPE jvm_classes_unloaded_total counter
+jvm_classes_unloaded_total 0.0
+# HELP requests_total requests_total
+# TYPE requests_total counter
+requests_total{endpoint="/campsite@get",clientId="unknown",} 1.0
+requests_total{endpoint="/campsite@post",clientId="unknown",} 1.0
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 9.640625
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.636848477162E9
+# HELP jvm_gc_collection_seconds Time spent in a given JVM garbage collector in seconds.
+# TYPE jvm_gc_collection_seconds summary
+jvm_gc_collection_seconds_count{gc="G1 Young Generation",} 3.0
+jvm_gc_collection_seconds_sum{gc="G1 Young Generation",} 0.034
+jvm_gc_collection_seconds_count{gc="G1 Old Generation",} 0.0
+jvm_gc_collection_seconds_sum{gc="G1 Old Generation",} 0.0
+# HELP jvm_info JVM version info
+# TYPE jvm_info gauge
+jvm_info{version="11.0.11+9-LTS-194",vendor="Oracle Corporation",runtime="Java(TM) SE Runtime Environment",} 1.0
+# HELP jvm_buffer_pool_used_bytes Used bytes of a given JVM buffer pool.
+# TYPE jvm_buffer_pool_used_bytes gauge
+jvm_buffer_pool_used_bytes{pool="mapped",} 1.38154803E8
+jvm_buffer_pool_used_bytes{pool="direct",} 131072.0
+# HELP jvm_buffer_pool_capacity_bytes Bytes capacity of a given JVM buffer pool.
+# TYPE jvm_buffer_pool_capacity_bytes gauge
+jvm_buffer_pool_capacity_bytes{pool="mapped",} 1.38154803E8
+jvm_buffer_pool_capacity_bytes{pool="direct",} 131072.0
+# HELP jvm_buffer_pool_used_buffers Used buffers of a given JVM buffer pool.
+# TYPE jvm_buffer_pool_used_buffers gauge
+jvm_buffer_pool_used_buffers{pool="mapped",} 1.0
+jvm_buffer_pool_used_buffers{pool="direct",} 8.0
+# HELP response_time_seconds response_time_seconds
+# TYPE response_time_seconds summary
+response_time_seconds_count{endpoint="/campsite@get",clientId="unknown",} 1.0
+response_time_seconds_sum{endpoint="/campsite@get",clientId="unknown",} 0.1250344
+response_time_seconds_count{endpoint="/campsite@post",clientId="unknown",} 1.0
+response_time_seconds_sum{endpoint="/campsite@post",clientId="unknown",} 0.0829096
+# HELP jvm_memory_bytes_used Used bytes of a given JVM memory area.
+# TYPE jvm_memory_bytes_used gauge
+jvm_memory_bytes_used{area="heap",} 7.477728E7
+jvm_memory_bytes_used{area="nonheap",} 4.8414648E7
+# HELP jvm_memory_bytes_committed Committed (bytes) of a given JVM memory area.
+# TYPE jvm_memory_bytes_committed gauge
+jvm_memory_bytes_committed{area="heap",} 4.00556032E8
+jvm_memory_bytes_committed{area="nonheap",} 5.1970048E7
+# HELP jvm_memory_bytes_max Max (bytes) of a given JVM memory area.
+# TYPE jvm_memory_bytes_max gauge
+jvm_memory_bytes_max{area="heap",} 6.400507904E9
+jvm_memory_bytes_max{area="nonheap",} -1.0
+# HELP jvm_memory_bytes_init Initial bytes of a given JVM memory area.
+# TYPE jvm_memory_bytes_init gauge
+jvm_memory_bytes_init{area="heap",} 4.00556032E8
+jvm_memory_bytes_init{area="nonheap",} 7667712.0
+# HELP jvm_memory_pool_bytes_used Used bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_bytes_used gauge
+jvm_memory_pool_bytes_used{pool="CodeHeap 'non-nmethods'",} 1243776.0
+jvm_memory_pool_bytes_used{pool="Metaspace",} 3.5675432E7
+jvm_memory_pool_bytes_used{pool="CodeHeap 'profiled nmethods'",} 6199552.0
+jvm_memory_pool_bytes_used{pool="Compressed Class Space",} 3837840.0
+jvm_memory_pool_bytes_used{pool="G1 Eden Space",} 6.815744E7
+jvm_memory_pool_bytes_used{pool="G1 Old Gen",} 4522688.0
+jvm_memory_pool_bytes_used{pool="G1 Survivor Space",} 2097152.0
+jvm_memory_pool_bytes_used{pool="CodeHeap 'non-profiled nmethods'",} 1458048.0
+# HELP jvm_memory_pool_bytes_committed Committed bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_bytes_committed gauge
+jvm_memory_pool_bytes_committed{pool="CodeHeap 'non-nmethods'",} 2555904.0
+jvm_memory_pool_bytes_committed{pool="Metaspace",} 3.6438016E7
+jvm_memory_pool_bytes_committed{pool="CodeHeap 'profiled nmethods'",} 6225920.0
+jvm_memory_pool_bytes_committed{pool="Compressed Class Space",} 4194304.0
+jvm_memory_pool_bytes_committed{pool="G1 Eden Space",} 7.4448896E7
+jvm_memory_pool_bytes_committed{pool="G1 Old Gen",} 3.24009984E8
+jvm_memory_pool_bytes_committed{pool="G1 Survivor Space",} 2097152.0
+jvm_memory_pool_bytes_committed{pool="CodeHeap 'non-profiled nmethods'",} 2555904.0
+# HELP jvm_memory_pool_bytes_max Max bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_bytes_max gauge
+jvm_memory_pool_bytes_max{pool="CodeHeap 'non-nmethods'",} 5898240.0
+jvm_memory_pool_bytes_max{pool="Metaspace",} -1.0
+jvm_memory_pool_bytes_max{pool="CodeHeap 'profiled nmethods'",} 1.2288E8
+jvm_memory_pool_bytes_max{pool="Compressed Class Space",} 1.073741824E9
+jvm_memory_pool_bytes_max{pool="G1 Eden Space",} -1.0
+jvm_memory_pool_bytes_max{pool="G1 Old Gen",} 6.400507904E9
+jvm_memory_pool_bytes_max{pool="G1 Survivor Space",} -1.0
+jvm_memory_pool_bytes_max{pool="CodeHeap 'non-profiled nmethods'",} 1.2288E8
+# HELP jvm_memory_pool_bytes_init Initial bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_bytes_init gauge
+jvm_memory_pool_bytes_init{pool="CodeHeap 'non-nmethods'",} 2555904.0
+jvm_memory_pool_bytes_init{pool="Metaspace",} 0.0
+jvm_memory_pool_bytes_init{pool="CodeHeap 'profiled nmethods'",} 2555904.0
+jvm_memory_pool_bytes_init{pool="Compressed Class Space",} 0.0
+jvm_memory_pool_bytes_init{pool="G1 Eden Space",} 2.7262976E7
+jvm_memory_pool_bytes_init{pool="G1 Old Gen",} 3.73293056E8
+jvm_memory_pool_bytes_init{pool="G1 Survivor Space",} 0.0
+jvm_memory_pool_bytes_init{pool="CodeHeap 'non-profiled nmethods'",} 2555904.0
+# HELP success_total success_total
+# TYPE success_total counter
+success_total{endpoint="/campsite@get",clientId="unknown",} 1.0
+success_total{endpoint="/campsite@post",clientId="unknown",} 1.0
+# HELP jvm_threads_current Current thread count of a JVM
+# TYPE jvm_threads_current gauge
+jvm_threads_current 27.0
+# HELP jvm_threads_daemon Daemon thread count of a JVM
+# TYPE jvm_threads_daemon gauge
+jvm_threads_daemon 7.0
+# HELP jvm_threads_peak Peak thread count of a JVM
+# TYPE jvm_threads_peak gauge
+jvm_threads_peak 27.0
+
+```
+
+## Local Configuration for Prometheus:
+
+```text
+#Global configurations
+global:
+  scrape_interval:     5s # Set the scrape interval to every 5 seconds.
+  evaluation_interval: 5s # Evaluate rules every 5 seconds.
+
+scrape_configs:
+  - job_name: 'campsite-app'
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets: ['campsite-service:8080']
+```
 
 
 ## Configuration for Prometheus (config with Consul )
