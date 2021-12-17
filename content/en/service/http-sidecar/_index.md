@@ -32,6 +32,8 @@ When the http-sidecar is used, all the traffic to and from the pod should go thr
 
 There are some special considerations for the [configurations](/service/http-sidecar/k8s-config/) for the http-sidecar when deploying it with a backend API in the same pod in a Kubernetes cluster. 
 
+For most enterprise applications, sensitive data in the logs should be masked. It is easier to do that in the http-sidecar as a mask module is included. However, the masking must be handled differently for the backend API implemented in other Java frameworks or other languages. To support masking for the backend logs, we can send the backend logs to the http-sidecar, and http-sidecar can do the [log masking][] before injecting the log files to the target indexing app or pushing the logs to a Kafka cluster for streams processing. 
 
 [cross-cutting concerns]: /concern/
 [network policy]: /service/http-sidecar/network-policy/
+[log masking]: /service/http-sidecar/log-masking/
