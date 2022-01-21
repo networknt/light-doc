@@ -34,7 +34,8 @@ The goal is to allow the developers to focus on their APIs' business logic inste
 
 ### Kafka Producer
 
-[Kafka Producer][] has an endpoint that allows backend API/APP to invoke to produce messages to one or more Kafka topics. 
+[Kafka Producer][] has an endpoint that allows backend API/APP to invoke to produce messages to one or more Kafka topics. To avoid each request to access the schema registry for the serialize the key and value, we can pass the schemaId or versionId to [cache the schema][] for the producer. When producing a record from the Kafka sidecar, one can also pass in a [traceabilityId][] in the ProduceRecord. This id will be propagated to all the applications this message is involved in for end-to-end tracing.  
+
 
 ### Active Consumer
 
@@ -1116,3 +1117,5 @@ Since the batch cannot be committed and the partition has migrated to another in
 [Kafka Sidecar Admin]: /service/kafka-sidecar/sidecar-amdin/
 [cross-cutting concerns]: /service/kafka-sidecar/sidecar-ccc/
 [Kafka Dead Letter Queue]: /service/kafka-sidecar/kafka-dlq/
+[cache the schema]: /service/kafka-sidecar/schema-cache/
+[traceabilityId]: /service/kafka-sidecar/traceability-id/
