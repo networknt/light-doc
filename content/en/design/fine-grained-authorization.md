@@ -17,7 +17,7 @@ When we are working on API security design, multiple layers need to be carefully
 
 ### Technical Concerns
 
-First, the JWT verifier handler will ensure that the authorization header has a valid token with the correct signature. It will allow the consumer to invoke the API at the API level. 
+First, the JWT verifier handler will ensure that the authorization header has a valid, unexpired token with the correct signature. It will allow the consumer to invoke the API at the API level. 
 
 Second, the JWT verifier also validates the scope in the JWT token against the scopes defined in the OpenAPI specification to ensure the JWT token has access to the current endpoint. This is the endpoint level security. 
 
@@ -31,18 +31,20 @@ After the JWT verifier handler verifies the request, the security check goes int
 The following design is based on the generic requirements for financial organizations like banks. You can follow the same pattern or customize it for other organizations if the security requirement is different. 
 
 
-### Role-based Authorization
+### Rule-based Authorization
 
-Let's first take a look at the role-based authorization requirement, design and implementation. 
+The fine-grained authorization for APIs is very complicated, and traditional role-based and attribute-based authorization cannot fulfill the requirement. You need to run a list of business rules to calculate if a user has permission for an API request. Let's take a look at the rule-based authorization requirement, design and implementation. 
 
 ##### Requirement
 
-Let's list several common requirements about role-based authorization at the API endpoint level. 
+Let's list several common requirements about rule-based authorization at the API endpoint level. 
 
 Request Side
 
-* Allow Client Credentails Token access even without role claim. This is for API to API invocation. 
+* Allow Client Credentails Token access even without user_id claim. However, a sid (serviceId) claim is not null and it equals to one of the values in the request (a path parameter or a property in the body). This is for API to API invocation. For example, during the API startup, it register to the controller and access config server to get its configuration. 
+
 * Allow certain roles to access. For example, only manager role can create a new account. 
+
 * Allow certain roles to access their own data. For example, a user role can update only his/her user profile. 
 
 Response Side
@@ -52,7 +54,7 @@ Response Side
 
 ##### Design
 
-The most important thing we have to resolve is how the service get the role-based authroization definition at runtime. Like the scopes definition for endpoints, the best location would be the OpenAPI specification as light-4j is using it at the runtime. However, the current specification and tool chains don't support it at the moment and we have to use the extension of OpenAPI. We are lucky to have our own implementation of OpenAPI parser to parse the extension at runtime and use the cached information to perform role-based authorization.
+The most important thing we have to resolve is how the service get the rule-based authroization definition at runtime. Like the scopes definition for endpoints, the best location would be the OpenAPI specification as light-4j is using it at the runtime. However, the current specification and tool chains don't support it at the moment and we have to use the extension of OpenAPI. We are lucky to have our own implementation of OpenAPI parser to parse the extension at runtime and use the cached information to perform role-based authorization.
 
 ```
 paths:

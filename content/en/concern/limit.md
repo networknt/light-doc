@@ -10,13 +10,16 @@ draft: false
 reviewed: true
 ---
 
-Although our framework can potentially handle millions of requests per second, some public-facing APIs might be a good idea to enable this handler to limit the concurrent requests to a certain level to avoid DDOS attacks.
+Although our framework can potentially handle millions of requests per second, some public-facing APIs might be a good idea to enable this handler to limit the concurrent requests to a certain level to avoid DDOS attacks. 
 
-As this handler will impact the overall performance a little bit, it is not configured as default in the [light-codegen](https://github.com/networknt/light-codegen). You must config the feature as true in your light-codegen config.json or update the config later in the deployment phase.
+When the http-sidecar, light-router or light-proxy is used inside a corporate network for a slow backend API, this handler can be used to throttle the request to protect the backend API from being overwhelmed. 
 
-## Dependency
 
-The following dependency needs to be added to pom.xml in your project to use the handler.
+As this handler will impact the overall performance a little bit, it is not configured as default in the [light-codegen](https://github.com/networknt/light-codegen). You must config the feature as true in your light-codegen config.yaml/config.json or update the config later in the deployment phase.
+
+### Dependency
+
+To use the handler, the following dependency needs to be added to pom.xml in your project.
 
 1.6.x release with JDK8
 ```
@@ -38,41 +41,56 @@ The following dependency needs to be added to pom.xml in your project to use the
 ```
 
 
-## Service
+### handler.yml
 
 As this middleware is not plugged in by default, we need to add it to the handler.yml in the config folder. As this rate-limiting handler needs to be failed fast, it needs to be put right after ExceptionHandler and MetricsHandler. The reason it is after MetricsHandler is to capture 513 error codes in InfluxDB and Grafana for monitoring on production.
 
 
 ```
-#Traceability Put traceabilityId into response header from request header if it exists
-com.networknt.traceability.TraceabilityHandler
-#Rate Limiting
-com.networknt.limit.LimitHandler
-#Metrics In order to calculate response time accurately, this needs to be the second.
-com.networknt.metrics.MetricsHandler
-#Exception Global exception handler that needs to be called first.
-com.networknt.exception.ExceptionHandler
+handlers:
+  # Rate limit middleware to prevent DDoS attacks externally or throttle requests internally
+  - com.networknt.limit.LimitHandler@limit
+.
+.
+.
+.
+.
+.
+
+chains:
+  default:
+    - exception
+    - metrics
+    - limit
+    - traceability
+    - correlation
 
 ```
 
-## Config
+### Config
 
 Here is the configuration file for rate limiting.
 
-```
+```yaml
+---
 # Rate Limit Handler Configuration
 
-# If this handler is enabled or not
-enabled: false
-
-# Maximum concurrent requests allowed, if this number is exceeded, request will be queued.
-concurrentRequest: 1000
-
-# Overflow request queue size. -1 means there is no limit on the queue size
-queueSize: -1
+# If this handler is enabled or not. It is disabled by default as this handle might be in
+# most http-sidecar, light-proxy and light-router instances. However, it should only be used
+# internally to throttle request for a slow backend service or externally for DDoS attacks.
+enabled: ${limit.enabled:false}
+# Maximum concurrent requests allowed at a given time. If this number is exceeded, new requests
+# will be queued. It must be greater than 1 and should be set based on your use case.
+concurrentRequest: ${limit.concurrentRequest:1000}
+# Overflow request queue size. -1 means there is no limit on the queue size and this should
+# only be used in the corporate network for throttling. For Internet facing service, set it
+# to a small value to prevent DDoS attacks. New requests will be dropped with 503 response
+# code returned if the queue is full.
+queueSize: ${limit.queueSize:-1}
 
 ```
 
 - Update enabled to true to enable it and false to disable it.
 - concurrentRequest number of concurrent requests to be limited.
 - queueSize -1 unlimited queue size, which might use a lot of memory. > 1 integer will limit the requests to be queued, and once the queue is full, 513 will be returned for new requests. 
+

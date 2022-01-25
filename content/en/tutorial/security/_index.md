@@ -26,6 +26,8 @@ In this section, we have several tutorials related to security configurations an
 
 * How to create keystore for the [light-config-server TLS][] and bootstrap.truststore for light-4j service.
 
+* How to export the cert and private key from the light-config-server and import them into the [light-router][] server.keystore and client.truststore
+
 * A real example on [adding server public key certificate to client.truststore][] to access public service on the Internet with HTTPS.
 
 * How to [install a self-signed or commercial CA-signed server certificate][] to light-4j service
@@ -44,6 +46,8 @@ In this section, we have several tutorials related to security configurations an
 
 * How to [generate keystore and truststore from PFX] for light-4j service
 
+
+
 [bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
 [encrypt and decrypt sensitive info]: /tutorial/security/encrypt-decrypt/
 [keystore and truststore]: /tutorial/security/keystore-truststore/
@@ -58,3 +62,4 @@ In this section, we have several tutorials related to security configurations an
 [self-signed client and server keystore]: /tutorial/security/self-signed-certificate/
 [self-signed JWT key and cert]: /tutorial/security/self-signed-jwt-key/
 [generate keystore and truststore from PFX]: /tutorial/security/pfx-certificate/
+[light-router]: /tutorial/security/light-router/
