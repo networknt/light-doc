@@ -26,12 +26,12 @@ startup.yml
 # For real config loader config, please follow the format below with your implementation.
 configLoaderClass: com.networknt.server.DefaultConfigLoader
 # Project name and version where this API belongs to
-projectName: example
-projectVersion: 0.0.1
+projectName: light-example
+projectVersion: 1.0.0
 
 # Service name and version
-serviceName: example-service
-serviceVersion: 0.0.1
+serviceName: com.networknt.petstore-1.0.0
+serviceVersion: 1.0.1
 ```
 
 ### Environment Variables
