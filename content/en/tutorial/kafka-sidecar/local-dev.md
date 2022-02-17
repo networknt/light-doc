@@ -63,6 +63,48 @@ value schema
 }
 ```
 
+To send a request with a wrong record in the list. 
+
+```
+{
+    "records": [
+        {
+            "key": "alice",
+            "value": {
+                "count": 2
+            },
+            "traceabilityId": "alice-id"
+        },
+        {
+            "key": "john",
+            "value": {
+                "count": "1"
+            },
+            "traceabilityId": "john-id"
+        },
+        {
+            "value": {
+                "count": 2
+            }
+        }
+    ],
+    "valueSchemaVersion": 1
+   
+}
+```
+
+Clearly, the count for John is not an integer but a string. The response from the server is 
+
+```
+{
+    "statusCode": 400,
+    "code": "ERR12206",
+    "message": "SERIALIZE_SCHEMA_EXCEPTION",
+    "description": "Unexpected exception in serializing jsonschema format with message #/count: expected type: Integer, found: String",
+    "severity": "ERROR"
+}
+```
+
 
 ##### test2
 
