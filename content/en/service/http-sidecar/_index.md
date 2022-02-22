@@ -34,6 +34,10 @@ There are some special considerations for the [configurations](/service/http-sid
 
 For most enterprise applications, sensitive data in the logs should be masked. It is easier to do that in the http-sidecar as a mask module is included. However, the masking must be handled differently for the backend API implemented in other Java frameworks or other languages. To support masking for the backend logs, we can send the backend logs to the http-sidecar, and http-sidecar can do the [log masking][] before injecting the log files to the target indexing app or pushing the logs to a Kafka cluster for streams processing. 
 
+We need to deploy a multiple-container pod using the sidecar in a Kubernetes cluster. It will become more complicated when replicas, sealed secrets, network policies, auto scalers are involved. Instead of using the Helm for templating or Kustomize for patching, we leverage the light-config-server to manage the templates and light-bot to do the [Kubernetes deployment][]. 
+
+
 [cross-cutting concerns]: /concern/
 [network policy]: /service/http-sidecar/network-policy/
 [log masking]: /service/http-sidecar/log-masking/
+[Kubernetes deployment]: /service/k8s-deployment/
