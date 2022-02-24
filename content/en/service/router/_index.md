@@ -47,6 +47,8 @@ To learn how to use this router, please refer to
 * [Configuration][] for different configurations based on your situations
 * [Location and Ownership] for deployment and ownership decision
 * [Static Content][] render a single page application
+* [Servic Id or URL] directives in header for downstream API invocation
+* [URL Rewrite Rules] for light-router used as an API Gateway
 
 
 [Getting Started]: /getting-started/light-router/
