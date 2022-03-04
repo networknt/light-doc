@@ -23,6 +23,13 @@ We need to convert the PFX certificate to Java keystore for API TLS authenticati
 
 - Java 7+
 
+
+For users who are using Windows with gitbash, you might experience the openssl command hung forever. If that happens, please try to use winpty to start another bash terminal to execute the openssl command. 
+
+```
+winpty bash
+```
+
 ### Detail steps:
 
 
@@ -66,6 +73,9 @@ openssl pkcs12 -export -in config.crt -inkey keyfromppfx.key -certfile config.cr
 
 ```
 
+If you are using Java 11 or above, you don't need to do anything further. The newer version of Java can use PKCS12 format keystore instead of Java specific JKS format. 
+
+To output the server.keystore directly, you can use server.keystore to replace the keystore.p12 in the above command line. 
 
 5. Import the p12 to server keystore.
 
