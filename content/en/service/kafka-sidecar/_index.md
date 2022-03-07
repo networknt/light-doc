@@ -30,6 +30,13 @@ Kafka client is complicated, and only the Java version is in sync with the serve
  
 The goal is to allow the developers to focus on their APIs' business logic instead of the specific Kafka client API and cross-cutting concerns.
 
+## Why Kafka-sidecar
+
+When implementing an application that interacts with Kafka, there are pros and cons to using a sidecar vs a standalone app. 
+
+ 
+
+
 ## Functional Component
 
 ### Kafka Producer
