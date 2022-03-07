@@ -34,7 +34,62 @@ The goal is to allow the developers to focus on their APIs' business logic inste
 
 When implementing an application that interacts with Kafka, there are pros and cons to using a sidecar vs a standalone app. 
 
+### Kafka Sidecar
+
+Pros:
+
+* The Kafka Sidecar only needs to deal with one backend with fixed IP and port. Easy to implement.
+
+* Low latency as it is in the same pod as backend API
+
+* Easy to evolve/upgrade per backend API
+
+* Offers the most flexibility
+
+* It becomes part of the backend API, ie, the backend API and the Kafka Sidecar form together the Event Producer and consumer, one logical unit:
+
+* It has its own identity and will be easy to manage as such when interacting with Kafka.
+
+* It will authenticate its consumers via Oauth and expose a contract via an OpenAPI Specifications, and will authenticate itself with Kafka with LDAP integration, authorize via RBAC and will only be allow to interact with the topic that it has access to.
+
+* All of the traceability and auditing on the Kafka out of the box components will be tied to that identity
+
+* We will be able to use the Kafka Sidecar to observe that logical entity, having heath checks on the sidecar that will make it all the way to the backend API
+
  
+Cons:
+
+
+* Extra cost as sidecar will use resource.
+
+* Make the delivery pipeline complicated to deal with an extra container in the pod.
+
+
+### Standalone
+
+Pros:
+
+* Lower the cost as one instance can be shared with multiple backend services. 
+
+* No need to change the pipeline as it is deployed just like another service.
+
+Cons:
+
+* The Kafka Service needs to deal with multiple backend and manage them with subscribe / unsubscribe API. Also, it needs to manage the state/cache for each instance. Hard to implement.
+
+* Any update to the service need to consider the impacts for all backend services. 
+
+* Becomes a single point of failure for the backend APIs that it serves
+
+* The Kafka service now has a separate identity then  the Backend APIs that it serves and all action on the Kafka will be tracked as being done by the Kafka Service on the out of the box confluent audit trails.
+
+* The Kafka service functional id will now have a broad set of permissions and as such expands the surface of exposure in case of a breach
+
+* Authentication and Authorization of interactions between between Kafka Service and backend APIs will be complex and hard to manage:
+
+* backend APIs will need to authenticate with the Kafka service via Oauth to produce to Kafka and to register as a Consumer of events
+
+* Kafka Service will have to authenticate with backend API via Oauth to push events to it
 
 
 ## Functional Component
