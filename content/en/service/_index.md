@@ -62,6 +62,8 @@ The following are some of the important services recommended by Light. Some of t
 
 [light-proxy][] is a proxy service that can bring legacy REST API to the Light ecosystem by encapsulating all provider side cross-cutting concerns into a microservice as a distributed gateway. 
 
+[light-gateway][] is a combination of light-router and light-proxy that can be deployed as a standalone service on the client/application host, or service/API host, or as an API gateway. 
+
 [http-sidecar][] is a service mesh sidecar to address cross-cutting concerns for both incoming and outgoing traffic for a backend API in the same pod.
 
 [kafka-sidecar][] is a service mesh sidecar to address cross-cutting concerns for backend API to interact with Kafka. 
@@ -82,6 +84,7 @@ The following are some of the important services recommended by Light. Some of t
 [light-oauth2]: /service/oauth/
 [oauth-kafka]: /service/oauth-kafka/
 [light-proxy]: /service/proxy/
+[light-gateway]: /service/gateway/
 [light-portal]: /service/portal/
 [Messaging service]: /service/messaging/
 [Apache Kafka]: https://kafka.apache.org/

@@ -73,7 +73,7 @@ client.pathPrefixServices:
   /api/market: com.networknt.market-1.0.0
 ```
 
-Now, we have identify the serviceId with the request path, we can set up the token config with the following. 
+Now that we have identified the serviceId with the request path, we can set up the token config with the following. 
 
 ```
 # The serviceId to the service specific OAuth 2.0 configuration. Used only when multipleOAuthServer is
