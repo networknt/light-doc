@@ -1,5 +1,5 @@
 ---
-title: "Rate Limiting"
+title: "Rate Limit"
 date: 2017-11-05T10:24:06-05:00
 description: ""
 categories: [concerns]
