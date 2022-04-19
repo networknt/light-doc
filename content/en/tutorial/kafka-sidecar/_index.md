@@ -15,9 +15,12 @@ As part of [light-mesh](/service/mesh/) offering, the [Kafka Sidecar](/service/m
 * [Local development][] with [Confluent local][]
 * [Local binary][] demo with externalized configuration
 * [Reactive Consumer Producer] backend reference implementation to receive a batch of records, transform the key with a field in the value and produce the new key/value to another topic. 
+* [Kafka Streams] with DSL or Processor API and deploy it with the Kafka-sidecar.
+
 
 [Local development]: /tutorial/kafka-sidecar/local-dev/
 [Local binary]: /tutorial/kafka-sidecar/local-binary/
 [Confluent local]: /tutorial/kafka-sidecar/confluent-local/
 [Confluent Docker]: /tutorial/kafka-sidecar/confluent-docker/
 [Reactive Consumer Producer]: /tutorial/kafka-sidecar/reactive-consumer-producer/
+[Kafka Streams]: /tutorial/kafka-sidecar/kafka-streams/
