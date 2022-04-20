@@ -109,10 +109,70 @@ world	9
 
 The above example is a direct conversion of word count example from Confluent GitHub [repository](https://github.com/confluentinc/kafka-streams-examples/blob/7.0.0-post/src/main/java/io/confluent/examples/streams/WordCountLambdaExample.java). 
 
-In the next step, we will implement the same example with Processor API.
+In the next step, we will drop the jar file to Kafka-sidecar and let the sidecar to host the Kafka Streams application. 
 
-### Kafka Streams with Processor API
+### Kafka Sidecar
 
+In the kafka-sidecar repository, we have a folder under config named streams. Within this folder, we have config files and values.yml to support the above streams application. 
+
+Here is the values.yml file that we have modified for the configuration of the streams application. We use docker-compose service names for the bootstrap servers and the registry URL. 
+
+```
+# streams configuration
+kafka-streams.application.id: word-count-docker
+kafka-streams.bootstrap.servers: broker:29092
+kafka-streams.schema.registry.url: http://schema-registry:8081
+
+```
+
+For startup hooks and shutdown hooks, we add the classes from the example application. 
+
+```
+# Service Startup and Shutdown Hooks
+service.com.networknt.server.StartupHookProvider:
+  # - com.networknt.mesh.kafka.ProducerStartupHook
+  - com.networknt.kafka.WordCountStartupHook
+  # - com.networknt.mesh.kafka.ActiveConsumerStartupHook
+  # - com.networknt.mesh.kafka.KsqldbReactiveConsumerStartupHook
+  # - com.networknt.mesh.kafka.KsqldbActiveConsumerStartupHook
+  # - com.networknt.mesh.kafka.ReactiveConsumerStartupHook
+  # - com.networknt.mesh.kafka.AdminClientStartupHook
+service.com.networknt.server.ShutdownHookProvider:
+  # - com.networknt.mesh.kafka.ProducerShutdownHook
+  - com.networknt.kafka.WordCountShutdownHook
+  # - com.networknt.mesh.kafka.ActiveConsumerShutdownHook
+  # - com.networknt.mesh.kafka.KsqldbReactiveConsumerShutdownHook
+  # - com.networknt.mesh.kafka.KsqldbActiveConsumerShutdownHook
+  # - com.networknt.mesh.kafka.ReactiveConsumerShutdownHook
+  # - com.networknt.mesh.kafka.AdminClientShutdownHook
+
+```
+
+To make the application run within the Kafka-sidecar, we must copy the streams application jar file to the streamsjar folder in the kafka-sidecar repository. Note: we don't need to copy the fatjar as the Kafka-sidecar contains all the dependencies to run a Kafka Streams application. 
+
+Since we have built the application with fatjar before with `mvn clean install -Prelease`, we just need to copy the original jar file. 
+
+```
+cd ~/networknt/kafka-sidecar
+cp ~/networknt/light-example-4j/kafka-sidecar/kafka-streams-dsl/target/original-word-count-1.0.0.jar ./streamsjar
+```
+
+Now, we can start the kafka-sidecar with the following docker-compose.
+
+```
+cd ~/networknt/kafka-sidecar
+docker-compose -f docker-compose-streams.yml up
+```
+
+Once the server is up, we can test with the existing console producer and consumer. Type some sentences on the producer console; you should see the word count changing on the consumer console. 
+
+### Next
+
+We can enable the producer on the sidecar so that we can produce to the input topic with the producer API instead of the console producer. 
+
+We can add a backend consumer to consumer the messages from the output topic and output from the docker-compose console to replace the console consumer. 
+
+We can create another Kafka-streams application and drop it into the same streamsjar folder to start two streams applications on the same sidecar instance.  
 
 
 [DSL]: https://github.com/networknt/light-example-4j/tree/master/kafka-sidecar/kafka-streams-dsl
