@@ -65,6 +65,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Traceability Id](/concern/traceability/)
 * [Utility](/concern/utility/)
 * [ZooKeeper Client](/concern/zookeeper/)
+* [Salesforce](/concern/salesforce/)
 
 #### light-rest-4j
 

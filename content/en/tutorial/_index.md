@@ -175,6 +175,10 @@ Tutorials give developers step by step guidance on how to use each component or 
      + [Debug with JUnit Test][]
      + [Debug with Hybrid Server][]
         
+- [Light-gateway](/tutorial/gateway/)
+  * [Server proxy](/tutorial/gateway/server-proxy/)
+  * [Client proxy server proxy](/tutorial/gateway/client-proxy-server-proxy/)
+  
 - [Light-proxy](/tutorial/proxy/)
   * Swagger 2.0 Backend
      + [Swagger backend service](/tutorial/proxy/swagger-backend/)
