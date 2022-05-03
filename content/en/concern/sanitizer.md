@@ -12,7 +12,7 @@ reviewed: true
 
 ### Introduction
 
-This is a middleware that addresses cross-site scripting concerns. It encodes the header and body according to the configuration. As body encoding depends on [Body][] middleware, it has to be plugged into the request/response chain after Body.
+This is a middleware that addresses cross-site scripting concerns. It encodes the header and body according to the configuration. As body encoding depends on [Body][] middleware, it has to be plugged into the request/response chain after the body handler.
 
 ### Configuration
 
