@@ -284,6 +284,50 @@ Result:
 {"offsets":[{"partition":0,"offset":6},{"partition":0,"offset":7},{"partition":0,"offset":8}],"value_schema_id":24,"requestStatus":"OK"}
 ```
 
+To produce some messages with one invaid entry against the schema like the following message body with the second entry count is "abc" instead of integer. 
+
+```
+curl -k --location --request POST 'http://localhost:9443/producers/test1' \
+--header 'Content-Type: application/json' \
+--header 'X-Traceability-Id: common-id' \
+--data-raw '{
+    "records": [
+        {
+            "key": "alice",
+            "value": {
+                "count": 2
+            },
+            "traceabilityId": "alice-id"
+        },
+        {
+            "key": "john",
+            "value": {
+                "count": "abc"
+            },
+            "traceabilityId": "john-id"
+        },
+        {
+            "value": {
+                "count": 2
+            }
+        }
+    ]
+}'
+```
+
+We go the following error message from the sidecar. It means we have to resend the entire back again after fixing the error entry in the batch. 
+
+```
+{
+    "statusCode": 400,
+    "code": "ERR12206",
+    "message": "SERIALIZE_SCHEMA_EXCEPTION",
+    "description": "Unexpected exception in serializing jsonschema format with message #/count: expected type: Integer, found: String",
+    "severity": "ERROR"
+}
+```
+
+
 ### Reactive Consumer
 
 
@@ -302,3 +346,4 @@ In the sample backend API, the first event for each message, it will be mark as 
 ```text
  RecordProcessedResult rpr = new RecordProcessedResult(record, false, sw.toString());
 ```
+
