@@ -315,8 +315,30 @@ serviceHost: ${salesforce.serviceHost}
 To overwrite some of the properties, we have the following values.yml in the src/test/resources/config for test cases. Please note that some of the values are changed to remove the identity information. 
 
 ```
+# handler.yml
+handler.handlers:
+  .
+  .
+  .
+  # add the SalesforceHandler to the end of the handler list.
+  - com.networknt.proxy.SalesforceHandler@salesforce
+
+handler.chains.default:
+  .
+  .
+  .
+  - header
+  # add the saleforce handler after the header and before the prefix and router.
+  - saleforce
+  - prefix
+  - router
+  .
+  .
+  .
+
 # client.yml
 client.verifyHostname: false
+
 # salesforce.yml
 salesforce.enabled: true
 salesforce.authIssuer: 3MVG9SUKGR3O.vJebzXvWgAEZ9KX_7vmKt6k3g_AdsTWtzBTkwU9jTTJF9h5mL.2tJaPW
@@ -324,12 +346,16 @@ salesforce.authSubject: apiuser.conquestintegration@networknt.sit
 salesforce.certFilename: apigatewayuat.pfx
 salesforce.certPassword: S1dsfereae!gtdwd3vu4degte
 salesforce.iv: YeoadsfcAvs2a/PeereEaRqg
+salesforce.proxyHost: gateway.example.com
+salesforce.proxyPort: 443
 salesforce.appliedPathPrefixes:
   - /salesforce
   - /services/apexrest
 salesforce.serviceHost: https://nnt-sit.my.salesforce.com
 
 ```
+
+
 
 For developers, you can use the test case to ensure everything works.
 
