@@ -117,3 +117,4 @@ The following are some of the important services recommended by Light. Some of t
 [light-scheduler]: /service/scheduler/
 [http-sidecar]: /service/http-sidecar/
 [kafka-sidecar]: /service/kafka-sidecar/
+[Light Gateway]: /service/gateway/
