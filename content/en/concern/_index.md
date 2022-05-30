@@ -66,7 +66,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Utility](/concern/utility/)
 * [ZooKeeper Client](/concern/zookeeper/)
 * [Salesforce](/concern/salesforce/)
-* [External Handler](/concerns/external-handler/)
+* [External Handler](/concern/external-handler/)
 
 #### light-rest-4j
 
