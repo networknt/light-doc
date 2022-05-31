@@ -35,7 +35,7 @@ mvn clean install exec:exec
 We need to add the kafka-streams dependencies to the pom.xml
 
 ```
-        <version.kafka>2.5.0</version.kafka>
+        <version.kafka>3.2.0</version.kafka>
 
 
         <dependency>
