@@ -67,6 +67,8 @@ Here is a list of cross-cutting concerns provided by Light.
 * [ZooKeeper Client](/concern/zookeeper/)
 * [Salesforce](/concern/salesforce/)
 * [External Handler](/concern/external-handler/)
+* [Request Interceptor](/concern/request-interceptor/)
+* [Response Interceptor](/concern/response-interceptor/)
 
 #### light-rest-4j
 

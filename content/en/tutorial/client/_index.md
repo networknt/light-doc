@@ -21,6 +21,10 @@ When communicating with public websites or API servers, it would be great to get
 - [Client Dependencies](/tutorial/client/dependencies/)
 - [Client Configuration](/tutorial/client/configuration/)
 - [Client Usage](/tutorial/client/code/)
+- [Get JWT Token](/tutorial/client/jwt-token/)
+- [Multiple JWT Tokens](/tutorial/client/multiple-tokens/)
+- [Get JWK](/tutorial/client/get-jwk/)
+- [Multiple JWKs](/tutorial/client/multiple-jwks/)
 
 
 [keystore vs. truststore]: /tutorial/security/keystore-truststore/

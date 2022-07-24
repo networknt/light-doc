@@ -46,7 +46,8 @@ mvn clean install
 ```
 
 * Use light gateway as [server proxy][] on the same host. 
-
+* [Request and response transformation][] based on rule engine. 
 
 [server proxy]: /tutorial/gateway/server-proxy/
+[Request and response transformation]: /tutorial/gateway/request-response-transformation/
 
