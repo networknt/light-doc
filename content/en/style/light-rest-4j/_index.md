@@ -32,6 +32,7 @@ The light-rest-4j is a framework that is designed to speed up RESTful API develo
    + [openapi-validator](/style/light-rest-4j/openapi-validator/)
 * [Schema Validation](/style/light-rest-4j/schema-validation/)
 * [Swagger UI](/style/light-rest-4j/swagger-ui/)
+* [Multiple Specs](/style/light-rest-4j/multiple-specs/)
 
 
 [API categories and frameworks]: /architecture/category/
