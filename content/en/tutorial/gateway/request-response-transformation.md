@@ -65,3 +65,9 @@ A team maintains a SOAP service and wants to rewrite it with REST. They have com
 
 
 {{< youtube V4WYUGqbFaM >}}
+
+### SOAP Security Transform
+
+One of our customers is accessing a Cannex Soap API from the corporate network with light-gateway via the generic [ExternalServiceHandler](/concern/external-handler/). For all the consumers, they don't need to set the security header in the SOAP request; the light-gateway intercepts the request body and adds security header with the correct credentials to access the Cannex. This is very similar to the above REST to SOAP request transformer; however, it is a little bit complicated as we are accessing an external service instead of internal services. For detailed configuration, please review this [PR](https://github.com/networknt/light-gateway/pull/69)
+
+{{< youtube MTA6Pf1TjaU >}}
