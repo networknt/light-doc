@@ -77,3 +77,27 @@ This [article](http://edn.embarcadero.com/article/32068) explains in a very
 detailed way how to set up such an execution of a JAR file as a service under 
 Windows.
 
+
+## Windows Server hosts light-gateway
+
+This is contributed from one of our customers and it works very reliable with auto restart if the server instance is down. 
+
+http://nssm.cc/
+
+NSSM is a service helper program similar to srvany and cygrunsrv.  It can start any application as an NT service and will restart the service if it 
+fails for any reason.
+
+Installation using the command line
+-----------------------------------
+To install a service, run
+
+```   
+nssm install <servicename> <application> [<options>]
+```
+
+NSSM will then attempt to install a service which runs the named application with the given options (if you specified any).
+
+Don't forget to enclose paths in "quotes" if they contain spaces!
+
+If you want to include quotes in the options you will need to """quote""" the quotes.
+
