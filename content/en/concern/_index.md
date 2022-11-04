@@ -26,6 +26,7 @@ Here is a list of cross-cutting concerns provided by Light.
 
 #### light-4j
 
+* [API Key](/concern/api-key/)
 * [Audit log](/concern/audit/)
 * [Load Balance](/concern/balance/)
 * [Basic Authentication](/concern/basic/)
