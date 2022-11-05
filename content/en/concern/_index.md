@@ -70,6 +70,8 @@ Here is a list of cross-cutting concerns provided by Light.
 * [External Handler](/concern/external-handler/)
 * [Request Interceptor](/concern/request-interceptor/)
 * [Response Interceptor](/concern/response-interceptor/)
+* [Dummy OAuth Server](/concern/oauth-server/)
+
 
 #### light-rest-4j
 
