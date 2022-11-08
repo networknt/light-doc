@@ -71,6 +71,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Request Interceptor](/concern/request-interceptor/)
 * [Response Interceptor](/concern/response-interceptor/)
 * [Dummy OAuth Server](/concern/oauth-server/)
+* [Shutdown Server](/concern/shutdown/)
 
 
 #### light-rest-4j
