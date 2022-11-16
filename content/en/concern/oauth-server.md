@@ -18,11 +18,33 @@ The current implementation is designed based on the SAG gateway, and only the cl
 
 ### Implementation
 
-The OAuthServerHandler is located in the egress-router module in the light-4j repository. The handler accepts the request body with the following data elements in a JSON format. 
+The OAuthServerHandler is located in the egress-router module in the light-4j repository. The handler accepts the request body with the following data elements in a JSON format or FormData. 
 
 client_id, client_secret and grant_type. The grant_type should always be client_credentials, and the client_id and client_secret should be configured in the oauthServer.yml client_credentials section, separated with a colon. 
 
-You must have a content type header with the value "application/json" header value.
+You must have a content type header with the value "application/json", "multipart/form-data" or "application/x-www-form-urlencoded".
+
+If content type is missing, you will receive the following error. 
+
+```
+ERR10076:
+  statusCode: 400
+  code: ERR10076
+  message: CONTENT_TYPE_MISSING
+  description: Content type header is missing and it is required.
+```
+
+If the content type is not one of the above allowed content types, you will receive the following error. 
+
+```
+ERR10077:
+  statusCode: 400
+  code: ERR10077
+  message: INVALID_CONTENT_TYPE
+  description: Invalid content type %s.
+
+```
+
 
 If grant_type is not "client_credentials", then the error response looks like this. 
 
@@ -33,6 +55,31 @@ ERR12001:
   message: UNSUPPORTED_GRANT_TYPE
   description: Unsupported grant type %s. Only authorization_code and client_credentials
     are supported.
+```
+
+The server will try to get the client_id and client_secret from the request body, if they are not in the body, it will try to get from the Authroization header as a basic credential. 
+
+If the server cannot get client_id and client_secret from the request body and authorization header, then you will receive the following error. 
+
+```
+ERR12002:
+  statusCode: 401
+  code: ERR12002
+  message: MISSING_AUTHORIZATION_HEADER
+  description: Missing authorization header. client credentials must be passed in
+    as Authorization header.
+
+```
+
+If the authorization header does exist, but it is not a basic header, then you will receive the following error. 
+
+```
+ERR12003:
+  statusCode: 401
+  code: ERR12003
+  message: INVALID_AUTHORIZATION_HEADER
+  description: Invalid authorization header %s.
+
 ```
 
 If client_id or client_secret is not matched, then the error response looks like this. 
@@ -133,7 +180,7 @@ As the api-key is in a new module, we need to make sure that the light-gateway p
 
 After completing the above configuration, let's start the light-gateway locally to have a test.
 
-Send the following request. 
+Send the following request with client_id and client_secret in the request body with JSON format. 
 
 ```
 curl -k --location --request POST 'https://localhost:8443/oauth/token' \
@@ -143,6 +190,24 @@ curl -k --location --request POST 'https://localhost:8443/oauth/token' \
     "client_id": "client_id1",
     "client_secret": "client_secret1"
 }'
+```
+
+Send the following request with client_id and client_secret in the BASIC authorization header with x-www-form-urlencoded format. 
+
+```
+curl -k --location --request POST 'https://localhost:8443/oauth/token' \
+--header 'Authorization: BASIC client_id1:client_secret1' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'grant_type=client_credentials'
+```
+
+Send the following request with client_id and client_secret based 64 encoded in the BASIC authroization header with x-www-form-urlencoded format. 
+
+```
+curl --location --request POST 'https://localhost:8443/oauth/token' \
+--header 'Authorization: BASIC Y2xpZW50X2lkMTpjbGllbnRfc2VjcmV0MQ==' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'grant_type=client_credentials'
 ```
 
 And you will have the following response.

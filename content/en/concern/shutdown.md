@@ -81,10 +81,23 @@ values.yml
 # openapi-security.yml
 openapi-security.enableVerifyJwt: false
 ```
+Or skip the security for the /adm/shutdown path in the values.yml
 
+```
+# openapi-security.yml
+openapi-security.skipPathPrefixes: ["/v1/pets","/adm"]
+```
 The following is the curl command to send the request directly. 
 
 ```
 curl -k --location --request DELETE 'https://localhost:8443/adm/shutdown'
 ```
+
+Once the server receives the request, it will start the shutdown sequence. The response from the server is something like the following. 
+
+```
+{"time":1667937042151,"serviceId":"com.networknt.client-gateway-1.0.0"}
+```
+
+{{< youtube JG89o0eou2E >}}
 
