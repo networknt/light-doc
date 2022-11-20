@@ -20,7 +20,7 @@ The following are features we added to the light-gateway:
 
 * [Multiple OAuth 2.0][] provider support on the JWT token retrieval and JWT token verification via JWK. 
 * [Rate Limit][] helps the gateway regulate the traffic based on server, client, address, and user with optional request paths or services. 
-[Path Prefix Service][] middleware handler supports routeing traffic based on the request paths to different backend APIs.
+* [Path Prefix Service][] middleware handler supports routeing traffic based on the request paths to different backend APIs.
 
 
 [http-sidecar]: /service/http-sidecar/
