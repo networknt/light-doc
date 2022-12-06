@@ -48,6 +48,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Business Handler](/concern/business-handler/)
 * [Header Handler](/concern/header/)
 * [Health Check](/concern/health/)
+* [Proxy Health](/concern/proxy-health/)
 * [Server Info](/concern/info/)
 * [IP Whitelist](/concern/ip-whitelist/)
 * [Rate Limit](/concern/limit/)
