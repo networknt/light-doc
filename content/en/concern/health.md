@@ -10,16 +10,16 @@ draft: false
 reviewed: true
 ---
 
-This is a server health check handler that outputs OK or a JSON object to indicate the server is alive. Normally, it will be used by F5/light-router to check if the server is healthy before routing requests to it. The global registry will also use the same endpoint to ensure all instances are healthy for consumers to discover. Another way to check server health is to ping the IP and port, and it is the standard way to check server status for F5 or any reverse proxy servers. However, just because the service instance is up and running doesn’t mean it is functioning. The handler can output more information about the server for reverse proxies.
+This is a server health check handler that outputs OK or a JSON object to indicate the server is alive. Normally, it will be used by F5/light-gateway/http-sidecar to check if the server is healthy before routing requests to it. The global registry will also use the same handler to ensure all instances are healthy for consumers to discover. Another way to check server health is to ping the IP and port, and it is the standard way to check server status for F5 or any reverse proxy servers. However, just because the service instance is up and running doesn’t mean it is functioning. The handler can output more information about the server for reverse proxies.
 
-We recommend using the light-router as the router for Internet traffic for back-end services with static IP addresses that act as a traditional web server. These services will be sitting in DMZ to serve mobile native and browser SPA and aggregate other back-end services. There is no reverse proxy for services deployed in the cloud dynamically but using client-side service discovery.
+We recommend using the light-gateway as the router for Internet traffic for back-end services with static IP addresses that act as a traditional web server. These services will be sitting in DMZ to serve mobile native and browser SPA and aggregate other back-end services. There is no reverse proxy for services deployed in the cloud dynamically but using client-side service discovery.
 
 This handler needs to be injected into the handler.yml as a standard path to return something that indicates the server is still alive. Currently, it returns "OK"  or {"result": "OK"} only, and in the future, it will be enhanced to add more features.
 
 When deploying the server to a Kubernetes cluster, there are three possible ways the health check endpoint is invoked:
 
 1. Kubernetes liveness and readiness probes
-2. Light Control Plane
+2. Light Control Pane
 3. Third-party monitor tools.
 
 
@@ -57,7 +57,7 @@ downstreamPath: ${health.downstreamPath:/health}
 
 ##### handler.yml
 
-As this endpoint is not part of each API specification, we need to inject it into the handler.yml file.
+As this endpoint is not part of each API business specification, we need to inject it into the handler.yml file.
 
 ```
 handlers:
@@ -69,10 +69,15 @@ handlers:
 .
 
 paths:
-  - path: '/health/${server.serviceId:com.networknt.petstore-3.0.1}'
+  - path: '/adm/health/${server.serviceId:com.networknt.petstore-3.0.1}'
     method: 'get'
     exec:
-      # - security
+      - security
+      - health
+
+  - path: '/health
+    method: 'get'
+    exec:
       - health
 
 ```
@@ -81,38 +86,11 @@ When you generate the project from light-codegen, the handler.yml will have an e
 
 In the above example, I have commented out the security handler in the exec for the health. In a real service deployed to the cloud, this has to be enabled. The JwtVerifierHandler in light-rest-4j, light-hybrid-4j and light-graphql-4j can verify the token with the signature and check the scope for 'portal.w' and 'portal.r'. The light-controller is using a bootstrap token to connect to the endpoint for the health check with the proper scopes. 
 
+When a service is deployed to a Kubernetes cluster, we might need to add a new endpoint /health without security. The K8s will use this for liveness and readiness probes. 
 
 ### Proxy
 
-When using light-proxy as a sidecar for backend API in a Kubernetes cluster, there are two options to config the health check on the light-proxy container. 
-
-##### Proxy Health
-
-If the backend API is implemented with other frameworks/languages, chances are it doesn't have a health check endpoint. In this case, we just need to set up the proxy to return its health check result on behalf of the backend API.
-
-The configuration is the same as the above example. Just be sure to use the backend API serviceId for the path parameter. Only the light-proxy instance will be registered to the global registry for consumers to discover with this configuration. It is a standard way to bring any API service to the Light-4j ecosystem. 
-
-##### Pass Through
-
-If the backend API has the health check endpoint implemented, we want to call the backend API instead of the handler on the light-proxy. Here is the configuration in the handler.yml on the light-proxy.
-
-```
-handlers:
-  - com.networknt.proxy.LightProxyHandler@proxy
-
-  .
-  .
-  .
-
-paths:
-  - path: '/health/${server.serviceId:com.networknt.petstore-3.0.1}'
-    method: 'get'
-    exec:
-      # - security
-      - proxy
-
-```
-As you can see, we put the proxy handler in the exec for the /health/{serviceId} endpoint so the request will be proxied to the backend API. 
+For proxy health check, please refer to [proxy health][]
 
 ### Customization
 
@@ -122,3 +100,5 @@ For example, if an API connects to a database to serve its request, it would che
 
 One example of a health check is the Kafka sidecar that checks the backend connectivity when Reactive Consumer is enabled. The source code can be accessed at https://github.com/networknt/kafka-sidecar/blob/master/src/main/java/com/networknt/mesh/kafka/handler/SidecarHealthHandler.java
 
+
+[proxy health]: /concerns/proxy-health/
