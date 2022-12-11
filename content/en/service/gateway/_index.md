@@ -21,11 +21,22 @@ The following are features we added to the light-gateway:
 * [Multiple OAuth 2.0][] provider support on the JWT token retrieval and JWT token verification via JWK. 
 * [Rate Limit][] helps the gateway regulate the traffic based on server, client, address, and user with optional request paths or services. 
 * [Path Prefix Service][] middleware handler supports routeing traffic based on the request paths to different backend APIs.
+* [SkipVerifyScopeWithoutSpec][] flag to avoid scope verification from JWT for backend API endpoints in JwtVerifyHandler.
+
+The following are the products with different configurations. 
+
+* [light-gateway][] to replace the traditional monolithic gateway shared by multiple consumers and providers. 
+* [light-proxy-client][] to bring legacy consumers to the light ecosystem with all the cross-cutting concerns
+* [light-balancer][] to enable the high availability of light-proxy-client (LPC) for multiple consumers on the same host.
+* [light-proxy-server][] to bring legacy providers to the light ecosystem with all the cross-cutting concerns. 
 
 
 [http-sidecar]: /service/http-sidecar/
 [Multiple OAuth 2.0]: /service/gateway/multiple-oauth/
 [Rate Limit]: /concern/limit/
 [Path Prefix Service]: /service/gateway/path-prefix/
-
-
+[light-proxy-client]: /service/gateway/light-proxy-client/
+[light-gateway]: /service/gateway/light-gateway/
+[light-balancer]: /service/gateway/light-balancer/
+[light-proxy-server]: /service/gateway/light-proxy-server/
+[SkipVerifyScopeWithoutSpec]: /service/gateway/skip-scope/
