@@ -30,7 +30,7 @@ As original RFC6749 didn't specify the format of the token, several different ap
 To standardize this approach, the OAuth 2.0 specification working group published structured token formats JWT [RFC7519][]. The token contains a header, a payload and a signature and resource server can retrieve enough info to authorize the access locally without contacting the OAuth 2.0 provider. 
 
 
-### Miscoservices architecture
+### Microservices architecture
 
 As Light is aiming for microservices, the number of requests for service to service communication grows exponentially. There is no way we can use SWT in the OAuth 2.0 provider. So when we decided to implement microservices based [light-oauth2][], we chose the JWT for the token format. 
 
