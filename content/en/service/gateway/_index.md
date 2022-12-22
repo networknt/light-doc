@@ -22,6 +22,7 @@ The following are features we added to the light-gateway:
 * [Rate Limit][] helps the gateway regulate the traffic based on server, client, address, and user with optional request paths or services. 
 * [Path Prefix Service][] middleware handler supports routeing traffic based on the request paths to different backend APIs.
 * [SkipVerifyScopeWithoutSpec][] flag to avoid scope verification from JWT for backend API endpoints in JwtVerifyHandler.
+* [UnifiedSecurityHandler][] to combine Basic, OAuth and ApiKey together for the same request path. 
 
 The following are the products with different configurations. 
 
@@ -40,3 +41,4 @@ The following are the products with different configurations.
 [light-balancer]: /service/gateway/light-balancer/
 [light-proxy-server]: /service/gateway/light-proxy-server/
 [SkipVerifyScopeWithoutSpec]: /service/gateway/skip-scope/
+[UnifiedSecurityHandler]: /service/gateway/unified-security/

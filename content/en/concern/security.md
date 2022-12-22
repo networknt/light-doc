@@ -70,58 +70,77 @@ Here is the default **security.yml** file. It is usually replaced by a **framewo
 
 
 ```yaml
-# Security configuration in light framework.
----
-# Security configuration for openapi-security in light-rest-4j. It is a specific config
-# for OpenAPI framework security. It is introduced to support multiple frameworks in the
-# same server instance. If this file cannot be found, the generic security.yml will be
-# loaded for backward compatibility.
+# Security configuration for security module in light-4j. For each individual framework,
+# it has a framework specific security config file to control if security and scopes
+# verification are enabled or not.
+
+# This configuration file is only for JwtHelper class most of the cases. However, if there
+# is no framework specific security configuration available. The fallback security config
+# is read from this file. Hence, we leave the enableVerifyJwt and enableVerifyScope to true.
 ---
 # Enable JWT verification flag.
-enableVerifyJwt: true
+enableVerifyJwt: ${security.enableVerifyJwt:true}
 
 # Extract JWT scope token from the X-Scope-Token header and validate the JWT token
-enableExtractScopeToken: true
+enableExtractScopeToken: ${security.enableExtractScopeToken:true}
+
+# Enable JWT scope verification. Only valid when enableVerifyJwt is true.
+enableVerifyScope: ${security.enableVerifyScope:true}
 
 # Enable JWT scope verification. 
-# Only valid when (enableVerifyJwt is true) AND (enableVerifyJWTScopeToken is true)
-enableVerifyScope: true
+# Only valid when (enableVerifyJwt is true) AND (enableVerifyScope is true)
+enableVerifyJwtScopeToken: ${security.enableVerifyJwtScopeToken:true}
+
+# If set true, the JWT verifier handler will pass if the JWT token is expired already. Unless
+# you have a strong reason, please use it only on the dev environment if your OAuth 2 provider
+# doesn't support long-lived token for dev environment or test automation.
+ignoreJwtExpiry: ${security.ignoreJwtExpiry:false}
 
 # User for test only. should be always be false on official environment.
-enableMockJwt: false
+enableMockJwt: ${security.enableMockJwt:false}
 
-# For test only, should be always be true on official environment.
-ignoreJwtExpiry: true
+# Enables relaxed verification for jwt. e.g. Disables key length requirements.
+# Should be used in test environments only.
+enableRelaxedKeyValidation: ${security.enableRelaxedKeyValidation:false}
 
 # JWT signature public certificates. kid and certificate path mappings.
 jwt:
-  certificate:
-    '100': oauth/primary.crt
-    '101': oauth/secondary.crt
-  clockSkewInSeconds: 60
-  # Key distribution server standard: JsonWebKeySet for other OAuth 2.0 provider | X509Certificate for light-oauth2
-  keyResolver: X509Certificate
+  certificate: ${security.certificate:100=primary.crt&101=secondary.crt}
+#    '100': primary.crt
+#    '101': secondary.crt
+  clockSkewInSeconds: ${security.clockSkewInSeconds:60}
+  # Key distribution server standard: JsonWebKeySet for other OAuth 2.0 provider| X509Certificate for light-oauth2
+  keyResolver: ${security.keyResolver:JsonWebKeySet}
 
 # Enable or disable JWT token logging for audit. This is to log the entire token
 # or choose the next option that only logs client_id, user_id and scope.
-logJwtToken: true
+logJwtToken: ${security.logJwtToken:true}
 
-# Enable or disable client_id, user_id and scope logging if you don't want to log
-# the entire token. Choose this option or the option above.
-logClientUserScope: false
-
-# If OAuth2 provider support http2 protocol. If using light-oauth2, set this to true.
-oauthHttp2Support: true
+# Enable or disable client_id, user_id and scope logging.
+logClientUserScope: ${security.logClientUserScope:false}
 
 # Enable JWT token cache to speed up verification. This will only verify expired time
 # and skip the signature verification as it takes more CPU power and long time.
-enableJwtCache: true
+enableJwtCache: ${security.enableJwtCache:true}
 
 # If you are using light-oauth2, then you don't need to have oauth subfolder for public
 # key certificate to verify JWT token, the key will be retrieved from key endpoint once
 # the first token is arrived. Default to false for dev environment without oauth2 server
 # or official environment that use other OAuth 2.0 providers.
-bootstrapFromKeyService: false
+bootstrapFromKeyService: ${security.bootstrapFromKeyService:false}
+
+# Used in light-oauth2 and oauth-kafka key service for federated deployment. Each instance
+# will have a providerId, and it will be part of the kid to allow each instance to get the
+# JWK from other instance based on the providerId in the kid.
+providerId: ${security.providerId:}
+
+# Define a list of path prefixes to skip the security to ease the configuration for the
+# handler.yml so that users can define some endpoint without security even through it uses
+# the default chain. This is particularly useful in the light-gateway use case as the same
+# instance might be shared with multiple consumers and providers with different security
+# requirement. The format is a list of strings separated with commas or a JSON list in
+# values.yml definition from config server, or you can use yaml format in this file.
+skipPathPrefixes: ${security.skipPathPrefixes:}
 
 ``` 
 
