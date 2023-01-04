@@ -58,6 +58,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Portal Registry](/concern/portal-registry/)
 * [Prometheus Metrics](/concern/prometheus/)
 * [Registry Discovery](/concern/registry/)
+* [Direct Registry](/concern/direct-registry/)
 * [XSS Sanitizer](/concern/sanitizer/)
 * [Security](/concern/security/)
 * [Server](/concern/server/)
