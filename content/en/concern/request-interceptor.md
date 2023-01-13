@@ -50,13 +50,26 @@ handler.chains.default:
 
 Please note that the requestInterceptor is placed after the correlation and before any meaningful middleware handlers. 
 
-Here is the configuration file request-injection.yml for RequestInterceptorInjectionHandler, and you should not modify it in values.yml unless you want to disable it temporarily. 
+Here is the built-in configuration file request-injection.yml for RequestInterceptorInjectionHandler in the module. It is enabled by default as long as it is in the handler chain. By default, the request body is not injected as it is very heavy. If you set up some request body transformers or want to log the request body into the audit log, you should add the request path prefix to appliedBodyInjectionPathPrefixes.
 
 ```
 # request interceptor injection handler configuration
 
 # indicator of enabled
 enabled: ${request-injection.enabled:true}
+# request body injection applied path prefixes. Injecting the request body and output into the audit log is very heavy operation,
+# and it should only be enabled when necessary or for diagnose session to resolve issues. This list can be updated on the config
+# server or local values.yml, then an API call to the config-reload endpoint to apply the changes from light-portal control pane.
+# Please be aware that big request body will only log the beginning part of it in the audit log and gzip encoded request body can
+# not be injected. Even the body injection is not applied, you can still transform the request for headers, query parameters, path
+# parameters etc. The format is a list of strings separated with commas or a JSON list in values.yml definition from config server,
+# or you can use yaml format in this file or values.yaml on local filesystem. The following are the examples.
+# request-injection.appliedBodyInjectionPathPrefixes: ["/v1/cats", "/v1/dogs"]
+# request-injection.appliedBodyInjectionPathPrefixes: /v1/cats, /v1/dogs
+# request-injection.appliedBodyInjectionPathPrefixes:
+#   - /v1/cats
+#   - /v1/dogs
+appliedBodyInjectionPathPrefixes: ${request-injection.appliedBodyInjectionPathPrefixes:}
 
 ```
 
