@@ -79,6 +79,7 @@ Tutorials give developers step by step guidance on how to use each component or 
      + How to create [self-signed client and server keystore] for light-4j server
      + How to create [self-signed JWT key and cert] for light-oauth2 and light-4j service
      + How to [generate keystore and truststore from PFX] for light-4j service
+     + How to use [Okta OAuth][] 2.0 provider for light-4j service
 
 
 ### API Styles
@@ -309,3 +310,4 @@ Tutorials give developers step by step guidance on how to use each component or 
 [Local IDE]: /tutorial/controller/local-ide/
 [Local Docker]: /tutorial/controller/local-docker/
 [View Development]: /tutorial/config-server/local-view/
+[Okta OAuth]: /tutorial/security/okta-oauth/
