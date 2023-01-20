@@ -46,6 +46,7 @@ In this section, we have several tutorials related to security configurations an
 
 * How to [generate keystore and truststore from PFX] for light-4j service
 
+* How to use [Okta OAuth][] 2.0 provider for light-4j service
 
 
 [bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
@@ -63,3 +64,4 @@ In this section, we have several tutorials related to security configurations an
 [self-signed JWT key and cert]: /tutorial/security/self-signed-jwt-key/
 [generate keystore and truststore from PFX]: /tutorial/security/pfx-certificate/
 [light-router]: /tutorial/security/light-router/
+[Okta OAuth]: /tutorial/security/okta-oauth/
