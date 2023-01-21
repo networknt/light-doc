@@ -11,16 +11,16 @@ draft: false
 reviewed: true
 ---
 
-API security is very crucial, and it is an essential part of the cross-cutting concerns provided by Light. For business API endpoints, we should use the OAuth 2.0 JWT token to secure them. For some other functional endpoints that cannot be secured by OAuth 2.0, Basic Authentication is an option. For example, one of the users is using Basic Authentication to secure their API deployed on an IoT device.
+API security is very crucial, and it is an essential part of the cross-cutting concerns provided by Light Platform. For business API endpoints, we should use the OAuth 2.0 JWT token to secure them. For some other functional endpoints that cannot be secured by OAuth 2.0, Basic Authentication or API Key is an option. For example, one of the users is using Basic Authentication to secure their API deployed on an IoT device.
 
-In release 1.5.18, we provided a new feature that allows multiple chains to be defined in a single API instance. Naturally, the /server/info and /health endpoints are separated from the business endpoints so that they can use different middleware handler chains. It has been asked by our customers for a long time to bypass the OAuth 2.0 security check for a health check endpoint so that the orchestration layer can access it without providing a token. In most deployments, Consul is used for service registry, and discovery and the /health is periodically accessed from Consul to ensure the service is up and running. It is not very convenient to use JWT or even Basic Authentication in this use case. Since most Consul servers are deployed in physical machines or VMs with fixed IP addresses. It would be great if we can support the IP whitelist for the /health endpoint. After several hours of hard work, the ip-whitelist middleware handler was born.
+In release 1.5.18, we provided a new feature that allows multiple chains to be defined in a single API instance. Naturally, the admin endpoints, like /adm/server/info and /adm/chaosmonkey endpoints, are separated from the business endpoints so that they can use different middleware handler chains. It has been asked by our customers for a long time to bypass the OAuth 2.0 security check for a health check endpoint so that the orchestration layer can access it without providing a token. In most deployments, Consul is used for service registry, and discovery and the /health is periodically accessed from Consul to ensure the service is up and running. It is not very convenient to use JWT or even Basic Authentication in this use case. Since most Consul servers are deployed in physical machines or VMs with fixed IP addresses. It would be great if we can support the IP whitelist for the /health endpoint. After several hours of hard work, the ip-whitelist middleware handler was born.
  
 ### Requirements
 
-* The IP whitelist must be defined per endpoint which is the path and method combination. 
+* The IP whitelist must be defined per path prefix which is the beginning of the request path. 
 * Both IPv4 and IPv6 should be supported. 
 * Need to support the different format of IP addresses. For example, exact, wildcard, slash. 
-* Users can specify if access is allowed for the endpoints without IP whitelist defined.
+* Users can specify if access is allowed for the path prefixes without IP whitelist defined.
 
 ### Implementation
 
@@ -32,44 +32,85 @@ Since we are supporting both IPv4 and IPv6, the address must be parsed with a pa
 
 ### Configuration
 
-Here is an exmaple for the whitelist.yml file. The default config in the module has enabled set as false. So you have to externalize it in order to use it in your own application. 
+Here is the built-in whitelist.yml file in the module resource/config folder that will be used by default. All the properties can be overwritten with the values.yml in your application. For the whitelist.paths, we have added two examples in both YAML and JSON formats. 
 
 ```
 # IP Whitelist configuration
 ---
-# Indicate if this handler is enabled or not
-enabled: true
+# Indicate if this handler is enabled or not. It is normally used for the third party integration
+# so that only approved IPs can connect to the light-gateway or http-sidecar at certain endpoints.
+# The default value is true, and it will take effect as long as this handler is in the chain.
+enabled: ${whitelist.enabled:true}
+# Default allowed or denied if there is no rules defined for the path. Default is false so only
+# defined paths with IP ACL rules will be allowed to access. Other paths or other IPs are not
+# allowed to access the service. If this is set to true, then other IPs can access other paths
+# not defined below. However, for the paths defined below, only the listed IPs can access.
+defaultAllow: ${whitelist.defaultAllow:false}
+# List of path prefixes and their access rules. It supports IPv4 and IPv6 with Exact, Wildcard and
+# Slash format. The path prefix is defined as request path prefix only without differentiate method.
+paths: ${whitelist.paths:}
+# The following format is the YAML format suitable for externalized values.yml in local filesystem.
+#  /health/com.networknt.petstore-1.0.0:
+#    - '127.0.0.1'
+#    - '10.10.*.*'
+#    - '127.0.0.48/30'
+#  /prometheus:
+#    - 'FE45:00:00:000:0:AAA:FFFF:0045'
+#    - 'FE45:00:00:000:0:AAA:FFFF:*'
+#    - 'FE45:00:00:000:0:AAA:FFFF:01F4/127'
+#  '/data':
+#    - '127.0.0.2'
+#    - '10.10.*.*'
+#    - '127.0.0.48/30'
 
-defaultAllow: true
+# The following format is the JSON format suitable for both local values.yml and config server.
+# paths: {"/health/com.networknt.petstore-1.0.0":["127.0.0.1","10.10.*.*","127.0.0.48/30"],"/prometheus":["FE45:00:00:000:0:AAA:FFFF:0045","FE45:00:00:000:0:AAA:FFFF:*","FE45:00:00:000:0:AAA:FFFF:01F4/127"],"/data":["127.0.0.2","10.10.*.*","127.0.0.48/30"]}
 
-paths:
-  # For a particular endpoint(path@method), there are three IPs can access
-  '/health/com.networknt.petstore-1.0.0@get':
-  # IPv4 Exact
-  - '127.0.0.1'
-  # IPv4 Wildcard
-  - '10.10.*.*'
-  # IPv4 Slash
-  - '127.0.0.48/30'
+```
+
+Here is an exmaple for the values.yml file in YAML format. 
+
+```
+# whitelist.yml
+
+whitelist.paths:
+  # For a particular path prefix, there are three IPs can access
+  /health/com.networknt.petstore-1.0.0:
+    # IPv4 Exact
+    - 127.0.0.1
+    # IPv4 Wildcard
+    - 10.10.*.*
+    # IPv4 Slash
+    - 127.0.0.48/30
 
   # For a path, the following IP can access regardless the method
-  '/prometheus@get':
-  # IPv6 Exact
-  - 'FE45:00:00:000:0:AAA:FFFF:0045'
-  # IPv6 Prefix
-  - 'FE45:00:00:000:0:AAA:FFFF:*'
-  # IPv6 Slash
-  - 'FE45:00:00:000:0:AAA:FFFF:01F4/127'
+  /prometheus:
+    # IPv6 Exact
+    - FE45:00:00:000:0:AAA:FFFF:0045
+    # IPv6 Prefix
+    - FE45:00:00:000:0:AAA:FFFF:*
+    # IPv6 Slash
+    - FE45:00:00:000:0:AAA:FFFF:01F4/127
 
-  # For a particular endpoint(path@method), there are three IPs can access
-  '/data@get':
-  # IPv4 Exact
-  - '127.0.0.2'
-  # IPv4 Wildcard
-  - '10.10.*.*'
-  # IPv4 Slash
-  - '127.0.0.48/30'
+  # For a particular path, there are three IPs can access
+  /data:
+    # IPv4 Exact
+    - 127.0.0.2
+    # IPv4 Wildcard
+    - 10.10.*.*
+    # IPv4 Slash
+    - 127.0.0.48/30
 ```
+
+Here is an example for values.yml file in JSON format.
+
+```
+# whitelist.yml
+
+whitelist.paths: {"/health/com.networknt.petstore-1.0.0":["127.0.0.1","10.10.*.*","127.0.0.48/30"],"/prometheus":["FE45:00:00:000:0:AAA:FFFF:0045","FE45:00:00:000:0:AAA:FFFF:*","FE45:00:00:000:0:AAA:FFFF:01F4/127"],"/data":["127.0.0.2","10.10.*.*","127.0.0.48/30"]}
+
+```
+
 
 ### Error Messages
 

@@ -1,5 +1,5 @@
 ---
-title: "Body Parser"
+title: "Body Handler"
 date: 2017-11-05T10:24:06-05:00
 description: ""
 categories: [concerns]
@@ -18,13 +18,23 @@ After the body is parsed, it will be attached to the exchange so that subsequent
 
 [Sanitizer][] and [OpenApi Validator][] depend on this middleware.
 
+The purpose of the BodyHandler is to convert the request body stream to an easy-to-use Java object so that all subsequent handlers can share the same thing. As the request body stream can only be consumed once, it is easy for us to provide this standard handler to do that job in the request/response chain. 
+
+Also, we need to be aware that this handler is not suitable in the http-sidecar and the light-gateway as the request body stream needs to be transferred to the downstream API and cannot be consumed. For the sidecar and the gateway, we should use [RequestBodyInterceptor][] and [ResponseBodyInterceptor][] instead.
+
 ### Configuration
 
 Here is a code example that receives the body object (Map or List) from the exchange.
 
 ```
 # Enable body parse flag
-enabled: true
+enabled: ${body.enabled:true}
+# cache request body as a string along with JSON object. The string formatted request body will be used for audit log.
+# you should only enable this if you have configured audit.yml to log the request body as it uses extra memory.
+cacheRequestBody: ${body.cacheRequestBody:false}
+# cache response body as a string along with JSON object. The string formatted response body will be used for audit log.
+# you should only enable this if you have configured audit.yml to log the response body as it uses extra memory.
+cacheResponseBody: ${body.cacheResponseBody:false}
 ```
 
 ### Parser
@@ -32,7 +42,17 @@ enabled: true
 Here is the parsing logic. 
 
 ```java
+    @Override
+    public void handleRequest(final HttpServerExchange exchange) throws Exception {
+        if(logger.isDebugEnabled()) logger.debug("BodyHandler.handleRequest starts.");
+        // parse the body to map or list if content type is application/json
+        String contentType = exchange.getRequestHeaders().getFirst(Headers.CONTENT_TYPE);
         if (contentType != null) {
+            if (exchange.isInIoThread()) {
+                exchange.dispatch(this);
+                return;
+            }
+            exchange.startBlocking();
             try {
                 if (contentType.startsWith("application/json")) {
                     InputStream inputStream = exchange.getInputStream();
@@ -57,17 +77,17 @@ Here is the parsing logic.
             } catch (IOException e) {
                 logger.error("IOException: ", e);
                 setExchangeStatus(exchange, CONTENT_TYPE_MISMATCH, contentType);
+                if(logger.isDebugEnabled()) logger.debug("BodyHandler.handleRequest ends with an error.");
                 return;
             }
-        } else {
-            // attach the stream to the exchange if the content type is missing.
-            InputStream inputStream = exchange.getInputStream();
-            exchange.putAttachment(REQUEST_BODY, inputStream);
         }
+        if(logger.isDebugEnabled()) logger.debug("BodyHandler.handleRequest ends.");
+        Handler.next(exchange, next);
+    }
 ```
 ### Example
 
-Here is the code example that get the boby object(Map or List) from exchange.
+Here is the code example that gets the body object(Map or List) from the exchange in subsequent middleware handlers or business handlers.
 
 ```java
                     Object body = exchange.getAttachment(BodyHandler.REQUEST_BODY);
@@ -86,3 +106,5 @@ Here is the code example that get the boby object(Map or List) from exchange.
 [light-rest-4j]: /style/light-rest-4j/
 [Sanitizer]: /concern/sanitizer/
 [OpenApi Validator]: /style/light-rest-4j/openapi-validator/
+[RequestBodyInterceptor]: /concern/request-body-interceptor/
+[ResponseBodyInterceptor]: /concern/response-body-interceptor/
