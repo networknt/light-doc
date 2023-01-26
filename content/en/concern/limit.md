@@ -72,22 +72,20 @@ chains:
 Here is the configuration file for rate limiting.
 
 ```yaml
+---
+---
 # Rate Limit Handler Configuration
 
 # If this handler is enabled or not. It is disabled by default as this handle might be in
 # most http-sidecar, light-proxy and light-router instances. However, it should only be used
 # internally to throttle request for a slow backend service or externally for DDoS attacks.
 enabled: ${limit.enabled:false}
-# Maximum concurrent requests allowed at a given time. If this number is exceeded, new requests
-# will be queued. It must be greater than 1 and should be set based on your use case. Be aware
-# it is concurrent requests not the number of request per second. Light-4j server can handle
-# millions of request per seconds. With 2 concurrent requests, the petstore API can still handle
-# hundreds or even thousands requests per second.
+# Maximum concurrent requests allowed per second on the entire server. This is property is
+# here to keep backward compatible. New users should use the rateLimit property for config
+# with different keys and different time unit.
 concurrentRequest: ${limit.concurrentRequest:2}
-# Overflow request queue size. -1 means there is no limit on the queue size and this should
-# only be used in the corporate network for throttling. For Internet facing service, set it
-# to a small value to prevent DDoS attacks. New requests will be dropped with 503 response
-# code returned if the queue is full.
+# This property is kept to ensure backward compatibility. Please don't use it anymore. All
+# requests will return the rate limit headers with error messages after the limit is reached.
 queueSize: ${limit.queueSize:-1}
 # If the rate limit is exposed to the Internet to prevent DDoS attacks, it will return 503
 # error code to trick the DDoS client/tool to stop the attacks as it considers the server
@@ -95,6 +93,39 @@ queueSize: ${limit.queueSize:-1}
 # protect a slow backend API, it will return 429 error code to indicate too many requests
 # for the client to wait a grace period to resent the request. By default, 503 is returned.
 errorCode: ${limit.errorCode:503}
+# Default request rate limit 10 requests per second and 10000 quota per day. This is the
+# default for the server shared by all the services. If the key is not server, then the
+# quota is not applicable.
+# 10 requests per second limit and 10000 requests per day quota.
+rateLimit: ${limit.rateLimit:10/s 10000/d}
+# Key of the rate limit: server, address, client, user
+# server: The entire server has one rate limit key, and it means all users share the same.
+# address: The IP address is the key and each IP will have its rate limit configuration.
+# client: The client id in the JWT token so that we can give rate limit per client.
+# user: The user id in the JWT token so that we can set rate limit and quota based on user.
+key: ${limit.key:server}
+# If server is the key, we can set up different rate limit per request path prefix.
+server: ${limit.server:}
+# If address is the key, we can set up different rate limit per address and optional per
+# path or service for certain addresses. All other un-specified addresses will share the
+# limit defined in rateLimit.
+address: ${limit.address:}
+# If client is the key, we can set up different rate limit per client and optional per
+# path or service for certain clients. All other un-specified clients will share the limit
+# defined in rateLimit. When client is select, the rate-limit handler must be after the
+## JwtVerifierHandler so that the client_id can be retrieved from the auditInfo attachment.
+client: ${limit.client:}
+# If user is the key, we can set up different rate limit per user and optional per
+# path or service for certain users. All other un-specified users will share the limit
+# defined in rateLimit. When user is select, the rate-limit handler must be after the
+# JwtVerifierHandler so that the user_id can be retrieved from the auditInfo attachment.
+user: ${limit.user:}
+# Client id Key Resolver.
+clientIdKeyResolver: ${limit.clientIdKeyResolver:com.networknt.limit.key.JwtClientIdKeyResolver}
+# Ip Address Key Resolver.
+addressKeyResolver: ${limit.addressKeyResolver:com.networknt.limit.key.RemoteAddressKeyResolver}
+# User Id Key Resolver.
+userIdKeyResolver: ${limit.userIdKeyResolver:com.networknt.limit.key.JwtUserIdKeyResolver}
 
 ```
 
@@ -102,3 +133,66 @@ errorCode: ${limit.errorCode:503}
 - concurrentRequest number of concurrent requests to be limited.
 - queueSize -1 unlimited queue size, which might use a lot of memory. > 1 integer will limit the requests to be queued, and once the queue is full, 503 will be returned for new requests by default. 
 - errorCode can be changed to 429 if it is used internal to throttle the concurrent request to backend APIs. 
+
+By default, the limit.key is server and you can define the limit.server in values.yml like the following. 
+
+```
+limit.server:
+  /v1/address: 10/s
+  /v2/address: 1000/s
+
+```
+
+When limit.key is set as address, you can define the limit.address in values.yml as the following. 
+
+```
+limit.address:
+  192.168.1.100: 10/h 1000/d
+  192.168.1.101: 1000/s 1000000/d
+  192.168.1.102:
+    /v1/address: 10/s
+    /v2/address: 100/s
+
+```
+
+When limit.key is set as client, you can define the limit.client in values.yml as the following.
+
+```
+limit.client:
+  f7d42348-c647-4efb-a52d-4c5787421e73: 100/m 10000/d
+  f7d42348-c647-4efb-a52d-4c5787421e74: 10/m 1000/d
+  f7d42348-c647-4efb-a52d-4c5787421e75:
+    /v1/address: 10/s
+    /v2/address: 100/s
+
+```
+
+Please not that the client_id in the above configuration is from the JWT token and JwtVerifyHandler must be in the chain before the limit handler.
+
+When limit.key is set as user, you can define the limit.user in values.yml as the following. 
+
+```
+limit.user:
+  alex@lightapi.net: 10/m 10000/d
+  alice@lightapi.net: 20/m 20000/d
+  albert@lightapi.net:
+    /batch: 1000/m 1000000/d
+
+```
+
+Please note that the user_id is from the JWT token and authorizaiton code flow should be used in this case to protect the single page application or mobile application. 
+
+There are several built-in KeyResolver implementation that you can use when client, address or user is selected as the limit.key. Here are several of them that you can choose from. 
+
+```
+# Client id Key Resolver.
+limit.clientIdKeyResolver: com.networknt.limit.key.JwtClientIdKeyResolver
+# Ip Address Key Resolver.
+limit.addressKeyResolver: com.networknt.limit.key.RemoteAddressKeyResolver
+# User id Key Resolver.
+limit.userIdKeyResolver: com.networknt.limit.key.JwtUserIdKeyResolver
+
+```
+
+If the above implementation is not suitable for your business requirement, you can create customized on and replace the above in the configuation. 
+
