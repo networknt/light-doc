@@ -29,7 +29,50 @@ encrypt input to output.
 
 This is the other side of the coin and this class should be included into your built API or
 service. The decryptor will only be invoked if values in secret.yml are encrypted by the above
-utility. With SingletonServiceFactory, you can inject any customized implementation you want.
+utility.  With SingletonServiceFactory, you can inject any customized implementation you want.
+
+Start from light-4j 2.* version, the decryptor instance defined in the Config.yml file:
+
+```
+decryptorClass: com.networknt.decrypt.AutoAESDecryptor
+```
+
+User can change the config to use customized implementation class.
+
+### Service API Decryption process
+
+In general case, the encrypt key is only plain text value need be keep and remember. And the key will be saved in an environment variable.
+For framework default implementation decryptor(AutoAESDecryptor), it use default environment variable name:
+
+```
+LIGHT_4J_CONFIG_PASSWORD = "light_4j_config_password";
+String passwordStr = System.getenv(LIGHT_4J_CONFIG_PASSWORD);
+```
+If user need use other environment variable name (for example, the environment variable for the key already existing for other systems), it can be specified in the config file:
+
+```
+#DecrptKeyEnvironmentVarName: ENV_ENCRYPT_KEY
+```
+
+So the API deployment process can be implemented as following steps:
+
+- User the encryption key to encrypt the password(s)
+- Create a kubernetes  secret for the encryption key
+- From the kubernetes deploynment (or deploymentConfig) yaml, set the environment variable and point value to the secret created above
+  
+  
+  for example:
+  ```
+       env:
+       - name: ENV_ENCRYPT_KEY
+         valueFrom:
+           secretKeyRef:
+             name: encryptkey
+             key: keycode
+```
+- Add the encrypted password(s) for password value(s) in configMap 
+
+
 
 There is a tutorial that documents the details of [how to use customized encryptor][].
 

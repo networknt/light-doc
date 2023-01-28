@@ -313,6 +313,12 @@ singletons:
   - com.networknt.decrypt.AESDecryptor
 ```
 
+Start from light-4j version 2.*, the Decryptor interface been defined in the config.yml:
+
+```
+decryptorClass: com.networknt.decrypt.AutoAESDecryptor
+```
+
 As you can see we have bound AESDecryptor the Decryptor interface. If you have customized implementation,
 you can replace the AESDecryptor implementation with your package and class. 
 
