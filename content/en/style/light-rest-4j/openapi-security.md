@@ -35,6 +35,12 @@ Here is a built-in openapi-security.yml in the module with default configuration
 # request path prefix in skipPathPrefixes.
 enableVerifyJwt: ${openapi-security.enableVerifyJwt:true}
 
+# Enable the SWT verification flag. The SwtVerifierHandler will skip the SWT token verification
+# if this flag is false. It should only be set to false on the dev environment for testing
+# purposes. If you have some endpoints that want to skip the SWT verification, you can put the
+# request path prefix in skipPathPrefixes.
+enableVerifySwt: ${openapi-security.enableVerifySwt:true}
+
 # Extract JWT scope token from the X-Scope-Token header and validate the JWT token
 enableExtractScopeToken: ${openapi-security.enableExtractScopeToken:true}
 
@@ -52,10 +58,6 @@ enableVerifyScope: ${openapi-security.enableVerifyScope:true}
 # the security handler will invoke the scope verification for all endpoints. However, if the endpoint
 # doesn't have a specification to retrieve the defined scopes, the handler will skip the scope verification.
 skipVerifyScopeWithoutSpec: ${openapi-security.skipVerifyScopeWithoutSpec:false}
-
-# Enable JWT scope verification. 
-# Only valid when (enableVerifyJwt is true) AND (enableVerifyScope is true)
-enableVerifyJwtScopeToken: ${openapi-security.enableVerifyJwtScopeToken:true}
 
 # If set true, the JWT verifier handler will pass if the JWT token is expired already. Unless
 # you have a strong reason, please use it only on the dev environment if your OAuth 2 provider
@@ -124,7 +126,57 @@ skipPathPrefixes: ${openapi-security.skipPathPrefixes:}
 
 For detailed information about the properties in the above configuration file, please refer to the light-4j [security][] module.
 
-Unlike the simple web token that the resource server has to contact the Authorization server to validate, JWT can be verified by the resource server as long as the token signing certificate is available at the resource server. 
+Unlike the simple web token that the resource server has to contact the Authorization server to validate, JWT can be verified by the resource server as long as the token signing certificate is available at the resource server or there is a JWK link available to the resource server. 
+
+### SwtVerifyHandler
+
+Some OAuth 2.0 providers issue a simple web token as an access token if the client requests come from the Internet for security reasons. The resource server has to use that token to invoke the token introspection endpoint to get all the details about the token, including the scope. 
+
+This handler shares the same openapi-security.yml configuration file with the JwtVerifyHandler. By default, the JwtVerifyHandler is enabled, and this handler is disabled. To use SwtVerifyHandler, we need to inject the SwtVerifyHandler in the handler chain like the following. 
+
+handler.yml
+
+```
+handler.handlers:
+  .
+  .
+  .
+  - com.networknt.openapi.SwtVerifyHandler@security
+  .
+  .
+  .
+
+handler.chains.default:
+  .
+  .
+  .
+  - security
+  .
+  .
+  .
+
+```
+
+In the values.yml file, we need to disable the jwt handler and enable this handler. 
+
+values.yml
+
+```
+openapi-security.enableVerifyJwt: false
+openapi-security.enableVerifySwt: true
+```
+
+We also need to set up the token introspection URL and credentials in the client.yml section in values.yml
+
+```
+client.tokenKeyServerUrl: https://oauth.networknt.com
+client.tokenKeyUri: /oauth/introspection
+client.tokenKeyClientId: f7d42348-c647-4efb-a52d-4c5787421e72
+client.tokenKeyClientSecret: f6h1FTI8Q3-7UScPZDzfXA
+client.tokenKeyEnableHttp2: true
+```
+
+As you can see, the configuration is the same for loading the JWKs from the OAuth provider for JWT verification. The above is for a single OAuth 2.0 provider. For multiple OAuth 2.0 providers with different introspection endpoints, please see the UnifiedSecurityHandler for details. 
 
 ### UnifiedSecurityHandler
 
