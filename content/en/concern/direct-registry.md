@@ -220,5 +220,23 @@ direct-registry.directUrls: code=http://192.168.1.100:6881,http://192.168.1.101:
 When the DirectRegistry is initialized during the server startup, it will register itself to the ModuleRegistry. The [config-reload](/concern/config-reload/) API can be called to trigger the reload from the local filesystem values.yml or load from the config server. This allows the light-gateway and http-sdiecar to change the configuration and trigger the reload from the Control Pane without shutting down the server in a shared environment. 
 
 
+Please note that only direct-registry.yml will support the configuration reload. If you have the mapping in the service.yml, reload is not supported. 
 
+Also, as the RouterHandler will cache its copy of the mapping for the service lookup, we need to reload the RouterHandler simultaneously when DirectRegistry is reloaded. 
+
+Here is the command that should be used to reload the router configuration simultaneously. 
+
+```
+curl --location --request POST 'https://localhost:8443/adm/modules' \
+--header 'Authorization: Bearer eyJraWQiOiIxMDAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ1cm46Y29tOm5ldHdvcmtudDpvYXV0aDI6djEiLCJhdWQiOiJ1cm46Y29tLm5ldHdvcmtudCIsImV4cCI6MTk4NDUzMTMyOSwianRpIjoiY1JvN3hpVHdGQmhKNndIdmlvTzZ2USIsImlhdCI6MTY2OTE3MTMyOSwibmJmIjoxNjY5MTcxMjA5LCJ2ZXJzaW9uIjoiMS4wIiwiY2xpZW50X2lkIjoiZjdkNDIzNDgtYzY0Ny00ZWZiLWE1MmQtNGM1Nzg3NDIxZTczIiwic2NvcGUiOiJhZG1pbiJ9.BHdrIB5EEwI2mhryQa-xnScDYMNOX01-tcRExBK6EjkaiUc_yfVhHG0o2uz5qQuSiNbyFu4q0IPsNYRAet48ghFurHmI64_LjIRTTKSZgRYkzpmutFuG9vMY81RFc9RggtVPq_DjMi4LSPtZEfq3giMkXOJOEh7Ja3rkUMuxA7mcR_ih7Fc0IiIGET5VIgUz9urqyAt9mj2F9BtPEFDSpRace3hSW2sPL-4BB5KKPNK_0OghX_fS4N0Gu979KTsXgk-wYrlLmz6xTTJ2yaDDJene3GQUtBddN6iQHSslTT9kadhvRualhhyY0tAifQ2Q57z96QPBbMhuk6LEU3jsuQ' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    "com.networknt.router.middleware.PathPrefixServiceHandler",
+    "com.networknt.router.RouterHandler",
+    "com.networknt.registry.support.DirectRegistry"
+]
+'
+```
+
+The above three handlers are related, and they should be reloaded at the same time. 
 

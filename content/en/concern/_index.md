@@ -65,6 +65,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Response Body Interceptor](/concern/response-body-interceptor/)
 * [Response Interceptor Injection](/concern/response-interceptor-injection/)
 * [Response Transformer Interceptor](/concern/response-transformer-interceptor/)
+* [Router Handler](/concern/router-handler/)
 * [XSS Sanitizer](/concern/sanitizer/)
 * [Security](/concern/security/)
 * [Server](/concern/server/)
