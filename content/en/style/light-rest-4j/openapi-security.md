@@ -122,11 +122,41 @@ providerId: ${openapi-security.providerId:}
 # values.yml definition from config server, or you can use yaml format in this file.
 skipPathPrefixes: ${openapi-security.skipPathPrefixes:}
 
+# When light-gateway or http-sidecar is used for security, sometimes, we need to pass some
+# claims from the JWT or SWT to the backend API for further verification or audit. You can
+# select some claims to pass to the backend API with HTTP headers. The format is a map of
+# claim in the token and a header name that the downstream API is expecting. You can use
+# both JSON or YAML format.
+# When SwtVerifyHandler is used, the claim names are in https://github.com/networknt/light-4j/blob/master/client/src/main/java/com/networknt/client/oauth/TokenInfo.java
+# When JwtVerifyHandler is used, the claim names is the JwtClaims claimName.
+# YAML
+# openapi-security.passThroughClaims:
+#   clientId: client_id
+#   tokenType: token_type
+# JSON
+# openapi-security.passThroughClaims: {"clientId":"client_id","tokenType":"token_type"}
+passThroughClaims: ${openapi-security.passThroughClaims:}
+
 ```
 
 For detailed information about the properties in the above configuration file, please refer to the light-4j [security][] module.
 
 Unlike the simple web token that the resource server has to contact the Authorization server to validate, JWT can be verified by the resource server as long as the token signing certificate is available at the resource server or there is a JWK link available to the resource server. 
+
+For some legacy applications that use http-sidecar or light-gateway as light-proxy-server(LPS) on the same host with native service, they might require that the JwtVerifyHandler passes through some token claims to the backend API through HTTP headers for further verification or audit. To do that, you need to add the openapi-security.passThroughClaims to the values.yml like the following. 
+
+```
+openapi-security.passThroughClaims: {"clientId":"client_id", "tokenType":"token_type"}
+```
+Or
+```
+openapi-security.passThroughClaims: 
+  clientId: client_id
+  tokenType: token_type
+```
+
+The passThroughClaims is a map with the key as the claim name in the JWT token, and the value is the header name to pass to the backend API. You can check the claim names with jwt.io website by pasting the JWT token there.  
+
 
 ### SwtVerifyHandler
 
@@ -177,6 +207,20 @@ client.tokenKeyEnableHttp2: true
 ```
 
 As you can see, the configuration is the same for loading the JWKs from the OAuth provider for JWT verification. The above is for a single OAuth 2.0 provider. For multiple OAuth 2.0 providers with different introspection endpoints, please see the UnifiedSecurityHandler for details. 
+
+For some legacy applications that use http-sidecar or light-gateway as light-proxy-server(LPS) on the same host with native service, they might require that the SwtVerifyHandler passes through some token claims to the backend API through HTTP headers for further verification or audit. To do that, you need to add the openapi-security.passThroughClaims to the values.yml like the following. 
+
+```
+openapi-security.passThroughClaims: {"clientId":"client_id", "tokenType":"token_type"}
+```
+Or
+```
+openapi-security.passThroughClaims: 
+  clientId: client_id
+  tokenType: token_type
+```
+
+The passThroughClaims is a map with the key as the property name in [TokenInfo](https://github.com/networknt/light-4j/blob/master/client/src/main/java/com/networknt/client/oauth/TokenInfo.java), and the value is the header name to passed to the backend API. 
 
 ### UnifiedSecurityHandler
 
