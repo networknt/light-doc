@@ -337,4 +337,43 @@ Password for config decryption:
 export light-4j-config-password=your_password
 ```
 
+
+## Environment Variable
+
+The config module manages the configuration in the light-4j repository, and the config properties are set up in a hierarchical structure. Each module has its default config file packaged in with some default values. Users can overwrite the properties with values.yml at the application level and externalized folder with -Dlight-4j-config-dir in the command line. Ultimately, users can use environment variables to overwrite some properties or provide secrets that are not supposed to be put into the config file. 
+
+To use environment variables on Linux, you must change it to upper case and convert all special characters to '_'. 
+
+
+For example, if you want to overwrite the server.serviceId, you need to use SERVER_SERVICEID as the variable name.
+
+There are two ways to add environment variables on Linux.
+
+* add export to the .profile and .bashrc under your user home directory.
+
+```
+export SERVER.SERVICEID=com.networknt.petstore-1.0.0
+```
+* add the env before the java on the command line. 
+
+```
+SERVER.SERVICEID=com.networknt.petstore-1.0.0 java -jar target/server.jar
+```
+
+Or
+
+```
+export SERVER.SERVICEID=com.networknt.petstore-1.0.0
+java -jar target/server.jar
+```
+
+The code matches the environment variable with the config property key in the config file. 
+
+```
+input.replaceAll("[^A-Za-z0-9]", "_").toUpperCase();
+```
+
+So for other OS that not requires the environment variable to be upper case, you can use a lower case or a mixed case environment variable name. 
+
+
 [info]: /concern/info/
