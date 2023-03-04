@@ -23,6 +23,7 @@ The following are features we added to the light-gateway:
 * [Path Prefix Service][] middleware handler supports routeing traffic based on the request paths to different backend APIs.
 * [SkipVerifyScopeWithoutSpec][] flag to avoid scope verification from JWT for backend API endpoints in JwtVerifyHandler.
 * [UnifiedSecurityHandler][] to combine Basic, OAuth and ApiKey together for the same request path. 
+* [Generic Transformer][] to transform the request and response before sending to the downstream API or return to the caller.
 
 The following are the products with different configurations. 
 
@@ -42,3 +43,4 @@ The following are the products with different configurations.
 [light-proxy-server]: /service/gateway/light-proxy-server/
 [SkipVerifyScopeWithoutSpec]: /service/gateway/skip-scope/
 [UnifiedSecurityHandler]: /service/gateway/unified-security/
+[Generic Transformer]: /service/gateway/generic-transformer/
