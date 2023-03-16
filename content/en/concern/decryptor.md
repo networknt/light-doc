@@ -23,17 +23,15 @@ This command line utility takes a string as input and outputs the encrypted text
 
 If you have your implementation, you shouldn't package it into your framework or your API. This should be a standalone utility used by the operation team or an internal website that you can encrypt input to output. 
 
-As we use the java command line to execute the utility, we must pass the clear text secret to the utility as a command line parameter. There are several situations that we need to handle it. 
+As we use the java command line to execute the utility, we must pass the clear text secret to the utility as a command line parameter. We need to use double quotes for the clear text password to avoid any encoding errors. 
 
-
-* If your password or secret contains a back slash with numbers following it, you have to escape it with double back slashes. 
-
-For example,  the following password must escape.
+Otherwise, we might not encode the password correctly. For example, the following password cannot be encoded correctly on Windows. 
 
 ```
 tN-(kw^tQ\46}Bq
 ```
-It must be escaped as the following command line parameter. 
+
+* If the password or secret contains a back slash with numbers following it, you have to escape it with double back slashes. 
 
 ```
 tN-(kw^tQ\\46}Bq
@@ -41,14 +39,19 @@ tN-(kw^tQ\\46}Bq
 
 * If you are running the utility on windows cmd, you cannot have '^' in your password. You have to run the command line on Linux. The '^' is a special character on the Windows command line. 
 
+So, to be safe, let's use double quotes for the password in the command line to avoid the above issues. 
+
+Here is an example of command line. 
+
+```
+java -jar encryptor-1.0.0.jar "tN-(kw^tQ\46}Bq"
+```
 
 There is a reference implementation in the common module test folder in the light-4j repository. All users are encouraged to have their customized implementation. 
-
 
 ```
 https://github.com/networknt/light-4j/blob/master/common/src/test/java/com/networknt/common/AESSaltEncryptor.java
 ```
-
 
 ### Decrypt Class
 
