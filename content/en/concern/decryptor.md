@@ -11,19 +11,44 @@ draft: false
 reviewed: true
 ---
 
-This module contains a reference implementation of the decryptor that implements Decryptor interface defined in the utility module. A decryptor is used to inject into the framework to decrypt the encrypted values in the secret.yml file. In order to use encrypted values in secret.yml, you also need a command line utility to convert plain text to encrypted text and put it into the value field in secret.yml
+A decryptor is used to inject into the framework to decrypt the encrypted values in a config file. To use encrypted values in a config file, you need a command line utility to convert plain text to encrypted text and put it into the value field in your config file. This module contains several reference implementations that implement the Decryptor interface defined in the decryptor module in the light-4j repository.
 
-While light-4j framework is following security first design, we have grouped all sensitive config info into a centralized secret.yml that is shared for both the client and server. Some of our customers have a very strict policy that clear text passwords are not allowed in the configuration files. So we have to find a way to encrypt the passwords, client-secret etc. And in the framework, we need to decrypt the value back to clear text so that the application can use it.
+The light-4j framework has many modules, and each module might have its config file that contains sensitive information. Some of our customers have a very strict policy that clear text passwords or secrets are not allowed in the configuration files. So we have to find a way to encrypt the passwords, client-secret etc. And in the framework, we need to decrypt the value back to clear text so the application can use it. 
 
 The reference decryptor contains two parts and uses AES for encryption and decryption.
 
 ### Encrypt Utility
 
-This is a command line utility that takes a string as input and outputs the encrypted text. You can pick up any value in secret.yml, encrypt it and put the result into secret.yml
+This command line utility takes a string as input and outputs the encrypted text. You can pick up any value in your config file, encrypt it and put the result into it to replace the clear text.
 
-If you have your implementation, you shouldn't package it into your framework or your API. This
-should be a standalone utility used by the operation team or an internal website that you can 
-encrypt input to output. 
+If you have your implementation, you shouldn't package it into your framework or your API. This should be a standalone utility used by the operation team or an internal website that you can encrypt input to output. 
+
+As we use the java command line to execute the utility, we must pass the clear text secret to the utility as a command line parameter. There are several situations that we need to handle it. 
+
+
+* If your password or secret contains a back slash with numbers following it, you have to escape it with double back slashes. 
+
+For example,  the following password must escape.
+
+```
+tN-(kw^tQ\46}Bq
+```
+It must be escaped as the following command line parameter. 
+
+```
+tN-(kw^tQ\\46}Bq
+```
+
+* If you are running the utility on windows cmd, you cannot have '^' in your password. You have to run the command line on Linux. The '^' is a special character on the Windows command line. 
+
+
+There is a reference implementation in the common module test folder in the light-4j repository. All users are encouraged to have their customized implementation. 
+
+
+```
+https://github.com/networknt/light-4j/blob/master/common/src/test/java/com/networknt/common/AESSaltEncryptor.java
+```
+
 
 ### Decrypt Class
 
@@ -41,14 +66,16 @@ User can change the config to use customized implementation class.
 
 ### Service API Decryption process
 
-In general case, the encrypt key is only plain text value need be keep and remember. And the key will be saved in an environment variable.
-For framework default implementation decryptor(AutoAESDecryptor), it use default environment variable name:
+Generally, the encryption key is the only plain text value that needs to be remembered. And the key will be saved in an environment variable.
+
+For framework default implementation decryptor(AutoAESDecryptor), it uses a default environment variable name:
 
 ```
 LIGHT_4J_CONFIG_PASSWORD = "light_4j_config_password";
 String passwordStr = System.getenv(LIGHT_4J_CONFIG_PASSWORD);
 ```
-If user need use other environment variable name (for example, the environment variable for the key already existing for other systems), it can be specified in the config file:
+
+If users need to use another environment variable name (for example, the environment variable for the key already existing for other systems), it can be specified in the config file:
 
 ```
 #DecrptKeyEnvironmentVarName: ENV_ENCRYPT_KEY
@@ -57,8 +84,8 @@ If user need use other environment variable name (for example, the environment v
 So the API deployment process can be implemented as following steps:
 
 - User the encryption key to encrypt the password(s)
-- Create a kubernetes  secret for the encryption key
-- From the kubernetes deploynment (or deploymentConfig) yaml, set the environment variable and point value to the secret created above
+- Create a Kubernetes  secret for the encryption key
+- From the Kubernetes deployment (or deployment config) YAML, set the environment variable and point value to the secret created above
   
   
   for example:
