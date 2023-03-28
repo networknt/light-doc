@@ -62,6 +62,24 @@ apikey.pathPrefixAuths: [{"pathPrefix":"/test1","headerName":"x-gateway-apikey",
 
 ```
 
+Most services will have multiple consumers, and each consumer might have its own API key for authentication. In this case, we can have multiple entries of the same path prefix in the pathPrefixAuths. 
+
+```
+apikey.pathPrefixAuths:
+  - pathPrefix: /test1
+    headerName: x-gateway-apikey
+    apiKey: abcdefg
+  # The same prefix has another apikey header and value.
+  - pathPrefix: /test1
+    headerName: authorization
+    apiKey: xyz
+  - pathPrefix: /test2
+    headerName: x-apikey
+    apiKey: CRYPT:3ddd6c8b9bf2afc24d1c94af1dffd518:1bf0cafb19c53e61ddeae626f8906d43
+```
+
+With the above configuration in the values.yml on the gateway, the service with path prefix /test1 has two consumers and two different API keys from different headers. 
+
 ### Error Response
 
 This handler only returns an error response ERR10075 if the pathPrefix and the header are matching and the apiKey is not equal between the configured value and the header value. 
