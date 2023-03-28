@@ -116,7 +116,6 @@ handler.chains.default:
   .
   .
   - apikey
-  - security
   .
   .
   .
@@ -124,4 +123,12 @@ handler.chains.default:
 ```
 
 This is the [PR](https://github.com/networknt/light-gateway/issues/92) on how we add the apikey handler to the chain in the light-gateway values.yml file. 
+
+### Unified Security
+
+When light-gateway is used for multiple consumers and providers, chances are API Key, Basic, JWT, and SWT security will be used by different services. And one service might use several security handlers simultaneously to allow different consumers to authenticate and authorize themselves. In this case, the API Key handler can join the [UnifiedSecurityHandler][] for a unified security solution. 
+
+ 
+[UnifiedSecurityHandler]: /service/gateway/unified-security/
+
 
