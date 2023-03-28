@@ -207,15 +207,37 @@ folder or externalized config folder.
 
 2. Merging automatically by configuring app-status.yml. The contents in app-status.yml are automatically merged with the framework’s status.yml when the server starts. However, it should be noted that you should not use the status code that already exists in the status.yml in the app-status.yml, or it will cause an exception.
 
-3. Using [light-config-server][] which can automatically merge status
-error codes from multiple levels.
+3. Using [light-config-server][] which can automatically merge status error codes from multiple levels.
 
 #### Status Configuration 
-In app-status.yml you can add/change these configs to display metadata, description and message selectively. 
+In status.yml, there is a section to control displaying metadata, description and message selectively. 
+
 ```yaml
-showMetadata: false
-showDescription: true
-showMessage: true
+# To control show or hide message field in the following error. Some organizations do not want to expose
+# the error message to allow the hackers to guess how the server is doing with invalid requests.
+showMessage: ${status.showMessage:true}
+# To control show or hide description field in the following error. Some organizations do not want to expose
+# the error description to allow the hackers to guess how the server is doing with invalid requests.
+showDescription: ${status.showDescription:true}
+# To control show or hide metadata field in the error. Light-4j default status code does not have metadata
+# defined as below. However, user defined error could have metadata that is a JSON object. If you do not want
+# to expose the error metadata to allow the hackers to guess how the server is doing with invalid requests, you
+# can turn it off with is flag. Here is an example of metadata in YAML format
+# ERR10000:
+#   statusCode: 401
+#   code: ERR10000
+#   message: INVALID_AUTH_TOKEN
+#   description: Incorrect signature or malformed token in authorization header
+#   metadata:
+#     link: https://lightapi.net/error/ERR10000
+showMetadata: ${status.showMetadata:true}
+```
+By default, all three properties are true. You can turn off them in values.yml
+
+values.yml 
+
+```
+status.showMessage: false
 ```
 
 #### Customize Status
