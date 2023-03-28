@@ -22,7 +22,7 @@ For general information on the metrics, please visit [here](/concern/metrics/).
 
 ### Configuration
 
-By default, InfluxDB MetricsHandler is used in the default chain generated. We need to replace it with the AMPMetricsHandler in the handlers definition section in the handler.yml file.
+By default, InfluxDB MetricsHandler is used in the default chain generated. We need to replace it with the APMMetricsHandler in the handlers definition section in the handler.yml file.
 
 handler.yml
 
