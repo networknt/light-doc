@@ -10,7 +10,7 @@ draft: false
 reviewed: true
 ---
 
-When using the light router, each request must have service_id in the header to allow the router to discover the service before invoking downstream services. We have to do that due to the unpredictable path between services. Suppose you are sure that a unique path prefix can identify all the downstream services. In that case, you can use this Path to ServiceId mapper handler to uniquely identify the service_id and put it into the request header. The client can invoke the service just like it is invoking it directly. To do that, you can leverage the [PathPrefixServiceHandler][] in the egress-router module in the light-4j repository.
+When using the light-gateway, each request must have service_id in the header to allow the router to discover the service before invoking downstream services. We have to do that due to the unpredictable path between services. Suppose you are sure that a unique path prefix can identify all the downstream services. In that case, you can use this Path to ServiceId mapper handler to uniquely identify the service_id and put it into the request header. The client can invoke the service just like it is invoking it directly. To do that, you can leverage the [PathPrefixServiceHandler][] in the egress-router module in the light-4j repository.
 
 Please note that you cannot invoke /adm/health or /adm/server/info endpoints as these are the standard endpoints injected by the framework, and all services will have them on the same path. The
 the router cannot figure out which service you want to invoke, and an error message will be returned. In other words, we should only use this middleware handler with business endpoints. 
@@ -93,10 +93,12 @@ handler.handlers:
   - com.networknt.router.middleware.PathPrefixServiceHandler@prefix
 
 handler.chains.default:
-  .
-  .
-  .
+  - exception
+  - metrics
   - prefix
+  .
+  .
+  .
   - router
   .
   .
@@ -105,6 +107,8 @@ handler.chains.default:
 ```
 
 This handler must be placed before the router handler as it will put the service_id in the request header for the router to find the downstream API host. 
+
+In light-gateway without OpenAPI specification deployed, you have to put the prefix right after the metrics handler so that the auditInfo can be populated for metrics even if security verification is failed. 
 
 For a real example of using this handle in the light gateway, please visit [path-prefix][] in the gateway document. 
 
