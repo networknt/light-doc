@@ -521,24 +521,18 @@ The following is the default client.yml in light-4j, which you should replace wi
 ---
 # Settings for TLS
 tls:
-  # if the server is using self-signed certificate, this need to be false. If true, you have to use CA signed certificate
-  # or load truststore that contains the self-signed cretificate.
+  # if the server is using self-signed certificate, this need to be false. If true, you have to use CA signed certificate or load
+  # truststore that contains the self-signed certificate.
   verifyHostname: ${client.verifyHostname:true}
-  # The default trustedNames group used to created default SSL context. This is used to create Http2Client.SSL if set.
-  defaultGroupKey: ${client.defaultGroupKey:trustedNames.local}
-  # trusted hostnames, service names, service Ids, and so on.
-  # Note: localhost and 127.0.0.1 are not trustable hostname/ip in general. So, these values should not be used as trusted names in production.
-  trustedNames:
-    local: localhost
-    negativeTest: invalidhost
-    empty:
-  # trust store contains certifictes that server needs. Enable if tls is used.
+  # indicate of system load default cert.
+  loadDefaultTrustStore: ${client.loadDefaultTrustStore:true}
+  # trust store contains certificates that server needs. Enable if tls is used.
   loadTrustStore: ${client.loadTrustStore:true}
   # trust store location can be specified here or system properties javax.net.ssl.trustStore and password javax.net.ssl.trustStorePassword
   trustStore: ${client.trustStore:client.truststore}
   # trust store password
   trustStorePass: ${client.trustStorePass:password}
-  # key store contains client key and it should be loaded if two-way ssl is uesed.
+  # key store contains client key and it should be loaded if two-way ssl is used.
   loadKeyStore: ${client.loadKeyStore:false}
   # key store location
   keyStore: ${client.keyStore:client.keystore}
@@ -546,22 +540,30 @@ tls:
   keyStorePass: ${client.keyStorePass:password}
   # private key password
   keyPass: ${client.keyPass:password}
+  # public issued CA cert  password
+  defaultCertPassword: ${client.defaultCertPassword:changeit}
+  # TLS version. Default is TSLv1.2, and you can downgrade to TLSv1 to support some internal old servers that support only TLSv1.1(deprecated
+  # and risky). You can also upgrade to TSLv1.3 for maximum security if all your servers support it.
+  tlsVersion: ${client.tlsVersion:TLSv1.2}
 # settings for OAuth2 server communication
 oauth:
   # OAuth 2.0 token endpoint configuration
+  # If there are multiple oauth providers per serviceId, then we need to update this flag to true. In order to derive the serviceId from the
+  # path prefix, we need to set up the pathPrefixServices below if there is no duplicated paths between services.
+  multipleAuthServers: ${client.multipleAuthServers:false}
   token:
     cache:
       #capacity of caching TOKENs
       capacity: ${client.tokenCacheCapacity:200}
-    # The scope token will be renewed automatically 1 minutes before expiry
+    # The scope token will be renewed automatically 1 minute before expiry
     tokenRenewBeforeExpired: ${client.tokenRenewBeforeExpired:60000}
     # if scope token is expired, we need short delay so that we can retry faster.
     expiredRefreshRetryDelay: ${client.expiredRefreshRetryDelay:2000}
-    # if scope token is not expired but in renew windown, we need slow retry delay.
+    # if scope token is not expired but in renew window, we need slow retry delay.
     earlyRefreshRetryDelay: ${client.earlyRefreshRetryDelay:4000}
     # token server url. The default port number for token service is 6882. If this is set,
     # it will take high priority than serviceId for the direct connection
-    # server_url: ${client.tokenServerUrl:https://localhost:6882}
+    server_url: ${client.tokenServerUrl:}
     # token service unique id for OAuth 2.0 provider. If server_url is not set above,
     # a service discovery action will be taken to find an instance of token service.
     serviceId: ${client.tokenServiceId:com.networknt.oauth2-token-1.0.0}
@@ -569,11 +571,11 @@ oauth:
     # and has an internal proxy server to access code, token and key services of OAuth 2.0, set up the
     # proxyHost here for the HTTPS traffic. This option is only working with server_url and serviceId
     # below should be commented out. OAuth 2.0 services cannot be discovered if a proxy server is used.
-    # proxyHost: ${client.tokenProxyHost:proxy.lightapi.net}
+    proxyHost: ${client.tokenProxyHost:}
     # We only support HTTPS traffic for the proxy and the default port is 443. If your proxy server has
     # a different port, please specify it here. If proxyHost is available and proxyPort is missing, then
     # the default value 443 is going to be used for the HTTP connection.
-    # proxyPort: ${client.tokenProxyPort:3128}
+    proxyPort: ${client.tokenProxyPort:}
     # set to true if the oauth2 provider supports HTTP/2
     enableHttp2: ${client.tokenEnableHttp2:true}
     # the following section defines uri and parameters for authorization code grant type
@@ -588,7 +590,8 @@ oauth:
       redirect_uri: ${client.tokenAcRedirectUri:https://localhost:3000/authorization}
       # optional scope, default scope in the client registration will be used if not defined.
       # If there are scopes specified here, they will be verified against the registered scopes.
-      # scope:
+      # In values.yml, you define a list of strings for the scope(s).
+      scope: ${client.tokenAcScope:}
       # - petstore.r
       # - petstore.w
     # the following section defines uri and parameters for client credentials grant type
@@ -601,9 +604,13 @@ oauth:
       client_secret: ${client.tokenCcClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
       # optional scope, default scope in the client registration will be used if not defined.
       # If there are scopes specified here, they will be verified against the registered scopes.
-      # scope:
+      # In values.yml, you define a list of strings for the scope(s).
+      scope: ${client.tokenCcScope:}
       # - petstore.r
       # - petstore.w
+      # The serviceId to the service specific OAuth 2.0 configuration. Used only when multipleOAuthServer is
+      # set as true. For detailed config options, please see the values.yml in the client module test.
+      serviceIdAuthServers: ${client.tokenCcServiceIdAuthServers:}
     refresh_token:
       # token endpoint for refresh token grant
       uri: ${client.tokenRtUri:/oauth2/token}
@@ -613,14 +620,15 @@ oauth:
       client_secret: ${client.tokenRtClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
       # optional scope, default scope in the client registration will be used if not defined.
       # If there are scopes specified here, they will be verified against the registered scopes.
-      # scope:
+      # In values.yml, you define a list of strings for the scope(s).
+      scope: ${client.tokenRtScope:}
       # - petstore.r
       # - petstore.w
     # light-oauth2 key distribution endpoint configuration for token verification
     key:
       # key distribution server url for token verification. It will be used if it is configured.
       # If it is not set, a service lookup will be taken with serviceId to find an instance.
-      # server_url: ${client.tokenKeyServerUrl:https://localhost:6886}
+      server_url: ${client.tokenKeyServerUrl:}
       # key serviceId for key distribution service, it will be used if above server_url is not configured.
       serviceId: ${client.tokenKeyServiceId:com.networknt.oauth2-key-1.0.0}
       # the path for the key distribution endpoint
@@ -631,6 +639,9 @@ oauth:
       client_secret: ${client.tokenKeyClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
       # set to true if the oauth2 provider supports HTTP/2
       enableHttp2: ${client.tokenKeyEnableHttp2:true}
+      # The serviceId to the service specific OAuth 2.0 configuration. Used only when multipleOAuthServer is
+      # set as true. For detailed config options, please see the values.yml in the client module test.
+      serviceIdAuthServers: ${client.tokenKeyServiceIdAuthServers:}
   # sign endpoint configuration
   sign:
     # token server url. The default port number for token service is 6882. If this url exists, it will be used.
@@ -662,15 +673,6 @@ oauth:
       # key distribution server url. It will be used to establish connection if it exists.
       # if it is not set, then a service lookup against serviceId will be taken to discover an instance.
       # server_url: ${client.signKeyServerUrl:https://localhost:6886}
-      # For users who leverage SaaS OAuth 2.0 provider from lightapi.net or others in the public cloud
-      # and has an internal proxy server to access code, token and key services of OAuth 2.0, set up the
-      # proxyHost here for the HTTPS traffic. This option is only working with server_url and serviceId
-      # below should be commented out. OAuth 2.0 services cannot be discovered if a proxy server is used.
-      # proxyHost: ${client.signKeyProxyHost:proxy.lightapi.net}
-      # We only support HTTPS traffic for the proxy and the default port is 443. If your proxy server has
-      # a different port, please specify it here. If proxyHost is available and proxyPort is missing, then
-      # the default value 443 is going to be used for the HTTP connection.
-      # proxyPort: ${client.signKeyProxyPort:3128}
       # the unique service id for key distribution service, it will be used to lookup key service if above url doesn't exist.
       serviceId: ${client.signKeyServiceId:com.networknt.oauth2-key-1.0.0}
       # the path for the key distribution endpoint
@@ -704,6 +706,10 @@ oauth:
     client_id: ${client.derefClientId:f7d42348-c647-4efb-a52d-4c5787421e72}
     # client_secret for deref
     client_secret: ${client.derefClientSecret:f6h1FTI8Q3-7UScPZDzfXA}
+# If you have multiple OAuth 2.0 providers and use path prefix to decide which OAuth 2.0 server
+# to get the token or JWK. If two or more services have the same path, you must use serviceId in
+# the request header to use the serviceId to find the OAuth 2.0 provider configuration.
+pathPrefixServices: ${client.pathPrefixServices:}
 # circuit breaker configuration for the client
 request:
   # number of timeouts/errors to break the circuit
@@ -712,7 +718,7 @@ request:
   timeout: ${client.timeout:3000}
   # reset the circuit after this timeout in millisecond
   resetTimeout: ${client.resetTimeout:7000}
-  # if open tracing is enable. traceability, correlation and metrics should not be in the chain if opentracing is used.
+  # if open tracing is enabled. traceability, correlation and metrics should not be in the chain if opentracing is used.
   injectOpenTracing: ${client.injectOpenTracing:false}
   # inject serviceId as callerId into the http header for metrics to collect the caller. The serviceId is from server.yml
   injectCallerId: ${client.injectCallerId:false}
@@ -720,7 +726,11 @@ request:
   enableHttp2: ${client.enableHttp2:true}
   # the maximum host capacity of connection pool
   connectionPoolSize: ${client.connectionPoolSize:1000}
-  # the maximum request limitation for each connection
+  # Connection expire time when connection pool is used. By default, the cached connection will be closed after 30 minutes.
+  # This is one way to force the connection to be closed so that the client-side discovery can be balanced.
+  connectionExpireTime: ${client.connectionExpireTime:1800000}
+  # The maximum request limitation for each connection in the connection pool. By default, a connection will be closed after
+  # sending 1 million requests. This is one way to force the client-side discovery to re-balance the connections.
   maxReqPerConn: ${client.maxReqPerConn:1000000}
   # maximum quantity of connection in connection pool for each host
   maxConnectionNumPerHost: ${client.maxConnectionNumPerHost:1000}
@@ -808,64 +818,6 @@ emailPassword: change-to-real-password
 
 ```
 
-
-### Hostname verification in Caas environments
-
-The config item `verifyHostname` in the [Configuration](#Configuration) section enables default HTTPS hostname verification. That means the hostname in the client request URL must match the common name or subject alternative names in the server certificate. Otherwise, the connection will be rejected. It is a common practice for APIs with a proper DNS. 
-
-However, hostnames are usually not available in CaaS environments. Services can only be accessed via IP addresses. To improve the security in the CaaS environment, we provide a configuration-based approach for a service identity check. In this approach, the server-side SSL certificate needs to include a service identity. Users can choose any meaningful ids or names to identify their services. Once the ids or names are added to the server SSL certificate, the clients of the service need to add the specified ids or names to `trustedNames` of the configuration file `client.yml`. At runtime, the HTTPS or http2 client verifies server certificates against configured `trustedNames`. If a match is found, the service is trusted, and connections are established. Otherwise, connections are terminated or refused.
-
-The following steps illustrate how to set up service identify checks using service IDs. 
-
-1. Put service IDs into the server certificate. Ideally, the service IDs should be put in subject alternative names of the certificate (as shown below). If subject alternative names are not set, the common name is used in the verification. For each service, the service ID can be found in the server.yml configuration file. 
-
-```
-subjectAltName = @alt_names
-
-[alt_names]
-DNS.1 = service_id1
-DNS.2 = service_id2
-```
-
-2. Add service IDs to `trustedNames` in the `client.yml`. Service IDs can be separated into multiple groups if needed, and any group name can be used (as long as it is a valid YAML map key). Multiple service IDs in a group should be delimited by a comma.
-
-```
-tls:
-  verifyHostname: true
-  trustedNames:
-    group1: service_id1, service_id2
-```
-
-3. Create XnioSsl instances using the trusted names. An example is shown below. Before version 1.5.32, the default Http2Client.SSL does not accept any `trustedNames` settings. 
-
-```
-Http2Client client = Http2Client.getInstance();
-
-// create ssl instance using the trusted names
-XnioSsl ssl= new UndertowXnioSsl(Http2Client.WORKER.getXnio(), OptionMap.EMPTY, Http2Client.BUFFER_POOL, Http2Client.createSSLContext("trustedNames.group1"));
-
-try {
-	// Create an HTTP 2.0 connection to the server
-	final ClientConnection connection = client.connect(new URI("https://1.2.3.4:8443"), Http2Client.WORKER,
-			ssl, Http2Client.BUFFER_POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true))
-			.get();
-
-	return getData(client, connection, path);
-} catch (Throwable t) {
-	logger.error(t.getMessage(), t);
-}
-```
-
-From version 1.5.32, the default Http2Client.SSL accepts the group specified by `defaultGroupKey`. An example config is shown below. No custom XnioSsl instance is needed in order to use trusted names in the default group. That being said, if names in other groups are used, the custom XnioSSL instance still needs to be created and used as shown above.
-
-```
-tls:
-  verifyHostname: true
-  defaultGroupKey: trustedNames.group1
-  trustedNames:
-    group1: service_id1, service_id2
-    group2: service_id3
-```
 
 [Microservices Chain pattern tutorial]: /tutorial/rest/swagger/ms-chain/
 [Service discovery tutorial]: /tutorial/common/discovery/
