@@ -127,10 +127,18 @@ Here is the default logging.yml
 ---
 # Logging endpoint that can output the logger with logging levels.
 
-# Indicate if the logging info is enable or not.
+# Indicate if the logging info is enabled or not.
 enabled: ${logging.enabled:true}
-# Indicate the default time period backward in millisecond for log content retrieve. Default is  hour which indicate system will retrieve one hour log by default
+# Indicate the default time period backward in millisecond for log content retrieve. Default is an hour which indicate system will retrieve one hour log by default
 logStart: ${logging.logStart:600000}
+
+# if the logger access needs to invoke down streams API. It is false by default.
+downstreamEnabled: ${logging.downstreamEnabled:false}
+# down stream API host. http://localhost is the default when used with http-sidecar and kafka-sidecar.
+downstreamHost: ${logging.downstreamHost:http://localhost:8081}
+# down stream API framework that has the admin endpoints. Light4j, SpringBoot, Quarkus, Micronaut, Helidon, etc. If the adm endpoints are different between
+# different versions, you can use the framework plus version as the identifier. For example, Light4j-1.6.0, SpringBoot-2.4.0, etc.
+downstreamFramework: ${logging.downstreamFramework:Light4j}
 ```
 
 You can disable the logger-config module and change the log retrieval timestamp in the values.yml file to overwrite the default values. 
@@ -373,6 +381,112 @@ Above command will get 10 log statements starting from line 10. You can specify 
 ```
 curl -k --location --request GET 'https://localhost:8443/adm/logger/content?loggerName=com.networknt&loggerLevel=TRACE&startTime=1668000000000&endTime=1668206563000'
 ```
+
+
+### Pass Through
+
+When the http-sidecar is used for backend API implemented with other frameworks and languages, get loggers and set loggers should be passed through to the backend API to make the logger configuration changes on the backend API instance. 
+
+If the backend API is a light-4j server, the request can be passed through directly without any transformation. If the backend is another framework, we might need to transform the request path, headers, query parameters and body if necessary. The following uses Spring Boot actuator endpoint as examples. 
+
+
+The backend spring boot application can be found at https://github.com/networknt/light-example-4j/tree/release/springboot/log
+
+Here is the command line to start the spring boot application. 
+
+```
+steve@lucky:~/networknt/light-example-4j/springboot/log$ mvn spring-boot:run --debug
+```
+
+The following endpoint outputs some logging statements in stdout to indicate the logging level. 
+
+```
+curl http://localhost:8080
+```
+The default result in the stdout should look like the following to indicate the logging level is INFO.
+
+```
+2023-06-21 15:53:43.404  INFO 36112 --- [nio-8080-exec-1] com.networknt.log.LoggingController      : An INFO Message
+2023-06-21 15:53:43.404  WARN 36112 --- [nio-8080-exec-1] com.networknt.log.LoggingController      : A WARN Message
+2023-06-21 15:53:43.404 ERROR 36112 --- [nio-8080-exec-1] com.networknt.log.LoggingController      : An ERROR Message
+```
+
+You can use the following API to get the logging levels for all loggers on the Spring Boot App. 
+
+```
+curl http://localhost:8080/actuator/loggers
+```
+Here is the partial of the result.
+
+```
+{"levels":["OFF","ERROR","WARN","INFO","DEBUG","TRACE"],"loggers":{"ROOT":{"configuredLevel":"INFO","effectiveLevel":"INFO"},"_org":{"configuredLevel":null,"effectiveLevel":"INFO"},"_org.springframework":{"configuredLevel":null,"effectiveLevel":"INFO"},
+.
+.
+.
+```
+
+To change the logging level for the ROOT logger, you can use the following curl command. 
+
+```
+curl --location 'http://localhost:8080/actuator/loggers/ROOT' \
+--header 'Content-Type: application/json' \
+--data '{
+    "configuredLevel": "TRACE"
+}'
+```
+
+After the logging level is changed, the same API endpoint http://localhost:8080 will have the following output in stdout to indicate the logging level is TRACE. 
+
+```
+2023-06-21 16:17:08.363 TRACE 36112 --- [nio-8080-exec-9] com.networknt.log.LoggingController      : A TRACE Message
+2023-06-21 16:17:08.363 DEBUG 36112 --- [nio-8080-exec-9] com.networknt.log.LoggingController      : A DEBUG Message
+2023-06-21 16:17:08.363  INFO 36112 --- [nio-8080-exec-9] com.networknt.log.LoggingController      : An INFO Message
+2023-06-21 16:17:08.363  WARN 36112 --- [nio-8080-exec-9] com.networknt.log.LoggingController      : A WARN Message
+2023-06-21 16:17:08.363 ERROR 36112 --- [nio-8080-exec-9] com.networknt.log.LoggingController      : An ERROR Message
+
+```
+
+We are familiar with the Spring Boot actuator endpoints for loggers. With property configuration on the http-sidecar, we can access the above endpoints from the /adm/logger API light-4j on the sidecar. 
+
+The following are the configuration properties in values.yml for the Spring Boot backend with the loggers actuator enabled.
+
+```
+# logging.yml
+logging.downstreamEnabled: true
+logging.downstreamHost: http://localhost:8080
+logging.downstreamFramework: SpringBoot
+```
+
+The entire configuration for the http-sidecar can be found at https://github.com/networknt/http-sidecar/tree/master/config/actuator
+
+
+Once the http-sidecar is started with the actuator configuration with -Dlight-4j-config-dir=config/actuator option, we can access the backend actuator endpoint with the following commands with a special header X-Adm-Passthrough. 
+
+Get logging level for loggers.
+
+```
+curl --location 'https://localhost:9445/adm/logger' \
+--header 'X-Adm-Passthrough: true'
+```
+ Update logging level for loggers.
+
+```
+curl --location 'https://localhost:9445/adm/logger' \
+--header 'X-Adm-Passthrough: true' \
+--header 'Content-Type: application/json' \
+--data '[
+    {
+        "name": "ROOT",
+        "level": "DEBUG"
+    },
+    {
+        "name": "com.networknt",
+        "level": "TRACE"
+    }
+]'
+```
+
+As you can see, we are using the same commands to get and post loggers for the light-4j instance, like the http-sidecar and the backend API, like the spring boot application. The only difference is the header X-Adm-Passthrough exists with true value or not. 
 
 
 ### Light-Controller
