@@ -466,6 +466,7 @@ Get logging level for loggers.
 
 ```
 curl --location 'https://localhost:9445/adm/logger' \
+
 --header 'X-Adm-Passthrough: true'
 ```
  Update logging level for loggers.
