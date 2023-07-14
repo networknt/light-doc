@@ -31,7 +31,7 @@ The following are the products with different configurations.
 * [light-proxy-client][] to bring legacy consumers to the light ecosystem with all the cross-cutting concerns
 * [light-balancer][] to enable the high availability of light-proxy-client (LPC) for multiple consumers on the same host.
 * [light-proxy-server][] to bring legacy providers to the light ecosystem with all the cross-cutting concerns. 
-
+* [external-access-point][] to wrap one or more internal or external APIs and expose a single API to the third-party consumers.
 
 [http-sidecar]: /service/http-sidecar/
 [Multiple OAuth 2.0]: /service/gateway/multiple-oauth/
@@ -44,3 +44,4 @@ The following are the products with different configurations.
 [SkipVerifyScopeWithoutSpec]: /service/gateway/skip-scope/
 [UnifiedSecurityHandler]: /service/gateway/unified-security/
 [Generic Transformer]: /service/gateway/generic-transformer/
+[external-access-point]: /service/gateway/external-access-point/

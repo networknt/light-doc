@@ -64,6 +64,24 @@ The following are some of the important services recommended by Light. Some of t
 
 [light-gateway][] is a combination of light-router and light-proxy that can be deployed as a standalone service on the client/application host, or service/API host, or as an API gateway. 
 
+The following are features we added to the light-gateway: 
+
+* [Multiple OAuth 2.0][] provider support on the JWT token retrieval and JWT token verification via JWK. 
+* [Rate Limit][] helps the gateway regulate the traffic based on server, client, address, and user with optional request paths or services. 
+* [Path Prefix Service][] middleware handler supports routeing traffic based on the request paths to different backend APIs.
+* [SkipVerifyScopeWithoutSpec][] flag to avoid scope verification from JWT for backend API endpoints in JwtVerifyHandler.
+* [UnifiedSecurityHandler][] to combine Basic, OAuth and ApiKey together for the same request path. 
+* [Generic Transformer][] to transform the request and response before sending to the downstream API or return to the caller.
+
+The following are the products with different configurations. 
+
+* [light-gateway][] to replace the traditional monolithic gateway shared by multiple consumers and providers. 
+* [light-proxy-client][] to bring legacy consumers to the light ecosystem with all the cross-cutting concerns
+* [light-balancer][] to enable the high availability of light-proxy-client (LPC) for multiple consumers on the same host.
+* [light-proxy-server][] to bring legacy providers to the light ecosystem with all the cross-cutting concerns. 
+* [external-access-point][] to wrap one or more internal or external APIs and expose a single API to the third-party consumers.
+
+
 [http-sidecar][] is a service mesh sidecar to address cross-cutting concerns for both incoming and outgoing traffic for a backend API in the same pod.
 
 [kafka-sidecar][] is a service mesh sidecar to address cross-cutting concerns for backend API to interact with Kafka. 
@@ -72,11 +90,7 @@ The following are some of the important services recommended by Light. Some of t
 
 [Logging][] is provided by [ELK][] stack for centralized logging
 
-
-
 [Metrics][] is provided by [InfluxDB][] or [Prometheus][] with [Grafana][] as front-end.
-
-
 
 [Tracing][] is provided by [OpenTracing][] and [Jaeger][] Tracer and [SkyWalking][] is working in process. 
 
