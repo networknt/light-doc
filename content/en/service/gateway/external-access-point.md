@@ -17,3 +17,7 @@ Some organizations that want to re-branding third-party APIs can use this extern
 
 Instead of implementing a customized wrapper API, you can use the light gateway with external access point configuration for your use case. 
 
+
+Here is a video tutorial. 
+
+{{< youtube h0fGpd-u6D0 >}}
