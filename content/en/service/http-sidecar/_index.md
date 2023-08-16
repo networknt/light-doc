@@ -16,13 +16,13 @@ If you use Java 8 or Java 11 to implement your service, you can leverage one of 
 
 The other option is to use the HTTP Sidecar container in the same pod to address the [cross-cutting concerns][] at the network level. 
 
-The HTTP Sidecar is a combination of [light-proxy](/service/proxy/) and [light-router](/service/router/) to manage the [cross-cutting concerns](/concern/) for the incoming and outgoing traffic of backend API in the same pod in a Kubernetes cluster.
+The [http-sidecar](/service/http-sidecar/) is a combination of [light-proxy](/service/proxy/) and [light-router](/service/router/) to manage the [cross-cutting concerns](/concern/) for the incoming and outgoing traffic of backend API in the same pod in a Kubernetes cluster.
 
 - Package and deployed as a separate module to handle Cross-Cutting Concerns for the main container/service in the same pod. In this case, the main service only need care about the HTTP request/response and business logic
 
 - Ingress traffic: First, client API requests will come to the sidecar service. Sidecar service acts as a proxy to delegate light client features, including open API schema validation, observability, monitoring, logging, JWT verify, etc. Then forward the request to the main service.
 
-- Egress traffic: The main service calls the sidecar service first for egress traffic; in this case, the sidecar service acts as a router to delegate light client features, including service discovery, SSL handshake, JWT token management, etc. Then forward the request to server API.
+- Egress traffic: The main service calls the sidecar service first for egress traffic; in this case, the sidecar service acts as a router to delegate light client features, including service discovery, SSL handshake, JWT token management, etc. Then forward the request to server API. Here are several [egress configuration][] properties that need to be considered. 
 
 Suppose an organization has made the decision to standardize with the sidecar approach. In that case, we highly recommend light-4j frameworks for backend API implementation for smooth integration with the HTTP Sidecar if Java 8 or Java 11 is the target language. However, users can build the backend API with any language and framework as the sidecar is deployed independently. 
 
@@ -41,3 +41,4 @@ We need to deploy a multiple-container pod using the sidecar in a Kubernetes clu
 [network policy]: /service/http-sidecar/network-policy/
 [log masking]: /service/http-sidecar/log-masking/
 [Kubernetes deployment]: /service/k8s-deployment/
+[egress configuration]: /service/egress-configuration/
