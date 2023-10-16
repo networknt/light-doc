@@ -20,7 +20,9 @@ In this section, we have several tutorials related to security configurations an
 
 * How to set up your service to [bootstrap from light-oauth2 key service][] for JWT signature verification public key certificate distribution.
 
-* How to [encrypt and decrypt sensitive info][] from secret.yml or other config files. 
+* How to [encrypt and decrypt sensitive info][] from config files. 
+
+* How to use [customized decryptor][] to decrypt sensitive properties in config files.
 
 * How to use [keystore and truststore][] for one-way and two-way TLS.
 
@@ -51,6 +53,7 @@ In this section, we have several tutorials related to security configurations an
 
 [bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
 [encrypt and decrypt sensitive info]: /tutorial/security/encrypt-decrypt/
+[customized decryptor]: /tutorial/security/customized-decryptor/
 [keystore and truststore]: /tutorial/security/keystore-truststore/
 [adding server public key certificate to client.truststore]: /tutorial/security/publickey-truststore/
 [Install a self-signed or commercial CA-signed server certificate]: /tutorial/security/install-certificate/
