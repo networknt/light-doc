@@ -67,7 +67,8 @@ Tutorials give developers step by step guidance on how to use each component or 
   * [Security](/tutorial/security/)     
      + It is essential to understand the [basic terminologies and formats of certs and keys][] before proceeding other tutorials.
      + How to set up your service to [bootstrap from light-oauth2 key service][] for JWT signature verification public key certificate distribution.
-     + How to [encrypt and decrypt sensitive info][] from secret.yml or other config files. 
+     + How to [encrypt and decrypt sensitive info][] from config files. 
+     + How to use [customized decryptor][] to decrypt sensitive properties in config files.
      + How to use [keystore and truststore][] for one-way and two-way TLS.
      + How to create keystore for the [light-config-server TLS][] and bootstrap.truststore for light-4j service.
      + A real example on [adding server public key certificate to client.truststore][] to access public service on the Internet with HTTPS.
@@ -283,6 +284,7 @@ Tutorials give developers step by step guidance on how to use each component or 
 [Docker Tutorial]: /tutorial/eventuate/docker/
 [bootstrap from light-oauth2 key service]: /tutorial/security/bootstrap-from-key-service/
 [encrypt and decrypt sensitive info]: /tutorial/security/encrypt-decrypt/
+[customized decryptor]: /tutorial/security/customized-decryptor/
 [keystore and truststore]: /tutorial/security/keystore-truststore/
 [adding server public key certificate to client.truststore]: /tutorial/security/publickey-truststore/
 [Install a self-signed or commercial CA-signed server certificate]: /tutorial/security/install-certificate/
