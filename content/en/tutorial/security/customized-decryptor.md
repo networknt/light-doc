@@ -13,7 +13,7 @@ Some organizations that don't want to use the default implementation can use the
 
 If you implement your decryptor in a common module, you can release it internally to the organization's Artifactory and include it in your service dependency. 
 
-### coonfig.yml
+### config.yml
 
 Once you have the decryptor implemented, you should externalize config.yml into your application src/main/resources/config folder. Here is the modified config.yml from the light-4j repository. 
 
