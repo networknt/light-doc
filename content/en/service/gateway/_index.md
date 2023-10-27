@@ -16,6 +16,11 @@ Like the http-sidecar, the light-gateway combines both light-proxy and light-rou
 
 Please be aware that all the features listed here are applicable to the [http-sidecar][]. 
 
+The following are some ideas to manage the light-gateway.
+
+* [Path Prefix Naming Convention][] can help us manage hundreds of APIs on the same gateway.
+* [Header Sanitization][] to prevent XSS injection for X-Correlation-Id and X-Traceability-Id.
+
 The following are features we added to the light-gateway: 
 
 * [Multiple OAuth 2.0][] provider support on the JWT token retrieval and JWT token verification via JWK. 
@@ -45,3 +50,5 @@ The following are the products with different configurations.
 [UnifiedSecurityHandler]: /service/gateway/unified-security/
 [Generic Transformer]: /service/gateway/generic-transformer/
 [external-access-point]: /service/gateway/external-access-point/
+[Path Prefix Naming Convention]: /service/gateway/naming-convention/
+[Header Sanitization]: /service/gateway/header-sanitization/
