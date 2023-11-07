@@ -20,6 +20,7 @@ The following are some ideas to manage the light-gateway.
 
 * [Path Prefix Naming Convention][] can help us manage hundreds of APIs on the same gateway.
 * [Header Sanitization][] to prevent XSS injection for X-Correlation-Id and X-Traceability-Id.
+* [Body Sanitization][] to prevent XSS injection for request body in light-gateway and http-sidecar.
 
 The following are features we added to the light-gateway: 
 
@@ -52,3 +53,4 @@ The following are the products with different configurations.
 [external-access-point]: /service/gateway/external-access-point/
 [Path Prefix Naming Convention]: /service/gateway/naming-convention/
 [Header Sanitization]: /service/gateway/header-sanitization/
+[Body Sanitization]: /service/gateway/body-sanitization/
