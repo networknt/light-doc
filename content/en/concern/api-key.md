@@ -25,6 +25,11 @@ Here is the built-in configuration template.
 # ApiKey Authentication Security Configuration for light-4j
 # Enable ApiKey Authentication Handler, default is false.
 enabled: ${apikey.enabled:false}
+# If API key hash is enabled. The API key will be hashed with PBKDF2WithHmacSHA1 before it is
+# stored in the config file. It is more secure than put the encrypted key into the config file.
+# The default value is false. If you want to enable it, you need to use the following repo
+# https://github.com/networknt/light-hash command line tool to hash the clear text key.
+hashEnabled: ${apikey.hashEnabled:false}
 # path prefix to the api key mapping. It is a list of map between the path prefix and the api key
 # for apikey authentication. In the handler, it loops through the list and find the matching path
 # prefix. Once found, it will check if the apikey is equal to allow the access or return an error.
@@ -52,13 +57,13 @@ apikey.pathPrefixAuths:
     apiKey: abcdefg
   - pathPrefix: /test2
     headerName: x-apikey
-    apiKey: CRYPT:08eXg9TmK604+w06RaBlsPQbplU1F1Ez5pkBO/hNr8w=
+    apiKey: mykey
 ```
 
 Here is the way to define the pathPrefix, headerName and apiKey mapping in JSON format in values.yml file. It is suitable for the config server as the entire object can be constructed as a string. 
 
 ```
-apikey.pathPrefixAuths: [{"pathPrefix":"/test1","headerName":"x-gateway-apikey","apiKey":"abcdefg"},{"pathPrefix":"/test2","headerName":"x-apikey","apiKey":"CRYPT:08eXg9TmK604+w06RaBlsPQbplU1F1Ez5pkBO/hNr8w="}]
+apikey.pathPrefixAuths: [{"pathPrefix":"/test1","headerName":"x-gateway-apikey","apiKey":"abcdefg"},{"pathPrefix":"/test2","headerName":"x-apikey","apiKey":"mykey"}]
 
 ```
 
@@ -75,10 +80,20 @@ apikey.pathPrefixAuths:
     apiKey: xyz
   - pathPrefix: /test2
     headerName: x-apikey
-    apiKey: CRYPT:3ddd6c8b9bf2afc24d1c94af1dffd518:1bf0cafb19c53e61ddeae626f8906d43
+    apiKey: mykey
 ```
 
 With the above configuration in the values.yml on the gateway, the service with path prefix /test1 has two consumers and two different API keys from different headers. 
+
+### One-Way Hash
+
+In the above configuration examples, the apiKey value is clear text. This can be used only in a test environment. We should enable the hash to ensure that nobody can see the apiKey value. To do that, we first need to add the following to the values.yml
+
+```
+apikey.hasEnabled: true
+```
+Please use the command line utility [light-hash][] to generate the hash value from your API key. 
+
 
 ### Error Response
 
@@ -130,5 +145,6 @@ When light-gateway is used for multiple consumers and providers, chances are API
 
  
 [UnifiedSecurityHandler]: /service/gateway/unified-security/
+[light-hash]: https://github.com/networknt/light-hash
 
 
