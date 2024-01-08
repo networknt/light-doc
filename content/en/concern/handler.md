@@ -249,7 +249,7 @@ public class Handler {
     private static final String CONFIG_NAME = "handler";
     // Accessed directly.
     public
-    static HandlerConfig config = (HandlerConfig) Config.getInstance().getJsonObjectConfig(CONFIG_NAME, HandlerConfig.class);
+    static HandlerConfig config = HandlerConfig.load();
 
     // each handler keyed by a name.
     static final Map<String, HttpHandler> handlers = new HashMap<>();
@@ -485,7 +485,7 @@ public class Handler {
 
     // Exposed for testing only.
     static void setConfig(String configName) throws Exception {
-        config = (HandlerConfig) Config.getInstance().getJsonObjectConfig(configName, HandlerConfig.class);
+        config = HandlerConfig.load();
         initHandlers();
         initPaths();
     }
