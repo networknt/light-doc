@@ -90,7 +90,7 @@ With the above configuration in the values.yml on the gateway, the service with 
 In the above configuration examples, the apiKey value is clear text. This can be used only in a test environment. We should enable the hash to ensure that nobody can see the apiKey value. To do that, we first need to add the following to the values.yml
 
 ```
-apikey.hasEnabled: true
+apikey.hashEnabled: true
 ```
 Please use the command line utility [light-hash][] to generate the hash value from your API key. 
 
