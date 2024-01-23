@@ -55,7 +55,7 @@ mvn clean install -Prelease
 java -jar target/word-count-1.0.0.jar
 ```
 
-Now the server should be started with HTTPS/2 on port 8443. You can also start the server within the IDE to debug your Kafka Streams application. 
+Please be aware we are using -Prelease to build the fatjar so that all the dependencies will be packaged into the jar. Now the server should be started with HTTPS/2 on port 8443. You can also start the server within the IDE to debug your Kafka Streams application. 
 
 
 ### Test DSL Streams Application
@@ -157,7 +157,7 @@ cd ~/networknt/kafka-sidecar
 cp ~/networknt/light-example-4j/kafka-sidecar/kafka-streams-dsl/target/original-word-count-1.0.0.jar ./streamsjar
 ```
 
-Now, we can start the kafka-sidecar with the following docker-compose.
+Note that the original jar is used as the Kafka-sidecar will provide all the dependencies. Now, we can start the kafka-sidecar with the following docker-compose.
 
 ```
 cd ~/networknt/kafka-sidecar
