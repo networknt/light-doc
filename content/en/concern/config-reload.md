@@ -117,8 +117,8 @@ You can disable the security in the values.yml file for a simple local test.
 values.yml
 
 ```
-# openapi-security.yml
-openapi-security.enableVerifyJwt: false
+# security.yml
+security.enableVerifyJwt: false
 ```
 
 ### Dependency

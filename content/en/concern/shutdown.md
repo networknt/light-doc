@@ -78,14 +78,14 @@ You can disable the security in the values.yml file for a simple local test.
 values.yml
 
 ```
-# openapi-security.yml
-openapi-security.enableVerifyJwt: false
+# security.yml
+security.enableVerifyJwt: false
 ```
 Or skip the security for the /adm/shutdown path in the values.yml
 
 ```
-# openapi-security.yml
-openapi-security.skipPathPrefixes: ["/v1/pets","/adm"]
+# security.yml
+security.skipPathPrefixes: ["/v1/pets","/adm"]
 ```
 The following is the curl command to send the request directly. 
 

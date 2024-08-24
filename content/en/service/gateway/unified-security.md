@@ -100,9 +100,10 @@ Here is the section for handler.yml in the values.yml
 ```
 handler.handlers:
   - com.networknt.openapi.JwtVerifyHandler@jwt
+  - com.networknt.openapi.SimpleJwtVerifyHandler@sjwt
   - com.networknt.apikey.ApiKeyHandler@apikey
   - com.networknt.basicauth.BasicAuthHandler@basic
-  - com.networknt.openapi.UnifiedSecurityHandler@security
+  - com.networknt.security.UnifiedSecurityHandler@security
 
 
 hnadler.chains.default:

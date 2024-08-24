@@ -153,8 +153,8 @@ You can disable the security in the values.yml file for a simple local test.
 values.yml
 
 ```
-# openapi-security.yml
-openapi-security.enableVerifyJwt: false
+# security.yml
+security.enableVerifyJwt: false
 ```
 
 ### Dependency
@@ -164,7 +164,7 @@ Add dependency in the application pom.xml file.
 ```xml
 <dependency>
   <groupId>com.networknt</groupId>
-  <artifactId>logger-config</artifactId>
+  <artifactId>logger-handler</artifactId>
   <version>${version.light-4j}</version>
 </dependency>
 ```
