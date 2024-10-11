@@ -86,6 +86,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Dummy OAuth Server](/concern/oauth-server/)
 * [Shutdown Server](/concern/shutdown/)
 * [PathPrefixService](/concern/path-prefix-service/)
+* [Token Limit Handler](/concern/token-limit-handler/)
 
 
 #### light-rest-4j
