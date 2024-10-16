@@ -77,7 +77,7 @@ The light-gateway handler for managing token requests is designed with the follo
 ##### Handler Configuration
 
 * The handler will be part of the default chain.
-* It will match the request path with a configured template for the token request path, accommodating different paths used by various OAuth 2.0 providers.
+* It will match the request path with a list of configured templates for the token request paths, accommodating different paths used by various OAuth 2.0 providers.
 
 ##### Data Management
 
@@ -92,19 +92,20 @@ The light-gateway handler for managing token requests is designed with the follo
 
 The handler differentiates between client_credentials and authorization_code grant types:
 
-* For client_credentials: The key is composed of source IP and client_id.
-* For authorization_code: The key is composed of source IP, client_id, and code.
-
+* For client_credentials: The key is composed of client_id and source IP.
+* For authorization_code: The key is composed of client_id, code and source IP.
+* Refresh token is one-time token and it is not handled in this handler.
 
 
 ##### Duplicate Request Handling
 
 The maximum number of duplicated keys is configurable as duplicateLimit in the config file.
-When duplicated request counts exceed this number, an action is taken based on the configuration:
+When duplicated request counts exceed this number, an action is recommended based on the environment:
 
-* For lower environments (dev/sit/stg): An error message is returned to the consumer.
-* For production environment: The same error is logged as an error, but not returned to the consumer.
+* For lower environments (dev/sit/stg): It is recommended to return an error message to the consumer.
+* For production environment: It is recommended to log the same error in the logs, but not return it to the consumer.
 
+These recommendations allow for flexibility in implementation while providing guidance on best practices for different environments.
 
 
 ##### Implementation Considerations
@@ -133,8 +134,12 @@ errorOnLimit: ${token-limit.errorOnLimit:true}
 # light-gateway or oauth-kafka instance. Note: cache.yml needs to be configured.
 duplicateLimit: ${token-limit.duplicateLimit:2}
 # Different OAuth 2.0 providers have different token request path. To make sure that this handler only
-# applied to the token endpoint, we define the path template here to ensure request path is matched.
-tokenPathTemplate: ${token-limit.tokenPathTemplate:/oauth2/(?<instanceId>[^/]+)/v1/token}
+# applied to the token endpoint, we define a list of path templates here to ensure request path is matched.
+# The following is an example with two different OAuth 2.0 providers in values.yml file.
+# token-limit.tokenPathTemplates:
+#   - /oauth2/(?<instanceId>[^/]+)/v1/token
+#   - /oauth2/(?<instanceId>[^/]+)/token
+tokenPathTemplates: ${token-limit.tokenPathTemplates:}
 
 ```
 
@@ -208,6 +213,11 @@ cache.caches:
   - cacheName: token-limit
     expiryInMinutes: 15
     maxSize: 100
+
+# token-limit.yml
+token-limit.tokenPathTemplates:
+  - /oauth2/(?<instanceId>[^/]+)/v1/token
+
 ```
 
 ### Test
