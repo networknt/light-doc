@@ -87,7 +87,7 @@ Here is a list of cross-cutting concerns provided by Light.
 * [Shutdown Server](/concern/shutdown/)
 * [PathPrefixService](/concern/path-prefix-service/)
 * [Token Limit Handler](/concern/token-limit-handler/)
-
+* [Env Vars injection into values.yml](/concern/envvars-values/)
 
 #### light-rest-4j
 
