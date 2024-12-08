@@ -483,21 +483,86 @@ I got a lot of questions on how to make a post request to the server, and the ab
 connection.sendRequest(request, client.createClientCallback(reference, latch, json));
 ```
 
-### NPE at reference.get()
+### Request Timeout
 
-When accessing a server with heavy load, the response time might be longer. In the above example, we waited 1000ms to ensure that the response was coming back. If we only wait 10ms, chances are the response is not backed yet and the subsequent call to get statusCode will throw a NullPointerException. If you see this exception, try to increase the wait timeout to a bigger number like 1000ms. In the above example, we are sending 100 big requests(48k) to the server so the wait time is set as 1000ms.
+
+`Http2Client` is based on the Undertow client and utilizes callbacks to maximize efficiency. A `CountDownLatch` is passed to the callback function and should be set to zero during the `wait` call once the server response is returned. 
+
+If no timeout is set for the `wait`, the application will wait indefinitely until the response arrives. To avoid this, you can specify a timeout and `TimeUnit` to customize the wait duration. If the timeout is reached but the `CountDownLatch` is not set to zero, it indicates the response is incomplete, and a `ClientException` can be thrown.
+
+Below is an example of a client application that accesses the Petstore API's `/v1/pets` endpoint using the `GET` method:
+
+```java
+public class Http2ClientExample {
+    static final Logger logger = LoggerFactory.getLogger(Http2ClientExample.class);
+    // Get the singleton Http2Client instance
+    static Http2Client client = Http2Client.getInstance();
+
+    public static void main(String[] args) {
+        Http2ClientExample e = new Http2ClientExample();
+        try {
+            e.testHttp2Get();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.exit(0);
+    }
+
+    /**
+     * This is a simple example that create a new HTTP 2.0 connection for get request
+     * and close the connection after the call is done. As you can see that it is using
+     * a hard coded uri which points to a statically deployed service on fixed ip and port
+     *
+     */
+    public void testHttp2Get() throws Exception {
+        final CountDownLatch latch = new CountDownLatch(1);
+        SimpleConnectionHolder.ConnectionToken connectionToken = null;
+
+        final AtomicReference<ClientResponse> reference = new AtomicReference<>();
+        boolean completed  = false;
+        try {
+            connectionToken = client.borrow(new URI("https://localhost:9445"), Http2Client.WORKER, client.getDefaultXnioSsl(), Http2Client.BUFFER_POOL, OptionMap.create(UndertowOptions.ENABLE_HTTP2, true));
+            ClientConnection connection = (ClientConnection) connectionToken.getRawConnection();
+            ClientRequest request = new ClientRequest().setPath("/v1/pets").setMethod(Methods.GET);
+            request.getRequestHeaders().put(Headers.CONTENT_TYPE, "application/json");
+            request.getRequestHeaders().put(Headers.TRANSFER_ENCODING, "chunked");
+            request.getRequestHeaders().put(new HttpString("host"), "localhost");
+            connection.sendRequest(request, client.createClientCallback(reference, latch));
+            completed = latch.await(ClientConfig.get().getTimeout(), TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            logger.error("InterruptedException:", e);
+            throw new ClientException(e);
+        } finally {
+            client.restore(connectionToken);
+        }
+        if(!completed) {
+            logger.error("Request timeout");
+            throw new ClientException("Request timeout");
+        } else {
+            int statusCode = reference.get().getResponseCode();
+            String body = reference.get().getAttachment(Http2Client.RESPONSE_BODY);
+            System.out.println("testHttp2Get: statusCode = " + statusCode + " body = " + body);
+        }
+    }
+}
 
 ```
-latch.await(1000, TimeUnit.MILLISECONDS);
+
+You can find the source code at GitHub [repository](https://github.com/networknt/light-example-4j/blob/master/client/request-timeout/src/main/java/com/networknt/client/Http2ClientExample.java). 
+
+
+If you are accessing only one target server, you can use the `client.timeout` setting in `values.yml` to configure the wait timeout. For example:
+
+```
+latch.await(ClientConfig.get().getTimeout(), TimeUnit.MILLISECONDS);
 ```
 
-If you want to wait until the default timeout defined in client.yml is reached, you can just call:
+If you have multiple endpoints or services to access, each with different timeout requirements, you can configure their timeouts in your application-specific configuration file.
 
-```
-latch.await();
-```
+Additionally, the `timeout` setting in `client.yml` is used to specify the timeout duration for establishing a connection to the server when creating a new connection.
 
-For some slow services, you might need to adjust the default timeout in client.yml to allow the client to wait longer before timeout. This is usually dealt with legacy services, and these services should be upgraded with the async approach if possible.
+[Here](https://github.com/networknt/light-4j/blob/master/client/src/main/java/com/networknt/client/Http2Client.java#L276) is the usage in Http2Client.
+
 
 ### HOST Header
 
