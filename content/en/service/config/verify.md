@@ -86,7 +86,7 @@ curl -X POST \
   https://localhost:8443/api/json \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/json' \
-  -d '{"host":"lightapi.net","service":"config","action":"create-service","version":"0.1.0","data":{"serviceId":"config-service-1.1.0001","encryptionAlgorithm":"AES","templateRepository":"git@github.com:networknt/light-config-server.git","serviceOwner":"Google","version":"1.1.1","profile":"DEV/DIT","refreshed":false}}
+  -d '{"host":"lightapi.net","service":"config","action":"create-service","version":"0.1.0","data":{"serviceId":"config-service-1.1.0001","encryptionAlgorithm":"AES","templateRepository":"git@github.com:lightapi/light-config-server.git","serviceOwner":"Google","version":"1.1.1","profile":"DEV/DIT","refreshed":false}}
 '
 
 ```
@@ -224,7 +224,7 @@ POST /api/json HTTP/1.1
 Host: localhost:8443
 Content-Type: application/json
 Cache-Control: no-cache
-{"host":"lightapi.net","service":"config","action":"delete-service","version":"0.1.0","data":{"serviceId":"config-service-1.1,1","encryptionAlgorithm":"AES","templateRepository":"git@github.com:networknt/light-config-server.git","version":"1.1.1","profile":"DEV/DIT","refreshed":false}}
+{"host":"lightapi.net","service":"config","action":"delete-service","version":"0.1.0","data":{"serviceId":"config-service-1.1,1","encryptionAlgorithm":"AES","templateRepository":"git@github.com:lightapi/light-config-server.git","version":"1.1.1","profile":"DEV/DIT","refreshed":false}}
 
 ```
 

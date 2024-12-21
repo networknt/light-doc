@@ -65,7 +65,7 @@ checkout:
     - git@github.com:networknt/light-example-4j.git
     - git@github.com:networknt/light-example-kotlin.git
     - git@github.com:networknt/light-docker.git
-    - git@github.com:networknt/light-config-server.git
+    - git@github.com:lightapi/light-config-server.git
     - git@github.com:networknt/microservices-framework-benchmark.git
     - git@github.com:networknt/light-portal.git
     - git@github.com:networknt/light-workflow-4j.git

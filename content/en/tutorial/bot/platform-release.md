@@ -76,7 +76,7 @@ checkout:
     - git@github.com:networknt/light-doc.git
     - git@github.com:networknt/light-config-test.git
     - git@github.com:networknt/light-bot.git
-    - git@github.com:networknt/light-config-server.git
+    - git@github.com:lightapi/light-config-server.git
     - git@github.com:networknt/microservices-framework-benchmark.git
     - git@github.com:networknt/model-config.git
     - git@github.com:networknt/light-portal.git
@@ -548,7 +548,7 @@ checkout:
     - git@github.com:networknt/light-example-4j.git
     - git@github.com:networknt/light-docker.git
     - git@github.com:networknt/light-consumer-4j.git
-    - git@github.com:networknt/light-config-server.git
+    - git@github.com:lightapi/light-config-server.git
     - git@github.com:networknt/http2client-benchmark.git
     - git@github.com:networknt/microservices-framework-benchmark.git
 

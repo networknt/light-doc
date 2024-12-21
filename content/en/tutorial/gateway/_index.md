@@ -46,8 +46,11 @@ mvn clean install
 ```
 
 * Use light gateway as [server proxy][] on the same host. 
-* [Request and response transformation][] based on rule engine. 
+* [Request and response transformation][] based on rule engine.
+* [Mulitple Rule Actions] to chain multiple yaml-rule-plugin action classes.
+
 
 [server proxy]: /tutorial/gateway/server-proxy/
 [Request and response transformation]: /tutorial/gateway/request-response-transformation/
+[Multiple Rule Actions]: /tutorial/gateway/multiple-rule-actions/
 

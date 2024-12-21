@@ -14,7 +14,7 @@ Checkout this repo to your `~/networknt` folder
 
 ```
 cd ~/networknt
-git clone git@github.com:networknt/oauth-kafka.git
+git clone git@github.com:lightapi/oauth-kafka.git
 ```
 
 To start the token server on the local 
