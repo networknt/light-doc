@@ -2,3 +2,7 @@
 nohup.out
 public/
 .DS_Store
+.gitnexus
+.claude/
+AGENTS.md
+CLAUDE.md
