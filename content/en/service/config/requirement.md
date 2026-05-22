@@ -15,17 +15,17 @@ When managing the configurations, the following things need to be considered as 
 
 * Config server instance per environment
 
-For each environment, there should be an instance of config server with config templates and key/value pairs for the environment. The authentication and authorization would be different so that developers can access the DEV config server. Operators can access the UAT config server, and Production operators can access the PROD config server. 
+For each environment, there should be an instance of config server with config templates and key/value pairs for the environment. The authentication and authorization would be different so that developers can access the dev config server. Operators can access the UAT config server, and Production operators can access the prd config server. 
 
 The config server url will be passed to the contain through environment variable.
 
 * Multiple config template files per service.
 
-Each service has numeric plugins, and each plugin has its configuration file to control if it is enabled and the runtime behavior. That means for each service there would be a list of configuration files per environment like DIT, SIT, UAT, and PROD. To ease the burden to manage different config files per environment, we would create config file templates instead and replace some of the values per environment from an environmental specific config server. 
+Each service has numeric plugins, and each plugin has its configuration file to control if it is enabled and the runtime behavior. That means for each service there would be a list of configuration files per environment like dev, sit, uat, and prd. To ease the burden to manage different config files per environment, we would create config file templates instead and replace some of the values per environment from an environmental specific config server. 
 
 * All config server instances share the same set of config template files
 
-For each service, how many config files are needed is known. We just need to parameterize the variables per environment to create a set of templates. These templates should be the same from an environment to an environment. All templates should be checked into the git repository to trace changes. UAT and PROD can have their own repository and it is subject to the organization's security policy. If one repository is used, there should be multiple branches per environment and only certain users have write access to each branch. The promotion flow should be from DEV to UAT to PROD with pull requests. 
+For each service, how many config files are needed is known. We just need to parameterize the variables per environment to create a set of templates. These templates should be the same from an environment to an environment. All templates should be checked into the git repository to trace changes. UAT and PROD can have their own repository and it is subject to the organization's security policy. If one repository is used, there should be multiple branches per environment and only certain users have write access to each branch. The promotion flow should be from dev to uat to prd with pull requests. 
 
 * Each config server will maintain a list of key/value pairs
 
