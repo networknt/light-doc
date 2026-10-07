@@ -24,7 +24,8 @@ The following are the steps to get it set up.
 
 The following software packages need to be installed locally before moving to the next step. 
 
-* Oracle JDK 11 or OpenJDK 11
+* JDK 25 or newer for building and running light-bot
+* Maven 3.6.3 or newer
 * Maven 3.5.x
 * Git
 
@@ -48,7 +49,7 @@ cd ~/networknt
 git clone git@github.com:networknt/light-config-test.git
 git clone git@github.com:networknt/light-bot.git
 cd light-bot
-./gradlew build
+mvn clean verify
 ```
 
 ### Start light-bot develop-build without test
@@ -58,7 +59,7 @@ final jar files to the .m2 repository.
 
 ```
 cd ~/networknt/light-config-test/light-bot/develop-build/build-all
-java -Dlight-4j-config-dir=./config -Dlogback.configurationFile=./logback.xml -jar ~/networknt/light-bot/bot-cli/build/libs/bot-cli-fat-1.0.jar -t develop-build
+java -Dlight-4j-config-dir=./config -Dlogback.configurationFile=./logback.xml -jar ~/networknt/light-bot/bot-cli/target/bot-cli.jar -t develop-build
 ```
 
 Wait for several minutes, all the related Light jar files should be built and installed. 

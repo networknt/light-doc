@@ -18,7 +18,8 @@ In this tutorial, we are going to setup the develop branch build and test for ne
 
 To build all projects we need to have the following installed on your local.
 
-* Java JDK 11 - JDK to compile Java source code
+* Java JDK 25 or newer to compile and run light-bot
+* Maven 3.6.3 or newer
 * Maven 3.5.X - light-4j frameworks are built with Maven
 * Git - Clone source code from github.com
 * Docker - Running some of the dependencies for end-to-end testing
@@ -50,15 +51,11 @@ Depending on how fast your computer is and if you have all the docker images cac
 
 Now we can clone and build light-bot repository based on the [build light-bot] tutorial. 
 
-### Run the develop branch build with default config
+### Prepare task configuration
 
-```
-cd ~/networknt/light-bot/bot-cli/build/libs
-java -jar bot-cli-fat-1.0.jar -t develop-build
-
-```
-
-If the build failed, you can check bot.log in the same directory as default email server is not set up with a correct password, there would be no email will be sent out if build or test is failed.
+Bundled configuration files are examples, not runnable defaults. Prepare a
+complete external configuration directory and register only the tasks you
+intend to use in `service.yml`. Use the customized configuration below.
 
 ### Run the develop branch build with customized config
 

@@ -24,9 +24,13 @@ This forces us to consider building our own DevOps tool [light-bot][]
 
 To start a full-blown DevOps toolchain is not an easy job, and we are starting from the command line first and will add a central control server and agent server later on. 
 
-Another goal for this light-bot project is to try Gradle with [Kotlin DSL][]. As you know, light-4j frameworks are built with Maven, and I have been looking at Gradle for a while but don't want to learn Groove DSL. With release 4.4.1, the Kotlin DSL is good enough for production usage, and I am trying it with the light-bot project. So far, everything works perfectly, and it is really fast compared with the Maven build. The next step is to update light-codegen to give users the option to choose Maven or Gradle in the config.json file.
+light-bot uses Maven for its modules, tests, and executable CLI packaging.
+Building requires JDK 25 or newer and Maven 3.6.3 or newer. Running the CLI
+also requires Java 25 or newer.
 
-To build the project, just run "./gradlew build" in the root folder of [light-bot][].
+To build the project, run `mvn clean verify` in the root folder of [light-bot][].
+The executable JAR is `bot-cli/target/bot-cli.jar`. Supply complete external
+task configuration with `-Dlight-4j-config-dir=/path/to/config` before `-jar`.
 
 - [Why light-bot][]
 - [NetworkNT repositories][]

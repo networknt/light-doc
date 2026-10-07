@@ -13,15 +13,19 @@ reviewed: true
 
 The light-bot is built as a Java application, and it has a command line that allows you to execute a task with internal or externalized config directory. The command line utility is an entry point to call all the major tasks.
 
-To run the command line, go to `~/networknt/light-bot/bot-cli/build/libs` folder
+Build with JDK 25 or newer and Maven 3.6.3 or newer. The CLI runtime also
+requires Java 25 or newer. Prepare a complete external config directory,
+then go to `~/networknt/light-bot/bot-cli/target`.
 
-* java -jar bot-cli-fat-1.0.jar -t develop-build 
-* java -jar bot-cli-fat-1.0.jar -t version-upgrade
-* java -jar bot-cli-fat-1.0.jar -t release-maven 
+* java -Dlight-4j-config-dir=/path/to/config -jar bot-cli.jar -t develop-build
+* java -Dlight-4j-config-dir=/path/to/config -jar bot-cli.jar -t version-upgrade
+* java -Dlight-4j-config-dir=/path/to/config -jar bot-cli.jar -t release-maven
 
 For the entire list of tasks, please visit [how light-bot works][].
 
-The above commands can invoke the light-bot cli but you will use the default configuration files from the bot-cli module. These config files are just examples, and they are not supposed to be used in your project. You need to pass in your own configuration files in a config folder to direct light-bot to work with your GitHub organization and repositories. 
+The bundled config files are examples and do not form a runnable default.
+Supply configuration for every task registered in your `service.yml`, or
+register only the tasks you intend to use.
 
 For most of the tasks, you will need the following config files.
 
@@ -206,7 +210,7 @@ Here is one of the example run.sh and you can find others in the [light-config-t
 ```
 #!/bin/bash
 
-java -Dlight-4j-config-dir=./config -Dlogback.configurationFile=./logback.xml -jar ~/networknt/light-bot/bot-cli/build/libs/bot-cli-fat-1.0.jar -t develop-build
+java -Dlight-4j-config-dir=./config -Dlogback.configurationFile=./logback.xml -jar ~/networknt/light-bot/bot-cli/target/bot-cli.jar -t develop-build
 ```
 
 From the above java command, you can see how to specify the config folder, log file config, location of the jar and the task is about to execute. 
